@@ -18,7 +18,8 @@ type
     DirList: TStringList;
     procedure Initialize;
     procedure SetDirPath(sPath: String);
-    procedure LoadDirList;
+    procedure LoadDirList(sPath: String);
+    function GetDirList(sPath: String): TStringList;
   end;
 
 var
@@ -56,24 +57,31 @@ begin
   WriteLn(f,sPath);
   CloseFile(f);
   sDirPath:=sPath;
-  LoadDirList;
+  LoadDirList(sPath);
 end;
 
-procedure TAppSettings.LoadDirList;
-var
-  SR: TSearchRec;
+procedure TAppSettings.LoadDirList(sPath: String);
 begin
   DirList.Clear;
-  if (sDirPath <> '') then begin
-    if FindFirst(sDirPath+'\*', faAnyFile, SR) = 0 then begin
+  DirList:=GetDirList(sDirPath);
+end;
+
+function TAppSettings.GetDirList(sPath: String): TStringList;
+var
+  StringList: TStringList;
+  SR: TSearchRec;
+begin
+  StringList := TStringList.Create;
+  if (sPath <> '') then begin
+    if FindFirst(sPath+'\*', faAnyFile, SR) = 0 then begin
       repeat
         if (SR.Name[1] <> '.') then begin
-          DirList.Add(SR.Name);
+          StringList.Add(SR.Name);
         end;
       until FindNext(SR) <> 0;
       FindClose(SR);
     end;
   end;
+  Result:=StringList;
 end;
-
 end.

@@ -1,9 +1,10 @@
 object MainForm: TMainForm
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'TrayDir'
-  ClientHeight = 77
-  ClientWidth = 560
+  ClientHeight = 81
+  ClientWidth = 555
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -28,7 +29,7 @@ object MainForm: TMainForm
       Top = 24
       Width = 417
       Height = 21
-      Enabled = False
+      ReadOnly = True
       TabOrder = 0
     end
     object Button1: TButton

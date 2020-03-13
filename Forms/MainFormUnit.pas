@@ -46,6 +46,7 @@ type
   private
     { Private declarations }
     procedure CreatePopupMenu;
+    procedure CreatePopupMenuRecursive(ParentMenuItem: TMenuItem; sPath: String; level: integer);
   public
     { Public declarations }
   end;
@@ -63,6 +64,7 @@ procedure TMainForm.CreatePopupMenu;
 var
   MenuItem: TMenuItem;
   i: integer;
+  Caption: String;
 begin
   PopupMenu.Items.Clear;
   MenuItem:=TMenuItem.Create(self);
@@ -75,11 +77,22 @@ begin
   MenuItem.Caption:='-';
   PopupMenu.Items.Add(MenuItem);
   for i := 0 to AppSettings.DirList.Count - 1 do
+
   begin
-    MenuItem:=TMenuItem.Create(self);
-    MenuItem.Caption:=AppSettings.DirList[i];
-    MenuItem.onClick:=RunActionExecute;
-    PopupMenu.Items.Add(MenuItem);
+    if (i < 20) then begin
+      Caption:=AppSettings.DirList[i];
+      if DirectoryExists(AppSettings.sDirPath+'\'+Caption) then begin
+        MenuItem:=TMenuItem.Create(self);
+        MenuItem.Caption:=AppSettings.DirList[i];
+        CreatePopupMenuRecursive(MenuItem, AppSettings.sDirPath+'\'+Caption, 1);
+        PopupMenu.Items.Add(MenuItem);
+      end else begin
+        MenuItem:=TMenuItem.Create(self);
+        MenuItem.Caption:=AppSettings.DirList[i];
+        MenuItem.onClick:=RunActionExecute;
+        PopupMenu.Items.Add(MenuItem);
+      end;
+    end;
   end;
   MenuItem:=TMenuItem.Create(self);
   MenuItem.Caption:='-';
@@ -87,6 +100,35 @@ begin
   MenuItem:=TMenuItem.Create(self);
   MenuItem.Action :=  PopupMenuTemplate.Items[4].Action;
   PopupMenu.Items.Add(MenuItem);
+end;
+
+procedure TMainForm.CreatePopupMenuRecursive(ParentMenuItem: TMenuItem; sPath: String; level: integer);
+var
+  MenuItem: TMenuItem;
+  FileList: TStringList;
+  Caption: String;
+  i: Integer;
+begin
+  begin
+    if level > 3 then exit;
+    FileList:=AppSettings.GetDirList(sPath);
+    for i:= 0 to FileList.Count - 1 do begin
+      if (i < 20) then begin
+        Caption:=FileList[i];
+        if DirectoryExists(sPath+'\'+Caption) then begin
+          MenuItem:=TMenuItem.Create(self);
+          MenuItem.Caption:=Caption;
+          CreatePopupMenuRecursive(MenuItem, sPath+'\'+Caption, level+1);
+          ParentMenuItem.Add(MenuItem);
+        end else begin
+          MenuItem:=TMenuItem.Create(self);
+          MenuItem.Caption:=Caption;
+          MenuItem.onClick:=RunActionExecute;
+          ParentMenuItem.Add(MenuItem);
+        end;
+      end;
+    end;
+  end;
 end;
 
 procedure TMainForm.HideActionExecute(Sender: TObject);
@@ -135,7 +177,7 @@ var
   MyIcon: TIcon;
 begin
   DirEdit.Text:=AppSettings.sDirPath;
-  AppSettings.LoadDirList;
+  AppSettings.LoadDirList(AppSettings.sDirPath);
   CreatePopupMenu;
   if Application.ShowMainForm = False then begin
     MainForm.WindowState := wsMinimized;

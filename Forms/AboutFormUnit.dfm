@@ -40,7 +40,7 @@ object AboutForm: TAboutForm
     Top = 140
     Width = 103
     Height = 13
-    Caption = 'V 1.0.2    2020-03-11'
+    Caption = 'V 1.0.3    2020-03-12'
   end
   object Label4: TLabel
     Left = 24
