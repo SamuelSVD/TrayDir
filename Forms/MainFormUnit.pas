@@ -33,6 +33,8 @@ type
     Action11: TMenuItem;
     Exit1: TMenuItem;
     Browse1: TMenuItem;
+    Explore1: TMenuItem;
+    ExploreAction: TAction;
     procedure HideActionExecute(Sender: TObject);
     procedure ShowActionExecute(Sender: TObject);
     procedure TrayIconDblClick(Sender: TObject);
@@ -43,6 +45,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure RunActionExecute(Sender: TObject);
     procedure AboutActionExecute(Sender: TObject);
+    procedure ExploreActionExecute(Sender: TObject);
   private
     { Private declarations }
     procedure CreatePopupMenu;
@@ -170,6 +173,13 @@ end;
 procedure TMainForm.ExitActionExecute(Sender: TObject);
 begin
   MainForm.Close;
+end;
+
+procedure TMainForm.ExploreActionExecute(Sender: TObject);
+begin
+  if AppSettings.sDirPath <> '' then begin
+    ShellExecute(Application.Handle, 'open', 'explorer.exe', PWideChar(AppSettings.sDirPath), nil, SW_NORMAL);
+  end;
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);

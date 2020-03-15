@@ -14,37 +14,43 @@ object AboutForm: TAboutForm
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object TrayDir: TLabel
+  object AppName: TLabel
     Left = 24
-    Top = 32
-    Width = 46
-    Height = 13
-    Caption = 'TrayForm'
+    Top = 18
+    Width = 87
+    Height = 33
+    Caption = 'TrayDir'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clMenuHighlight
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
   end
   object Label1: TLabel
     Left = 24
-    Top = 73
+    Top = 65
     Width = 103
     Height = 13
     Caption = 'A program by samver'
   end
   object Label2: TLabel
     Left = 24
-    Top = 92
+    Top = 84
     Width = 173
     Height = 13
-    Caption = 'visit samver.ca for more information'
+    Caption = 'Visit samver.ca for more information'
   end
   object Label3: TLabel
     Left = 24
     Top = 140
     Width = 103
     Height = 13
-    Caption = 'V 1.0.3    2020-03-12'
+    Caption = 'V 1.0.4    2020-03-14'
   end
   object Label4: TLabel
     Left = 24
-    Top = 111
+    Top = 103
     Width = 75
     Height = 13
     Caption = #169' samver 2020'

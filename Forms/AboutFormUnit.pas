@@ -8,7 +8,7 @@ uses
 
 type
   TAboutForm = class(TForm)
-    TrayDir: TLabel;
+    AppName: TLabel;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;

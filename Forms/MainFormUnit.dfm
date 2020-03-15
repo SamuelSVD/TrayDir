@@ -74,6 +74,10 @@ object MainForm: TMainForm
       Caption = 'About'
       OnExecute = AboutActionExecute
     end
+    object ExploreAction: TAction
+      Caption = 'Explore'
+      OnExecute = ExploreActionExecute
+    end
   end
   object PopupMenuTemplate: TPopupMenu
     MenuAnimation = [maLeftToRight]
@@ -117,6 +121,9 @@ object MainForm: TMainForm
     Top = 24
     object Exit1: TMenuItem
       Action = ExitAction
+    end
+    object Explore1: TMenuItem
+      Action = ExploreAction
     end
     object Browse1: TMenuItem
       Action = BrowseAction
