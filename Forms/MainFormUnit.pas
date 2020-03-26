@@ -43,7 +43,6 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure BrowseActionExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure RunActionExecute(Sender: TObject);
     procedure AboutActionExecute(Sender: TObject);
     procedure ExploreActionExecute(Sender: TObject);
   private
@@ -54,6 +53,14 @@ type
     { Public declarations }
   end;
 
+  TRunAction = class(TAction)
+    private
+      filepath: String;
+      mainform: TMainForm;
+    public
+      constructor Create(Owner: TComponent; form: TMainForm; path: String);
+      procedure Execute(Sender: TObject);
+  end;
 var
   MainForm: TMainForm;
 
@@ -63,9 +70,22 @@ implementation
 
 uses AboutFormUnit, AppSettingsModule;
 
+constructor TRunAction.Create(Owner: TComponent; form: TMainForm; path: string);
+begin
+  inherited Create(Owner);
+  filepath := path;
+  mainform := form;
+end;
+
+procedure TRunAction.Execute(Sender: TObject);
+begin
+  ShellExecute(mainform.Handle, 'runas', PWideChar(filepath), nil, nil, SW_SHOWNORMAL);
+end;
+
 procedure TMainForm.CreatePopupMenu;
 var
   MenuItem: TMenuItem;
+  RunAction: TRunAction;
   i: integer;
   Caption: String;
 begin
@@ -92,7 +112,8 @@ begin
       end else begin
         MenuItem:=TMenuItem.Create(self);
         MenuItem.Caption:=AppSettings.DirList[i];
-        MenuItem.onClick:=RunActionExecute;
+        RunAction:=TRunAction.Create(mainForm,MainForm,AppSettings.sDirPath+'\'+Caption);
+        MenuItem.onClick:=RunAction.Execute;
         PopupMenu.Items.Add(MenuItem);
       end;
     end;
@@ -108,6 +129,7 @@ end;
 procedure TMainForm.CreatePopupMenuRecursive(ParentMenuItem: TMenuItem; sPath: String; level: integer);
 var
   MenuItem: TMenuItem;
+  RunAction: TRunAction;
   FileList: TStringList;
   Caption: String;
   i: Integer;
@@ -126,7 +148,8 @@ begin
         end else begin
           MenuItem:=TMenuItem.Create(self);
           MenuItem.Caption:=Caption;
-          MenuItem.onClick:=RunActionExecute;
+          RunAction:=TRunAction.Create(mainForm,MainForm,sPath+'\'+Caption);
+          MenuItem.onClick:=RunAction.Execute;
           ParentMenuItem.Add(MenuItem);
         end;
       end;
@@ -145,15 +168,6 @@ begin
   WindowState := wsNormal;
   Application.BringToFront();
   Timer1.Enabled:=True;
-end;
-
-procedure TMainForm.RunActionExecute(Sender: TObject);
-var
-  filename: string;
-begin
-  filename:=AppSettings.sDirPath+'\'+TMenuItem(Sender).Caption;
-  filename:=StringReplace(filename,'&','',[]);
-  ShellExecute(Handle, 'runas', PWideChar(filename), nil, nil, SW_SHOWNORMAL);
 end;
 
 procedure TMainForm.AboutActionExecute(Sender: TObject);

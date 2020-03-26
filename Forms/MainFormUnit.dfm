@@ -68,7 +68,6 @@ object MainForm: TMainForm
       OnExecute = BrowseActionExecute
     end
     object RunAction: TAction
-      OnExecute = RunActionExecute
     end
     object AboutAction: TAction
       Caption = 'About'
