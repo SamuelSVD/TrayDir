@@ -3,22 +3,26 @@ unit AppSettingsModule;
 interface
 
 uses
-  System.SysUtils, System.Classes;
+  System.SysUtils, System.Classes, System.IniFiles;
 
 type
   TAppSettings = class(TDataModule)
   private
     { Private declarations }
     f:textfile;
+    iniFile: TIniFile;
   public
     { Public declarations }
     sDirPath: String;
-    sConfigPath: String;
+    sIniPath: String;
     sProgramPath: String;
+    sTrayIconFilePath: String;
     bRunShortcutsAsAdmin: boolean;
     bRunFilesAsAdmin: boolean;
     DirList: TStringList;
     procedure Initialize;
+    procedure LoadSettings;
+    procedure WriteSettings;
     procedure SetDirPath(sPath: String);
     procedure LoadDirList(sPath: String);
     function GetDirList(sPath: String): TStringList;
@@ -36,27 +40,32 @@ implementation
 procedure TAppSettings.Initialize;
 begin
   sProgramPath := ExtractFilePath(ParamStr(0));
-  sConfigPath := sProgramPath+'options.ini';
+  sIniPath := sProgramPath+'options.ini';
+  IniFile := TIniFile.Create(sIniPath);
   DirList:=TStringList.Create;
-  bRunShortcutsAsAdmin:=false;
-  bRunFilesAsAdmin:=true;
-  if FileExists(sConfigPath) then begin
-    AssignFile(f,sConfigPath);
-    Reset(f);
-    ReadLn(f,sDirPath);
-    CloseFile(f);
-  end else begin
-    AssignFile(f,sConfigPath);
-    Rewrite(f);
-    WriteLn(f,'');
-    CloseFile(f);
-    sDirPath:='';
-  end;
+  LoadSettings;
+end;
+
+procedure TAppSettings.LoadSettings;
+begin
+  sDirPath := IniFile.ReadString('Program','DirPath','');
+  bRunShortcutsAsAdmin:=IniFile.ReadBool('Program', 'RunShortcutsAsAdmin',False);
+  bRunFilesAsAdmin:=IniFile.ReadBool('Program', 'RunFilesAsAdmin', True);
+  sTrayIconFilePath:=IniFile.ReadString('Program','TrayIconPath','TrayIcon.ico');
+  WriteSettings;
+end;
+
+procedure TAppSettings.WriteSettings;
+begin
+  IniFile.WriteString('Program', 'DirPath', sDirPath);
+  IniFile.WriteBool('Program', 'RunShortcutsAsAdmin',bRunShortcutsAsAdmin);
+  IniFile.WriteBool('Program', 'RunFilesAsAdmin', bRunFilesAsAdmin);
+  IniFile.WriteString('Program','TrayIconPath',sTrayIconFilePath);
 end;
 
 procedure TAppSettings.SetDirPath(sPath: String);
 begin
-  AssignFile(f,sConfigPath);
+  AssignFile(f,sIniPath);
   Rewrite(f);
   WriteLn(f,sPath);
   CloseFile(f);

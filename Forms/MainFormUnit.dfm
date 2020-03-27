@@ -3,7 +3,7 @@ object MainForm: TMainForm
   Top = 0
   BorderStyle = bsSingle
   Caption = 'TrayDir'
-  ClientHeight = 81
+  ClientHeight = 117
   ClientWidth = 555
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,10 +18,10 @@ object MainForm: TMainForm
   PixelsPerInch = 96
   TextHeight = 13
   object GroupBox1: TGroupBox
-    Left = 8
-    Top = 4
+    Left = 9
+    Top = 8
     Width = 538
-    Height = 65
+    Height = 97
     Caption = 'Directory'
     TabOrder = 0
     object DirEdit: TEdit
@@ -39,6 +39,25 @@ object MainForm: TMainForm
       Height = 25
       Action = BrowseAction
       TabOrder = 1
+    end
+    object ShortcutsAsAdminCheckBox: TCheckBox
+      Left = 24
+      Top = 64
+      Width = 498
+      Height = 17
+      Action = ShortcutsAsAdminAction
+      Alignment = taLeftJustify
+      TabOrder = 2
+      Visible = False
+    end
+    object FilesAsAdminCheckBox: TCheckBox
+      Left = 24
+      Top = 64
+      Width = 498
+      Height = 17
+      Action = FilesAsAdminAction
+      Alignment = taLeftJustify
+      TabOrder = 3
     end
   end
   object TrayIcon: TTrayIcon
@@ -76,6 +95,14 @@ object MainForm: TMainForm
     object ExploreAction: TAction
       Caption = 'Explore'
       OnExecute = ExploreActionExecute
+    end
+    object ShortcutsAsAdminAction: TAction
+      Caption = 'Run Shortcuts As Admin'
+      OnExecute = ShortcutsAsAdminActionExecute
+    end
+    object FilesAsAdminAction: TAction
+      Caption = 'Run Files As Admin'
+      OnExecute = FilesAsAdminActionExecute
     end
   end
   object PopupMenuTemplate: TPopupMenu

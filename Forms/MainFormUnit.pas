@@ -35,6 +35,10 @@ type
     Browse1: TMenuItem;
     Explore1: TMenuItem;
     ExploreAction: TAction;
+    ShortcutsAsAdminCheckBox: TCheckBox;
+    FilesAsAdminCheckBox: TCheckBox;
+    ShortcutsAsAdminAction: TAction;
+    FilesAsAdminAction: TAction;
     procedure HideActionExecute(Sender: TObject);
     procedure ShowActionExecute(Sender: TObject);
     procedure TrayIconDblClick(Sender: TObject);
@@ -45,6 +49,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure AboutActionExecute(Sender: TObject);
     procedure ExploreActionExecute(Sender: TObject);
+    procedure FilesAsAdminActionExecute(Sender: TObject);
+    procedure ShortcutsAsAdminActionExecute(Sender: TObject);
   private
     { Private declarations }
     procedure CreatePopupMenu;
@@ -184,6 +190,12 @@ begin
   Timer1.Enabled:=True;
 end;
 
+procedure TMainForm.ShortcutsAsAdminActionExecute(Sender: TObject);
+begin
+  AppSettings.bRunShortcutsAsAdmin:=ShortcutsAsAdminCheckBox.Checked;
+  AppSettings.WriteSettings;
+end;
+
 procedure TMainForm.ShowActionExecute(Sender: TObject);
 begin
   WindowState := wsNormal;
@@ -200,6 +212,7 @@ procedure TMainForm.BrowseActionExecute(Sender: TObject);
 begin
   if(OpenDialog.Execute()) then begin
     AppSettings.SetDirPath(OpenDialog.FileName);
+    AppSettings.WriteSettings;
     DirEdit.Text:=AppSettings.sDirPath;
     CreatePopupMenu;
   end;
@@ -217,15 +230,23 @@ begin
   end;
 end;
 
+procedure TMainForm.FilesAsAdminActionExecute(Sender: TObject);
+begin
+  AppSettings.bRunFilesAsAdmin:=FilesAsAdminCheckBox.Checked;
+  AppSettings.WriteSettings;
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 var
   MyIcon: TIcon;
 begin
   DirEdit.Text:=AppSettings.sDirPath;
+  FilesAsAdminCheckBox.Checked:=AppSettings.bRunFilesAsAdmin;
+  ShortcutsAsAdminCheckBox.Checked:=AppSettings.bRunShortcutsAsAdmin;
   AppSettings.LoadDirList(AppSettings.sDirPath);
-  if FileExists('TrayIcon.ico') then begin
+  if FileExists(AppSettings.sTrayIconFilePath) then begin
     MyIcon := TIcon.Create;
-    MyIcon.LoadFromFile('TrayIcon.ico');
+    MyIcon.LoadFromFile(AppSettings.sTrayIconFilePath);
     TrayIcon.Icon := MyIcon;
   end;
   CreatePopupMenu;
