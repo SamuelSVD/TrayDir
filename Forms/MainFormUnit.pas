@@ -69,6 +69,9 @@ implementation
 {$R *.dfm}
 
 uses AboutFormUnit, AppSettingsModule;
+const
+  RunLink = '@echo off'+AnsiString(#13#10)+'setlocal'+AnsiString(#13#10)+'rem // ensure user supplied a filename with a .lnk extension'+AnsiString(#13#10)+'if /i "%~x1" neq ".lnk" ('+AnsiString(#13#10)+'    echo usage: %~nx0 shortcut.lnk'+AnsiString(#13#10)+'    goto :EOF'+AnsiString(#13#10)+')'+AnsiString(#13#10)+''+AnsiString(#13#10)+'rem // set filename to the fully qualified path + filename'+AnsiString(#13#10)+'set "filename=%~f1"'+AnsiString(#13#10)+''+AnsiString(#13#10)+'rem // get target'+AnsiString(#13#10)+'for /f "delims=" %%I in ('+AnsiString(#13#10)+'    ''wmic path win32_shortcutfile where "name=''%filename:\=\\%''" get target /value'''+AnsiString(#13#10)+') do for /f "delims=" %%# in ("%%~I") do set "%%~#"'+AnsiString(#13#10)+''+AnsiString(#13#10)+'rem // preserve ampersands'+AnsiString(#13#10)+'setlocal enabledelayedexpansion'+AnsiString(#13#10)+'echo(!target!'+AnsiString(#13#10)+'start "" "!target!"'+AnsiString(#13#10)+'DEL "%~f0"';
+  RunLinkFileName = '_RunLink.bat';
 
 constructor TRunAction.Create(Owner: TComponent; form: TMainForm; path: string);
 begin
@@ -78,8 +81,26 @@ begin
 end;
 
 procedure TRunAction.Execute(Sender: TObject);
+var
+  myFile: TextFile;
 begin
-  ShellExecute(mainform.Handle, 'runas', PWideChar(filepath), nil, nil, SW_SHOWNORMAL);
+  if filepath.EndsWith('.lnk') then begin
+    AssignFile(myFile,RunLinkFileName);
+    ReWrite(myFile);
+    WriteLn(myFile, RunLink);
+    CloseFile(myFile);
+    if AppSettings.bRunShortcutsAsAdmin then begin
+      ShellExecute(mainform.Handle, 'runas', PWideChar(RunLinkFileName), PWideChar(filepath), nil, SW_HIDE);
+    end else begin
+      ShellExecute(mainform.Handle, 'open', PWideChar(RunLinkFileName), PWideChar(filepath), nil, SW_HIDE);
+    end;
+  end else begin
+    if AppSettings.bRunFilesAsAdmin then begin
+      ShellExecute(mainform.Handle, 'runas', PWideChar(filepath), nil, nil, SW_SHOWNORMAL);
+    end else begin
+      ShellExecute(mainform.Handle, 'open', PWideChar(filepath), nil, nil, SW_SHOWNORMAL);
+    end;
+  end;
 end;
 
 procedure TMainForm.CreatePopupMenu;

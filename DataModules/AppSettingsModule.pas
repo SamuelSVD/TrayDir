@@ -15,6 +15,8 @@ type
     sDirPath: String;
     sConfigPath: String;
     sProgramPath: String;
+    bRunShortcutsAsAdmin: boolean;
+    bRunFilesAsAdmin: boolean;
     DirList: TStringList;
     procedure Initialize;
     procedure SetDirPath(sPath: String);
@@ -36,6 +38,8 @@ begin
   sProgramPath := ExtractFilePath(ParamStr(0));
   sConfigPath := sProgramPath+'options.ini';
   DirList:=TStringList.Create;
+  bRunShortcutsAsAdmin:=false;
+  bRunFilesAsAdmin:=true;
   if FileExists(sConfigPath) then begin
     AssignFile(f,sConfigPath);
     Reset(f);
