@@ -223,6 +223,11 @@ var
 begin
   DirEdit.Text:=AppSettings.sDirPath;
   AppSettings.LoadDirList(AppSettings.sDirPath);
+  if FileExists('TrayIcon.ico') then begin
+    MyIcon := TIcon.Create;
+    MyIcon.LoadFromFile('TrayIcon.ico');
+    TrayIcon.Icon := MyIcon;
+  end;
   CreatePopupMenu;
   if Application.ShowMainForm = False then begin
     MainForm.WindowState := wsMinimized;
