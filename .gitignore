@@ -4,3 +4,5 @@ Win32/
 *.local
 TrayDir/obj
 TrayDir/bin
+.vs
+*.suo

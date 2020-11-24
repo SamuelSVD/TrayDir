@@ -11,16 +11,24 @@ namespace TrayDir
     class Option
     {
         public string name;
-        public bool value;
-        public Option(string name, bool value)
+        public string sValue;
+        public bool bValue
+        {
+            get { return sValue == "1"; }
+            set { sValue = value ? "1" : "0"; }
+        }
+        public Option(string name, string value)
         {
             this.name = name;
-            this.value = value;
+            this.sValue = value;
         }
+        public Option(string name, bool value) : this(name, value ? "1" : "0") { }
     }
     class Settings
     {
         public static string config = "config.xml";
+        public static string iconPath = "";
+
         private static Dictionary<string, Option> options;
         public static List<string> paths;
         public static void Init()
@@ -30,6 +38,8 @@ namespace TrayDir
             options.Add("RunAsAdmin", option);
             option = new Option("ShowFileExtensions", true);
             options.Add("ShowFileExtensions", option);
+            option = new Option("StartMinimized", false);
+            options.Add("StartMinimized", option);
             paths = new List<string>();
             paths.Add(".");
             Load();
@@ -42,49 +52,79 @@ namespace TrayDir
             {
                 doc.Load(config);
                 XmlElement root = doc.DocumentElement;
-                LoadOptions(root.GetElementsByTagName("options")[0] as XmlElement);
-                LoadPaths(root.GetElementsByTagName("paths")[0] as XmlElement);
+                LoadOptions(root);
+                LoadPaths(root);
+                LoadAppConfig(root);
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error Loading Config" + e.Message);
+                MessageBox.Show("Error Loading Config:" + e.Message);
             }
         }
-        private static void LoadOptions(XmlElement options)
+        private static void LoadOptions(XmlElement root)
         {
-            foreach(XmlElement option in options.GetElementsByTagName("option"))
+            try
             {
-                try
-                {
-                    string name = option.GetAttribute("Name");
-                    bool value = StrToBool(option.GetAttribute("Value"));
-                    Option o = new Option(name, value);
-                    Settings.options[name] = o;
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Error Parsing Options: " + e.Message);
-                }
-            }
-        }
-        private static void LoadPaths(XmlElement paths)
-        {
-            XmlNodeList list = paths.GetElementsByTagName("path");
-            if (list.Count > 0)
-            {
-                Settings.paths.Clear();
-                foreach (XmlElement path in list)
+                XmlElement options = root.GetElementsByTagName("options")[0] as XmlElement;
+                foreach (XmlElement option in options.GetElementsByTagName("option"))
                 {
                     try
                     {
-                        string value = path.GetAttribute("Value");
-                        Settings.paths.Add(value);
+                        string name = option.GetAttribute("Name");
+                        bool value = StrToBool(option.GetAttribute("Value"));
+                        Option o = new Option(name, value);
+                        Settings.options[name] = o;
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Error Parsing Options: " + e.Message);
+                        MessageBox.Show("Error Parsing Option: " + e.Message);
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error Parsing Options: " + e.Message);
+            }
+        }
+        private static void LoadPaths(XmlElement root)
+        {
+            try
+            {
+                XmlElement paths = root.GetElementsByTagName("paths")[0] as XmlElement;
+                XmlNodeList list = paths.GetElementsByTagName("path");
+                if (list.Count > 0)
+                {
+                    Settings.paths.Clear();
+                    foreach (XmlElement path in list)
+                    {
+                        try
+                        {
+                            string value = path.GetAttribute("Value");
+                            Settings.paths.Add(value);
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Error Parsing Path: " + e.Message);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error Parsing Paths: " + e.Message);
+            }
+        }
+        private static void LoadAppConfig(XmlElement root)
+        {
+            try
+            {
+                XmlElement appConfig = root.GetElementsByTagName("appconfig")[0] as XmlElement;
+                XmlElement trayicon = appConfig.GetElementsByTagName("trayicon")[0] as XmlElement;
+                iconPath = trayicon.GetAttribute("Value");
+            }
+            catch
+            {
+                //MessageBox.Show("Error Parsing Paths: " + e.Message);
             }
         }
         public static void Save()
@@ -96,15 +136,21 @@ namespace TrayDir
             xmlSettings.OmitXmlDeclaration = false;
             XmlWriter writer = XmlWriter.Create(config, xmlSettings);
             writer.WriteStartElement("TrayDir");
+            writer.WriteStartElement("appconfig");
+            writer.WriteStartElement("trayicon");
+            writer.WriteAttributeString("Value", iconPath);
+            writer.WriteEndElement();
+            writer.WriteEndElement();
             writer.WriteStartElement("options");
             foreach (KeyValuePair<string, Option> option in options)
             {
                 writer.WriteStartElement("option");
                 writer.WriteAttributeString("Name", option.Key);
-                writer.WriteAttributeString("Value", BoolToStr(option.Value.value));
+                writer.WriteAttributeString("Value", option.Value.sValue);
                 writer.WriteEndElement();
             }
             writer.WriteEndElement();
+
             writer.WriteStartElement("paths");
             writer.WriteAttributeString("count", paths.Count.ToString());
             foreach( string path in paths)
@@ -127,21 +173,45 @@ namespace TrayDir
         {
             return value == "1" ? true : false;
         }
-        public static bool getOption(string input)
+        public static bool getOptionBool(string input)
         {
             if (options.ContainsKey(input))
             {
-                return options[input].value;
-            } else
+                return options[input].bValue;
+            }
+            else
             {
                 return false;
             }
         }
-        public static void setOption(string input, bool value)
+        public static void setOptionBool(string input, bool value)
         {
             if (options.ContainsKey(input))
             {
-                options[input].value = value;
+                options[input].bValue = value;
+            }
+            else
+            {
+                Option o = new Option(input, value);
+                options[input] = o;
+            }
+        }
+        public static string getOptionStr(string input)
+        {
+            if (options.ContainsKey(input))
+            {
+                return options[input].sValue;
+            }
+            else
+            {
+                return "";
+            }
+        }
+        public static void setOptionStr(string input, string value)
+        {
+            if (options.ContainsKey(input))
+            {
+                options[input].sValue = value;
             }
             else
             {

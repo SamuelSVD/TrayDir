@@ -38,7 +38,7 @@ namespace TrayDir
                 else if (PathIsFile(path))
                 {
                     menuitem.Text = Path.GetFileName(path);
-                    if (Settings.getOption("ShowFileExtensions"))
+                    if (Settings.getOptionBool("ShowFileExtensions"))
                     {
                         menuitem.Text = Path.GetFileName(path);
                     }
@@ -108,7 +108,7 @@ namespace TrayDir
         {
             try
             {
-                if (Settings.getOption("RunAsAdmin"))
+                if (Settings.getOptionBool("RunAsAdmin"))
                 {
                     ExecuteAsAdmin(path);
                 }

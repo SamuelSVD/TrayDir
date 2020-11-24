@@ -19,10 +19,13 @@ namespace TrayDir
             InitializeOptions();
             InitializeTrayMenu();
             InitializePaths();
-            if (Settings.getOption("StartMinimized"))
+            if (Settings.getOptionBool("StartMinimized"))
             {
                 this.allowVisible = false;
                 HideApp(this, null);
+            } else
+            {
+                this.allowVisible = true;
             }
             PerformLayout();
         }
@@ -96,11 +99,22 @@ namespace TrayDir
             this.TrayItem.ContextMenuStrip.Items.Add("Exit", null, ExitApp);
             this.TrayItem.ContextMenuStrip.Items[0].Visible = false;
             BuildExploreDropdown();
+            InitializeTrayIcon();
         }
-        private void Exit(object Sender, EventArgs e)
+        private void InitializeTrayIcon()
         {
-            allowClose = true;
-            Application.Exit();
+            string iconPath = Settings.iconPath;
+            if (AppUtils.PathIsFile(iconPath))
+            {
+                try
+                {
+                    TrayItem.Icon = System.Drawing.Icon.ExtractAssociatedIcon(iconPath);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error loading icon: " + e.Message);
+                }
+            }
         }
         private void HideApp(object Sender, EventArgs e)
         {
@@ -256,11 +270,11 @@ namespace TrayDir
             checkbox.Size = new System.Drawing.Size(116, 27);
             checkbox.TabIndex = 1;
             checkbox.UseVisualStyleBackColor = true;
-            checkbox.Checked = Settings.getOption(name);
+            checkbox.Checked = Settings.getOptionBool(name);
 
             EventHandler folderSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
-                Settings.setOption(name,checkbox.Checked);
+                Settings.setOptionBool(name,checkbox.Checked);
                 InitializeTrayMenu();
             });
 
