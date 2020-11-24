@@ -31,6 +31,7 @@ namespace TrayDir
 
         private static Dictionary<string, Option> options;
         public static List<string> paths;
+        private static bool _altered;
         public static void Init()
         {
             options = new Dictionary<string, Option>();
@@ -38,11 +39,14 @@ namespace TrayDir
             options.Add("RunAsAdmin", option);
             option = new Option("ShowFileExtensions", true);
             options.Add("ShowFileExtensions", option);
+            option = new Option("MinimizeOnClose", true);
+            options.Add("MinimizeOnClose", option);
             option = new Option("StartMinimized", false);
             options.Add("StartMinimized", option);
             paths = new List<string>();
             paths.Add(".");
             Load();
+            _altered = false;
         }
         public static void Load()
         {
@@ -164,6 +168,7 @@ namespace TrayDir
             writer.WriteEndElement();
             writer.Flush();
             writer.Close();
+            _altered = false;
         }
         static string BoolToStr(bool value)
         {
@@ -195,6 +200,7 @@ namespace TrayDir
                 Option o = new Option(input, value);
                 options[input] = o;
             }
+            _altered = true;
         }
         public static string getOptionStr(string input)
         {
@@ -218,10 +224,22 @@ namespace TrayDir
                 Option o = new Option(input, value);
                 options[input] = o;
             }
+            _altered = true;
         }
         public static Dictionary<string, Option>.ValueCollection getOptions()
         {
             return options.Values;
+        }
+        public static bool ConfirmClose()
+        {
+            if (_altered)
+            {
+                return (MessageBox.Show("Changes have not been saved. Continue closing?", "TrayDir", MessageBoxButtons.YesNo) == DialogResult.Yes);
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

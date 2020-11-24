@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FolderSelect;
+using System;
 using System.IO;
 using System.Windows.Forms;
 
@@ -28,6 +29,7 @@ namespace TrayDir
                 this.allowVisible = true;
             }
             PerformLayout();
+            MaximizeBox = false;
         }
         public void InitializeOptions()
         {
@@ -199,6 +201,7 @@ namespace TrayDir
             EventHandler fileSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
                 FileDialog.DereferenceLinks = false;
+                FileDialog.InitialDirectory = textbox.Text;
                 DialogResult d = FileDialog.ShowDialog();
                 if (d == DialogResult.OK)
                 {
@@ -227,10 +230,11 @@ namespace TrayDir
 
             EventHandler folderSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
-                DialogResult d = FolderDialog.ShowDialog();
-                if (d == DialogResult.OK)
+                FolderSelectDialog fs = new FolderSelectDialog();
+                fs.InitialDirectory = textbox.Text;
+                if (fs.ShowDialog())
                 {
-                    textbox.Text = FolderDialog.SelectedPath;
+                    textbox.Text = fs.FileName;
                     Settings.paths[n] = textbox.Text;
                     InitializeTrayMenu();
                 }
@@ -355,12 +359,15 @@ namespace TrayDir
             Settings.Save();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ShowAbout(object sender, EventArgs e)
         {
             About aa = new About();
             aa.Show();
         }
-
+        private void Rebuild(object sender, EventArgs e)
+        {
+            InitializeTrayMenu();
+        }
         protected override void SetVisibleCore(bool value)
         {
             if (!allowVisible)
@@ -373,10 +380,17 @@ namespace TrayDir
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!allowClose)
+            if (!allowClose && Settings.getOptionBool("MinimizeOnClose"))
             {
                 this.HideApp(this, null);
                 e.Cancel = true;
+            } 
+            else
+            {
+                if (!Settings.ConfirmClose())
+                {
+                    e.Cancel = true;
+                }
             }
             base.OnFormClosing(e);
         }

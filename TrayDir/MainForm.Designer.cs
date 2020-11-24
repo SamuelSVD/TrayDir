@@ -43,14 +43,15 @@ namespace TrayDir
             this.MainLayout = new System.Windows.Forms.TableLayoutPanel();
             this.OptionsGroupBox = new System.Windows.Forms.GroupBox();
             this.OptionsGroupLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exploreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rebuildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TrayItem = new System.Windows.Forms.NotifyIcon(this.components);
             this.FileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.FolderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.DirectoriesGroupBox.SuspendLayout();
             this.DirectoriesGroupBoxLayout.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -165,14 +166,14 @@ namespace TrayDir
             this.MainLayout.Controls.Add(this.OptionsGroupBox, 0, 0);
             this.MainLayout.Controls.Add(this.DirectoriesGroupBox, 0, 1);
             this.MainLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainLayout.Location = new System.Drawing.Point(0, 38);
+            this.MainLayout.Location = new System.Drawing.Point(0, 48);
             this.MainLayout.Margin = new System.Windows.Forms.Padding(5);
             this.MainLayout.Name = "MainLayout";
             this.MainLayout.RowCount = 2;
             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.MainLayout.Size = new System.Drawing.Size(1131, 170);
+            this.MainLayout.Size = new System.Drawing.Size(1131, 160);
             this.MainLayout.TabIndex = 3;
             // 
             // OptionsGroupBox
@@ -205,28 +206,20 @@ namespace TrayDir
             this.OptionsGroupLayout.Size = new System.Drawing.Size(1085, 0);
             this.OptionsGroupLayout.TabIndex = 0;
             // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(66, 34);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitApp);
-            // 
             // exploreToolStripMenuItem
             // 
             this.exploreToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.exploreToolStripMenuItem.Name = "exploreToolStripMenuItem";
-            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(105, 34);
+            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(105, 38);
             this.exploreToolStripMenuItem.Text = "Explore";
             // 
             // aboutToolStripMenuItem
             // 
-            this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(92, 34);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(100, 38);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.ShowAbout);
             // 
             // mainMenu
             // 
@@ -234,23 +227,45 @@ namespace TrayDir
             this.mainMenu.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.mainMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem,
-            this.exitToolStripMenuItem,
+            this.fileToolStripMenuItem,
             this.exploreToolStripMenuItem,
+            this.rebuildToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1131, 38);
+            this.mainMenu.Size = new System.Drawing.Size(1131, 48);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "mainMenu";
             // 
-            // saveToolStripMenuItem
+            // fileToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(79, 34);
-            this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.Save);
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem1,
+            this.exitToolStripMenuItem1});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 38);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveToolStripMenuItem1
+            // 
+            this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(199, 44);
+            this.saveToolStripMenuItem1.Text = "Save";
+            this.saveToolStripMenuItem1.Click += new System.EventHandler(this.Save);
+            // 
+            // exitToolStripMenuItem1
+            // 
+            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(199, 44);
+            this.exitToolStripMenuItem1.Text = "Exit";
+            this.exitToolStripMenuItem1.Click += new System.EventHandler(this.ExitApp);
+            // 
+            // rebuildToolStripMenuItem
+            // 
+            this.rebuildToolStripMenuItem.Name = "rebuildToolStripMenuItem";
+            this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(115, 38);
+            this.rebuildToolStripMenuItem.Text = "Rebuild";
+            this.rebuildToolStripMenuItem.Click += new System.EventHandler(this.Rebuild);
             // 
             // TrayItem
             // 
@@ -294,7 +309,6 @@ namespace TrayDir
         private System.Windows.Forms.GroupBox DirectoriesGroupBox;
         private System.Windows.Forms.TableLayoutPanel MainLayout;
         private System.Windows.Forms.GroupBox OptionsGroupBox;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exploreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.MenuStrip mainMenu;
@@ -306,8 +320,10 @@ namespace TrayDir
         private Button AddButton;
         private Button RemoveButton;
         private OpenFileDialog FileDialog;
-        private FolderBrowserDialog FolderDialog;
-        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem saveToolStripMenuItem1;
+        private ToolStripMenuItem exitToolStripMenuItem1;
+        private ToolStripMenuItem rebuildToolStripMenuItem;
     }
 }
 

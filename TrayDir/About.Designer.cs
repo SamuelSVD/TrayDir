@@ -66,7 +66,7 @@ namespace TrayDir
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(201, 25);
             this.label3.TabIndex = 2;
-            this.label3.Text = "V2.0.0 | 2020-11-19";
+            this.label3.Text = "V2.0.2 | 2020-11-24";
             // 
             // About
             // 
