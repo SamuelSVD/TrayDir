@@ -69,7 +69,7 @@ namespace TrayDir
             this.DirectoriesGroupBox.Location = new System.Drawing.Point(20, 55);
             this.DirectoriesGroupBox.Margin = new System.Windows.Forms.Padding(20, 5, 20, 20);
             this.DirectoriesGroupBox.Name = "DirectoriesGroupBox";
-            this.DirectoriesGroupBox.Size = new System.Drawing.Size(1091, 125);
+            this.DirectoriesGroupBox.Size = new System.Drawing.Size(1091, 117);
             this.DirectoriesGroupBox.TabIndex = 2;
             this.DirectoriesGroupBox.TabStop = false;
             this.DirectoriesGroupBox.Text = "Paths";
@@ -88,7 +88,7 @@ namespace TrayDir
             this.DirectoriesGroupBoxLayout.RowCount = 2;
             this.DirectoriesGroupBoxLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.DirectoriesGroupBoxLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.DirectoriesGroupBoxLayout.Size = new System.Drawing.Size(1085, 95);
+            this.DirectoriesGroupBoxLayout.Size = new System.Drawing.Size(1085, 87);
             this.DirectoriesGroupBoxLayout.TabIndex = 1;
             // 
             // DirectoriesGroupLayout
@@ -124,7 +124,7 @@ namespace TrayDir
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1065, 55);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1065, 47);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // AddButton
@@ -132,11 +132,10 @@ namespace TrayDir
             this.AddButton.AutoSize = true;
             this.AddButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AddButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AddButton.Location = new System.Drawing.Point(750, 5);
-            this.AddButton.Margin = new System.Windows.Forms.Padding(5);
+            this.AddButton.Location = new System.Drawing.Point(748, 3);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Padding = new System.Windows.Forms.Padding(5);
-            this.AddButton.Size = new System.Drawing.Size(149, 45);
+            this.AddButton.Padding = new System.Windows.Forms.Padding(3);
+            this.AddButton.Size = new System.Drawing.Size(153, 41);
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -147,11 +146,10 @@ namespace TrayDir
             this.RemoveButton.AutoSize = true;
             this.RemoveButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.RemoveButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RemoveButton.Location = new System.Drawing.Point(909, 5);
-            this.RemoveButton.Margin = new System.Windows.Forms.Padding(5);
+            this.RemoveButton.Location = new System.Drawing.Point(907, 3);
             this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Padding = new System.Windows.Forms.Padding(5);
-            this.RemoveButton.Size = new System.Drawing.Size(151, 45);
+            this.RemoveButton.Padding = new System.Windows.Forms.Padding(3);
+            this.RemoveButton.Size = new System.Drawing.Size(155, 41);
             this.RemoveButton.TabIndex = 1;
             this.RemoveButton.Text = "Remove";
             this.RemoveButton.UseVisualStyleBackColor = true;
@@ -208,23 +206,22 @@ namespace TrayDir
             // 
             // exploreToolStripMenuItem
             // 
-            this.exploreToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.exploreToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.exploreToolStripMenuItem.Name = "exploreToolStripMenuItem";
-            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(105, 38);
+            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(113, 44);
             this.exploreToolStripMenuItem.Text = "Explore";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(100, 38);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(100, 44);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.ShowAbout);
             // 
             // mainMenu
             // 
             this.mainMenu.BackColor = System.Drawing.SystemColors.Window;
-            this.mainMenu.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.mainMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
@@ -243,7 +240,7 @@ namespace TrayDir
             this.saveToolStripMenuItem1,
             this.exitToolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 44);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem1
@@ -263,7 +260,7 @@ namespace TrayDir
             // rebuildToolStripMenuItem
             // 
             this.rebuildToolStripMenuItem.Name = "rebuildToolStripMenuItem";
-            this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(115, 38);
+            this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(115, 44);
             this.rebuildToolStripMenuItem.Text = "Rebuild";
             this.rebuildToolStripMenuItem.Click += new System.EventHandler(this.Rebuild);
             // 

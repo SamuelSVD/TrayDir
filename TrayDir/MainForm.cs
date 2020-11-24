@@ -172,7 +172,7 @@ namespace TrayDir
             panel.Location = new System.Drawing.Point(5, 5);
             panel.Margin = new System.Windows.Forms.Padding(5);
             panel.Name = "panel" + n.ToString();
-            panel.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            panel.Padding = new System.Windows.Forms.Padding(10, 3, 0, 3);
             panel.Size = new System.Drawing.Size(675, 45);
             panel.TabIndex = 5;
             
@@ -189,10 +189,10 @@ namespace TrayDir
             Button fileButton = new Button();
             fileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             fileButton.AutoSize = true;
-            fileButton.Location = new System.Drawing.Point(690, 5);
-            fileButton.Margin = new System.Windows.Forms.Padding(5);
+            fileButton.Location = new System.Drawing.Point(690, 3);
+            //fileButton.Margin = new System.Windows.Forms.Padding(5);
             fileButton.Name = "filebutton" + n.ToString();
-            fileButton.Padding = new System.Windows.Forms.Padding(5);
+            fileButton.Padding = new System.Windows.Forms.Padding(3);
             fileButton.Size = new System.Drawing.Size(112, 45);
             fileButton.TabIndex = 1;
             fileButton.Text = "File";
@@ -220,9 +220,9 @@ namespace TrayDir
             folderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             folderButton.AutoSize = true;
             folderButton.Location = new System.Drawing.Point(690, 5);
-            folderButton.Margin = new System.Windows.Forms.Padding(5);
+            folderButton.Margin = new System.Windows.Forms.Padding(3);
             folderButton.Name = "folderButton" + n.ToString();
-            folderButton.Padding = new System.Windows.Forms.Padding(5);
+            folderButton.Padding = new System.Windows.Forms.Padding(3);
             folderButton.Size = new System.Drawing.Size(112, 45);
             folderButton.TabIndex = 1;
             folderButton.Text = "Folder";
@@ -259,7 +259,7 @@ namespace TrayDir
             label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             label.AutoSize = true;
             label.Location = new System.Drawing.Point(10, 55);
-            label.Margin = new System.Windows.Forms.Padding(10, 10, 5, 10);
+            label.Margin = new System.Windows.Forms.Padding(10, 5, 3, 5);
             label.Name = name+"Label";
             label.Size = new System.Drawing.Size(670, 25);
             label.TabIndex = 2;
@@ -289,7 +289,6 @@ namespace TrayDir
             this.OptionsGroupLayout.Controls.Add(checkbox, 1, OptionCount);
             OptionCount += 1;
             this.OptionsGroupLayout.RowCount = OptionCount;
-            this.OptionsGroupBox.Height += label.Height + label.Padding.Top + label.Padding.Bottom;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -315,8 +314,8 @@ namespace TrayDir
             control = panel.GetControlFromPosition(0, Rowindex);
             panel.Controls.Remove(control);
             panel.RowCount = Rowindex;
-            panel.Height -= 100;
-            Height -= 100;
+            panel.Height = 0;
+            Height = 100;
             Settings.paths.RemoveAt(Settings.paths.Count - 1);
             InitializeTrayMenu();
         }
