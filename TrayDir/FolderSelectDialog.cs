@@ -14,15 +14,15 @@ namespace FolderSelect
 	/// </summary>
 	public class FolderSelectDialog
 	{
-		// Wrapped dialog
-		System.Windows.Forms.OpenFileDialog ofd = null;
+        // Wrapped dialog
+        OpenFileDialog ofd = null;
 
 		/// <summary>
 		/// Default constructor
 		/// </summary>
 		public FolderSelectDialog()
 		{
-			ofd = new System.Windows.Forms.OpenFileDialog();
+			ofd = new OpenFileDialog();
 
 			ofd.Filter = "Folders|\n";
 			ofd.AddExtension = false;
@@ -90,7 +90,7 @@ namespace FolderSelect
 				object dialog = r.Call(ofd, "CreateVistaDialog");
 				r.Call(ofd, "OnBeforeVistaDialog", dialog);
 
-				uint options = (uint)r.CallAs(typeof(System.Windows.Forms.FileDialog), ofd, "GetOptions");
+				uint options = (uint)r.CallAs(typeof(FileDialog), ofd, "GetOptions");
 				options |= (uint)r.GetEnum("FileDialogNative.FOS", "FOS_PICKFOLDERS");
 				r.CallAs(typeIFileDialog, dialog, "SetOptions", options);
 
@@ -112,8 +112,8 @@ namespace FolderSelect
 			else
 			{
 				var fbd = new FolderBrowserDialog();
-				fbd.Description = this.Title;
-				fbd.SelectedPath = this.InitialDirectory;
+				fbd.Description = Title;
+				fbd.SelectedPath = InitialDirectory;
 				fbd.ShowNewFolderButton = false;
 				if (fbd.ShowDialog(new WindowWrapper(hWndOwner)) != DialogResult.OK) return false;
 				ofd.FileName = fbd.SelectedPath;
@@ -129,8 +129,8 @@ namespace FolderSelect
 	/// <summary>
 	/// Creates IWin32Window around an IntPtr
 	/// </summary>
-	public class WindowWrapper : System.Windows.Forms.IWin32Window
-	{
+	public class WindowWrapper : IWin32Window
+    {
 		/// <summary>
 		/// Constructor
 		/// </summary>

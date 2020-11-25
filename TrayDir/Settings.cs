@@ -20,7 +20,7 @@ namespace TrayDir
         public Option(string name, string value)
         {
             this.name = name;
-            this.sValue = value;
+            sValue = value;
         }
         public Option(string name, bool value) : this(name, value ? "1" : "0") { }
     }

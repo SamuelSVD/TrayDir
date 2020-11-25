@@ -22,11 +22,11 @@ namespace TrayDir
             InitializePaths();
             if (Settings.getOptionBool("StartMinimized"))
             {
-                this.allowVisible = false;
+                allowVisible = false;
                 HideApp(this, null);
             } else
             {
-                this.allowVisible = true;
+                allowVisible = true;
             }
             PerformLayout();
             MaximizeBox = false;
@@ -60,16 +60,16 @@ namespace TrayDir
         {
             if (TrayItem.ContextMenuStrip is null)
             {
-                this.TrayItem.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+                TrayItem.ContextMenuStrip = new ContextMenuStrip();
             }
             else
             {
-                this.TrayItem.ContextMenuStrip.Items.Clear();
+                TrayItem.ContextMenuStrip.Items.Clear();
             }
-            this.TrayItem.ContextMenuStrip.Items.Add("Show", null, this.ShowApp);
-            this.TrayItem.ContextMenuStrip.Items.Add("Hide", null, this.HideApp);
+            TrayItem.ContextMenuStrip.Items.Add("Show", null, ShowApp);
+            TrayItem.ContextMenuStrip.Items.Add("Hide", null, HideApp);
 
-            this.TrayItem.ContextMenuStrip.Items.Add("-");
+            TrayItem.ContextMenuStrip.Items.Add("-");
 
             if (Settings.paths.Count == 1)
             {
@@ -81,25 +81,25 @@ namespace TrayDir
                     {
                         ToolStripItem item = mi.DropDownItems[0];
                         mi.DropDownItems.RemoveAt(0);
-                        this.TrayItem.ContextMenuStrip.Items.Add(item);
+                        TrayItem.ContextMenuStrip.Items.Add(item);
                     }
                 }
                 else
                 {
-                    this.TrayItem.ContextMenuStrip.Items.Add(mi);
+                    TrayItem.ContextMenuStrip.Items.Add(mi);
                 }
             }
             else
             {
                 foreach (string path in Settings.paths)
                 {
-                    this.TrayItem.ContextMenuStrip.Items.Add(AppUtils.RecursivePathFollow(path));
+                    TrayItem.ContextMenuStrip.Items.Add(AppUtils.RecursivePathFollow(path));
                 }
             }
-            this.TrayItem.ContextMenuStrip.Items.Add("-");
+            TrayItem.ContextMenuStrip.Items.Add("-");
 
-            this.TrayItem.ContextMenuStrip.Items.Add("Exit", null, ExitApp);
-            this.TrayItem.ContextMenuStrip.Items[0].Visible = false;
+            TrayItem.ContextMenuStrip.Items.Add("Exit", null, ExitApp);
+            TrayItem.ContextMenuStrip.Items[0].Visible = false;
             BuildExploreDropdown();
             InitializeTrayIcon();
         }
@@ -120,17 +120,17 @@ namespace TrayDir
         }
         private void HideApp(object Sender, EventArgs e)
         {
-            this.Hide();
-            this.TrayItem.ContextMenuStrip.Items[0].Visible = true;
-            this.TrayItem.ContextMenuStrip.Items[1].Visible = false;
+            Hide();
+            TrayItem.ContextMenuStrip.Items[0].Visible = true;
+            TrayItem.ContextMenuStrip.Items[1].Visible = false;
         }
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                this.HideApp(sender, e);
-                this.TrayItem.ContextMenuStrip.Items[0].Visible = true;
-                this.TrayItem.ContextMenuStrip.Items[1].Visible = false;
+                HideApp(sender, e);
+                TrayItem.ContextMenuStrip.Items[0].Visible = true;
+                TrayItem.ContextMenuStrip.Items[1].Visible = false;
             }
         }
         private void AddPath(string text)
@@ -140,11 +140,10 @@ namespace TrayDir
             // textBox1
             // 
             TextBox textbox = new TextBox();
-            textbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            textbox.BorderStyle = BorderStyle.None;
             textbox.Name = "textbox" + n.ToString();
-            textbox.Size = new System.Drawing.Size(651, 24);
-            textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            textbox.Margin = new System.Windows.Forms.Padding(10);
+            textbox.Dock = DockStyle.Fill;
+            textbox.Margin = new Padding(10);
             textbox.AutoSize = true;
             textbox.ReadOnly = true;
 
@@ -163,14 +162,14 @@ namespace TrayDir
             // panel
             Panel panel = new Panel();
             panel.AutoSize = true;
-            panel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            panel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel.Cursor = textbox.Cursor;
             panel.BackColor = textbox.BackColor;
-            panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel.Margin = new System.Windows.Forms.Padding(2,3,2,3);
+            panel.BorderStyle = BorderStyle.Fixed3D;
+            panel.Dock = DockStyle.Fill;
+            panel.Margin = new Padding(2,3,2,3);
             panel.Name = "panel" + n.ToString();
-            panel.Padding = new System.Windows.Forms.Padding(0);
+            panel.Padding = new Padding(0);
             
             EventHandler textbox_select = new EventHandler(delegate (object obj, EventArgs args)
             {
@@ -186,13 +185,13 @@ namespace TrayDir
             // 
             Button fileButton = new Button();
             fileButton.AutoSize = true;
-            fileButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            fileButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             fileButton.Location = new System.Drawing.Point(690, 3);
             fileButton.Name = "filebutton" + n.ToString();
             fileButton.TabIndex = 1;
             fileButton.Text = "File";
             fileButton.UseVisualStyleBackColor = true;
-            fileButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            fileButton.Dock = DockStyle.Fill;
 
             EventHandler fileSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
@@ -214,10 +213,10 @@ namespace TrayDir
             // 
             Button folderButton = new Button();
             folderButton.AutoSize = true;
-            folderButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            folderButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             folderButton.Text = "Folder";
             folderButton.UseVisualStyleBackColor = true;
-            folderButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            folderButton.Dock = DockStyle.Fill;
 
             EventHandler folderSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
@@ -233,12 +232,12 @@ namespace TrayDir
 
             folderButton.Click += folderSelect;
 
-            this.DirectoriesGroupLayout.Controls.Add(panel, 0, DirCount);
-            this.DirectoriesGroupLayout.Controls.Add(fileButton, 1, DirCount);
-            this.DirectoriesGroupLayout.Controls.Add(folderButton, 2, DirCount);
+            DirectoriesGroupLayout.Controls.Add(panel, 0, DirCount);
+            DirectoriesGroupLayout.Controls.Add(fileButton, 1, DirCount);
+            DirectoriesGroupLayout.Controls.Add(folderButton, 2, DirCount);
             DirCount += 1;
-            this.DirectoriesGroupLayout.RowCount = DirCount;
-            this.DirectoriesGroupLayout.Height = 0;
+            DirectoriesGroupLayout.RowCount = DirCount;
+            DirectoriesGroupLayout.Height = 0;
             Height = 0;
             foreach (RowStyle style in DirectoriesGroupLayout.RowStyles)
             {
@@ -252,17 +251,17 @@ namespace TrayDir
             string text = AppUtils.SplitCamelCase(name);
             Label label = new Label();
 
-            label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            label.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
             label.AutoSize = true;
             label.Location = new System.Drawing.Point(10, 55);
-            label.Margin = new System.Windows.Forms.Padding(10, 5, 3, 5);
+            label.Margin = new Padding(10, 5, 3, 5);
             label.Name = name+"Label";
             label.Size = new System.Drawing.Size(670, 25);
             label.TabIndex = 2;
             label.Text = text;
 
             CheckBox checkbox = new CheckBox(); 
-            checkbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            checkbox.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
             checkbox.AutoSize = true;
             checkbox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             checkbox.Location = new System.Drawing.Point(688, 9);
@@ -280,11 +279,11 @@ namespace TrayDir
 
             checkbox.Click += folderSelect;
 
-            int n = this.OptionsGroupLayout.RowCount;
-            this.OptionsGroupLayout.Controls.Add(label, 0, OptionCount);
-            this.OptionsGroupLayout.Controls.Add(checkbox, 1, OptionCount);
+            int n = OptionsGroupLayout.RowCount;
+            OptionsGroupLayout.Controls.Add(label, 0, OptionCount);
+            OptionsGroupLayout.Controls.Add(checkbox, 1, OptionCount);
             OptionCount += 1;
-            this.OptionsGroupLayout.RowCount = OptionCount;
+            OptionsGroupLayout.RowCount = OptionCount;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -368,7 +367,7 @@ namespace TrayDir
             if (!allowVisible)
             {
                 value = false;
-                if (!this.IsHandleCreated) CreateHandle();
+                if (!IsHandleCreated) CreateHandle();
             }
             base.SetVisibleCore(value);
         }
@@ -377,7 +376,7 @@ namespace TrayDir
         {
             if (!allowClose && Settings.getOptionBool("MinimizeOnClose"))
             {
-                this.HideApp(this, null);
+                HideApp(this, null);
                 e.Cancel = true;
             } 
             else
@@ -394,9 +393,9 @@ namespace TrayDir
         {
             allowVisible = true;
             Show();
-            this.TrayItem.ContextMenuStrip.Items[0].Visible = false;
-            this.TrayItem.ContextMenuStrip.Items[1].Visible = true;
-            this.Focus();
+            TrayItem.ContextMenuStrip.Items[0].Visible = false;
+            TrayItem.ContextMenuStrip.Items[1].Visible = true;
+            Focus();
         }
         private void ExitApp(object sender, EventArgs e)
         {
