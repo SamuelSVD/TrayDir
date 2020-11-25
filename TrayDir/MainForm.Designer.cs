@@ -66,10 +66,11 @@ namespace TrayDir
             this.DirectoriesGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.DirectoriesGroupBox.Controls.Add(this.DirectoriesGroupBoxLayout);
             this.DirectoriesGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DirectoriesGroupBox.Location = new System.Drawing.Point(20, 55);
-            this.DirectoriesGroupBox.Margin = new System.Windows.Forms.Padding(20, 5, 20, 20);
+            this.DirectoriesGroupBox.Location = new System.Drawing.Point(10, 30);
+            this.DirectoriesGroupBox.Margin = new System.Windows.Forms.Padding(10, 3, 10, 10);
             this.DirectoriesGroupBox.Name = "DirectoriesGroupBox";
-            this.DirectoriesGroupBox.Size = new System.Drawing.Size(1091, 117);
+            this.DirectoriesGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DirectoriesGroupBox.Size = new System.Drawing.Size(546, 64);
             this.DirectoriesGroupBox.TabIndex = 2;
             this.DirectoriesGroupBox.TabStop = false;
             this.DirectoriesGroupBox.Text = "Paths";
@@ -83,12 +84,13 @@ namespace TrayDir
             this.DirectoriesGroupBoxLayout.Controls.Add(this.DirectoriesGroupLayout, 0, 0);
             this.DirectoriesGroupBoxLayout.Controls.Add(this.tableLayoutPanel1, 0, 1);
             this.DirectoriesGroupBoxLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DirectoriesGroupBoxLayout.Location = new System.Drawing.Point(3, 27);
+            this.DirectoriesGroupBoxLayout.Location = new System.Drawing.Point(2, 15);
+            this.DirectoriesGroupBoxLayout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DirectoriesGroupBoxLayout.Name = "DirectoriesGroupBoxLayout";
             this.DirectoriesGroupBoxLayout.RowCount = 2;
             this.DirectoriesGroupBoxLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.DirectoriesGroupBoxLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.DirectoriesGroupBoxLayout.Size = new System.Drawing.Size(1085, 87);
+            this.DirectoriesGroupBoxLayout.Size = new System.Drawing.Size(542, 47);
             this.DirectoriesGroupBoxLayout.TabIndex = 1;
             // 
             // DirectoriesGroupLayout
@@ -100,12 +102,12 @@ namespace TrayDir
             this.DirectoriesGroupLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.DirectoriesGroupLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.DirectoriesGroupLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DirectoriesGroupLayout.Location = new System.Drawing.Point(10, 10);
-            this.DirectoriesGroupLayout.Margin = new System.Windows.Forms.Padding(10);
+            this.DirectoriesGroupLayout.Location = new System.Drawing.Point(5, 5);
+            this.DirectoriesGroupLayout.Margin = new System.Windows.Forms.Padding(5);
             this.DirectoriesGroupLayout.Name = "DirectoriesGroupLayout";
             this.DirectoriesGroupLayout.RowCount = 1;
-            this.DirectoriesGroupLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.DirectoriesGroupLayout.Size = new System.Drawing.Size(1065, 1);
+            this.DirectoriesGroupLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.DirectoriesGroupLayout.Size = new System.Drawing.Size(532, 1);
             this.DirectoriesGroupLayout.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -119,12 +121,12 @@ namespace TrayDir
             this.tableLayoutPanel1.Controls.Add(this.AddButton, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.RemoveButton, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 30);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(10);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 15);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1065, 47);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(532, 27);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // AddButton
@@ -132,10 +134,10 @@ namespace TrayDir
             this.AddButton.AutoSize = true;
             this.AddButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AddButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AddButton.Location = new System.Drawing.Point(748, 3);
+            this.AddButton.Location = new System.Drawing.Point(374, 2);
+            this.AddButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Padding = new System.Windows.Forms.Padding(3);
-            this.AddButton.Size = new System.Drawing.Size(153, 41);
+            this.AddButton.Size = new System.Drawing.Size(75, 23);
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "Add";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -146,10 +148,10 @@ namespace TrayDir
             this.RemoveButton.AutoSize = true;
             this.RemoveButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.RemoveButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RemoveButton.Location = new System.Drawing.Point(907, 3);
+            this.RemoveButton.Location = new System.Drawing.Point(453, 2);
+            this.RemoveButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Padding = new System.Windows.Forms.Padding(3);
-            this.RemoveButton.Size = new System.Drawing.Size(155, 41);
+            this.RemoveButton.Size = new System.Drawing.Size(77, 23);
             this.RemoveButton.TabIndex = 1;
             this.RemoveButton.Text = "Remove";
             this.RemoveButton.UseVisualStyleBackColor = true;
@@ -164,14 +166,14 @@ namespace TrayDir
             this.MainLayout.Controls.Add(this.OptionsGroupBox, 0, 0);
             this.MainLayout.Controls.Add(this.DirectoriesGroupBox, 0, 1);
             this.MainLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainLayout.Location = new System.Drawing.Point(0, 48);
-            this.MainLayout.Margin = new System.Windows.Forms.Padding(5);
+            this.MainLayout.Location = new System.Drawing.Point(0, 24);
+            this.MainLayout.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MainLayout.Name = "MainLayout";
             this.MainLayout.RowCount = 2;
             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.MainLayout.Size = new System.Drawing.Size(1131, 160);
+            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.MainLayout.Size = new System.Drawing.Size(566, 84);
             this.MainLayout.TabIndex = 3;
             // 
             // OptionsGroupBox
@@ -180,10 +182,11 @@ namespace TrayDir
             this.OptionsGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.OptionsGroupBox.Controls.Add(this.OptionsGroupLayout);
             this.OptionsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OptionsGroupBox.Location = new System.Drawing.Point(20, 10);
-            this.OptionsGroupBox.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);
+            this.OptionsGroupBox.Location = new System.Drawing.Point(10, 5);
+            this.OptionsGroupBox.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.OptionsGroupBox.Name = "OptionsGroupBox";
-            this.OptionsGroupBox.Size = new System.Drawing.Size(1091, 30);
+            this.OptionsGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.OptionsGroupBox.Size = new System.Drawing.Size(546, 17);
             this.OptionsGroupBox.TabIndex = 3;
             this.OptionsGroupBox.TabStop = false;
             this.OptionsGroupBox.Text = "Options";
@@ -196,26 +199,26 @@ namespace TrayDir
             this.OptionsGroupLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.OptionsGroupLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.OptionsGroupLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OptionsGroupLayout.Location = new System.Drawing.Point(3, 27);
-            this.OptionsGroupLayout.Margin = new System.Windows.Forms.Padding(5);
+            this.OptionsGroupLayout.Location = new System.Drawing.Point(2, 15);
+            this.OptionsGroupLayout.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.OptionsGroupLayout.Name = "OptionsGroupLayout";
             this.OptionsGroupLayout.RowCount = 1;
             this.OptionsGroupLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.OptionsGroupLayout.Size = new System.Drawing.Size(1085, 0);
+            this.OptionsGroupLayout.Size = new System.Drawing.Size(542, 0);
             this.OptionsGroupLayout.TabIndex = 0;
             // 
             // exploreToolStripMenuItem
             // 
             this.exploreToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.exploreToolStripMenuItem.Name = "exploreToolStripMenuItem";
-            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(113, 44);
+            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(58, 22);
             this.exploreToolStripMenuItem.Text = "Explore";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(100, 44);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.ShowAbout);
             // 
@@ -230,7 +233,8 @@ namespace TrayDir
             this.aboutToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1131, 48);
+            this.mainMenu.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
+            this.mainMenu.Size = new System.Drawing.Size(566, 24);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "mainMenu";
             // 
@@ -240,27 +244,27 @@ namespace TrayDir
             this.saveToolStripMenuItem1,
             this.exitToolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 44);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 22);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(199, 44);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.Save);
             // 
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(199, 44);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.ExitApp);
             // 
             // rebuildToolStripMenuItem
             // 
             this.rebuildToolStripMenuItem.Name = "rebuildToolStripMenuItem";
-            this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(115, 44);
+            this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(59, 22);
             this.rebuildToolStripMenuItem.Text = "Rebuild";
             this.rebuildToolStripMenuItem.Click += new System.EventHandler(this.Rebuild);
             // 
@@ -273,15 +277,16 @@ namespace TrayDir
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1131, 208);
+            this.ClientSize = new System.Drawing.Size(566, 108);
             this.Controls.Add(this.MainLayout);
             this.Controls.Add(this.mainMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MainForm";
             this.Text = "TrayDir";
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);

@@ -141,11 +141,12 @@ namespace TrayDir
             // 
             TextBox textbox = new TextBox();
             textbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            textbox.Dock = System.Windows.Forms.DockStyle.Fill;
-            textbox.Location = new System.Drawing.Point(10, 5);
-            textbox.Margin = new System.Windows.Forms.Padding(0);
             textbox.Name = "textbox" + n.ToString();
             textbox.Size = new System.Drawing.Size(651, 24);
+            textbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            textbox.Margin = new System.Windows.Forms.Padding(10);
+            textbox.AutoSize = true;
+            textbox.ReadOnly = true;
 
             if (AppUtils.PathIsDirectory(text)) 
             {
@@ -159,44 +160,39 @@ namespace TrayDir
             {
                 textbox.Text = text;
             }
-            textbox.TabIndex = 0;
-            textbox.ReadOnly = true;
             // panel
             Panel panel = new Panel();
             panel.AutoSize = true;
+            panel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             panel.Cursor = textbox.Cursor;
             panel.BackColor = textbox.BackColor;
             panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            panel.Controls.Add(textbox);
             panel.Dock = System.Windows.Forms.DockStyle.Fill;
-            panel.Location = new System.Drawing.Point(5, 5);
-            panel.Margin = new System.Windows.Forms.Padding(5);
+            panel.Margin = new System.Windows.Forms.Padding(2,3,2,3);
             panel.Name = "panel" + n.ToString();
-            panel.Padding = new System.Windows.Forms.Padding(10, 3, 0, 3);
-            panel.Size = new System.Drawing.Size(675, 45);
-            panel.TabIndex = 5;
+            panel.Padding = new System.Windows.Forms.Padding(0);
             
             EventHandler textbox_select = new EventHandler(delegate (object obj, EventArgs args)
             {
                 textbox.Select();
             });
-
             panel.Click += textbox_select;
+
+
+            panel.Controls.Add(textbox);
 
             // 
             // fileButton
             // 
             Button fileButton = new Button();
-            fileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             fileButton.AutoSize = true;
+            fileButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             fileButton.Location = new System.Drawing.Point(690, 3);
-            //fileButton.Margin = new System.Windows.Forms.Padding(5);
             fileButton.Name = "filebutton" + n.ToString();
-            fileButton.Padding = new System.Windows.Forms.Padding(3);
-            fileButton.Size = new System.Drawing.Size(112, 45);
             fileButton.TabIndex = 1;
             fileButton.Text = "File";
             fileButton.UseVisualStyleBackColor = true;
+            fileButton.Dock = System.Windows.Forms.DockStyle.Fill;
 
             EventHandler fileSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
@@ -217,16 +213,11 @@ namespace TrayDir
             // folderButton
             // 
             Button folderButton = new Button();
-            folderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             folderButton.AutoSize = true;
-            folderButton.Location = new System.Drawing.Point(690, 5);
-            folderButton.Margin = new System.Windows.Forms.Padding(3);
-            folderButton.Name = "folderButton" + n.ToString();
-            folderButton.Padding = new System.Windows.Forms.Padding(3);
-            folderButton.Size = new System.Drawing.Size(112, 45);
-            folderButton.TabIndex = 1;
+            folderButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             folderButton.Text = "Folder";
             folderButton.UseVisualStyleBackColor = true;
+            folderButton.Dock = System.Windows.Forms.DockStyle.Fill;
 
             EventHandler folderSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
@@ -247,7 +238,12 @@ namespace TrayDir
             this.DirectoriesGroupLayout.Controls.Add(folderButton, 2, DirCount);
             DirCount += 1;
             this.DirectoriesGroupLayout.RowCount = DirCount;
+            this.DirectoriesGroupLayout.Height = 0;
             Height = 0;
+            foreach (RowStyle style in DirectoriesGroupLayout.RowStyles)
+            {
+                style.SizeType = SizeType.AutoSize;
+            }
             InitializeTrayMenu();
             RemoveButton.Enabled = DirCount > 1;
         }
