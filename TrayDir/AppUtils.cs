@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -60,7 +56,7 @@ namespace TrayDir
 
             EventHandler textbox_select = new EventHandler(delegate (object obj, EventArgs args)
             {
-                if (PathIsDirectory(path))
+                if (PathIsDirectory(path) & Settings.getOptionBool("ExploreFoldersInTrayMenu"))
                 {
                     OpenPath(new DirectoryInfo(path).FullName);
                 }

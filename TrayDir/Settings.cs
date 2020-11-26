@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -35,14 +32,11 @@ namespace TrayDir
         public static void Init()
         {
             options = new Dictionary<string, Option>();
-            Option option = new Option("RunAsAdmin", false);
-            options.Add("RunAsAdmin", option);
-            option = new Option("ShowFileExtensions", true);
-            options.Add("ShowFileExtensions", option);
-            option = new Option("MinimizeOnClose", true);
-            options.Add("MinimizeOnClose", option);
-            option = new Option("StartMinimized", false);
-            options.Add("StartMinimized", option);
+            setOptionBool("RunAsAdmin", false);
+            setOptionBool("ShowFileExtensions", true);
+            setOptionBool("MinimizeOnClose", true);
+            setOptionBool("StartMinimized", false);
+            setOptionBool("ExploreFoldersInTrayMenu", false);
             paths = new List<string>();
             paths.Add(".");
             Load();
