@@ -102,6 +102,17 @@ namespace TrayDir
             TrayItem.ContextMenuStrip.Items[0].Visible = false;
             BuildExploreDropdown();
             InitializeTrayIcon();
+            CheckIsAltered();
+        }
+        private void CheckIsAltered()
+        {
+            if (Settings.isAltered())
+            {
+                this.Text = "TrayDir*";
+            } else
+            {
+                this.Text = "TrayDir";
+            }
         }
         private void InitializeTrayIcon()
         {
@@ -351,6 +362,7 @@ namespace TrayDir
         private void Save(object Sender, EventArgs e)
         {
             Settings.Save();
+            CheckIsAltered();
         }
 
         private void ShowAbout(object sender, EventArgs e)

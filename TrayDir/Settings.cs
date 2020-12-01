@@ -56,7 +56,7 @@ namespace TrayDir
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error Loading Config:" + e.Message);
+                //MessageBox.Show("Error Loading Config:" + e.Message);
             }
         }
         private static void LoadOptions(XmlElement root)
@@ -81,7 +81,7 @@ namespace TrayDir
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error Parsing Options: " + e.Message);
+                //MessageBox.Show("Error Parsing Options: " + e.Message);
             }
         }
         private static void LoadPaths(XmlElement root)
@@ -109,7 +109,7 @@ namespace TrayDir
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error Parsing Paths: " + e.Message);
+                //MessageBox.Show("Error Parsing Paths: " + e.Message);
             }
         }
         private static void LoadAppConfig(XmlElement root)
@@ -127,42 +127,49 @@ namespace TrayDir
         }
         public static void Save()
         {
-            XmlWriterSettings xmlSettings = new XmlWriterSettings();
-            xmlSettings.Indent = true;
-            xmlSettings.IndentChars = ("    ");
-            xmlSettings.CloseOutput = true;
-            xmlSettings.OmitXmlDeclaration = false;
-            XmlWriter writer = XmlWriter.Create(config, xmlSettings);
-            writer.WriteStartElement("TrayDir");
-            writer.WriteStartElement("appconfig");
-            writer.WriteStartElement("trayicon");
-            writer.WriteAttributeString("Value", iconPath);
-            writer.WriteEndElement();
-            writer.WriteEndElement();
-            writer.WriteStartElement("options");
-            foreach (KeyValuePair<string, Option> option in options)
+            try
             {
-                writer.WriteStartElement("option");
-                writer.WriteAttributeString("Name", option.Key);
-                writer.WriteAttributeString("Value", option.Value.sValue);
+                XmlWriterSettings xmlSettings = new XmlWriterSettings();
+                xmlSettings.Indent = true;
+                xmlSettings.IndentChars = ("    ");
+                xmlSettings.CloseOutput = true;
+                xmlSettings.OmitXmlDeclaration = false;
+                XmlWriter writer = XmlWriter.Create(config, xmlSettings);
+                writer.WriteStartElement("TrayDir");
+                writer.WriteStartElement("appconfig");
+                writer.WriteStartElement("trayicon");
+                writer.WriteAttributeString("Value", iconPath);
                 writer.WriteEndElement();
-            }
-            writer.WriteEndElement();
+                writer.WriteEndElement();
+                writer.WriteStartElement("options");
+                foreach (KeyValuePair<string, Option> option in options)
+                {
+                    writer.WriteStartElement("option");
+                    writer.WriteAttributeString("Name", option.Key);
+                    writer.WriteAttributeString("Value", option.Value.sValue);
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
 
-            writer.WriteStartElement("paths");
-            writer.WriteAttributeString("count", paths.Count.ToString());
-            foreach( string path in paths)
-            {
-                writer.WriteStartElement("path");
-                writer.WriteAttributeString("Value", path);
+                writer.WriteStartElement("paths");
+                writer.WriteAttributeString("count", paths.Count.ToString());
+                foreach (string path in paths)
+                {
+                    writer.WriteStartElement("path");
+                    writer.WriteAttributeString("Value", path);
+                    writer.WriteEndElement();
+                    Console.WriteLine(path);
+                };
                 writer.WriteEndElement();
-                Console.WriteLine(path);
-            };
-            writer.WriteEndElement();
-            writer.WriteEndElement();
-            writer.Flush();
-            writer.Close();
-            _altered = false;
+                writer.WriteEndElement();
+                writer.Flush();
+                writer.Close();
+                _altered = false;
+            }
+            catch (System.UnauthorizedAccessException e)
+            {
+                MessageBox.Show("Exception caught: " + e.Message);
+            }
         }
         static string BoolToStr(bool value)
         {
@@ -234,6 +241,10 @@ namespace TrayDir
             {
                 return true;
             }
+        }
+        public static bool isAltered()
+        {
+            return _altered;
         }
     }
 }

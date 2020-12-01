@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,9 +24,9 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationVersion>2.0.4.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -51,7 +52,7 @@
     <ApplicationIcon>file-exe.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>5AF3662021EB8BDD51A9BD377BCD986DE7534BEC</ManifestCertificateThumbprint>
@@ -64,6 +65,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
