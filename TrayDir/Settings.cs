@@ -25,6 +25,7 @@ namespace TrayDir
     {
         public static string config = "config.xml";
         public static string iconPath = "";
+        public static string iconText = "TrayDir";
 
         private static Dictionary<string, Option> options;
         public static List<string> paths;
@@ -119,6 +120,10 @@ namespace TrayDir
                 XmlElement appConfig = root.GetElementsByTagName("appconfig")[0] as XmlElement;
                 XmlElement trayicon = appConfig.GetElementsByTagName("trayicon")[0] as XmlElement;
                 iconPath = trayicon.GetAttribute("Value");
+                if (trayicon.Attributes != null && trayicon.Attributes["Text"] != null)
+                {
+                    iconText = trayicon.GetAttribute("Text");
+                }
             }
             catch
             {
@@ -139,6 +144,7 @@ namespace TrayDir
                 writer.WriteStartElement("appconfig");
                 writer.WriteStartElement("trayicon");
                 writer.WriteAttributeString("Value", iconPath);
+                writer.WriteAttributeString("Text", iconText);
                 writer.WriteEndElement();
                 writer.WriteEndElement();
                 writer.WriteStartElement("options");
@@ -245,6 +251,10 @@ namespace TrayDir
         public static bool isAltered()
         {
             return _altered;
+        }
+        public static void Alter()
+        {
+            _altered = true;
         }
     }
 }

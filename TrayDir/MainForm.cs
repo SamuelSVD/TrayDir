@@ -11,11 +11,12 @@ namespace TrayDir
         private int OptionCount;
         private bool allowVisible;     // ContextMenu's Show command used
         private bool allowClose;       // ContextMenu's Exit command used
-
+        private SettingsForm settingsForm;
         public MainForm()
         {
             DirCount = 0;
             OptionCount = 0;
+            settingsForm = new SettingsForm();
             InitializeComponent();
             InitializeOptions();
             InitializeTrayMenu();
@@ -121,13 +122,19 @@ namespace TrayDir
             {
                 try
                 {
+                    TrayIconPathTextBox.Text = iconPath;
                     TrayItem.Icon = System.Drawing.Icon.ExtractAssociatedIcon(iconPath);
+                    IconDisplay.Image = TrayItem.Icon.ToBitmap();
+                    this.Icon = TrayItem.Icon;
+                    settingsForm.Icon = TrayItem.Icon;
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show("Error loading icon: " + e.Message);
                 }
             }
+            TrayTextTextBox.Text = Settings.iconText;
+            TrayItem.Text = Settings.iconText;
         }
         private void HideApp(object Sender, EventArgs e)
         {
@@ -176,7 +183,7 @@ namespace TrayDir
             panel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel.Cursor = textbox.Cursor;
             panel.BackColor = textbox.BackColor;
-            panel.BorderStyle = BorderStyle.Fixed3D;
+            panel.BorderStyle = BorderStyle.FixedSingle;
             panel.Dock = DockStyle.Fill;
             panel.Margin = new Padding(2,3,2,3);
             panel.Name = "panel" + n.ToString();
@@ -197,7 +204,6 @@ namespace TrayDir
             Button fileButton = new Button();
             fileButton.AutoSize = true;
             fileButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            fileButton.Location = new System.Drawing.Point(690, 3);
             fileButton.Name = "filebutton" + n.ToString();
             fileButton.TabIndex = 1;
             fileButton.Text = "File";
@@ -290,20 +296,38 @@ namespace TrayDir
 
             checkbox.Click += folderSelect;
 
-            int n = OptionsGroupLayout.RowCount;
-            OptionsGroupLayout.Controls.Add(label, 0, OptionCount);
-            OptionsGroupLayout.Controls.Add(checkbox, 1, OptionCount);
+            int n = settingsForm.OptionsGroupLayout.RowCount;
+            settingsForm.OptionsGroupLayout.Controls.Add(label, 0, OptionCount);
+            settingsForm.OptionsGroupLayout.Controls.Add(checkbox, 1, OptionCount);
             OptionCount += 1;
-            OptionsGroupLayout.RowCount = OptionCount;
+            settingsForm.OptionsGroupLayout.RowCount = OptionCount;
         }
         private void button1_Click(object sender, EventArgs e)
         {
             Settings.paths.Add(".");
             AddPath(".");
+            Settings.Alter();
+            CheckIsAltered();
         }
         private void button2_Click(object sender, EventArgs e)
         {
             RemovePath();
+            Settings.Alter();
+            CheckIsAltered();
+        }
+        private void BrowseIcon(object sender, EventArgs e)
+        {
+            FileDialog.DereferenceLinks = false;
+            FileDialog.InitialDirectory = TrayIconPathTextBox.Text;
+            DialogResult d = IconFileDialog.ShowDialog();
+            if (d == DialogResult.OK)
+            {
+                TrayIconPathTextBox.Text = IconFileDialog.FileName;
+                Settings.iconPath = TrayIconPathTextBox.Text;
+                InitializeTrayMenu();
+                Settings.Alter();
+                CheckIsAltered();
+            }
         }
         public void RemovePath()
         {
@@ -413,6 +437,24 @@ namespace TrayDir
         {
             allowClose = true;
             Application.Exit();
+        }
+
+        private void TrayPropertiesBoxLayout_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            settingsForm.ShowDialog();
+        }
+
+        private void TrayTextApplyButton_Click(object sender, EventArgs e)
+        {
+            Settings.iconText = TrayTextTextBox.Text;
+            InitializeTrayIcon();
+            Settings.Alter();
+            CheckIsAltered();
         }
     }
 }
