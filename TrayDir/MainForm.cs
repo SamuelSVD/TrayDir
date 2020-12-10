@@ -7,103 +7,36 @@ namespace TrayDir
 {
     public partial class MainForm : Form
     {
+        public static MainForm form;
         private int DirCount;
-        private int OptionCount;
         private bool allowVisible;     // ContextMenu's Show command used
         private bool allowClose;       // ContextMenu's Exit command used
-        private SettingsForm settingsForm;
+        private TrayInstance trayInstance;
         public MainForm()
         {
-            DirCount = 0;
-            OptionCount = 0;
-            settingsForm = new SettingsForm();
             InitializeComponent();
-            InitializeOptions();
-            InitializeTrayMenu();
-            InitializePaths();
-            if (Settings.getOptionBool("StartMinimized"))
-            {
-                allowVisible = false;
-                HideApp(this, null);
-            } else
-            {
-                allowVisible = true;
-            }
-            PerformLayout();
-            MaximizeBox = false;
         }
-        public void InitializeOptions()
+        public static void Init()
         {
-            foreach (Option option in Settings.getOptions())
-            {
-                AddOption(option.name);
-            }
+            form = new MainForm();
         }
         public void InitializePaths()
         {
-            if (Settings.paths.Count == 0)
+            if (trayInstance.settings.paths.Count == 0)
             {
-                Settings.paths.Add(".");
+                trayInstance.settings.paths.Add(".");
                 AddPath(".");
             } else
             {
-                foreach (string path in Settings.paths)
+                foreach (string path in trayInstance.settings.paths)
                 {
                     AddPath(path);
                 }
             }
-            if (Settings.paths.Count == 1)
+            if (trayInstance.settings.paths.Count == 1)
             {
                 RemoveButton.Enabled = false;
             }
-        }
-        public void InitializeTrayMenu()
-        {
-            if (TrayItem.ContextMenuStrip is null)
-            {
-                TrayItem.ContextMenuStrip = new ContextMenuStrip();
-            }
-            else
-            {
-                TrayItem.ContextMenuStrip.Items.Clear();
-            }
-            TrayItem.ContextMenuStrip.Items.Add("Show", null, ShowApp);
-            TrayItem.ContextMenuStrip.Items.Add("Hide", null, HideApp);
-
-            TrayItem.ContextMenuStrip.Items.Add("-");
-
-            if (Settings.paths.Count == 1)
-            {
-                String path = Settings.paths[0];
-                ToolStripMenuItem mi = AppUtils.RecursivePathFollow(path);
-                if (mi.DropDownItems.Count > 0)
-                {
-                    while (mi.DropDownItems.Count > 0)
-                    {
-                        ToolStripItem item = mi.DropDownItems[0];
-                        mi.DropDownItems.RemoveAt(0);
-                        TrayItem.ContextMenuStrip.Items.Add(item);
-                    }
-                }
-                else
-                {
-                    TrayItem.ContextMenuStrip.Items.Add(mi);
-                }
-            }
-            else
-            {
-                foreach (string path in Settings.paths)
-                {
-                    TrayItem.ContextMenuStrip.Items.Add(AppUtils.RecursivePathFollow(path));
-                }
-            }
-            TrayItem.ContextMenuStrip.Items.Add("-");
-
-            TrayItem.ContextMenuStrip.Items.Add("Exit", null, ExitApp);
-            TrayItem.ContextMenuStrip.Items[0].Visible = false;
-            BuildExploreDropdown();
-            InitializeTrayIcon();
-            CheckIsAltered();
         }
         private void CheckIsAltered()
         {
@@ -115,40 +48,17 @@ namespace TrayDir
                 this.Text = "TrayDir";
             }
         }
-        private void InitializeTrayIcon()
-        {
-            string iconPath = Settings.iconPath;
-            if (AppUtils.PathIsFile(iconPath))
-            {
-                try
-                {
-                    TrayIconPathTextBox.Text = iconPath;
-                    TrayItem.Icon = System.Drawing.Icon.ExtractAssociatedIcon(iconPath);
-                    IconDisplay.Image = TrayItem.Icon.ToBitmap();
-                    this.Icon = TrayItem.Icon;
-                    settingsForm.Icon = TrayItem.Icon;
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Error loading icon: " + e.Message);
-                }
-            }
-            TrayTextTextBox.Text = Settings.iconText;
-            TrayItem.Text = Settings.iconText;
-        }
-        private void HideApp(object Sender, EventArgs e)
+        public void HideApp(object Sender, EventArgs e)
         {
             Hide();
-            TrayItem.ContextMenuStrip.Items[0].Visible = true;
-            TrayItem.ContextMenuStrip.Items[1].Visible = false;
+            TrayInstance.FormHidden();
         }
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
             {
                 HideApp(sender, e);
-                TrayItem.ContextMenuStrip.Items[0].Visible = true;
-                TrayItem.ContextMenuStrip.Items[1].Visible = false;
+                TrayInstance.FormHidden();
             }
         }
         private void AddPath(string text)
@@ -218,8 +128,8 @@ namespace TrayDir
                 if (d == DialogResult.OK)
                 {
                     textbox.Text = FileDialog.FileName;
-                    Settings.paths[n] = textbox.Text;
-                    InitializeTrayMenu();
+                    trayInstance.settings.paths[n] = textbox.Text;
+                    trayInstance.UpdateTrayMenu();
                 }
             });
 
@@ -242,8 +152,8 @@ namespace TrayDir
                 if (fs.ShowDialog())
                 {
                     textbox.Text = fs.FileName;
-                    Settings.paths[n] = textbox.Text;
-                    InitializeTrayMenu();
+                    trayInstance.settings.paths[n] = textbox.Text;
+                    trayInstance.UpdateTrayMenu();
                 }
             });
 
@@ -260,51 +170,12 @@ namespace TrayDir
             {
                 style.SizeType = SizeType.AutoSize;
             }
-            InitializeTrayMenu();
+            trayInstance.UpdateTrayMenu();
             RemoveButton.Enabled = DirCount > 1;
-        }
-        private void AddOption(string name)
-        {
-            string text = AppUtils.SplitCamelCase(name);
-            Label label = new Label();
-
-            label.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
-            label.AutoSize = true;
-            label.Location = new System.Drawing.Point(10, 55);
-            label.Margin = new Padding(10, 5, 3, 5);
-            label.Name = name+"Label";
-            label.Size = new System.Drawing.Size(670, 25);
-            label.TabIndex = 2;
-            label.Text = text;
-
-            CheckBox checkbox = new CheckBox(); 
-            checkbox.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
-            checkbox.AutoSize = true;
-            checkbox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            checkbox.Location = new System.Drawing.Point(688, 9);
-            checkbox.Name = name+"CheckBox";
-            checkbox.Size = new System.Drawing.Size(116, 27);
-            checkbox.TabIndex = 1;
-            checkbox.UseVisualStyleBackColor = true;
-            checkbox.Checked = Settings.getOptionBool(name);
-
-            EventHandler folderSelect = new EventHandler(delegate (object obj, EventArgs args)
-            {
-                Settings.setOptionBool(name,checkbox.Checked);
-                InitializeTrayMenu();
-            });
-
-            checkbox.Click += folderSelect;
-
-            int n = settingsForm.OptionsGroupLayout.RowCount;
-            settingsForm.OptionsGroupLayout.Controls.Add(label, 0, OptionCount);
-            settingsForm.OptionsGroupLayout.Controls.Add(checkbox, 1, OptionCount);
-            OptionCount += 1;
-            settingsForm.OptionsGroupLayout.RowCount = OptionCount;
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            Settings.paths.Add(".");
+            trayInstance.AddPath(".");
             AddPath(".");
             Settings.Alter();
             CheckIsAltered();
@@ -314,20 +185,6 @@ namespace TrayDir
             RemovePath();
             Settings.Alter();
             CheckIsAltered();
-        }
-        private void BrowseIcon(object sender, EventArgs e)
-        {
-            FileDialog.DereferenceLinks = false;
-            FileDialog.InitialDirectory = TrayIconPathTextBox.Text;
-            DialogResult d = IconFileDialog.ShowDialog();
-            if (d == DialogResult.OK)
-            {
-                TrayIconPathTextBox.Text = IconFileDialog.FileName;
-                Settings.iconPath = TrayIconPathTextBox.Text;
-                InitializeTrayMenu();
-                Settings.Alter();
-                CheckIsAltered();
-            }
         }
         public void RemovePath()
         {
@@ -346,13 +203,13 @@ namespace TrayDir
             panel.RowCount = Rowindex;
             panel.Height = 0;
             Height = 100;
-            Settings.paths.RemoveAt(Settings.paths.Count - 1);
-            InitializeTrayMenu();
+            trayInstance.settings.paths.RemoveAt(trayInstance.settings.paths.Count - 1);
+            trayInstance.UpdateTrayMenu();
         }
         private void BuildExploreDropdown()
         {
             exploreToolStripMenuItem.DropDownItems.Clear();
-            foreach (string path in Settings.paths)
+            foreach (string path in trayInstance.settings.paths)
             {
                 ToolStripMenuItem item = new ToolStripMenuItem();
                 item.Size = new System.Drawing.Size(359, 44);
@@ -396,7 +253,7 @@ namespace TrayDir
         }
         private void Rebuild(object sender, EventArgs e)
         {
-            InitializeTrayMenu();
+            trayInstance.UpdateTrayMenu();
         }
         protected override void SetVisibleCore(bool value)
         {
@@ -425,36 +282,46 @@ namespace TrayDir
             base.OnFormClosing(e);
         }
 
-        private void ShowApp(object sender, EventArgs e)
+        public void ShowApp(object sender, EventArgs e)
         {
             allowVisible = true;
             Show();
-            TrayItem.ContextMenuStrip.Items[0].Visible = false;
-            TrayItem.ContextMenuStrip.Items[1].Visible = true;
             Focus();
+            TrayInstance.FormShowed();
         }
-        private void ExitApp(object sender, EventArgs e)
+        public void ExitApp(object sender, EventArgs e)
         {
             allowClose = true;
             Application.Exit();
         }
-
-        private void TrayPropertiesBoxLayout_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            settingsForm.ShowDialog();
+            SettingsForm.form.ShowDialog();
         }
-
         private void TrayTextApplyButton_Click(object sender, EventArgs e)
         {
-            Settings.iconText = TrayTextTextBox.Text;
-            InitializeTrayIcon();
+            trayInstance.settings.iconText = SettingsForm.form.TrayTextTextBox.Text;
             Settings.Alter();
             CheckIsAltered();
+        }
+        private void MainForm_Load(object sender, EventArgs e) { }
+        public void InitializeAllAssets()
+        {
+            DirCount = 0;
+            trayInstance = new TrayInstance();
+            trayInstance.UpdateTrayMenu();
+            InitializePaths();
+            if (Settings.getOptionBool("StartMinimized"))
+            {
+                allowVisible = false;
+                HideApp(this, null);
+            }
+            else
+            {
+                allowVisible = true;
+            }
+            PerformLayout();
+            MaximizeBox = false;
         }
     }
 }

@@ -5,42 +5,30 @@ using System.Xml;
 
 namespace TrayDir
 {
-    class Option
-    {
-        public string name;
-        public string sValue;
-        public bool bValue
-        {
-            get { return sValue == "1"; }
-            set { sValue = value ? "1" : "0"; }
-        }
-        public Option(string name, string value)
-        {
-            this.name = name;
-            sValue = value;
-        }
-        public Option(string name, bool value) : this(name, value ? "1" : "0") { }
-    }
     class Settings
     {
         public static string config = "config.xml";
-        public static string iconPath = "";
-        public static string iconText = "TrayDir";
+        //public static string iconPath = "";
+        //public static string iconText = "TrayDir";
 
-        private static Dictionary<string, Option> options;
-        public static List<string> paths;
+        public static OptionGroup settings;
+        public static OptionGroup instanceSettings;
+
         private static bool _altered;
         public static void Init()
         {
-            options = new Dictionary<string, Option>();
-            setOptionBool("RunAsAdmin", false);
-            setOptionBool("ShowFileExtensions", true);
-            setOptionBool("MinimizeOnClose", true);
-            setOptionBool("StartMinimized", false);
-            setOptionBool("ExploreFoldersInTrayMenu", false);
-            paths = new List<string>();
-            paths.Add(".");
-            Load();
+            settings = new OptionGroup("Application");
+
+            setOption("MinimizeOnClose", true);
+            setOption("StartMinimized", false);
+
+            instanceSettings = new OptionGroup("Instances");
+            instanceSettings.setOption("default-instance|RunAsAdmin", false);
+            instanceSettings.setOption("default-instance|ShowFileExtensions", true);
+            instanceSettings.setOption("default-instance|ExploreFoldersInTrayMenu", false);
+            instanceSettings.setOption("default-instance|paths|1", ".");
+            instanceSettings.setOption("default-instance|iconPath", System.Reflection.Assembly.GetEntryAssembly().Location);
+            instanceSettings.setOption("default-instance|iconText", "TrayDir");
             _altered = false;
         }
         public static void Load()
@@ -53,6 +41,7 @@ namespace TrayDir
                 XmlElement root = doc.DocumentElement;
                 LoadOptions(root);
                 LoadPaths(root);
+                LoadInstances(root);
                 LoadAppConfig(root);
             }
             catch (Exception e)
@@ -70,9 +59,8 @@ namespace TrayDir
                     try
                     {
                         string name = option.GetAttribute("Name");
-                        bool value = StrToBool(option.GetAttribute("Value"));
-                        Option o = new Option(name, value);
-                        Settings.options[name] = o;
+                        bool value = AppUtils.StrToBool(option.GetAttribute("Value"));
+                        setOption(name, value);
                     }
                     catch (Exception e)
                     {
@@ -90,16 +78,46 @@ namespace TrayDir
             try
             {
                 XmlElement paths = root.GetElementsByTagName("paths")[0] as XmlElement;
-                XmlNodeList list = paths.GetElementsByTagName("path");
+                if (paths != null) {
+                    XmlNodeList list = paths.GetElementsByTagName("path");
+                    if (list.Count > 0)
+                    {
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            XmlElement path = (XmlElement)list[i];
+                            try
+                            {
+                                string value = path.GetAttribute("Value");
+                                setOption("default-instance|paths|" + i.ToString(), value);
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show("Error Parsing Path: " + e.Message);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                //MessageBox.Show("Error Parsing Paths: " + e.Message);
+            }
+        }
+        private static void LoadInstances(XmlElement root)
+        {
+            try
+            {
+                XmlElement paths = root.GetElementsByTagName("instances")[0] as XmlElement;
+                XmlNodeList list = paths.GetElementsByTagName("option");
                 if (list.Count > 0)
                 {
-                    Settings.paths.Clear();
-                    foreach (XmlElement path in list)
+                    for (int i = 0; i < list.Count; i++)
                     {
+                        XmlElement path = (XmlElement)list[i];
                         try
                         {
                             string value = path.GetAttribute("Value");
-                            Settings.paths.Add(value);
+                            setIOption(path.GetAttribute("name"), value);
                         }
                         catch (Exception e)
                         {
@@ -119,10 +137,10 @@ namespace TrayDir
             {
                 XmlElement appConfig = root.GetElementsByTagName("appconfig")[0] as XmlElement;
                 XmlElement trayicon = appConfig.GetElementsByTagName("trayicon")[0] as XmlElement;
-                iconPath = trayicon.GetAttribute("Value");
+                setIOption("default-instance|iconPath", trayicon.GetAttribute("Value"));
                 if (trayicon.Attributes != null && trayicon.Attributes["Text"] != null)
                 {
-                    iconText = trayicon.GetAttribute("Text");
+                    setOption("default-instance|iconText", trayicon.GetAttribute("Text"));
                 }
             }
             catch
@@ -143,28 +161,30 @@ namespace TrayDir
                 writer.WriteStartElement("TrayDir");
                 writer.WriteStartElement("appconfig");
                 writer.WriteStartElement("trayicon");
-                writer.WriteAttributeString("Value", iconPath);
-                writer.WriteAttributeString("Text", iconText);
+                writer.WriteAttributeString("Value", getIOptionStr("default-instance|iconPath"));
+                writer.WriteAttributeString("Text", getIOptionStr("default-instance|iconText"));
                 writer.WriteEndElement();
                 writer.WriteEndElement();
                 writer.WriteStartElement("options");
-                foreach (KeyValuePair<string, Option> option in options)
+                List<Option> optionList = settings.asOptionList();
+                for (int i = 0; i < optionList.Count; i++)
                 {
                     writer.WriteStartElement("option");
-                    writer.WriteAttributeString("Name", option.Key);
-                    writer.WriteAttributeString("Value", option.Value.sValue);
+                    writer.WriteAttributeString("Name", optionList[i].name);
+                    writer.WriteAttributeString("Value", optionList[i].getValue_string());
                     writer.WriteEndElement();
                 }
                 writer.WriteEndElement();
 
-                writer.WriteStartElement("paths");
-                writer.WriteAttributeString("count", paths.Count.ToString());
-                foreach (string path in paths)
+                List<Option> instanceOption = instanceSettings.asOptionList();
+                writer.WriteStartElement("instances");
+                writer.WriteAttributeString("count", instanceSettings.getCategoryCount().ToString());
+                for (int i = 0; i < instanceOption.Count; i++)
                 {
-                    writer.WriteStartElement("path");
-                    writer.WriteAttributeString("Value", path);
+                    writer.WriteStartElement("option");
+                    writer.WriteAttributeString("name", instanceOption[i].name);
+                    writer.WriteAttributeString("Value", instanceOption[i].getValue_string());
                     writer.WriteEndElement();
-                    Console.WriteLine(path);
                 };
                 writer.WriteEndElement();
                 writer.WriteEndElement();
@@ -181,61 +201,37 @@ namespace TrayDir
         {
             return value ? "1" : "0";
         }
-        static bool StrToBool(string value)
-        {
-            return value == "1" ? true : false;
-        }
         public static bool getOptionBool(string input)
         {
-            if (options.ContainsKey(input))
-            {
-                return options[input].bValue;
-            }
-            else
-            {
-                return false;
-            }
+            return settings.getOptionValue_bool(input);
         }
-        public static void setOptionBool(string input, bool value)
+        public static void setOption(string input, bool value)
         {
-            if (options.ContainsKey(input))
-            {
-                options[input].bValue = value;
-            }
-            else
-            {
-                Option o = new Option(input, value);
-                options[input] = o;
-            }
-            _altered = true;
+            settings.setOption(input, value);
         }
         public static string getOptionStr(string input)
         {
-            if (options.ContainsKey(input))
-            {
-                return options[input].sValue;
-            }
-            else
-            {
-                return "";
-            }
+            return settings.getOptionValue_string(input);
         }
-        public static void setOptionStr(string input, string value)
+        public static void setOption(string input, string value)
         {
-            if (options.ContainsKey(input))
-            {
-                options[input].sValue = value;
-            }
-            else
-            {
-                Option o = new Option(input, value);
-                options[input] = o;
-            }
-            _altered = true;
+            settings.setOption(input, value);
         }
-        public static Dictionary<string, Option>.ValueCollection getOptions()
+        public static bool getIOptionBool(string input)
         {
-            return options.Values;
+            return instanceSettings.getOptionValue_bool(input);
+        }
+        public static void setIOption(string input, bool value)
+        {
+            instanceSettings.setOption(input, value);
+        }
+        public static string getIOptionStr(string input)
+        {
+            return instanceSettings.getOptionValue_string(input);
+        }
+        public static void setIOption(string input, string value)
+        {
+            instanceSettings.setOption(input, value);
         }
         public static bool ConfirmClose()
         {
@@ -256,5 +252,9 @@ namespace TrayDir
         {
             _altered = true;
         }
+        public static OptionGroup getInstanceOptions(string instanceName)
+        {
+            return instanceSettings.getChild(instanceName);
+    }
     }
 }

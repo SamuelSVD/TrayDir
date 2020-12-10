@@ -8,11 +8,11 @@ namespace TrayDir
 {
     class AppUtils
     {
-        public static ToolStripMenuItem RecursivePathFollow(string path)
+        public static ToolStripMenuItem RecursivePathFollow(TrayInstanceSettings settings, string path)
         {
-            return RecursivePathFollow(path, 0);
+            return RecursivePathFollow(settings, path, 0);
         }
-        public static ToolStripMenuItem RecursivePathFollow(string path, int depth)
+        public static ToolStripMenuItem RecursivePathFollow(TrayInstanceSettings settings, string path, int depth)
         {
             ToolStripMenuItem menuitem = new ToolStripMenuItem();
             menuitem.Size = new Size(359, 44);
@@ -27,14 +27,14 @@ namespace TrayDir
                     {
                         foreach (string fp in Directory.GetFileSystemEntries(path))
                         {
-                            menuitem.DropDownItems.Add(RecursivePathFollow(fp));
+                            menuitem.DropDownItems.Add(RecursivePathFollow(settings, fp));
                         }
                     }
                 }
                 else if (PathIsFile(path))
                 {
                     menuitem.Text = Path.GetFileName(path);
-                    if (Settings.getOptionBool("ShowFileExtensions"))
+                    if (settings.ShowFileExtensions)
                     {
                         menuitem.Text = Path.GetFileName(path);
                     }
@@ -157,6 +157,10 @@ namespace TrayDir
             {
                 MessageBox.Show("Error Executing As Admin: " + path + '\n' + e.Message);
             }
+        }
+        public static bool StrToBool(string value)
+        {
+            return value == "1" ? true : false;
         }
     }
 }
