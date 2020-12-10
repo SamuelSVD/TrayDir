@@ -15,6 +15,7 @@ namespace TrayDir
         public MainForm()
         {
             InitializeComponent();
+            trayInstance = TrayInstance.instances[0];
         }
         public static void Init()
         {
@@ -26,7 +27,8 @@ namespace TrayDir
             {
                 trayInstance.settings.paths.Add(".");
                 AddPath(".");
-            } else
+            }
+            else
             {
                 foreach (string path in trayInstance.settings.paths)
                 {
@@ -104,7 +106,6 @@ namespace TrayDir
                 textbox.Select();
             });
             panel.Click += textbox_select;
-
 
             panel.Controls.Add(textbox);
 
@@ -278,6 +279,13 @@ namespace TrayDir
                 {
                     e.Cancel = true;
                 }
+                else
+                {
+                    foreach(TrayInstance i in TrayInstance.instances)
+                    {
+                        i.Hide();
+                    }
+                }
             }
             base.OnFormClosing(e);
         }
@@ -308,7 +316,6 @@ namespace TrayDir
         public void InitializeAllAssets()
         {
             DirCount = 0;
-            trayInstance = new TrayInstance();
             trayInstance.UpdateTrayMenu();
             InitializePaths();
             if (Settings.getOptionBool("StartMinimized"))

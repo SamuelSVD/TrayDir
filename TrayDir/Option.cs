@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace TrayDir
 {
     public class Option
     {
+        [XmlAttribute]
         public string name;
-        private string sValue;
-        public bool bValue
-        {
-            get { return sValue == "1"; }
-            set { sValue = value ? "1" : "0"; }
-        }
+        [XmlAttribute]
+        public string sValue;
+        public Option() : this("", "") { }
         public Option(string name, string value)
         {
             this.name = name;

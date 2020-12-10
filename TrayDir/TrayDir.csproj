@@ -109,9 +109,12 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SettingsXML.cs" />
     <Compile Include="TrayInstance.cs" />
     <Compile Include="TrayInstanceSettings.cs" />
+    <Compile Include="TrayInstanceSettingsXML.cs" />
     <Compile Include="TrayUtils.cs" />
+    <Compile Include="XMLUtils.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>

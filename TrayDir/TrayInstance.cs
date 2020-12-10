@@ -12,7 +12,7 @@ namespace TrayDir
         public static List<TrayInstance> instances;
         public TrayInstanceSettings settings;
 
-        public string instanceName { get { return settings.instanceName; } set { settings.instanceName = value; } }
+        public string instanceName { get { return settings.InstanceName; } set { settings.InstanceName = value; } }
         public string iconPath { get { return settings.iconPath; } set { settings.iconPath = value; } }
         private NotifyIcon notifyIcon;
         public static void UpdateAllMenus()
@@ -48,19 +48,19 @@ namespace TrayDir
             }
         }
         public TrayInstance() : this("default-instance") { }
-        public TrayInstance(string instanceName)
+        public TrayInstance(string instanceName) : this(new TrayInstanceSettings(instanceName))
+        {
+        }
+        public TrayInstance(TrayInstanceSettings settings)
         {
             if (TrayInstance.instances == null)
             {
                 TrayInstance.instances = new List<TrayInstance>();
             }
-            this.settings = new TrayInstanceSettings(instanceName);
-            this.instanceName = instanceName;
+            this.settings = settings;
             notifyIcon = new NotifyIcon();
             notifyIcon.Visible = true;
-            notifyIcon.DoubleClick += MainForm.form.ShowApp;
-            instances.Add(this);
-            UpdateTrayMenu();
+            //notifyIcon.DoubleClick += MainForm.form.ShowApp;
         }
         public bool BrowseForIcon()
         {
@@ -68,7 +68,7 @@ namespace TrayDir
             if (newPath != null)
             {
                 SettingsForm.form.TrayIconPathTextBox.Text = newPath;
-                Settings.setOption("default-instance", SettingsForm.form.TrayIconPathTextBox.Text);
+                settings.iconText = SettingsForm.form.TrayIconPathTextBox.Text;
                 UpdateTrayMenu();
                 Settings.Alter();
                 return true;
@@ -144,6 +144,10 @@ namespace TrayDir
         public void AddPath(string path)
         {
             this.settings.paths.Add(path);
+        }
+        public void Hide()
+        {
+            notifyIcon.Visible = false;
         }
 
     }

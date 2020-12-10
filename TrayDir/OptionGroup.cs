@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace TrayDir
 {
     public class OptionGroup
     {
+        [XmlAttribute]
         public string name;
         public List<Option> options;
         public List<OptionGroup> childGroups;
 
+        public OptionGroup() : this("") { }
         public OptionGroup(string name)
         {
             this.name = name;
