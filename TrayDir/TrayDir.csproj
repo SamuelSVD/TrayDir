@@ -92,6 +92,7 @@
     <Compile Include="src\forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\utils\ControlUtils.cs" />
     <Compile Include="src\utils\AppUtils.cs" />
     <Compile Include="lib\FolderSelectDialog\FolderSelectDialog.cs" />
     <Compile Include="src\forms\MainForm.cs">
