@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -45,8 +46,41 @@ namespace TrayDir
             {
                 result = serializer.Deserialize(reader);
             }
-
             return result;
+        }
+        public static T LoadFromFile<T>(string filepath)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.PreserveWhitespace = true;
+            try
+            {
+                doc.Load(filepath);
+                XmlElement root = doc.DocumentElement;
+                return XmlDeserializeFromString<T>(root.OuterXml);
+            }
+            catch (Exception e)
+            {
+                return default(T);
+            }
+        }
+        public static void SaveToFile(this object obj, string filepath)
+        {
+            try
+            {
+                XmlWriterSettings xmlSettings = new XmlWriterSettings();
+                xmlSettings.Indent = true;
+                xmlSettings.IndentChars = ("    ");
+                xmlSettings.CloseOutput = true;
+                xmlSettings.OmitXmlDeclaration = false;
+                XmlWriter writer = XmlWriter.Create(filepath, xmlSettings);
+                XmlSerializeToWriter(obj, writer);
+                writer.Flush();
+                writer.Close();
+            }
+            catch (System.UnauthorizedAccessException e)
+            {
+                MessageBox.Show("Exception caught: " + e.Message);
+            }
         }
     }
 }

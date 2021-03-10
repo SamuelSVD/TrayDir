@@ -18,6 +18,8 @@ namespace TrayDir
         [XmlAttribute]
         public bool ExploreFoldersInTrayMenu;
         [XmlAttribute]
+        public bool ExpandFirstPath;
+        [XmlAttribute]
         public string iconPath;
         [XmlAttribute]
         public string iconText;

@@ -12,14 +12,21 @@ namespace TrayDir
         private bool allowVisible;     // ContextMenu's Show command used
         private bool allowClose;       // ContextMenu's Exit command used
         private TrayInstance trayInstance;
+        public ProgramData pd;
         public MainForm()
         {
             InitializeComponent();
-            trayInstance = TrayInstance.instances[0];
+            pd = ProgramData.Load();
+            if (pd.trayInstances.Count == 0) {
+                pd.CreateDefaultInstance();
+            }
+            trayInstance = pd.trayInstances[0];
+            pd.Save();
         }
         public static void Init()
         {
             form = new MainForm();
+
         }
         public void InitializePaths()
         {
@@ -53,14 +60,14 @@ namespace TrayDir
         public void HideApp(object Sender, EventArgs e)
         {
             Hide();
-            TrayInstance.FormHidden();
+            pd.FormHidden();
         }
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
             if (WindowState == FormWindowState.Minimized)
             {
                 HideApp(sender, e);
-                TrayInstance.FormHidden();
+                pd.FormHidden();
             }
         }
         private void AddPath(string text)
@@ -243,7 +250,7 @@ namespace TrayDir
         }
         private void Save(object Sender, EventArgs e)
         {
-            Settings.Save();
+            pd.Save();
             CheckIsAltered();
         }
 
@@ -268,7 +275,7 @@ namespace TrayDir
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!allowClose && Settings.getOptionBool("MinimizeOnClose"))
+            if (!allowClose && pd.settings.app.MinimizeOnClose)
             {
                 HideApp(this, null);
                 e.Cancel = true;
@@ -281,7 +288,7 @@ namespace TrayDir
                 }
                 else
                 {
-                    foreach(TrayInstance i in TrayInstance.instances)
+                    foreach(TrayInstance i in pd.trayInstances)
                     {
                         i.Hide();
                     }
@@ -295,7 +302,7 @@ namespace TrayDir
             allowVisible = true;
             Show();
             Focus();
-            TrayInstance.FormShowed();
+            pd.FormShowed();
         }
         public void ExitApp(object sender, EventArgs e)
         {
@@ -318,7 +325,7 @@ namespace TrayDir
             DirCount = 0;
             trayInstance.UpdateTrayMenu();
             InitializePaths();
-            if (Settings.getOptionBool("StartMinimized"))
+            if (pd.settings.app.StartMinimized)
             {
                 allowVisible = false;
                 HideApp(this, null);

@@ -32,17 +32,17 @@ namespace TrayDir
 
         private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings.Save();
+            MainForm.form.pd.Save();
         }
 
         public void InitializeOptions()
         {
-            foreach (Option option in Settings.settings.options)
-            {
-                AddOption(option.name);
-            }
+            //foreach (Option option in Settings.settings.options)
+            //{
+            //    AddOption(option.name);
+            //}
         }
-        private void AddOption(string name)
+        private CheckBox AddOption(string name, bool boxChecked)
         {
             string text = AppUtils.SplitCamelCase(name);
             Label label = new Label();
@@ -65,12 +65,12 @@ namespace TrayDir
             checkbox.Size = new System.Drawing.Size(116, 27);
             checkbox.TabIndex = 1;
             checkbox.UseVisualStyleBackColor = true;
-            checkbox.Checked = Settings.getOptionBool(name);
+            checkbox.Checked = boxChecked;
 
             EventHandler folderSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
-                Settings.setOption(name, checkbox.Checked);
-                TrayInstance.UpdateAllMenus();
+                int i = 1 / (SettingsForm.form.OptionsGroupLayout.RowCount - SettingsForm.form.OptionsGroupLayout.RowCount);//Settings.setOption(name, checkbox.Checked);
+                MainForm.form.pd.UpdateAllMenus();
             });
 
             checkbox.Click += folderSelect;
@@ -80,6 +80,8 @@ namespace TrayDir
             SettingsForm.form.OptionsGroupLayout.Controls.Add(checkbox, 1, OptionCount);
             OptionCount += 1;
             SettingsForm.form.OptionsGroupLayout.RowCount = OptionCount;
+
+            return checkbox;
         }
     }
 }

@@ -13,8 +13,6 @@ namespace TrayDir
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Settings.Init();
-            Settings.Load();
             MainForm.Init();
             SettingsForm.Init();
             MainForm.form.InitializeAllAssets();
