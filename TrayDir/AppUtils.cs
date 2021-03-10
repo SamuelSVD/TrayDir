@@ -126,7 +126,7 @@ namespace TrayDir
                 {
                     Process.Start("explorer.exe", new FileInfo(path).Directory.FullName);
                 }
-                else 
+                else
                 {
                     Process.Start("explorer.exe", path);
                 }

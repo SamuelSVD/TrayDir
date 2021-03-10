@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace TrayDir
 {
-    [XmlRoot(ElementName= "TrayInstanceSettings")]
+    [XmlRoot(ElementName = "TrayInstanceSettings")]
     public class TrayInstanceSettings
     {
         public List<string> paths;
@@ -35,10 +31,10 @@ namespace TrayDir
         {
             RunAsAdmin = false;
             ShowFileExtensions = true;
-            ExploreFoldersInTrayMenu= false;
+            ExploreFoldersInTrayMenu = false;
             paths = new List<string>();
             iconPath = System.Reflection.Assembly.GetEntryAssembly().Location;
-            iconText= "TrayDir";
+            iconText = "TrayDir";
         }
     }
 }

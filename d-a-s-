@@ -1,0 +1,328 @@
+[1mdiff --git a/TrayDir/MainForm.Designer.cs b/TrayDir/MainForm.Designer.cs[m
+[1mindex 1543840..8b57fed 100644[m
+[1m--- a/TrayDir/MainForm.Designer.cs[m
+[1m+++ b/TrayDir/MainForm.Designer.cs[m
+[36m@@ -66,10 +66,11 @@[m [mnamespace TrayDir[m
+             this.DirectoriesGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;[m
+             this.DirectoriesGroupBox.Controls.Add(this.DirectoriesGroupBoxLayout);[m
+             this.DirectoriesGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[31m-            this.DirectoriesGroupBox.Location = new System.Drawing.Point(20, 55);[m
+[31m-            this.DirectoriesGroupBox.Margin = new System.Windows.Forms.Padding(20, 5, 20, 20);[m
+[32m+[m[32m            this.DirectoriesGroupBox.Location = new System.Drawing.Point(10, 30);[m
+[32m+[m[32m            this.DirectoriesGroupBox.Margin = new System.Windows.Forms.Padding(10, 3, 10, 10);[m
+             this.DirectoriesGroupBox.Name = "DirectoriesGroupBox";[m
+[31m-            this.DirectoriesGroupBox.Size = new System.Drawing.Size(1091, 117);[m
+[32m+[m[32m            this.DirectoriesGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);[m
+[32m+[m[32m            this.DirectoriesGroupBox.Size = new System.Drawing.Size(546, 64);[m
+             this.DirectoriesGroupBox.TabIndex = 2;[m
+             this.DirectoriesGroupBox.TabStop = false;[m
+             this.DirectoriesGroupBox.Text = "Paths";[m
+[36m@@ -83,12 +84,13 @@[m [mnamespace TrayDir[m
+             this.DirectoriesGroupBoxLayout.Controls.Add(this.DirectoriesGroupLayout, 0, 0);[m
+             this.DirectoriesGroupBoxLayout.Controls.Add(this.tableLayoutPanel1, 0, 1);[m
+             this.DirectoriesGroupBoxLayout.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[31m-            this.DirectoriesGroupBoxLayout.Location = new System.Drawing.Point(3, 27);[m
+[32m+[m[32m            this.DirectoriesGroupBoxLayout.Location = new System.Drawing.Point(2, 15);[m
+[32m+[m[32m            this.DirectoriesGroupBoxLayout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);[m
+             this.DirectoriesGroupBoxLayout.Name = "DirectoriesGroupBoxLayout";[m
+             this.DirectoriesGroupBoxLayout.RowCount = 2;[m
+             this.DirectoriesGroupBoxLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));[m
+             this.DirectoriesGroupBoxLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());[m
+[31m-            this.DirectoriesGroupBoxLayout.Size = new System.Drawing.Size(1085, 87);[m
+[32m+[m[32m            this.DirectoriesGroupBoxLayout.Size = new System.Drawing.Size(542, 47);[m
+             this.DirectoriesGroupBoxLayout.TabIndex = 1;[m
+             // [m
+             // DirectoriesGroupLayout[m
+[36m@@ -100,12 +102,12 @@[m [mnamespace TrayDir[m
+             this.DirectoriesGroupLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));[m
+             this.DirectoriesGroupLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));[m
+             this.DirectoriesGroupLayout.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[31m-            this.DirectoriesGroupLayout.Location = new System.Drawing.Point(10, 10);[m
+[31m-            this.DirectoriesGroupLayout.Margin = new System.Windows.Forms.Padding(10);[m
+[32m+[m[32m            this.DirectoriesGroupLayout.Location = new System.Drawing.Point(5, 5);[m
+[32m+[m[32m            this.DirectoriesGroupLayout.Margin = new System.Windows.Forms.Padding(5);[m
+             this.DirectoriesGroupLayout.Name = "DirectoriesGroupLayout";[m
+             this.DirectoriesGroupLayout.RowCount = 1;[m
+[31m-            this.DirectoriesGroupLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));[m
+[31m-            this.DirectoriesGroupLayout.Size = new System.Drawing.Size(1065, 1);[m
+[32m+[m[32m            this.DirectoriesGroupLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());[m
+[32m+[m[32m            this.DirectoriesGroupLayout.Size = new System.Drawing.Size(532, 1);[m
+             this.DirectoriesGroupLayout.TabIndex = 0;[m
+             // [m
+             // tableLayoutPanel1[m
+[36m@@ -119,12 +121,12 @@[m [mnamespace TrayDir[m
+             this.tableLayoutPanel1.Controls.Add(this.AddButton, 1, 0);[m
+             this.tableLayoutPanel1.Controls.Add(this.RemoveButton, 2, 0);[m
+             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[31m-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 30);[m
+[31m-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(10);[m
+[32m+[m[32m            this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 15);[m
+[32m+[m[32m            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);[m
+             this.tableLayoutPanel1.Name = "tableLayoutPanel1";[m
+             this.tableLayoutPanel1.RowCount = 1;[m
+             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));[m
+[31m-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1065, 47);[m
+[32m+[m[32m            this.tableLayoutPanel1.Size = new System.Drawing.Size(532, 27);[m
+             this.tableLayoutPanel1.TabIndex = 1;[m
+             // [m
+             // AddButton[m
+[36m@@ -132,10 +134,10 @@[m [mnamespace TrayDir[m
+             this.AddButton.AutoSize = true;[m
+             this.AddButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;[m
+             this.AddButton.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[31m-            this.AddButton.Location = new System.Drawing.Point(748, 3);[m
+[32m+[m[32m            this.AddButton.Location = new System.Drawing.Point(374, 2);[m
+[32m+[m[32m            this.AddButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);[m
+             this.AddButton.Name = "AddButton";[m
+[31m-            this.AddButton.Padding = new System.Windows.Forms.Padding(3);[m
+[31m-            this.AddButton.Size = new System.Drawing.Size(153, 41);[m
+[32m+[m[32m            this.AddButton.Size = new System.Drawing.Size(75, 23);[m
+             this.AddButton.TabIndex = 0;[m
+             this.AddButton.Text = "Add";[m
+             this.AddButton.UseVisualStyleBackColor = true;[m
+[36m@@ -146,10 +148,10 @@[m [mnamespace TrayDir[m
+             this.RemoveButton.AutoSize = true;[m
+             this.RemoveButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;[m
+             this.RemoveButton.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[31m-            this.RemoveButton.Location = new System.Drawing.Point(907, 3);[m
+[32m+[m[32m            this.RemoveButton.Location = new System.Drawing.Point(453, 2);[m
+[32m+[m[32m            this.RemoveButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);[m
+             this.RemoveButton.Name = "RemoveButton";[m
+[31m-            this.RemoveButton.Padding = new System.Windows.Forms.Padding(3);[m
+[31m-            this.RemoveButton.Size = new System.Drawing.Size(155, 41);[m
+[32m+[m[32m            this.RemoveButton.Size = new System.Drawing.Size(77, 23);[m
+             this.RemoveButton.TabIndex = 1;[m
+             this.RemoveButton.Text = "Remove";[m
+             this.RemoveButton.UseVisualStyleBackColor = true;[m
+[36m@@ -164,14 +166,14 @@[m [mnamespace TrayDir[m
+             this.MainLayout.Controls.Add(this.OptionsGroupBox, 0, 0);[m
+             this.MainLayout.Controls.Add(this.DirectoriesGroupBox, 0, 1);[m
+             this.MainLayout.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[31m-            this.MainLayout.Location = new System.Drawing.Point(0, 48);[m
+[31m-            this.MainLayout.Margin = new System.Windows.Forms.Padding(5);[m
+[32m+[m[32m            this.MainLayout.Location = new System.Drawing.Point(0, 24);[m
+[32m+[m[32m            this.MainLayout.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);[m
+             this.MainLayout.Name = "MainLayout";[m
+             this.MainLayout.RowCount = 2;[m
+             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());[m
+             this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());[m
+[31m-            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));[m
+[31m-            this.MainLayout.Size = new System.Drawing.Size(1131, 160);[m
+[32m+[m[32m            this.MainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));[m
+[32m+[m[32m            this.MainLayout.Size = new System.Drawing.Size(566, 84);[m
+             this.MainLayout.TabIndex = 3;[m
+             // [m
+             // OptionsGroupBox[m
+[36m@@ -180,10 +182,11 @@[m [mnamespace TrayDir[m
+             this.OptionsGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;[m
+             this.OptionsGroupBox.Controls.Add(this.OptionsGroupLayout);[m
+             this.OptionsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[31m-            this.OptionsGroupBox.Location = new System.Drawing.Point(20, 10);[m
+[31m-            this.OptionsGroupBox.Margin = new System.Windows.Forms.Padding(20, 10, 20, 10);[m
+[32m+[m[32m            this.OptionsGroupBox.Location = new System.Drawing.Point(10, 5);[m
+[32m+[m[32m            this.OptionsGroupBox.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);[m
+             this.OptionsGroupBox.Name = "OptionsGroupBox";[m
+[31m-            this.OptionsGroupBox.Size = new System.Drawing.Size(1091, 30);[m
+[32m+[m[32m            this.OptionsGroupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);[m
+[32m+[m[32m            this.OptionsGroupBox.Size = new System.Drawing.Size(546, 17);[m
+             this.OptionsGroupBox.TabIndex = 3;[m
+             this.OptionsGroupBox.TabStop = false;[m
+             this.OptionsGroupBox.Text = "Options";[m
+[36m@@ -196,26 +199,26 @@[m [mnamespace TrayDir[m
+             this.OptionsGroupLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));[m
+             this.OptionsGroupLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));[m
+             this.OptionsGroupLayout.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[31m-            this.OptionsGroupLayout.Location = new System.Drawing.Point(3, 27);[m
+[31m-            this.OptionsGroupLayout.Margin = new System.Windows.Forms.Padding(5);[m
+[32m+[m[32m            this.OptionsGroupLayout.Location = new System.Drawing.Point(2, 15);[m
+[32m+[m[32m            this.OptionsGroupLayout.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);[m
+             this.OptionsGroupLayout.Name = "OptionsGroupLayout";[m
+             this.OptionsGroupLayout.RowCount = 1;[m
+             this.OptionsGroupLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));[m
+[31m-            this.OptionsGroupLayout.Size = new System.Drawing.Size(1085, 0);[m
+[32m+[m[32m            this.OptionsGroupLayout.Size = new System.Drawing.Size(542, 0);[m
+             this.OptionsGroupLayout.TabIndex = 0;[m
+             // [m
+             // exploreToolStripMenuItem[m
+             // [m
+             this.exploreToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);[m
+             this.exploreToolStripMenuItem.Name = "exploreToolStripMenuItem";[m
+[31m-            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(113, 44);[m
+[32m+[m[32m            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(58, 22);[m
+             this.exploreToolStripMenuItem.Text = "Explore";[m
+             // [m
+             // aboutToolStripMenuItem[m
+             // [m
+             this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);[m
+             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";[m
+[31m-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(100, 44);[m
+[32m+[m[32m            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 22);[m
+             this.aboutToolStripMenuItem.Text = "About";[m
+             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.ShowAbout);[m
+             // [m
+[36m@@ -230,7 +233,8 @@[m [mnamespace TrayDir[m
+             this.aboutToolStripMenuItem});[m
+             this.mainMenu.Location = new System.Drawing.Point(0, 0);[m
+             this.mainMenu.Name = "mainMenu";[m
+[31m-            this.mainMenu.Size = new System.Drawing.Size(1131, 48);[m
+[32m+[m[32m            this.mainMenu.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);[m
+[32m+[m[32m            this.mainMenu.Size = new System.Drawing.Size(566, 24);[m
+             this.mainMenu.TabIndex = 1;[m
+             this.mainMenu.Text = "mainMenu";[m
+             // [m
+[36m@@ -240,27 +244,27 @@[m [mnamespace TrayDir[m
+             this.saveToolStripMenuItem1,[m
+             this.exitToolStripMenuItem1});[m
+             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";[m
+[31m-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 44);[m
+[32m+[m[32m            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 22);[m
+             this.fileToolStripMenuItem.Text = "File";[m
+             // [m
+             // saveToolStripMenuItem1[m
+             // [m
+             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";[m
+[31m-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(199, 44);[m
+[32m+[m[32m            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);[m
+             this.saveToolStripMenuItem1.Text = "Save";[m
+             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.Save);[m
+             // [m
+             // exitToolStripMenuItem1[m
+             // [m
+             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";[m
+[31m-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(199, 44);[m
+[32m+[m[32m            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);[m
+             this.exitToolStripMenuItem1.Text = "Exit";[m
+             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.ExitApp);[m
+             // [m
+             // rebuildToolStripMenuItem[m
+             // [m
+             this.rebuildToolStripMenuItem.Name = "rebuildToolStripMenuItem";[m
+[31m-            this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(115, 44);[m
+[32m+[m[32m            this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(59, 22);[m
+             this.rebuildToolStripMenuItem.Text = "Rebuild";[m
+             this.rebuildToolStripMenuItem.Click += new System.EventHandler(this.Rebuild);[m
+             // [m
+[36m@@ -273,15 +277,16 @@[m [mnamespace TrayDir[m
+             // [m
+             // MainForm[m
+             // [m
+[31m-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);[m
+[32m+[m[32m            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);[m
+             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;[m
+             this.AutoSize = true;[m
+[31m-            this.ClientSize = new System.Drawing.Size(1131, 208);[m
+[32m+[m[32m            this.ClientSize = new System.Drawing.Size(566, 108);[m
+             this.Controls.Add(this.MainLayout);[m
+             this.Controls.Add(this.mainMenu);[m
+             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;[m
+             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));[m
+             this.MainMenuStrip = this.mainMenu;[m
+[32m+[m[32m            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);[m
+             this.Name = "MainForm";[m
+             this.Text = "TrayDir";[m
+             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);[m
+[1mdiff --git a/TrayDir/MainForm.cs b/TrayDir/MainForm.cs[m
+[1mindex 61c12bf..1b001dd 100644[m
+[1m--- a/TrayDir/MainForm.cs[m
+[1m+++ b/TrayDir/MainForm.cs[m
+[36m@@ -141,11 +141,12 @@[m [mnamespace TrayDir[m
+             // [m
+             TextBox textbox = new TextBox();[m
+             textbox.BorderStyle = System.Windows.Forms.BorderStyle.None;[m
+[31m-            textbox.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[31m-            textbox.Location = new System.Drawing.Point(10, 5);[m
+[31m-            textbox.Margin = new System.Windows.Forms.Padding(0);[m
+             textbox.Name = "textbox" + n.ToString();[m
+             textbox.Size = new System.Drawing.Size(651, 24);[m
+[32m+[m[32m            textbox.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[32m+[m[32m            textbox.Margin = new System.Windows.Forms.Padding(10);[m
+[32m+[m[32m            textbox.AutoSize = true;[m
+[32m+[m[32m            textbox.ReadOnly = true;[m
+ [m
+             if (AppUtils.PathIsDirectory(text)) [m
+             {[m
+[36m@@ -159,44 +160,39 @@[m [mnamespace TrayDir[m
+             {[m
+                 textbox.Text = text;[m
+             }[m
+[31m-            textbox.TabIndex = 0;[m
+[31m-            textbox.ReadOnly = true;[m
+             // panel[m
+             Panel panel = new Panel();[m
+             panel.AutoSize = true;[m
+[32m+[m[32m            panel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;[m
+             panel.Cursor = textbox.Cursor;[m
+             panel.BackColor = textbox.BackColor;[m
+             panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;[m
+[31m-            panel.Controls.Add(textbox);[m
+             panel.Dock = System.Windows.Forms.DockStyle.Fill;[m
+[31m-            panel.Location = new System.Drawing.Point(5, 5);[m
+[31m-            panel.Margin = new System.Windows.Forms.Padding(5);[m
+[32m+[m[32m            panel.Margin = new System.Windows.Forms.Padding(2,3,2,3);[m
+             panel.Name = "panel" + n.ToString();[m
+[31m-            panel.Padding = new System.Windows.Forms.Padding(10, 3, 0, 3);[m
+[31m-            panel.Size = new System.Drawing.Size(675, 45);[m
+[31m-            panel.TabIndex = 5;[m
+[32m+[m[32m            panel.Padding = new System.Windows.Forms.Padding(0);[m
+             [m
+             EventHandler textbox_select = new EventHandler(delegate (object obj, EventArgs args)[m
+             {[m
+                 textbox.Select();[m
+             });[m
+[31m-[m
+             panel.Click += textbox_select;[m
+ [m
+[32m+[m
+[32m+[m[32m            panel.Controls.Add(textbox);[m
+[32m+[m
+             // [m
+             // fileButton[m
+             // [m
+             Button fileButton = new Button();[m
+[31m-            fileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));[m
+             fileButton.AutoSize = true;[m
+[32m+[m[32m            fileButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;[m
+             fileButton.Location = new System.Drawing.Point(690, 3);[m
+[31m-            //fileButton.Margin = new System.Windows.Forms.Padding(5);[m
+             fileButton.Name = "filebutton" + n.ToString();[m
+[31m-            fileButton.Padding = new System.Windows.Forms.Padding(3);[m
+[31m-            fileButton.Size = new System.Drawing.Size(112, 45);[m
+             fileButton.TabIndex = 1;[m
+             fileButton.Text = "File";[m
+             fileButton.UseVisualStyleBackColor = true;[m
+[32m+[m[32m            fileButton.Dock = System.Windows.Forms.DockStyle.Fill;[m
+ [m
+             EventHandler fileSelect = new EventHandler(delegate (object obj, EventArgs args)[m
+             {[m
+[36m@@ -217,16 +213,11 @@[m [mnamespace TrayDir[m
+             // folderButton[m
+             // [m
+             Button folderButton = new Button();[m
+[31m-            folderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));[m
+             folderButton.AutoSize = true;[m
+[31m-            folderButton.Location = new System.Drawing.Point(690, 5);[m
+[31m-            folderButton.Margin = new System.Windows.Forms.Padding(3);[m
+[31m-            folderButton.Name = "folderButton" + n.ToString();[m
+[31m-            folderButton.Padding = new System.Windows.Forms.Padding(3);[m
+[31m-            folderButton.Size = new System.Drawing.Size(112, 45);[m
+[31m-            folderButton.TabIndex = 1;[m
+[32m+[m[32m            folderButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;[m
+             folderButton.Text = "Folder";[m
+             folderButton.UseVisualStyleBackColor = true;[m
+[32m+[m[32m            folderButton.Dock = System.Windows.Forms.DockStyle.Fill;[m
+ [m
+             EventHandler folderSelect = new EventHandler(delegate (object obj, EventArgs args)[m
+             {[m
+[36m@@ -247,7 +238,12 @@[m [mnamespace TrayDir[m
+             this.DirectoriesGroupLayout.Controls.Add(folderButton, 2, DirCount);[m
+             DirCount += 1;[m
+             this.DirectoriesGroupLayout.RowCount = DirCount;[m
+[32m+[m[32m            this.DirectoriesGroupLayout.Height = 0;[m
+             Height = 0;[m
+[32m+[m[32m            foreach (RowStyle style in DirectoriesGroupLayout.RowStyles)[m
+[32m+[m[32m            {[m
+[32m+[m[32m                style.SizeType = SizeType.AutoSize;[m
+[32m+[m[32m            }[m
+             InitializeTrayMenu();[m
+             RemoveButton.Enabled = DirCount > 1;[m
+         }[m

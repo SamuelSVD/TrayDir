@@ -17,7 +17,8 @@ namespace TrayDir
         {
             InitializeComponent();
             pd = ProgramData.Load();
-            if (pd.trayInstances.Count == 0) {
+            if (pd.trayInstances.Count == 0)
+            {
                 pd.CreateDefaultInstance();
             }
             trayInstance = pd.trayInstances[0];
@@ -52,7 +53,8 @@ namespace TrayDir
             if (Settings.isAltered())
             {
                 this.Text = "TrayDir*";
-            } else
+            }
+            else
             {
                 this.Text = "TrayDir";
             }
@@ -84,7 +86,7 @@ namespace TrayDir
             textbox.AutoSize = true;
             textbox.ReadOnly = true;
 
-            if (AppUtils.PathIsDirectory(text)) 
+            if (AppUtils.PathIsDirectory(text))
             {
                 textbox.Text = new DirectoryInfo(text).FullName;
             }
@@ -104,10 +106,10 @@ namespace TrayDir
             panel.BackColor = textbox.BackColor;
             panel.BorderStyle = BorderStyle.FixedSingle;
             panel.Dock = DockStyle.Fill;
-            panel.Margin = new Padding(2,3,2,3);
+            panel.Margin = new Padding(2, 3, 2, 3);
             panel.Name = "panel" + n.ToString();
             panel.Padding = new Padding(0);
-            
+
             EventHandler textbox_select = new EventHandler(delegate (object obj, EventArgs args)
             {
                 textbox.Select();
@@ -196,7 +198,7 @@ namespace TrayDir
         }
         public void RemovePath()
         {
-            removerow(DirectoriesGroupLayout, DirCount-1);
+            removerow(DirectoriesGroupLayout, DirCount - 1);
             DirCount--;
             RemoveButton.Enabled = DirCount > 1;
         }
@@ -279,7 +281,7 @@ namespace TrayDir
             {
                 HideApp(this, null);
                 e.Cancel = true;
-            } 
+            }
             else
             {
                 if (!Settings.ConfirmClose())
@@ -288,7 +290,7 @@ namespace TrayDir
                 }
                 else
                 {
-                    foreach(TrayInstance i in pd.trayInstances)
+                    foreach (TrayInstance i in pd.trayInstances)
                     {
                         i.Hide();
                     }
