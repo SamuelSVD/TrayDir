@@ -15,7 +15,6 @@ namespace TrayDir
             Application.SetCompatibleTextRenderingDefault(false);
             MainForm.Init();
             SettingsForm.Init();
-            MainForm.form.InitializeAllAssets();
             Application.Run(MainForm.form);
         }
     }

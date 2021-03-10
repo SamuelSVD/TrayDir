@@ -23,6 +23,7 @@ namespace TrayDir
             }
             trayInstance = pd.trayInstances[0];
             pd.Save();
+            InitializeAllAssets();
         }
         public static void Init()
         {
@@ -31,6 +32,9 @@ namespace TrayDir
         }
         public void InitializePaths()
         {
+            foreach (TrayInstance instance in pd.trayInstances) {
+                instance.setEventHandlers(ShowApp, HideApp, ExitApp);
+            }
             if (trayInstance.settings.paths.Count == 0)
             {
                 trayInstance.settings.paths.Add(".");

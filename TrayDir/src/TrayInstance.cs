@@ -13,6 +13,10 @@ namespace TrayDir
         public string instanceName { get { return settings.InstanceName; } set { settings.InstanceName = value; } }
         public string iconPath { get { return settings.iconPath; } set { settings.iconPath = value; } }
         private NotifyIcon notifyIcon;
+        private EventHandler showForm;
+        private EventHandler hideForm;
+        private EventHandler exitForm;
+
         public TrayInstance() : this("default-instance") { }
         public TrayInstance(string instanceName) : this(new TrayInstanceSettings(instanceName))
         {
@@ -37,6 +41,12 @@ namespace TrayDir
             }
             return false;
         }
+        public void setEventHandlers(EventHandler showForm, EventHandler hideForm, EventHandler exitForm)
+        {
+            this.showForm = showForm;
+            this.hideForm = hideForm;
+            this.exitForm = exitForm;
+        }
         public void UpdateTrayMenu()
         {
             if (notifyIcon.ContextMenuStrip is null)
@@ -47,15 +57,21 @@ namespace TrayDir
             {
                 notifyIcon.ContextMenuStrip.Items.Clear();
             }
-            notifyIcon.ContextMenuStrip.Items.Add("Show", null, MainForm.form.ShowApp);
-            notifyIcon.ContextMenuStrip.Items.Add("Hide", null, MainForm.form.HideApp);
+            if (!(showForm is null))
+            {
+                notifyIcon.ContextMenuStrip.Items.Add("Show", null, showForm);
+            }
+            if (!(hideForm is null))
+            {
+                notifyIcon.ContextMenuStrip.Items.Add("Hide", null, hideForm);
+            }
 
             notifyIcon.ContextMenuStrip.Items.Add("-");
 
             if (settings.paths.Count == 1)
             {
                 String path = settings.paths[0];
-                /*ToolStripMenuItem mi = AppUtils.RecursivePathFollow(instances[0].settings, path);
+                ToolStripMenuItem mi = AppUtils.RecursivePathFollow(settings, path);
                 if (mi.DropDownItems.Count > 0)
                 {
                     while (mi.DropDownItems.Count > 0)
@@ -68,7 +84,7 @@ namespace TrayDir
                 else
                 {
                     notifyIcon.ContextMenuStrip.Items.Add(mi);
-                }*/
+                }
             }
             else
             {
@@ -79,7 +95,10 @@ namespace TrayDir
             }
             notifyIcon.ContextMenuStrip.Items.Add("-");
 
-            notifyIcon.ContextMenuStrip.Items.Add("Exit", null, MainForm.form.ExitApp);
+            if (!(exitForm is null))
+            {
+                notifyIcon.ContextMenuStrip.Items.Add("Exit", null, exitForm);
+            }
             notifyIcon.ContextMenuStrip.Items[0].Visible = false;
             UpdateTrayIcon();
         }
@@ -90,17 +109,17 @@ namespace TrayDir
             {
                 try
                 {
-                    SettingsForm.form.TrayIconPathTextBox.Text = iconPath;
+                    //SettingsForm.form.TrayIconPathTextBox.Text = iconPath;
                     notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(iconPath);
-                    SettingsForm.form.IconDisplay.Image = notifyIcon.Icon.ToBitmap();
-                    SettingsForm.form.Icon = notifyIcon.Icon;
+                    //SettingsForm.form.IconDisplay.Image = notifyIcon.Icon.ToBitmap();
+                    //SettingsForm.form.Icon = notifyIcon.Icon;
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show("Error loading icon: " + e.Message);
                 }
             }
-            SettingsForm.form.TrayTextTextBox.Text = settings.iconText;
+            //SettingsForm.form.TrayTextTextBox.Text = settings.iconText;
             notifyIcon.Text = settings.iconText;
         }
         public void AddPath(string path)
