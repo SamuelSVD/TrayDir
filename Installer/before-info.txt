@@ -1,0 +1,4 @@
+TrayDir is an application meant to make your workflow more efficient.
+It provides a tray menu item that you can right click and select a file or folder to open.
+
+Please provide feedback on how to improve this app as this is an ongoing work
