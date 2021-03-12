@@ -56,13 +56,13 @@ namespace TrayDir
 
             EventHandler textbox_select = new EventHandler(delegate (object obj, EventArgs args)
             {
-                if (PathIsDirectory(path) & Settings.getOptionBool("ExploreFoldersInTrayMenu"))
+                if (PathIsDirectory(path) & settings.ExploreFoldersInTrayMenu)
                 {
-                    OpenPath(new DirectoryInfo(path).FullName);
+                    OpenPath(new DirectoryInfo(path).FullName, settings.RunAsAdmin);
                 }
                 else if (PathIsFile(path))
                 {
-                    OpenPath(Path.GetFullPath(path));
+                    OpenPath(Path.GetFullPath(path), settings.RunAsAdmin);
                 }
             });
 
@@ -100,11 +100,11 @@ namespace TrayDir
         {
             return System.Text.RegularExpressions.Regex.Replace(input, "([A-Z])", " $1", System.Text.RegularExpressions.RegexOptions.Compiled).Trim();
         }
-        public static void OpenPath(string path)
+        public static void OpenPath(string path, bool runAsAdmin)
         {
             try
             {
-                if (Settings.getOptionBool("RunAsAdmin"))
+                if (runAsAdmin)
                 {
                     ExecuteAsAdmin(path);
                 }
@@ -126,7 +126,7 @@ namespace TrayDir
                 {
                     Process.Start("explorer.exe", new FileInfo(path).Directory.FullName);
                 }
-                else 
+                else
                 {
                     Process.Start("explorer.exe", path);
                 }
