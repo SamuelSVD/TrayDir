@@ -317,7 +317,7 @@ namespace TrayDir
             GroupBox optionsgb = new GroupBox();
             optionsgb.Text = "Tray Options";
             ControlUtils.ConfigureGroupBox(optionsgb);
-            
+
             TableLayoutPanel optionstlp = new TableLayoutPanel();
             ControlUtils.ConfigureTableLayoutPanel(optionstlp);
             optionsgb.Controls.Add(optionstlp);

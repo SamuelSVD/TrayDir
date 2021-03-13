@@ -1,5 +1,4 @@
-﻿using FolderSelect;
-using System;
+﻿using System;
 using System.IO;
 using System.Windows.Forms;
 
@@ -103,7 +102,7 @@ namespace TrayDir
             fileButton.UseVisualStyleBackColor = true;
             fileButton.Dock = DockStyle.Fill;
 
-            
+
 
             fileButton.Click += fileSelect;
 
@@ -122,23 +121,22 @@ namespace TrayDir
             tlp.Controls.Add(panel, 0, row);
             tlp.Controls.Add(fileButton, 1, row);
             tlp.Controls.Add(folderButton, 2, row);
-            tlp.RowCount = row+1;
+            tlp.RowCount = row + 1;
             tlp.Height = 0;
             tlp.RowStyles.Add(new RowStyle());
             foreach (RowStyle style in tlp.RowStyles)
             {
-                style.SizeType = SizeType.Absolute;
-                style.Height = 1;
+                style.SizeType = SizeType.AutoSize;
             }
             for (int i = 0; i < 3; i++)
             {
-                if (tlp.ColumnStyles.Count < (i+1))
+                if (tlp.ColumnStyles.Count < (i + 1))
                 {
                     tlp.ColumnStyles.Add(new ColumnStyle());
                 }
                 ColumnStyle style = tlp.ColumnStyles[i];
                 style.SizeType = SizeType.Percent;
-                switch(i)
+                switch (i)
                 {
                     case 0:
                         style.Width = 70;
@@ -152,7 +150,7 @@ namespace TrayDir
                     default:
                         style.Width = 33;
                         break;
-                } 
+                }
             }
             return textbox;
         }
