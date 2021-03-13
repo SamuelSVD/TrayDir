@@ -45,7 +45,7 @@ namespace TrayDir
             tlp.RowStyles[row].Height = 0;
             tlp.RowCount = row + 1;
         }
-        public static void AddPath(TableLayoutPanel tlp, int row, string text, FileDialog fd, TrayInstance instance)
+        public static TextBox AddPath(TableLayoutPanel tlp, int row, string text, TrayInstance instance, EventHandler fileSelect, EventHandler folderSelect)
         {
             int n = row;
             // 
@@ -103,18 +103,7 @@ namespace TrayDir
             fileButton.UseVisualStyleBackColor = true;
             fileButton.Dock = DockStyle.Fill;
 
-            EventHandler fileSelect = new EventHandler(delegate (object obj, EventArgs args)
-            {
-                fd.DereferenceLinks = false;
-                fd.InitialDirectory = textbox.Text;
-                DialogResult d = fd.ShowDialog();
-                if (d == DialogResult.OK)
-                {
-                    textbox.Text = fd.FileName;
-                    instance.settings.paths[n] = textbox.Text;
-                    instance.UpdateTrayMenu();
-                }
-            });
+            
 
             fileButton.Click += fileSelect;
 
@@ -128,18 +117,6 @@ namespace TrayDir
             folderButton.UseVisualStyleBackColor = true;
             folderButton.Dock = DockStyle.Fill;
 
-            EventHandler folderSelect = new EventHandler(delegate (object obj, EventArgs args)
-            {
-                FolderSelectDialog fs = new FolderSelectDialog();
-                fs.InitialDirectory = textbox.Text;
-                if (fs.ShowDialog())
-                {
-                    textbox.Text = fs.FileName;
-                    instance.settings.paths[n] = textbox.Text;
-                    instance.UpdateTrayMenu();
-                }
-            });
-
             folderButton.Click += folderSelect;
 
             tlp.Controls.Add(panel, 0, row);
@@ -147,9 +124,11 @@ namespace TrayDir
             tlp.Controls.Add(folderButton, 2, row);
             tlp.RowCount = row+1;
             tlp.Height = 0;
+            tlp.RowStyles.Add(new RowStyle());
             foreach (RowStyle style in tlp.RowStyles)
             {
-                style.SizeType = SizeType.AutoSize;
+                style.SizeType = SizeType.Absolute;
+                style.Height = 1;
             }
             for (int i = 0; i < 3; i++)
             {
@@ -176,6 +155,7 @@ namespace TrayDir
                 } 
             }
             instance.UpdateTrayMenu();
+            return textbox;
         }
 
         public static void ConfigureGroupBox(GroupBox gb)

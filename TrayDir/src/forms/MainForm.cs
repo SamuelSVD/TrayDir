@@ -243,9 +243,34 @@ namespace TrayDir
             for (int i = 0; i < instance.settings.paths.Count; i++)
             {
                 string path = instance.settings.paths[i];
-                ControlUtils.AddPath(pathstlp, i, path, FileDialog, instance);
-                //TODO Continue here
-                //int j = 1 / (instance.settings.paths.Count - instance.settings.paths.Count);
+                int j = i;
+                TextBox textbox = null;
+                EventHandler fileSelect = new EventHandler(delegate (object obj, EventArgs args)
+                {
+                    FileDialog.DereferenceLinks = false;
+                    FileDialog.InitialDirectory = textbox.Text;
+                    DialogResult d = FileDialog.ShowDialog();
+                    if (d == DialogResult.OK)
+                    {
+                        textbox.Text = FileDialog.FileName;
+                        instance.settings.paths[j] = textbox.Text;
+                        instance.UpdateTrayMenu();
+                        pd.Save();
+                    }
+                });
+                EventHandler folderSelect = new EventHandler(delegate (object obj, EventArgs args)
+                {
+                    FolderSelectDialog fs = new FolderSelectDialog();
+                    fs.InitialDirectory = textbox.Text;
+                    if (fs.ShowDialog())
+                    {
+                        textbox.Text = fs.FileName;
+                        instance.settings.paths[j] = textbox.Text;
+                        instance.UpdateTrayMenu();
+                        pd.Save();
+                    }
+                });
+                textbox = ControlUtils.AddPath(pathstlp, i, path, instance, fileSelect, folderSelect);
             }
             return pathsgb;
         }
@@ -302,19 +327,22 @@ namespace TrayDir
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            this.Text = instanceTabs.TabPages[0].Height.ToString();
-            for (int i = 0; i < instanceTabs.TabPages[0].Controls.Count; i++)
+            resizeForm();
+        }
+        private void resizeForm()
+        {
+            int tempHeight = 1;
+            for (int i = 0; i < instanceTabs.TabPages[instanceTabs.SelectedIndex].Controls.Count; i++)
             {
-                Control c = instanceTabs.TabPages[0].Controls[i];
-                int tempHeight = c.Padding.Top + c.Padding.Bottom + c.Margin.Bottom + c.Margin.Top + c.Location.Y*2;
+                Control c = instanceTabs.TabPages[instanceTabs.SelectedIndex].Controls[i];
+                tempHeight += c.Padding.Top + c.Padding.Bottom + c.Margin.Bottom + c.Margin.Top + c.Location.Y * 2;
                 for (int j = 0; j < c.Controls.Count; j++)
                 {
                     Control c2 = c.Controls[i];
                     tempHeight += c2.Padding.Top + c2.Padding.Bottom + c2.Margin.Bottom + c2.Margin.Top + c2.Height;
                 }
-                instanceTabs.Height = tempHeight;
             }
-            timer1.Enabled = false;
+            instanceTabs.Height = tempHeight;
         }
     }
 }

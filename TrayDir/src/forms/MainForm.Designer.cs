@@ -70,7 +70,7 @@ namespace TrayDir
             this.MainFormTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 135F));
             this.MainFormTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 135F));
             this.MainFormTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.MainFormTableLayout.Size = new System.Drawing.Size(566, 154);
+            this.MainFormTableLayout.Size = new System.Drawing.Size(566, 57);
             this.MainFormTableLayout.TabIndex = 3;
             // 
             // instanceTabs
@@ -83,7 +83,7 @@ namespace TrayDir
             this.instanceTabs.Location = new System.Drawing.Point(8, 13);
             this.instanceTabs.Name = "instanceTabs";
             this.instanceTabs.SelectedIndex = 0;
-            this.instanceTabs.Size = new System.Drawing.Size(550, 129);
+            this.instanceTabs.Size = new System.Drawing.Size(550, 31);
             this.instanceTabs.TabIndex = 0;
             // 
             // tabPage1
@@ -91,7 +91,7 @@ namespace TrayDir
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(542, 103);
+            this.tabPage1.Size = new System.Drawing.Size(542, 5);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -186,9 +186,10 @@ namespace TrayDir
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(566, 178);
+            this.ClientSize = new System.Drawing.Size(566, 81);
             this.Controls.Add(this.MainFormTableLayout);
             this.Controls.Add(this.mainMenu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
             this.Margin = new System.Windows.Forms.Padding(2);
