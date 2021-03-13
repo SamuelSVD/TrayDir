@@ -17,12 +17,6 @@ namespace TrayDir
         public bool ExploreFoldersInTrayMenu;
         [XmlAttribute]
         public bool ExpandFirstPath;
-        [XmlAttribute]
-        public string iconPath;
-        [XmlAttribute]
-        public string iconText;
-        [XmlAttribute]
-        public string InstanceName;
         public object this[string propertyName]
         {
             get
@@ -38,11 +32,8 @@ namespace TrayDir
                 myPropInfo.SetValue(this, value);
             }
         }
-        public TrayInstanceSettings() : this("") { }
-        public TrayInstanceSettings(string instanceName)
-        {
-            this.InstanceName = instanceName;
-            Instantiate(instanceName);
+        public TrayInstanceSettings() {
+            Instantiate("");
         }
         private void Instantiate(string instanceName)
         {
@@ -50,8 +41,6 @@ namespace TrayDir
             ShowFileExtensions = true;
             ExploreFoldersInTrayMenu = false;
             paths = new List<string>();
-            iconPath = System.Reflection.Assembly.GetEntryAssembly().Location;
-            iconText = "TrayDir";
         }
     }
 }

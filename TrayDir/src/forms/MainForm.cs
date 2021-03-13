@@ -1,5 +1,7 @@
 ﻿using FolderSelect;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -11,43 +13,62 @@ namespace TrayDir
         private int DirCount;
         private bool allowVisible;     // ContextMenu's Show command used
         private bool allowClose;       // ContextMenu's Exit command used
-        private TrayInstance trayInstance;
+        private TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
         public ProgramData pd;
+        private IView instanceView;
+        public FileDialog fd;
 
         //Event Handlers
         EventHandler exploreClick;
         public MainForm()
         {
             InitializeComponent();
+            fd = FileDialog;
             pd = ProgramData.Load();
+            pd.FixInstances();
             if (pd.trayInstances.Count == 0)
             {
                 pd.CreateDefaultInstance();
             }
-            trayInstance = pd.trayInstances[0];
+            if (pd.trayInstances.Count > 1)
+            {
+                instanceTabs.ShowClosingButton = true;
+            }
             pd.Save();
             InitializeAllAssets();
             InitializeInstanceTabs();
             BuildExploreDropdown();
+
+            instanceTabs.HeaderColor = Color.FromArgb(237, 238, 242);
+            instanceTabs.ActiveColor = Color.FromArgb(1, 122, 204);
+            instanceTabs.HorizontalLineColor = Color.FromArgb(1, 122, 204);
+            instanceTabs.TextColor = Color.Black;
+            instanceTabs.BackTabColor = Color.WhiteSmoke;
         }
         private void InitializeInstanceTabs()
         {
             for (int i = 0; i < pd.trayInstances.Count; i++)
             {
                 TrayInstance instance = pd.trayInstances[i];
-                TabPage tp;
-                if (i == 0)
-                {
-                    tp = instanceTabs.TabPages[0];
-                    tp.Text = instance.instanceName;
-                }
-                else
-                {
-                    tp = new TabPage(instance.instanceName);
-                    instanceTabs.TabPages.Add(tp);
-                }
-                CreateViewFromInstance(instance, tp);
+                AddInstanceTabPage(instance);
             }
+        }
+        private void AddInstanceTabPage(TrayInstance instance)
+        {
+            TabPage tp;
+            tp = new TabPage(instance.instanceName);
+            instanceTabs.TabPages.Remove(newTabTabPage);
+            instanceTabs.TabPages.Add(tp);
+            instanceTabs.TabPages.Add(newTabTabPage);
+            CreateViewFromInstance(instance, tp);
+            EventHandler tabClose = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                pd.trayInstances.Remove(instance);
+                instance.Hide();
+                instanceTabs.ShowClosingButton = (pd.trayInstances.Count > 1);
+                pd.Save();
+            });
+            tp.ParentChanged += tabClose;
         }
         public static void Init()
         {
@@ -183,6 +204,7 @@ namespace TrayDir
         private void Rebuild(object sender, EventArgs e)
         {
             pd.UpdateAllMenus();
+            resizeForm();
         }
         protected override void SetVisibleCore(bool value)
         {
@@ -236,7 +258,7 @@ namespace TrayDir
         }
         private void TrayTextApplyButton_Click(object sender, EventArgs e)
         {
-            trayInstance.settings.iconText = SettingsForm.form.TrayTextTextBox.Text;
+            trayInstance.iconText = SettingsForm.form.TrayTextTextBox.Text;
             Settings.Alter();
             CheckIsAltered();
         }
@@ -256,122 +278,50 @@ namespace TrayDir
             PerformLayout();
             MaximizeBox = false;
         }
-        private GroupBox CreateInstancePathsGroupBox(TrayInstance instance)
-        {
-            // Paths Group
-            GroupBox pathsgb = new GroupBox();
-            pathsgb.Text = "Paths";
-            ControlUtils.ConfigureGroupBox(pathsgb);
-
-            TableLayoutPanel pathstlp = new TableLayoutPanel();
-            ControlUtils.ConfigureTableLayoutPanel(pathstlp);
-            pathsgb.Controls.Add(pathstlp);
-
-            for (int i = 0; i < instance.settings.paths.Count; i++)
-            {
-                string path = instance.settings.paths[i];
-                int j = i;
-                TextBox textbox = null;
-                EventHandler fileSelect = new EventHandler(delegate (object obj, EventArgs args)
-                {
-                    FileDialog.DereferenceLinks = false;
-                    FileDialog.InitialDirectory = textbox.Text;
-                    DialogResult d = FileDialog.ShowDialog();
-                    if (d == DialogResult.OK)
-                    {
-                        textbox.Text = FileDialog.FileName;
-                        instance.settings.paths[j] = textbox.Text;
-                        instance.UpdateTrayMenu();
-                        pd.Save();
-                    }
-                });
-                EventHandler folderSelect = new EventHandler(delegate (object obj, EventArgs args)
-                {
-                    FolderSelectDialog fs = new FolderSelectDialog();
-                    fs.InitialDirectory = textbox.Text;
-                    if (fs.ShowDialog())
-                    {
-                        textbox.Text = fs.FileName;
-                        instance.settings.paths[j] = textbox.Text;
-                        instance.UpdateTrayMenu();
-                        pd.Save();
-                    }
-                });
-                textbox = ControlUtils.AddPath(pathstlp, i, path, instance, fileSelect, folderSelect);
-            }
-            return pathsgb;
-        }
-        private void SetCheckboxCheckedEvent(CheckBox cb, TrayInstance instance, string settingName)
-        {
-            EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args)
-            {
-                instance.settings[settingName] = cb.Checked;
-                instance.UpdateTrayMenu();
-                pd.Save();
-            });
-            cb.Click += cbClick;
-        }
-        private GroupBox CreateInstanceOptionsGroupBox(TrayInstance instance)
-        {
-            // Options Group
-            GroupBox optionsgb = new GroupBox();
-            optionsgb.Text = "Tray Options";
-            ControlUtils.ConfigureGroupBox(optionsgb);
-
-            TableLayoutPanel optionstlp = new TableLayoutPanel();
-            ControlUtils.ConfigureTableLayoutPanel(optionstlp);
-            optionsgb.Controls.Add(optionstlp);
-
-            // Add options into table layout
-            CheckBox cb;
-            cb = ControlUtils.AddOption(optionstlp, 0, "Run As Admin", instance.settings.RunAsAdmin);
-            SetCheckboxCheckedEvent(cb, instance, "RunAsAdmin");
-
-            cb = ControlUtils.AddOption(optionstlp, 1, "Show File Extensions", instance.settings.ShowFileExtensions);
-            SetCheckboxCheckedEvent(cb, instance, "ShowFileExtensions");
-
-            cb = ControlUtils.AddOption(optionstlp, 2, "Explore Folders In TrayMenu", instance.settings.ExploreFoldersInTrayMenu);
-            SetCheckboxCheckedEvent(cb, instance, "ExploreFoldersInTrayMenu");
-
-            cb = ControlUtils.AddOption(optionstlp, 3, "Expand First Path", instance.settings.ExpandFirstPath);
-            SetCheckboxCheckedEvent(cb, instance, "ExpandFirstPath");
-
-            //ControlUtils.AddEmptyOption(optionstlp, 4);
-            return optionsgb;
-        }
         public void CreateViewFromInstance(TrayInstance instance, TabPage tp)
         {
-            TableLayoutPanel tlp = new TableLayoutPanel();
-            ControlUtils.ConfigureTableLayoutPanel(tlp);
-            tp.Controls.Add(tlp);
-
-            tlp.Controls.Add(CreateInstanceOptionsGroupBox(instance), 0, 0);
-            tlp.Controls.Add(CreateInstancePathsGroupBox(instance), 0, 1);
-
-            tlp.PerformLayout();
+            IView iv = new IView(instance);
+            tp.Text = instance.instanceName;
+            tp.Controls.Add(iv.GetControl());
 
             instance.setEventHandlers(ShowApp, HideApp, ExitApp);
             instance.UpdateTrayMenu();
+            instanceView = iv;
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             resizeForm();
-            timer1.Interval = 1000;
+            timer1.Interval = 100;
         }
         private void resizeForm()
         {
-            int tempHeight = 1;
-            for (int i = 0; i < instanceTabs.TabPages[instanceTabs.SelectedIndex].Controls.Count; i++)
+            if (instanceTabs.SelectedIndex >= 0)
             {
-                Control c = instanceTabs.TabPages[instanceTabs.SelectedIndex].Controls[i];
-                tempHeight += c.Padding.Top + c.Padding.Bottom + c.Margin.Bottom + c.Margin.Top + c.Location.Y * 2;
-                for (int j = 0; j < c.Controls.Count; j++)
-                {
-                    Control c2 = c.Controls[i];
-                    tempHeight += c2.Padding.Top + c2.Padding.Bottom + c2.Margin.Bottom + c2.Margin.Top + c2.Height;
-                }
+                int tempHeight = instanceView.GetHeight() + 6;
+                //tempHeight += mainMenu.Height;
+                if (Program.DEBUG) Text = tempHeight.ToString();
+                instanceTabs.Height = tempHeight;
             }
-            instanceTabs.Height = tempHeight;
+            panel1.PerformLayout();
+        }
+        private void instanceTabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = ((TabControl)sender).SelectedIndex;
+            if (((TabControl)sender).SelectedTab == newTabTabPage)
+            {
+                TrayInstance ti = new TrayInstance("New Instance");
+                pd.trayInstances.Add(ti);
+                pd.FixInstances();
+                AddInstanceTabPage(ti);
+                instanceTabs.SelectedIndex = index;
+                if (pd.trayInstances.Count > 1)
+                {
+                    instanceTabs.ShowClosingButton = true;
+                }
+                pd.Save();
+            }
+            BuildExploreDropdown();
+            resizeForm();
         }
     }
 }

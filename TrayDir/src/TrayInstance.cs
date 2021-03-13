@@ -5,28 +5,35 @@ using System.Xml.Serialization;
 
 namespace TrayDir
 {
+    [XmlRoot(ElementName = "Instance")]
     public class TrayInstance
     {
         [XmlElement(ElementName = "Settings")]
         public TrayInstanceSettings settings;
-
-        public string instanceName { get { return settings.InstanceName; } set { settings.InstanceName = value; } }
-        public string iconPath { get { return settings.iconPath; } set { settings.iconPath = value; } }
+        [XmlAttribute]
+        public string iconPath;
+        [XmlAttribute]
+        public string iconText;
+        [XmlAttribute]
+        public string instanceName;
         private NotifyIcon notifyIcon;
         private EventHandler showForm;
         private EventHandler hideForm;
         private EventHandler exitForm;
 
-        public TrayInstance() : this("default-instance") { }
-        public TrayInstance(string instanceName) : this(new TrayInstanceSettings(instanceName))
+        public TrayInstance() : this("New Instance") { }
+        public TrayInstance(string instanceName) : this(instanceName, new TrayInstanceSettings())
         {
         }
-        public TrayInstance(TrayInstanceSettings settings)
+        public TrayInstance(String instanceName, TrayInstanceSettings settings)
         {
             this.settings = settings;
             notifyIcon = new NotifyIcon();
             notifyIcon.Visible = true;
             //notifyIcon.DoubleClick += MainForm.form.ShowApp;
+            iconPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            this.instanceName = instanceName;
+            iconText = "TrayDir";
         }
         public bool BrowseForIcon()
         {
@@ -34,7 +41,7 @@ namespace TrayDir
             if (newPath != null)
             {
                 SettingsForm.form.TrayIconPathTextBox.Text = newPath;
-                settings.iconText = SettingsForm.form.TrayIconPathTextBox.Text;
+                iconText = SettingsForm.form.TrayIconPathTextBox.Text;
                 UpdateTrayMenu();
                 Settings.Alter();
                 return true;
@@ -104,7 +111,6 @@ namespace TrayDir
         }
         private void UpdateTrayIcon()
         {
-            string iconPath = settings.iconPath;
             if (AppUtils.PathIsFile(iconPath))
             {
                 try
@@ -120,7 +126,7 @@ namespace TrayDir
                 }
             }
             //SettingsForm.form.TrayTextTextBox.Text = settings.iconText;
-            notifyIcon.Text = settings.iconText;
+            notifyIcon.Text = iconText;
         }
         public void AddPath(string path)
         {

@@ -1,0 +1,8 @@
+C:\Users\Alaa\Documents\Visual Studio 2015\Projects\VisualStudioTabControl\VisualStudioTabControl\bin\Debug\VisualStudioTabControl.pdb
+C:\Users\Alaa\Documents\Visual Studio 2015\Projects\VisualStudioTabControl\VisualStudioTabControl\obj\Debug\VisualStudioTabControl.csprojResolveAssemblyReference.cache
+C:\Users\Alaa\Documents\Visual Studio 2015\Projects\VisualStudioTabControl\VisualStudioTabControl\obj\Debug\VisualStudioTabControl.Properties.Resources.resources
+C:\Users\Alaa\Documents\Visual Studio 2015\Projects\VisualStudioTabControl\VisualStudioTabControl\obj\Debug\VisualStudioTabControl.csproj.GenerateResource.Cache
+C:\Users\Alaa\Documents\Visual Studio 2015\Projects\VisualStudioTabControl\VisualStudioTabControl\obj\Debug\VisualStudioTabControl.pdb
+C:\Users\Alaa\Documents\Visual Studio 2015\Projects\VisualStudioTabControl\VisualStudioTabControl\bin\Debug\VisualStudioTabControl.dll.config
+C:\Users\Alaa\Documents\Visual Studio 2015\Projects\VisualStudioTabControl\VisualStudioTabControl\bin\Debug\VisualStudioTabControl.dll
+C:\Users\Alaa\Documents\Visual Studio 2015\Projects\VisualStudioTabControl\VisualStudioTabControl\obj\Debug\VisualStudioTabControl.dll

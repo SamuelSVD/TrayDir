@@ -34,10 +34,6 @@ namespace TrayDir
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.MainFormTableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.instanceTabs = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.exploreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
@@ -48,63 +44,14 @@ namespace TrayDir
             this.rebuildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FileDialog = new System.Windows.Forms.OpenFileDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.MainFormTableLayout.SuspendLayout();
-            this.instanceTabs.SuspendLayout();
+            this.instanceTabs = new VisualStudioTabControl.VisualStudioTabControl();
+            this.newTabTabPage = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.mainMenu.SuspendLayout();
+            this.instanceTabs.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // MainFormTableLayout
-            // 
-            this.MainFormTableLayout.AutoSize = true;
-            this.MainFormTableLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.MainFormTableLayout.ColumnCount = 1;
-            this.MainFormTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainFormTableLayout.Controls.Add(this.instanceTabs, 0, 0);
-            this.MainFormTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainFormTableLayout.Location = new System.Drawing.Point(0, 24);
-            this.MainFormTableLayout.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.MainFormTableLayout.Name = "MainFormTableLayout";
-            this.MainFormTableLayout.Padding = new System.Windows.Forms.Padding(5, 10, 5, 10);
-            this.MainFormTableLayout.RowCount = 1;
-            this.MainFormTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.MainFormTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.MainFormTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.MainFormTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.MainFormTableLayout.Size = new System.Drawing.Size(566, 57);
-            this.MainFormTableLayout.TabIndex = 3;
-            // 
-            // instanceTabs
-            // 
-            this.instanceTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.instanceTabs.Controls.Add(this.tabPage1);
-            this.instanceTabs.Controls.Add(this.tabPage2);
-            this.instanceTabs.Location = new System.Drawing.Point(8, 13);
-            this.instanceTabs.Name = "instanceTabs";
-            this.instanceTabs.SelectedIndex = 0;
-            this.instanceTabs.Size = new System.Drawing.Size(550, 31);
-            this.instanceTabs.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(542, 5);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(542, 103);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "   +   ";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // exploreToolStripMenuItem
             // 
@@ -181,13 +128,67 @@ namespace TrayDir
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // instanceTabs
+            // 
+            this.instanceTabs.ActiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.instanceTabs.AllowDrop = true;
+            this.instanceTabs.BackTabColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.instanceTabs.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.instanceTabs.ClosingButtonColor = System.Drawing.Color.WhiteSmoke;
+            this.instanceTabs.ClosingMessage = "Delete this instance?";
+            this.instanceTabs.Controls.Add(this.newTabTabPage);
+            this.instanceTabs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.instanceTabs.HeaderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.instanceTabs.HorizontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.instanceTabs.ItemSize = new System.Drawing.Size(240, 16);
+            this.instanceTabs.Location = new System.Drawing.Point(0, 0);
+            this.instanceTabs.Name = "instanceTabs";
+            this.instanceTabs.SelectedIndex = 0;
+            this.instanceTabs.SelectedTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.instanceTabs.ShowClosingButton = false;
+            this.instanceTabs.ShowClosingMessage = true;
+            this.instanceTabs.Size = new System.Drawing.Size(566, 41);
+            this.instanceTabs.TabIndex = 0;
+            this.instanceTabs.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.instanceTabs.SelectedIndexChanged += new System.EventHandler(this.instanceTabs_SelectedIndexChanged);
+            // 
+            // newTabTabPage
+            // 
+            this.newTabTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.newTabTabPage.Location = new System.Drawing.Point(4, 20);
+            this.newTabTabPage.Name = "newTabTabPage";
+            this.newTabTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.newTabTabPage.Size = new System.Drawing.Size(558, 17);
+            this.newTabTabPage.TabIndex = 1;
+            this.newTabTabPage.Text = "+";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.tabPage1.Location = new System.Drawing.Point(4, 20);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(558, 244);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            // 
+            // panel1
+            // 
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.instanceTabs);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(566, 41);
+            this.panel1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(566, 81);
-            this.Controls.Add(this.MainFormTableLayout);
+            this.ClientSize = new System.Drawing.Size(566, 70);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.mainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
@@ -196,17 +197,16 @@ namespace TrayDir
             this.Text = "TrayDir";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
-            this.MainFormTableLayout.ResumeLayout(false);
-            this.instanceTabs.ResumeLayout(false);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
+            this.instanceTabs.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
         
         #endregion
-        private System.Windows.Forms.TableLayoutPanel MainFormTableLayout;
         private System.Windows.Forms.ToolStripMenuItem exploreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.MenuStrip mainMenu;
@@ -217,9 +217,10 @@ namespace TrayDir
         private ToolStripMenuItem rebuildToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private Timer timer1;
-        private TabControl instanceTabs;
+        private VisualStudioTabControl.VisualStudioTabControl instanceTabs;
         private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TabPage newTabTabPage;
+        private Panel panel1;
     }
 }
 

@@ -20,6 +20,8 @@ namespace TrayDir
             label.TabIndex = 2;
             label.Text = text;
 
+            if(Program.DEBUG) label.BackColor = System.Drawing.Color.Orange;
+
             CheckBox checkbox = new CheckBox();
             checkbox.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
             checkbox.AutoSize = true;
@@ -31,11 +33,34 @@ namespace TrayDir
             checkbox.UseVisualStyleBackColor = true;
             checkbox.Checked = boxChecked;
 
+            if (Program.DEBUG) checkbox.BackColor = System.Drawing.Color.Red;
+
             tlp.Controls.Add(label, 0, row);
             tlp.Controls.Add(checkbox, 1, row);
             tlp.RowCount = row + 1;
             tlp.RowStyles.Add(new RowStyle());
 
+            for (int i = 0; i < 3; i++)
+            {
+                if (tlp.ColumnStyles.Count < (i + 1))
+                {
+                    tlp.ColumnStyles.Add(new ColumnStyle());
+                }
+                ColumnStyle style = tlp.ColumnStyles[i];
+                style.SizeType = SizeType.Percent;
+                switch (i)
+                {
+                    case 0:
+                        style.Width = 90;
+                        break;
+                    case 1:
+                        style.Width = 10;
+                        break;
+                    default:
+                        style.Width = 50;
+                        break;
+                }
+            }
             return checkbox;
         }
         public static void AddEmptyOption(TableLayoutPanel tlp, int row)
@@ -157,13 +182,13 @@ namespace TrayDir
 
         public static void ConfigureGroupBox(GroupBox gb)
         {
-            gb.Dock = DockStyle.Fill;
+            gb.Dock = DockStyle.Top;
             gb.AutoSize = true;
             gb.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         }
         public static void ConfigureTableLayoutPanel(TableLayoutPanel gb)
         {
-            gb.Dock = DockStyle.Fill;
+            gb.Dock = DockStyle.Top;
             gb.AutoSize = true;
             gb.AutoSizeMode = AutoSizeMode.GrowAndShrink;
         }

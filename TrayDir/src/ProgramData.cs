@@ -7,7 +7,6 @@ namespace TrayDir
     {
         [XmlElement(ElementName = "Settings")]
         public Settings settings;
-        [XmlElement(ElementName = "Instances")]
         public List<TrayInstance> trayInstances;
         private static string config = "config2.xml";
         public ProgramData()
@@ -63,7 +62,16 @@ namespace TrayDir
                 }
             }
         }
-
+        public void FixInstances()
+        {
+            foreach (TrayInstance instance in trayInstances)
+            {
+                if (instance.settings.paths.Count == 0)
+                {
+                    instance.settings.paths.Add(".");
+                }
+            }
+        }
 
     }
 }
