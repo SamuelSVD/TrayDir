@@ -38,7 +38,7 @@ namespace TrayDir
             {
                 foreach (TrayInstance instance in trayInstances)
                 {
-                    instance.UpdateTrayMenu();
+                    instance.view.UpdateTrayMenu();
                 }
             }
         }
@@ -48,7 +48,7 @@ namespace TrayDir
             {
                 foreach (TrayInstance instance in trayInstances)
                 {
-                    instance.SetFormHiddenMenu();
+                    instance.view.SetFormHiddenMenu();
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace TrayDir
             {
                 foreach (TrayInstance instance in trayInstances)
                 {
-                    instance.SetFormShownMenu();
+                    instance.view.SetFormShownMenu();
                 }
             }
         }

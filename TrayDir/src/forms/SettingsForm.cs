@@ -6,7 +6,6 @@ namespace TrayDir
     public partial class SettingsForm : Form
     {
         public static SettingsForm form;
-        private int OptionCount = 0;
         public static void Init()
         {
             if (form is null)

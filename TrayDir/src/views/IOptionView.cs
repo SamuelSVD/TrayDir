@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -47,7 +43,7 @@ namespace TrayDir
             EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args)
             {
                 instance.settings[settingName] = cb.Checked;
-                instance.UpdateTrayMenu();
+                instance.view.UpdateTrayMenu();
                 MainForm.form.pd.Save();
             });
             cb.Click += cbClick;

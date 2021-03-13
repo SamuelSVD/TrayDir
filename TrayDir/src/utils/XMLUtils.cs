@@ -55,7 +55,7 @@ namespace TrayDir
                 XmlElement root = doc.DocumentElement;
                 return XmlDeserializeFromString<T>(root.OuterXml);
             }
-            catch (Exception e)
+            catch
             {
                 return default(T);
             }

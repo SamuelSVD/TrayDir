@@ -1,9 +1,5 @@
 ﻿using FolderSelect;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -36,7 +32,7 @@ namespace TrayDir
                     {
                         textbox.Text = MainForm.form.fd.FileName;
                         instance.settings.paths[j] = textbox.Text;
-                        instance.UpdateTrayMenu();
+                        instance.view.UpdateTrayMenu();
                         MainForm.form.pd.Save();
                     }
                 });
@@ -48,7 +44,7 @@ namespace TrayDir
                     {
                         textbox.Text = fs.FileName;
                         instance.settings.paths[j] = textbox.Text;
-                        instance.UpdateTrayMenu();
+                        instance.view.UpdateTrayMenu();
                         MainForm.form.pd.Save();
                     }
                 });

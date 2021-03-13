@@ -1,6 +1,4 @@
-﻿using FolderSelect;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -10,7 +8,6 @@ namespace TrayDir
     public partial class MainForm : Form
     {
         public static MainForm form;
-        private int DirCount;
         private bool allowVisible;     // ContextMenu's Show command used
         private bool allowClose;       // ContextMenu's Exit command used
         private TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
@@ -35,8 +32,8 @@ namespace TrayDir
                 instanceTabs.ShowClosingButton = true;
             }
             pd.Save();
-            InitializeAllAssets();
             InitializeInstanceTabs();
+            InitializeAllAssets();
             BuildExploreDropdown();
 
             instanceTabs.HeaderColor = Color.FromArgb(237, 238, 242);
@@ -60,11 +57,11 @@ namespace TrayDir
             instanceTabs.TabPages.Remove(newTabTabPage);
             instanceTabs.TabPages.Add(tp);
             instanceTabs.TabPages.Add(newTabTabPage);
-            CreateViewFromInstance(instance, tp);
+            IView iv = CreateViewFromInstance(instance, tp);
             EventHandler tabClose = new EventHandler(delegate (object obj, EventArgs args)
             {
                 pd.trayInstances.Remove(instance);
-                instance.Hide();
+                iv.Hide();
                 instanceTabs.ShowClosingButton = (pd.trayInstances.Count > 1);
                 pd.Save();
             });
@@ -97,39 +94,6 @@ namespace TrayDir
                 HideApp(sender, e);
                 pd.FormHidden();
             }
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            trayInstance.AddPath(".");
-            //ControlUtils.AddPath(DirectoriesGroupLayout, DirCount, ".", FileDialog, trayInstance);
-            DirCount++;
-            Settings.Alter();
-            CheckIsAltered();
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            RemovePath();
-            Settings.Alter();
-            CheckIsAltered();
-        }
-        public void RemovePath()
-        {
-            //removerow(DirectoriesGroupLayout, DirCount - 1);
-            DirCount--;
-            //RemoveButton.Enabled = DirCount > 1;
-        }
-        public void removerow(TableLayoutPanel panel, int Rowindex)
-        {
-            var control = panel.GetControlFromPosition(2, Rowindex);
-            panel.Controls.Remove(control);
-            control = panel.GetControlFromPosition(1, Rowindex);
-            panel.Controls.Remove(control);
-            control = panel.GetControlFromPosition(0, Rowindex);
-            panel.Controls.Remove(control);
-            panel.RowCount = Rowindex;
-            panel.Height = 0;
-            Height = 100;
-            trayInstance.settings.paths.RemoveAt(trayInstance.settings.paths.Count - 1);
         }
         private void BuildExploreDropdown()
         {
@@ -233,7 +197,7 @@ namespace TrayDir
                 {
                     foreach (TrayInstance i in pd.trayInstances)
                     {
-                        i.Hide();
+                        i.view.Hide();
                     }
                 }
             }
@@ -258,14 +222,13 @@ namespace TrayDir
         }
         private void TrayTextApplyButton_Click(object sender, EventArgs e)
         {
-            trayInstance.iconText = SettingsForm.form.TrayTextTextBox.Text;
+            //trayInstance.iconText = SettingsForm.form.TrayTextTextBox.Text;
             Settings.Alter();
             CheckIsAltered();
         }
         private void MainForm_Load(object sender, EventArgs e) { }
         public void InitializeAllAssets()
         {
-            DirCount = 0;
             if (pd.settings.app.StartMinimized)
             {
                 allowVisible = false;
@@ -275,18 +238,18 @@ namespace TrayDir
             {
                 allowVisible = true;
             }
-            PerformLayout();
             MaximizeBox = false;
         }
-        public void CreateViewFromInstance(TrayInstance instance, TabPage tp)
+        private IView CreateViewFromInstance(TrayInstance instance, TabPage tp)
         {
             IView iv = new IView(instance);
             tp.Text = instance.instanceName;
             tp.Controls.Add(iv.GetControl());
 
-            instance.setEventHandlers(ShowApp, HideApp, ExitApp);
-            instance.UpdateTrayMenu();
+            iv.setEventHandlers(ShowApp, HideApp, ExitApp);
+            iv.UpdateTrayMenu();
             instanceView = iv;
+            return iv;
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
