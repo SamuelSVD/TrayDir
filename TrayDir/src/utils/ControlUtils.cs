@@ -35,8 +35,15 @@ namespace TrayDir
             tlp.Controls.Add(label, 0, row);
             tlp.Controls.Add(checkbox, 1, row);
             tlp.RowCount = row + 1;
+            tlp.RowStyles.Add(new RowStyle());
 
             return checkbox;
+        }
+        public static void AddEmptyOption(TableLayoutPanel tlp, int row)
+        {
+            tlp.RowStyles.Add(new RowStyle());
+            tlp.RowStyles[row].Height = 0;
+            tlp.RowCount = row + 1;
         }
         public static void AddPath(TableLayoutPanel tlp, int row, string text, FileDialog fd, TrayInstance instance)
         {
@@ -143,6 +150,30 @@ namespace TrayDir
             foreach (RowStyle style in tlp.RowStyles)
             {
                 style.SizeType = SizeType.AutoSize;
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                if (tlp.ColumnStyles.Count < (i+1))
+                {
+                    tlp.ColumnStyles.Add(new ColumnStyle());
+                }
+                ColumnStyle style = tlp.ColumnStyles[i];
+                style.SizeType = SizeType.Percent;
+                switch(i)
+                {
+                    case 0:
+                        style.Width = 70;
+                        break;
+                    case 1:
+                        style.Width = 15;
+                        break;
+                    case 2:
+                        style.Width = 15;
+                        break;
+                    default:
+                        style.Width = 33;
+                        break;
+                } 
             }
             instance.UpdateTrayMenu();
         }

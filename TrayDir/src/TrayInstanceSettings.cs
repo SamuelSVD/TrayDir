@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Xml.Serialization;
 
 namespace TrayDir
@@ -21,6 +23,21 @@ namespace TrayDir
         public string iconText;
         [XmlAttribute]
         public string InstanceName;
+        public object this[string propertyName]
+        {
+            get
+            {
+                Type myType = typeof(TrayInstanceSettings);
+                FieldInfo myPropInfo = myType.GetField(propertyName);
+                return myPropInfo.GetValue(this);
+            }
+            set
+            {
+                Type myType = typeof(TrayInstanceSettings);
+                FieldInfo myPropInfo = myType.GetField(propertyName);
+                myPropInfo.SetValue(this, value);
+            }
+        }
         public TrayInstanceSettings() : this("") { }
         public TrayInstanceSettings(string instanceName)
         {

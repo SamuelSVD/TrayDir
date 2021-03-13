@@ -49,32 +49,6 @@ namespace TrayDir
         {
             form = new MainForm();
         }
-        public void InitializePaths()
-        {
-            foreach (TrayInstance instance in pd.trayInstances)
-            {
-                instance.setEventHandlers(ShowApp, HideApp, ExitApp);
-            }
-            if (trayInstance.settings.paths.Count == 0)
-            {
-                trayInstance.settings.paths.Add(".");
-                ControlUtils.AddPath(DirectoriesGroupLayout, 0, ".", FileDialog, trayInstance);
-                DirCount++;
-            }
-            else
-            {
-                for (int i = 0; i < trayInstance.settings.paths.Count; i++)
-                {
-                    string path = trayInstance.settings.paths[i];
-                    ControlUtils.AddPath(DirectoriesGroupLayout, i, path, FileDialog, trayInstance);
-                    DirCount++;
-                }
-            }
-            if (trayInstance.settings.paths.Count == 1)
-            {
-                RemoveButton.Enabled = false;
-            }
-        }
         private void CheckIsAltered()
         {
             if (Settings.isAltered())
@@ -102,7 +76,7 @@ namespace TrayDir
         private void button1_Click(object sender, EventArgs e)
         {
             trayInstance.AddPath(".");
-            ControlUtils.AddPath(DirectoriesGroupLayout, DirCount, ".", FileDialog, trayInstance);
+            //ControlUtils.AddPath(DirectoriesGroupLayout, DirCount, ".", FileDialog, trayInstance);
             DirCount++;
             Settings.Alter();
             CheckIsAltered();
@@ -115,9 +89,9 @@ namespace TrayDir
         }
         public void RemovePath()
         {
-            removerow(DirectoriesGroupLayout, DirCount - 1);
+            //removerow(DirectoriesGroupLayout, DirCount - 1);
             DirCount--;
-            RemoveButton.Enabled = DirCount > 1;
+            //RemoveButton.Enabled = DirCount > 1;
         }
         public void removerow(TableLayoutPanel panel, int Rowindex)
         {
@@ -243,7 +217,6 @@ namespace TrayDir
         {
             DirCount = 0;
             trayInstance.UpdateTrayMenu();
-            InitializePaths();
             if (pd.settings.app.StartMinimized)
             {
                 allowVisible = false;
@@ -256,17 +229,12 @@ namespace TrayDir
             PerformLayout();
             MaximizeBox = false;
         }
-        public void CreateViewFromInstance(TrayInstance instance, TabPage tp)
+        private GroupBox CreateInstancePathsGroupBox(TrayInstance instance)
         {
-            TableLayoutPanel tlp = new TableLayoutPanel();
-            ControlUtils.ConfigureTableLayoutPanel(tlp);
-            tp.Controls.Add(tlp);
-
             // Paths Group
             GroupBox pathsgb = new GroupBox();
             pathsgb.Text = "Paths";
             ControlUtils.ConfigureGroupBox(pathsgb);
-            tlp.Controls.Add(pathsgb, 0, 0);
 
             TableLayoutPanel pathstlp = new TableLayoutPanel();
             ControlUtils.ConfigureTableLayoutPanel(pathstlp);
@@ -277,59 +245,76 @@ namespace TrayDir
                 string path = instance.settings.paths[i];
                 ControlUtils.AddPath(pathstlp, i, path, FileDialog, instance);
                 //TODO Continue here
-                int j = 1 / (instance.settings.paths.Count - instance.settings.paths.Count);
+                //int j = 1 / (instance.settings.paths.Count - instance.settings.paths.Count);
             }
+            return pathsgb;
+        }
+        private void SetCheckboxCheckedEvent(CheckBox cb, TrayInstance instance, string settingName)
+        {
+            EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                instance.settings[settingName] = cb.Checked;
+                instance.UpdateTrayMenu();
+                pd.Save();
+            });
+            cb.Click += cbClick;
+        }
+        private GroupBox CreateInstanceOptionsGroupBox(TrayInstance instance)
+        {
             // Options Group
             GroupBox optionsgb = new GroupBox();
             optionsgb.Text = "Tray Options";
             ControlUtils.ConfigureGroupBox(optionsgb);
-            tlp.Controls.Add(optionsgb, 0, 1);
-
+            
             TableLayoutPanel optionstlp = new TableLayoutPanel();
             ControlUtils.ConfigureTableLayoutPanel(optionstlp);
             optionsgb.Controls.Add(optionstlp);
 
             // Add options into table layout
-            EventHandler cbClick;
-            CheckBox cb1;
-            cb1 = ControlUtils.AddOption(optionstlp, 0, "Run As Admin", instance.settings.RunAsAdmin);
-            cbClick = new EventHandler(delegate (object obj, EventArgs args)
-            {
-                instance.settings.RunAsAdmin = cb1.Checked;
-                instance.UpdateTrayMenu();
-                pd.Save();
-            });
-            cb1.Click += cbClick;
+            CheckBox cb;
+            cb = ControlUtils.AddOption(optionstlp, 0, "Run As Admin", instance.settings.RunAsAdmin);
+            SetCheckboxCheckedEvent(cb, instance, "RunAsAdmin");
 
-            CheckBox cb2;
-            cb2 = ControlUtils.AddOption(optionstlp, 1, "Show File Extensions", instance.settings.ShowFileExtensions);
-            cbClick = new EventHandler(delegate (object obj, EventArgs args)
-            {
-                instance.settings.ShowFileExtensions = cb2.Checked;
-                instance.UpdateTrayMenu();
-                pd.Save();
-            });
-            cb2.Click += cbClick;
+            cb = ControlUtils.AddOption(optionstlp, 1, "Show File Extensions", instance.settings.ShowFileExtensions);
+            SetCheckboxCheckedEvent(cb, instance, "ShowFileExtensions");
 
-            CheckBox cb3;
-            cb3 = ControlUtils.AddOption(optionstlp, 2, "Explore Folders In TrayMenu", instance.settings.ExploreFoldersInTrayMenu);
-            cbClick = new EventHandler(delegate (object obj, EventArgs args)
-            {
-                instance.settings.ExploreFoldersInTrayMenu = cb3.Checked;
-                instance.UpdateTrayMenu();
-                pd.Save();
-            });
-            cb3.Click += cbClick;
+            cb = ControlUtils.AddOption(optionstlp, 2, "Explore Folders In TrayMenu", instance.settings.ExploreFoldersInTrayMenu);
+            SetCheckboxCheckedEvent(cb, instance, "ExploreFoldersInTrayMenu");
 
-            CheckBox cb4;
-            cb4 = ControlUtils.AddOption(optionstlp, 3, "Expand First Path", instance.settings.ExpandFirstPath);
-            cbClick = new EventHandler(delegate (object obj, EventArgs args)
+            cb = ControlUtils.AddOption(optionstlp, 3, "Expand First Path", instance.settings.ExpandFirstPath);
+            SetCheckboxCheckedEvent(cb, instance, "ExpandFirstPath");
+
+            //ControlUtils.AddEmptyOption(optionstlp, 4);
+            return optionsgb;
+        }
+        public void CreateViewFromInstance(TrayInstance instance, TabPage tp)
+        {
+            TableLayoutPanel tlp = new TableLayoutPanel();
+            ControlUtils.ConfigureTableLayoutPanel(tlp);
+            tp.Controls.Add(tlp);
+
+            tlp.Controls.Add(CreateInstanceOptionsGroupBox(instance), 0, 0);
+            tlp.Controls.Add(CreateInstancePathsGroupBox(instance), 0, 1);
+
+            tlp.PerformLayout();
+
+            instance.setEventHandlers(ShowApp, HideApp, ExitApp);
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Text = instanceTabs.TabPages[0].Height.ToString();
+            for (int i = 0; i < instanceTabs.TabPages[0].Controls.Count; i++)
             {
-                instance.settings.ExpandFirstPath = cb4.Checked;
-                instance.UpdateTrayMenu();
-                pd.Save();
-            });
-            cb4.Click += cbClick;
+                Control c = instanceTabs.TabPages[0].Controls[i];
+                int tempHeight = c.Padding.Top + c.Padding.Bottom + c.Margin.Bottom + c.Margin.Top + c.Location.Y*2;
+                for (int j = 0; j < c.Controls.Count; j++)
+                {
+                    Control c2 = c.Controls[i];
+                    tempHeight += c2.Padding.Top + c2.Padding.Bottom + c2.Margin.Bottom + c2.Margin.Top + c2.Height;
+                }
+                instanceTabs.Height = tempHeight;
+            }
+            timer1.Enabled = false;
         }
     }
 }
