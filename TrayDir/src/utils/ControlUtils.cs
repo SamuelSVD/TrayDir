@@ -154,7 +154,6 @@ namespace TrayDir
                         break;
                 } 
             }
-            instance.UpdateTrayMenu();
             return textbox;
         }
 
