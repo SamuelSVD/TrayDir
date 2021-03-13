@@ -13,6 +13,9 @@ namespace TrayDir
         private bool allowClose;       // ContextMenu's Exit command used
         private TrayInstance trayInstance;
         public ProgramData pd;
+
+        //Event Handlers
+        EventHandler exploreClick;
         public MainForm()
         {
             InitializeComponent();
@@ -25,6 +28,7 @@ namespace TrayDir
             pd.Save();
             InitializeAllAssets();
             InitializeInstanceTabs();
+            BuildExploreDropdown();
         }
         private void InitializeInstanceTabs()
         {
@@ -105,26 +109,19 @@ namespace TrayDir
             panel.Height = 0;
             Height = 100;
             trayInstance.settings.paths.RemoveAt(trayInstance.settings.paths.Count - 1);
-            trayInstance.UpdateTrayMenu();
         }
         private void BuildExploreDropdown()
         {
             exploreToolStripMenuItem.DropDownItems.Clear();
-            foreach (string path in trayInstance.settings.paths)
+            if (exploreClick != null)
             {
-                ToolStripMenuItem item = new ToolStripMenuItem();
-                item.Size = new System.Drawing.Size(359, 44);
+                exploreToolStripMenuItem.Click -= exploreClick;
+            }
+            if (trayInstance.settings.paths.Count == 1)
+            {
+                string path = trayInstance.settings.paths[0];
 
-                if (AppUtils.PathIsDirectory(path))
-                {
-                    item.Text = new DirectoryInfo(path).FullName;
-                }
-                else if (AppUtils.PathIsFile(path))
-                {
-                    item.Text = Path.GetFullPath(path);
-                }
-
-                EventHandler sel = new EventHandler(delegate (object obj, EventArgs args)
+                exploreClick = new EventHandler(delegate (object obj, EventArgs args)
                 {
                     if (AppUtils.PathIsDirectory(path))
                     {
@@ -136,9 +133,40 @@ namespace TrayDir
                     }
                 });
 
-                item.Click += sel;
+                exploreToolStripMenuItem.Click += exploreClick;
+            }
+            else
+            {
+                foreach (string path in trayInstance.settings.paths)
+                {
+                    ToolStripMenuItem item = new ToolStripMenuItem();
+                    item.Size = new System.Drawing.Size(359, 44);
 
-                exploreToolStripMenuItem.DropDownItems.Add(item);
+                    if (AppUtils.PathIsDirectory(path))
+                    {
+                        item.Text = new DirectoryInfo(path).FullName;
+                    }
+                    else if (AppUtils.PathIsFile(path))
+                    {
+                        item.Text = Path.GetFullPath(path);
+                    }
+
+                    EventHandler sel = new EventHandler(delegate (object obj, EventArgs args)
+                    {
+                        if (AppUtils.PathIsDirectory(path))
+                        {
+                            AppUtils.ExplorePath(new DirectoryInfo(path).FullName);
+                        }
+                        else if (AppUtils.PathIsFile(path))
+                        {
+                            AppUtils.ExplorePath(Path.GetFullPath(path));
+                        }
+                    });
+
+                    item.Click += sel;
+
+                    exploreToolStripMenuItem.DropDownItems.Add(item);
+                }
             }
         }
         private void Save(object Sender, EventArgs e)
@@ -154,7 +182,7 @@ namespace TrayDir
         }
         private void Rebuild(object sender, EventArgs e)
         {
-            trayInstance.UpdateTrayMenu();
+            pd.UpdateAllMenus();
         }
         protected override void SetVisibleCore(bool value)
         {
@@ -216,7 +244,6 @@ namespace TrayDir
         public void InitializeAllAssets()
         {
             DirCount = 0;
-            trayInstance.UpdateTrayMenu();
             if (pd.settings.app.StartMinimized)
             {
                 allowVisible = false;
@@ -324,10 +351,12 @@ namespace TrayDir
             tlp.PerformLayout();
 
             instance.setEventHandlers(ShowApp, HideApp, ExitApp);
+            instance.UpdateTrayMenu();
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             resizeForm();
+            timer1.Interval = 1000;
         }
         private void resizeForm()
         {
