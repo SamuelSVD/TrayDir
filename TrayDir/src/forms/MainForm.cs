@@ -22,7 +22,6 @@ namespace TrayDir
             InitializeComponent();
             fd = FileDialog;
             pd = ProgramData.Load();
-            pd.FixInstances();
             if (pd.trayInstances.Count == 0)
             {
                 pd.CreateDefaultInstance();
@@ -31,6 +30,7 @@ namespace TrayDir
             {
                 instanceTabs.ShowClosingButton = true;
             }
+            pd.FixInstances();
             pd.Save();
             InitializeInstanceTabs();
             InitializeAllAssets();

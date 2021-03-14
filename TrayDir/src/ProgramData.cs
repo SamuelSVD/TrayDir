@@ -8,7 +8,7 @@ namespace TrayDir
         [XmlElement(ElementName = "Settings")]
         public Settings settings;
         public List<TrayInstance> trayInstances;
-        private static string config = "config2.xml";
+        private static string config = "config.xml";
         public ProgramData()
         {
             settings = new Settings();
