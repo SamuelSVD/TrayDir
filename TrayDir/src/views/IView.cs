@@ -7,8 +7,8 @@ namespace TrayDir
     {
         TableLayoutPanel tlp;
 
-        IOptionView options;
-        IPathView paths;
+        IOptionsView options;
+        IPathsView paths;
         private TrayInstance instance;
 
         private NotifyIcon notifyIcon;
@@ -22,10 +22,10 @@ namespace TrayDir
             tlp = new TableLayoutPanel();
             ControlUtils.ConfigureTableLayoutPanel(tlp);
 
-            options = new IOptionView(instance);
+            options = new IOptionsView(instance);
             tlp.Controls.Add(options.GetControl(), 0, 0);
 
-            paths = new IPathView(instance);
+            paths = new IPathsView(instance);
             tlp.Controls.Add(paths.GetControl(), 0, 1);
 
             tlp.PerformLayout();

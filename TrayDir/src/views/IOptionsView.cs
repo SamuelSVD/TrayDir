@@ -3,10 +3,10 @@ using System.Windows.Forms;
 
 namespace TrayDir
 {
-    class IOptionView
+    class IOptionsView
     {
         public GroupBox optionsgb;
-        public IOptionView(TrayInstance instance)
+        public IOptionsView(TrayInstance instance)
         {
             // Options Group
             optionsgb = new GroupBox();
