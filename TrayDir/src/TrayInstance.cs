@@ -13,8 +13,6 @@ namespace TrayDir
         [XmlAttribute]
         public string iconPath;
         [XmlAttribute]
-        public string iconText;
-        [XmlAttribute]
         public string instanceName;
         [XmlIgnore]
         public IView view;
@@ -28,7 +26,6 @@ namespace TrayDir
             //notifyIcon.DoubleClick += MainForm.form.ShowApp;
             iconPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             this.instanceName = instanceName;
-            iconText = "TrayDir";
         }
         public void AddPath(string path)
         {

@@ -128,13 +128,11 @@ namespace TrayDir
             fileButton.UseVisualStyleBackColor = true;
             fileButton.Dock = DockStyle.Fill;
 
-
-
             fileButton.Click += fileSelect;
 
-            // 
+            //
             // folderButton
-            // 
+            //
             Button folderButton = new Button();
             folderButton.AutoSize = true;
             folderButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -150,6 +148,7 @@ namespace TrayDir
             tlp.RowCount = row + 1;
             tlp.Height = 0;
             tlp.RowStyles.Add(new RowStyle());
+
             foreach (RowStyle style in tlp.RowStyles)
             {
                 style.SizeType = SizeType.AutoSize;

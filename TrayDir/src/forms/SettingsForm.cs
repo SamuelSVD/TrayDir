@@ -13,18 +13,12 @@ namespace TrayDir
                 form = new SettingsForm();
                 form.InitializeComponent();
                 form.InitializeOptions();
-
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            MainForm.form.pd.Save();
         }
 
         public void InitializeOptions()

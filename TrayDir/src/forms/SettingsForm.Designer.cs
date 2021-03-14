@@ -139,7 +139,6 @@ namespace TrayDir
             this.MinimumSize = new System.Drawing.Size(400, 0);
             this.Name = "SettingsForm";
             this.Text = "Settings";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingsForm_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);

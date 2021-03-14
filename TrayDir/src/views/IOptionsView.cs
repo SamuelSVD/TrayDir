@@ -13,10 +13,38 @@ namespace TrayDir
             optionsgb.Text = "Tray Options";
             ControlUtils.ConfigureGroupBox(optionsgb);
 
+            TableLayoutPanel grouptlp = new TableLayoutPanel();
+            ControlUtils.ConfigureTableLayoutPanel(grouptlp);
+            optionsgb.Controls.Add(grouptlp);
+
             TableLayoutPanel optionstlp = new TableLayoutPanel();
             ControlUtils.ConfigureTableLayoutPanel(optionstlp);
-            optionsgb.Controls.Add(optionstlp);
+            grouptlp.Controls.Add(optionstlp, 0, 0);
 
+            IIconOption io = new IIconOption(instance);
+            grouptlp.Controls.Add(io.GetControl(), 1, 0);
+            
+            for (int i = 0; i < 2; i++)
+            {
+                if (grouptlp.ColumnStyles.Count < i + 1)
+                {
+                    ColumnStyle cs = new ColumnStyle();
+                    cs.SizeType = SizeType.Percent;
+                    grouptlp.ColumnStyles.Add(cs);
+                    switch (i)
+                    {
+                        case 0:
+                            cs.Width = 70;
+                            break;
+                        case 1:
+                            cs.Width = 30;
+                            break;
+                        default:
+                            cs.Width = 30;
+                            break;
+                    }
+                }
+            }
             // Add options into table layout
             OptionView ov;
             ov = ControlUtils.AddOption(optionstlp, 0, "Run As Admin", instance.settings.RunAsAdmin);

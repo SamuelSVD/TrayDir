@@ -11,7 +11,7 @@ namespace TrayDir
         IPathsView paths;
         private TrayInstance instance;
 
-        private NotifyIcon notifyIcon;
+        public NotifyIcon notifyIcon;
         private EventHandler showForm;
         private EventHandler hideForm;
         private EventHandler exitForm;
@@ -113,18 +113,14 @@ namespace TrayDir
             {
                 try
                 {
-                    //SettingsForm.form.TrayIconPathTextBox.Text = iconPath;
                     notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(instance.iconPath);
-                    //SettingsForm.form.IconDisplay.Image = notifyIcon.Icon.ToBitmap();
-                    //SettingsForm.form.Icon = notifyIcon.Icon;
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show("Error loading icon: " + e.Message);
                 }
             }
-            //SettingsForm.form.TrayTextTextBox.Text = settings.iconText;
-            notifyIcon.Text = instance.iconText;
+            notifyIcon.Text = instance.instanceName;
         }
         public void Hide()
         {
