@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Reflection;
+using System.Xml.Serialization;
 
 namespace TrayDir
 {
@@ -9,5 +11,20 @@ namespace TrayDir
         public bool MinimizeOnClose;
         [XmlAttribute]
         public bool StartMinimized;
+        public object this[string propertyName]
+        {
+            get
+            {
+                Type myType = typeof(SettingsApplication);
+                FieldInfo myPropInfo = myType.GetField(propertyName);
+                return myPropInfo.GetValue(this);
+            }
+            set
+            {
+                Type myType = typeof(SettingsApplication);
+                FieldInfo myPropInfo = myType.GetField(propertyName);
+                myPropInfo.SetValue(this, value);
+            }
+        }
     }
 }

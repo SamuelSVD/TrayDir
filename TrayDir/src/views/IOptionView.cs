@@ -18,35 +18,28 @@ namespace TrayDir
             optionsgb.Controls.Add(optionstlp);
 
             // Add options into table layout
-            CheckBox cb;
-            cb = ControlUtils.AddOption(optionstlp, 0, "Run As Admin", instance.settings.RunAsAdmin);
-            SetCheckboxCheckedEvent(cb, instance, "RunAsAdmin");
+            OptionView ov;
+            ov = ControlUtils.AddOption(optionstlp, 0, "Run As Admin", instance.settings.RunAsAdmin);
+            ov.SetTooltip("Run files as administrator user");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "RunAsAdmin");
 
-            cb = ControlUtils.AddOption(optionstlp, 1, "Show File Extensions", instance.settings.ShowFileExtensions);
-            SetCheckboxCheckedEvent(cb, instance, "ShowFileExtensions");
+            ov = ControlUtils.AddOption(optionstlp, 1, "Show File Extensions", instance.settings.ShowFileExtensions);
+            ov.SetTooltip("Show file exensions in tray menu");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ShowFileExtensions");
 
-            cb = ControlUtils.AddOption(optionstlp, 2, "Explore Folders In TrayMenu", instance.settings.ExploreFoldersInTrayMenu);
-            SetCheckboxCheckedEvent(cb, instance, "ExploreFoldersInTrayMenu");
+            ov = ControlUtils.AddOption(optionstlp, 2, "Explore Folders In TrayMenu", instance.settings.ExploreFoldersInTrayMenu);
+            ov.SetTooltip("Explore to folder location when folder menu item clicked in tray menu");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ExploreFoldersInTrayMenu");
 
-            cb = ControlUtils.AddOption(optionstlp, 3, "Expand First Path", instance.settings.ExpandFirstPath);
-            SetCheckboxCheckedEvent(cb, instance, "ExpandFirstPath");
+            ov = ControlUtils.AddOption(optionstlp, 3, "Expand First Path", instance.settings.ExpandFirstPath);
+            ov.SetTooltip("When only one path and is directed to folder, use folder contents in tray menu instead of grouped in folder");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ExpandFirstPath");
 
             //ControlUtils.AddEmptyOption(optionstlp, 4);
         }
         public Control GetControl()
         {
             return optionsgb;
-        }
-
-        private void SetCheckboxCheckedEvent(CheckBox cb, TrayInstance instance, string settingName)
-        {
-            EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args)
-            {
-                instance.settings[settingName] = cb.Checked;
-                instance.view.UpdateTrayMenu();
-                MainForm.form.pd.Save();
-            });
-            cb.Click += cbClick;
         }
         public int GetHeight()
         {

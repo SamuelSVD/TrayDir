@@ -29,10 +29,14 @@ namespace TrayDir
 
         public void InitializeOptions()
         {
-            //foreach (Option option in Settings.settings.options)
-            //{
-            //    AddOption(option.name);
-            //}
+            OptionView ov;
+            ov = ControlUtils.AddOption(OptionsGroupLayout, 0, "Minimize On Close", MainForm.form.pd.settings.app.MinimizeOnClose);
+            ov.SetTooltip("When enabled, closing the window will not exit the application");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, MainForm.form.pd.settings.app, "MinimizeOnClose");
+
+            ov = ControlUtils.AddOption(OptionsGroupLayout, 1, "Start Minimized", MainForm.form.pd.settings.app.StartMinimized);
+            ov.SetTooltip("When enabled, the application will always start hidden, only visible in system tray");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, MainForm.form.pd.settings.app, "StartMinimized");
         }
 
     }

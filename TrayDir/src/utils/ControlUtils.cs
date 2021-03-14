@@ -6,37 +6,38 @@ namespace TrayDir
 {
     class ControlUtils
     {
-        public static CheckBox AddOption(TableLayoutPanel tlp, int row, string name, bool boxChecked)
+        public static OptionView AddOption(TableLayoutPanel tlp, int row, string name, bool boxChecked)
         {
+            OptionView ov = new OptionView();
             string text = AppUtils.SplitCamelCase(name);
-            Label label = new Label();
+            ov.label = new Label();
 
-            label.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
-            label.AutoSize = true;
-            label.Location = new System.Drawing.Point(10, 55);
-            label.Margin = new Padding(10, 5, 3, 5);
-            label.Name = name + "Label";
-            label.Size = new System.Drawing.Size(670, 25);
-            label.TabIndex = 2;
-            label.Text = text;
+            ov.label.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
+            ov.label.AutoSize = true;
+            ov.label.Location = new System.Drawing.Point(10, 55);
+            ov.label.Margin = new Padding(10, 5, 3, 5);
+            ov.label.Name = name + "Label";
+            ov.label.Size = new System.Drawing.Size(670, 25);
+            ov.label.TabIndex = 2;
+            ov.label.Text = text;
 
-            if(Program.DEBUG) label.BackColor = System.Drawing.Color.Orange;
+            if(Program.DEBUG) ov.label.BackColor = System.Drawing.Color.Orange;
 
-            CheckBox checkbox = new CheckBox();
-            checkbox.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
-            checkbox.AutoSize = true;
-            checkbox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            checkbox.Location = new System.Drawing.Point(688, 9);
-            checkbox.Name = name + "CheckBox";
-            checkbox.Size = new System.Drawing.Size(116, 27);
-            checkbox.TabIndex = 1;
-            checkbox.UseVisualStyleBackColor = true;
-            checkbox.Checked = boxChecked;
+            ov.checkbox = new CheckBox();
+            ov.checkbox.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
+            ov.checkbox.AutoSize = true;
+            ov.checkbox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            ov.checkbox.Location = new System.Drawing.Point(688, 9);
+            ov.checkbox.Name = name + "CheckBox";
+            ov.checkbox.Size = new System.Drawing.Size(116, 27);
+            ov.checkbox.TabIndex = 1;
+            ov.checkbox.UseVisualStyleBackColor = true;
+            ov.checkbox.Checked = boxChecked;
 
-            if (Program.DEBUG) checkbox.BackColor = System.Drawing.Color.Red;
+            if (Program.DEBUG) ov.checkbox.BackColor = System.Drawing.Color.Red;
 
-            tlp.Controls.Add(label, 0, row);
-            tlp.Controls.Add(checkbox, 1, row);
+            tlp.Controls.Add(ov.label, 0, row);
+            tlp.Controls.Add(ov.checkbox, 1, row);
             tlp.RowCount = row + 1;
             tlp.RowStyles.Add(new RowStyle());
 
@@ -61,7 +62,7 @@ namespace TrayDir
                         break;
                 }
             }
-            return checkbox;
+            return ov;
         }
         public static void AddEmptyOption(TableLayoutPanel tlp, int row)
         {
@@ -191,6 +192,26 @@ namespace TrayDir
             gb.Dock = DockStyle.Top;
             gb.AutoSize = true;
             gb.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        }
+        public static void SetCheckboxCheckedEvent(CheckBox cb, TrayInstance instance, string settingName)
+        {
+            EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                instance.settings[settingName] = cb.Checked;
+                instance.view.UpdateTrayMenu();
+                MainForm.form.pd.Save();
+            });
+            cb.Click += cbClick;
+        }
+        public static void SetCheckboxCheckedEvent(CheckBox cb, SettingsApplication settings, string settingName)
+        {
+            EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                settings[settingName] = cb.Checked;
+                MainForm.form.pd.UpdateAllMenus();
+                MainForm.form.pd.Save();
+            });
+            cb.Click += cbClick;
         }
 
     }

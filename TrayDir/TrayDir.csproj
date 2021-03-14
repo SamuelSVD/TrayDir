@@ -124,6 +124,7 @@
     <Compile Include="src\views\IView.cs" />
     <Compile Include="src\views\IOptionView.cs" />
     <Compile Include="src\views\IPathView.cs" />
+    <Compile Include="src\views\OptionView.cs" />
     <EmbeddedResource Include="src\forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
