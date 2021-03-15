@@ -383,6 +383,11 @@ namespace VisualStudioTabControl
                     if (this.ShowClosingButton)
                     {
                         e.Graphics.DrawString("X", Font, ClosingColorBrush, HeaderSize.Right - 17, 3);
+                        e.Graphics.DrawString("?", Font, ClosingColorBrush, HeaderSize.Right - 34, 3);
+                    }
+                    else
+                    {
+                        e.Graphics.DrawString("?", Font, ClosingColorBrush, HeaderSize.Right - 17, 3);
                     }
                 }
                 else

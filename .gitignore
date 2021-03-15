@@ -7,3 +7,4 @@ TrayDir/bin
 .vs
 *.suo
 Installer/binaries
+TrayDir/lib/VisualStudioTabControl/obj/
