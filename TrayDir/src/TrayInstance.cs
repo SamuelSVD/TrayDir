@@ -23,7 +23,6 @@ namespace TrayDir
         public TrayInstance(String instanceName, TrayInstanceSettings settings)
         {
             this.settings = settings;
-            //notifyIcon.DoubleClick += MainForm.form.ShowApp;
             iconPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             this.instanceName = instanceName;
         }

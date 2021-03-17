@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -62,12 +63,14 @@ namespace VisualStudioTabControl
         ///     The color of the text
         /// </summary>
         private Color textColor = Color.FromArgb(255, 255, 255);
-        
+
         ///<summary>
         /// Shows closing buttons
         /// </summary> 
         public bool ShowClosingButton { get; set; }
 
+        public event EventHandler CloseClicked;
+        public event EventHandler OnMiddleClick;
         /// <summary>
         /// Selected tab text color
         /// </summary>
@@ -273,7 +276,14 @@ namespace VisualStudioTabControl
                 for (var i = 0; i < this.TabCount; i++)
                 {
                     var r = this.GetTabRect(i);
-                    r.Offset(r.Width - 15, 2);
+                    if (e.Button == MouseButtons.Middle)
+                    {
+                        if (r.Contains(p) && OnMiddleClick != null)
+                        {
+                            OnMiddleClick(this, null);
+                        }
+                    }
+                        r.Offset(r.Width - 15, 2);
                     r.Width = 10;
                     r.Height = 10;
                     if (!r.Contains(p))
@@ -281,16 +291,9 @@ namespace VisualStudioTabControl
                         continue;
                     }
 
-                    if (this.ShowClosingMessage)
+                    if (CloseClicked != null)
                     {
-                        if (DialogResult.Yes == MessageBox.Show(this.ClosingMessage, "Close", MessageBoxButtons.YesNo))
-                        {
-                            this.TabPages.RemoveAt(i);
-                        }
-                    }
-                    else
-                    {
-                        this.TabPages.RemoveAt(i);
+                        CloseClicked(this, null);
                     }
                 }
             }
@@ -328,24 +331,29 @@ namespace VisualStudioTabControl
         /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
+            base.OnPaint(e);
             var g = e.Graphics;
             var Drawer = g;
+
+            Drawer.Clear(this.headerColor);
+
+            // Draws the horizontal line
+            //Drawer.DrawLine(new Pen(this.horizLineColor, 5), new Point(0, 19), new Point(Width, 19));
+
+            // Draws the background of the tab control
+            Drawer.FillRectangle(new SolidBrush(this.backTabColor), new Rectangle(0, 20, Width, Height - 20));
+            Drawer.FillRectangle(new SolidBrush(Color.Green), new Rectangle(0, 20, Width, Height - 20));
+
+            // Draws the border of the TabControl
+            Drawer.DrawRectangle(new Pen(this.borderColor, 2), new Rectangle(0, 0, Width, Height));
+            Drawer.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
             Drawer.SmoothingMode = SmoothingMode.HighQuality;
             Drawer.PixelOffsetMode = PixelOffsetMode.HighQuality;
             Drawer.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-            Drawer.Clear(this.headerColor);
             try
             {
                 SelectedTab.BackColor = this.backTabColor;
-            }
-            catch
-            {
-                // ignored
-            }
-
-            try
-            {
                 SelectedTab.BorderStyle = BorderStyle.None;
             }
             catch
@@ -353,11 +361,39 @@ namespace VisualStudioTabControl
                 // ignored
             }
 
+            int x = 0;
             for (var i = 0; i <= TabCount - 1; i++)
             {
+                TabPage tabPage = TabPages[i];
+                int qWidth = (int)g.MeasureString("?", tabPage.Font).Width;
+                int xWidth = (int)g.MeasureString("X", tabPage.Font).Width;
+
+                int headerWidth = (int)(
+                    g.MeasureString(tabPage.Text, tabPage.Font).Width +
+                    g.MeasureString("_", tabPage.Font).Width +
+                    qWidth +
+                    xWidth +
+                    2);
+                int headerHeight = (int)(
+                    g.MeasureString(tabPage.Text, this.TabPages[i].Font).Height +
+                    tabPage.Margin.Top +
+                    tabPage.Margin.Bottom +
+                    tabPage.Padding.Top +
+                    tabPage.Padding.Bottom);
+
+                if (headerHeight > ItemSize.Height)
+                {
+                    this.ItemSize = new Size(ItemSize.Width, headerHeight);
+                }
+                if (headerWidth > ItemSize.Width)
+                {
+                    this.ItemSize = new Size(headerWidth, ItemSize.Height);
+                }
                 var Header = new Rectangle(
-                    new Point(GetTabRect(i).Location.X + 2, GetTabRect(i).Location.Y),
-                    new Size(GetTabRect(i).Width, GetTabRect(i).Height));
+                    new Point(x, GetTabRect(i).Location.Y),
+                    new Size(headerWidth, headerHeight));
+
+                x += headerWidth;
                 var HeaderSize = new Rectangle(Header.Location, new Size(Header.Width, Header.Height));
                 Brush ClosingColorBrush = new SolidBrush(this.closingButtonColor);
 
@@ -374,10 +410,10 @@ namespace VisualStudioTabControl
                     // Draws the title of the page
                     Drawer.DrawString(
                         TabPages[i].Text,
-                        Font,
+                        TabPages[i].Font,
                         new SolidBrush(this.selectedTextColor),
-                        HeaderSize,
-                        this.CenterSringFormat);
+                        HeaderSize.Left,
+                        HeaderSize.Top);
 
                     // Draws the closing button
                     if (this.ShowClosingButton)
@@ -392,25 +428,18 @@ namespace VisualStudioTabControl
                 }
                 else
                 {
+                    // Draws the back of the header 
+                    Drawer.FillRectangle(new SolidBrush(Color.Red), HeaderSize);
                     // Simply draws the header when it is not selected
                     Drawer.DrawString(
                         TabPages[i].Text,
-                        Font,
+                        TabPages[i].Font,
                         new SolidBrush(this.textColor),
                         HeaderSize,
                         this.CenterSringFormat);
                 }
             }
 
-            // Draws the horizontal line
-            Drawer.DrawLine(new Pen(this.horizLineColor, 5), new Point(0, 19), new Point(Width, 19));
-
-            // Draws the background of the tab control
-            Drawer.FillRectangle(new SolidBrush(this.backTabColor), new Rectangle(0, 20, Width, Height - 20));
-
-            // Draws the border of the TabControl
-            Drawer.DrawRectangle(new Pen(this.borderColor, 2), new Rectangle(0, 0, Width, Height));
-            Drawer.InterpolationMode = InterpolationMode.HighQualityBicubic;
         }
 
         /// <summary>
@@ -455,6 +484,6 @@ namespace VisualStudioTabControl
             this.Refresh();
         }
 
-      
+
     }
 }

@@ -62,6 +62,17 @@ namespace TrayDir
             this.instanceTabs.Controls.Add(this.newTabTabPage);
             this.panel1.Controls.Add(this.instanceTabs);
 
+            EventHandler closeTab = new EventHandler(delegate
+            {
+                if (DialogResult.Yes == MessageBox.Show("Do you want to delete this instance?", "Close", MessageBoxButtons.YesNo))
+                {
+                    this.instanceTabs.TabPages.RemoveAt(instanceTabs.SelectedIndex);
+                }
+            });
+
+            instanceTabs.CloseClicked += closeTab;
+            instanceTabs.OnMiddleClick += closeTab;
+
             fd = FileDialog;
             pd = ProgramData.Load();
             if (pd.trayInstances.Count == 0)
@@ -100,6 +111,7 @@ namespace TrayDir
             instanceTabs.TabPages.Add(tp);
             instanceTabs.TabPages.Add(newTabTabPage);
             IView iv = CreateViewFromInstance(instance, tp);
+            iv.notifyIcon.DoubleClick += ShowApp;
             EventHandler tabClose = new EventHandler(delegate (object obj, EventArgs args)
             {
                 pd.trayInstances.Remove(instance);
