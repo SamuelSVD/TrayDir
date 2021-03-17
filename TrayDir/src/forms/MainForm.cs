@@ -14,12 +14,54 @@ namespace TrayDir
         public ProgramData pd;
         private IView instanceView;
         public FileDialog fd;
+        public VisualStudioTabControl.VisualStudioTabControl instanceTabs;
+        public TabPage newTabTabPage;
 
         //Event Handlers
         EventHandler exploreClick;
         public MainForm()
         {
             InitializeComponent();
+            // 
+            // instanceTabs
+            // 
+            instanceTabs = new VisualStudioTabControl.VisualStudioTabControl();
+            this.instanceTabs.ActiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.instanceTabs.AllowDrop = true;
+            this.instanceTabs.BackTabColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.instanceTabs.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.instanceTabs.ClosingButtonColor = System.Drawing.Color.WhiteSmoke;
+            this.instanceTabs.ClosingMessage = "Delete this instance?";
+            this.instanceTabs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.instanceTabs.HeaderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.instanceTabs.HorizontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.instanceTabs.ItemSize = new System.Drawing.Size(240, 16);
+            this.instanceTabs.Location = new System.Drawing.Point(0, 0);
+            this.instanceTabs.Margin = new System.Windows.Forms.Padding(6);
+            this.instanceTabs.Name = "instanceTabs";
+            this.instanceTabs.SelectedIndex = 0;
+            this.instanceTabs.SelectedTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.instanceTabs.ShowClosingButton = false;
+            this.instanceTabs.ShowClosingMessage = true;
+            this.instanceTabs.Size = new System.Drawing.Size(1132, 79);
+            this.instanceTabs.TabIndex = 0;
+            this.instanceTabs.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.instanceTabs.SelectedIndexChanged += new System.EventHandler(this.instanceTabs_SelectedIndexChanged);
+            // 
+            // newTabTabPage
+            // 
+            newTabTabPage = new TabPage();
+            this.newTabTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.newTabTabPage.Location = new System.Drawing.Point(8, 24);
+            this.newTabTabPage.Margin = new System.Windows.Forms.Padding(6);
+            this.newTabTabPage.Name = "newTabTabPage";
+            this.newTabTabPage.Padding = new System.Windows.Forms.Padding(6);
+            this.newTabTabPage.Size = new System.Drawing.Size(1116, 47);
+            this.newTabTabPage.TabIndex = 1;
+            this.newTabTabPage.Text = "+";
+            this.instanceTabs.Controls.Add(this.newTabTabPage);
+            this.panel1.Controls.Add(this.instanceTabs);
+
             fd = FileDialog;
             pd = ProgramData.Load();
             if (pd.trayInstances.Count == 0)

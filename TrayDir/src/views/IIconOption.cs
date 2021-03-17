@@ -20,9 +20,14 @@ namespace TrayDir
             tlp = new TableLayoutPanel();
             ControlUtils.ConfigureTableLayoutPanel(tlp);
             iconFileDialog = new OpenFileDialog();
+            iconFileDialog.DereferenceLinks = false;
             browseButton = new Button();
             browseButton.Text = "Browse";
             browseButton.Anchor = AnchorStyles.None;
+            browseButton.AutoSize = true;
+            browseButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            browseButton.UseVisualStyleBackColor = true;
+            browseButton.Dock = DockStyle.Fill;
 
             EventHandler bClick = new EventHandler(delegate (object obj, EventArgs args)
             {
@@ -42,6 +47,11 @@ namespace TrayDir
             resetButton = new Button();
             resetButton.Text = "Reset";
             resetButton.Anchor = AnchorStyles.None;
+            resetButton.AutoSize = true;
+            resetButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            resetButton.UseVisualStyleBackColor = true;
+            resetButton.Dock = DockStyle.Fill;
+
             resetButton.Enabled = (instance.iconPath != System.Reflection.Assembly.GetEntryAssembly().Location);
 
             bClick = new EventHandler(delegate (object obj, EventArgs args)
@@ -62,11 +72,25 @@ namespace TrayDir
             picturebox.Width = browseButton.Width;
             if (Program.DEBUG) picturebox.BackColor = Color.Purple;
             picturebox.BorderStyle = BorderStyle.FixedSingle;
-            picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            picturebox.AutoSize = true;
+            picturebox.Dock = DockStyle.Fill;
+
 
             tlp.Controls.Add(picturebox, 0, 0);
             tlp.Controls.Add(browseButton, 0, 1);
             tlp.Controls.Add(resetButton, 0, 2);
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (tlp.ColumnStyles.Count < i + 1)
+                {
+                    RowStyle rs = new RowStyle();
+                    rs.SizeType = SizeType.AutoSize;
+                    tlp.RowStyles.Add(rs);
+                }
+            }
+
 
         }
         public Control GetControl()
