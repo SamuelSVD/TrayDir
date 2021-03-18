@@ -390,6 +390,7 @@ namespace TrayDir
             {
                 trayInstance.instanceName = input;
                 instanceTabs.SelectedTab.Text = input;
+                trayInstance.view.notifyIcon.Text = input;
                 pd.Save();
             }
         }
