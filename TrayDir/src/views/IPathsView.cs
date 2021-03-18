@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace TrayDir
 {
-    class IPathsView
+    public class IPathsView
     {
         public GroupBox pathsgb;
         public IPathsView(TrayInstance instance)

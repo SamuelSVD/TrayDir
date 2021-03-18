@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TrayDir
 {
-    class IOptionsView
+    public class IOptionsView
     {
         public GroupBox optionsgb;
         public IOptionsView(TrayInstance instance)
@@ -21,10 +22,15 @@ namespace TrayDir
             ControlUtils.ConfigureTableLayoutPanel(optionstlp);
             grouptlp.Controls.Add(optionstlp, 0, 0);
 
+            VerticalSeparator vs = new VerticalSeparator();
+            vs.Dock = DockStyle.Fill;
+            if (Program.DEBUG) vs.BackColor = Color.Blue;
+            grouptlp.Controls.Add(vs, 1, 0);
+
             IIconOption io = new IIconOption(instance);
-            grouptlp.Controls.Add(io.GetControl(), 1, 0);
+            grouptlp.Controls.Add(io.GetControl(), 2, 0);
             
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 if (grouptlp.ColumnStyles.Count < i + 1)
                 {
@@ -34,10 +40,10 @@ namespace TrayDir
                     switch (i)
                     {
                         case 0:
-                            cs.Width = 70;
+                            cs.Width = 65;
                             break;
                         case 1:
-                            cs.Width = 30;
+                            cs.Width = 5;
                             break;
                         default:
                             cs.Width = 30;

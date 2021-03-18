@@ -87,7 +87,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\controls\VisualStudioTabControl.cs">
+    <Compile Include="lib\VerticalSeparator\VerticalSeparator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="src\controls\SmartTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="src\forms\AboutForm.cs">

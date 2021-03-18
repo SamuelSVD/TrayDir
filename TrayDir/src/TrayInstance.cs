@@ -28,7 +28,7 @@ namespace TrayDir
         }
         public void AddPath(string path)
         {
-            this.settings.paths.Add(path);
+            settings.paths.Add(path);
         }
     }
 }

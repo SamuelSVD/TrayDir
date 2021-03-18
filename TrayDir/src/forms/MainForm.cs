@@ -14,7 +14,7 @@ namespace TrayDir
         public ProgramData pd;
         private IView instanceView;
         public FileDialog fd;
-        public VisualStudioTabControl.VisualStudioTabControl instanceTabs;
+        public SmartTabControl instanceTabs;
         public TabPage newTabTabPage;
 
         //Event Handlers
@@ -24,54 +24,32 @@ namespace TrayDir
             InitializeComponent();
             // 
             // instanceTabs
-            // 
-            instanceTabs = new VisualStudioTabControl.VisualStudioTabControl();
-            this.instanceTabs.ActiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.instanceTabs.AllowDrop = true;
-            this.instanceTabs.BackTabColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.instanceTabs.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.instanceTabs.ClosingButtonColor = System.Drawing.Color.WhiteSmoke;
-            this.instanceTabs.ClosingMessage = "Delete this instance?";
-            this.instanceTabs.Dock = System.Windows.Forms.DockStyle.Top;
-            this.instanceTabs.HeaderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.instanceTabs.HorizontalLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.instanceTabs.ItemSize = new System.Drawing.Size(240, 16);
-            this.instanceTabs.Location = new System.Drawing.Point(0, 0);
-            this.instanceTabs.Margin = new System.Windows.Forms.Padding(6);
-            this.instanceTabs.Name = "instanceTabs";
-            this.instanceTabs.SelectedIndex = 0;
-            this.instanceTabs.SelectedTextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.instanceTabs.ShowClosingButton = false;
-            this.instanceTabs.ShowClosingMessage = true;
-            this.instanceTabs.Size = new System.Drawing.Size(1132, 79);
-            this.instanceTabs.TabIndex = 0;
-            this.instanceTabs.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.instanceTabs.SelectedIndexChanged += new System.EventHandler(this.instanceTabs_SelectedIndexChanged);
+            //
+            instanceTabs = new SmartTabControl();
+            instanceTabs.AllowDrop = true;
+            instanceTabs.Dock = DockStyle.Top;
+            instanceTabs.Name = "instanceTabs";
+            instanceTabs.SelectedIndex = 0;
+            instanceTabs.TabIndex = 0;
+
+            instanceTabs.Margin = new Padding(6);
+            instanceTabs.SelectedIndexChanged += new EventHandler(instanceTabs_SelectedIndexChanged);
             // 
             // newTabTabPage
             // 
             newTabTabPage = new TabPage();
-            this.newTabTabPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            this.newTabTabPage.Location = new System.Drawing.Point(8, 24);
-            this.newTabTabPage.Margin = new System.Windows.Forms.Padding(6);
-            this.newTabTabPage.Name = "newTabTabPage";
-            this.newTabTabPage.Padding = new System.Windows.Forms.Padding(6);
-            this.newTabTabPage.Size = new System.Drawing.Size(1116, 47);
-            this.newTabTabPage.TabIndex = 1;
-            this.newTabTabPage.Text = "+";
-            this.instanceTabs.Controls.Add(this.newTabTabPage);
-            this.panel1.Controls.Add(this.instanceTabs);
+            newTabTabPage.BackColor = Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            newTabTabPage.Location = new Point(8, 24);
+            newTabTabPage.Margin = new Padding(6);
+            newTabTabPage.Name = "newTabTabPage";
+            newTabTabPage.Padding = new Padding(6);
+            newTabTabPage.Size = new Size(1116, 47);
+            newTabTabPage.TabIndex = 1;
+            newTabTabPage.Text = "+";
+            instanceTabs.Controls.Add(newTabTabPage);
+            panel1.Controls.Add(instanceTabs);
 
-            EventHandler closeTab = new EventHandler(delegate
-            {
-                if (DialogResult.Yes == MessageBox.Show("Do you want to delete this instance?", "Close", MessageBoxButtons.YesNo))
-                {
-                    this.instanceTabs.TabPages.RemoveAt(instanceTabs.SelectedIndex);
-                }
-            });
-
-            instanceTabs.CloseClicked += closeTab;
-            instanceTabs.OnMiddleClick += closeTab;
+            instanceTabs.OnMiddleClick += Delete;
 
             fd = FileDialog;
             pd = ProgramData.Load();
@@ -79,21 +57,19 @@ namespace TrayDir
             {
                 pd.CreateDefaultInstance();
             }
-            if (pd.trayInstances.Count > 1)
-            {
-                instanceTabs.ShowClosingButton = true;
-            }
+
+            deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
             pd.FixInstances();
             pd.Save();
             InitializeInstanceTabs();
             InitializeAllAssets();
             BuildExploreDropdown();
 
-            instanceTabs.HeaderColor = Color.FromArgb(237, 238, 242);
+            /*instanceTabs.HeaderColor = Color.FromArgb(237, 238, 242);
             instanceTabs.ActiveColor = Color.FromArgb(1, 122, 204);
             instanceTabs.HorizontalLineColor = Color.FromArgb(1, 122, 204);
             instanceTabs.TextColor = Color.Black;
-            instanceTabs.BackTabColor = Color.WhiteSmoke;
+            instanceTabs.BackTabColor = Color.WhiteSmoke;*/
         }
         private void InitializeInstanceTabs()
         {
@@ -102,21 +78,24 @@ namespace TrayDir
                 TrayInstance instance = pd.trayInstances[i];
                 AddInstanceTabPage(instance);
             }
+            instanceTabs.SelectedIndex = 0;
         }
         private void AddInstanceTabPage(TrayInstance instance)
         {
             TabPage tp;
             tp = new TabPage(instance.instanceName);
+            int i = instanceTabs.TabPages.IndexOf(newTabTabPage);
             instanceTabs.TabPages.Remove(newTabTabPage);
             instanceTabs.TabPages.Add(tp);
             instanceTabs.TabPages.Add(newTabTabPage);
+            instanceTabs.SelectedIndex = i;
             IView iv = CreateViewFromInstance(instance, tp);
             iv.notifyIcon.DoubleClick += ShowApp;
             EventHandler tabClose = new EventHandler(delegate (object obj, EventArgs args)
             {
                 pd.trayInstances.Remove(instance);
                 iv.Hide();
-                instanceTabs.ShowClosingButton = (pd.trayInstances.Count > 1);
+                deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
                 pd.Save();
             });
             tp.ParentChanged += tabClose;
@@ -129,11 +108,11 @@ namespace TrayDir
         {
             if (Settings.isAltered())
             {
-                this.Text = "TrayDir*";
+                Text = "TrayDir*";
             }
             else
             {
-                this.Text = "TrayDir";
+                Text = "TrayDir";
             }
         }
         public void HideApp(object Sender, EventArgs e)
@@ -179,7 +158,7 @@ namespace TrayDir
                 foreach (string path in trayInstance.settings.paths)
                 {
                     ToolStripMenuItem item = new ToolStripMenuItem();
-                    item.Size = new System.Drawing.Size(359, 44);
+                    item.Size = new Size(359, 44);
 
                     if (AppUtils.PathIsDirectory(path))
                     {
@@ -276,7 +255,6 @@ namespace TrayDir
         }
         private void TrayTextApplyButton_Click(object sender, EventArgs e)
         {
-            //trayInstance.iconText = SettingsForm.form.TrayTextTextBox.Text;
             Settings.Alter();
             CheckIsAltered();
         }
@@ -314,10 +292,11 @@ namespace TrayDir
         {
             if (instanceTabs.SelectedIndex >= 0)
             {
-                int tempHeight = instanceView.GetHeight() + 6;
+                if (Program.DEBUG) instanceTabs.SelectedTab.BackColor = Color.Orange;
+                int tempHeight = instanceView.GetHeight();
                 //tempHeight += mainMenu.Height;
                 if (Program.DEBUG) Text = tempHeight.ToString();
-                instanceTabs.Height = tempHeight;
+                instanceTabs.Height = tempHeight + instanceTabs.ItemSize.Height;
             }
             panel1.PerformLayout();
         }
@@ -326,19 +305,101 @@ namespace TrayDir
             int index = ((TabControl)sender).SelectedIndex;
             if (((TabControl)sender).SelectedTab == newTabTabPage)
             {
-                TrayInstance ti = new TrayInstance("New Instance");
-                pd.trayInstances.Add(ti);
-                pd.FixInstances();
-                AddInstanceTabPage(ti);
-                instanceTabs.SelectedIndex = index;
-                if (pd.trayInstances.Count > 1)
-                {
-                    instanceTabs.ShowClosingButton = true;
-                }
-                pd.Save();
+                New(sender, e);
             }
             BuildExploreDropdown();
             resizeForm();
+        }
+        private void New(object sender, EventArgs e)
+        {
+            TrayInstance ti = new TrayInstance("New Instance");
+            pd.trayInstances.Add(ti);
+            pd.FixInstances();
+            AddInstanceTabPage(ti);
+            deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
+            pd.Save();
+        }
+        private static DialogResult ShowInputDialog(ref string input)
+        {
+            Size size = new Size(500, 50);
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = FormBorderStyle.SizableToolWindow;
+            inputBox.AutoSize = true;
+            inputBox.AutoSizeMode = AutoSizeMode.GrowOnly;
+            inputBox.Text = "Edit Name";
+            inputBox.Height = 10;
+
+            TableLayoutPanel tlp = new TableLayoutPanel();
+            ControlUtils.ConfigureTableLayoutPanel(tlp);
+            inputBox.Controls.Add(tlp);
+
+            TextBox textBox = new TextBox();
+            textBox.Size = new Size(size.Width - 10, 23);
+            textBox.Dock = DockStyle.Top;
+            textBox.Text = input;
+            tlp.Controls.Add(textBox, 0, 0);
+            tlp.SetColumnSpan(textBox, 3);
+
+            Button okButton = new Button();
+            okButton.DialogResult = DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Text = "&OK";
+            okButton.AutoSize = true;
+            okButton.Dock = DockStyle.Top;
+            tlp.Controls.Add(okButton, 1, 1);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Text = "&Cancel";
+            cancelButton.AutoSize = true;
+            cancelButton.Dock = DockStyle.Top;
+            tlp.Controls.Add(cancelButton, 2, 1);
+
+            for(int i = 0; i < 3; i++)
+            {
+                ColumnStyle cs = new ColumnStyle();
+                switch(i)
+                {
+                    case 0:
+                        cs.SizeType = SizeType.Percent;
+                        cs.Width = 60;
+                        break;
+                    default:
+                        cs.SizeType = SizeType.AutoSize;
+                        cs.Width = 35;
+                        break;
+                }
+                tlp.ColumnStyles.Add(cs);
+            }
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            inputBox.PerformLayout();
+            inputBox.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = inputBox.ShowDialog();
+            input = textBox.Text;
+            return result;
+        }
+        private void Edit(object sender, EventArgs e)
+        {
+            string input = trayInstance.instanceName;
+            if (ShowInputDialog(ref input) == DialogResult.OK)
+            {
+                trayInstance.instanceName = input;
+                instanceTabs.SelectedTab.Text = input;
+                pd.Save();
+            }
+        }
+
+        private void Delete(object sender, EventArgs e)
+        {
+            if (pd.trayInstances.Count > 1 && (DialogResult.Yes == MessageBox.Show("Do you want to delete this instance?", "Close", MessageBoxButtons.YesNo)))
+            {
+                instanceTabs.TabPages.RemoveAt(instanceTabs.SelectedIndex);
+            }
         }
     }
 }

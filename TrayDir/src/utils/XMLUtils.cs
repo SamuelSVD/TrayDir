@@ -74,7 +74,7 @@ namespace TrayDir
                 writer.Flush();
                 writer.Close();
             }
-            catch (System.UnauthorizedAccessException e)
+            catch (UnauthorizedAccessException e)
             {
                 MessageBox.Show("Exception caught: " + e.Message);
             }

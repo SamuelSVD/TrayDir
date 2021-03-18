@@ -35,7 +35,7 @@ namespace TrayDir
                 {
                     string iconPath = iconFileDialog.FileName;
                     instance.iconPath = iconPath;
-                    Icon i = System.Drawing.Icon.ExtractAssociatedIcon(instance.iconPath);
+                    Icon i = Icon.ExtractAssociatedIcon(instance.iconPath);
                     instance.view.notifyIcon.Icon = i;
                     picturebox.Image = i.ToBitmap();
                     MainForm.form.pd.Save();
@@ -58,7 +58,7 @@ namespace TrayDir
             {
                 
                 instance.iconPath = System.Reflection.Assembly.GetEntryAssembly().Location; ;
-                Icon i = System.Drawing.Icon.ExtractAssociatedIcon(instance.iconPath);
+                Icon i = Icon.ExtractAssociatedIcon(instance.iconPath);
                 instance.view.notifyIcon.Icon = i;
                 picturebox.Image = i.ToBitmap();
                 MainForm.form.pd.Save();
@@ -67,12 +67,12 @@ namespace TrayDir
             resetButton.Click += bClick;
 
             picturebox = new PictureBox();
-            picturebox.Image = System.Drawing.Icon.ExtractAssociatedIcon(instance.iconPath).ToBitmap();
+            picturebox.Image = Icon.ExtractAssociatedIcon(instance.iconPath).ToBitmap();
             picturebox.Anchor = AnchorStyles.None;
             picturebox.Width = browseButton.Width;
             if (Program.DEBUG) picturebox.BackColor = Color.Purple;
             picturebox.BorderStyle = BorderStyle.FixedSingle;
-            picturebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            picturebox.SizeMode = PictureBoxSizeMode.Zoom;
             picturebox.AutoSize = true;
             picturebox.Dock = DockStyle.Fill;
 

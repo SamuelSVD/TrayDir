@@ -7,8 +7,8 @@ namespace TrayDir
     {
         TableLayoutPanel tlp;
 
-        IOptionsView options;
-        IPathsView paths;
+        public IOptionsView options;
+        public IPathsView paths;
         private TrayInstance instance;
 
         public NotifyIcon notifyIcon;
