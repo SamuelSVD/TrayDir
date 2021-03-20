@@ -31,6 +31,10 @@ namespace TrayDir
             ov = ControlUtils.AddOption(OptionsGroupLayout, 1, "Start Minimized", MainForm.form.pd.settings.app.StartMinimized);
             ov.SetTooltip("When enabled, the application will always start hidden, only visible in system tray");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, MainForm.form.pd.settings.app, "StartMinimized");
+
+            ov = ControlUtils.AddOption(OptionsGroupLayout, 2, "Start With Windows", MainForm.form.pd.settings.app.StartWithWindows);
+            ov.SetTooltip("When enabled, the application will always start hidden, only visible in system tray");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, MainForm.form.pd.settings.app, "StartWithWindows");
         }
 
     }

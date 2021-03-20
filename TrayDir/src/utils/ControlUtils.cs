@@ -207,7 +207,8 @@ namespace TrayDir
             EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args)
             {
                 settings[settingName] = cb.Checked;
-                MainForm.form.pd.UpdateAllMenus();
+
+                MainForm.form.pd.Update();
                 MainForm.form.pd.Save();
             });
             cb.Click += cbClick;

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace TrayDir
@@ -32,7 +34,7 @@ namespace TrayDir
         {
             XMLUtils.SaveToFile(this, config);
         }
-        public void UpdateAllMenus()
+        public void Update()
         {
             if (trayInstances != null)
             {
@@ -41,6 +43,7 @@ namespace TrayDir
                     instance.view.UpdateTrayMenu();
                 }
             }
+            CheckStartup();
         }
         public void FormHidden()
         {
@@ -71,6 +74,23 @@ namespace TrayDir
                     instance.settings.paths.Add(".");
                 }
             }
+        }
+        public void CheckStartup()
+        {
+            //HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+            RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (settings.app.StartWithWindows)
+            {
+                key.SetValue("TrayDir", System.Reflection.Assembly.GetEntryAssembly().Location);
+            }
+            else
+            {
+                if (Array.Find(key.GetValueNames(), v => v == "TrayDir") != null)
+                {
+                    key.DeleteValue("TrayDir");
+                }
+            }
+            key.Close();
         }
 
     }

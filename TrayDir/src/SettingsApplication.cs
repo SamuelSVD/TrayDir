@@ -11,6 +11,8 @@ namespace TrayDir
         public bool MinimizeOnClose;
         [XmlAttribute]
         public bool StartMinimized;
+        [XmlAttribute]
+        public bool StartWithWindows;
         public object this[string propertyName]
         {
             get
