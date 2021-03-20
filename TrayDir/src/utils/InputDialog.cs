@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace TrayDir
+{
+    class InputDialog
+    {
+        public static DialogResult ShowStringInputDialog(string text, ref string input)
+        {
+            Size size = new Size(500, 50);
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = FormBorderStyle.SizableToolWindow;
+            inputBox.AutoSize = true;
+            inputBox.AutoSizeMode = AutoSizeMode.GrowOnly;
+            inputBox.Text = text;
+            inputBox.Height = 10;
+
+            TableLayoutPanel tlp = new TableLayoutPanel();
+            ControlUtils.ConfigureTableLayoutPanel(tlp);
+            inputBox.Controls.Add(tlp);
+
+            TextBox textBox = new TextBox();
+            textBox.Size = new Size(size.Width - 10, 23);
+            textBox.Dock = DockStyle.Top;
+            textBox.Text = input;
+            tlp.Controls.Add(textBox, 0, 0);
+            tlp.SetColumnSpan(textBox, 3);
+
+            Button okButton = new Button();
+            okButton.DialogResult = DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Text = "&OK";
+            okButton.AutoSize = true;
+            okButton.Dock = DockStyle.Top;
+            tlp.Controls.Add(okButton, 1, 1);
+
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Text = "&Cancel";
+            cancelButton.AutoSize = true;
+            cancelButton.Dock = DockStyle.Top;
+            tlp.Controls.Add(cancelButton, 2, 1);
+
+            for (int i = 0; i < 3; i++)
+            {
+                ColumnStyle cs = new ColumnStyle();
+                switch (i)
+                {
+                    case 0:
+                        cs.SizeType = SizeType.Percent;
+                        cs.Width = 60;
+                        break;
+                    default:
+                        cs.SizeType = SizeType.AutoSize;
+                        cs.Width = 35;
+                        break;
+                }
+                tlp.ColumnStyles.Add(cs);
+            }
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            inputBox.PerformLayout();
+            inputBox.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = inputBox.ShowDialog();
+            input = textBox.Text;
+            return result;
+        }
+    }
+}

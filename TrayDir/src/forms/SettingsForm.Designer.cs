@@ -32,12 +32,12 @@ namespace TrayDir
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
-            this.OptionsGroupBox = new System.Windows.Forms.GroupBox();
+            this.AppGroupBox = new System.Windows.Forms.GroupBox();
             this.OptionsGroupLayout = new System.Windows.Forms.TableLayoutPanel();
             this.IconFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.OptionsGroupBox.SuspendLayout();
+            this.AppGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -46,7 +46,7 @@ namespace TrayDir
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.OptionsGroupBox, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.AppGroupBox, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
@@ -91,20 +91,20 @@ namespace TrayDir
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // OptionsGroupBox
+            // AppGroupBox
             // 
-            this.OptionsGroupBox.AutoSize = true;
-            this.OptionsGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.OptionsGroupBox.Controls.Add(this.OptionsGroupLayout);
-            this.OptionsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.OptionsGroupBox.Location = new System.Drawing.Point(10, 5);
-            this.OptionsGroupBox.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.OptionsGroupBox.Name = "OptionsGroupBox";
-            this.OptionsGroupBox.Padding = new System.Windows.Forms.Padding(2);
-            this.OptionsGroupBox.Size = new System.Drawing.Size(364, 17);
-            this.OptionsGroupBox.TabIndex = 5;
-            this.OptionsGroupBox.TabStop = false;
-            this.OptionsGroupBox.Text = "Options";
+            this.AppGroupBox.AutoSize = true;
+            this.AppGroupBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.AppGroupBox.Controls.Add(this.OptionsGroupLayout);
+            this.AppGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AppGroupBox.Location = new System.Drawing.Point(10, 5);
+            this.AppGroupBox.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.AppGroupBox.Name = "AppGroupBox";
+            this.AppGroupBox.Padding = new System.Windows.Forms.Padding(2);
+            this.AppGroupBox.Size = new System.Drawing.Size(364, 17);
+            this.AppGroupBox.TabIndex = 5;
+            this.AppGroupBox.TabStop = false;
+            this.AppGroupBox.Text = "Application";
             // 
             // OptionsGroupLayout
             // 
@@ -132,19 +132,20 @@ namespace TrayDir
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(384, 141);
+            this.ClientSize = new System.Drawing.Size(384, 70);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(400, 0);
+            this.MinimumSize = new System.Drawing.Size(400, 39);
             this.Name = "SettingsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.OptionsGroupBox.ResumeLayout(false);
-            this.OptionsGroupBox.PerformLayout();
+            this.AppGroupBox.ResumeLayout(false);
+            this.AppGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,7 +154,7 @@ namespace TrayDir
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        public System.Windows.Forms.GroupBox OptionsGroupBox;
+        public System.Windows.Forms.GroupBox AppGroupBox;
         public System.Windows.Forms.TableLayoutPanel OptionsGroupLayout;
         private System.Windows.Forms.OpenFileDialog IconFileDialog;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

@@ -122,6 +122,7 @@
     </Compile>
     <Compile Include="src\TrayInstance.cs" />
     <Compile Include="src\TrayInstanceSettings.cs" />
+    <Compile Include="src\utils\InputDialog.cs" />
     <Compile Include="src\utils\TrayUtils.cs" />
     <Compile Include="src\utils\XMLUtils.cs" />
     <Compile Include="src\views\IIconOption.cs" />
