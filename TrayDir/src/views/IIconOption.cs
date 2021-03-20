@@ -31,6 +31,7 @@ namespace TrayDir
 
             EventHandler bClick = new EventHandler(delegate (object obj, EventArgs args)
             {
+                iconFileDialog.FileName = instance.iconPath;
                 if (iconFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string iconPath = iconFileDialog.FileName;

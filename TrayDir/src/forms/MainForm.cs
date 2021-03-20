@@ -77,6 +77,10 @@ namespace TrayDir
                 {
                     PromptDelete(instanceTabs.TabPages.IndexOf(tp));
                 }
+                if (mea.Button == MouseButtons.Left && mea.Clicks > 1)
+                {
+                    Edit(this, null);
+                }
             }
         }
         public void OnTabSwapped(object sender, SmartTabControl.TabSwappedArgs tsa)

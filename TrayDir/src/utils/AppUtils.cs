@@ -45,12 +45,12 @@ namespace TrayDir
                 }
                 else
                 {
-                    MessageBox.Show("Problem Parsing " + path);
+                    if (Program.DEBUG) MessageBox.Show("Problem Parsing " + path);
                 }
             }
             catch
             {
-                MessageBox.Show("Problem Parsing " + path);
+                if (Program.DEBUG) MessageBox.Show("Problem Parsing " + path);
             }
 
 
