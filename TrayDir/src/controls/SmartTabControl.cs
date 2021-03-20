@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -21,8 +22,23 @@ namespace TrayDir
             public TabPage TabPage { get; set; }
             public MouseEventArgs MouseEventArgs { get; set; }
         }
+        public class TabSwappedArgs : EventArgs
+        {
+            public TabSwappedArgs(TabPage aTabPage, TabPage bTabPage, int aOriginalIndex, int bOriginalIndex)
+            {
+                this.aTabPage = aTabPage;
+                this.bTabPage = bTabPage;
+                this.aOriginalIndex = aOriginalIndex;
+                this.bOriginalIndex = bOriginalIndex;
+            }
+            public TabPage aTabPage { get; set; }
+            public TabPage bTabPage { get; set; }
+            public int aOriginalIndex { get; set; }
+            public int bOriginalIndex { get; set; }
+        }
         public SmartTabControl()
         {
+            IgnoreDragTabPages = new List<TabPage>();
             SetStyle(
                 ControlStyles.AllPaintingInWmPaint 
                 //ControlStyles.UserPaint
@@ -39,7 +55,9 @@ namespace TrayDir
         private TabPage predraggedTab;
 
         public event EventHandler<TabClickedArgs> OnTabClick;
-        
+        public event EventHandler<TabSwappedArgs> OnTabsSwapped;
+
+        public List<TabPage> IgnoreDragTabPages;
         /// <summary>
         ///     Drags the selected tab
         /// </summary>
@@ -53,7 +71,7 @@ namespace TrayDir
             {
                 drgevent.Effect = DragDropEffects.Move;
 
-                if (!ReferenceEquals(pointedTab, draggedTab))
+                if (!ReferenceEquals(pointedTab, draggedTab) && (IgnoreDragTabPages.IndexOf(pointedTab) == -1))
                 {
                     ReplaceTabPages(draggedTab, pointedTab);
                 }
@@ -69,7 +87,10 @@ namespace TrayDir
         protected override void OnMouseDown(MouseEventArgs e)
         {
             predraggedTab = getPointedTab();
-            
+            if (this.IgnoreDragTabPages.IndexOf(predraggedTab) > -1)
+            {
+                predraggedTab = null;
+            }
             base.OnMouseDown(e);
             var p = e.Location;
             for (var i = 0; i < TabCount; i++)
@@ -134,6 +155,10 @@ namespace TrayDir
             var SourceIndex = TabPages.IndexOf(Source);
             var DestinationIndex = TabPages.IndexOf(Destination);
 
+            if (OnTabsSwapped != null)
+            {
+                OnTabsSwapped(this, new TabSwappedArgs(Source, Destination, SourceIndex, DestinationIndex));
+            }
             TabPages[DestinationIndex] = Source;
             TabPages[SourceIndex] = Destination;
 

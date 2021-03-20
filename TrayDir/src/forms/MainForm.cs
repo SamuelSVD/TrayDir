@@ -47,9 +47,11 @@ namespace TrayDir
             newTabTabPage.TabIndex = 1;
             newTabTabPage.Text = "+";
             instanceTabs.Controls.Add(newTabTabPage);
+            instanceTabs.IgnoreDragTabPages.Add(newTabTabPage);
             panel1.Controls.Add(instanceTabs);
 
             instanceTabs.OnTabClick += OnTabClick;
+            instanceTabs.OnTabsSwapped += OnTabSwapped;
 
             fd = FileDialog;
             pd = ProgramData.Load();
@@ -64,17 +66,11 @@ namespace TrayDir
             InitializeInstanceTabs();
             InitializeAllAssets();
             BuildExploreDropdown();
-
-            /*instanceTabs.HeaderColor = Color.FromArgb(237, 238, 242);
-            instanceTabs.ActiveColor = Color.FromArgb(1, 122, 204);
-            instanceTabs.HorizontalLineColor = Color.FromArgb(1, 122, 204);
-            instanceTabs.TextColor = Color.Black;
-            instanceTabs.BackTabColor = Color.WhiteSmoke;*/
         }
-        public void OnTabClick(object sender, SmartTabControl.TabClickedArgs tce)
+        public void OnTabClick(object sender, SmartTabControl.TabClickedArgs tca)
         {
-            TabPage tp = tce.TabPage;
-            MouseEventArgs mea = tce.MouseEventArgs;
+            TabPage tp = tca.TabPage;
+            MouseEventArgs mea = tca.MouseEventArgs;
             if (tp != this.newTabTabPage)
             {
                 if ((mea.Button == MouseButtons.Middle) && pd.trayInstances.Count > 1)
@@ -82,7 +78,13 @@ namespace TrayDir
                     PromptDelete(instanceTabs.TabPages.IndexOf(tp));
                 }
             }
-            //delete
+        }
+        public void OnTabSwapped(object sender, SmartTabControl.TabSwappedArgs tsa)
+        {
+            TrayInstance ti = pd.trayInstances[tsa.aOriginalIndex];
+            pd.trayInstances[tsa.aOriginalIndex] = pd.trayInstances[tsa.bOriginalIndex];
+            pd.trayInstances[tsa.bOriginalIndex] = ti;
+            pd.Save();
         }
         private void InitializeInstanceTabs()
         {
