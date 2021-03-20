@@ -49,7 +49,7 @@ namespace TrayDir
             instanceTabs.Controls.Add(newTabTabPage);
             panel1.Controls.Add(instanceTabs);
 
-            instanceTabs.OnMiddleClick += Delete;
+            instanceTabs.OnTabClick += OnTabClick;
 
             fd = FileDialog;
             pd = ProgramData.Load();
@@ -70,6 +70,19 @@ namespace TrayDir
             instanceTabs.HorizontalLineColor = Color.FromArgb(1, 122, 204);
             instanceTabs.TextColor = Color.Black;
             instanceTabs.BackTabColor = Color.WhiteSmoke;*/
+        }
+        public void OnTabClick(object sender, SmartTabControl.TabClickedArgs tce)
+        {
+            TabPage tp = tce.TabPage;
+            MouseEventArgs mea = tce.MouseEventArgs;
+            if (tp != this.newTabTabPage)
+            {
+                if ((mea.Button == MouseButtons.Middle) && pd.trayInstances.Count > 1)
+                {
+                    PromptDelete(instanceTabs.TabPages.IndexOf(tp));
+                }
+            }
+            //delete
         }
         private void InitializeInstanceTabs()
         {
@@ -395,11 +408,17 @@ namespace TrayDir
             }
         }
 
-        private void Delete(object sender, EventArgs e)
+        private void DeleteCurrent(object sender, EventArgs e)
         {
-            if (pd.trayInstances.Count > 1 && (DialogResult.Yes == MessageBox.Show("Do you want to delete this instance?", "Close", MessageBoxButtons.YesNo)))
+            PromptDelete(instanceTabs.SelectedIndex);
+        }
+        private void PromptDelete(int i)
+        {
+            TabPage tp = instanceTabs.TabPages[i];
+            TrayInstance ti = pd.trayInstances[i];
+            if (pd.trayInstances.Count > 1 && (DialogResult.Yes == MessageBox.Show("Do you want to delete <" + ti.instanceName + ">?", "Close", MessageBoxButtons.YesNo)))
             {
-                instanceTabs.TabPages.RemoveAt(instanceTabs.SelectedIndex);
+                instanceTabs.TabPages.RemoveAt(i);
             }
         }
     }

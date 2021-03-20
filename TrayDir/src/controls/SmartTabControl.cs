@@ -10,6 +10,17 @@ namespace TrayDir
 
     public class SmartTabControl : TabControl
     {
+        // Define a class to hold custom event info
+        public class TabClickedArgs : EventArgs
+        {
+            public TabClickedArgs(TabPage tp, MouseEventArgs e)
+            {
+                TabPage = tp;
+                MouseEventArgs = e;
+            }
+            public TabPage TabPage { get; set; }
+            public MouseEventArgs MouseEventArgs { get; set; }
+        }
         public SmartTabControl()
         {
             SetStyle(
@@ -27,7 +38,7 @@ namespace TrayDir
         /// </summary>
         private TabPage predraggedTab;
 
-        public event EventHandler OnMiddleClick;
+        public event EventHandler<TabClickedArgs> OnTabClick;
         
         /// <summary>
         ///     Drags the selected tab
@@ -64,13 +75,10 @@ namespace TrayDir
             for (var i = 0; i < TabCount; i++)
             {
                 var r = GetTabRect(i);
-                if (e.Button == MouseButtons.Middle)
+                
+                if (r.Contains(p) && OnTabClick != null)
                 {
-                    if (r.Contains(p) && OnMiddleClick != null)
-                    {
-                        SelectedIndex = i;
-                        OnMiddleClick(this, null);
-                    }
+                    OnTabClick(this, new TabClickedArgs(TabPages[i], e));
                 }
             }
         }

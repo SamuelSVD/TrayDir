@@ -178,7 +178,7 @@ namespace TrayDir
             this.deleteSelectedToolStripMenuItem.Name = "deleteSelectedToolStripMenuItem";
             this.deleteSelectedToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
             this.deleteSelectedToolStripMenuItem.Text = "Delete";
-            this.deleteSelectedToolStripMenuItem.Click += new System.EventHandler(this.Delete);
+            this.deleteSelectedToolStripMenuItem.Click += new System.EventHandler(this.DeleteCurrent);
             // 
             // MainForm
             // 
