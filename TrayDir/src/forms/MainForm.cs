@@ -304,7 +304,6 @@ namespace TrayDir
         private void timer1_Tick(object sender, EventArgs e)
         {
             resizeForm();
-            timer1.Enabled = false;
         }
         private void resizeForm()
         {

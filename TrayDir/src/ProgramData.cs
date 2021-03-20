@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml.Serialization;
 
 namespace TrayDir
@@ -10,7 +11,7 @@ namespace TrayDir
         [XmlElement(ElementName = "Settings")]
         public Settings settings;
         public List<TrayInstance> trayInstances;
-        private static string config = "config.xml";
+        private static string config;
         public ProgramData()
         {
             settings = new Settings();
@@ -18,6 +19,7 @@ namespace TrayDir
         }
         public static ProgramData Load()
         {
+            ProgramData.config = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml";
             ProgramData pd = XMLUtils.LoadFromFile<ProgramData>(config);
             if (pd is null)
             {
