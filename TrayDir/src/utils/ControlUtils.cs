@@ -73,9 +73,41 @@ namespace TrayDir
         public static TextBox AddPath(TableLayoutPanel tlp, int row, string text, TrayInstance instance, EventHandler fileSelect, EventHandler folderSelect)
         {
             int n = row;
-            // 
+
+            Button upButton = new Button();
+            upButton.Text = "▲";
+            upButton.Width = 0;
+            upButton.Height = 0;
+            upButton.Dock = DockStyle.Top;
+            upButton.Margin = new Padding();
+            upButton.AutoSize = true;
+            Button downButton = new Button();
+            downButton.Text = "▼";
+            downButton.Width = 0;
+            downButton.Height = 0;
+            downButton.Dock = DockStyle.Top;
+            downButton.Margin = new Padding();
+            downButton.AutoSize = true;
+            TableLayoutPanel btlp = new TableLayoutPanel();
+            ControlUtils.ConfigureTableLayoutPanel(btlp);
+
+            ColumnStyle cs = new ColumnStyle();
+            cs.SizeType = SizeType.AutoSize;
+            btlp.ColumnStyles.Add(cs);
+            RowStyle rs1 = new RowStyle();
+            rs1.SizeType = SizeType.AutoSize;
+            btlp.RowStyles.Add(rs1);
+            RowStyle rs2 = new RowStyle();
+            rs2.SizeType = SizeType.AutoSize;
+            btlp.RowStyles.Add(rs2);
+
+            btlp.Controls.Add(upButton, 0, 0);
+            btlp.Controls.Add(downButton, 0, 1);
+            int y = upButton.Height;
+            upButton.MaximumSize = new System.Drawing.Size(y,y/2);
+            downButton.MaximumSize = new System.Drawing.Size(y, y / 2);
+
             // textBox1
-            // 
             TextBox textbox = new TextBox();
             textbox.BorderStyle = BorderStyle.None;
             textbox.Name = "textbox" + n.ToString();
@@ -142,9 +174,10 @@ namespace TrayDir
 
             folderButton.Click += folderSelect;
 
-            tlp.Controls.Add(panel, 0, row);
-            tlp.Controls.Add(fileButton, 1, row);
-            tlp.Controls.Add(folderButton, 2, row);
+            tlp.Controls.Add(btlp, 0, row);
+            tlp.Controls.Add(panel, 1, row);
+            tlp.Controls.Add(fileButton, 2, row);
+            tlp.Controls.Add(folderButton, 3, row);
             tlp.RowCount = row + 1;
             tlp.Height = 0;
             tlp.RowStyles.Add(new RowStyle());
@@ -164,16 +197,17 @@ namespace TrayDir
                 switch (i)
                 {
                     case 0:
-                        style.Width = 70;
+                        //style.SizeType = SizeType.AutoSize;
+                        style.Width = 5;
                         break;
                     case 1:
-                        style.Width = 15;
+                        style.Width = 65;
                         break;
                     case 2:
                         style.Width = 15;
                         break;
                     default:
-                        style.Width = 33;
+                        style.Width = 15;
                         break;
                 }
             }
