@@ -40,16 +40,16 @@ namespace TrayDir
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rebuildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.FileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.instanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newInstanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rebuildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,21 +57,20 @@ namespace TrayDir
             // 
             this.exploreToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.exploreToolStripMenuItem.Name = "exploreToolStripMenuItem";
-            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(113, 36);
+            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(58, 22);
             this.exploreToolStripMenuItem.Text = "Explore";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(100, 36);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.ShowAbout);
             // 
             // mainMenu
             // 
             this.mainMenu.BackColor = System.Drawing.SystemColors.Window;
-            this.mainMenu.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.mainMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
@@ -82,7 +81,8 @@ namespace TrayDir
             this.aboutToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1132, 40);
+            this.mainMenu.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
+            this.mainMenu.Size = new System.Drawing.Size(566, 24);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "mainMenu";
             // 
@@ -92,36 +92,67 @@ namespace TrayDir
             this.saveToolStripMenuItem1,
             this.exitToolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 22);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(199, 44);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.Save);
             // 
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(199, 44);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.ExitApp);
             // 
-            // settingsToolStripMenuItem
+            // instanceToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(121, 36);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            this.instanceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newInstanceToolStripMenuItem,
+            this.editNameToolStripMenuItem,
+            this.deleteSelectedToolStripMenuItem});
+            this.instanceToolStripMenuItem.Name = "instanceToolStripMenuItem";
+            this.instanceToolStripMenuItem.Size = new System.Drawing.Size(63, 22);
+            this.instanceToolStripMenuItem.Text = "Instance";
+            // 
+            // newInstanceToolStripMenuItem
+            // 
+            this.newInstanceToolStripMenuItem.Name = "newInstanceToolStripMenuItem";
+            this.newInstanceToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.newInstanceToolStripMenuItem.Text = "New";
+            this.newInstanceToolStripMenuItem.Click += new System.EventHandler(this.New);
+            // 
+            // editNameToolStripMenuItem
+            // 
+            this.editNameToolStripMenuItem.Name = "editNameToolStripMenuItem";
+            this.editNameToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.editNameToolStripMenuItem.Text = "Edit Name";
+            this.editNameToolStripMenuItem.Click += new System.EventHandler(this.Edit);
+            // 
+            // deleteSelectedToolStripMenuItem
+            // 
+            this.deleteSelectedToolStripMenuItem.Name = "deleteSelectedToolStripMenuItem";
+            this.deleteSelectedToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.deleteSelectedToolStripMenuItem.Text = "Delete";
+            this.deleteSelectedToolStripMenuItem.Click += new System.EventHandler(this.DeleteCurrent);
             // 
             // rebuildToolStripMenuItem
             // 
             this.rebuildToolStripMenuItem.Name = "rebuildToolStripMenuItem";
-            this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(115, 36);
+            this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(59, 22);
             this.rebuildToolStripMenuItem.Text = "Rebuild";
             this.rebuildToolStripMenuItem.Click += new System.EventHandler(this.Rebuild);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // timer1
             // 
@@ -143,56 +174,24 @@ namespace TrayDir
             // 
             this.panel1.AutoSize = true;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 40);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6);
+            this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1132, 0);
+            this.panel1.Size = new System.Drawing.Size(566, 0);
             this.panel1.TabIndex = 0;
-            // 
-            // instanceToolStripMenuItem
-            // 
-            this.instanceToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newInstanceToolStripMenuItem,
-            this.editNameToolStripMenuItem,
-            this.deleteSelectedToolStripMenuItem});
-            this.instanceToolStripMenuItem.Name = "instanceToolStripMenuItem";
-            this.instanceToolStripMenuItem.Size = new System.Drawing.Size(123, 36);
-            this.instanceToolStripMenuItem.Text = "Instance";
-            // 
-            // newInstanceToolStripMenuItem
-            // 
-            this.newInstanceToolStripMenuItem.Name = "newInstanceToolStripMenuItem";
-            this.newInstanceToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.newInstanceToolStripMenuItem.Text = "New";
-            this.newInstanceToolStripMenuItem.Click += new System.EventHandler(this.New);
-            // 
-            // editNameToolStripMenuItem
-            // 
-            this.editNameToolStripMenuItem.Name = "editNameToolStripMenuItem";
-            this.editNameToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.editNameToolStripMenuItem.Text = "Edit Name";
-            this.editNameToolStripMenuItem.Click += new System.EventHandler(this.Edit);
-            // 
-            // deleteSelectedToolStripMenuItem
-            // 
-            this.deleteSelectedToolStripMenuItem.Name = "deleteSelectedToolStripMenuItem";
-            this.deleteSelectedToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.deleteSelectedToolStripMenuItem.Text = "Delete";
-            this.deleteSelectedToolStripMenuItem.Click += new System.EventHandler(this.DeleteCurrent);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1132, 135);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(566, 70);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.mainMenu);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(500, 71);
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.MinimumSize = Size;
             this.Name = "MainForm";
             this.Text = "TrayDir";
             this.Load += new System.EventHandler(this.MainForm_Load);

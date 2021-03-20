@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TrayDir
 {
     public class IView
     {
+        public Panel p;
         TableLayoutPanel tlp;
 
         public IOptionsView options;
@@ -19,8 +21,15 @@ namespace TrayDir
         {
             this.instance = instance;
             instance.view = this;
+            p = new Panel();
+            p.Dock = DockStyle.Top;
+            p.AutoSize = true;
+            p.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            if (Program.DEBUG) p.BackColor = Color.Violet;
+
             tlp = new TableLayoutPanel();
             ControlUtils.ConfigureTableLayoutPanel(tlp);
+            p.Controls.Add(tlp);
 
             options = new IOptionsView(instance);
             tlp.Controls.Add(options.GetControl(), 0, 0);
@@ -41,7 +50,7 @@ namespace TrayDir
         }
         public Control GetControl()
         {
-            return tlp;
+            return p;
         }
         public int GetHeight()
         {

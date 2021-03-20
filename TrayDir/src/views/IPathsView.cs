@@ -58,7 +58,7 @@ namespace TrayDir
         public int GetHeight()
         {
             int height = 0;
-            height += pathsgb.Padding.Bottom + pathsgb.Padding.Top + pathsgb.Margin.Top + pathsgb.Margin.Bottom + pathsgb.Height;
+            height += pathsgb.Padding.Bottom + pathsgb.Padding.Top + pathsgb.Margin.Top + pathsgb.Margin.Bottom + pathsgb.Bottom - pathsgb.Top;
             return height;
         }
     }

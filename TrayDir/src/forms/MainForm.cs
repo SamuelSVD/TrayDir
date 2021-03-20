@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -10,9 +11,9 @@ namespace TrayDir
         public static MainForm form;
         private bool allowVisible;     // ContextMenu's Show command used
         private bool allowClose;       // ContextMenu's Exit command used
+        private int prevHeight;
         private TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
         public ProgramData pd;
-        private IView instanceView;
         public FileDialog fd;
         public SmartTabControl instanceTabs;
         public TabPage newTabTabPage;
@@ -39,16 +40,13 @@ namespace TrayDir
             // 
             newTabTabPage = new TabPage();
             newTabTabPage.BackColor = Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
-            newTabTabPage.Location = new Point(8, 24);
-            newTabTabPage.Margin = new Padding(6);
             newTabTabPage.Name = "newTabTabPage";
-            newTabTabPage.Padding = new Padding(6);
-            newTabTabPage.Size = new Size(1116, 47);
-            newTabTabPage.TabIndex = 1;
             newTabTabPage.Text = "+";
             instanceTabs.Controls.Add(newTabTabPage);
             instanceTabs.IgnoreDragTabPages.Add(newTabTabPage);
             panel1.Controls.Add(instanceTabs);
+            panel1.Dock = DockStyle.Fill;
+            if (Program.DEBUG) panel1.BackColor = Color.Cyan;
 
             instanceTabs.OnTabClick += OnTabClick;
             instanceTabs.OnTabsSwapped += OnTabSwapped;
@@ -62,6 +60,7 @@ namespace TrayDir
 
             deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
             pd.FixInstances();
+            pd.CheckStartup();
             pd.Save();
             InitializeInstanceTabs();
             InitializeAllAssets();
@@ -82,6 +81,7 @@ namespace TrayDir
                     Edit(this, null);
                 }
             }
+            resizeForm();
         }
         public void OnTabSwapped(object sender, SmartTabControl.TabSwappedArgs tsa)
         {
@@ -219,7 +219,7 @@ namespace TrayDir
         }
         private void Rebuild(object sender, EventArgs e)
         {
-            pd.UpdateAllMenus();
+            pd.Update();
             resizeForm();
         }
         protected override void SetVisibleCore(bool value)
@@ -299,25 +299,40 @@ namespace TrayDir
 
             iv.setEventHandlers(ShowApp, HideApp, ExitApp);
             iv.UpdateTrayMenu();
-            instanceView = iv;
             return iv;
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             resizeForm();
-            timer1.Interval = 100;
+            timer1.Enabled = false;
         }
         private void resizeForm()
         {
             if (instanceTabs.SelectedIndex >= 0)
             {
-                if (Program.DEBUG) instanceTabs.SelectedTab.BackColor = Color.Orange;
-                int tempHeight = instanceView.GetHeight();
-                //tempHeight += mainMenu.Height;
-                if (Program.DEBUG) Text = tempHeight.ToString();
-                instanceTabs.Height = tempHeight + instanceTabs.ItemSize.Height;
+                if (Program.DEBUG) instanceTabs.SelectedTab.BackColor = Color.Red;
+                if (trayInstance.view != null)
+                {
+                    int tempHeight = trayInstance.view.GetHeight();
+                    //tempHeight += mainMenu.Height;
+                    if (Program.DEBUG) Text =
+                            "T" + instanceTabs.ItemSize.Height.ToString()
+                            + ",C" + ClientSize.Height.ToString()
+                            + ",MM" + mainMenu.Height.ToString()
+                            + ",IT" + instanceTabs.ClientSize.Height.ToString()
+                            + ",ST" + instanceTabs.SelectedTab.ClientSize.Height.ToString()
+                            + ",O" + trayInstance.view.options.GetHeight().ToString()
+                            + ",P" + trayInstance.view.paths.GetHeight().ToString()
+                            + ",p" + trayInstance.view.p.Size.Height;
+                    instanceTabs.SelectedTab.ClientSize = new Size(instanceTabs.SelectedTab.ClientSize.Width, trayInstance.view.p.Size.Height);
+                    instanceTabs.ClientSize = new Size(instanceTabs.ClientSize.Width, instanceTabs.SelectedTab.ClientSize.Height + instanceTabs.SelectedTab.Top + instanceTabs.Margin.Bottom);
+                    if (prevHeight == 0 || prevHeight > instanceTabs.ClientSize.Height)
+                    {
+                        ClientSize = new Size(ClientSize.Width, instanceTabs.Height + mainMenu.Height);
+                    }
+                    prevHeight = instanceTabs.ClientSize.Height;
+                }
             }
-            panel1.PerformLayout();
         }
         private void instanceTabs_SelectedIndexChanged(object sender, EventArgs e)
         {
