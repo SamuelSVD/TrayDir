@@ -8,3 +8,4 @@ TrayDir/bin
 *.suo
 Installer/binaries
 TrayDir/lib/VisualStudioTabControl/obj/
+*.pfx
