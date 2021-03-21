@@ -19,7 +19,7 @@ namespace TrayDir
         }
         public static ProgramData Load()
         {
-            ProgramData.config = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml";
+            config = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml";
             ProgramData pd = XMLUtils.LoadFromFile<ProgramData>(config);
             if (pd is null)
             {

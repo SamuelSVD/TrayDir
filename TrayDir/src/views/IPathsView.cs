@@ -48,7 +48,9 @@ namespace TrayDir
                         MainForm.form.pd.Save();
                     }
                 });
-                textbox = ControlUtils.AddPath(pathstlp, i, path, instance, fileSelect, folderSelect);
+                PathView pv = ControlUtils.AddPath(pathstlp, i, path);
+                pv.folderButton.Click += folderSelect;
+                pv.fileButton.Click += fileSelect;
             }
         }
         public Control GetControl()

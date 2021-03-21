@@ -122,7 +122,7 @@ namespace TrayDir
             {
                 try
                 {
-                    notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(instance.iconPath);
+                    notifyIcon.Icon = Icon.ExtractAssociatedIcon(instance.iconPath);
                 }
                 catch (Exception e)
                 {
