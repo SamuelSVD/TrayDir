@@ -71,7 +71,7 @@ namespace TrayDir
             tlp.RowStyles[row].Height = 0;
             tlp.RowCount = row + 1;
         }
-        public static PathView AddPath(TableLayoutPanel tlp, int row, string text)
+        public static PathView AddPath(TableLayoutPanel tlp, int row)
         {
             int n = row;
             PathView pv = new PathView();
@@ -87,19 +87,6 @@ namespace TrayDir
             ConfigurePathTableStyles(tlp, 0);
             pv.ResizeButtons(pv.fileButton.Height);
             tlp.Controls.Add(pv.buttonsPanel, 0, row);
-
-            if (AppUtils.PathIsDirectory(text))
-            {
-                pv.textbox.Text = new DirectoryInfo(text).FullName;
-            }
-            else if (AppUtils.PathIsFile(text))
-            {
-                pv.textbox.Text = Path.GetFullPath(text);
-            }
-            else
-            {
-                pv.textbox.Text = text;
-            }
 
             return pv;
         }

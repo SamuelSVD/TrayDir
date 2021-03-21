@@ -56,7 +56,7 @@ namespace TrayDir
             this.label2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
             this.label2.Size = new System.Drawing.Size(352, 95);
             this.label2.TabIndex = 1;
-            this.label2.Text = "A program by Sam Vergara\r\nvisit samver.ca for more information\r\n© samver 2020";
+            this.label2.Text = "A program by Sam Vergara\r\nvisit samver.ca for more information\r\n© samver 2021";
             // 
             // label3
             // 
@@ -66,7 +66,7 @@ namespace TrayDir
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(201, 25);
             this.label3.TabIndex = 2;
-            this.label3.Text = "V2.0.4 | 2020-11-30";
+            this.label3.Text = "V2.1.0 | 2021-03-21";
             // 
             // About
             // 

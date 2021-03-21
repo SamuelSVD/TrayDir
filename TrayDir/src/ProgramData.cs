@@ -73,7 +73,7 @@ namespace TrayDir
             {
                 if (instance.settings.paths.Count == 0)
                 {
-                    instance.settings.paths.Add(".");
+                    instance.settings.paths.Add(TrayInstance.defaultPath);
                 }
             }
         }

@@ -89,6 +89,10 @@ namespace TrayDir
         }
         public void UpdateInstanceTabs()
         {
+            foreach (TrayInstance ti in pd.trayInstances)
+            {
+                ti.view.paths.FixPaths();
+            }
         }
         public void OnTabSwapped(object sender, SmartTabControl.TabSwappedArgs tsa)
         {
@@ -386,6 +390,26 @@ namespace TrayDir
             {
                 instanceTabs.TabPages.RemoveAt(i);
             }
+        }
+        public void SwapPaths(int a, int b)
+        {
+            string sa = trayInstance.settings.paths[a];
+            trayInstance.settings.paths[a] = trayInstance.settings.paths[b];
+            trayInstance.settings.paths[b] = sa;
+            trayInstance.view.paths.FixPaths();
+            trayInstance.view.UpdateTrayMenu();
+        }
+        public void RemovePath(int i)
+        {
+            trayInstance.settings.paths.RemoveAt(i);
+            trayInstance.view.paths.FixPaths();
+            trayInstance.view.UpdateTrayMenu();
+        }
+        public void InsertPath(int i)
+        {
+            trayInstance.settings.paths.Insert(i, TrayInstance.defaultPath);
+            trayInstance.view.paths.FixPaths();
+            trayInstance.view.UpdateTrayMenu();
         }
     }
 }

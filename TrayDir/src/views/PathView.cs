@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FolderSelect;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -16,16 +17,19 @@ namespace TrayDir
         public Panel panel;
         public Button fileButton;
         public Button folderButton;
+        private EventHandler fileSelect;
+        private EventHandler folderSelect;
+        private EventHandler upSelect;
+        private EventHandler downSelect;
+        private EventHandler addSelect;
+        private EventHandler deleteSelect;
+
         public PathView()
         {
             CreateTextField();
             CreateFileButton();
             CreateFolderButton();
 
-            int y = fileButton.Height;
-            //this.upButton.MaximumSize = new Size(y, y / 2);
-            //this.downButton.MaximumSize = new Size(y, y / 2);
-            //this.upButton.Font = this.downButton.Font;
             CreateUpButton();
             CreateDownButton();
             CreateAddButton();
@@ -41,7 +45,6 @@ namespace TrayDir
         }
         private void CreateTextField()
         {
-            // textBox1
             textbox = new TextBox();
             textbox.BorderStyle = BorderStyle.None;
             textbox.Dock = DockStyle.Fill;
@@ -49,7 +52,6 @@ namespace TrayDir
             textbox.AutoSize = true;
             textbox.ReadOnly = true;
             
-            // panel
             panel = new Panel();
             panel.AutoSize = true;
             panel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -60,16 +62,21 @@ namespace TrayDir
             panel.Margin = new Padding(2, 3, 2, 3);
             panel.Padding = new Padding(0);
 
-            TextBox tb = textbox;
             EventHandler textbox_select = new EventHandler(delegate (object obj, EventArgs args)
             {
-                tb.Select();
+                textbox.Select();
             });
             panel.Click += textbox_select;
 
             panel.Controls.Add(textbox);
         }
-
+        internal void RemoveFromControl(Control c)
+        {
+            c.Controls.Remove(buttonsPanel);
+            c.Controls.Remove(panel);
+            c.Controls.Remove(fileButton);
+            c.Controls.Remove(folderButton);
+        }
         private void CreateButtonsPanel()
         {
             buttonsPanel = new TableLayoutPanel();
@@ -198,6 +205,79 @@ namespace TrayDir
             deleteButton.Height = height;
             deleteButton.Width = height;
         }
-
+        public void SetEvents(TrayInstance instance, int pathIndex)
+        {
+            if (fileSelect != null)
+            {
+                fileButton.Click -= fileSelect;
+            }
+            fileSelect = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                MainForm.form.fd.DereferenceLinks = false;
+                MainForm.form.fd.InitialDirectory = textbox.Text;
+                DialogResult d = MainForm.form.fd.ShowDialog();
+                if (d == DialogResult.OK)
+                {
+                    textbox.Text = MainForm.form.fd.FileName;
+                    instance.settings.paths[pathIndex] = textbox.Text;
+                    instance.view.UpdateTrayMenu();
+                    MainForm.form.pd.Save();
+                }
+            });
+            if (folderSelect != null)
+            {
+                folderButton.Click -= folderSelect;
+            }
+            folderSelect = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                FolderSelectDialog fs = new FolderSelectDialog();
+                fs.InitialDirectory = textbox.Text;
+                if (fs.ShowDialog())
+                {
+                    textbox.Text = fs.FileName;
+                    instance.settings.paths[pathIndex] = textbox.Text;
+                    instance.view.UpdateTrayMenu();
+                    MainForm.form.pd.Save();
+                }
+            });
+            folderButton.Click += folderSelect;
+            fileButton.Click += fileSelect;
+            if (downSelect != null)
+            {
+                downButton.Click -= downSelect;
+            }
+            downSelect = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                MainForm.form.SwapPaths(pathIndex, pathIndex + 1);
+            });
+            downButton.Click += downSelect;
+            if (upSelect != null)
+            {
+                upButton.Click -= upSelect;
+            }
+            upSelect = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                MainForm.form.SwapPaths(pathIndex, pathIndex - 1);
+            });
+            upButton.Click += upSelect;
+            if (addSelect != null)
+            {
+                addButton.Click -= addSelect;
+            }
+            addSelect = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                MainForm.form.InsertPath(pathIndex+1);
+            });
+            addButton.Click += addSelect;
+            if (deleteSelect != null)
+            {
+                deleteButton.Click -= deleteSelect;
+            }
+            deleteSelect = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                MainForm.form.RemovePath(pathIndex);
+            });
+            deleteButton.Click += deleteSelect;
+        }
     }
 }
