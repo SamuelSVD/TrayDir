@@ -76,33 +76,30 @@ namespace TrayDir
             int n = row;
             PathView pv = new PathView();
 
-            CreatePathsTextField(ref pv, text);
-            CreatePathsFileButton(ref pv);
-            CreatePathsFolderButton(ref pv);
-
             tlp.Controls.Add(pv.panel, 1, row);
             tlp.Controls.Add(pv.fileButton, 2, row);
             tlp.Controls.Add(pv.folderButton, 3, row);
 
-
-            int y = pv.fileButton.Height;
-            //pv.upButton.MaximumSize = new Size(y, y / 2);
-            //pv.downButton.MaximumSize = new Size(y, y / 2);
-            //pv.upButton.Font = pv.downButton.Font;
-            CreatePathsUpButton(ref pv, y);
-            CreatePathsDownButton(ref pv, y);
-            CreatePathsUpDownPanel(ref pv);
-
-            pv.updownPanel.Controls.Add(pv.upButton, 0, 0);
-            pv.updownPanel.Controls.Add(pv.downButton, 0, 1);
-
             tlp.RowCount = row + 1;
             tlp.Height = 0;
-            tlp.RowStyles.Add(new RowStyle());
+            //tlp.RowStyles.Add(new RowStyle());
 
             ConfigurePathTableStyles(tlp, 0);
+            pv.ResizeButtons(pv.fileButton.Height);
+            tlp.Controls.Add(pv.buttonsPanel, 0, row);
 
-            tlp.Controls.Add(pv.updownPanel, 0, row);
+            if (AppUtils.PathIsDirectory(text))
+            {
+                pv.textbox.Text = new DirectoryInfo(text).FullName;
+            }
+            else if (AppUtils.PathIsFile(text))
+            {
+                pv.textbox.Text = Path.GetFullPath(text);
+            }
+            else
+            {
+                pv.textbox.Text = text;
+            }
 
             return pv;
         }
@@ -123,7 +120,7 @@ namespace TrayDir
                 switch (i)
                 {
                     case 0:
-                        style.SizeType = SizeType.Percent;
+                        style.SizeType = SizeType.AutoSize;
                         style.Width = 5;
                         break;
                     case 1:
@@ -142,122 +139,6 @@ namespace TrayDir
             }
         }
 
-        private static void CreatePathsTextField(ref PathView pv, string text)
-        {
-            // textBox1
-            pv.textbox = new TextBox();
-            pv.textbox.BorderStyle = BorderStyle.None;
-            pv.textbox.Dock = DockStyle.Fill;
-            pv.textbox.Margin = new Padding(10);
-            pv.textbox.AutoSize = true;
-            pv.textbox.ReadOnly = true;
-
-            if (AppUtils.PathIsDirectory(text))
-            {
-                pv.textbox.Text = new DirectoryInfo(text).FullName;
-            }
-            else if (AppUtils.PathIsFile(text))
-            {
-                pv.textbox.Text = Path.GetFullPath(text);
-            }
-            else
-            {
-                pv.textbox.Text = text;
-            }
-            // panel
-            pv.panel = new Panel();
-            pv.panel.AutoSize = true;
-            pv.panel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            pv.panel.Cursor = pv.textbox.Cursor;
-            pv.panel.BackColor = pv.textbox.BackColor;
-            pv.panel.BorderStyle = BorderStyle.FixedSingle;
-            pv.panel.Dock = DockStyle.Fill;
-            pv.panel.Margin = new Padding(2, 3, 2, 3);
-            pv.panel.Padding = new Padding(0);
-
-            TextBox tb = pv.textbox;
-            EventHandler textbox_select = new EventHandler(delegate (object obj, EventArgs args)
-            {
-                tb.Select();
-            });
-            pv.panel.Click += textbox_select;
-
-            pv.panel.Controls.Add(pv.textbox);
-        }
-
-        private static void CreatePathsUpDownPanel(ref PathView pv)
-        {
-            pv.updownPanel = new TableLayoutPanel();
-            if (Program.DEBUG) pv.updownPanel.BackColor = Color.Green;
-            ConfigureTableLayoutPanel(pv.updownPanel);
-
-            ColumnStyle cs = new ColumnStyle();
-            cs.SizeType = SizeType.AutoSize;
-            pv.updownPanel.ColumnStyles.Add(cs);
-            RowStyle rs1 = new RowStyle();
-            rs1.SizeType = SizeType.AutoSize;
-            pv.updownPanel.RowStyles.Add(rs1);
-            RowStyle rs2 = new RowStyle();
-            rs2.SizeType = SizeType.AutoSize;
-            pv.updownPanel.RowStyles.Add(rs2);
-        }
-
-        private static void CreatePathsDownButton(ref PathView pv, int h)
-        {
-            pv.downButton = new Button();
-            pv.downButton.Text = "▼";
-            pv.downButton.Width = h;
-            pv.downButton.Height = h / 2;
-            //pv.downButton.Height = 0;
-            //pv.downButton.Dock = DockStyle.Top;
-            //pv.downButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pv.downButton.Padding = new Padding();
-            pv.downButton.Margin = new Padding();
-            pv.downButton.AutoSize = false;
-            pv.downButton.FlatStyle = FlatStyle.Flat;
-            pv.downButton.FlatAppearance.BorderSize = 1;
-            //pv.downButton.UseCompatibleTextRendering = true;
-            pv.downButton.Font = new Font("Microsoft Sans Serif", pv.fileButton.Font.Size / 2, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-            pv.downButton.TextAlign = ContentAlignment.TopRight;
-        }
-        private static void CreatePathsUpButton(ref PathView pv, int h)
-        {
-            
-            pv.upButton = new Button();
-            pv.upButton.Text = "▲";
-            pv.upButton.Width = h;
-            pv.upButton.Height = h / 2;
-            //pv.upButton.Width = 0;
-            //pv.upButton.Height = 0;
-            //pv.upButton.Dock = DockStyle.Top;
-            //pv.upButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pv.upButton.Padding = new Padding();
-            pv.upButton.Margin = new Padding();
-            //pv.upButton.AutoSize = true;
-            pv.upButton.FlatStyle = FlatStyle.Flat;
-            pv.upButton.FlatAppearance.BorderSize = 1;
-            //pv.upButton.UseCompatibleTextRendering = true;
-            pv.upButton.Font = new Font("Microsoft Sans Serif", pv.fileButton.Font.Size / 2, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-        }
-        private static void CreatePathsFileButton(ref PathView pv)
-        {
-            pv.fileButton = new Button();
-            pv.fileButton.AutoSize = true;
-            pv.fileButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            pv.fileButton.TabIndex = 1;
-            pv.fileButton.Text = "File";
-            pv.fileButton.UseVisualStyleBackColor = true;
-            pv.fileButton.Dock = DockStyle.Fill;
-        }
-        private static void CreatePathsFolderButton(ref PathView pv)
-        {
-            pv.folderButton = new Button();
-            pv.folderButton.AutoSize = true;
-            pv.folderButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            pv.folderButton.Text = "Folder";
-            pv.folderButton.UseVisualStyleBackColor = true;
-            pv.folderButton.Dock = DockStyle.Fill;
-        }
         public static void ConfigureGroupBox(GroupBox gb)
         {
             gb.Dock = DockStyle.Top;

@@ -1,5 +1,6 @@
 ﻿using FolderSelect;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -7,6 +8,7 @@ namespace TrayDir
     public class IPathsView
     {
         public GroupBox pathsgb;
+        public List<PathView> pathViews;
         public IPathsView(TrayInstance instance)
         {
             // Paths Group
@@ -18,6 +20,7 @@ namespace TrayDir
             ControlUtils.ConfigureTableLayoutPanel(pathstlp);
             pathsgb.Controls.Add(pathstlp);
 
+            pathViews = new List<PathView>();
             for (int i = 0; i < instance.settings.paths.Count; i++)
             {
                 string path = instance.settings.paths[i];
@@ -51,6 +54,7 @@ namespace TrayDir
                 PathView pv = ControlUtils.AddPath(pathstlp, i, path);
                 pv.folderButton.Click += folderSelect;
                 pv.fileButton.Click += fileSelect;
+                pathViews.Add(pv);
             }
         }
         public Control GetControl()

@@ -23,9 +23,27 @@ namespace TrayDir
         public MainForm()
         {
             InitializeComponent();
-            // 
-            // instanceTabs
-            //
+
+            fd = FileDialog;
+            pd = ProgramData.Load();
+            if (pd.trayInstances.Count == 0)
+            {
+                pd.CreateDefaultInstance();
+            }
+
+            deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
+
+            pd.FixInstances();
+            pd.CheckStartup();
+            pd.Save();
+            CreateInstanceTabsLayout();
+            InitializeInstanceTabs();
+            UpdateInstanceTabs();
+            InitializeAllAssets();
+            BuildExploreDropdown();
+        }
+        private void CreateInstanceTabsLayout()
+        {
             instanceTabs = new SmartTabControl();
             instanceTabs.AllowDrop = true;
             instanceTabs.Dock = DockStyle.Top;
@@ -51,26 +69,12 @@ namespace TrayDir
             instanceTabs.OnTabClick += OnTabClick;
             instanceTabs.OnTabsSwapped += OnTabSwapped;
 
-            fd = FileDialog;
-            pd = ProgramData.Load();
-            if (pd.trayInstances.Count == 0)
-            {
-                pd.CreateDefaultInstance();
-            }
-
-            deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
-            pd.FixInstances();
-            pd.CheckStartup();
-            pd.Save();
-            InitializeInstanceTabs();
-            InitializeAllAssets();
-            BuildExploreDropdown();
         }
         public void OnTabClick(object sender, SmartTabControl.TabClickedArgs tca)
         {
             TabPage tp = tca.TabPage;
             MouseEventArgs mea = tca.MouseEventArgs;
-            if (tp != this.newTabTabPage)
+            if (tp != newTabTabPage)
             {
                 if ((mea.Button == MouseButtons.Middle) && pd.trayInstances.Count > 1)
                 {
@@ -82,6 +86,9 @@ namespace TrayDir
                 }
             }
             resizeForm();
+        }
+        public void UpdateInstanceTabs()
+        {
         }
         public void OnTabSwapped(object sender, SmartTabControl.TabSwappedArgs tsa)
         {
@@ -303,6 +310,7 @@ namespace TrayDir
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
+            timer1.Interval = 1000;
             resizeForm();
         }
         private void resizeForm()

@@ -87,7 +87,7 @@ namespace TrayDir
         protected override void OnMouseDown(MouseEventArgs e)
         {
             predraggedTab = getPointedTab();
-            if (this.IgnoreDragTabPages.IndexOf(predraggedTab) > -1)
+            if (IgnoreDragTabPages.IndexOf(predraggedTab) > -1)
             {
                 predraggedTab = null;
             }

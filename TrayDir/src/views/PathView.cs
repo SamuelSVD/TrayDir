@@ -1,16 +1,203 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace TrayDir
 {
-    class PathView
+    public class PathView
     {
         public Button upButton;
         public Button downButton;
-        public TableLayoutPanel updownPanel;
+        public Button addButton;
+        public Button deleteButton;
+        public TableLayoutPanel buttonsPanel;
         public TextBox textbox;
         public Panel panel;
         public Button fileButton;
         public Button folderButton;
+        public PathView()
+        {
+            CreateTextField();
+            CreateFileButton();
+            CreateFolderButton();
+
+            int y = fileButton.Height;
+            //this.upButton.MaximumSize = new Size(y, y / 2);
+            //this.downButton.MaximumSize = new Size(y, y / 2);
+            //this.upButton.Font = this.downButton.Font;
+            CreateUpButton();
+            CreateDownButton();
+            CreateAddButton();
+            CreateDeleteButton();
+            CreateButtonsPanel();
+
+            buttonsPanel.Controls.Add(upButton, 0, 0);
+            buttonsPanel.Controls.Add(downButton, 0, 1);
+            buttonsPanel.Controls.Add(addButton, 1, 0);
+            buttonsPanel.Controls.Add(deleteButton, 2, 0);
+            buttonsPanel.SetRowSpan(deleteButton, 2);
+            buttonsPanel.SetRowSpan(addButton, 2);
+        }
+        private void CreateTextField()
+        {
+            // textBox1
+            textbox = new TextBox();
+            textbox.BorderStyle = BorderStyle.None;
+            textbox.Dock = DockStyle.Fill;
+            textbox.Margin = new Padding(10);
+            textbox.AutoSize = true;
+            textbox.ReadOnly = true;
+            
+            // panel
+            panel = new Panel();
+            panel.AutoSize = true;
+            panel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel.Cursor = textbox.Cursor;
+            panel.BackColor = textbox.BackColor;
+            panel.BorderStyle = BorderStyle.FixedSingle;
+            panel.Dock = DockStyle.Fill;
+            panel.Margin = new Padding(2, 3, 2, 3);
+            panel.Padding = new Padding(0);
+
+            TextBox tb = textbox;
+            EventHandler textbox_select = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                tb.Select();
+            });
+            panel.Click += textbox_select;
+
+            panel.Controls.Add(textbox);
+        }
+
+        private void CreateButtonsPanel()
+        {
+            buttonsPanel = new TableLayoutPanel();
+            if (Program.DEBUG) buttonsPanel.BackColor = Color.Green;
+            ControlUtils.ConfigureTableLayoutPanel(buttonsPanel);
+
+            ColumnStyle cs = new ColumnStyle();
+            cs.SizeType = SizeType.AutoSize;
+            buttonsPanel.ColumnStyles.Add(cs);
+            RowStyle rs1 = new RowStyle();
+            rs1.SizeType = SizeType.AutoSize;
+            buttonsPanel.RowStyles.Add(rs1);
+            RowStyle rs2 = new RowStyle();
+            rs2.SizeType = SizeType.AutoSize;
+            buttonsPanel.RowStyles.Add(rs2);
+        }
+        private void CreateUpButton()
+        {
+
+            upButton = new Button();
+            upButton.Text = "▲";
+            upButton.Padding = new Padding();
+            upButton.Margin = new Padding();
+            upButton.UseCompatibleTextRendering = true;
+            upButton.Font = new Font("Microsoft Sans Serif", fileButton.Font.Size / 2, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+        }
+        private void CreateDownButton()
+        {
+            downButton = new Button();
+            downButton.Text = "▼";
+            downButton.Padding = new Padding();
+            downButton.Margin = new Padding();
+            downButton.UseCompatibleTextRendering = true;
+            downButton.Font = new Font("Microsoft Sans Serif", fileButton.Font.Size / 2, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            downButton.TextAlign = ContentAlignment.MiddleCenter;
+        }
+        private void CreateAddButton()
+        {
+            addButton = new Button()
+            {
+                Text = "+",
+                Padding = new Padding(),
+                Margin = new Padding(),
+                AutoSize = false,
+                UseCompatibleTextRendering = true,
+                //Font = new Font("Microsoft Sans Serif", fileButton.Font.Size / 2, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            addButton.FlatAppearance.BorderSize = 1;
+        }
+        private void CreateDeleteButton()
+        {
+            deleteButton = new Button()
+            {
+                Text = "-",
+                Padding = new Padding(),
+                Margin = new Padding(),
+                AutoSize = false,
+                UseCompatibleTextRendering = true,
+                //Font = new Font("Microsoft Sans Serif", fileButton.Font.Size / 2, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            deleteButton.FlatAppearance.BorderSize = 1;
+        }
+        private void CreateFileButton()
+        {
+            fileButton = new Button();
+            fileButton.AutoSize = true;
+            fileButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            fileButton.TabIndex = 1;
+            fileButton.Text = "File";
+            fileButton.UseVisualStyleBackColor = true;
+            fileButton.Dock = DockStyle.Top;
+        }
+        private void CreateFolderButton()
+        {
+            folderButton = new Button();
+            folderButton.AutoSize = true;
+            folderButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            folderButton.Text = "Folder";
+            folderButton.UseVisualStyleBackColor = true;
+            folderButton.Dock = DockStyle.Top;
+        }
+        private static void ConfigurePathTableStyles(TableLayoutPanel tlp, int buttonWidth)
+        {
+            RowStyle rs = new RowStyle();
+            rs.SizeType = SizeType.AutoSize;
+            tlp.RowStyles.Add(rs);
+            for (int i = 0; i < 3; i++)
+            {
+                if (tlp.ColumnStyles.Count < (i + 1))
+                {
+                    tlp.ColumnStyles.Add(new ColumnStyle());
+                }
+                ColumnStyle style = tlp.ColumnStyles[i];
+                style.SizeType = SizeType.Percent;
+                switch (i)
+                {
+                    case 0:
+                        style.SizeType = SizeType.Percent;
+                        style.Width = 5;
+                        break;
+                    case 1:
+                        style.SizeType = SizeType.Percent;
+                        style.Width = 65;
+                        break;
+                    case 2:
+                        style.SizeType = SizeType.Percent;
+                        style.Width = 15;
+                        break;
+                    default:
+                        style.SizeType = SizeType.Percent;
+                        style.Width = 15;
+                        break;
+                }
+            }
+        }
+        public void ResizeButtons(int height)
+        {
+            upButton.Width = height;
+            upButton.Height = height / 2;
+            downButton.Width = height;
+            downButton.Height = height / 2;
+            addButton.Height = height;
+            addButton.Width = height;
+            deleteButton.Height = height;
+            deleteButton.Width = height;
+        }
 
     }
 }
