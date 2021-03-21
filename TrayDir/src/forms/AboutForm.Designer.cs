@@ -31,7 +31,7 @@ namespace TrayDir
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.versionLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -58,15 +58,15 @@ namespace TrayDir
             this.label2.TabIndex = 1;
             this.label2.Text = "A program by Sam Vergara\r\nvisit samver.ca for more information\r\n© samver 2021";
             // 
-            // label3
+            // versionLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Location = new System.Drawing.Point(50, 238);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(201, 25);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "V2.1.0 | 2021-03-21";
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.versionLabel.Location = new System.Drawing.Point(50, 238);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(201, 25);
+            this.versionLabel.TabIndex = 2;
+            this.versionLabel.Text = "V2.1.0 | 2021-03-21";
             // 
             // About
             // 
@@ -74,7 +74,7 @@ namespace TrayDir
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(454, 328);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -90,6 +90,6 @@ namespace TrayDir
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label versionLabel;
     }
 }

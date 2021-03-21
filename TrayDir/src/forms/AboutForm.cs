@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Reflection;
+using System.Windows.Forms;
 
 namespace TrayDir
 {
@@ -7,6 +8,7 @@ namespace TrayDir
         public About()
         {
             InitializeComponent();
+            versionLabel.Text = "Version: " + Assembly.GetEntryAssembly().GetName().Version.ToString();
         }
     }
 }
