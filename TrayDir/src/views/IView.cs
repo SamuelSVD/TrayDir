@@ -82,7 +82,7 @@ namespace TrayDir
 
             notifyIcon.ContextMenuStrip.Items.Add("-");
 
-            if (instance.settings.paths.Count == 1)
+            if (instance.settings.paths.Count == 1 && instance.settings.ExpandFirstPath)
             {
                 String path = instance.settings.paths[0];
                 ToolStripMenuItem mi = AppUtils.RecursivePathFollow(instance.settings, path);
