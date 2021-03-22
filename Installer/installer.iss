@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "TrayDir"
-#define MyAppVersion "2.0.4"
+#define MyAppVersion "2.1.0"
 #define MyAppPublisher "samver"
 #define MyAppURL "https://samver.ca/TrayDir"
 #define MyAppExeName "TrayDir.exe"
@@ -27,7 +27,7 @@ LicenseFile=license.txt
 ; Remove the following line to run in administrative install mode (install for all users.)
 ; PrivilegesRequired=lowest
 ; PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=C:\Programming\samverApps\TrayDir\Installer
+OutputDir=C:\Programming\samverApps\TrayDir\Installer\bin
 OutputBaseFilename="TrayDir_{#MyAppVersion}_Install"
 SetupIconFile=C:\Programming\samverApps\TrayDir\Resources\file-exe.ico
 Compression=lzma
@@ -48,7 +48,6 @@ Source: "C:\Programming\samverApps\TrayDir\TrayDir\bin\Release\TrayDir.exe"; Des
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
-Name: "{commonstartup}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}";
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
