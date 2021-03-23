@@ -13,6 +13,7 @@ namespace TrayDir
         private bool allowClose;       // ContextMenu's Exit command used
         private int prevHeight;
         private TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
+        private TrayInstance onShowInstance;
         public ProgramData pd;
         public FileDialog fd;
         public SmartTabControl instanceTabs;
@@ -120,7 +121,10 @@ namespace TrayDir
             instanceTabs.TabPages.Add(newTabTabPage);
             instanceTabs.SelectedIndex = i;
             IView iv = CreateViewFromInstance(instance, tp);
-            iv.notifyIcon.DoubleClick += ShowApp;
+            iv.notifyIcon.DoubleClick += new EventHandler(delegate (object obj, EventArgs args) {
+                onShowInstance = instance;
+                ShowApp(obj, args);
+            });
             EventHandler tabClose = new EventHandler(delegate (object obj, EventArgs args)
             {
                 pd.trayInstances.Remove(instance);
@@ -249,10 +253,21 @@ namespace TrayDir
 
         public void ShowApp(object sender, EventArgs e)
         {
+            if (onShowInstance != null)
+            {
+                int i = pd.trayInstances.IndexOf(onShowInstance);
+                if (i >= 0)
+                {
+                    instanceTabs.SelectedIndex = i;
+                }
+                onShowInstance = null;
+            }
             allowVisible = true;
+            Visible = true;
             Show();
             Focus();
             pd.FormShowed();
+            Invalidate();
         }
         public void ExitApp(object sender, EventArgs e)
         {
@@ -283,18 +298,28 @@ namespace TrayDir
             tp.Text = instance.instanceName;
             tp.Controls.Add(iv.GetControl());
 
-            iv.setEventHandlers(ShowApp, HideApp, ExitApp);
+            iv.setEventHandlers(new EventHandler(delegate(Object obj, EventArgs args) {
+                onShowInstance = instance;
+                ShowApp(obj, args);
+            }), HideApp, ExitApp);
             iv.UpdateTrayMenu();
             return iv;
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Interval = 1000;
+            if (Visible)
+            {
+                timer1.Interval = 1000;
+            }
+            else
+            {
+                timer1.Interval = 100;
+            }
             resizeForm();
         }
         private void resizeForm()
         {
-            if (instanceTabs.SelectedIndex >= 0)
+            if (Visible && instanceTabs.SelectedIndex >= 0)
             {
                 if (Program.DEBUG) instanceTabs.SelectedTab.BackColor = Color.Red;
                 if (trayInstance.view != null)
@@ -319,6 +344,7 @@ namespace TrayDir
                     prevHeight = instanceTabs.ClientSize.Height;
                 }
             }
+            PerformLayout();
         }
         private void instanceTabs_SelectedIndexChanged(object sender, EventArgs e)
         {
