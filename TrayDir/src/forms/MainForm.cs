@@ -134,17 +134,6 @@ namespace TrayDir
         {
             form = new MainForm();
         }
-        private void CheckIsAltered()
-        {
-            if (Settings.isAltered())
-            {
-                Text = "TrayDir*";
-            }
-            else
-            {
-                Text = "TrayDir";
-            }
-        }
         public void HideApp(object Sender, EventArgs e)
         {
             Hide();
@@ -220,7 +209,6 @@ namespace TrayDir
         private void Save(object Sender, EventArgs e)
         {
             pd.Save();
-            CheckIsAltered();
         }
 
         private void ShowAbout(object sender, EventArgs e)
@@ -242,7 +230,6 @@ namespace TrayDir
             }
             base.SetVisibleCore(value);
         }
-
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (!allowClose && pd.settings.app.MinimizeOnClose)
@@ -252,16 +239,9 @@ namespace TrayDir
             }
             else
             {
-                if (!Settings.ConfirmClose())
+                foreach (TrayInstance i in pd.trayInstances)
                 {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    foreach (TrayInstance i in pd.trayInstances)
-                    {
-                        i.view.Hide();
-                    }
+                    i.view.Hide();
                 }
             }
             base.OnFormClosing(e);
@@ -282,11 +262,6 @@ namespace TrayDir
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SettingsForm.form.ShowDialog();
-        }
-        private void TrayTextApplyButton_Click(object sender, EventArgs e)
-        {
-            Settings.Alter();
-            CheckIsAltered();
         }
         private void MainForm_Load(object sender, EventArgs e) { }
         public void InitializeAllAssets()

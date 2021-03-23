@@ -145,18 +145,5 @@ namespace TrayDir
             notifyIcon.ContextMenuStrip.Items[0].Visible = false;
             notifyIcon.ContextMenuStrip.Items[1].Visible = true;
         }
-        public bool BrowseForIcon()
-        {
-            string newPath = TrayUtils.BrowseForIconPath(instance.iconPath);
-            if (newPath != null)
-            {
-                //SettingsForm.form.TrayIconPathTextBox.Text = newPath;
-                //instance.iconText = SettingsForm.form.TrayIconPathTextBox.Text;
-                UpdateTrayMenu();
-                Settings.Alter();
-                return true;
-            }
-            return false;
-        }
     }
 }

@@ -12,7 +12,8 @@ namespace TrayDir
         {
             OpenFileDialog iconFileDialog = new OpenFileDialog();
             iconFileDialog.DereferenceLinks = false;
-            iconFileDialog.InitialDirectory = startingPath;
+            iconFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(startingPath);
+            iconFileDialog.FileName = startingPath;
             DialogResult d = iconFileDialog.ShowDialog();
             if (d == DialogResult.OK)
             {

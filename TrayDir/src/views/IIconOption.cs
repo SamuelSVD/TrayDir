@@ -31,16 +31,16 @@ namespace TrayDir
 
             EventHandler bClick = new EventHandler(delegate (object obj, EventArgs args)
             {
-                iconFileDialog.FileName = instance.iconPath;
-                if (iconFileDialog.ShowDialog() == DialogResult.OK)
+                string newPath = TrayUtils.BrowseForIconPath(instance.iconPath);
+                if (newPath != null)
                 {
-                    string iconPath = iconFileDialog.FileName;
-                    instance.iconPath = iconPath;
+                    instance.iconPath = newPath;
                     Icon i = Icon.ExtractAssociatedIcon(instance.iconPath);
                     instance.view.notifyIcon.Icon = i;
                     picturebox.Image = i.ToBitmap();
                     MainForm.form.pd.Save();
                     resetButton.Enabled = true;
+                    instance.view.UpdateTrayMenu();
                 }
             });
             browseButton.Click += bClick;
@@ -91,8 +91,6 @@ namespace TrayDir
                     tlp.RowStyles.Add(rs);
                 }
             }
-
-
         }
         public Control GetControl()
         {
