@@ -147,7 +147,7 @@ namespace TrayDir
                 pd.FormHidden();
             }
         }
-        private void BuildExploreDropdown()
+        public void BuildExploreDropdown()
         {
             exploreToolStripMenuItem.DropDownItems.Clear();
             if (exploreClick != null)
@@ -373,18 +373,21 @@ namespace TrayDir
             trayInstance.settings.paths[b] = sa;
             trayInstance.view.paths.FixPaths();
             trayInstance.view.UpdateTrayMenu();
+            BuildExploreDropdown();
         }
         public void RemovePath(int i)
         {
             trayInstance.settings.paths.RemoveAt(i);
             trayInstance.view.paths.FixPaths();
             trayInstance.view.UpdateTrayMenu();
+            BuildExploreDropdown();
         }
         public void InsertPath(int i)
         {
             trayInstance.settings.paths.Insert(i, TrayInstance.defaultPath);
             trayInstance.view.paths.FixPaths();
             trayInstance.view.UpdateTrayMenu();
+            BuildExploreDropdown();
         }
     }
 }

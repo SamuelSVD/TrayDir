@@ -221,6 +221,7 @@ namespace TrayDir
                     textbox.Text = MainForm.form.fd.FileName;
                     instance.settings.paths[pathIndex] = textbox.Text;
                     instance.view.UpdateTrayMenu();
+                    MainForm.form.BuildExploreDropdown();
                     MainForm.form.pd.Save();
                 }
             });
@@ -237,6 +238,7 @@ namespace TrayDir
                     textbox.Text = fs.FileName;
                     instance.settings.paths[pathIndex] = textbox.Text;
                     instance.view.UpdateTrayMenu();
+                    MainForm.form.BuildExploreDropdown();
                     MainForm.form.pd.Save();
                 }
             });
