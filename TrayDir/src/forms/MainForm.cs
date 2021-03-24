@@ -266,6 +266,8 @@ namespace TrayDir
             Visible = true;
             Show();
             Focus();
+            BringToFront();
+            WindowState = FormWindowState.Normal;
             pd.FormShowed();
             Invalidate();
         }
