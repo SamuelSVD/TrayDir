@@ -66,10 +66,8 @@ namespace TrayDir
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ExploreFoldersInTrayMenu");
 
             ov = ControlUtils.AddOption(optionstlp, 3, "Expand First Path", instance.settings.ExpandFirstPath);
-            ov.SetTooltip("When only one path and is directed to folder, use folder contents in tray menu instead of grouped in folder");
+            ov.SetTooltip("Expand first path's contents in the tray menu");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ExpandFirstPath");
-
-            //ControlUtils.AddEmptyOption(optionstlp, 4);
         }
         public Control GetControl()
         {
