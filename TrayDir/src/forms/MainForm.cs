@@ -218,7 +218,7 @@ namespace TrayDir
         private void ShowAbout(object sender, EventArgs e)
         {
             About aa = new About();
-            aa.Show();
+            aa.ShowDialog();
         }
         private void Rebuild(object sender, EventArgs e)
         {
