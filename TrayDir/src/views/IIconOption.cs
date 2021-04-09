@@ -35,12 +35,12 @@ namespace TrayDir
                 if (newPath != null)
                 {
                     instance.iconPath = newPath;
-                    Icon i = Icon.ExtractAssociatedIcon(instance.iconPath);
-                    instance.view.notifyIcon.Icon = i;
-                    picturebox.Image = i.ToBitmap();
-                    MainForm.form.pd.Save();
+                    instance.iconData = null;
                     resetButton.Enabled = true;
-                    instance.view.UpdateTrayMenu();
+                    instance.view.UpdateTrayIcon();
+                    instance.view.UpdateTrayIcon();
+                    picturebox.Image = instance.view.notifyIcon.Icon.ToBitmap();
+                    MainForm.form.pd.Save();
                 }
             });
             browseButton.Click += bClick;
@@ -58,17 +58,17 @@ namespace TrayDir
             bClick = new EventHandler(delegate (object obj, EventArgs args)
             {
                 
-                instance.iconPath = System.Reflection.Assembly.GetEntryAssembly().Location; ;
-                Icon i = Icon.ExtractAssociatedIcon(instance.iconPath);
-                instance.view.notifyIcon.Icon = i;
-                picturebox.Image = i.ToBitmap();
+                instance.iconPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+                instance.iconData = null;
+                instance.view.UpdateTrayIcon();
+                picturebox.Image = instance.view.notifyIcon.Icon.ToBitmap();
                 MainForm.form.pd.Save();
                 resetButton.Enabled = false;
             });
             resetButton.Click += bClick;
 
             picturebox = new PictureBox();
-            picturebox.Image = Icon.ExtractAssociatedIcon(instance.iconPath).ToBitmap();
+            picturebox.Image = instance.view.GetInstanceIcon().ToBitmap();
             picturebox.Anchor = AnchorStyles.None;
             picturebox.Width = browseButton.Width;
             if (Program.DEBUG) picturebox.BackColor = Color.Purple;

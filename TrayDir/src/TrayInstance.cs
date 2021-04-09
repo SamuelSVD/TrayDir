@@ -12,6 +12,7 @@ namespace TrayDir
         public TrayInstanceSettings settings;
         [XmlAttribute]
         public string iconPath;
+        public byte[] iconData;
         [XmlAttribute]
         public string instanceName;
         [XmlIgnore]
@@ -23,9 +24,8 @@ namespace TrayDir
         }
         public TrayInstance(String instanceName, TrayInstanceSettings settings)
         {
-            defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             this.settings = settings;
-            iconPath = System.Reflection.Assembly.GetEntryAssembly().Location;
             this.instanceName = instanceName;
         }
         public void AddPath(string path)

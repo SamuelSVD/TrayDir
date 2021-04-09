@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace TrayDir
 {
@@ -22,6 +25,23 @@ namespace TrayDir
             else
             {
                 return null;
+            }
+        }
+        public static byte[] IconToBytes(System.Drawing.Icon icon)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                icon.ToBitmap().Save(ms, System.Drawing.Imaging.ImageFormat.Tiff);
+                return ms.ToArray();
+            }
+        }
+        public static System.Drawing.Icon BytesToIcon(byte[] bytes)
+        {
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                Bitmap bmp = new Bitmap(ms);
+                IntPtr Hicon = bmp.GetHicon();
+                return Icon.FromHandle(Hicon);
             }
         }
     }

@@ -37,11 +37,25 @@ namespace TrayDir
             pd.FixInstances();
             pd.CheckStartup();
             pd.Save();
+            InitializeContent();
+            BuildExploreDropdown();
+
+            if (pd.settings.app.StartMinimized)
+            {
+                allowVisible = false;
+                HideApp(this, null);
+            }
+            else
+            {
+                allowVisible = true;
+            }
+            MaximizeBox = false;
+        }
+        private void InitializeContent()
+        {
             CreateInstanceTabsLayout();
             InitializeInstanceTabs();
             UpdateInstanceTabs();
-            InitializeAllAssets();
-            BuildExploreDropdown();
         }
         private void CreateInstanceTabsLayout()
         {
@@ -281,19 +295,6 @@ namespace TrayDir
             SettingsForm.form.ShowDialog();
         }
         private void MainForm_Load(object sender, EventArgs e) { }
-        public void InitializeAllAssets()
-        {
-            if (pd.settings.app.StartMinimized)
-            {
-                allowVisible = false;
-                HideApp(this, null);
-            }
-            else
-            {
-                allowVisible = true;
-            }
-            MaximizeBox = false;
-        }
         private IView CreateViewFromInstance(TrayInstance instance, TabPage tp)
         {
             IView iv = new IView(instance);
@@ -368,7 +369,6 @@ namespace TrayDir
             pd.Save();
             Edit(this, e);
         }
-        
         private void Edit(object sender, EventArgs e)
         {
             string input = trayInstance.instanceName;

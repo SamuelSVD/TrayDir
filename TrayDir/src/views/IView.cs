@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -41,6 +42,7 @@ namespace TrayDir
 
             notifyIcon = new NotifyIcon();
             notifyIcon.Visible = true;
+            UpdateTrayIcon();
         }
         public void setEventHandlers(EventHandler showForm, EventHandler hideForm, EventHandler exitForm)
         {
@@ -60,7 +62,6 @@ namespace TrayDir
             height += paths.GetHeight();
             return height;
         }
-
         public void UpdateTrayMenu()
         {
             if (notifyIcon.ContextMenuStrip is null)
@@ -116,20 +117,42 @@ namespace TrayDir
             notifyIcon.ContextMenuStrip.Items[0].Visible = false;
             UpdateTrayIcon();
         }
-        private void UpdateTrayIcon()
+        public void UpdateTrayIcon()
         {
-            if (AppUtils.PathIsFile(instance.iconPath))
+            Icon i = this.GetInstanceIcon();
+            if (i != null && ((instance.iconPath != null) || (instance.iconData == null)))
             {
-                try
-                {
-                    notifyIcon.Icon = Icon.ExtractAssociatedIcon(instance.iconPath);
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Error loading icon: " + e.Message);
-                }
+                notifyIcon.Icon = i;
+                instance.iconData = TrayUtils.IconToBytes(i);
+                instance.iconPath = null;
             }
             notifyIcon.Text = instance.instanceName;
+            notifyIcon.Icon = i;
+        }
+        public Icon GetInstanceIcon()
+        {
+            Icon i;
+            try
+            {
+                if (instance.iconData != null)
+                {
+                    i = TrayUtils.BytesToIcon(instance.iconData);
+                }
+                else if (AppUtils.PathIsFile(instance.iconPath))
+                {
+                    i = Icon.ExtractAssociatedIcon(instance.iconPath);
+                }
+                else
+                {
+                    i = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error loading icon: " + e.Message);
+                i = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
+            }
+            return i;
         }
         public void Hide()
         {
