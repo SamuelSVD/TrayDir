@@ -57,14 +57,14 @@ namespace TrayDir
             // 
             this.exploreToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.exploreToolStripMenuItem.Name = "exploreToolStripMenuItem";
-            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(113, 44);
+            this.exploreToolStripMenuItem.Size = new System.Drawing.Size(113, 36);
             this.exploreToolStripMenuItem.Text = "Explore";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(100, 44);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(100, 36);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.ShowAbout);
             // 
@@ -82,8 +82,7 @@ namespace TrayDir
             this.aboutToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
-            this.mainMenu.Size = new System.Drawing.Size(1132, 48);
+            this.mainMenu.Size = new System.Drawing.Size(1132, 40);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "mainMenu";
             // 
@@ -93,7 +92,7 @@ namespace TrayDir
             this.saveToolStripMenuItem1,
             this.exitToolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 44);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 36);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveToolStripMenuItem1
@@ -117,7 +116,7 @@ namespace TrayDir
             this.editNameToolStripMenuItem,
             this.deleteSelectedToolStripMenuItem});
             this.instanceToolStripMenuItem.Name = "instanceToolStripMenuItem";
-            this.instanceToolStripMenuItem.Size = new System.Drawing.Size(123, 44);
+            this.instanceToolStripMenuItem.Size = new System.Drawing.Size(123, 36);
             this.instanceToolStripMenuItem.Text = "Instance";
             // 
             // newInstanceToolStripMenuItem
@@ -144,14 +143,14 @@ namespace TrayDir
             // rebuildToolStripMenuItem
             // 
             this.rebuildToolStripMenuItem.Name = "rebuildToolStripMenuItem";
-            this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(115, 44);
+            this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(115, 36);
             this.rebuildToolStripMenuItem.Text = "Rebuild";
             this.rebuildToolStripMenuItem.Click += new System.EventHandler(this.Rebuild);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(121, 44);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(121, 36);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -175,8 +174,8 @@ namespace TrayDir
             // 
             this.panel1.AutoSize = true;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 48);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panel1.Location = new System.Drawing.Point(0, 40);
+            this.panel1.Margin = new System.Windows.Forms.Padding(6);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1132, 0);
             this.panel1.TabIndex = 0;
@@ -192,7 +191,7 @@ namespace TrayDir
             this.Controls.Add(this.mainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = this.Size;
             this.Name = "MainForm";
             this.Text = "TrayDir";

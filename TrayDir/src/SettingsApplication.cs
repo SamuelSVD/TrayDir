@@ -13,6 +13,8 @@ namespace TrayDir
         public bool StartMinimized;
         [XmlAttribute]
         public bool StartWithWindows;
+        [XmlAttribute]
+        public bool ShowIconsInMenus;
         public object this[string propertyName]
         {
             get

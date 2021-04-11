@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -25,7 +26,24 @@ namespace TrayDir
                     menuitem.Text = new DirectoryInfo(path).Name;
                     if (depth < 4)
                     {
+                        List<string> dirs = new List<string>();
+                        List<string> paths = new List<string>();
                         foreach (string fp in Directory.GetFileSystemEntries(path))
+                        {
+                            if (PathIsDirectory(fp))
+                            {
+                                dirs.Add(fp);
+                            }
+                            else
+                            {
+                                paths.Add(fp);
+                            }
+                        }
+                        foreach (string dp in dirs)
+                        {
+                            menuitem.DropDownItems.Add(RecursivePathFollow(settings, dp));
+                        }
+                        foreach (string fp in paths)
                         {
                             menuitem.DropDownItems.Add(RecursivePathFollow(settings, fp));
                         }
@@ -65,6 +83,15 @@ namespace TrayDir
                     OpenPath(Path.GetFullPath(path), settings.RunAsAdmin);
                 }
             });
+
+            if (ProgramData.pd.settings.app.ShowIconsInMenus)
+            {
+                try
+                {
+                    menuitem.Image = Icon.ExtractAssociatedIcon(path).ToBitmap();
+                }
+                catch { }
+            }
 
             menuitem.Click += textbox_select;
             return menuitem;

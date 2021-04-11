@@ -35,6 +35,10 @@ namespace TrayDir
             ov = ControlUtils.AddOption(OptionsGroupLayout, 2, "Start With Windows", MainForm.form.pd.settings.app.StartWithWindows);
             ov.SetTooltip("When enabled, the application will always start hidden, only visible in system tray");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, MainForm.form.pd.settings.app, "StartWithWindows");
+
+            ov = ControlUtils.AddOption(OptionsGroupLayout, 3, "Show Icons In Tray Menu", MainForm.form.pd.settings.app.ShowIconsInMenus);
+            ov.SetTooltip("When enabled, each menu item will show the icon associated with the file linked");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, MainForm.form.pd.settings.app, "ShowIconsInMenus");
         }
 
     }

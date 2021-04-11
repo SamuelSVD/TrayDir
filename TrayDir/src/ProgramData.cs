@@ -12,10 +12,12 @@ namespace TrayDir
         public Settings settings;
         public List<TrayInstance> trayInstances;
         private static string config;
+        public static ProgramData pd;
         public ProgramData()
         {
             settings = new Settings();
             trayInstances = new List<TrayInstance>();
+            ProgramData.pd = this;
         }
         public static ProgramData Load()
         {
