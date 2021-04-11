@@ -53,19 +53,23 @@ namespace TrayDir
             }
             // Add options into table layout
             OptionView ov;
-            ov = ControlUtils.AddOption(optionstlp, 0, "Run As Admin", instance.settings.RunAsAdmin);
+            ov = new OptionView("Run As Admin", instance.settings.RunAsAdmin);
+            ov.AddTo(optionstlp, 0);
             ov.SetTooltip("Run files as administrator user");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "RunAsAdmin");
 
-            ov = ControlUtils.AddOption(optionstlp, 1, "Show File Extensions", instance.settings.ShowFileExtensions);
+            ov = new OptionView("Show File Extensions", instance.settings.ShowFileExtensions);
+            ov.AddTo(optionstlp, 1);
             ov.SetTooltip("Show file exensions in tray menu");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ShowFileExtensions");
 
-            ov = ControlUtils.AddOption(optionstlp, 2, "Explore Folders In TrayMenu", instance.settings.ExploreFoldersInTrayMenu);
+            ov = new OptionView("Explore Folders In TrayMenu", instance.settings.ExploreFoldersInTrayMenu);
+            ov.AddTo(optionstlp, 2);
             ov.SetTooltip("Explore to folder location when folder menu item clicked in tray menu");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ExploreFoldersInTrayMenu");
 
-            ov = ControlUtils.AddOption(optionstlp, 3, "Expand First Path", instance.settings.ExpandFirstPath);
+            ov = new OptionView("Expand First Path", instance.settings.ExpandFirstPath);
+            ov.AddTo(optionstlp, 3);
             ov.SetTooltip("Expand first path's contents in the tray menu");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ExpandFirstPath");
         }
