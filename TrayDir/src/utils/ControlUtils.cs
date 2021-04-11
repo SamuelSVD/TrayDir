@@ -101,6 +101,17 @@ namespace TrayDir
             });
             cb.Click += cbClick;
         }
+        public static void SetComboBoxChangedEvent(ComboBox cb, SettingsApplication settings, string settingName)
+        {
+            EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                settings[settingName] = cb.SelectedItem;
+
+                MainForm.form.pd.Update();
+                MainForm.form.pd.Save();
+            });
+            cb.SelectedIndexChanged += cbClick;
+        }
 
     }
 }

@@ -28,24 +28,47 @@ namespace TrayDir
                     {
                         List<string> dirs = new List<string>();
                         List<string> paths = new List<string>();
-                        foreach (string fp in Directory.GetFileSystemEntries(path))
+                        if (ProgramData.pd.settings.app.MenuSorting != "None")
                         {
-                            if (PathIsDirectory(fp))
+                            foreach (string fp in Directory.GetFileSystemEntries(path))
                             {
-                                dirs.Add(fp);
+                                if (PathIsDirectory(fp))
+                                {
+                                    dirs.Add(fp);
+                                }
+                                else
+                                {
+                                    paths.Add(fp);
+                                }
                             }
-                            else
+                            if (ProgramData.pd.settings.app.MenuSorting == "Folders Top")
                             {
-                                paths.Add(fp);
+                                foreach (string dp in dirs)
+                                {
+                                    menuitem.DropDownItems.Add(RecursivePathFollow(settings, dp));
+                                }
+                                foreach (string fp in paths)
+                                {
+                                    menuitem.DropDownItems.Add(RecursivePathFollow(settings, fp));
+                                }
+                            } else
+                            {
+                                foreach (string fp in paths)
+                                {
+                                    menuitem.DropDownItems.Add(RecursivePathFollow(settings, fp));
+                                }
+                                foreach (string dp in dirs)
+                                {
+                                    menuitem.DropDownItems.Add(RecursivePathFollow(settings, dp));
+                                }
                             }
                         }
-                        foreach (string dp in dirs)
+                        else
                         {
-                            menuitem.DropDownItems.Add(RecursivePathFollow(settings, dp));
-                        }
-                        foreach (string fp in paths)
-                        {
-                            menuitem.DropDownItems.Add(RecursivePathFollow(settings, fp));
+                            foreach (string fp in Directory.GetFileSystemEntries(path))
+                            {
+                                menuitem.DropDownItems.Add(RecursivePathFollow(settings, fp));
+                            }
                         }
                     }
                 }

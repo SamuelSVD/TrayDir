@@ -24,26 +24,31 @@ namespace TrayDir
         public void InitializeOptions()
         {
             OptionView ov;
-            ov = new OptionView("Minimize On Close", MainForm.form.pd.settings.app.MinimizeOnClose);
+            ov = new OptionView("Minimize On Close", ProgramData.pd.settings.app.MinimizeOnClose);
             ov.AddTo(OptionsGroupLayout, 0);
             ov.SetTooltip("When enabled, closing the window will not exit the application");
-            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, MainForm.form.pd.settings.app, "MinimizeOnClose");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.app, "MinimizeOnClose");
 
-            ov = new OptionView("Start Minimized", MainForm.form.pd.settings.app.StartMinimized);
+            ov = new OptionView("Start Minimized", ProgramData.pd.settings.app.StartMinimized);
             ov.AddTo(OptionsGroupLayout, 1);
             ov.SetTooltip("When enabled, the application will always start hidden, only visible in system tray");
-            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, MainForm.form.pd.settings.app, "StartMinimized");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.app, "StartMinimized");
 
-            ov = new OptionView("Start With Windows", MainForm.form.pd.settings.app.StartWithWindows);
+            ov = new OptionView("Start With Windows", ProgramData.pd.settings.app.StartWithWindows);
             ov.AddTo(OptionsGroupLayout, 2);
             ov.SetTooltip("When enabled, the application will always start hidden, only visible in system tray");
-            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, MainForm.form.pd.settings.app, "StartWithWindows");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.app, "StartWithWindows");
 
-            ov = new OptionView("Show Icons In Tray Menu", MainForm.form.pd.settings.app.ShowIconsInMenus);
+            ov = new OptionView("Show Icons In Tray Menu", ProgramData.pd.settings.app.ShowIconsInMenus);
             ov.AddTo(OptionsGroupLayout, 3);
             ov.SetTooltip("When enabled, each menu item will show the icon associated with the file linked");
-            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, MainForm.form.pd.settings.app, "ShowIconsInMenus");
-        }
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.app, "ShowIconsInMenus");
 
+            string[] s = new[] { "Folders Top", "Folders Bottom", "None" };
+            ComboBoxView cbv = new ComboBoxView("Menu Sorting", s);
+            cbv.AddTo(OptionsGroupLayout, 4);
+            ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "MenuSorting");
+            cbv.combobox.Text = ProgramData.pd.settings.app.MenuSorting;
+        }
     }
 }

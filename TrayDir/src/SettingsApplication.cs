@@ -15,6 +15,8 @@ namespace TrayDir
         public bool StartWithWindows;
         [XmlAttribute]
         public bool ShowIconsInMenus;
+        [XmlAttribute]
+        public string MenuSorting = "Folders Top";
         public object this[string propertyName]
         {
             get
