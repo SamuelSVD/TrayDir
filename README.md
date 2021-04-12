@@ -10,7 +10,7 @@ Each instance can point to multiple destinations, which can be either a folder o
 
 Currently TrayDir is only supported/tested on Windows 10.
 
-##Download Latest
+## Download Latest
 
 Download the installer for the latest release by following this link:
 [http://github.com/samuelSVD/TrayDir/releases/latest](http://github.com/samuelSVD/TrayDir/releases/latest);
