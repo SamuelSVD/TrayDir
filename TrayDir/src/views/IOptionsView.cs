@@ -70,7 +70,7 @@ namespace TrayDir
 
             ov = new OptionView("Expand First Path", instance.settings.ExpandFirstPath);
             ov.AddTo(optionstlp, 3);
-            ov.SetTooltip("Expand first path's contents in the tray menu");
+            ov.SetTooltip("Expand first path's contents in the tray menu when only one path is selected");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ExpandFirstPath");
         }
         public Control GetControl()

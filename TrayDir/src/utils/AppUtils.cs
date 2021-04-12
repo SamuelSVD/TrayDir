@@ -83,6 +83,14 @@ namespace TrayDir
                     {
                         menuitem.Text = Path.GetFileNameWithoutExtension(path);
                     }
+                    if (ProgramData.pd.settings.app.ShowIconsInMenus)
+                    {
+                        try
+                        {
+                            menuitem.Image = Icon.ExtractAssociatedIcon(path).ToBitmap();
+                        }
+                        catch { }
+                    }
                 }
                 else
                 {
@@ -106,15 +114,6 @@ namespace TrayDir
                     OpenPath(Path.GetFullPath(path), settings.RunAsAdmin);
                 }
             });
-
-            if (ProgramData.pd.settings.app.ShowIconsInMenus)
-            {
-                try
-                {
-                    menuitem.Image = Icon.ExtractAssociatedIcon(path).ToBitmap();
-                }
-                catch { }
-            }
 
             menuitem.Click += textbox_select;
             return menuitem;

@@ -48,6 +48,7 @@ namespace TrayDir
             ComboBoxView cbv = new ComboBoxView("Menu Sorting", s);
             cbv.AddTo(OptionsGroupLayout, 4);
             ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "MenuSorting");
+            cbv.SetTooltip("Set tray menu folder / file sorting");
             cbv.combobox.Text = ProgramData.pd.settings.app.MenuSorting;
         }
     }
