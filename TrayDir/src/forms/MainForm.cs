@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -25,7 +24,7 @@ namespace TrayDir
         {
             InitializeComponent();
 
-            fd = FileDialog;
+            fd = new OpenFileDialog();
             pd = ProgramData.Load();
             if (pd.trayInstances.Count == 0)
             {
@@ -135,7 +134,8 @@ namespace TrayDir
             instanceTabs.TabPages.Add(newTabTabPage);
             instanceTabs.SelectedIndex = i;
             IView iv = CreateViewFromInstance(instance, tp);
-            iv.notifyIcon.DoubleClick += new EventHandler(delegate (object obj, EventArgs args) {
+            iv.notifyIcon.DoubleClick += new EventHandler(delegate (object obj, EventArgs args)
+            {
                 onShowInstance = instance;
                 ShowApp(obj, args);
             });
@@ -301,7 +301,8 @@ namespace TrayDir
             tp.Text = instance.instanceName;
             tp.Controls.Add(iv.GetControl());
 
-            iv.setEventHandlers(new EventHandler(delegate(Object obj, EventArgs args) {
+            iv.setEventHandlers(new EventHandler(delegate (Object obj, EventArgs args)
+            {
                 onShowInstance = instance;
                 ShowApp(obj, args);
             }), HideApp, ExitApp);
@@ -416,6 +417,26 @@ namespace TrayDir
             trayInstance.view.paths.FixPaths();
             trayInstance.view.UpdateTrayMenu();
             BuildExploreDropdown();
+        }
+
+        private void exportToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            AppUtils.ExportInstance(trayInstance);
+        }
+
+        private void importToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            TrayInstance i = AppUtils.ImportInstance();
+            if (i != null)
+            {
+                pd.trayInstances.Add(i);
+                AddInstanceTabPage(i);
+                pd.Save();
+            }
+            else
+            {
+                MessageBox.Show("Error: Unable to import file.");
+            }
         }
     }
 }

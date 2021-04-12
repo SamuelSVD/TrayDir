@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -210,6 +211,30 @@ namespace TrayDir
         public static bool StrToBool(string value)
         {
             return value == "1" ? true : false;
+        }
+
+        public static void ExportInstance(TrayInstance instance)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Tray Instance Export | *.tde";
+            sfd.FileName = Regex.Replace(instance.instanceName, @"[^0-9a-zA-Z()_ ]+", "_");
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show(sfd.FileName);
+                XMLUtils.SaveToFile(instance, sfd.FileName);
+            }
+        }
+        public static TrayInstance ImportInstance()
+        {
+            TrayInstance i = null;
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Tray Instance Export | *.tde";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show(ofd.FileName);
+                i = XMLUtils.LoadFromFile<TrayInstance>(ofd.FileName);
+            }
+            return i;
         }
     }
 }
