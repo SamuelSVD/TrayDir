@@ -31,7 +31,12 @@ namespace TrayDir
                         List<string> paths = new List<string>();
                         if (ProgramData.pd.settings.app.MenuSorting != "None")
                         {
-                            foreach (string fp in Directory.GetFileSystemEntries(path))
+                            string[] dirpaths = Directory.GetFileSystemEntries(path);
+                            if (dirpaths.Length == 0)
+                            {
+                                menuitem.DropDownItems.Add("(Empty)");
+                            }
+                            foreach (string fp in dirpaths)
                             {
                                 if (PathIsDirectory(fp))
                                 {
