@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,21 +7,31 @@ namespace TrayDir
 {
     public class IView
     {
+        private TrayInstance instance;
+
         public Panel p;
-        TableLayoutPanel tlp;
+        public TableLayoutPanel tlp;
 
         public IOptionsView options;
         public IPathsView paths;
-        private TrayInstance instance;
+        public Dictionary<string, IMenuItem> pathMenuItems;
+
 
         public NotifyIcon notifyIcon;
+
         private EventHandler showForm;
         private EventHandler hideForm;
         private EventHandler exitForm;
+
+        private ToolStripMenuItem showMenuItem;
+        private ToolStripMenuItem hideMenuItem;
+        private ToolStripMenuItem exitMenuItem;
+
         public IView(TrayInstance instance)
         {
             this.instance = instance;
             instance.view = this;
+
             p = new Panel();
             p.Dock = DockStyle.Top;
             p.AutoSize = true;
@@ -42,6 +53,8 @@ namespace TrayDir
             notifyIcon = new NotifyIcon();
             notifyIcon.Visible = true;
             UpdateTrayIcon();
+
+            pathMenuItems = new Dictionary<string, IMenuItem>();
         }
         public void setEventHandlers(EventHandler showForm, EventHandler hideForm, EventHandler exitForm)
         {
@@ -61,6 +74,19 @@ namespace TrayDir
             height += paths.GetHeight();
             return height;
         }
+        private ToolStripMenuItem MakeAndAddMenuItem(ToolStripMenuItem menuItem, string text, bool visible, EventHandler eh)
+        {
+            if (!(eh is null) && (menuItem == null))
+            {
+                menuItem = new ToolStripMenuItem(text, null, eh);
+                menuItem.Visible = visible;
+            }
+            if (menuItem != null)
+            {
+                notifyIcon.ContextMenuStrip.Items.Add(menuItem);
+            }
+            return menuItem;
+        }
         public void UpdateTrayMenu()
         {
             if (notifyIcon.ContextMenuStrip is null)
@@ -71,50 +97,76 @@ namespace TrayDir
             {
                 notifyIcon.ContextMenuStrip.Items.Clear();
             }
-            if (!(showForm is null))
-            {
-                notifyIcon.ContextMenuStrip.Items.Add("Show", null, showForm);
-            }
-            if (!(hideForm is null))
-            {
-                notifyIcon.ContextMenuStrip.Items.Add("Hide", null, hideForm);
-            }
+            showMenuItem = MakeAndAddMenuItem(showMenuItem, "Show", false, showForm);
+            hideMenuItem = MakeAndAddMenuItem(hideMenuItem, "Hide", true, hideForm);
 
             notifyIcon.ContextMenuStrip.Items.Add("-");
 
+            foreach (string path in instance.settings.paths)
+            {
+                IMenuItem i;
+                if (!pathMenuItems.TryGetValue(path, out i))
+                {
+                    i = new IMenuItem(instance, path);
+                    i.Load();
+                    pathMenuItems[path] = i;
+                }
+            }
+
             if (instance.settings.paths.Count == 1 && instance.settings.ExpandFirstPath)
             {
-                String path = instance.settings.paths[0];
-                ToolStripMenuItem mi = AppUtils.RecursivePathFollow(instance.settings, path);
-                if (mi.DropDownItems.Count > 0)
+                IMenuItem i = pathMenuItems[instance.settings.paths[0]];
+                if (i.menuItem.DropDownItems.Count > 0)
                 {
-                    while (mi.DropDownItems.Count > 0)
+                    while (i.menuItem.DropDownItems.Count > 0)
                     {
-                        ToolStripItem item = mi.DropDownItems[0];
-                        mi.DropDownItems.RemoveAt(0);
+                        ToolStripItem item = i.menuItem.DropDownItems[0];
+                        i.menuItem.DropDownItems.RemoveAt(0);
                         notifyIcon.ContextMenuStrip.Items.Add(item);
                     }
                 }
                 else
                 {
-                    notifyIcon.ContextMenuStrip.Items.Add(mi);
+                    notifyIcon.ContextMenuStrip.Items.Add(i.menuItem);
                 }
             }
             else
             {
                 foreach (string path in instance.settings.paths)
                 {
-                    notifyIcon.ContextMenuStrip.Items.Add(AppUtils.RecursivePathFollow(instance.settings, path));
+                    IMenuItem i;
+                    if (!pathMenuItems.TryGetValue(path, out i))
+                    {
+                        i = new IMenuItem(instance, path);
+                        i.Load();
+                        pathMenuItems[path] = i;
+                    }
+                    notifyIcon.ContextMenuStrip.Items.Add(i.menuItem);
                 }
             }
-            notifyIcon.ContextMenuStrip.Items.Add("-");
 
-            if (!(exitForm is null))
+            notifyIcon.ContextMenuStrip.Items.Add("-");
+            exitMenuItem = MakeAndAddMenuItem(exitMenuItem, "Exit", true, exitForm);
+
+            foreach(IMenuItem i in pathMenuItems.Values)
             {
-                notifyIcon.ContextMenuStrip.Items.Add("Exit", null, exitForm);
+                if (ProgramData.pd.settings.app.ShowIconsInMenus)
+                {
+                    i.LoadIcon();
+                }
+                else
+                {
+                    i.ClearIcon();
+                }
             }
-            notifyIcon.ContextMenuStrip.Items[0].Visible = false;
+
             UpdateTrayIcon();
+
+            if (instance.settings.paths.Count == 1 && instance.settings.ExpandFirstPath)
+            {
+                pathMenuItems.Clear();
+            }
+
         }
         public void UpdateTrayIcon()
         {
@@ -164,8 +216,8 @@ namespace TrayDir
         }
         public void SetFormShownMenu()
         {
-            notifyIcon.ContextMenuStrip.Items[0].Visible = false;
-            notifyIcon.ContextMenuStrip.Items[1].Visible = true;
+            showMenuItem.Visible = false;
+            hideMenuItem.Visible = true;
         }
     }
 }
