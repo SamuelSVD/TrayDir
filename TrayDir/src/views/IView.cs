@@ -125,19 +125,21 @@ namespace TrayDir
 
             if (instance.settings.paths.Count == 1 && instance.settings.ExpandFirstPath)
             {
-                IMenuItem i = pathMenuItems[instance.settings.paths[0]+ "_________" + 0.ToString()];
-                if (i.menuItem.DropDownItems.Count > 0)
+                IMenuItem mi = pathMenuItems[instance.settings.paths[0]+ "_________" + 1.ToString()];
+                if (mi.children.Count > 0)
                 {
-                    while (i.menuItem.DropDownItems.Count > 0)
+                    foreach (IMenuItem child in mi.children)
                     {
-                        ToolStripItem item = i.menuItem.DropDownItems[0];
-                        i.menuItem.DropDownItems.RemoveAt(0);
-                        notifyIcon.ContextMenuStrip.Items.Add(item);
+                        if (child.menuItem.GetCurrentParent() != null)
+                        {
+                            mi.menuItem.DropDownItems.Remove(child.menuItem);
+                        }
+                        notifyIcon.ContextMenuStrip.Items.Add(child.menuItem);
                     }
                 }
                 else
                 {
-                    notifyIcon.ContextMenuStrip.Items.Add(i.menuItem);
+                    notifyIcon.ContextMenuStrip.Items.Add(mi.menuItem);
                 }
             }
             else
@@ -160,6 +162,15 @@ namespace TrayDir
                         pathMenuItems[path + "_________" + i.ToString()] = mi;
                     }
                     notifyIcon.ContextMenuStrip.Items.Add(mi.menuItem);
+
+                    if (mi.children.Count != mi.menuItem.DropDownItems.Count)
+                    {
+                        mi.menuItem.DropDownItems.Clear();
+                        foreach (IMenuItem child in mi.children)
+                        {
+                            mi.menuItem.DropDownItems.Add(child.menuItem);
+                        }
+                    }
                 }
             }
 
@@ -168,10 +179,10 @@ namespace TrayDir
 
             UpdateTrayIcon();
 
-            if (instance.settings.paths.Count == 1 && instance.settings.ExpandFirstPath)
-            {
-                pathMenuItems.Clear();
-            }
+            //if (instance.settings.paths.Count == 1 && instance.settings.ExpandFirstPath)
+            //{
+            //    pathMenuItems.Clear();
+            //}
         }
         public bool UpdateMenuIcons()
         {

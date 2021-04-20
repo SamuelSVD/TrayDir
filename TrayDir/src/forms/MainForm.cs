@@ -405,6 +405,10 @@ namespace TrayDir
             trayInstance.view.UpdateTrayMenu();
             pd.Save();
             BuildExploreDropdown();
+            if (!iconLoadTimer.Enabled)
+            {
+                iconLoadTimer.Start();
+            }
         }
         public void RemovePath(int i)
         {
@@ -413,6 +417,10 @@ namespace TrayDir
             trayInstance.view.UpdateTrayMenu();
             pd.Save();
             BuildExploreDropdown();
+            if (!iconLoadTimer.Enabled)
+            {
+                iconLoadTimer.Start();
+            }
         }
         public void InsertPath(int i)
         {
@@ -421,6 +429,10 @@ namespace TrayDir
             trayInstance.view.UpdateTrayMenu();
             pd.Save();
             BuildExploreDropdown();
+            if (!iconLoadTimer.Enabled)
+            {
+                iconLoadTimer.Start();
+            }
         }
 
         private void exportToolStripMenuItem1_Click(object sender, EventArgs e)
