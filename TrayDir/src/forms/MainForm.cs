@@ -403,6 +403,7 @@ namespace TrayDir
             trayInstance.settings.paths[b] = sa;
             trayInstance.view.paths.FixPaths();
             trayInstance.view.UpdateTrayMenu();
+            pd.Save();
             BuildExploreDropdown();
         }
         public void RemovePath(int i)
@@ -410,6 +411,7 @@ namespace TrayDir
             trayInstance.settings.paths.RemoveAt(i);
             trayInstance.view.paths.FixPaths();
             trayInstance.view.UpdateTrayMenu();
+            pd.Save();
             BuildExploreDropdown();
         }
         public void InsertPath(int i)
@@ -417,6 +419,7 @@ namespace TrayDir
             trayInstance.settings.paths.Insert(i, TrayInstance.defaultPath);
             trayInstance.view.paths.FixPaths();
             trayInstance.view.UpdateTrayMenu();
+            pd.Save();
             BuildExploreDropdown();
         }
 

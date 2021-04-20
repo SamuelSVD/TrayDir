@@ -15,6 +15,7 @@ namespace TrayDir
         public IOptionsView options;
         public IPathsView paths;
         public Dictionary<string, IMenuItem> pathMenuItems;
+        private Dictionary<string, int> instCount;
 
 
         public NotifyIcon notifyIcon;
@@ -55,6 +56,7 @@ namespace TrayDir
             UpdateTrayIcon();
 
             pathMenuItems = new Dictionary<string, IMenuItem>();
+            instCount = new Dictionary<string, int>();
         }
         public void setEventHandlers(EventHandler showForm, EventHandler hideForm, EventHandler exitForm)
         {
@@ -102,20 +104,28 @@ namespace TrayDir
 
             notifyIcon.ContextMenuStrip.Items.Add("-");
 
+            instCount.Clear();
             foreach (string path in instance.settings.paths)
             {
-                IMenuItem i;
-                if (!pathMenuItems.TryGetValue(path, out i))
+                int i = 0;
+                if (!instCount.TryGetValue(path, out i))
                 {
-                    i = new IMenuItem(instance, path);
-                    i.Load();
-                    pathMenuItems[path] = i;
+                    i = 0;
+                }
+                i++;
+                instCount[path] = i;
+                IMenuItem mi;
+                if (!pathMenuItems.TryGetValue(path + "_________" + i.ToString(), out mi))
+                {
+                    mi = new IMenuItem(instance, path);
+                    mi.Load();
+                    pathMenuItems[path + "_________" + i.ToString()] = mi;
                 }
             }
 
             if (instance.settings.paths.Count == 1 && instance.settings.ExpandFirstPath)
             {
-                IMenuItem i = pathMenuItems[instance.settings.paths[0]];
+                IMenuItem i = pathMenuItems[instance.settings.paths[0]+ "_________" + 0.ToString()];
                 if (i.menuItem.DropDownItems.Count > 0)
                 {
                     while (i.menuItem.DropDownItems.Count > 0)
@@ -132,16 +142,24 @@ namespace TrayDir
             }
             else
             {
+                instCount.Clear();
                 foreach (string path in instance.settings.paths)
                 {
-                    IMenuItem i;
-                    if (!pathMenuItems.TryGetValue(path, out i))
+                    int i = 0;
+                    if (!instCount.TryGetValue(path, out i))
                     {
-                        i = new IMenuItem(instance, path);
-                        i.Load();
-                        pathMenuItems[path] = i;
+                        i = 0;
                     }
-                    notifyIcon.ContextMenuStrip.Items.Add(i.menuItem);
+                    i++;
+                    instCount[path] = i;
+                    IMenuItem mi;
+                    if (!pathMenuItems.TryGetValue(path + "_________" + i.ToString(), out mi))
+                    {
+                        mi = new IMenuItem(instance, path);
+                        mi.Load();
+                        pathMenuItems[path + "_________" + i.ToString()] = mi;
+                    }
+                    notifyIcon.ContextMenuStrip.Items.Add(mi.menuItem);
                 }
             }
 

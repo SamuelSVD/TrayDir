@@ -147,7 +147,7 @@ namespace TrayDir
         }
         private void LoadIconThread()
         {
-            Thread.Sleep(100);
+            Thread.Sleep(1);
             if (isFile)
             {
                 try
@@ -163,7 +163,7 @@ namespace TrayDir
         public bool LoadIcon()
         {
             bool ret = loadedIcon;
-            if (loadedIcon)
+            if (loadedIcon && menuIcon != null)
             {
                 menuItem.Image = menuIcon;
             }

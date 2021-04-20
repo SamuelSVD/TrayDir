@@ -206,6 +206,7 @@ namespace TrayDir
             // 
             // iconLoadTimer
             // 
+            this.iconLoadTimer.Interval = 1;
             this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
             // 
             // MainForm
@@ -219,7 +220,7 @@ namespace TrayDir
             this.Controls.Add(this.mainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = this.Size;
             this.Name = "MainForm";
             this.Text = "TrayDir";
