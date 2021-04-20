@@ -168,11 +168,11 @@ namespace TrayDir
         public bool LoadIcon()
         {
             bool ret = loadedIcon;
-            if (loadedIcon && menuIcon != null)
+            if (menuIcon != null)
             {
                 menuItem.Image = menuIcon;
             }
-            if (!loadedIcon && (imgLoadThread is null || !imgLoadThread.IsAlive))
+            if ((menuIcon == null) && (imgLoadThread is null))
             {
                 imgLoadThread = new Thread(LoadIconThread);
                 imgLoadThread.Start();
@@ -198,16 +198,21 @@ namespace TrayDir
         }
         public bool ClearIcon()
         {
+            bool ret = !loadedIcon;
             if (menuItem.Image != null)
             {
                 menuIcon = menuItem.Image;
                 menuItem.Image = null;
             }
-            foreach (IMenuItem child in children)
+            if (ret)
             {
-                child.ClearIcon();
+                foreach (IMenuItem child in children)
+                {
+                    child.ClearIcon();
+                }
             }
-            return true;
+            loadedIcon = false;
+            return ret;
         }
     }
 }

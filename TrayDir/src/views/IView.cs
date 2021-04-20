@@ -266,11 +266,11 @@ namespace TrayDir
             {
                 if (ProgramData.pd.settings.app.ShowIconsInMenus)
                 {
-                    ret = ret && i.LoadIcon();
+                    ret = i.LoadIcon() && ret;
                 }
                 else
                 {
-                    ret = ret && i.ClearIcon();
+                    ret = i.ClearIcon() && ret;
                 }
             }
             return ret;
