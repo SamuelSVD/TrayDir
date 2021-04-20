@@ -98,6 +98,10 @@ namespace TrayDir
 
                 MainForm.form.pd.Update();
                 MainForm.form.pd.Save();
+                if (!MainForm.form.iconLoadTimer.Enabled)
+                {
+                    MainForm.form.iconLoadTimer.Start();
+                }
             });
             cb.Click += cbClick;
         }

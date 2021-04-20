@@ -148,25 +148,28 @@ namespace TrayDir
             notifyIcon.ContextMenuStrip.Items.Add("-");
             exitMenuItem = MakeAndAddMenuItem(exitMenuItem, "Exit", true, exitForm);
 
-            foreach(IMenuItem i in pathMenuItems.Values)
-            {
-                if (ProgramData.pd.settings.app.ShowIconsInMenus)
-                {
-                    i.LoadIcon();
-                }
-                else
-                {
-                    i.ClearIcon();
-                }
-            }
-
             UpdateTrayIcon();
 
             if (instance.settings.paths.Count == 1 && instance.settings.ExpandFirstPath)
             {
                 pathMenuItems.Clear();
             }
-
+        }
+        public bool UpdateMenuIcons()
+        {
+            bool ret = true;
+            foreach (IMenuItem i in pathMenuItems.Values)
+            {
+                if (ProgramData.pd.settings.app.ShowIconsInMenus)
+                {
+                    ret = ret && i.LoadIcon();
+                }
+                else
+                {
+                    ret = ret && i.ClearIcon();
+                }
+            }
+            return ret;
         }
         public void UpdateTrayIcon()
         {

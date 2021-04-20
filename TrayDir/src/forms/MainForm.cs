@@ -49,6 +49,7 @@ namespace TrayDir
                 allowVisible = true;
             }
             MaximizeBox = false;
+            iconLoadTimer.Start();
         }
         private void InitializeContent()
         {
@@ -436,6 +437,19 @@ namespace TrayDir
             else
             {
                 MessageBox.Show("Error: Unable to import file.");
+            }
+        }
+
+        private void iconLoadTimer_Tick(object sender, EventArgs e)
+        {
+            bool ret = true;
+            foreach(TrayInstance ti in pd.trayInstances)
+            {
+                ret = ret && ti.view.UpdateMenuIcons();
+            }
+            if (ret)
+            {
+                iconLoadTimer.Stop();
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace TrayDir
 {
@@ -13,10 +14,13 @@ namespace TrayDir
         public List<IMenuItem> children;
         public IMenuItem parent;
         private Image menuIcon;
+        private Thread imgLoadThread;
 
         protected bool isDir = false;
         protected bool isFile = false;
         public string path;
+        private bool loadedIcon;
+
         protected int depth
         {
             get
@@ -44,11 +48,15 @@ namespace TrayDir
         {
             if (isDir)
             {
-                string[] dirpaths = Directory.GetFileSystemEntries(path);
-                foreach (string fp in dirpaths)
+                try
                 {
-                    children.Add(new IMenuItem(instance, fp, this));
+                    string[] dirpaths = Directory.GetFileSystemEntries(path);
+                    foreach (string fp in dirpaths)
+                    {
+                        children.Add(new IMenuItem(instance, fp, this));
+                    }
                 }
+                catch { }
             }
         }
         public void MenuItemClick(object obj, EventArgs args)
@@ -137,27 +145,43 @@ namespace TrayDir
             }
             menuItem.Click += MenuItemClick;
         }
-        public void LoadIcon()
+        private void LoadIconThread()
         {
-            if (menuIcon != null)
-            {
-                menuItem.Image = menuIcon;
-            }
-            else if (isFile)
+            Thread.Sleep(100);
+            if (isFile)
             {
                 try
                 {
-                    menuItem.Image = Icon.ExtractAssociatedIcon(path).ToBitmap();
+                    menuIcon = Icon.ExtractAssociatedIcon(path).ToBitmap();
                 }
-                catch { }
+                catch
+                {
+                }
             }
-            foreach (IMenuItem child in children)
-            {
-                child.LoadIcon();
-            }
-
+            loadedIcon = true;
         }
-        public void ClearIcon()
+        public bool LoadIcon()
+        {
+            bool ret = loadedIcon;
+            if (loadedIcon)
+            {
+                menuItem.Image = menuIcon;
+            }
+            if (!loadedIcon && (imgLoadThread is null || !imgLoadThread.IsAlive))
+            {
+                imgLoadThread = new Thread(LoadIconThread);
+                imgLoadThread.Start();
+            }
+            if (ret)
+            {
+                foreach (IMenuItem child in children)
+                {
+                    ret = ret && child.LoadIcon();
+                }
+            }
+            return ret;
+        }
+        public bool ClearIcon()
         {
             if (menuItem.Image != null)
             {
@@ -168,6 +192,7 @@ namespace TrayDir
             {
                 child.ClearIcon();
             }
+            return true;
         }
     }
 }
