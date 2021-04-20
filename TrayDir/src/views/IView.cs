@@ -118,23 +118,67 @@ namespace TrayDir
                 if (!pathMenuItems.TryGetValue(path + "_________" + i.ToString(), out mi))
                 {
                     mi = new IMenuItem(instance, path);
-                    mi.Load();
                     pathMenuItems[path + "_________" + i.ToString()] = mi;
                 }
+            }
+            foreach (IMenuItem mi in pathMenuItems.Values)
+            {
+                mi.Load();
             }
 
             if (instance.settings.paths.Count == 1 && instance.settings.ExpandFirstPath)
             {
-                IMenuItem mi = pathMenuItems[instance.settings.paths[0]+ "_________" + 1.ToString()];
+                IMenuItem mi = pathMenuItems[instance.settings.paths[0] + "_________" + 1.ToString()];
                 if (mi.children.Count > 0)
                 {
+                    if (mi.children.Count != mi.menuItem.DropDownItems.Count)
+                    {
+                        mi.menuItem.DropDownItems.Clear();
+                    }
+                    List<IMenuItem> dirMenuItems = new List<IMenuItem>();
+                    List<IMenuItem> fileMenuItems = new List<IMenuItem>();
+
                     foreach (IMenuItem child in mi.children)
                     {
-                        if (child.menuItem.GetCurrentParent() != null)
+                        if (child.isDir)
                         {
-                            mi.menuItem.DropDownItems.Remove(child.menuItem);
+                            dirMenuItems.Add(child);
+                        } else if (child.isFile)
+                        {
+                            fileMenuItems.Add(child);
                         }
-                        notifyIcon.ContextMenuStrip.Items.Add(child.menuItem);
+                    }
+                    if (ProgramData.pd.settings.app.MenuSorting != "None")
+                    {
+                        if (ProgramData.pd.settings.app.MenuSorting == "Folders Top")
+                        {
+                            foreach (IMenuItem child in dirMenuItems)
+                            {
+                                notifyIcon.ContextMenuStrip.Items.Add(child.menuItem);
+                            }
+                            foreach (IMenuItem child in fileMenuItems)
+                            {
+                                notifyIcon.ContextMenuStrip.Items.Add(child.menuItem);
+                            }
+                        }
+                        else
+                        {
+                            foreach (IMenuItem child in fileMenuItems)
+                            {
+                                notifyIcon.ContextMenuStrip.Items.Add(child.menuItem);
+                            }
+                            foreach (IMenuItem child in dirMenuItems)
+                            {
+                                notifyIcon.ContextMenuStrip.Items.Add(child.menuItem);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (IMenuItem child in mi.children)
+                        {
+                            notifyIcon.ContextMenuStrip.Items.Add(child.menuItem);
+                        }
                     }
                 }
                 else
@@ -166,9 +210,40 @@ namespace TrayDir
                     if (mi.children.Count != mi.menuItem.DropDownItems.Count)
                     {
                         mi.menuItem.DropDownItems.Clear();
-                        foreach (IMenuItem child in mi.children)
+                        List<IMenuItem> dirMenuItems = new List<IMenuItem>();
+                        List<IMenuItem> fileMenuItems = new List<IMenuItem>();
+
+                        if (ProgramData.pd.settings.app.MenuSorting != "None")
                         {
-                            mi.menuItem.DropDownItems.Add(child.menuItem);
+                            if (ProgramData.pd.settings.app.MenuSorting == "Folders Top")
+                            {
+                                foreach (IMenuItem child in dirMenuItems)
+                                {
+                                    mi.menuItem.DropDownItems.Add(child.menuItem);
+                                }
+                                foreach (IMenuItem child in fileMenuItems)
+                                {
+                                    mi.menuItem.DropDownItems.Add(child.menuItem);
+                                }
+                            }
+                            else
+                            {
+                                foreach (IMenuItem child in fileMenuItems)
+                                {
+                                    mi.menuItem.DropDownItems.Add(child.menuItem);
+                                }
+                                foreach (IMenuItem child in dirMenuItems)
+                                {
+                                    mi.menuItem.DropDownItems.Add(child.menuItem);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (IMenuItem child in mi.children)
+                            {
+                                mi.menuItem.DropDownItems.Add(child.menuItem);
+                            }
                         }
                     }
                 }

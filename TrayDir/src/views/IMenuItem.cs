@@ -16,10 +16,12 @@ namespace TrayDir
         private Image menuIcon;
         private Thread imgLoadThread;
 
-        protected bool isDir = false;
-        protected bool isFile = false;
+        public readonly bool isDir = false;
+        public readonly bool isFile = false;
         public string path;
-        private bool loadedIcon;
+        private bool loadedIcon = false;
+
+        private static List<string> pathsLoadedHistory;
 
         protected int depth
         {
@@ -36,6 +38,10 @@ namespace TrayDir
         public IMenuItem(TrayInstance instance, string path) : this(instance, path, null) { }
         public IMenuItem(TrayInstance instance, string path, IMenuItem parent)
         {
+            if (pathsLoadedHistory is null)
+            {
+                pathsLoadedHistory = new List<string>();
+            }
             this.instance = instance;
             this.path = path;
             this.parent = parent;
@@ -158,7 +164,6 @@ namespace TrayDir
                 {
                 }
             }
-            loadedIcon = true;
         }
         public bool LoadIcon()
         {
@@ -171,14 +176,24 @@ namespace TrayDir
             {
                 imgLoadThread = new Thread(LoadIconThread);
                 imgLoadThread.Start();
+                pathsLoadedHistory.Add(instance.instanceName + " || " + path);
+                if (path == "C:\\Users\\svd_m\\Desktop\\TrayDir\\Folder1\\f1\\1.txt")
+                {
+                    path = path;
+                }
+                if (path == "C:\\Users\\svd_m\\Desktop\\TrayDir\\Folder2\\2.txt")
+                {
+                    path = path;
+                }
             }
             if (ret)
             {
                 foreach (IMenuItem child in children)
                 {
-                    ret = ret && child.LoadIcon();
+                    ret = child.LoadIcon() && ret;
                 }
             }
+            loadedIcon = true;
             return ret;
         }
         public bool ClearIcon()

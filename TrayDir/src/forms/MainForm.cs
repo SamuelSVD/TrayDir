@@ -460,7 +460,7 @@ namespace TrayDir
             bool ret = true;
             foreach(TrayInstance ti in pd.trayInstances)
             {
-                ret = ret && ti.view.UpdateMenuIcons();
+                ret = ti.view.UpdateMenuIcons() && ret;
             }
             if (ret)
             {
