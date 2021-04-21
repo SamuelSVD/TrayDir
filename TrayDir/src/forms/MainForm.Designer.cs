@@ -206,7 +206,6 @@ namespace TrayDir
             // 
             // iconLoadTimer
             // 
-            this.iconLoadTimer.Interval = 1;
             this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
             // 
             // MainForm

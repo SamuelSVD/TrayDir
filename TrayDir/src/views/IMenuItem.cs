@@ -4,24 +4,27 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Threading;
+using System.Diagnostics;
 
 namespace TrayDir
 {
     public class IMenuItem
     {
+        private static Thread imgLoadThread;
+        private static Thread mainThread;
+        private static Semaphore imgLoadSemaphore;
+        private static Queue<IMenuItem> imgLoadQueue;
+
         private TrayInstance instance;
         public ToolStripMenuItem menuItem;
         public List<IMenuItem> children;
         public IMenuItem parent;
         private Image menuIcon;
-        private Thread imgLoadThread;
 
         public readonly bool isDir = false;
         public readonly bool isFile = false;
         public string path;
         private bool loadedIcon = false;
-
-        private static List<string> pathsLoadedHistory;
 
         protected int depth
         {
@@ -35,13 +38,54 @@ namespace TrayDir
                 return d;
             }
         }
+        private static void LoadIconThread()
+        {
+            Stopwatch s = new Stopwatch();
+            s.Start();
+            while (true && mainThread.IsAlive)
+            {
+                imgLoadSemaphore.WaitOne();
+                if (imgLoadQueue.Count > 0)
+                {
+                    IMenuItem mi = imgLoadQueue.Dequeue();
+                    try
+                    {
+                        if (mi.menuIcon is null)
+                        {
+                            mi.menuIcon = Icon.ExtractAssociatedIcon(mi.path).ToBitmap();
+                        }
+                    }
+                    catch { }
+                    s.Reset();
+                }
+                imgLoadSemaphore.Release();
+                s.Stop();
+                if (s.Elapsed.Seconds > 2)
+                {
+                    break;
+                }
+                s.Start();
+                Thread.Sleep(10);
+            }
+        }
         public IMenuItem(TrayInstance instance, string path) : this(instance, path, null) { }
         public IMenuItem(TrayInstance instance, string path, IMenuItem parent)
         {
-            if (pathsLoadedHistory is null)
+            if (imgLoadSemaphore is null)
             {
-                pathsLoadedHistory = new List<string>();
+                imgLoadSemaphore = new Semaphore(1, 1);
             }
+            if (imgLoadQueue is null)
+            {
+                imgLoadQueue = new Queue<IMenuItem>();
+            }
+            if (imgLoadThread is null)
+            {
+                mainThread = Thread.CurrentThread;
+                imgLoadThread = new Thread(LoadIconThread);
+                imgLoadThread.Start();
+            }
+
             this.instance = instance;
             this.path = path;
             this.parent = parent;
@@ -151,20 +195,6 @@ namespace TrayDir
             }
             menuItem.Click += MenuItemClick;
         }
-        private void LoadIconThread()
-        {
-            Thread.Sleep(1);
-            if (isFile)
-            {
-                try
-                {
-                    menuIcon = Icon.ExtractAssociatedIcon(path).ToBitmap();
-                }
-                catch
-                {
-                }
-            }
-        }
         public bool LoadIcon()
         {
             bool ret = loadedIcon;
@@ -172,19 +202,16 @@ namespace TrayDir
             {
                 menuItem.Image = menuIcon;
             }
-            if ((menuIcon == null) && (imgLoadThread is null))
+            if ((menuIcon == null) && (!imgLoadThread.IsAlive) && isFile)
             {
                 imgLoadThread = new Thread(LoadIconThread);
                 imgLoadThread.Start();
-                pathsLoadedHistory.Add(instance.instanceName + " || " + path);
-                if (path == "C:\\Users\\svd_m\\Desktop\\TrayDir\\Folder1\\f1\\1.txt")
-                {
-                    path = path;
-                }
-                if (path == "C:\\Users\\svd_m\\Desktop\\TrayDir\\Folder2\\2.txt")
-                {
-                    path = path;
-                }
+            }
+            if (!loadedIcon && isFile) 
+            {
+                imgLoadSemaphore.WaitOne();
+                imgLoadQueue.Enqueue(this);
+                imgLoadSemaphore.Release();
             }
             if (ret)
             {
@@ -194,7 +221,7 @@ namespace TrayDir
                 }
             }
             loadedIcon = true;
-            return ret;
+            return ret && (isDir || menuItem.Image != null);
         }
         public bool ClearIcon()
         {
