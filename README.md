@@ -1,3 +1,5 @@
+[![GitHub release](https://img.shields.io/github/release/SamuelSVD/TrayDir.svg)](../../releases/latest)
+
 # TrayDir
 A windows application that gives the user the ability to access files and folders from the system tray.
 
@@ -13,4 +15,5 @@ Currently TrayDir is only supported/tested on Windows 10.
 ## Download Latest
 
 Download the installer for the latest release by following this link:
+
 [http://github.com/samuelSVD/TrayDir/releases/latest](http://github.com/samuelSVD/TrayDir/releases/latest);
