@@ -89,6 +89,11 @@ namespace TrayDir
             }
             return menuItem;
         }
+        public void Rebuild()
+        {
+            pathMenuItems.Clear();
+            UpdateTrayMenu();
+        }
         public void UpdateTrayMenu()
         {
             if (notifyIcon.ContextMenuStrip is null)

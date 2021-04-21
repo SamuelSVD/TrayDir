@@ -38,6 +38,7 @@ namespace TrayDir
             pd.Save();
             InitializeContent();
             BuildExploreDropdown();
+            BuildRebuildDropdown();
 
             if (pd.settings.app.StartMinimized)
             {
@@ -148,6 +149,7 @@ namespace TrayDir
                 pd.Save();
             });
             tp.ParentChanged += tabClose;
+            BuildRebuildDropdown();
         }
         public static void Init()
         {
@@ -164,6 +166,21 @@ namespace TrayDir
             {
                 HideApp(sender, e);
                 pd.FormHidden();
+            }
+        }
+        public void BuildRebuildDropdown()
+        {
+            rebuildToolStripMenuItem.DropDownItems.Clear();
+            rebuildToolStripMenuItem.Click -= rebuildCurrentToolStripMenuItem_Click;
+
+            if (pd.trayInstances.Count == 1)
+            {
+                rebuildToolStripMenuItem.Click += rebuildCurrentToolStripMenuItem_Click;
+            }
+            else
+            {
+                rebuildToolStripMenuItem.DropDownItems.Add(rebuildCurrentToolStripMenuItem);
+                rebuildToolStripMenuItem.DropDownItems.Add(rebuildAllToolStripMenuItem);
             }
         }
         public void BuildExploreDropdown()
@@ -234,11 +251,6 @@ namespace TrayDir
         {
             About aa = new About();
             aa.ShowDialog();
-        }
-        private void Rebuild(object sender, EventArgs e)
-        {
-            pd.Update();
-            resizeForm();
         }
         protected override void SetVisibleCore(bool value)
         {
@@ -370,6 +382,10 @@ namespace TrayDir
             deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
             pd.Save();
             Edit(this, e);
+            if (!iconLoadTimer.Enabled)
+            {
+                iconLoadTimer.Start();
+            }
         }
         private void Edit(object sender, EventArgs e)
         {
@@ -394,6 +410,7 @@ namespace TrayDir
             if (pd.trayInstances.Count > 1 && (DialogResult.Yes == MessageBox.Show("Do you want to delete <" + ti.instanceName + ">?", "Close", MessageBoxButtons.YesNo)))
             {
                 instanceTabs.TabPages.RemoveAt(i);
+                BuildRebuildDropdown();
             }
         }
         public void SwapPaths(int a, int b)
@@ -466,6 +483,18 @@ namespace TrayDir
             {
                 iconLoadTimer.Stop();
             }
+        }
+
+        private void rebuildCurrentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            trayInstance.view.Rebuild();
+            resizeForm();
+        }
+
+        private void rebuildAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pd.RebuildAll();
+            resizeForm();
         }
     }
 }

@@ -96,6 +96,15 @@ namespace TrayDir
             }
             key.Close();
         }
-
+        public void RebuildAll()
+        {
+            foreach (TrayInstance ti in pd.trayInstances)
+            {
+                if (ti.view != null)
+                {
+                    ti.view.Rebuild();
+                }
+            }
+        }
     }
 }

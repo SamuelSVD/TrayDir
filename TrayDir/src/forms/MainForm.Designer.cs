@@ -48,6 +48,8 @@ namespace TrayDir
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.rebuildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rebuildCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rebuildAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -167,10 +169,27 @@ namespace TrayDir
             // 
             // rebuildToolStripMenuItem
             // 
+            this.rebuildToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rebuildCurrentToolStripMenuItem,
+            this.rebuildAllToolStripMenuItem});
             this.rebuildToolStripMenuItem.Name = "rebuildToolStripMenuItem";
             this.rebuildToolStripMenuItem.Size = new System.Drawing.Size(59, 22);
             this.rebuildToolStripMenuItem.Text = "Rebuild";
-            this.rebuildToolStripMenuItem.Click += new System.EventHandler(this.Rebuild);
+            this.rebuildToolStripMenuItem.Click += new System.EventHandler(this.rebuildCurrentToolStripMenuItem_Click);
+            // 
+            // rebuildCurrentToolStripMenuItem
+            // 
+            this.rebuildCurrentToolStripMenuItem.Name = "rebuildCurrentToolStripMenuItem";
+            this.rebuildCurrentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rebuildCurrentToolStripMenuItem.Text = "Rebuild Current";
+            this.rebuildCurrentToolStripMenuItem.Click += new System.EventHandler(this.rebuildCurrentToolStripMenuItem_Click);
+            // 
+            // rebuildAllToolStripMenuItem
+            // 
+            this.rebuildAllToolStripMenuItem.Name = "rebuildAllToolStripMenuItem";
+            this.rebuildAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rebuildAllToolStripMenuItem.Text = "Rebuild All";
+            this.rebuildAllToolStripMenuItem.Click += new System.EventHandler(this.rebuildAllToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -252,6 +271,8 @@ namespace TrayDir
         private ToolStripMenuItem importToolStripMenuItem;
         private ToolStripMenuItem exportToolStripMenuItem1;
         public Timer iconLoadTimer;
+        private ToolStripMenuItem rebuildCurrentToolStripMenuItem;
+        private ToolStripMenuItem rebuildAllToolStripMenuItem;
     }
 }
 
