@@ -44,9 +44,14 @@ namespace TrayDir
             ov.SetTooltip("When enabled, each menu item will show the icon associated with the file linked");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.app, "ShowIconsInMenus");
 
+            ov = new OptionView("Check For Updates on Startup", ProgramData.pd.settings.app.CheckForUpdates);
+            ov.AddTo(OptionsGroupLayout, 4);
+            ov.SetTooltip("When enabled, TrayDir will check for update on startup");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.app, "CheckForUpdates");
+
             string[] s = new[] { "Folders Top", "Folders Bottom", "None" };
             ComboBoxView cbv = new ComboBoxView("Menu Sorting", s);
-            cbv.AddTo(OptionsGroupLayout, 4);
+            cbv.AddTo(OptionsGroupLayout, 5);
             ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "MenuSorting");
             cbv.SetTooltip("Set tray menu folder / file sorting");
             cbv.combobox.Text = ProgramData.pd.settings.app.MenuSorting;

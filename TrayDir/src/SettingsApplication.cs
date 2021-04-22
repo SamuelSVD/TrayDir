@@ -8,15 +8,17 @@ namespace TrayDir
     public class SettingsApplication
     {
         [XmlAttribute]
-        public bool MinimizeOnClose;
+        public bool MinimizeOnClose = false;
         [XmlAttribute]
-        public bool StartMinimized;
+        public bool StartMinimized = false;
         [XmlAttribute]
-        public bool StartWithWindows;
+        public bool StartWithWindows = true;
         [XmlAttribute]
-        public bool ShowIconsInMenus;
+        public bool ShowIconsInMenus = false;
         [XmlAttribute]
         public string MenuSorting = "Folders Top";
+        [XmlAttribute]
+        public bool CheckForUpdates = true;
         public object this[string propertyName]
         {
             get

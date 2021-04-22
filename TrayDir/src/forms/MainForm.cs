@@ -51,6 +51,10 @@ namespace TrayDir
             }
             MaximizeBox = false;
             iconLoadTimer.Start();
+            if (pd.settings.app.CheckForUpdates)
+            {
+                UpdateUtils.CheckForUpdates();
+            }
         }
         private void InitializeContent()
         {
