@@ -25,6 +25,7 @@ namespace TrayDir
         public readonly bool isFile = false;
         public string path;
         private bool loadedIcon = false;
+        private bool assignedClickEvent = false;
 
         protected int depth
         {
@@ -193,7 +194,11 @@ namespace TrayDir
                     menuItem.DropDownItems.Add(child.menuItem);
                 }
             }
-            menuItem.Click += MenuItemClick;
+            if (!assignedClickEvent)
+            {
+                menuItem.Click += MenuItemClick;
+                assignedClickEvent = true;
+            }
         }
         public bool LoadIcon()
         {
