@@ -50,7 +50,6 @@ namespace TrayDir
                 allowVisible = true;
             }
             MaximizeBox = false;
-            iconLoadTimer.Start();
             if (pd.settings.app.CheckForUpdates)
             {
                 UpdateUtils.CheckForUpdates();
@@ -386,10 +385,6 @@ namespace TrayDir
             deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
             pd.Save();
             Edit(this, e);
-            if (!iconLoadTimer.Enabled)
-            {
-                iconLoadTimer.Start();
-            }
         }
         private void Edit(object sender, EventArgs e)
         {
@@ -426,10 +421,6 @@ namespace TrayDir
             trayInstance.view.UpdateTrayMenu();
             pd.Save();
             BuildExploreDropdown();
-            if (!iconLoadTimer.Enabled)
-            {
-                iconLoadTimer.Start();
-            }
         }
         public void RemovePath(int i)
         {
@@ -438,10 +429,6 @@ namespace TrayDir
             trayInstance.view.UpdateTrayMenu();
             pd.Save();
             BuildExploreDropdown();
-            if (!iconLoadTimer.Enabled)
-            {
-                iconLoadTimer.Start();
-            }
         }
         public void InsertPath(int i)
         {
@@ -450,10 +437,6 @@ namespace TrayDir
             trayInstance.view.UpdateTrayMenu();
             pd.Save();
             BuildExploreDropdown();
-            if (!iconLoadTimer.Enabled)
-            {
-                iconLoadTimer.Start();
-            }
         }
 
         private void exportToolStripMenuItem1_Click(object sender, EventArgs e)

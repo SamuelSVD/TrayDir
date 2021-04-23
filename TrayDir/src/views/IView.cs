@@ -94,11 +94,38 @@ namespace TrayDir
             pathMenuItems.Clear();
             UpdateTrayMenu();
         }
+        public void MenuOpened(Object obj, EventArgs args)
+        {
+            if (instance.settings.ExpandFirstPath && instance.settings.paths.Count == 1)
+            {
+                foreach (IMenuItem child in pathMenuItems.Values)
+                {
+                    child.EnqueueImgLoad();
+                    foreach (IMenuItem subchild in child.children)
+                    {
+                        subchild.EnqueueImgLoad();
+                    }
+                }
+            } else
+            {
+                foreach (IMenuItem child in pathMenuItems.Values)
+                {
+                    child.EnqueueImgLoad();
+                }
+            }
+            MainForm.form.iconLoadTimer.Start();
+        }
+        public void MenuClosed(Object obj, EventArgs args)
+        {
+            MainForm.form.iconLoadTimer.Stop();
+        }
         public void UpdateTrayMenu()
         {
             if (notifyIcon.ContextMenuStrip is null)
             {
                 notifyIcon.ContextMenuStrip = new ContextMenuStrip();
+                notifyIcon.ContextMenuStrip.Opened += MenuOpened;
+                notifyIcon.ContextMenuStrip.Closed += MenuClosed;
             }
             else
             {
@@ -258,11 +285,6 @@ namespace TrayDir
             exitMenuItem = MakeAndAddMenuItem(exitMenuItem, "Exit", true, exitForm);
 
             UpdateTrayIcon();
-
-            //if (instance.settings.paths.Count == 1 && instance.settings.ExpandFirstPath)
-            //{
-            //    pathMenuItems.Clear();
-            //}
         }
         public bool UpdateMenuIcons()
         {

@@ -26,6 +26,7 @@ namespace TrayDir
         public string path;
         private bool loadedIcon = false;
         private bool assignedClickEvent = false;
+        private bool enqueued;
 
         protected int depth
         {
@@ -51,12 +52,13 @@ namespace TrayDir
                     IMenuItem mi = imgLoadQueue.Dequeue();
                     try
                     {
-                        if (mi.menuIcon is null)
+                        if (mi.menuIcon is null && mi.isFile)
                         {
                             mi.menuIcon = Icon.ExtractAssociatedIcon(mi.path).ToBitmap();
                         }
                     }
                     catch { }
+                    mi.loadedIcon = true;
                     s.Reset();
                 }
                 imgLoadSemaphore.Release();
@@ -197,26 +199,16 @@ namespace TrayDir
             if (!assignedClickEvent)
             {
                 menuItem.Click += MenuItemClick;
+                menuItem.DropDownOpened += LoadChildrenIconEvent;
                 assignedClickEvent = true;
             }
         }
         public bool LoadIcon()
         {
             bool ret = loadedIcon;
-            if (menuIcon != null)
+            if (loadedIcon && menuIcon != null)
             {
                 menuItem.Image = menuIcon;
-            }
-            if ((menuIcon == null) && (!imgLoadThread.IsAlive) && isFile)
-            {
-                imgLoadThread = new Thread(LoadIconThread);
-                imgLoadThread.Start();
-            }
-            if (!loadedIcon && isFile) 
-            {
-                imgLoadSemaphore.WaitOne();
-                imgLoadQueue.Enqueue(this);
-                imgLoadSemaphore.Release();
             }
             if (ret)
             {
@@ -225,8 +217,29 @@ namespace TrayDir
                     ret = child.LoadIcon() && ret;
                 }
             }
-            loadedIcon = true;
             return ret && (isDir || menuItem.Image != null);
+        }
+        public void EnqueueImgLoad()
+        {
+            if (!enqueued)
+            {
+                imgLoadSemaphore.WaitOne();
+                imgLoadQueue.Enqueue(this);
+                imgLoadSemaphore.Release();
+                enqueued = true;
+            }
+        }
+        public void LoadChildrenIconEvent(Object obj, EventArgs args)
+        {
+            if (!imgLoadThread.IsAlive)
+            {
+                imgLoadThread = new Thread(LoadIconThread);
+                imgLoadThread.Start();
+            }
+            foreach (IMenuItem child in children)
+            {
+                child.EnqueueImgLoad();
+            }
         }
         public bool ClearIcon()
         {
@@ -240,7 +253,7 @@ namespace TrayDir
             {
                 foreach (IMenuItem child in children)
                 {
-                    child.ClearIcon();
+                    ret = child.ClearIcon() && ret;
                 }
             }
             loadedIcon = false;
