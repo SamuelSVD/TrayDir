@@ -219,7 +219,7 @@ namespace TrayDir
                 if (d == DialogResult.OK)
                 {
                     textbox.Text = MainForm.form.fd.FileName;
-                    instance.settings.paths[pathIndex] = textbox.Text;
+                    instance.paths[pathIndex].path = MainForm.form.fd.FileName;
                     instance.view.UpdateTrayMenu();
                     MainForm.form.BuildExploreDropdown();
                     MainForm.form.pd.Save();
@@ -236,7 +236,7 @@ namespace TrayDir
                 if (fs.ShowDialog())
                 {
                     textbox.Text = fs.FileName;
-                    instance.settings.paths[pathIndex] = textbox.Text;
+                    instance.paths[pathIndex].path = fs.FileName;
                     instance.view.UpdateTrayMenu();
                     MainForm.form.BuildExploreDropdown();
                     MainForm.form.pd.Save();

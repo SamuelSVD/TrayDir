@@ -33,10 +33,6 @@ namespace TrayDir
             }
         }
         public TrayInstanceSettings() {
-            Instantiate("");
-        }
-        private void Instantiate(string instanceName)
-        {
             RunAsAdmin = false;
             ShowFileExtensions = true;
             ExploreFoldersInTrayMenu = false;

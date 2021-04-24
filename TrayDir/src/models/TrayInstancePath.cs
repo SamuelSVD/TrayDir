@@ -13,5 +13,10 @@ namespace TrayDir
         public string path;
         [XmlAttribute]
         public string alias;
+        public TrayInstancePath() : this("") {}
+        public TrayInstancePath(string path)
+        {
+            this.path = path;
+        }
     }
 }

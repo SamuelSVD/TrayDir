@@ -64,6 +64,7 @@ namespace TrayDir
             this.exploreToolStripMenuItem.Name = "exploreToolStripMenuItem";
             this.exploreToolStripMenuItem.Size = new System.Drawing.Size(58, 22);
             this.exploreToolStripMenuItem.Text = "Explore";
+            this.exploreToolStripMenuItem.Click += new System.EventHandler(this.ExploreClick);
             // 
             // aboutToolStripMenuItem
             // 
@@ -180,14 +181,14 @@ namespace TrayDir
             // rebuildCurrentToolStripMenuItem
             // 
             this.rebuildCurrentToolStripMenuItem.Name = "rebuildCurrentToolStripMenuItem";
-            this.rebuildCurrentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rebuildCurrentToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.rebuildCurrentToolStripMenuItem.Text = "Rebuild Current";
             this.rebuildCurrentToolStripMenuItem.Click += new System.EventHandler(this.rebuildCurrentToolStripMenuItem_Click);
             // 
             // rebuildAllToolStripMenuItem
             // 
             this.rebuildAllToolStripMenuItem.Name = "rebuildAllToolStripMenuItem";
-            this.rebuildAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rebuildAllToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.rebuildAllToolStripMenuItem.Text = "Rebuild All";
             this.rebuildAllToolStripMenuItem.Click += new System.EventHandler(this.rebuildAllToolStripMenuItem_Click);
             // 

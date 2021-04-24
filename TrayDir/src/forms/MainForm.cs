@@ -18,8 +18,6 @@ namespace TrayDir
         public SmartTabControl instanceTabs;
         public TabPage newTabTabPage;
 
-        //Event Handlers
-        EventHandler exploreClick;
         public MainForm()
         {
             InitializeComponent();
@@ -189,32 +187,16 @@ namespace TrayDir
         public void BuildExploreDropdown()
         {
             exploreToolStripMenuItem.DropDownItems.Clear();
-            if (exploreClick != null)
+            exploreToolStripMenuItem.Click -= ExploreClick;
+            if (trayInstance.PathCount == 1)
             {
-                exploreToolStripMenuItem.Click -= exploreClick;
-            }
-            if (trayInstance.settings.paths.Count == 1)
-            {
-                string path = trayInstance.settings.paths[0];
-
-                exploreClick = new EventHandler(delegate (object obj, EventArgs args)
-                {
-                    if (AppUtils.PathIsDirectory(path))
-                    {
-                        AppUtils.ExplorePath(new DirectoryInfo(path).FullName);
-                    }
-                    else if (AppUtils.PathIsFile(path))
-                    {
-                        AppUtils.ExplorePath(Path.GetFullPath(path));
-                    }
-                });
-
-                exploreToolStripMenuItem.Click += exploreClick;
+                exploreToolStripMenuItem.Click += ExploreClick;
             }
             else
             {
-                foreach (string path in trayInstance.settings.paths)
+                foreach (TrayInstancePath p in trayInstance.paths)
                 {
+                    string path = p.path;
                     ToolStripMenuItem item = new ToolStripMenuItem();
                     item.Size = new Size(359, 44);
 
@@ -414,9 +396,9 @@ namespace TrayDir
         }
         public void SwapPaths(int a, int b)
         {
-            string sa = trayInstance.settings.paths[a];
-            trayInstance.settings.paths[a] = trayInstance.settings.paths[b];
-            trayInstance.settings.paths[b] = sa;
+            TrayInstancePath sa = trayInstance.paths[a];
+            trayInstance.paths[a] = trayInstance.paths[b];
+            trayInstance.paths[b] = sa;
             trayInstance.view.paths.FixPaths();
             trayInstance.view.UpdateTrayMenu();
             pd.Save();
@@ -424,7 +406,7 @@ namespace TrayDir
         }
         public void RemovePath(int i)
         {
-            trayInstance.settings.paths.RemoveAt(i);
+            trayInstance.paths.RemoveAt(i);
             trayInstance.view.paths.FixPaths();
             trayInstance.view.UpdateTrayMenu();
             pd.Save();
@@ -432,7 +414,7 @@ namespace TrayDir
         }
         public void InsertPath(int i)
         {
-            trayInstance.settings.paths.Insert(i, TrayInstance.defaultPath);
+            trayInstance.paths.Insert(i, new TrayInstancePath(TrayInstance.defaultPath));
             trayInstance.view.paths.FixPaths();
             trayInstance.view.UpdateTrayMenu();
             pd.Save();
@@ -482,6 +464,18 @@ namespace TrayDir
         {
             pd.RebuildAll();
             resizeForm();
+        }
+        private void ExploreClick(object sender, EventArgs e)
+        {
+            string path = trayInstance.paths[0].path;
+            if (AppUtils.PathIsDirectory(path))
+            {
+                AppUtils.ExplorePath(new DirectoryInfo(path).FullName);
+            }
+            else if (AppUtils.PathIsFile(path))
+            {
+                AppUtils.ExplorePath(Path.GetFullPath(path));
+            }
         }
     }
 }

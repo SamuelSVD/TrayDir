@@ -16,6 +16,7 @@ namespace TrayDir
         private static Queue<IMenuItem> imgLoadQueue;
 
         private TrayInstance instance;
+        private TrayInstancePath tiPath;
         public ToolStripMenuItem menuItem;
         public List<IMenuItem> children;
         public IMenuItem parent;
@@ -23,7 +24,6 @@ namespace TrayDir
 
         public readonly bool isDir = false;
         public readonly bool isFile = false;
-        public string path;
         private bool loadedIcon = false;
         private bool assignedClickEvent = false;
         private bool enqueued;
@@ -54,7 +54,7 @@ namespace TrayDir
                     {
                         if (mi.menuIcon is null && mi.isFile)
                         {
-                            mi.menuIcon = Icon.ExtractAssociatedIcon(mi.path).ToBitmap();
+                            mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
                         }
                     }
                     catch { }
@@ -71,8 +71,8 @@ namespace TrayDir
                 Thread.Sleep(10);
             }
         }
-        public IMenuItem(TrayInstance instance, string path) : this(instance, path, null) { }
-        public IMenuItem(TrayInstance instance, string path, IMenuItem parent)
+        public IMenuItem(TrayInstance instance, TrayInstancePath path) : this(instance, path, null) { }
+        public IMenuItem(TrayInstance instance, TrayInstancePath tiPath, IMenuItem parent)
         {
             if (imgLoadSemaphore is null)
             {
@@ -90,11 +90,11 @@ namespace TrayDir
             }
 
             this.instance = instance;
-            this.path = path;
+            this.tiPath = tiPath;
             this.parent = parent;
             children = new List<IMenuItem>();
-            isDir = AppUtils.PathIsDirectory(path);
-            isFile = AppUtils.PathIsFile(path);
+            isDir = AppUtils.PathIsDirectory(tiPath.path);
+            isFile = AppUtils.PathIsFile(tiPath.path);
             MakeChildren();
         }
         private void MakeChildren()
@@ -103,10 +103,10 @@ namespace TrayDir
             {
                 try
                 {
-                    string[] dirpaths = Directory.GetFileSystemEntries(path);
+                    string[] dirpaths = Directory.GetFileSystemEntries(tiPath.path);
                     foreach (string fp in dirpaths)
                     {
-                        children.Add(new IMenuItem(instance, fp, this));
+                        children.Add(new IMenuItem(instance, new TrayInstancePath(fp), this));
                     }
                 }
                 catch { }
@@ -116,11 +116,11 @@ namespace TrayDir
         {
             if (isDir & instance.settings.ExploreFoldersInTrayMenu)
             {
-                AppUtils.OpenPath(new DirectoryInfo(path).FullName, instance.settings.RunAsAdmin);
+                AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, instance.settings.RunAsAdmin);
             }
             else if (isFile)
             {
-                AppUtils.OpenPath(Path.GetFullPath(path), instance.settings.RunAsAdmin);
+                AppUtils.OpenPath(Path.GetFullPath(tiPath.path), instance.settings.RunAsAdmin);
             }
         }
         public void Load()
@@ -129,21 +129,31 @@ namespace TrayDir
             {
                 menuItem = new ToolStripMenuItem();
             }
-            if (isDir)
+            bool useAlias = (tiPath.alias != null && tiPath.alias != "");
+
+            if (useAlias)
             {
-                menuItem.Text = new DirectoryInfo(path).Name;
+                menuItem.Text = tiPath.alias;
             }
-            else if (isFile)
+            else
             {
-                if (instance.settings.ShowFileExtensions)
+                if (isDir)
                 {
-                    menuItem.Text = Path.GetFileName(path);
+                    menuItem.Text = new DirectoryInfo(tiPath.path).Name;
                 }
-                else
+                else if (isFile)
                 {
-                    menuItem.Text = Path.GetFileNameWithoutExtension(path);
+                    if (instance.settings.ShowFileExtensions)
+                    {
+                        menuItem.Text = Path.GetFileName(tiPath.path);
+                    }
+                    else
+                    {
+                        menuItem.Text = Path.GetFileNameWithoutExtension(tiPath.path);
+                    }
                 }
             }
+
             menuItem.DropDownItems.Clear();
             List<IMenuItem> dirMenuItems = new List<IMenuItem>();
             List<IMenuItem> fileMenuItems = new List<IMenuItem>();

@@ -103,6 +103,7 @@
     <Compile Include="src\forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\models\TrayInstancePath.cs" />
     <Compile Include="src\utils\ControlUtils.cs" />
     <Compile Include="src\utils\AppUtils.cs" />
     <Compile Include="lib\FolderSelectDialog\FolderSelectDialog.cs" />
@@ -116,16 +117,16 @@
     <Compile Include="src\ProgramData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="lib\FolderSelectDialog\Reflector.cs" />
-    <Compile Include="src\Settings.cs" />
-    <Compile Include="src\SettingsApplication.cs" />
+    <Compile Include="src\models\Settings.cs" />
+    <Compile Include="src\models\SettingsApplication.cs" />
     <Compile Include="src\forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="src\forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\TrayInstance.cs" />
-    <Compile Include="src\TrayInstanceSettings.cs" />
+    <Compile Include="src\models\TrayInstance.cs" />
+    <Compile Include="src\models\TrayInstanceSettings.cs" />
     <Compile Include="src\utils\DialogUtils.cs" />
     <Compile Include="src\utils\TrayUtils.cs" />
     <Compile Include="src\utils\UpdateUtils.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="src\views\PathView.cs" />
     <EmbeddedResource Include="src\forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -27,6 +27,7 @@ namespace TrayDir
             {
                 pd = new ProgramData();
             }
+            pd.PerformUpdate();
             return pd;
         }
         public void CreateDefaultInstance()
@@ -73,9 +74,9 @@ namespace TrayDir
         {
             foreach (TrayInstance instance in trayInstances)
             {
-                if (instance.settings.paths.Count == 0)
+                if (instance.PathCount == 0)
                 {
-                    instance.settings.paths.Add(TrayInstance.defaultPath);
+                    instance.paths.Add(new TrayInstancePath(TrayInstance.defaultPath));
                 }
             }
         }
@@ -104,6 +105,20 @@ namespace TrayDir
                 {
                     ti.view.Rebuild();
                 }
+            }
+        }
+        private void PerformUpdate()
+        {
+            foreach(TrayInstance ti in trayInstances)
+            {
+                if (ti.settings.paths.Count > 0)
+                {
+                    foreach(string path in ti.settings.paths)
+                    {
+                        ti.paths.Add(new TrayInstancePath(path));
+                    }
+                }
+                ti.settings.paths = null;
             }
         }
     }

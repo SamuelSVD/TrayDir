@@ -35,7 +35,7 @@ namespace TrayDir
         {
             int j = i;
             PathView pv = ControlUtils.AddPath(pathstlp, i);
-            string text = instance.settings.paths[i];
+            string text = instance.paths[i].path;
             if (AppUtils.PathIsDirectory(text))
             {
                 pv.textbox.Text = new DirectoryInfo(text).FullName;
@@ -70,18 +70,18 @@ namespace TrayDir
         }
         public void FixPaths()
         {
-            int p = instance.settings.paths.Count;
+            int p = instance.PathCount;
             int v = pathViews.Count;
             while (p < v)
             {
-                p = instance.settings.paths.Count;
+                p = instance.PathCount;
                 v = pathViews.Count;
                 RemovePath(v-1);
             }
             while (p > v)
             {
                 AddPath(v);
-                p = instance.settings.paths.Count;
+                p = instance.PathCount;
                 v = pathViews.Count;
             }
             for(int i = 0; i < pathViews.Count; i++)
@@ -92,7 +92,7 @@ namespace TrayDir
                 pv.deleteButton.Enabled = pathViews.Count != 1;
                 pv.SetEvents(instance, i);
 
-                string text = instance.settings.paths[i];
+                string text = instance.paths[i].path;
                 if (AppUtils.PathIsDirectory(text))
                 {
                     pv.textbox.Text = new DirectoryInfo(text).FullName;
