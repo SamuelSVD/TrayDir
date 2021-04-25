@@ -122,7 +122,7 @@ namespace TrayDir
                         }
                     }
                 }
-                catch (Exception e) { }
+                catch { }
             }
         }
         public void MenuDestroy(object obj, EventArgs args)

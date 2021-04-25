@@ -282,6 +282,7 @@ namespace TrayDir
             WindowState = FormWindowState.Normal;
             pd.FormShowed();
             Invalidate();
+            BuildExploreDropdown();
         }
         public void ExitApp(object sender, EventArgs e)
         {

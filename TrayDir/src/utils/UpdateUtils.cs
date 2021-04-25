@@ -16,6 +16,11 @@ namespace TrayDir
         private class GitHubRelease {
             public string url;
             public string tag_name;
+            public GitHubRelease()
+            {
+                url = null;
+                tag_name = null;
+            }
         }
         private class Version
         {
@@ -41,17 +46,24 @@ namespace TrayDir
         }
         private static async void UpdatesThread()
         {
-            string JSON = await GetVersion();
-            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
-            GitHubRelease latestRelease = json_serializer.Deserialize<GitHubRelease>(JSON);
-            JSON = latestRelease.url;
-            JSON = latestRelease.tag_name;
-            if (SemverCompare(Assembly.GetEntryAssembly().GetName().Version.ToString(), latestRelease.tag_name))
+            try
             {
-                if (MessageBox.Show("A new version of TrayDir is available, do you want to update now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                string JSON = await GetVersion();
+                JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+                GitHubRelease latestRelease = json_serializer.Deserialize<GitHubRelease>(JSON);
+                JSON = latestRelease.url;
+                JSON = latestRelease.tag_name;
+                if (SemverCompare(Assembly.GetEntryAssembly().GetName().Version.ToString(), latestRelease.tag_name))
                 {
-                    System.Diagnostics.Process.Start(latestRelease.url);
+                    if (MessageBox.Show("A new version of TrayDir is available, do you want to update now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(latestRelease.url);
+                    }
                 }
+            }
+            catch
+            {
+
             }
         }
         public async static Task<string> GetVersion()
