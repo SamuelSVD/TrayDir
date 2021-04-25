@@ -14,11 +14,11 @@ namespace TrayDir
         private static string SOURCE = "https://api.github.com/repos/SamuelSVD/TrayDir/releases/latest";
         private static Thread updatesThread;
         private class GitHubRelease {
-            public string url;
+            public string html_url;
             public string tag_name;
             public GitHubRelease()
             {
-                url = null;
+                html_url = null;
                 tag_name = null;
             }
         }
@@ -51,13 +51,13 @@ namespace TrayDir
                 string JSON = await GetVersion();
                 JavaScriptSerializer json_serializer = new JavaScriptSerializer();
                 GitHubRelease latestRelease = json_serializer.Deserialize<GitHubRelease>(JSON);
-                JSON = latestRelease.url;
+                JSON = latestRelease.html_url;
                 JSON = latestRelease.tag_name;
                 if (SemverCompare(Assembly.GetEntryAssembly().GetName().Version.ToString(), latestRelease.tag_name))
                 {
                     if (MessageBox.Show("A new version of TrayDir is available, do you want to update now?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        System.Diagnostics.Process.Start(latestRelease.url);
+                        System.Diagnostics.Process.Start(latestRelease.html_url);
                     }
                 }
             }
