@@ -12,6 +12,7 @@ namespace TrayDir
         public Button downButton;
         public Button addButton;
         public Button deleteButton;
+        public Button editButton;
         public TableLayoutPanel buttonsPanel;
         public TextBox textbox;
         public Panel panel;
@@ -22,6 +23,7 @@ namespace TrayDir
         private EventHandler upSelect;
         private EventHandler downSelect;
         private EventHandler addSelect;
+        private EventHandler editSelect;
         private EventHandler deleteSelect;
 
         public PathView()
@@ -34,14 +36,17 @@ namespace TrayDir
             CreateDownButton();
             CreateAddButton();
             CreateDeleteButton();
+            CreateEditButton();
             CreateButtonsPanel();
 
             buttonsPanel.Controls.Add(upButton, 0, 0);
             buttonsPanel.Controls.Add(downButton, 0, 1);
             buttonsPanel.Controls.Add(addButton, 1, 0);
-            buttonsPanel.Controls.Add(deleteButton, 2, 0);
-            buttonsPanel.SetRowSpan(deleteButton, 2);
+            buttonsPanel.Controls.Add(editButton, 2, 0);
+            buttonsPanel.Controls.Add(deleteButton, 3, 0);
             buttonsPanel.SetRowSpan(addButton, 2);
+            buttonsPanel.SetRowSpan(editButton, 2);
+            buttonsPanel.SetRowSpan(deleteButton, 2);
         }
         private void CreateTextField()
         {
@@ -141,6 +146,20 @@ namespace TrayDir
             };
             deleteButton.FlatAppearance.BorderSize = 1;
         }
+        private void CreateEditButton()
+        {
+            editButton = new Button()
+            {
+                Text = "?",
+                Padding = new Padding(),
+                Margin = new Padding(),
+                AutoSize = false,
+                UseCompatibleTextRendering = true,
+                //Font = new Font("Microsoft Sans Serif", fileButton.Font.Size / 2, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))),
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            editButton.FlatAppearance.BorderSize = 1;
+        }
         private void CreateFileButton()
         {
             fileButton = new Button();
@@ -202,6 +221,8 @@ namespace TrayDir
             downButton.Height = height / 2;
             addButton.Height = height;
             addButton.Width = height;
+            editButton.Height = height;
+            editButton.Width = height;
             deleteButton.Height = height;
             deleteButton.Width = height;
         }
@@ -268,9 +289,18 @@ namespace TrayDir
             }
             addSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
-                MainForm.form.InsertPath(pathIndex+1);
+                MainForm.form.InsertPath(pathIndex + 1);
             });
             addButton.Click += addSelect;
+            if (editSelect != null)
+            {
+                editButton.Click -= editSelect;
+            }
+            editSelect = new EventHandler(delegate (object obj, EventArgs args)
+            {
+                MainForm.form.EditPath(pathIndex + 1);
+            });
+            editButton.Click += editSelect;
             if (deleteSelect != null)
             {
                 deleteButton.Click -= deleteSelect;

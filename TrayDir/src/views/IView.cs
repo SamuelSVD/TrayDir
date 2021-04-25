@@ -15,7 +15,6 @@ namespace TrayDir
         public IOptionsView options;
         public IPathsView paths;
         public Dictionary<string, IMenuItem> pathMenuItems;
-        private Dictionary<string, int> instCount;
 
 
         public NotifyIcon notifyIcon;
@@ -56,7 +55,6 @@ namespace TrayDir
             UpdateTrayIcon();
 
             pathMenuItems = new Dictionary<string, IMenuItem>();
-            instCount = new Dictionary<string, int>();
         }
         public void setEventHandlers(EventHandler showForm, EventHandler hideForm, EventHandler exitForm)
         {
@@ -136,21 +134,14 @@ namespace TrayDir
 
             notifyIcon.ContextMenuStrip.Items.Add("-");
 
-            instCount.Clear();
             foreach (TrayInstancePath tiPath in instance.paths)
             {
-                int i = 0;
-                if (!instCount.TryGetValue(tiPath.path, out i))
-                {
-                    i = 0;
-                }
-                i++;
-                instCount[tiPath.path] = i;
                 IMenuItem mi;
-                if (!pathMenuItems.TryGetValue(tiPath.path + "_________" + i.ToString(), out mi))
+                string ID = tiPath.GetHashCode().ToString();
+                if (!pathMenuItems.TryGetValue(ID, out mi))
                 {
                     mi = new IMenuItem(instance, tiPath);
-                    pathMenuItems[tiPath.path + "_________" + i.ToString()] = mi;
+                    pathMenuItems[ID] = mi;
                 }
             }
             foreach (IMenuItem mi in pathMenuItems.Values)
@@ -160,7 +151,8 @@ namespace TrayDir
 
             if (instance.PathCount == 1 && instance.settings.ExpandFirstPath)
             {
-                IMenuItem mi = pathMenuItems[instance.paths[0].path + "_________" + 1.ToString()];
+                string ID = instance.paths[0].GetHashCode().ToString();
+                IMenuItem mi = pathMenuItems[ID];
                 if (mi.children.Count > 0)
                 {
                     if (mi.children.Count != mi.menuItem.DropDownItems.Count)
@@ -220,22 +212,15 @@ namespace TrayDir
             }
             else
             {
-                instCount.Clear();
                 foreach (TrayInstancePath tiPath in instance.paths)
                 {
-                    int i = 0;
-                    if (!instCount.TryGetValue(tiPath.path, out i))
-                    {
-                        i = 0;
-                    }
-                    i++;
-                    instCount[tiPath.path] = i;
                     IMenuItem mi;
-                    if (!pathMenuItems.TryGetValue(tiPath.path + "_________" + i.ToString(), out mi))
+                    string ID = tiPath.GetHashCode().ToString();
+                    if (!pathMenuItems.TryGetValue(ID, out mi))
                     {
                         mi = new IMenuItem(instance, tiPath);
                         mi.Load();
-                        pathMenuItems[tiPath.path + "_________" + i.ToString()] = mi;
+                        pathMenuItems[ID] = mi;
                     }
                     notifyIcon.ContextMenuStrip.Items.Add(mi.menuItem);
 

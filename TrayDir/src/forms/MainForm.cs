@@ -420,6 +420,17 @@ namespace TrayDir
             pd.Save();
             BuildExploreDropdown();
         }
+        public void EditPath(int i)
+        {
+            string input = trayInstance.paths[i-1].alias;
+            if (InputDialog.ShowStringInputDialog("Edit Display Name", ref input) == DialogResult.OK)
+            {
+                trayInstance.paths[i-1].alias = input;
+                trayInstance.view.UpdateTrayMenu();
+                pd.Save();
+            }
+        }
+
 
         private void exportToolStripMenuItem1_Click(object sender, EventArgs e)
         {
