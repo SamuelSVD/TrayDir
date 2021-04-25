@@ -448,7 +448,7 @@ namespace TrayDir
             }
             else
             {
-                MessageBox.Show("Error: Unable to import file.");
+                MessageBox.Show("Error: Unable to import file.", "Import failed");
             }
         }
 

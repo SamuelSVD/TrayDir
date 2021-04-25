@@ -59,6 +59,47 @@ namespace TrayDir
                 MessageBox.Show("Error Opening: " + path + '\n' + e.Message);
             }
         }
+        public static void OpenCmdPath(string path)
+        {
+            try
+            {
+                if (PathIsFile(path))
+                {
+                    Process.Start("cmd", "/k cd \"" + new FileInfo(path).Directory.FullName + "\"");
+                }
+                else
+                {
+                    Process.Start("cmd", "/k cd \"" + path + "\"");
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error Exploring: " + path + '\n' + e.Message);
+            }
+        }
+        public static void OpenAdminCmdPath(string path)
+        {
+            Process proc = new Process();
+            proc.StartInfo.UseShellExecute = true;
+            proc.StartInfo.FileName = "cmd";
+            proc.StartInfo.Verb = "runas";
+            try
+            {
+                if (PathIsFile(path))
+                {
+                    proc.StartInfo.Arguments = "/k cd \"" + new FileInfo(path).Directory.FullName + "\"";
+                }
+                else
+                {
+                    proc.StartInfo.Arguments = "/k cd \"" + path + "\"";
+                }
+                proc.Start();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error Opening As Admin: " + '\n' + path + '\n' + e.Message, "Error");
+            }
+        }
         public static void ExplorePath(string path)
         {
             try
@@ -96,7 +137,7 @@ namespace TrayDir
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error Executing As Admin: " + path + '\n' + e.Message);
+                MessageBox.Show("Error Executing As Admin: " + '\n' + path + '\n' + e.Message, "Error");
             }
         }
         public static bool StrToBool(string value)
@@ -111,8 +152,8 @@ namespace TrayDir
             sfd.FileName = Regex.Replace(instance.instanceName, @"[^0-9a-zA-Z()_ ]+", "_");
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show(sfd.FileName);
                 XMLUtils.SaveToFile(instance, sfd.FileName);
+                MessageBox.Show("Exported to:" + sfd.FileName, "Export Done");
             }
         }
         public static TrayInstance ImportInstance()
@@ -122,7 +163,6 @@ namespace TrayDir
             ofd.Filter = "Tray Instance Export | *.tde";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show(ofd.FileName);
                 i = XMLUtils.LoadFromFile<TrayInstance>(ofd.FileName);
             }
             return i;

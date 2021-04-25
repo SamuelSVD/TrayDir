@@ -119,6 +119,7 @@ namespace TrayDir
         }
         public void UpdateTrayMenu()
         {
+
             if (notifyIcon.ContextMenuStrip is null)
             {
                 notifyIcon.ContextMenuStrip = new ContextMenuStrip();
@@ -129,6 +130,7 @@ namespace TrayDir
             {
                 notifyIcon.ContextMenuStrip.Items.Clear();
             }
+//            notifyIcon.ContextMenuStrip.AutoClose = true;
             showMenuItem = MakeAndAddMenuItem(showMenuItem, "Show", false, showForm);
             hideMenuItem = MakeAndAddMenuItem(hideMenuItem, "Hide", true, hideForm);
 
@@ -269,6 +271,7 @@ namespace TrayDir
             notifyIcon.ContextMenuStrip.Items.Add("-");
             exitMenuItem = MakeAndAddMenuItem(exitMenuItem, "Exit", true, exitForm);
 
+  //          notifyIcon.ContextMenuStrip.AutoClose = false;
             UpdateTrayIcon();
         }
         public bool UpdateMenuIcons()

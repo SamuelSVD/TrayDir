@@ -125,15 +125,136 @@ namespace TrayDir
                 catch (Exception e) { }
             }
         }
-        public void MenuItemClick(object obj, EventArgs args)
+        public void MenuDestroy(object obj, EventArgs args)
+        {
+            IMenuItem mi = parent;
+            while (mi != null)
+            {
+                mi.menuItem.DropDown.AutoClose = true;
+                mi.menuItem.DropDown.Close();
+                mi.menuItem.Enabled = true;
+                mi = mi.parent;
+            }
+            instance.view.notifyIcon.ContextMenuStrip.AutoClose = true;
+            instance.view.notifyIcon.ContextMenuStrip.Enabled = true;
+            instance.view.notifyIcon.ContextMenuStrip.Close();
+        }
+        private void MenuSave()
+        {
+            IMenuItem mi = parent;
+            instance.view.notifyIcon.ContextMenuStrip.Show();
+            while (mi != null)
+            {
+                mi.menuItem.DropDown.AutoClose = false;
+                mi.menuItem.DropDown.Show();
+                mi.menuItem.Enabled = false;
+                mi = mi.parent;
+            }
+            instance.view.notifyIcon.ContextMenuStrip.AutoClose = false;
+            instance.view.notifyIcon.ContextMenuStrip.Enabled = false;
+        }
+        private void Run(object obj, EventArgs args)
         {
             if (isDir & instance.settings.ExploreFoldersInTrayMenu)
             {
-                AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, instance.settings.RunAsAdmin);
+                AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, false);
             }
             else if (isFile)
             {
-                AppUtils.OpenPath(Path.GetFullPath(tiPath.path), instance.settings.RunAsAdmin);
+                AppUtils.OpenPath(Path.GetFullPath(tiPath.path), false);
+            }
+        }
+        private void Explore(object obj, EventArgs args)
+        {
+            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            {
+                AppUtils.ExplorePath(new DirectoryInfo(tiPath.path).FullName);
+            }
+            else if (isFile)
+            {
+                AppUtils.ExplorePath(Path.GetFullPath(tiPath.path));
+            }
+        }
+        private void RunAs(object obj, EventArgs args)
+        {
+            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            {
+                AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, true);
+            }
+            else if (isFile)
+            {
+                AppUtils.OpenPath(Path.GetFullPath(tiPath.path), true);
+            }
+        }
+        private void OpenCmd(object obj, EventArgs args)
+        {
+            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            {
+                AppUtils.OpenCmdPath(new DirectoryInfo(tiPath.path).FullName);
+            }
+            else if (isFile)
+            {
+                AppUtils.OpenCmdPath(Path.GetFullPath(tiPath.path));
+            }
+        }
+        private void OpenAdminCmd(object obj, EventArgs args)
+        {
+            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            {
+                AppUtils.OpenAdminCmdPath(new DirectoryInfo(tiPath.path).FullName);
+            }
+            else if (isFile)
+            {
+                AppUtils.OpenAdminCmdPath(Path.GetFullPath(tiPath.path));
+            }
+        }
+        public void MenuItemClick(object obj, MouseEventArgs args)
+        {
+            if (((MouseEventArgs)args).Button == MouseButtons.Right) {
+                MenuSave();
+                Point pt = System.Windows.Forms.Cursor.Position;
+                ContextMenuStrip cmnu = new ContextMenuStrip();
+                ToolStripItem tsi;
+                if (isDir)
+                {
+                    tsi = cmnu.Items.Add("Open in Explorer");
+                    tsi.Click += Explore;
+                    tsi = cmnu.Items.Add("Open in cmd");
+                    tsi.Click += OpenCmd;
+                    tsi = cmnu.Items.Add("Open in cmd (Administrator)");
+                    tsi.Click += OpenAdminCmd;
+                }
+                else if (isFile)
+                {
+                    tsi = cmnu.Items.Add("Run");
+                    tsi.Click += Run;
+                    tsi = cmnu.Items.Add("Run (Administrator)");
+                    tsi.Click += RunAs;
+                    tsi = cmnu.Items.Add("Open in Explorer");
+                    tsi.Click += Explore;
+                    tsi = cmnu.Items.Add("Open in cmd");
+                    tsi.Click += OpenCmd;
+                    tsi = cmnu.Items.Add("Open in cmd (Administrator)");
+                    tsi.Click += OpenAdminCmd;
+                }
+                else
+                {
+                    MenuDestroy(null, null);
+                }
+                cmnu.Show();
+                cmnu.Location = pt;
+                cmnu.Closing += MenuDestroy;
+            }
+            else
+            {
+                if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+                {
+                    AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, instance.settings.RunAsAdmin);
+                }
+                else if (isFile)
+                {
+                    AppUtils.OpenPath(Path.GetFullPath(tiPath.path), instance.settings.RunAsAdmin);
+                }
             }
         }
         public void Load()
@@ -186,7 +307,6 @@ namespace TrayDir
             {
                 menuItem.DropDownItems.Add("(Empty)");
             }
-
             if (ProgramData.pd.settings.app.MenuSorting != "None")
             {
                 if (ProgramData.pd.settings.app.MenuSorting == "Folders Top")
@@ -221,7 +341,7 @@ namespace TrayDir
             }
             if (!assignedClickEvent)
             {
-                menuItem.Click += MenuItemClick;
+                menuItem.MouseDown += MenuItemClick;
                 menuItem.DropDownOpened += LoadChildrenIconEvent;
                 assignedClickEvent = true;
             }

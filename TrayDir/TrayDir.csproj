@@ -94,6 +94,7 @@
     <Compile Include="lib\VerticalSeparator\VerticalSeparator.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="src\controls\NativeContextMenuStrip.cs" />
     <Compile Include="src\controls\SmartTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
