@@ -488,5 +488,16 @@ namespace TrayDir
                 AppUtils.ExplorePath(Path.GetFullPath(path));
             }
         }
+
+        private void changeIgnoreRegexToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string input = trayInstance.ignoreRegex;
+            if (InputDialog.ShowMultilineStringInputDialog("Edit Ignore Regex", ref input) == DialogResult.OK)
+            {
+                trayInstance.ignoreRegex = input;
+                trayInstance.view.Rebuild();
+                pd.Save();
+            }
+        }
     }
 }

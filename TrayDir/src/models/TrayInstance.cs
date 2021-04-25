@@ -14,6 +14,8 @@ namespace TrayDir
         public string iconPath;
         [XmlAttribute]
         public string instanceName;
+        [XmlAttribute]
+        public string ignoreRegex = "";
         [XmlIgnore]
         public IView view;
         public List<TrayInstancePath> paths;
@@ -21,6 +23,7 @@ namespace TrayDir
         public byte[] iconData;
         public static string defaultPath = "";
         public int PathCount { get { return paths.Count; } }
+        public string[] regexList { get { return ignoreRegex.Split('\r', '\n'); } }
         public TrayInstance() : this("New Instance") { }
         public TrayInstance(string instanceName) : this(instanceName, new TrayInstanceSettings())
         {

@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace TrayDir
 {
@@ -106,10 +107,22 @@ namespace TrayDir
                     string[] dirpaths = Directory.GetFileSystemEntries(tiPath.path);
                     foreach (string fp in dirpaths)
                     {
-                        children.Add(new IMenuItem(instance, new TrayInstancePath(fp), this));
+                        bool match = false;
+                        foreach(string regx in instance.regexList)
+                        {
+                            if (regx != "")
+                            {
+                                match = match || (Regex.Matches(fp, regx).Count > 0);
+                            }
+                            if (match) break;
+                        }
+                        if (!match)
+                        {
+                            children.Add(new IMenuItem(instance, new TrayInstancePath(fp), this));
+                        }
                     }
                 }
-                catch { }
+                catch (Exception e) { }
             }
         }
         public void MenuItemClick(object obj, EventArgs args)

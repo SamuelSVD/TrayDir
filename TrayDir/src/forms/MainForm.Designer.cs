@@ -47,6 +47,8 @@ namespace TrayDir
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.changeIgnoreRegexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebuildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebuildCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebuildAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -123,7 +125,9 @@ namespace TrayDir
             this.deleteSelectedToolStripMenuItem,
             this.exportToolStripMenuItem,
             this.importToolStripMenuItem,
-            this.exportToolStripMenuItem1});
+            this.exportToolStripMenuItem1,
+            this.toolStripMenuItem1,
+            this.changeIgnoreRegexToolStripMenuItem});
             this.instanceToolStripMenuItem.Name = "instanceToolStripMenuItem";
             this.instanceToolStripMenuItem.Size = new System.Drawing.Size(63, 22);
             this.instanceToolStripMenuItem.Text = "Instance";
@@ -131,42 +135,56 @@ namespace TrayDir
             // newInstanceToolStripMenuItem
             // 
             this.newInstanceToolStripMenuItem.Name = "newInstanceToolStripMenuItem";
-            this.newInstanceToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.newInstanceToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.newInstanceToolStripMenuItem.Text = "New";
             this.newInstanceToolStripMenuItem.Click += new System.EventHandler(this.New);
             // 
             // editNameToolStripMenuItem
             // 
             this.editNameToolStripMenuItem.Name = "editNameToolStripMenuItem";
-            this.editNameToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.editNameToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.editNameToolStripMenuItem.Text = "Edit Name";
             this.editNameToolStripMenuItem.Click += new System.EventHandler(this.Edit);
             // 
             // deleteSelectedToolStripMenuItem
             // 
             this.deleteSelectedToolStripMenuItem.Name = "deleteSelectedToolStripMenuItem";
-            this.deleteSelectedToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.deleteSelectedToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.deleteSelectedToolStripMenuItem.Text = "Delete";
             this.deleteSelectedToolStripMenuItem.Click += new System.EventHandler(this.DeleteCurrent);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(126, 6);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(193, 6);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.importToolStripMenuItem.Text = "Import";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click_1);
             // 
             // exportToolStripMenuItem1
             // 
             this.exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
+            this.exportToolStripMenuItem1.Size = new System.Drawing.Size(196, 22);
             this.exportToolStripMenuItem1.Text = "Export";
             this.exportToolStripMenuItem1.Click += new System.EventHandler(this.exportToolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(193, 6);
+            // 
+            // changeIgnoreRegexToolStripMenuItem
+            // 
+            this.changeIgnoreRegexToolStripMenuItem.Name = "changeIgnoreRegexToolStripMenuItem";
+            this.changeIgnoreRegexToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.changeIgnoreRegexToolStripMenuItem.Text = "Change Ignore Regex...";
+            this.changeIgnoreRegexToolStripMenuItem.ToolTipText = "Change currently selected instance\'s ignore regex.\r\nRegex patterns follow c# form" +
+    "atting.\r\nPatterns are separated by new lines.";
+            this.changeIgnoreRegexToolStripMenuItem.Click += new System.EventHandler(this.changeIgnoreRegexToolStripMenuItem_Click);
             // 
             // rebuildToolStripMenuItem
             // 
@@ -274,6 +292,8 @@ namespace TrayDir
         public Timer iconLoadTimer;
         private ToolStripMenuItem rebuildCurrentToolStripMenuItem;
         private ToolStripMenuItem rebuildAllToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem1;
+        private ToolStripMenuItem changeIgnoreRegexToolStripMenuItem;
     }
 }
 
