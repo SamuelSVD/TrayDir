@@ -17,3 +17,13 @@ Currently TrayDir is only supported/tested on Windows 10.
 Download the installer for the latest release by following this link:
 
 [http://github.com/samuelSVD/TrayDir/releases/latest](http://github.com/samuelSVD/TrayDir/releases/latest);
+
+## Regex Filtering
+
+You can add a Regex pattern to ignore certain files or folders from being included in the tray menu.
+
+| Pattern | Description |
+| --- | --- |
+| `$(?<=\.(gif\|png\|jpg))` | This pattern will ignore all files ending with `.gif`, `.png`, or `.jpg` |
+
+For more information on Regex and creating your own filters see [Regular Expressions](https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference)
