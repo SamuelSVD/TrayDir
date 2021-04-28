@@ -247,8 +247,8 @@ namespace TrayDir
                 DialogResult d = MainForm.form.fd.ShowDialog();
                 if (d == DialogResult.OK)
                 {
-                    textbox.Text = MainForm.form.fd.FileName;
                     instance.paths[pathIndex].path = MainForm.form.fd.FileName;
+                    UpdateTextBox();
                     instance.view.Rebuild();
                     MainForm.form.BuildExploreDropdown();
                     MainForm.form.pd.Save();
@@ -271,8 +271,8 @@ namespace TrayDir
                 }
                 if (fs.ShowDialog())
                 {
-                    textbox.Text = fs.FileName;
                     instance.paths[pathIndex].path = fs.FileName;
+                    UpdateTextBox();
                     instance.view.Rebuild();
                     MainForm.form.BuildExploreDropdown();
                     MainForm.form.pd.Save();
@@ -313,7 +313,8 @@ namespace TrayDir
             }
             editSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
-                MainForm.form.EditPath(pathIndex + 1);
+                MainForm.form.EditPath(pathIndex);
+                UpdateTextBox();
             });
             editButton.Click += editSelect;
             if (deleteSelect != null)
@@ -325,6 +326,17 @@ namespace TrayDir
                 MainForm.form.RemovePath(pathIndex);
             });
             deleteButton.Click += deleteSelect;
+        }
+        public void UpdateTextBox()
+        {
+            if (trayInstancePath.alias == null || trayInstancePath.alias == "")
+            {
+                textbox.Text = trayInstancePath.path;
+            }
+            else
+            {
+                textbox.Text = "(" + trayInstancePath.alias + ") " + trayInstancePath.path;
+            }
         }
     }
 }

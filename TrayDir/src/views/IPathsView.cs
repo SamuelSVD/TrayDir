@@ -37,19 +37,6 @@ namespace TrayDir
             PathView pv = ControlUtils.AddPath(pathstlp, i);
             pv.trayInstancePath = instance.paths[i];
             string text = instance.paths[i].path;
-            if (AppUtils.PathIsDirectory(text))
-            {
-                pv.textbox.Text = new DirectoryInfo(text).FullName;
-            }
-            else if (AppUtils.PathIsFile(text))
-            {
-                pv.textbox.Text = Path.GetFullPath(text);
-            }
-            else
-            {
-                pv.textbox.Text = text;
-            }
-
             pv.SetEvents(instance, i);
             pathViews.Add(pv);
         }
@@ -86,20 +73,7 @@ namespace TrayDir
                 pv.downButton.Enabled = (pathViews.Count != 1) && (i < pathViews.Count - 1);
                 pv.deleteButton.Enabled = pathViews.Count != 1;
                 pv.SetEvents(instance, i);
-
-                string text = instance.paths[i].path;
-                if (AppUtils.PathIsDirectory(text))
-                {
-                    pv.textbox.Text = new DirectoryInfo(text).FullName;
-                }
-                else if (AppUtils.PathIsFile(text))
-                {
-                    pv.textbox.Text = Path.GetFullPath(text);
-                }
-                else
-                {
-                    pv.textbox.Text = text;
-                }
+                pv.UpdateTextBox();
             }
         }
     }

@@ -408,10 +408,10 @@ namespace TrayDir
         }
         public void EditPath(int i)
         {
-            string input = trayInstance.paths[i-1].alias;
+            string input = trayInstance.paths[i].alias;
             if (InputDialog.ShowStringInputDialog("Edit Display Name", ref input) == DialogResult.OK)
             {
-                trayInstance.paths[i-1].alias = input;
+                trayInstance.paths[i].alias = input;
                 trayInstance.view.UpdateTrayMenu();
                 pd.Save();
             }
