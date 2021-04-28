@@ -320,17 +320,6 @@ namespace TrayDir
                 if (Program.DEBUG) instanceTabs.SelectedTab.BackColor = Color.Red;
                 if (trayInstance.view != null)
                 {
-                    int tempHeight = trayInstance.view.GetHeight();
-                    //tempHeight += mainMenu.Height;
-                    if (Program.DEBUG) Text =
-                            "T" + instanceTabs.ItemSize.Height.ToString()
-                            + ",C" + ClientSize.Height.ToString()
-                            + ",MM" + mainMenu.Height.ToString()
-                            + ",IT" + instanceTabs.ClientSize.Height.ToString()
-                            + ",ST" + instanceTabs.SelectedTab.ClientSize.Height.ToString()
-                            + ",O" + trayInstance.view.options.GetHeight().ToString()
-                            + ",P" + trayInstance.view.paths.GetHeight().ToString()
-                            + ",p" + trayInstance.view.p.Size.Height;
                     instanceTabs.SelectedTab.ClientSize = new Size(instanceTabs.SelectedTab.ClientSize.Width, trayInstance.view.p.Size.Height);
                     instanceTabs.ClientSize = new Size(instanceTabs.ClientSize.Width, instanceTabs.SelectedTab.ClientSize.Height + instanceTabs.SelectedTab.Top + instanceTabs.Margin.Bottom);
                     if (prevHeight == 0 || prevHeight > instanceTabs.ClientSize.Height)

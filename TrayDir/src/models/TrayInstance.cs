@@ -30,7 +30,6 @@ namespace TrayDir
         }
         public TrayInstance(String instanceName, TrayInstanceSettings settings)
         {
-            defaultPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             this.settings = settings;
             this.instanceName = instanceName;
             paths = new List<TrayInstancePath>();

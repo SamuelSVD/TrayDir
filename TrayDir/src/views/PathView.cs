@@ -8,6 +8,7 @@ namespace TrayDir
 {
     public class PathView
     {
+        public TrayInstancePath trayInstancePath;
         public Button upButton;
         public Button downButton;
         public Button addButton;
@@ -235,13 +236,20 @@ namespace TrayDir
             fileSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
                 MainForm.form.fd.DereferenceLinks = false;
-                MainForm.form.fd.InitialDirectory = textbox.Text;
+                if (trayInstancePath.path == null || trayInstancePath.path == "")
+                {
+                    MainForm.form.fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                }
+                else
+                {
+                    MainForm.form.fd.InitialDirectory = trayInstancePath.path;
+                }
                 DialogResult d = MainForm.form.fd.ShowDialog();
                 if (d == DialogResult.OK)
                 {
                     textbox.Text = MainForm.form.fd.FileName;
                     instance.paths[pathIndex].path = MainForm.form.fd.FileName;
-                    instance.view.UpdateTrayMenu();
+                    instance.view.Rebuild();
                     MainForm.form.BuildExploreDropdown();
                     MainForm.form.pd.Save();
                 }
@@ -253,12 +261,19 @@ namespace TrayDir
             folderSelect = new EventHandler(delegate (object obj, EventArgs args)
             {
                 FolderSelectDialog fs = new FolderSelectDialog();
-                fs.InitialDirectory = textbox.Text;
+                if (trayInstancePath.path == null || trayInstancePath.path == "")
+                {
+                    MainForm.form.fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                }
+                else
+                {
+                    MainForm.form.fd.InitialDirectory = trayInstancePath.path;
+                }
                 if (fs.ShowDialog())
                 {
                     textbox.Text = fs.FileName;
                     instance.paths[pathIndex].path = fs.FileName;
-                    instance.view.UpdateTrayMenu();
+                    instance.view.Rebuild();
                     MainForm.form.BuildExploreDropdown();
                     MainForm.form.pd.Save();
                 }

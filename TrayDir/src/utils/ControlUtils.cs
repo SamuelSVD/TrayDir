@@ -24,7 +24,6 @@ namespace TrayDir
 
             tlp.RowCount = row + 1;
             tlp.Height = 0;
-            //tlp.RowStyles.Add(new RowStyle());
 
             ConfigurePathTableStyles(tlp, 0);
             pv.ResizeButtons(pv.fileButton.Height);

@@ -68,14 +68,6 @@ namespace TrayDir
         {
             return p;
         }
-        public int GetHeight()
-        {
-            int height = 0;
-            height += tlp.Padding.Bottom + tlp.Padding.Top + tlp.Margin.Top + tlp.Margin.Bottom;
-            height += options.GetHeight();
-            height += paths.GetHeight();
-            return height;
-        }
         private ToolStripMenuItem MakeAndAddMenuItem(ToolStripMenuItem menuItem, string text, bool visible, EventHandler eh)
         {
             if (!(eh is null) && (menuItem == null))

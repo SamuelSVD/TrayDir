@@ -77,11 +77,5 @@ namespace TrayDir
         {
             return optionsgb;
         }
-        public int GetHeight()
-        {
-            int height = 0;
-            height += optionsgb.Padding.Bottom + optionsgb.Padding.Top + optionsgb.Margin.Top + optionsgb.Margin.Bottom + optionsgb.Height;
-            return height;
-        }
     }
 }

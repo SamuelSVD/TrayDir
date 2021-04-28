@@ -35,6 +35,7 @@ namespace TrayDir
         {
             int j = i;
             PathView pv = ControlUtils.AddPath(pathstlp, i);
+            pv.trayInstancePath = instance.paths[i];
             string text = instance.paths[i].path;
             if (AppUtils.PathIsDirectory(text))
             {
@@ -61,12 +62,6 @@ namespace TrayDir
                 pathViews.Remove(pv);
             }
             FixPaths();
-        }
-        public int GetHeight()
-        {
-            int height = 0;
-            height += pathsgb.Padding.Bottom + pathsgb.Padding.Top + pathsgb.Margin.Top + pathsgb.Margin.Bottom + pathsgb.Bottom - pathsgb.Top;
-            return height;
         }
         public void FixPaths()
         {
