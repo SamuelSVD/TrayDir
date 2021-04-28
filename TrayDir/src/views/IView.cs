@@ -9,6 +9,8 @@ namespace TrayDir
     {
         private TrayInstance instance;
 
+        public TabPage InstanceTabPage;
+
         public Panel p;
         public TableLayoutPanel tlp;
 

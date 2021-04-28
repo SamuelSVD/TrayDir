@@ -142,14 +142,6 @@ namespace TrayDir
                 onShowInstance = instance;
                 ShowApp(obj, args);
             });
-            EventHandler tabClose = new EventHandler(delegate (object obj, EventArgs args)
-            {
-                pd.trayInstances.Remove(instance);
-                iv.Hide();
-                deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
-                pd.Save();
-            });
-            tp.ParentChanged += tabClose;
             BuildRebuildDropdown();
         }
         public static void Init()
@@ -297,6 +289,7 @@ namespace TrayDir
         private IView CreateViewFromInstance(TrayInstance instance, TabPage tp)
         {
             IView iv = new IView(instance);
+            iv.InstanceTabPage = tp;
             tp.Text = instance.instanceName;
             tp.Controls.Add(iv.GetControl());
 
@@ -387,12 +380,15 @@ namespace TrayDir
         }
         private void PromptDelete(int i)
         {
-            TabPage tp = instanceTabs.TabPages[i];
             TrayInstance ti = pd.trayInstances[i];
             if (pd.trayInstances.Count > 1 && (DialogResult.Yes == MessageBox.Show("Do you want to delete <" + ti.instanceName + ">?", "Close", MessageBoxButtons.YesNo)))
             {
-                instanceTabs.TabPages.RemoveAt(i);
+                instanceTabs.TabPages.Remove(ti.view.InstanceTabPage);
+                pd.trayInstances.Remove(ti);
+                ti.view.Hide();
+                deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
                 BuildRebuildDropdown();
+                pd.Save();
             }
         }
         public void SwapPaths(int a, int b)
