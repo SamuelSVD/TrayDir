@@ -22,6 +22,31 @@ namespace TrayDir
             ControlUtils.ConfigureTableLayoutPanel(optionstlp);
             grouptlp.Controls.Add(optionstlp, 0, 0);
 
+            optionstlp.ColumnStyles.Clear();
+            optionstlp.ColumnStyles.Add(new ColumnStyle());
+            optionstlp.ColumnStyles.Add(new ColumnStyle());
+            for (int i = 0; i < 2; i++)
+            {
+                if (optionstlp.ColumnStyles.Count < (i + 1))
+                {
+                    optionstlp.ColumnStyles.Add(new ColumnStyle());
+                }
+                ColumnStyle style = optionstlp.ColumnStyles[i];
+                style.SizeType = SizeType.Percent;
+                switch (i)
+                {
+                    case 0:
+                        style.Width = 90;
+                        break;
+                    case 1:
+                        style.Width = 10;
+                        break;
+                    default:
+                        style.Width = 50;
+                        break;
+                }
+            }
+
             VerticalSeparator vs = new VerticalSeparator();
             vs.Dock = DockStyle.Fill;
             if (Program.DEBUG) vs.BackColor = Color.Blue;

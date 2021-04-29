@@ -10,11 +10,13 @@ namespace TrayDir
     {
         [XmlElement(ElementName = "Application")]
         public SettingsApplication app;
+        public SettingsWindows win;
         public static string config = "config.xml";
         
         public Settings()
         {
             app = new SettingsApplication();
+            win = new SettingsWindows();
         }
     }
 }

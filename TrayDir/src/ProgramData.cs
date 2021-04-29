@@ -84,7 +84,7 @@ namespace TrayDir
         {
             //HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
             RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            if (settings.app.StartWithWindows)
+            if (settings.win.StartWithWindows)
             {
                 key.SetValue("TrayDir", System.Reflection.Assembly.GetEntryAssembly().Location);
             }

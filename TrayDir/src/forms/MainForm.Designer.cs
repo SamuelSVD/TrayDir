@@ -57,6 +57,7 @@ namespace TrayDir
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.iconLoadTimer = new System.Windows.Forms.Timer(this.components);
+            this.iconList = new System.Windows.Forms.ImageList(this.components);
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,14 +107,14 @@ namespace TrayDir
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.Save);
             // 
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.ExitApp);
             // 
@@ -199,14 +200,14 @@ namespace TrayDir
             // rebuildCurrentToolStripMenuItem
             // 
             this.rebuildCurrentToolStripMenuItem.Name = "rebuildCurrentToolStripMenuItem";
-            this.rebuildCurrentToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.rebuildCurrentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.rebuildCurrentToolStripMenuItem.Text = "Rebuild Current";
             this.rebuildCurrentToolStripMenuItem.Click += new System.EventHandler(this.rebuildCurrentToolStripMenuItem_Click);
             // 
             // rebuildAllToolStripMenuItem
             // 
             this.rebuildAllToolStripMenuItem.Name = "rebuildAllToolStripMenuItem";
-            this.rebuildAllToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.rebuildAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.rebuildAllToolStripMenuItem.Text = "Rebuild All";
             this.rebuildAllToolStripMenuItem.Click += new System.EventHandler(this.rebuildAllToolStripMenuItem_Click);
             // 
@@ -245,6 +246,13 @@ namespace TrayDir
             // iconLoadTimer
             // 
             this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
+            // 
+            // iconList
+            // 
+            this.iconList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconList.ImageStream")));
+            this.iconList.TransparentColor = System.Drawing.Color.Transparent;
+            this.iconList.Images.SetKeyName(0, "document.png");
+            this.iconList.Images.SetKeyName(1, "folder.png");
             // 
             // MainForm
             // 
@@ -294,6 +302,7 @@ namespace TrayDir
         private ToolStripMenuItem rebuildAllToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem1;
         private ToolStripMenuItem changeIgnoreRegexToolStripMenuItem;
+        private ImageList iconList;
     }
 }
 

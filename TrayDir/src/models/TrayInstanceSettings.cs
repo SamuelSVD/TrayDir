@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace TrayDir
 {
     [XmlRoot(ElementName = "TrayInstanceSettings")]
-    public class TrayInstanceSettings
+    public class TrayInstanceSettings : StringIndexable
     {
         public List<string> paths;
         [XmlAttribute]
@@ -17,21 +17,6 @@ namespace TrayDir
         public bool ExploreFoldersInTrayMenu;
         [XmlAttribute]
         public bool ExpandFirstPath;
-        public object this[string propertyName]
-        {
-            get
-            {
-                Type myType = typeof(TrayInstanceSettings);
-                FieldInfo myPropInfo = myType.GetField(propertyName);
-                return myPropInfo.GetValue(this);
-            }
-            set
-            {
-                Type myType = typeof(TrayInstanceSettings);
-                FieldInfo myPropInfo = myType.GetField(propertyName);
-                myPropInfo.SetValue(this, value);
-            }
-        }
         public TrayInstanceSettings() {
             RunAsAdmin = false;
             ShowFileExtensions = true;

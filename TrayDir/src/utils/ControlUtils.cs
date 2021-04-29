@@ -89,7 +89,7 @@ namespace TrayDir
             });
             cb.Click += cbClick;
         }
-        public static void SetCheckboxCheckedEvent(CheckBox cb, SettingsApplication settings, string settingName)
+        public static void SetCheckboxCheckedEvent(CheckBox cb, StringIndexable settings, string settingName)
         {
             EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args)
             {
@@ -104,7 +104,7 @@ namespace TrayDir
             });
             cb.Click += cbClick;
         }
-        public static void SetComboBoxChangedEvent(ComboBox cb, SettingsApplication settings, string settingName)
+        public static void SetComboBoxChangedEvent(ComboBox cb, StringIndexable settings, string settingName)
         {
             EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args)
             {
@@ -115,6 +115,5 @@ namespace TrayDir
             });
             cb.SelectedIndexChanged += cbClick;
         }
-
     }
 }

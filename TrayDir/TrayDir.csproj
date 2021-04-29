@@ -104,6 +104,8 @@
     <Compile Include="src\forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\models\SettingsWindows.cs" />
+    <Compile Include="src\models\StringIndexable.cs" />
     <Compile Include="src\models\TrayInstancePath.cs" />
     <Compile Include="src\utils\ControlUtils.cs" />
     <Compile Include="src\utils\AppUtils.cs" />

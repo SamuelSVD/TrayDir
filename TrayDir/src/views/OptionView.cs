@@ -40,28 +40,6 @@ namespace TrayDir
             tlp.Controls.Add(checkbox, 1, row);
             tlp.RowCount = row + 1;
             tlp.RowStyles.Add(new RowStyle());
-
-            for (int i = 0; i < 3; i++)
-            {
-                if (tlp.ColumnStyles.Count < (i + 1))
-                {
-                    tlp.ColumnStyles.Add(new ColumnStyle());
-                }
-                ColumnStyle style = tlp.ColumnStyles[i];
-                style.SizeType = SizeType.Percent;
-                switch (i)
-                {
-                    case 0:
-                        style.Width = 90;
-                        break;
-                    case 1:
-                        style.Width = 10;
-                        break;
-                    default:
-                        style.Width = 50;
-                        break;
-                }
-            }
         }
         public void SetTooltip(string message)
         {

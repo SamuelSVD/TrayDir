@@ -38,7 +38,7 @@ namespace TrayDir
             BuildExploreDropdown();
             BuildRebuildDropdown();
 
-            if (pd.settings.app.StartMinimized)
+            if (pd.settings.win.StartMinimized)
             {
                 allowVisible = false;
                 HideApp(this, null);
@@ -48,7 +48,7 @@ namespace TrayDir
                 allowVisible = true;
             }
             MaximizeBox = false;
-            if (pd.settings.app.CheckForUpdates)
+            if (pd.settings.win.CheckForUpdates)
             {
                 UpdateUtils.CheckForUpdates();
             }
@@ -240,7 +240,7 @@ namespace TrayDir
         }
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (!allowClose && pd.settings.app.MinimizeOnClose)
+            if (!allowClose && pd.settings.win.MinimizeOnClose)
             {
                 HideApp(this, null);
                 e.Cancel = true;
