@@ -78,7 +78,23 @@ namespace TrayDir
                 {
                     instance.paths.Add(new TrayInstancePath(TrayInstance.defaultPath));
                 }
+                if (instance.PathCount != instance.NodeCount)
+                {
+                    instance.nodes.Clear();
+                    foreach(TrayInstancePath tip in instance.paths)
+                    {
+                        TrayInstanceNode tin = new TrayInstanceNode();
+                        tin.id = instance.paths.IndexOf(tip);
+                        tin.type = TrayInstanceNode.NodeType.Path;
+                        instance.nodes.Add(tin);
+                    }
+                }
+                foreach(TrayInstanceNode tin in instance.nodes)
+                {
+                    tin.SetInstance(instance);
+                }
             }
+            
         }
         public void CheckStartup()
         {

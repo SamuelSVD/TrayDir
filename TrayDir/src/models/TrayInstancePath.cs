@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace TrayDir
 {
@@ -13,7 +8,9 @@ namespace TrayDir
         public string path;
         [XmlAttribute]
         public string alias;
-        public TrayInstancePath() : this("") {}
+        public TrayInstancePath() : this("") { }
+        public bool isDir { get { return AppUtils.PathIsDirectory(path); } }
+        public bool isFile { get { return AppUtils.PathIsFile(path); } }
         public TrayInstancePath(string path)
         {
             this.path = path;

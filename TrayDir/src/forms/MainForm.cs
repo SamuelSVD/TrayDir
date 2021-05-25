@@ -11,7 +11,7 @@ namespace TrayDir
         private bool allowVisible;     // ContextMenu's Show command used
         private bool allowClose;       // ContextMenu's Exit command used
         private int prevHeight;
-        private TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
+        public TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
         private TrayInstance onShowInstance;
         public ProgramData pd;
         public FileDialog fd;
@@ -484,6 +484,12 @@ namespace TrayDir
                 trayInstance.view.Rebuild();
                 pd.Save();
             }
+        }
+
+        private void scrapformToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ScrapForm f = new ScrapForm();
+            f.ShowDialog();
         }
     }
 }
