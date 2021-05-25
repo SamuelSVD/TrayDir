@@ -31,31 +31,30 @@ namespace TrayDir
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScrapForm));
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.button10 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.newFileB = new System.Windows.Forms.Button();
+            this.newFolderB = new System.Windows.Forms.Button();
+            this.newPluginB = new System.Windows.Forms.Button();
+            this.newVFolderB = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.treeView2 = new System.Windows.Forms.TreeView();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.downB = new System.Windows.Forms.Button();
+            this.upB = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // treeView1
-            // 
-            this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imageList1;
-            this.treeView1.Location = new System.Drawing.Point(63, 56);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.ShowLines = false;
-            this.treeView1.Size = new System.Drawing.Size(751, 234);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // imageList1
             // 
@@ -74,161 +73,255 @@ namespace TrayDir
             this.imageList1.Images.SetKeyName(10, "delete.png");
             this.imageList1.Images.SetKeyName(11, "question.png");
             // 
-            // button10
+            // tableLayoutPanel1
             // 
-            this.button10.ImageIndex = 10;
-            this.button10.ImageList = this.imageList1;
-            this.button10.Location = new System.Drawing.Point(12, 144);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(44, 38);
-            this.button10.TabIndex = 12;
-            this.button10.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 1, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(434, 236);
+            this.tableLayoutPanel1.TabIndex = 13;
             // 
-            // button9
+            // tableLayoutPanel3
             // 
-            this.button9.ImageIndex = 4;
-            this.button9.ImageList = this.imageList1;
-            this.button9.Location = new System.Drawing.Point(234, 12);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(51, 38);
-            this.button9.TabIndex = 11;
-            this.button9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button9.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel3.AutoSize = true;
+            this.tableLayoutPanel3.ColumnCount = 5;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.Controls.Add(this.newFileB, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.newFolderB, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.newPluginB, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.newVFolderB, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.button13, 4, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(26, 0);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(408, 29);
+            this.tableLayoutPanel3.TabIndex = 1;
             // 
-            // button8
+            // newFileB
             // 
-            this.button8.ImageIndex = 7;
-            this.button8.ImageList = this.imageList1;
-            this.button8.Location = new System.Drawing.Point(177, 12);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(51, 38);
-            this.button8.TabIndex = 10;
-            this.button8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button8.UseVisualStyleBackColor = true;
+            this.newFileB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.newFileB.Location = new System.Drawing.Point(3, 3);
+            this.newFileB.Name = "newFileB";
+            this.newFileB.Size = new System.Drawing.Size(26, 23);
+            this.newFileB.TabIndex = 0;
+            this.newFileB.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // newFolderB
             // 
-            this.button2.ImageIndex = 9;
-            this.button2.ImageList = this.imageList1;
-            this.button2.Location = new System.Drawing.Point(120, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(51, 38);
-            this.button2.TabIndex = 9;
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button2.UseVisualStyleBackColor = true;
+            this.newFolderB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.newFolderB.Location = new System.Drawing.Point(35, 3);
+            this.newFolderB.Name = "newFolderB";
+            this.newFolderB.Size = new System.Drawing.Size(23, 23);
+            this.newFolderB.TabIndex = 1;
+            this.newFolderB.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // newPluginB
             // 
-            this.button7.ImageIndex = 6;
-            this.button7.ImageList = this.imageList1;
-            this.button7.Location = new System.Drawing.Point(12, 252);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(44, 38);
-            this.button7.TabIndex = 8;
-            this.button7.UseVisualStyleBackColor = true;
+            this.newPluginB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.newPluginB.Location = new System.Drawing.Point(64, 3);
+            this.newPluginB.Name = "newPluginB";
+            this.newPluginB.Size = new System.Drawing.Size(23, 23);
+            this.newPluginB.TabIndex = 2;
+            this.newPluginB.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // newVFolderB
             // 
-            this.button6.ImageIndex = 5;
-            this.button6.ImageList = this.imageList1;
-            this.button6.Location = new System.Drawing.Point(12, 56);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(44, 38);
-            this.button6.TabIndex = 7;
-            this.button6.UseVisualStyleBackColor = true;
+            this.newVFolderB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.newVFolderB.Location = new System.Drawing.Point(93, 3);
+            this.newVFolderB.Name = "newVFolderB";
+            this.newVFolderB.Size = new System.Drawing.Size(20, 23);
+            this.newVFolderB.TabIndex = 3;
+            this.newVFolderB.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // button13
             // 
-            this.button3.ImageIndex = 8;
-            this.button3.ImageList = this.imageList1;
-            this.button3.Location = new System.Drawing.Point(63, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(51, 38);
-            this.button3.TabIndex = 6;
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button3.UseVisualStyleBackColor = true;
+            this.button13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button13.Location = new System.Drawing.Point(119, 3);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(75, 23);
+            this.button13.TabIndex = 4;
+            this.button13.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // treeView2
             // 
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.ImageIndex = 1;
-            this.button5.ImageList = this.imageList1;
-            this.button5.Location = new System.Drawing.Point(820, 100);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(114, 38);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Folder";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button5.UseVisualStyleBackColor = true;
+            this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView2.ImageIndex = 0;
+            this.treeView2.ImageList = this.imageList1;
+            this.treeView2.Location = new System.Drawing.Point(3, 3);
+            this.treeView2.Name = "treeView2";
+            this.treeView2.SelectedImageIndex = 0;
+            this.treeView2.Size = new System.Drawing.Size(314, 201);
+            this.treeView2.TabIndex = 1;
+            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
             // 
-            // button4
+            // tableLayoutPanel5
             // 
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.ImageIndex = 0;
-            this.button4.ImageList = this.imageList1;
-            this.button4.Location = new System.Drawing.Point(820, 56);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(114, 38);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "File";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button4.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel5.AutoSize = true;
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel5.Controls.Add(this.button18, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.button19, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.button11, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.button12, 0, 3);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(323, 3);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 4;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(82, 201);
+            this.tableLayoutPanel5.TabIndex = 0;
             // 
-            // button1
+            // button12
             // 
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.ImageIndex = 3;
-            this.button1.ImageList = this.imageList1;
-            this.button1.Location = new System.Drawing.Point(820, 144);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(114, 38);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Plugin";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button12.Location = new System.Drawing.Point(3, 90);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(75, 23);
+            this.button12.TabIndex = 3;
+            this.button12.Text = "Rename...";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(3, 61);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.TabIndex = 2;
+            this.button11.Text = "Plugin";
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // button19
+            // 
+            this.button19.AutoSize = true;
+            this.button19.Location = new System.Drawing.Point(3, 32);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(75, 23);
+            this.button19.TabIndex = 1;
+            this.button19.Text = "Folder";
+            this.button19.UseVisualStyleBackColor = true;
+            // 
+            // button18
+            // 
+            this.button18.AutoSize = true;
+            this.button18.Location = new System.Drawing.Point(3, 3);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(75, 23);
+            this.button18.TabIndex = 0;
+            this.button18.Text = "File";
+            this.button18.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.treeView2, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(26, 29);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(408, 207);
+            this.tableLayoutPanel4.TabIndex = 2;
+            // 
+            // downB
+            // 
+            this.downB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.downB.Location = new System.Drawing.Point(3, 181);
+            this.downB.Name = "downB";
+            this.downB.Size = new System.Drawing.Size(20, 23);
+            this.downB.TabIndex = 2;
+            this.downB.UseVisualStyleBackColor = true;
+            // 
+            // upB
+            // 
+            this.upB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.upB.ImageIndex = 5;
+            this.upB.Location = new System.Drawing.Point(3, 3);
+            this.upB.Name = "upB";
+            this.upB.Size = new System.Drawing.Size(20, 23);
+            this.upB.TabIndex = 0;
+            this.upB.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.AutoSize = true;
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.upB, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.downB, 0, 2);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 29);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(26, 207);
+            this.tableLayoutPanel2.TabIndex = 0;
             // 
             // ScrapForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 383);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.treeView1);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(497, 333);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ScrapForm";
             this.Text = "ScrapForm";
+            this.Load += new System.EventHandler(this.ScrapForm_Load);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button newFileB;
+        private System.Windows.Forms.Button newFolderB;
+        private System.Windows.Forms.Button newPluginB;
+        private System.Windows.Forms.Button newVFolderB;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button upB;
+        private System.Windows.Forms.Button downB;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.TreeView treeView2;
     }
 }
