@@ -200,7 +200,6 @@
     <Content Include="Resources\folder_blue.png" />
     <Content Include="Resources\folder_blue_new.png" />
     <Content Include="Resources\folder_new.png" />
-    <Content Include="Resources\g1.png" />
     <Content Include="Resources\question.png" />
     <Content Include="Resources\runnable.png" />
     <Content Include="Resources\runnable_new.png" />

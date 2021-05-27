@@ -22,22 +22,22 @@ namespace TrayDir
             }
             TreeNode folder = new TreeNode();
             LoadImages();
-            updateImage(upB, 5);
-            updateImage(downB, 6);
-            updateImage(newFileB, 8);
-            updateImage(newFolderB,9);
-            updateImage(newPluginB,7);
-            updateImage(newVFolderB,4);
-            updateImage(button13, 10);
-            button18.Image = imageList1.Images[0];
-            button18.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button18.TextAlign = ContentAlignment.MiddleLeft;
-            button19.Image = imageList1.Images[1];
-            button19.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button19.TextAlign = ContentAlignment.MiddleLeft;
-            button11.Image = imageList1.Images[3];
-            button11.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button11.TextAlign = ContentAlignment.MiddleLeft;
+            updateImage(upButton, 5);
+            updateImage(downButton, 6);
+            updateImage(newDocButton, 8);
+            updateImage(newFolderButton,9);
+            updateImage(newPluginButton,7);
+            updateImage(newVirtualFolderButton,4);
+            updateImage(deleteButton, 10);
+            docPropertiesButton.Image = imageList1.Images[0];
+            docPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+            docPropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
+            folderPropertiesButton.Image = imageList1.Images[1];
+            folderPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+            folderPropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
+            runnablePropertiesButton.Image = imageList1.Images[3];
+            runnablePropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+            runnablePropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
         }
         private void updateImage(Button b, int index)
         {
@@ -46,7 +46,7 @@ namespace TrayDir
         }
         private void LoadImages()
         {
-            imageList1.ImageSize = new Size(upB.Font.Height, upB.Font.Height);
+            imageList1.ImageSize = new Size(upButton.Font.Height, upButton.Font.Height);
             imageList1.Images.Add(TrayDir.Properties.Resources.document);
             imageList1.Images.Add(TrayDir.Properties.Resources.folder);
             imageList1.Images.Add(TrayDir.Properties.Resources.folder_blue);
