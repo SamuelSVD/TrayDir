@@ -19,12 +19,12 @@ namespace TrayDir
         [XmlIgnore]
         public IView view;
         public List<TrayInstancePath> paths;
-        public List<TrayInstanceNode> nodes;
+        public TrayInstanceNode nodes;
 
         public byte[] iconData;
         public static string defaultPath = "";
         public int PathCount { get { return paths.Count; } }
-        public int NodeCount { get { int i = 0; foreach (TrayInstanceNode tin in nodes) i += tin.NodeCount; return i; } }
+        public int NodeCount { get { int i = 0; i += nodes.NodeCount - 1; return i; } }
         public string[] regexList { get { return ignoreRegex.Split('\r', '\n'); } }
         public TrayInstance() : this("New Instance") { }
         public TrayInstance(string instanceName) : this(instanceName, new TrayInstanceSettings())
@@ -35,7 +35,7 @@ namespace TrayDir
             this.settings = settings;
             this.instanceName = instanceName;
             paths = new List<TrayInstancePath>();
-            nodes = new List<TrayInstanceNode>();
+            nodes = new TrayInstanceNode();
         }
     }
 }

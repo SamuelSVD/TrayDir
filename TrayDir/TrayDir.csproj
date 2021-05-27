@@ -200,6 +200,8 @@
     <Content Include="Resources\folder_blue.png" />
     <Content Include="Resources\folder_blue_new.png" />
     <Content Include="Resources\folder_new.png" />
+    <None Include="Resources\indent_in.png" />
+    <None Include="Resources\indent_out.png" />
     <Content Include="Resources\question.png" />
     <Content Include="Resources\runnable.png" />
     <Content Include="Resources\runnable_new.png" />

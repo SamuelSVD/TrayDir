@@ -37,6 +37,14 @@ namespace TrayDir
                 child.SetInstance(instance);
             }
         }
+        public void FixChildren()
+        {
+            foreach (TrayInstanceNode child in children)
+            {
+                child.parent = this;
+                child.FixChildren();
+            }
+        }
         public void MoveUp()
         {
             if (parent != null)
@@ -75,8 +83,10 @@ namespace TrayDir
                 int index = parent.children.IndexOf(this);
                 if (index > 0)
                 {
+                    TrayInstanceNode newParent = parent.children[index - 1];
                     parent.children.RemoveAt(index);
-                    parent.children.Insert(index + 1, this);
+                    newParent.children.Add(this);
+                    parent = newParent;
                 }
                 else if (index == 0)
                 {

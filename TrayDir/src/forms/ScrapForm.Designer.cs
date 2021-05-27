@@ -33,27 +33,29 @@ namespace TrayDir
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScrapForm));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.upButton = new System.Windows.Forms.Button();
+            this.indentButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.newDocButton = new System.Windows.Forms.Button();
             this.newFolderButton = new System.Windows.Forms.Button();
             this.newPluginButton = new System.Windows.Forms.Button();
             this.newVirtualFolderButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
-            this.treeView2 = new System.Windows.Forms.TreeView();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.button12 = new System.Windows.Forms.Button();
-            this.runnablePropertiesButton = new System.Windows.Forms.Button();
-            this.folderPropertiesButton = new System.Windows.Forms.Button();
-            this.docPropertiesButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.docPropertiesButton = new System.Windows.Forms.Button();
+            this.folderPropertiesButton = new System.Windows.Forms.Button();
+            this.runnablePropertiesButton = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.treeView2 = new System.Windows.Forms.TreeView();
+            this.outdentButton = new System.Windows.Forms.Button();
             this.downButton = new System.Windows.Forms.Button();
-            this.upButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -89,6 +91,49 @@ namespace TrayDir
             this.tableLayoutPanel1.Size = new System.Drawing.Size(434, 236);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.AutoSize = true;
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.downButton, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.outdentButton, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.upButton, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.indentButton, 0, 2);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 29);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 5;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(26, 207);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // upButton
+            // 
+            this.upButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.upButton.ImageIndex = 5;
+            this.upButton.Location = new System.Drawing.Point(3, 3);
+            this.upButton.Name = "upButton";
+            this.upButton.Size = new System.Drawing.Size(20, 23);
+            this.upButton.TabIndex = 0;
+            this.upButton.UseVisualStyleBackColor = true;
+            this.upButton.Click += new System.EventHandler(this.upButton_Click);
+            // 
+            // indentButton
+            // 
+            this.indentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.indentButton.Location = new System.Drawing.Point(3, 32);
+            this.indentButton.Name = "indentButton";
+            this.indentButton.Size = new System.Drawing.Size(20, 23);
+            this.indentButton.TabIndex = 2;
+            this.indentButton.UseVisualStyleBackColor = true;
+            this.indentButton.Click += new System.EventHandler(this.indentButton_Click);
+            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.AutoSize = true;
@@ -112,62 +157,66 @@ namespace TrayDir
             this.tableLayoutPanel3.Size = new System.Drawing.Size(408, 29);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
-            // newFileB
+            // newDocButton
             // 
             this.newDocButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.newDocButton.Location = new System.Drawing.Point(3, 3);
-            this.newDocButton.Name = "newFileB";
+            this.newDocButton.Name = "newDocButton";
             this.newDocButton.Size = new System.Drawing.Size(26, 23);
             this.newDocButton.TabIndex = 0;
             this.newDocButton.UseVisualStyleBackColor = true;
             // 
-            // newFolderB
+            // newFolderButton
             // 
             this.newFolderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.newFolderButton.Location = new System.Drawing.Point(35, 3);
-            this.newFolderButton.Name = "newFolderB";
+            this.newFolderButton.Name = "newFolderButton";
             this.newFolderButton.Size = new System.Drawing.Size(23, 23);
             this.newFolderButton.TabIndex = 1;
             this.newFolderButton.UseVisualStyleBackColor = true;
             // 
-            // newPluginB
+            // newPluginButton
             // 
             this.newPluginButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.newPluginButton.Location = new System.Drawing.Point(64, 3);
-            this.newPluginButton.Name = "newPluginB";
+            this.newPluginButton.Name = "newPluginButton";
             this.newPluginButton.Size = new System.Drawing.Size(23, 23);
             this.newPluginButton.TabIndex = 2;
             this.newPluginButton.UseVisualStyleBackColor = true;
             // 
-            // newVFolderB
+            // newVirtualFolderButton
             // 
             this.newVirtualFolderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.newVirtualFolderButton.Location = new System.Drawing.Point(93, 3);
-            this.newVirtualFolderButton.Name = "newVFolderB";
+            this.newVirtualFolderButton.Name = "newVirtualFolderButton";
             this.newVirtualFolderButton.Size = new System.Drawing.Size(20, 23);
             this.newVirtualFolderButton.TabIndex = 3;
             this.newVirtualFolderButton.UseVisualStyleBackColor = true;
             // 
-            // button13
+            // deleteButton
             // 
             this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.deleteButton.Location = new System.Drawing.Point(119, 3);
-            this.deleteButton.Name = "button13";
+            this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(75, 23);
             this.deleteButton.TabIndex = 4;
             this.deleteButton.UseVisualStyleBackColor = true;
             // 
-            // treeView2
+            // tableLayoutPanel4
             // 
-            this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView2.ImageIndex = 0;
-            this.treeView2.ImageList = this.imageList1;
-            this.treeView2.Location = new System.Drawing.Point(3, 3);
-            this.treeView2.Name = "treeView2";
-            this.treeView2.SelectedImageIndex = 0;
-            this.treeView2.Size = new System.Drawing.Size(314, 201);
-            this.treeView2.TabIndex = 1;
-            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.treeView2, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(26, 29);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(408, 207);
+            this.tableLayoutPanel4.TabIndex = 2;
             // 
             // tableLayoutPanel5
             // 
@@ -189,6 +238,35 @@ namespace TrayDir
             this.tableLayoutPanel5.Size = new System.Drawing.Size(82, 201);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
+            // docPropertiesButton
+            // 
+            this.docPropertiesButton.AutoSize = true;
+            this.docPropertiesButton.Location = new System.Drawing.Point(3, 3);
+            this.docPropertiesButton.Name = "docPropertiesButton";
+            this.docPropertiesButton.Size = new System.Drawing.Size(75, 23);
+            this.docPropertiesButton.TabIndex = 0;
+            this.docPropertiesButton.Text = "File";
+            this.docPropertiesButton.UseVisualStyleBackColor = true;
+            // 
+            // folderPropertiesButton
+            // 
+            this.folderPropertiesButton.AutoSize = true;
+            this.folderPropertiesButton.Location = new System.Drawing.Point(3, 32);
+            this.folderPropertiesButton.Name = "folderPropertiesButton";
+            this.folderPropertiesButton.Size = new System.Drawing.Size(75, 23);
+            this.folderPropertiesButton.TabIndex = 1;
+            this.folderPropertiesButton.Text = "Folder";
+            this.folderPropertiesButton.UseVisualStyleBackColor = true;
+            // 
+            // runnablePropertiesButton
+            // 
+            this.runnablePropertiesButton.Location = new System.Drawing.Point(3, 61);
+            this.runnablePropertiesButton.Name = "runnablePropertiesButton";
+            this.runnablePropertiesButton.Size = new System.Drawing.Size(75, 23);
+            this.runnablePropertiesButton.TabIndex = 2;
+            this.runnablePropertiesButton.Text = "Plugin";
+            this.runnablePropertiesButton.UseVisualStyleBackColor = true;
+            // 
             // button12
             // 
             this.button12.Location = new System.Drawing.Point(3, 90);
@@ -198,87 +276,39 @@ namespace TrayDir
             this.button12.Text = "Rename...";
             this.button12.UseVisualStyleBackColor = true;
             // 
-            // button11
+            // treeView2
             // 
-            this.runnablePropertiesButton.Location = new System.Drawing.Point(3, 61);
-            this.runnablePropertiesButton.Name = "button11";
-            this.runnablePropertiesButton.Size = new System.Drawing.Size(75, 23);
-            this.runnablePropertiesButton.TabIndex = 2;
-            this.runnablePropertiesButton.Text = "Plugin";
-            this.runnablePropertiesButton.UseVisualStyleBackColor = true;
+            this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView2.ImageIndex = 0;
+            this.treeView2.ImageList = this.imageList1;
+            this.treeView2.Location = new System.Drawing.Point(3, 3);
+            this.treeView2.Name = "treeView2";
+            this.treeView2.SelectedImageIndex = 0;
+            this.treeView2.Size = new System.Drawing.Size(314, 201);
+            this.treeView2.TabIndex = 1;
+            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
             // 
-            // button19
+            // outdentButton
             // 
-            this.folderPropertiesButton.AutoSize = true;
-            this.folderPropertiesButton.Location = new System.Drawing.Point(3, 32);
-            this.folderPropertiesButton.Name = "button19";
-            this.folderPropertiesButton.Size = new System.Drawing.Size(75, 23);
-            this.folderPropertiesButton.TabIndex = 1;
-            this.folderPropertiesButton.Text = "Folder";
-            this.folderPropertiesButton.UseVisualStyleBackColor = true;
+            this.outdentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.outdentButton.ImageIndex = 5;
+            this.outdentButton.Location = new System.Drawing.Point(3, 61);
+            this.outdentButton.Name = "outdentButton";
+            this.outdentButton.Size = new System.Drawing.Size(20, 23);
+            this.outdentButton.TabIndex = 14;
+            this.outdentButton.UseVisualStyleBackColor = true;
+            this.outdentButton.Click += new System.EventHandler(this.outdentButton_Click);
             // 
-            // button18
+            // downButton
             // 
-            this.docPropertiesButton.AutoSize = true;
-            this.docPropertiesButton.Location = new System.Drawing.Point(3, 3);
-            this.docPropertiesButton.Name = "button18";
-            this.docPropertiesButton.Size = new System.Drawing.Size(75, 23);
-            this.docPropertiesButton.TabIndex = 0;
-            this.docPropertiesButton.Text = "File";
-            this.docPropertiesButton.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.treeView2, 0, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(26, 29);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(408, 207);
-            this.tableLayoutPanel4.TabIndex = 2;
-            // 
-            // downB
-            // 
-            this.downButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.downButton.Location = new System.Drawing.Point(3, 181);
-            this.downButton.Name = "downB";
+            this.downButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.downButton.ImageIndex = 5;
+            this.downButton.Location = new System.Drawing.Point(3, 90);
+            this.downButton.Name = "downButton";
             this.downButton.Size = new System.Drawing.Size(20, 23);
-            this.downButton.TabIndex = 2;
+            this.downButton.TabIndex = 14;
             this.downButton.UseVisualStyleBackColor = true;
-            // 
-            // upB
-            // 
-            this.upButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.upButton.ImageIndex = 5;
-            this.upButton.Location = new System.Drawing.Point(3, 3);
-            this.upButton.Name = "upB";
-            this.upButton.Size = new System.Drawing.Size(20, 23);
-            this.upButton.TabIndex = 0;
-            this.upButton.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.AutoSize = true;
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.upButton, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.downButton, 0, 2);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 29);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(26, 207);
-            this.tableLayoutPanel2.TabIndex = 0;
+            this.downButton.Click += new System.EventHandler(this.downButton_Click);
             // 
             // ScrapForm
             // 
@@ -288,18 +318,18 @@ namespace TrayDir
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(497, 333);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ScrapForm";
             this.Text = "ScrapForm";
             this.Load += new System.EventHandler(this.ScrapForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -315,7 +345,7 @@ namespace TrayDir
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button upButton;
-        private System.Windows.Forms.Button downButton;
+        private System.Windows.Forms.Button indentButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Button docPropertiesButton;
@@ -323,5 +353,7 @@ namespace TrayDir
         private System.Windows.Forms.Button runnablePropertiesButton;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.TreeView treeView2;
+        private System.Windows.Forms.Button downButton;
+        private System.Windows.Forms.Button outdentButton;
     }
 }

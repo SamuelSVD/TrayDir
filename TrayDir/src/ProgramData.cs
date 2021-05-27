@@ -80,19 +80,18 @@ namespace TrayDir
                 }
                 if (instance.PathCount != instance.NodeCount)
                 {
-                    instance.nodes.Clear();
+                    instance.nodes.children.Clear();
                     foreach(TrayInstancePath tip in instance.paths)
                     {
                         TrayInstanceNode tin = new TrayInstanceNode();
                         tin.id = instance.paths.IndexOf(tip);
                         tin.type = TrayInstanceNode.NodeType.Path;
-                        instance.nodes.Add(tin);
+                        instance.nodes.children.Add(tin);
+                        tin.parent = instance.nodes;
                     }
                 }
-                foreach(TrayInstanceNode tin in instance.nodes)
-                {
-                    tin.SetInstance(instance);
-                }
+                instance.nodes.SetInstance(instance);
+                instance.nodes.FixChildren();
             }
             
         }

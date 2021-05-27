@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TrayDir
 {
     public partial class ScrapForm : Form
     {
+        private List<ITreeNode> nodes;
+        private ITreeNode selectedNode;
         public ScrapForm()
         {
             InitializeComponent();
-            foreach(TrayInstanceNode tin in MainForm.form.trayInstance.nodes)
+            nodes = new List<ITreeNode>();
+            foreach(TrayInstanceNode tin in MainForm.form.trayInstance.nodes.children)
             {
                 ITreeNode tn = new ITreeNode(tin);
                 treeView2.Nodes.Add(tn.node);
+                nodes.Add(tn);
             }
             TreeNode folder = new TreeNode();
             LoadImages();
             updateImage(upButton, 5);
             updateImage(downButton, 6);
+            updateImage(indentButton, 12);
+            updateImage(outdentButton, 13);
             updateImage(newDocButton, 8);
             updateImage(newFolderButton,9);
             updateImage(newPluginButton,7);
@@ -59,25 +60,44 @@ namespace TrayDir
             imageList1.Images.Add(TrayDir.Properties.Resources.folder_new);
             imageList1.Images.Add(TrayDir.Properties.Resources.delete) ;
             imageList1.Images.Add(TrayDir.Properties.Resources.question);
+            imageList1.Images.Add(TrayDir.Properties.Resources.indent_in);
+            imageList1.Images.Add(TrayDir.Properties.Resources.indent_out);
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
-
         private void treeView2_AfterSelect(object sender, TreeViewEventArgs e)
         {
-
+            Text = e.Node.Text;
+            foreach( ITreeNode itn in nodes)
+            {
+                if (e.Node == itn.node)
+                {
+                    selectedNode = itn;
+                    break;
+                }
+            }
         }
-
         private void ScrapForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void upButton_Click(object sender, EventArgs e)
+        {
+            selectedNode.MoveUp();
+        }
+
+        private void downButton_Click(object sender, EventArgs e)
+        {
+            selectedNode.MoveDown();
+        }
+
+        private void indentButton_Click(object sender, EventArgs e)
+        {
+            selectedNode.MoveIn();
+        }
+
+        private void outdentButton_Click(object sender, EventArgs e)
+        {
+            selectedNode.MoveOut();
         }
     }
 }
