@@ -103,6 +103,7 @@ namespace TrayDir
                 {
                     parent.children.RemoveAt(index);
                     grandparent.children.Insert(parent.ParentIndex+1, this);
+                    parent = grandparent;
                 }
             }
         }

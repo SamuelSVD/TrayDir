@@ -112,7 +112,7 @@ namespace TrayDir
                 if (index > 0)
                 {
                     parent.Nodes.RemoveAt(index);
-                    parent.Nodes.Insert(index + 1, node);
+                    parent.Nodes[index - 1].Nodes.Add(node);
                 }
                 else if (index == 0)
                 {
@@ -126,13 +126,45 @@ namespace TrayDir
                     parent = tv.Nodes[index - 1];
                     tv.Nodes.RemoveAt(index);
                     parent.Nodes.Add(node);
-                    tv.SelectedNode = node;
                 }
             }
+            node.TreeView.SelectedNode = node;
         }
+
         public void MoveOut()
         {
             tin.MoveOut();
+
+            TreeNode parent = node.Parent;
+            if (parent != null)
+            {
+                int index = parent.Nodes.IndexOf(node);
+                if (index >= 0)
+                {
+                    TreeNode grandParent = parent.Parent;
+                    int parentindex;
+                    if (grandParent != null)
+                    {
+                        parentindex = grandParent.Nodes.IndexOf(parent);
+                        if (parentindex >= 0)
+                        {
+                            parent.Nodes.RemoveAt(index);
+                            grandParent.Nodes.Insert(parentindex+1, node);
+                        }
+                    }
+                    else
+                    {
+                        TreeView tv = node.TreeView;
+                        parentindex = tv.Nodes.IndexOf(parent);
+                        if (parentindex >= 0)
+                        {
+                            parent.Nodes.RemoveAt(index);
+                            tv.Nodes.Insert(parentindex+1, node);
+                        }
+                    }
+                }
+            }
+            node.TreeView.SelectedNode = node;
         }
     }
 }
