@@ -10,6 +10,10 @@ namespace TrayDir
         {
             this.tin = tin;
             node = new TreeNode();
+            Refresh();
+        }
+        public void Refresh()
+        {
             TrayInstancePath tip = tin.instance.paths[tin.id];
             switch (tin.type)
             {

@@ -488,7 +488,7 @@ namespace TrayDir
 
         private void scrapformToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ScrapForm f = new ScrapForm();
+            ScrapForm f = new ScrapForm(trayInstance);
             f.ShowDialog();
         }
     }

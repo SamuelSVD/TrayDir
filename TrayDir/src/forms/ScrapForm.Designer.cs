@@ -34,6 +34,8 @@ namespace TrayDir
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.downButton = new System.Windows.Forms.Button();
+            this.outdentButton = new System.Windows.Forms.Button();
             this.upButton = new System.Windows.Forms.Button();
             this.indentButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -49,8 +51,6 @@ namespace TrayDir
             this.runnablePropertiesButton = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.treeView2 = new System.Windows.Forms.TreeView();
-            this.outdentButton = new System.Windows.Forms.Button();
-            this.downButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -113,6 +113,28 @@ namespace TrayDir
             this.tableLayoutPanel2.Size = new System.Drawing.Size(26, 207);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
+            // downButton
+            // 
+            this.downButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.downButton.ImageIndex = 5;
+            this.downButton.Location = new System.Drawing.Point(3, 90);
+            this.downButton.Name = "downButton";
+            this.downButton.Size = new System.Drawing.Size(20, 23);
+            this.downButton.TabIndex = 14;
+            this.downButton.UseVisualStyleBackColor = true;
+            this.downButton.Click += new System.EventHandler(this.downButton_Click);
+            // 
+            // outdentButton
+            // 
+            this.outdentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.outdentButton.ImageIndex = 5;
+            this.outdentButton.Location = new System.Drawing.Point(3, 61);
+            this.outdentButton.Name = "outdentButton";
+            this.outdentButton.Size = new System.Drawing.Size(20, 23);
+            this.outdentButton.TabIndex = 14;
+            this.outdentButton.UseVisualStyleBackColor = true;
+            this.outdentButton.Click += new System.EventHandler(this.outdentButton_Click);
+            // 
             // upButton
             // 
             this.upButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -165,6 +187,7 @@ namespace TrayDir
             this.newDocButton.Size = new System.Drawing.Size(26, 23);
             this.newDocButton.TabIndex = 0;
             this.newDocButton.UseVisualStyleBackColor = true;
+            this.newDocButton.Click += new System.EventHandler(this.newDocButton_Click);
             // 
             // newFolderButton
             // 
@@ -174,6 +197,7 @@ namespace TrayDir
             this.newFolderButton.Size = new System.Drawing.Size(23, 23);
             this.newFolderButton.TabIndex = 1;
             this.newFolderButton.UseVisualStyleBackColor = true;
+            this.newFolderButton.Click += new System.EventHandler(this.newFolderButton_Click);
             // 
             // newPluginButton
             // 
@@ -247,6 +271,7 @@ namespace TrayDir
             this.docPropertiesButton.TabIndex = 0;
             this.docPropertiesButton.Text = "File";
             this.docPropertiesButton.UseVisualStyleBackColor = true;
+            this.docPropertiesButton.Click += new System.EventHandler(this.docPropertiesButton_Click);
             // 
             // folderPropertiesButton
             // 
@@ -257,6 +282,7 @@ namespace TrayDir
             this.folderPropertiesButton.TabIndex = 1;
             this.folderPropertiesButton.Text = "Folder";
             this.folderPropertiesButton.UseVisualStyleBackColor = true;
+            this.folderPropertiesButton.Click += new System.EventHandler(this.folderPropertiesButton_Click);
             // 
             // runnablePropertiesButton
             // 
@@ -279,6 +305,7 @@ namespace TrayDir
             // treeView2
             // 
             this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView2.HideSelection = false;
             this.treeView2.ImageIndex = 0;
             this.treeView2.ImageList = this.imageList1;
             this.treeView2.Location = new System.Drawing.Point(3, 3);
@@ -287,28 +314,6 @@ namespace TrayDir
             this.treeView2.Size = new System.Drawing.Size(314, 201);
             this.treeView2.TabIndex = 1;
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
-            // 
-            // outdentButton
-            // 
-            this.outdentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.outdentButton.ImageIndex = 5;
-            this.outdentButton.Location = new System.Drawing.Point(3, 61);
-            this.outdentButton.Name = "outdentButton";
-            this.outdentButton.Size = new System.Drawing.Size(20, 23);
-            this.outdentButton.TabIndex = 14;
-            this.outdentButton.UseVisualStyleBackColor = true;
-            this.outdentButton.Click += new System.EventHandler(this.outdentButton_Click);
-            // 
-            // downButton
-            // 
-            this.downButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.downButton.ImageIndex = 5;
-            this.downButton.Location = new System.Drawing.Point(3, 90);
-            this.downButton.Name = "downButton";
-            this.downButton.Size = new System.Drawing.Size(20, 23);
-            this.downButton.TabIndex = 14;
-            this.downButton.UseVisualStyleBackColor = true;
-            this.downButton.Click += new System.EventHandler(this.downButton_Click);
             // 
             // ScrapForm
             // 
