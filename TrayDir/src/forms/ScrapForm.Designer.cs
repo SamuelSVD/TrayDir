@@ -49,7 +49,7 @@ namespace TrayDir
             this.docPropertiesButton = new System.Windows.Forms.Button();
             this.folderPropertiesButton = new System.Windows.Forms.Button();
             this.runnablePropertiesButton = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
+            this.renameButton = new System.Windows.Forms.Button();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -216,6 +216,7 @@ namespace TrayDir
             this.newVirtualFolderButton.Size = new System.Drawing.Size(20, 23);
             this.newVirtualFolderButton.TabIndex = 3;
             this.newVirtualFolderButton.UseVisualStyleBackColor = true;
+            this.newVirtualFolderButton.Click += new System.EventHandler(this.newVirtualFolderButton_Click);
             // 
             // deleteButton
             // 
@@ -250,7 +251,7 @@ namespace TrayDir
             this.tableLayoutPanel5.Controls.Add(this.docPropertiesButton, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.folderPropertiesButton, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.runnablePropertiesButton, 0, 2);
-            this.tableLayoutPanel5.Controls.Add(this.button12, 0, 3);
+            this.tableLayoutPanel5.Controls.Add(this.renameButton, 0, 3);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(323, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -295,12 +296,13 @@ namespace TrayDir
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(3, 90);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(75, 23);
-            this.button12.TabIndex = 3;
-            this.button12.Text = "Rename...";
-            this.button12.UseVisualStyleBackColor = true;
+            this.renameButton.Location = new System.Drawing.Point(3, 90);
+            this.renameButton.Name = "button12";
+            this.renameButton.Size = new System.Drawing.Size(75, 23);
+            this.renameButton.TabIndex = 3;
+            this.renameButton.Text = "Rename...";
+            this.renameButton.UseVisualStyleBackColor = true;
+            this.renameButton.Click += new System.EventHandler(this.renameButton_Click);
             // 
             // treeView2
             // 
@@ -356,7 +358,7 @@ namespace TrayDir
         private System.Windows.Forms.Button docPropertiesButton;
         private System.Windows.Forms.Button folderPropertiesButton;
         private System.Windows.Forms.Button runnablePropertiesButton;
-        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button renameButton;
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.Button downButton;
         private System.Windows.Forms.Button outdentButton;

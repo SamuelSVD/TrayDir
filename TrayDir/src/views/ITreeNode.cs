@@ -2,42 +2,129 @@
 
 namespace TrayDir
 {
-    class ITreeNode
+    public class ITreeNode
     {
         public TreeNode node;
         public TrayInstanceNode tin;
+        public int index
+        {
+            get
+            {
+                return node.Parent != null ? node.Parent.Nodes.IndexOf(node) : node.TreeView.Nodes.IndexOf(node);
+            }
+        }
+        public bool isFirstChild
+        {
+            get
+            {
+                return index == 0;
+            }
+        }
+        public bool isLastChild
+        {
+            get
+            {
+                return node.Parent != null ? node.Parent.Nodes.Count == index + 1 : node.TreeView.Nodes.Count == index + 1;
+            }
+        }
+        public ITreeNode previousRelative
+        {
+            get
+            {
+                if (!isFirstChild)
+                {
+                    return tin.parent.children[index - 1].itn;
+                }
+                return null;
+            }
+        }
+        public ITreeNode nextRelative
+        {
+            get
+            {
+                if (!isLastChild)
+                {
+                    return tin.parent.children[index + 1].itn;
+                }
+                return null;
+            }
+        }
+        public string alias
+        {
+            get
+            {
+                switch (tin.type)
+                {
+                    case TrayInstanceNode.NodeType.Path:
+                        return tin.instance.paths[tin.id].alias;
+                    case TrayInstanceNode.NodeType.Plugin:
+                        return tin.instance.plugins[tin.id].alias;
+                    case TrayInstanceNode.NodeType.VirtualFolder:
+                        return tin.instance.vfolders[tin.id].alias;
+                    default:
+                        return null;
+                }
+            }
+            set
+            {
+                switch (tin.type)
+                {
+                    case TrayInstanceNode.NodeType.Path:
+                        tin.instance.paths[tin.id].alias = value;
+                        break;
+                    case TrayInstanceNode.NodeType.Plugin:
+                        tin.instance.plugins[tin.id].alias = value;
+                        break;
+                    case TrayInstanceNode.NodeType.VirtualFolder:
+                        tin.instance.vfolders[tin.id].alias = value;
+                        break;
+                    default:
+                        break;
+                }
+                Refresh();
+            }
+        }
         public ITreeNode(TrayInstanceNode tin)
         {
             this.tin = tin;
+            tin.itn = this;
             node = new TreeNode();
             Refresh();
         }
         public void Refresh()
         {
-            TrayInstancePath tip = tin.instance.paths[tin.id];
             switch (tin.type)
             {
                 case TrayInstanceNode.NodeType.Path:
+                    TrayInstancePath tip = tin.instance.paths[tin.id];
+                    bool hasAlias = alias != null && alias != "";
                     if (tip.isDir)
                     {
                         node.ImageIndex = 1;
                         node.SelectedImageIndex = 1;
-                        node.Text = tin.instance.paths[tin.id].alias + "(" + tin.instance.paths[tin.id].path + ")";
+                        node.Text = "";
                     }
                     else if (tip.isFile)
                     {
                         node.ImageIndex = 0;
                         node.SelectedImageIndex = 0;
-                        node.Text = tin.instance.paths[tin.id].alias + "(" + tin.instance.paths[tin.id].path + ")";
+                        node.Text = "";
                     }
                     else
                     {
                         node.ImageIndex = 11;
                         node.SelectedImageIndex = 11;
-                        node.Text = "ERR" + tin.instance.paths[tin.id].alias + "(" + tin.instance.paths[tin.id].path + ")";
+                        node.Text = "ERROR: ";
                     }
+
+                    node.Text += hasAlias ? alias : "";
+                    node.Text += hasAlias ? " (" + tin.instance.paths[tin.id].path + ")" : tin.instance.paths[tin.id].path;
+
                     break;
                 case TrayInstanceNode.NodeType.VirtualFolder:
+                    node.ImageIndex = 2;
+                    node.SelectedImageIndex = 2;
+                    node.Text = tin.instance.vfolders[tin.id].alias;
                     break;
                 case TrayInstanceNode.NodeType.Plugin:
                     break;

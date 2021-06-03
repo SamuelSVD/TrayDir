@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace TrayDir.src.models
+namespace TrayDir
 {
-    class TrayInstancePlugin
+    public class TrayInstancePlugin
     {
         [XmlAttribute]
         public string plugin;
-        public Dictionary<string,string> parameters;
+        [XmlAttribute]
+        public string alias;
+        public List<TrayInstancePluginParameter> parameters;
     }
 }

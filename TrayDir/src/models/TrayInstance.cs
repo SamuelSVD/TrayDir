@@ -19,6 +19,8 @@ namespace TrayDir
         [XmlIgnore]
         public IView view;
         public List<TrayInstancePath> paths;
+        public List<TrayInstanceVirtualFolder> vfolders;
+        public List<TrayInstancePlugin> plugins;
         public TrayInstanceNode nodes;
 
         public byte[] iconData;
@@ -35,6 +37,8 @@ namespace TrayDir
             this.settings = settings;
             this.instanceName = instanceName;
             paths = new List<TrayInstancePath>();
+            vfolders = new List<TrayInstanceVirtualFolder>();
+            plugins = new List<TrayInstancePlugin>();
             nodes = new TrayInstanceNode();
         }
     }
