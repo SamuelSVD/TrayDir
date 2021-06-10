@@ -137,7 +137,7 @@ namespace TrayDir
             instanceTabs.TabPages.Add(newTabTabPage);
             instanceTabs.SelectedIndex = i;
             IView iv = CreateViewFromInstance(instance, tp);
-            iv.notifyIcon.DoubleClick += new EventHandler(delegate (object obj, EventArgs args)
+            iv.tray.notifyIcon.DoubleClick += new EventHandler(delegate (object obj, EventArgs args)
             {
                 onShowInstance = instance;
                 ShowApp(obj, args);
@@ -249,7 +249,7 @@ namespace TrayDir
             {
                 foreach (TrayInstance i in pd.trayInstances)
                 {
-                    i.view.Hide();
+                    i.view.tray.Hide();
                 }
             }
             base.OnFormClosing(e);
@@ -293,12 +293,12 @@ namespace TrayDir
             tp.Text = instance.instanceName;
             tp.Controls.Add(iv.GetControl());
 
-            iv.setEventHandlers(new EventHandler(delegate (Object obj, EventArgs args)
+            iv.tray.setEventHandlers(new EventHandler(delegate (Object obj, EventArgs args)
             {
                 onShowInstance = instance;
                 ShowApp(obj, args);
             }), HideApp, ExitApp);
-            iv.UpdateTrayMenu();
+            iv.tray.BuildTrayMenu();
             return iv;
         }
         private void timer1_Tick(object sender, EventArgs e)
@@ -358,7 +358,7 @@ namespace TrayDir
             {
                 trayInstance.instanceName = input;
                 instanceTabs.SelectedTab.Text = input;
-                trayInstance.view.notifyIcon.Text = input;
+                trayInstance.view.tray.notifyIcon.Text = input;
                 pd.Save();
             }
         }
@@ -374,7 +374,7 @@ namespace TrayDir
             {
                 instanceTabs.TabPages.Remove(ti.view.InstanceTabPage);
                 pd.trayInstances.Remove(ti);
-                ti.view.Hide();
+                ti.view.tray.Hide();
                 deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
                 BuildRebuildDropdown();
                 pd.Save();
@@ -386,7 +386,7 @@ namespace TrayDir
             trayInstance.paths[a] = trayInstance.paths[b];
             trayInstance.paths[b] = sa;
             trayInstance.view.paths.FixPaths();
-            trayInstance.view.UpdateTrayMenu();
+            trayInstance.view.tray.BuildTrayMenu();
             pd.Save();
             BuildExploreDropdown();
         }
@@ -394,7 +394,7 @@ namespace TrayDir
         {
             trayInstance.paths.RemoveAt(i);
             trayInstance.view.paths.FixPaths();
-            trayInstance.view.UpdateTrayMenu();
+            trayInstance.view.tray.BuildTrayMenu();
             pd.Save();
             BuildExploreDropdown();
         }
@@ -402,7 +402,7 @@ namespace TrayDir
         {
             trayInstance.paths.Insert(i, new TrayInstancePath(TrayInstance.defaultPath));
             trayInstance.view.paths.FixPaths();
-            trayInstance.view.UpdateTrayMenu();
+            trayInstance.view.tray.BuildTrayMenu();
             pd.Save();
             BuildExploreDropdown();
         }
@@ -412,7 +412,7 @@ namespace TrayDir
             if (InputDialog.ShowStringInputDialog("Edit Display Name", ref input) == DialogResult.OK)
             {
                 trayInstance.paths[i].alias = input;
-                trayInstance.view.UpdateTrayMenu();
+                trayInstance.view.tray.BuildTrayMenu();
                 pd.Save();
             }
         }
@@ -443,7 +443,7 @@ namespace TrayDir
             bool ret = true;
             foreach(TrayInstance ti in pd.trayInstances)
             {
-                ret = ti.view.UpdateMenuIcons() && ret;
+                ret = ti.view.tray.UpdateMenuIcons() && ret;
             }
             if (ret)
             {
@@ -453,7 +453,7 @@ namespace TrayDir
 
         private void rebuildCurrentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            trayInstance.view.Rebuild();
+            trayInstance.view.tray.Rebuild();
             resizeForm();
         }
 
@@ -481,7 +481,7 @@ namespace TrayDir
             if (InputDialog.ShowMultilineStringInputDialog("Edit Ignore Regex", ref input) == DialogResult.OK)
             {
                 trayInstance.ignoreRegex = input;
-                trayInstance.view.Rebuild();
+                trayInstance.view.tray.Rebuild();
                 pd.Save();
             }
         }

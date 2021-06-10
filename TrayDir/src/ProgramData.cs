@@ -45,7 +45,7 @@ namespace TrayDir
             {
                 foreach (TrayInstance instance in trayInstances)
                 {
-                    instance.view.UpdateTrayMenu();
+                    instance.view.tray.BuildTrayMenu();
                 }
             }
             CheckStartup();
@@ -56,7 +56,7 @@ namespace TrayDir
             {
                 foreach (TrayInstance instance in trayInstances)
                 {
-                    instance.view.SetFormHiddenMenu();
+                    instance.view.tray.SetFormHiddenMenu();
                 }
             }
         }
@@ -66,7 +66,7 @@ namespace TrayDir
             {
                 foreach (TrayInstance instance in trayInstances)
                 {
-                    instance.view.SetFormShownMenu();
+                    instance.view.tray.SetFormShownMenu();
                 }
             }
         }
@@ -118,7 +118,7 @@ namespace TrayDir
             {
                 if (ti.view != null)
                 {
-                    ti.view.Rebuild();
+                    ti.view.tray.Rebuild();
                 }
             }
         }

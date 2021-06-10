@@ -84,7 +84,7 @@ namespace TrayDir
             EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args)
             {
                 instance.settings[settingName] = cb.Checked;
-                instance.view.UpdateTrayMenu();
+                instance.view.tray.BuildTrayMenu();
                 MainForm.form.pd.Save();
             });
             cb.Click += cbClick;

@@ -249,7 +249,7 @@ namespace TrayDir
                 {
                     instance.paths[pathIndex].path = MainForm.form.fd.FileName;
                     UpdateTextBox();
-                    instance.view.Rebuild();
+                    instance.view.tray.Rebuild();
                     MainForm.form.BuildExploreDropdown();
                     MainForm.form.pd.Save();
                 }
@@ -273,7 +273,7 @@ namespace TrayDir
                 {
                     instance.paths[pathIndex].path = fs.FileName;
                     UpdateTextBox();
-                    instance.view.Rebuild();
+                    instance.view.tray.Rebuild();
                     MainForm.form.BuildExploreDropdown();
                     MainForm.form.pd.Save();
                 }

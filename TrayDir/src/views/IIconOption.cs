@@ -37,9 +37,9 @@ namespace TrayDir
                     instance.iconPath = newPath;
                     instance.iconData = null;
                     resetButton.Enabled = true;
-                    instance.view.UpdateTrayIcon();
-                    instance.view.UpdateTrayIcon();
-                    picturebox.Image = instance.view.notifyIcon.Icon.ToBitmap();
+                    instance.view.tray.UpdateTrayIcon();
+                    instance.view.tray.UpdateTrayIcon();
+                    picturebox.Image = instance.view.tray.notifyIcon.Icon.ToBitmap();
                     MainForm.form.pd.Save();
                 }
             });
@@ -60,15 +60,15 @@ namespace TrayDir
                 
                 instance.iconPath = System.Reflection.Assembly.GetEntryAssembly().Location;
                 instance.iconData = null;
-                instance.view.UpdateTrayIcon();
-                picturebox.Image = instance.view.notifyIcon.Icon.ToBitmap();
+                instance.view.tray.UpdateTrayIcon();
+                picturebox.Image = instance.view.tray.notifyIcon.Icon.ToBitmap();
                 MainForm.form.pd.Save();
                 resetButton.Enabled = false;
             });
             resetButton.Click += bClick;
 
             picturebox = new PictureBox();
-            picturebox.Image = instance.view.GetInstanceIcon().ToBitmap();
+            picturebox.Image = instance.view.tray.GetInstanceIcon().ToBitmap();
             picturebox.Anchor = AnchorStyles.None;
             picturebox.Width = browseButton.Width;
             if (Program.DEBUG) picturebox.BackColor = Color.Purple;

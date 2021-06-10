@@ -146,6 +146,7 @@
     <Compile Include="src\utils\XMLUtils.cs" />
     <Compile Include="src\views\ComboBoxView.cs" />
     <Compile Include="src\views\IIconOption.cs" />
+    <Compile Include="src\views\ITray.cs" />
     <Compile Include="src\views\IMenuItem.cs" />
     <Compile Include="src\views\ITreeNode.cs" />
     <Compile Include="src\views\IView.cs" />

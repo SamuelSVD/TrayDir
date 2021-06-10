@@ -7,6 +7,8 @@ namespace TrayDir
         [XmlAttribute]
         public string path;
         [XmlAttribute]
+        public bool expandPath;
+        [XmlAttribute]
         public string alias;
         public TrayInstancePath() : this("") { }
         public bool isDir { get { return AppUtils.PathIsDirectory(path); } }
