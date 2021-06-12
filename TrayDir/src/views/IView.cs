@@ -19,11 +19,15 @@ namespace TrayDir
 
         public ITray tray;
 
+
+        private ScrapForm scrap;
+
         public IView(TrayInstance instance)
         {
             this.instance = instance;
             instance.view = this;
             tray = new ITray(instance);
+            scrap = new ScrapForm(instance);
 
             p = new Panel();
             p.Dock = DockStyle.Top;
@@ -38,8 +42,8 @@ namespace TrayDir
             options = new IOptionsView(instance);
             tlp.Controls.Add(options.GetControl(), 0, 0);
 
-            paths = new IPathsView(instance);
-            tlp.Controls.Add(paths.GetControl(), 0, 1);
+            //paths = new IPathsView(instance);
+            tlp.Controls.Add(scrap.GetControl(), 0, 1);
 
             tlp.PerformLayout();
 

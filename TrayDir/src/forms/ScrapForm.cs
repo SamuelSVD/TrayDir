@@ -49,6 +49,10 @@ namespace TrayDir
             runnablePropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
             UpdateButtonEnables();
         }
+        public Control GetControl()
+        {
+            return this.tableLayoutPanel1;
+        }
         private ITreeNode InitNodes(TreeView tv, TrayInstanceNode tin, ITreeNode parent)
         {
             ITreeNode tn = new ITreeNode(tin);
@@ -171,10 +175,7 @@ namespace TrayDir
                 {
                     selectedNode.tin.children.Add(tin);
                     tin.parent = selectedNode.tin;
-                    if (selectedNode.node.Parent != null)
-                    {
-                        selectedNode.node.Nodes.Add(itn.node);
-                    }
+                    selectedNode.node.Nodes.Add(itn.node);
                 }
                 else
                 {

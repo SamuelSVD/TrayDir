@@ -108,7 +108,7 @@ namespace TrayDir
         {
             foreach (TrayInstance ti in pd.trayInstances)
             {
-                ti.view.paths.FixPaths();
+                //ti.view.paths.FixPaths();
             }
         }
         public void OnTabSwapped(object sender, SmartTabControl.TabSwappedArgs tsa)
