@@ -112,6 +112,8 @@ namespace TrayDir
         }
         private void Save()
         {
+            instance.Repair();
+            instance.view.tray.Rebuild();
             ProgramData.pd.Save();
         }
         private void upButton_Click(object sender, EventArgs e)
@@ -286,6 +288,23 @@ namespace TrayDir
             {
                 selectedNode.alias = input;
                 Save();
+            }
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            if (selectedNode != null)
+            {
+                bool deleteNode = true;
+                if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder && selectedNode.node.Nodes.Count > 0)
+                {
+                    deleteNode = (MessageBox.Show("Delete virtual folder with its contents?", "", MessageBoxButtons.OKCancel) == DialogResult.OK);
+                }
+                if (deleteNode)
+                {
+                    selectedNode.Delete();
+                    Save();
+                }
             }
         }
     }

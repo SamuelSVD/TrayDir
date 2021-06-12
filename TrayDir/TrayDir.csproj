@@ -151,9 +151,7 @@
     <Compile Include="src\views\ITreeNode.cs" />
     <Compile Include="src\views\IView.cs" />
     <Compile Include="src\views\IOptionsView.cs" />
-    <Compile Include="src\views\IPathsView.cs" />
     <Compile Include="src\views\OptionView.cs" />
-    <Compile Include="src\views\PathView.cs" />
     <EmbeddedResource Include="src\forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
       <SubType>Designer</SubType>

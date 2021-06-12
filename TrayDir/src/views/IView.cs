@@ -15,7 +15,6 @@ namespace TrayDir
         public TableLayoutPanel tlp;
 
         public IOptionsView options;
-        public IPathsView paths;
 
         public ITray tray;
 
@@ -42,7 +41,6 @@ namespace TrayDir
             options = new IOptionsView(instance);
             tlp.Controls.Add(options.GetControl(), 0, 0);
 
-            //paths = new IPathsView(instance);
             tlp.Controls.Add(scrap.GetControl(), 0, 1);
 
             tlp.PerformLayout();

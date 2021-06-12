@@ -380,44 +380,6 @@ namespace TrayDir
                 pd.Save();
             }
         }
-        public void SwapPaths(int a, int b)
-        {
-            TrayInstancePath sa = trayInstance.paths[a];
-            trayInstance.paths[a] = trayInstance.paths[b];
-            trayInstance.paths[b] = sa;
-            trayInstance.view.paths.FixPaths();
-            trayInstance.view.tray.BuildTrayMenu();
-            pd.Save();
-            BuildExploreDropdown();
-        }
-        public void RemovePath(int i)
-        {
-            trayInstance.paths.RemoveAt(i);
-            trayInstance.view.paths.FixPaths();
-            trayInstance.view.tray.BuildTrayMenu();
-            pd.Save();
-            BuildExploreDropdown();
-        }
-        public void InsertPath(int i)
-        {
-            trayInstance.paths.Insert(i, new TrayInstancePath(TrayInstance.defaultPath));
-            trayInstance.view.paths.FixPaths();
-            trayInstance.view.tray.BuildTrayMenu();
-            pd.Save();
-            BuildExploreDropdown();
-        }
-        public void EditPath(int i)
-        {
-            string input = trayInstance.paths[i].alias;
-            if (InputDialog.ShowStringInputDialog("Edit Display Name", ref input) == DialogResult.OK)
-            {
-                trayInstance.paths[i].alias = input;
-                trayInstance.view.tray.BuildTrayMenu();
-                pd.Save();
-            }
-        }
-
-
         private void exportToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             AppUtils.ExportInstance(trayInstance);

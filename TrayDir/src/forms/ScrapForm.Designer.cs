@@ -226,6 +226,7 @@ namespace TrayDir
             this.deleteButton.Size = new System.Drawing.Size(75, 23);
             this.deleteButton.TabIndex = 4;
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // tableLayoutPanel4
             // 
@@ -294,10 +295,10 @@ namespace TrayDir
             this.runnablePropertiesButton.Text = "Plugin";
             this.runnablePropertiesButton.UseVisualStyleBackColor = true;
             // 
-            // button12
+            // renameButton
             // 
             this.renameButton.Location = new System.Drawing.Point(3, 90);
-            this.renameButton.Name = "button12";
+            this.renameButton.Name = "renameButton";
             this.renameButton.Size = new System.Drawing.Size(75, 23);
             this.renameButton.TabIndex = 3;
             this.renameButton.Text = "Rename...";

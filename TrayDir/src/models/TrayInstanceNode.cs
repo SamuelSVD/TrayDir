@@ -25,6 +25,12 @@ namespace TrayDir
         public TrayInstance instance;
         [XmlIgnore]
         public ITreeNode itn;
+        [XmlIgnore]
+        public TrayInstancePath __path;
+        [XmlIgnore]
+        public TrayInstanceVirtualFolder __vfolder;
+        [XmlIgnore]
+        public TrayInstancePlugin __plugin;
 
         public int NodeCount { get { int i = 0; if (type == NodeType.Path || type == NodeType.Plugin) i++;  foreach (TrayInstanceNode tin in children) i += tin.NodeCount; return i; } }
         public int ParentIndex { get { if (parent == null) { return -1; } return parent.children.IndexOf(this); } }
@@ -109,6 +115,23 @@ namespace TrayDir
                     parent = grandparent;
                 }
             }
+        }
+        public void Delete()
+        {
+            if (parent != null)
+            {
+                parent.children.Remove(this);
+            }
+        }
+        public List<TrayInstanceNode> GetAllChildNodes()
+        {
+            List<TrayInstanceNode> allnodes = new List<TrayInstanceNode>();
+            foreach(TrayInstanceNode child in children)
+            {
+                allnodes.Add(child);
+                allnodes.AddRange(child.GetAllChildNodes());
+            }
+            return allnodes;
         }
     }
 }

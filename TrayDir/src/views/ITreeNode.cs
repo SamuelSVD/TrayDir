@@ -257,5 +257,18 @@ namespace TrayDir
             }
             node.TreeView.SelectedNode = node;
         }
+
+        public void Delete()
+        {
+            tin.Delete();
+            if (this.node.Parent != null)
+            {
+                node.Parent.Nodes.Remove(node);
+            }
+            else
+            {
+                node.TreeView.Nodes.Remove(node);
+            }
+        }
     }
 }
