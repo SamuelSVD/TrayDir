@@ -110,6 +110,7 @@ namespace TrayDir
         {
             instance.Repair();
             instance.view.tray.Rebuild();
+            MainForm.form.BuildExploreDropdown();
             ProgramData.pd.Save();
         }
         private void upButton_Click(object sender, EventArgs e)
