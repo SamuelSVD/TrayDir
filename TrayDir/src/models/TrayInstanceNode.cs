@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace TrayDir
@@ -32,7 +30,7 @@ namespace TrayDir
         [XmlIgnore]
         public TrayInstancePlugin __plugin;
 
-        public int NodeCount { get { int i = 0; if (type == NodeType.Path || type == NodeType.Plugin) i++;  foreach (TrayInstanceNode tin in children) i += tin.NodeCount; return i; } }
+        public int NodeCount { get { int i = 0; if (type == NodeType.Path || type == NodeType.Plugin) i++; foreach (TrayInstanceNode tin in children) i += tin.NodeCount; return i; } }
         public int ParentIndex { get { if (parent == null) { return -1; } return parent.children.IndexOf(this); } }
         public TrayInstanceNode()
         {
@@ -41,7 +39,7 @@ namespace TrayDir
         public void SetInstance(TrayInstance instance)
         {
             this.instance = instance;
-            foreach(TrayInstanceNode child in children)
+            foreach (TrayInstanceNode child in children)
             {
                 child.SetInstance(instance);
             }
@@ -63,7 +61,8 @@ namespace TrayDir
                 {
                     parent.children.RemoveAt(index);
                     parent.children.Insert(index - 1, this);
-                } else if (index == 0)
+                }
+                else if (index == 0)
                 {
                     //TODO
                 }
@@ -111,7 +110,7 @@ namespace TrayDir
                 if (grandparent != null)
                 {
                     parent.children.RemoveAt(index);
-                    grandparent.children.Insert(parent.ParentIndex+1, this);
+                    grandparent.children.Insert(parent.ParentIndex + 1, this);
                     parent = grandparent;
                 }
             }
@@ -126,7 +125,7 @@ namespace TrayDir
         public List<TrayInstanceNode> GetAllChildNodes()
         {
             List<TrayInstanceNode> allnodes = new List<TrayInstanceNode>();
-            foreach(TrayInstanceNode child in children)
+            foreach (TrayInstanceNode child in children)
             {
                 allnodes.Add(child);
                 allnodes.AddRange(child.GetAllChildNodes());

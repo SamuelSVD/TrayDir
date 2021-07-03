@@ -21,6 +21,7 @@ namespace TrayDir
             TableLayoutPanel optionstlp = new TableLayoutPanel();
             ControlUtils.ConfigureTableLayoutPanel(optionstlp);
             grouptlp.Controls.Add(optionstlp, 0, 0);
+            if (Program.DEBUG) optionstlp.BackColor = Color.Chartreuse;
 
             optionstlp.ColumnStyles.Clear();
             optionstlp.ColumnStyles.Add(new ColumnStyle());
@@ -65,13 +66,13 @@ namespace TrayDir
                     switch (i)
                     {
                         case 0:
-                            cs.Width = 65;
+                            cs.Width = 75;
                             break;
                         case 1:
                             cs.Width = 5;
                             break;
                         default:
-                            cs.Width = 30;
+                            cs.Width = 20;
                             break;
                     }
                 }
@@ -93,10 +94,10 @@ namespace TrayDir
             ov.SetTooltip("Explore to folder location when folder menu item clicked in tray menu");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ExploreFoldersInTrayMenu");
 
-            ov = new OptionView("Expand First Path", instance.settings.ExpandFirstPath);
-            ov.AddTo(optionstlp, 3);
-            ov.SetTooltip("Expand first path's contents in the tray menu when only one path is selected");
-            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ExpandFirstPath");
+            //ov = new OptionView("Expand First Path", instance.settings.ExpandFirstPath);
+            //ov.AddTo(optionstlp, 3);
+            //ov.SetTooltip("Expand first path's contents in the tray menu when only one path is selected");
+            //ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, instance, "ExpandFirstPath");
         }
         public Control GetControl()
         {

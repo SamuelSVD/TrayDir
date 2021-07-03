@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -19,7 +17,7 @@ namespace TrayDir
         public ITray tray;
 
 
-        private ScrapForm scrap;
+        public ScrapForm scrap;
 
         public IView(TrayInstance instance)
         {
@@ -27,6 +25,7 @@ namespace TrayDir
             instance.view = this;
             tray = new ITray(instance);
             scrap = new ScrapForm(instance);
+            scrap.PerformLayout();
 
             p = new Panel();
             p.Dock = DockStyle.Top;

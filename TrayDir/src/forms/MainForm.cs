@@ -11,6 +11,8 @@ namespace TrayDir
         private bool allowVisible;     // ContextMenu's Show command used
         private bool allowClose;       // ContextMenu's Exit command used
         private int prevHeight;
+        private int prevWidth;
+        private int __debug_i;
         public TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
         private TrayInstance onShowInstance;
         public ProgramData pd;
@@ -63,7 +65,8 @@ namespace TrayDir
         {
             instanceTabs = new SmartTabControl();
             instanceTabs.AllowDrop = true;
-            instanceTabs.Dock = DockStyle.Top;
+            //instanceTabs.Dock = DockStyle.Top;
+            instanceTabs.Anchor = (AnchorStyles)5;
             instanceTabs.Name = "instanceTabs";
             instanceTabs.SelectedIndex = 0;
             instanceTabs.TabIndex = 0;
@@ -315,18 +318,25 @@ namespace TrayDir
         }
         private void resizeForm()
         {
+            if (Program.DEBUG)
+            {
+                __debug_i += 1;
+                if (__debug_i % 2 == 0)
+                {
+                    Text = instanceTabs.SelectedTab.ClientSize.ToString();
+                }
+                else
+                {
+                    Text = trayInstance.view.GetControl().ClientSize.ToString();
+                }
+            }
             if (Visible && instanceTabs.SelectedIndex >= 0)
             {
                 if (Program.DEBUG) instanceTabs.SelectedTab.BackColor = Color.Red;
                 if (trayInstance.view != null)
                 {
-                    instanceTabs.SelectedTab.ClientSize = new Size(instanceTabs.SelectedTab.ClientSize.Width, trayInstance.view.p.Size.Height);
-                    instanceTabs.ClientSize = new Size(instanceTabs.ClientSize.Width, instanceTabs.SelectedTab.ClientSize.Height + instanceTabs.SelectedTab.Top + instanceTabs.Margin.Bottom);
-                    if (prevHeight == 0 || prevHeight > instanceTabs.ClientSize.Height)
-                    {
-                        ClientSize = new Size(ClientSize.Width, instanceTabs.Height + mainMenu.Height);
-                    }
-                    prevHeight = instanceTabs.ClientSize.Height;
+                    instanceTabs.SelectedTab.ClientSize = new Size(trayInstance.view.scrap.tableLayoutPanel1.Width + 15, trayInstance.view.p.Size.Height);
+                    instanceTabs.ClientSize = new Size(instanceTabs.SelectedTab.ClientSize.Width, instanceTabs.SelectedTab.ClientSize.Height + instanceTabs.SelectedTab.Top + instanceTabs.Margin.Bottom);
                 }
             }
             PerformLayout();
@@ -403,7 +413,7 @@ namespace TrayDir
         private void iconLoadTimer_Tick(object sender, EventArgs e)
         {
             bool ret = true;
-            foreach(TrayInstance ti in pd.trayInstances)
+            foreach (TrayInstance ti in pd.trayInstances)
             {
                 ret = ti.view.tray.UpdateMenuIcons() && ret;
             }

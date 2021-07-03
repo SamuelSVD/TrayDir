@@ -230,6 +230,7 @@ namespace TrayDir
             // 
             // tableLayoutPanel4
             // 
+            this.tableLayoutPanel4.AutoSize = true;
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -314,8 +315,10 @@ namespace TrayDir
             this.treeView2.Location = new System.Drawing.Point(3, 3);
             this.treeView2.Name = "treeView2";
             this.treeView2.SelectedImageIndex = 0;
+            this.treeView2.ShowPlusMinus = false;
             this.treeView2.Size = new System.Drawing.Size(314, 201);
             this.treeView2.TabIndex = 1;
+            this.treeView2.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView2_BeforeCollapse);
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
             // 
             // ScrapForm
@@ -324,12 +327,11 @@ namespace TrayDir
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(497, 333);
+            this.ClientSize = new System.Drawing.Size(480, 273);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ScrapForm";
             this.Text = "ScrapForm";
-            this.Load += new System.EventHandler(this.ScrapForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -344,7 +346,7 @@ namespace TrayDir
 
         #endregion
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button newDocButton;
         private System.Windows.Forms.Button newFolderButton;

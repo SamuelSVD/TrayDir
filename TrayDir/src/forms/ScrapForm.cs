@@ -106,10 +106,6 @@ namespace TrayDir
                 }
             }
         }
-        private void ScrapForm_Load(object sender, EventArgs e)
-        {
-
-        }
         private void Save()
         {
             instance.Repair();
@@ -306,6 +302,11 @@ namespace TrayDir
                     Save();
                 }
             }
+        }
+
+        private void treeView2_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

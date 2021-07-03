@@ -16,7 +16,7 @@ namespace TrayDir
             label.AutoSize = true;
             label.Location = new Point(10, 55);
             label.Margin = new Padding(10, 5, 3, 5);
-            label.Size = new Size(670, 25);
+            label.Size = new Size(1, 25);
             label.TabIndex = 2;
             label.Text = text;
 
