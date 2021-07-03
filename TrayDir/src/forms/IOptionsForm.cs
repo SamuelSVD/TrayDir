@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -38,7 +32,6 @@ namespace TrayDir
 
             bClick = new EventHandler(delegate (object obj, EventArgs args)
             {
-
                 instance.iconPath = System.Reflection.Assembly.GetEntryAssembly().Location;
                 instance.iconData = null;
                 instance.view.tray.UpdateTrayIcon();
@@ -52,20 +45,21 @@ namespace TrayDir
             showextensionsCheckBox.Checked = instance.settings.ShowFileExtensions;
             exploreCheckBox.Checked = instance.settings.ExploreFoldersInTrayMenu;
         }
-
         private void runasCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             instance.settings.RunAsAdmin = runasCheckBox.Checked;
         }
-
         private void showextensionsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             instance.settings.ShowFileExtensions = showextensionsCheckBox.Checked;
         }
-
         private void exploreCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             instance.settings.ExploreFoldersInTrayMenu = exploreCheckBox.Checked;
+        }
+        private void IOptionsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ProgramData.pd.Save();
         }
     }
 }

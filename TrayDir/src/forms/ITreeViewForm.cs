@@ -13,7 +13,7 @@ namespace TrayDir
         private bool selectedIndentable { get { return selectedNode != null ? !selectedNode.isFirstChild && selectedNode.previousRelative.tin.type == TrayInstanceNode.NodeType.VirtualFolder : false; } }
         private bool selectedOutdentable { get { return selectedNode != null ? selectedNode.node.Parent != null : false; } }
         private bool selectedUpable { get { return selectedNode != null ? !selectedNode.isFirstChild : false; } }
-        private bool selectedDownable {  get { return selectedNode != null ? !selectedNode.isLastChild : false; } }
+        private bool selectedDownable { get { return selectedNode != null ? !selectedNode.isLastChild : false; } }
         private ITreeNode __selectedNode;
         private TrayInstance instance;
         public ITreeViewForm(TrayInstance instance)
@@ -21,10 +21,10 @@ namespace TrayDir
             this.instance = instance;
             InitializeComponent();
             nodes = new List<ITreeNode>();
-            foreach(TrayInstanceNode tin in instance.nodes.children)
+            foreach (TrayInstanceNode tin in instance.nodes.children)
             {
                 InitNodes(treeView2, tin, null);
-                
+
             }
             treeView2.ExpandAll();
             TreeNode folder = new TreeNode();
@@ -34,9 +34,9 @@ namespace TrayDir
             updateImage(indentButton, 12);
             updateImage(outdentButton, 13);
             updateImage(newDocButton, 8);
-            updateImage(newFolderButton,9);
-            updateImage(newPluginButton,7);
-            updateImage(newVirtualFolderButton,4);
+            updateImage(newFolderButton, 9);
+            updateImage(newPluginButton, 7);
+            updateImage(newVirtualFolderButton, 4);
             updateImage(deleteButton, 10);
             docPropertiesButton.Image = imageList1.Images[0];
             docPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -62,7 +62,7 @@ namespace TrayDir
             }
             if (tin.children.Count > 0)
             {
-                foreach(TrayInstanceNode tinc in tin.children)
+                foreach (TrayInstanceNode tinc in tin.children)
                 {
                     ITreeNode tnc = InitNodes(tv, tinc, tn);
                     tn.node.Nodes.Add(tnc.node);
@@ -89,7 +89,7 @@ namespace TrayDir
             imageList1.Images.Add(TrayDir.Properties.Resources.runnable_new);   //7
             imageList1.Images.Add(TrayDir.Properties.Resources.document_new);   //8
             imageList1.Images.Add(TrayDir.Properties.Resources.folder_new);     //9
-            imageList1.Images.Add(TrayDir.Properties.Resources.delete) ;        //10
+            imageList1.Images.Add(TrayDir.Properties.Resources.delete);        //10
             imageList1.Images.Add(TrayDir.Properties.Resources.question);       //11
             imageList1.Images.Add(TrayDir.Properties.Resources.indent_in);      //12
             imageList1.Images.Add(TrayDir.Properties.Resources.indent_out);     //13
@@ -97,7 +97,7 @@ namespace TrayDir
         private void treeView2_AfterSelect(object sender, TreeViewEventArgs e)
         {
             Text = e.Node.Text;
-            foreach( ITreeNode itn in nodes)
+            foreach (ITreeNode itn in nodes)
             {
                 if (e.Node == itn.node)
                 {
