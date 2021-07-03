@@ -47,6 +47,25 @@ namespace TrayDir
                 resetButton.Enabled = false;
             });
             resetButton.Click += bClick;
+
+            runasCheckBox.Checked = instance.settings.RunAsAdmin;
+            showextensionsCheckBox.Checked = instance.settings.ShowFileExtensions;
+            exploreCheckBox.Checked = instance.settings.ExploreFoldersInTrayMenu;
+        }
+
+        private void runasCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            instance.settings.RunAsAdmin = runasCheckBox.Checked;
+        }
+
+        private void showextensionsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            instance.settings.ShowFileExtensions = showextensionsCheckBox.Checked;
+        }
+
+        private void exploreCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            instance.settings.ExploreFoldersInTrayMenu = exploreCheckBox.Checked;
         }
     }
 }

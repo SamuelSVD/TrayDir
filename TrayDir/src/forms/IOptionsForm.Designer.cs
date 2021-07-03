@@ -168,6 +168,7 @@ namespace TrayDir
             this.exploreCheckBox.TabIndex = 3;
             this.exploreCheckBox.Text = "Explore Folders In Tray Menu";
             this.exploreCheckBox.UseVisualStyleBackColor = true;
+            this.exploreCheckBox.CheckedChanged += new System.EventHandler(this.exploreCheckBox_CheckedChanged);
             // 
             // showextensionsCheckBox
             // 
@@ -181,6 +182,7 @@ namespace TrayDir
             this.showextensionsCheckBox.TabIndex = 2;
             this.showextensionsCheckBox.Text = "Show File Extensions";
             this.showextensionsCheckBox.UseVisualStyleBackColor = true;
+            this.showextensionsCheckBox.CheckedChanged += new System.EventHandler(this.showextensionsCheckBox_CheckedChanged);
             // 
             // runasCheckBox
             // 
@@ -194,6 +196,7 @@ namespace TrayDir
             this.runasCheckBox.TabIndex = 1;
             this.runasCheckBox.Text = "Run As Administrator";
             this.runasCheckBox.UseVisualStyleBackColor = true;
+            this.runasCheckBox.CheckedChanged += new System.EventHandler(this.runasCheckBox_CheckedChanged);
             // 
             // closeButton
             // 
@@ -236,7 +239,7 @@ namespace TrayDir
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "IOptionsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "IOptionsForm";
+            this.Text = "Instance Options";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
