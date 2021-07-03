@@ -12,20 +12,18 @@ namespace TrayDir
         public Panel p;
         public TableLayoutPanel tlp;
 
-        public IOptionsView options;
 
+        public ITreeViewForm treeviewForm;
+        public IOptionsForm optionsForm;
         public ITray tray;
-
-
-        public ScrapForm scrap;
 
         public IView(TrayInstance instance)
         {
             this.instance = instance;
             instance.view = this;
             tray = new ITray(instance);
-            scrap = new ScrapForm(instance);
-            scrap.PerformLayout();
+            treeviewForm = new ITreeViewForm(instance);
+            optionsForm = new IOptionsForm(instance);
 
             p = new Panel();
             p.Dock = DockStyle.Top;
@@ -37,10 +35,7 @@ namespace TrayDir
             ControlUtils.ConfigureTableLayoutPanel(tlp);
             p.Controls.Add(tlp);
 
-            options = new IOptionsView(instance);
-            tlp.Controls.Add(options.GetControl(), 0, 0);
-
-            tlp.Controls.Add(scrap.GetControl(), 0, 1);
+            tlp.Controls.Add(treeviewForm.GetControl(), 0, 0);
 
             tlp.PerformLayout();
 

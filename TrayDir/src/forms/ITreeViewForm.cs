@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace TrayDir
 {
-    public partial class ScrapForm : Form
+    public partial class ITreeViewForm : Form
     {
         private List<ITreeNode> nodes;
         private ITreeNode selectedNode { get { return __selectedNode; } set { __selectedNode = value; UpdateButtonEnables(); } }
@@ -16,7 +16,7 @@ namespace TrayDir
         private bool selectedDownable {  get { return selectedNode != null ? !selectedNode.isLastChild : false; } }
         private ITreeNode __selectedNode;
         private TrayInstance instance;
-        public ScrapForm(TrayInstance instance)
+        public ITreeViewForm(TrayInstance instance)
         {
             this.instance = instance;
             InitializeComponent();
@@ -303,10 +303,14 @@ namespace TrayDir
                 }
             }
         }
-
         private void treeView2_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
         {
             e.Cancel = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            instance.view.optionsForm.ShowDialog();
         }
     }
 }

@@ -335,7 +335,7 @@ namespace TrayDir
                 if (Program.DEBUG) instanceTabs.SelectedTab.BackColor = Color.Red;
                 if (trayInstance.view != null)
                 {
-                    instanceTabs.SelectedTab.ClientSize = new Size(trayInstance.view.scrap.tableLayoutPanel1.Width + 15, trayInstance.view.p.Size.Height);
+                    instanceTabs.SelectedTab.ClientSize = new Size(trayInstance.view.treeviewForm.tableLayoutPanel1.Width + 15, trayInstance.view.p.Size.Height);
                     instanceTabs.ClientSize = new Size(instanceTabs.SelectedTab.ClientSize.Width, instanceTabs.SelectedTab.ClientSize.Height + instanceTabs.SelectedTab.Top + instanceTabs.Margin.Bottom);
                 }
             }
@@ -460,7 +460,7 @@ namespace TrayDir
 
         private void scrapformToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ScrapForm f = new ScrapForm(trayInstance);
+            ITreeViewForm f = new ITreeViewForm(trayInstance);
             f.ShowDialog();
         }
     }

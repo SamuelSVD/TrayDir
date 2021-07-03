@@ -1,7 +1,7 @@
 ﻿
 namespace TrayDir
 {
-    partial class ScrapForm
+    partial class ITreeViewForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace TrayDir
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScrapForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ITreeViewForm));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -51,6 +51,7 @@ namespace TrayDir
             this.runnablePropertiesButton = new System.Windows.Forms.Button();
             this.renameButton = new System.Windows.Forms.Button();
             this.treeView2 = new System.Windows.Forms.TreeView();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -254,14 +255,16 @@ namespace TrayDir
             this.tableLayoutPanel5.Controls.Add(this.folderPropertiesButton, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.runnablePropertiesButton, 0, 2);
             this.tableLayoutPanel5.Controls.Add(this.renameButton, 0, 3);
+            this.tableLayoutPanel5.Controls.Add(this.button1, 0, 4);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(323, 3);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 4;
+            this.tableLayoutPanel5.RowCount = 5;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(82, 201);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
@@ -321,6 +324,17 @@ namespace TrayDir
             this.treeView2.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView2_BeforeCollapse);
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(3, 175);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Options...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ScrapForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -365,5 +379,6 @@ namespace TrayDir
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.Button downButton;
         private System.Windows.Forms.Button outdentButton;
+        private System.Windows.Forms.Button button1;
     }
 }
