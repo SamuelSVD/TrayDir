@@ -283,11 +283,43 @@ namespace TrayDir
                 }
             }
         }
+        // Grabbed from https://stackoverflow.com/questions/26587843/prevent-toolstripmenuitems-from-jumping-to-second-screen
+        private void submenu_DropDownOpening(object sender, EventArgs e)
+        {
+            if (menuItem.HasDropDownItems == false)
+            {
+                return; // not a drop down item
+            }
+            // Current bounds of the current monitor
+            Rectangle Bounds = menuItem.GetCurrentParent().Bounds;
+            Screen CurrentScreen = Screen.FromPoint(Bounds.Location);
+
+            // Look how big our children are:
+            int MaxWidth = 0;
+            foreach (ToolStripMenuItem subitem in menuItem.DropDownItems)
+            {
+                MaxWidth = Math.Max(subitem.Width, MaxWidth);
+            }
+            MaxWidth += 10; // Add a little wiggle room
+
+            int FarRight = Bounds.Right + MaxWidth;
+            int CurrentMonitorRight = CurrentScreen.Bounds.Right;
+
+            if (FarRight > CurrentMonitorRight)
+            {
+                menuItem.DropDownDirection = ToolStripDropDownDirection.Left;
+            }
+            else
+            {
+                menuItem.DropDownDirection = ToolStripDropDownDirection.Right;
+            }
+        }
         public void Load()
         {
             if (menuItem == null)
             {
                 menuItem = new ToolStripMenuItem();
+                menuItem.DropDownOpening += submenu_DropDownOpening;
             }
             bool useAlias = (alias != null && alias != "");
             if (useAlias)
