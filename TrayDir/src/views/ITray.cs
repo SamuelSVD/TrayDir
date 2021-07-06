@@ -24,7 +24,7 @@ namespace TrayDir
         {
             this.instance = instance;
             notifyIcon = new NotifyIcon();
-            notifyIcon.Visible = true;
+            notifyIcon.Visible = !instance.settings.HideFromTray;
             UpdateTrayIcon();
             pathMenuItems = new List<IMenuItem>();
             virtualFolderMenuItems = new List<IMenuItem>();
@@ -267,6 +267,10 @@ namespace TrayDir
         public void Hide()
         {
             notifyIcon.Visible = false;
+        }
+        public void Show()
+        {
+            notifyIcon.Visible = true;
         }
         public void SetFormHiddenMenu()
         {

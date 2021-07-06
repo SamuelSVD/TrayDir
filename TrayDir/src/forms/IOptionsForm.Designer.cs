@@ -37,12 +37,13 @@ namespace TrayDir
             this.iconBox = new System.Windows.Forms.PictureBox();
             this.browseButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.hideFromTrayCheckBox = new System.Windows.Forms.CheckBox();
+            this.expandFirstPathCheckBox = new System.Windows.Forms.CheckBox();
             this.exploreCheckBox = new System.Windows.Forms.CheckBox();
             this.showextensionsCheckBox = new System.Windows.Forms.CheckBox();
             this.runasCheckBox = new System.Windows.Forms.CheckBox();
             this.closeButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.expandFirstPathCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -60,7 +61,7 @@ namespace TrayDir
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(0);
-            this.groupBox1.Size = new System.Drawing.Size(271, 198);
+            this.groupBox1.Size = new System.Drawing.Size(271, 178);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tray Options";
@@ -79,10 +80,9 @@ namespace TrayDir
             this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 18);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(262, 167);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(262, 147);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // verticalSeparator1
@@ -147,6 +147,7 @@ namespace TrayDir
             this.tableLayoutPanel3.AutoSize = true;
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.hideFromTrayCheckBox, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.expandFirstPathCheckBox, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.exploreCheckBox, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.showextensionsCheckBox, 0, 1);
@@ -154,13 +155,42 @@ namespace TrayDir
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 4;
+            this.tableLayoutPanel3.RowCount = 5;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(170, 92);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(170, 115);
             this.tableLayoutPanel3.TabIndex = 6;
+            // 
+            // hideFromTrayCheckBox
+            // 
+            this.hideFromTrayCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.hideFromTrayCheckBox.AutoSize = true;
+            this.hideFromTrayCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.hideFromTrayCheckBox.Location = new System.Drawing.Point(3, 95);
+            this.hideFromTrayCheckBox.Name = "hideFromTrayCheckBox";
+            this.hideFromTrayCheckBox.Size = new System.Drawing.Size(164, 17);
+            this.hideFromTrayCheckBox.TabIndex = 8;
+            this.hideFromTrayCheckBox.Text = "Hide From Tray";
+            this.hideFromTrayCheckBox.UseVisualStyleBackColor = true;
+            this.hideFromTrayCheckBox.CheckedChanged += new System.EventHandler(this.hideFromTrayCheckBox_CheckedChanged);
+            // 
+            // expandFirstPathCheckBox
+            // 
+            this.expandFirstPathCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.expandFirstPathCheckBox.AutoSize = true;
+            this.expandFirstPathCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.expandFirstPathCheckBox.Location = new System.Drawing.Point(3, 72);
+            this.expandFirstPathCheckBox.Name = "expandFirstPathCheckBox";
+            this.expandFirstPathCheckBox.Size = new System.Drawing.Size(164, 17);
+            this.expandFirstPathCheckBox.TabIndex = 7;
+            this.expandFirstPathCheckBox.Text = "Expand First Path";
+            this.expandFirstPathCheckBox.UseVisualStyleBackColor = true;
+            this.expandFirstPathCheckBox.CheckedChanged += new System.EventHandler(this.expandFirstPathCheckBox_CheckedChanged);
             // 
             // exploreCheckBox
             // 
@@ -206,7 +236,7 @@ namespace TrayDir
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(193, 204);
+            this.closeButton.Location = new System.Drawing.Point(193, 184);
             this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
@@ -228,22 +258,8 @@ namespace TrayDir
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(277, 230);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(277, 210);
             this.tableLayoutPanel4.TabIndex = 2;
-            // 
-            // expandFirstPathCheckBox
-            // 
-            this.expandFirstPathCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.expandFirstPathCheckBox.AutoSize = true;
-            this.expandFirstPathCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.expandFirstPathCheckBox.Location = new System.Drawing.Point(3, 72);
-            this.expandFirstPathCheckBox.Name = "expandFirstPathCheckBox";
-            this.expandFirstPathCheckBox.Size = new System.Drawing.Size(164, 17);
-            this.expandFirstPathCheckBox.TabIndex = 7;
-            this.expandFirstPathCheckBox.Text = "Expand First Path";
-            this.expandFirstPathCheckBox.UseVisualStyleBackColor = true;
-            this.expandFirstPathCheckBox.CheckedChanged += new System.EventHandler(this.expandFirstPathCheckBox_CheckedChanged);
             // 
             // IOptionsForm
             // 
@@ -290,5 +306,6 @@ namespace TrayDir
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.CheckBox expandFirstPathCheckBox;
+        private System.Windows.Forms.CheckBox hideFromTrayCheckBox;
     }
 }

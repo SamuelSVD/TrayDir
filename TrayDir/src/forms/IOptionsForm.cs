@@ -44,6 +44,7 @@ namespace TrayDir
             showextensionsCheckBox.Checked = instance.settings.ShowFileExtensions;
             exploreCheckBox.Checked = instance.settings.ExploreFoldersInTrayMenu;
             expandFirstPathCheckBox.Checked = instance.settings.ExpandFirstPath;
+            hideFromTrayCheckBox.Checked = instance.settings.HideFromTray;
         }
         private void runasCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -66,6 +67,19 @@ namespace TrayDir
         {
             instance.settings.ExpandFirstPath = expandFirstPathCheckBox.Checked;
             instance.view.tray.BuildTrayMenu();
+        }
+
+        private void hideFromTrayCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            instance.settings.HideFromTray = hideFromTrayCheckBox.Checked;
+            if (instance.settings.HideFromTray)
+            {
+                instance.view.tray.Hide();
+            }
+            else
+            {
+                instance.view.tray.Show();
+            }
         }
     }
 }

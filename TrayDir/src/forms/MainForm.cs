@@ -158,8 +158,20 @@ namespace TrayDir
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                HideApp(sender, e);
-                pd.FormHidden();
+                bool block = true;
+                foreach (TrayInstance instance in pd.trayInstances)
+                {
+                    if (!instance.settings.HideFromTray)
+                    {
+                        block = false;
+                        break;
+                    }
+                }
+                if (!block)
+                {
+                    HideApp(sender, e);
+                    pd.FormHidden();
+                }
             }
         }
         public void BuildRebuildDropdown()
@@ -243,7 +255,22 @@ namespace TrayDir
         {
             if (!allowClose && pd.settings.win.MinimizeOnClose)
             {
-                HideApp(this, null);
+                bool block = true;
+                foreach(TrayInstance instance in pd.trayInstances)
+                {
+                    if (!instance.settings.HideFromTray)
+                    {
+                        block = false;
+                        break;
+                    }
+                }
+                if (!block)
+                {
+                    HideApp(this, null);
+                } else
+                {
+                    WindowState = FormWindowState.Minimized;
+                }
                 e.Cancel = true;
             }
             else
@@ -396,7 +423,6 @@ namespace TrayDir
         {
             AppUtils.ExportInstance(trayInstance);
         }
-
         private void importToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             TrayInstance i = AppUtils.ImportInstance();

@@ -17,10 +17,13 @@ namespace TrayDir
         public bool ExploreFoldersInTrayMenu;
         [XmlAttribute]
         public bool ExpandFirstPath;
+        [XmlAttribute]
+        public bool HideFromTray;
         public TrayInstanceSettings() {
             RunAsAdmin = false;
             ShowFileExtensions = true;
             ExploreFoldersInTrayMenu = false;
+            HideFromTray = false;
             paths = new List<string>();
         }
     }
