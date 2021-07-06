@@ -15,6 +15,7 @@ namespace TrayDir
         private static Thread mainThread;
         private static Semaphore imgLoadSemaphore;
         private static Queue<IMenuItem> imgLoadQueue;
+        private static Dictionary<string, Icon> imgKnownIcons;
 
         private TrayInstance instance;
         public ToolStripMenuItem menuItem;
@@ -78,7 +79,23 @@ namespace TrayDir
                     {
                         if (mi.menuIcon is null && mi.isFile)
                         {
-                            mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
+                            string ext = Path.GetExtension(mi.tiPath.path);
+                            if (ext.Length == 0 || ext == ".ico" || ext == ".lnk" || ext == ".exe" || ext == ".url")
+                            {
+                                mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
+                            }
+                            else
+                            {
+                                if (imgKnownIcons.ContainsKey(ext))
+                                {
+                                    mi.menuIcon = imgKnownIcons[ext].ToBitmap();
+                                }
+                                else
+                                {
+                                    imgKnownIcons[ext] = Icon.ExtractAssociatedIcon(mi.tiPath.path);
+                                    mi.menuIcon = imgKnownIcons[ext].ToBitmap();
+                                }
+                            }
                         }
                     }
                     catch { }
@@ -106,6 +123,10 @@ namespace TrayDir
             if (imgLoadQueue is null)
             {
                 imgLoadQueue = new Queue<IMenuItem>();
+            }
+            if (imgKnownIcons is null)
+            {
+                imgKnownIcons = new Dictionary<string, Icon>();
             }
             if (imgLoadThread is null)
             {
