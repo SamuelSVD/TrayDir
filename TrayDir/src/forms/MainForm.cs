@@ -282,6 +282,10 @@ namespace TrayDir
         public void ExitApp(object sender, EventArgs e)
         {
             allowClose = true;
+            foreach(TrayInstance instance in pd.trayInstances)
+            {
+                instance.view.tray.Hide();
+            }
             Application.Exit();
         }
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
