@@ -210,7 +210,7 @@ namespace TrayDir
                         {
                             if (mi.tiPath == instance.paths[node.id])
                             {
-                                if (mi.tiPath.expandPath)
+                                if (mi.tiPath.expandPath || (instance.settings.ExpandFirstPath && nodes.Count == 1 && collection == notifyIcon.ContextMenuStrip.Items))
                                 {
                                     mi.AddToCollectionExpanded(collection);
                                 }

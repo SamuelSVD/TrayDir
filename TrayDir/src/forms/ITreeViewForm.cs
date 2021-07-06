@@ -222,7 +222,6 @@ namespace TrayDir
                 Save();
             }
         }
-
         private void folderPropertiesButton_Click(object sender, EventArgs e)
         {
             ITreeNode itn = selectedNode;
@@ -260,7 +259,6 @@ namespace TrayDir
             folderPropertiesButton.Enabled = selectedNode != null ? selectedNode.tin.type == TrayInstanceNode.NodeType.Path : false;
             runnablePropertiesButton.Enabled = selectedNode != null ? selectedNode.tin.type == TrayInstanceNode.NodeType.Plugin : false;
         }
-
         private void newVirtualFolderButton_Click(object sender, EventArgs e)
         {
             TrayInstanceVirtualFolder tip = new TrayInstanceVirtualFolder("New VFolder");
@@ -277,7 +275,6 @@ namespace TrayDir
             nodes.Add(itn);
             Save();
         }
-
         private void renameButton_Click(object sender, EventArgs e)
         {
             string input = selectedNode.alias;
@@ -287,7 +284,6 @@ namespace TrayDir
                 Save();
             }
         }
-
         private void deleteButton_Click(object sender, EventArgs e)
         {
             if (selectedNode != null)
@@ -302,7 +298,7 @@ namespace TrayDir
                     selectedNode.Delete();
                     Save();
                 }
-                if(treeView2.Nodes.Count == 0)
+                if (treeView2.Nodes.Count == 0)
                 {
                     selectedNode = null;
                 }

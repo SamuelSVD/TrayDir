@@ -43,6 +43,7 @@ namespace TrayDir
             runasCheckBox.Checked = instance.settings.RunAsAdmin;
             showextensionsCheckBox.Checked = instance.settings.ShowFileExtensions;
             exploreCheckBox.Checked = instance.settings.ExploreFoldersInTrayMenu;
+            expandFirstPathCheckBox.Checked = instance.settings.ExpandFirstPath;
         }
         private void runasCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -59,6 +60,11 @@ namespace TrayDir
         private void IOptionsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ProgramData.pd.Save();
+        }
+        private void expandFirstPathCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            instance.settings.ExpandFirstPath = expandFirstPathCheckBox.Checked;
+            instance.view.tray.BuildTrayMenu();
         }
     }
 }
