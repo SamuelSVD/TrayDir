@@ -52,6 +52,7 @@ namespace TrayDir
         private void showextensionsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             instance.settings.ShowFileExtensions = showextensionsCheckBox.Checked;
+            instance.view.tray.BuildTrayMenu();
         }
         private void exploreCheckBox_CheckedChanged(object sender, EventArgs e)
         {
