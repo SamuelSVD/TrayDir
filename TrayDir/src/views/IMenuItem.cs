@@ -72,6 +72,7 @@ namespace TrayDir
             while (true && mainThread.IsAlive)
             {
                 imgLoadSemaphore.WaitOne();
+                bool doWait = true;
                 if (imgLoadQueue.Count > 0)
                 {
                     IMenuItem mi = imgLoadQueue.Dequeue();
@@ -89,6 +90,7 @@ namespace TrayDir
                                 if (imgKnownIcons.ContainsKey(ext))
                                 {
                                     mi.menuIcon = imgKnownIcons[ext].ToBitmap();
+                                    doWait = false;
                                 }
                                 else
                                 {
@@ -109,7 +111,7 @@ namespace TrayDir
                     break;
                 }
                 s.Start();
-                Thread.Sleep(10);
+                if (doWait) Thread.Sleep(10);
             }
         }
         public IMenuItem(TrayInstance instance, TrayInstancePath path) : this(instance, path, null, null) { }
