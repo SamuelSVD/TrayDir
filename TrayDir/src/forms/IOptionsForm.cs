@@ -23,7 +23,6 @@ namespace TrayDir
                     instance.iconData = null;
                     resetButton.Enabled = true;
                     instance.view.tray.UpdateTrayIcon();
-                    instance.view.tray.UpdateTrayIcon();
                     iconBox.Image = instance.view.tray.notifyIcon.Icon.ToBitmap();
                     MainForm.form.pd.Save();
                 }

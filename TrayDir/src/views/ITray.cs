@@ -255,12 +255,12 @@ namespace TrayDir
         public void UpdateTrayIcon()
         {
             Icon i = this.GetInstanceIcon();
-            if (i != null && ((instance.iconPath != null) || (instance.iconData == null)))
+            if (i != null && ((instance.iconPath != null && instance.iconPath != "") || (instance.iconData == null)))
             {
                 notifyIcon.Icon = i;
                 instance.iconData = TrayUtils.IconToBytes(i);
-                instance.iconPath = null;
             }
+            instance.iconPath = null;
             notifyIcon.Text = instance.instanceName;
             notifyIcon.Icon = i;
         }

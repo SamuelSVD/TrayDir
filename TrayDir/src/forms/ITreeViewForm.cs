@@ -313,7 +313,7 @@ namespace TrayDir
         {
             instance.view.optionsForm.ShowDialog();
         }
-        private void treeView2_KeyDown(object sender, KeyEventArgs e)
+        public void treeView2_KeyDown(object sender, KeyEventArgs e)
         {
             if (selectedNode != null)
             {
@@ -342,6 +342,25 @@ namespace TrayDir
                 if (e.KeyCode == Keys.Delete)
                 {
                     deleteButton_Click(sender, null);
+                }
+                if (e.Modifiers == Keys.Control)
+                {
+                    if (e.KeyCode == Keys.Up && selectedUpable)
+                    {
+                        upButton_Click(sender, null);
+                    }
+                    if (e.KeyCode == Keys.Down && selectedDownable)
+                    {
+                        downButton_Click(sender, null);
+                    }
+                    if (e.KeyCode == Keys.Left && selectedOutdentable)
+                    {
+                        outdentButton_Click(sender, null);
+                    }
+                    if (e.KeyCode == Keys.Right && selectedIndentable)
+                    {
+                        indentButton_Click(sender, null);
+                    }
                 }
             }
         }
