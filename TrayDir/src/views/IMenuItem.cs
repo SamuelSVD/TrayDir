@@ -204,7 +204,7 @@ namespace TrayDir
         }
         private void Run(object obj, EventArgs args)
         {
-            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            if (isDir)
             {
                 AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, false);
             }
@@ -215,7 +215,7 @@ namespace TrayDir
         }
         private void Explore(object obj, EventArgs args)
         {
-            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            if (isDir)
             {
                 AppUtils.ExplorePath(new DirectoryInfo(tiPath.path).FullName);
             }
@@ -226,7 +226,7 @@ namespace TrayDir
         }
         private void RunAs(object obj, EventArgs args)
         {
-            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            if (isDir)
             {
                 AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, true);
             }
@@ -237,7 +237,7 @@ namespace TrayDir
         }
         private void OpenCmd(object obj, EventArgs args)
         {
-            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            if (isDir)
             {
                 AppUtils.OpenCmdPath(new DirectoryInfo(tiPath.path).FullName);
             }
@@ -248,7 +248,7 @@ namespace TrayDir
         }
         private void OpenAdminCmd(object obj, EventArgs args)
         {
-            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            if (isDir)
             {
                 AppUtils.OpenAdminCmdPath(new DirectoryInfo(tiPath.path).FullName);
             }
