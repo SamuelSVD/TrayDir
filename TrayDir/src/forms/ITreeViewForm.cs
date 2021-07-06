@@ -302,6 +302,10 @@ namespace TrayDir
                     selectedNode.Delete();
                     Save();
                 }
+                if(treeView2.Nodes.Count == 0)
+                {
+                    selectedNode = null;
+                }
             }
         }
         private void treeView2_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
