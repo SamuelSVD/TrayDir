@@ -313,5 +313,44 @@ namespace TrayDir
         {
             instance.view.optionsForm.ShowDialog();
         }
+        private void treeView2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (selectedNode != null)
+            {
+                if (e.KeyCode == Keys.F2)
+                {
+                    renameButton_Click(sender, null);
+                }
+                if (e.KeyCode == Keys.N)
+                {
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        newDocButton_Click(sender, null);
+                    }
+                    if (e.Modifiers == (Keys.Control | Keys.Shift))
+                    {
+                        newVirtualFolderButton_Click(sender, null);
+                    }
+                }
+                if (e.KeyCode == Keys.F)
+                {
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        newFolderButton_Click(sender, null);
+                    }
+                }
+                if (e.KeyCode == Keys.Delete)
+                {
+                    deleteButton_Click(sender, null);
+                }
+            }
+        }
+        private void treeView2_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (selectedNode != null)
+            {
+                renameButton_Click(sender, null);
+            }
+        }
     }
 }

@@ -50,8 +50,8 @@ namespace TrayDir
             this.folderPropertiesButton = new System.Windows.Forms.Button();
             this.runnablePropertiesButton = new System.Windows.Forms.Button();
             this.renameButton = new System.Windows.Forms.Button();
-            this.treeView2 = new System.Windows.Forms.TreeView();
             this.button1 = new System.Windows.Forms.Button();
+            this.treeView2 = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -309,6 +309,17 @@ namespace TrayDir
             this.renameButton.UseVisualStyleBackColor = true;
             this.renameButton.Click += new System.EventHandler(this.renameButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button1.Location = new System.Drawing.Point(3, 175);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Options...";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // treeView2
             // 
             this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -323,19 +334,10 @@ namespace TrayDir
             this.treeView2.TabIndex = 1;
             this.treeView2.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView2_BeforeCollapse);
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
+            this.treeView2.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseDoubleClick);
+            this.treeView2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView2_KeyDown);
             // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(3, 175);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Options...";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // ScrapForm
+            // ITreeViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -344,7 +346,7 @@ namespace TrayDir
             this.ClientSize = new System.Drawing.Size(480, 273);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "ScrapForm";
+            this.Name = "ITreeViewForm";
             this.Text = "ScrapForm";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
