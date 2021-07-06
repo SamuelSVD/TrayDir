@@ -40,7 +40,6 @@ namespace TrayDir
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.scrapformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newInstanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,8 +99,7 @@ namespace TrayDir
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem1,
-            this.exitToolStripMenuItem1,
-            this.scrapformToolStripMenuItem});
+            this.exitToolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 22);
             this.fileToolStripMenuItem.Text = "File";
@@ -109,23 +107,16 @@ namespace TrayDir
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.Save);
             // 
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.ExitApp);
-            // 
-            // scrapformToolStripMenuItem
-            // 
-            this.scrapformToolStripMenuItem.Name = "scrapformToolStripMenuItem";
-            this.scrapformToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.scrapformToolStripMenuItem.Text = "scrapform";
-            this.scrapformToolStripMenuItem.Click += new System.EventHandler(this.scrapformToolStripMenuItem_Click);
             // 
             // instanceToolStripMenuItem
             // 
@@ -311,7 +302,6 @@ namespace TrayDir
         private ToolStripSeparator toolStripMenuItem1;
         private ToolStripMenuItem changeIgnoreRegexToolStripMenuItem;
         private ImageList iconList;
-        private ToolStripMenuItem scrapformToolStripMenuItem;
     }
 }
 

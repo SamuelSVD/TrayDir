@@ -10,8 +10,6 @@ namespace TrayDir
         public static MainForm form;
         private bool allowVisible;     // ContextMenu's Show command used
         private bool allowClose;       // ContextMenu's Exit command used
-        private int prevHeight;
-        private int prevWidth;
         private int __debug_i;
         public TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
         private TrayInstance onShowInstance;
@@ -282,7 +280,7 @@ namespace TrayDir
         public void ExitApp(object sender, EventArgs e)
         {
             allowClose = true;
-            foreach(TrayInstance instance in pd.trayInstances)
+            foreach (TrayInstance instance in pd.trayInstances)
             {
                 instance.view.tray.Hide();
             }
@@ -413,7 +411,6 @@ namespace TrayDir
                 MessageBox.Show("Error: Unable to import file.", "Import failed");
             }
         }
-
         private void iconLoadTimer_Tick(object sender, EventArgs e)
         {
             bool ret = true;
@@ -426,13 +423,11 @@ namespace TrayDir
                 iconLoadTimer.Stop();
             }
         }
-
         private void rebuildCurrentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             trayInstance.view.tray.Rebuild();
             resizeForm();
         }
-
         private void rebuildAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pd.RebuildAll();
@@ -450,7 +445,6 @@ namespace TrayDir
                 AppUtils.ExplorePath(Path.GetFullPath(path));
             }
         }
-
         private void changeIgnoreRegexToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string input = trayInstance.ignoreRegex;
@@ -460,12 +454,6 @@ namespace TrayDir
                 trayInstance.view.tray.Rebuild();
                 pd.Save();
             }
-        }
-
-        private void scrapformToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ITreeViewForm f = new ITreeViewForm(trayInstance);
-            f.ShowDialog();
         }
     }
 }
