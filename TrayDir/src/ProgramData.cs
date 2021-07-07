@@ -13,8 +13,11 @@ namespace TrayDir
         public List<TrayInstance> trayInstances;
         private static string config;
         public static ProgramData pd;
+        [XmlIgnore]
+        public bool initialized;
         public ProgramData()
         {
+            initialized = false;
             settings = new Settings();
             trayInstances = new List<TrayInstance>();
             ProgramData.pd = this;
@@ -37,7 +40,10 @@ namespace TrayDir
         }
         public void Save()
         {
-            XMLUtils.SaveToFile(this, config);
+            if (initialized)
+            {
+                XMLUtils.SaveToFile(this, config);
+            }
         }
         public void Update()
         {

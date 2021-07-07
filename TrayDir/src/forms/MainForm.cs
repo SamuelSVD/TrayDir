@@ -33,7 +33,6 @@ namespace TrayDir
 
             pd.FixInstances();
             pd.CheckStartup();
-            pd.Save();
             InitializeContent();
             BuildExploreDropdown();
             BuildRebuildDropdown();
