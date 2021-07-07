@@ -266,7 +266,7 @@ namespace TrayDir
                         break;
                     }
                 }
-                if (!block)
+                if (!block && !pd.settings.win.MinimizeOnClose)
                 {
                     HideApp(this, null);
                 } else
