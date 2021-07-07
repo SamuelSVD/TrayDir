@@ -241,14 +241,7 @@ namespace TrayDir
             bool ret = true;
             foreach (IMenuItem mi in pathMenuItems)
             {
-                if (ProgramData.pd.settings.app.ShowIconsInMenus)
-                {
-                    ret = mi.LoadIcon() && ret;
-                }
-                else
-                {
-                    ret = mi.ClearIcon() && ret;
-                }
+                ret = mi.LoadIcon() && ret;
             }
             return ret;
         }

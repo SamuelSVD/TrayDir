@@ -26,7 +26,7 @@ namespace TrayDir
         public TrayInstanceVirtualFolder tiVirtualFolder;
         public TrayInstancePlugin tiPlugin;
 
-        private Image menuIcon;
+        private Icon menuIcon;
 
         public readonly bool isDir = false;
         public readonly bool isFile = false;
@@ -83,19 +83,19 @@ namespace TrayDir
                             string ext = Path.GetExtension(mi.tiPath.path);
                             if (ext.Length == 0 || ext == ".ico" || ext == ".lnk" || ext == ".exe" || ext == ".url")
                             {
-                                mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
+                                mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path);
                             }
                             else
                             {
                                 if (imgKnownIcons.ContainsKey(ext))
                                 {
-                                    mi.menuIcon = imgKnownIcons[ext].ToBitmap();
+                                    mi.menuIcon = imgKnownIcons[ext];
                                     doWait = false;
                                 }
                                 else
                                 {
                                     imgKnownIcons[ext] = Icon.ExtractAssociatedIcon(mi.tiPath.path);
-                                    mi.menuIcon = imgKnownIcons[ext].ToBitmap();
+                                    mi.menuIcon = imgKnownIcons[ext];
                                 }
                             }
                         }
@@ -429,9 +429,12 @@ namespace TrayDir
         public bool LoadIcon()
         {
             bool ret = loadedIcon;
-            if (loadedIcon && menuIcon != null)
+            if (ProgramData.pd.settings.app.ShowIconsInMenus && loadedIcon && menuIcon != null)
             {
-                menuItem.Image = menuIcon;
+                menuItem.Image = menuIcon.ToBitmap();
+            } else
+            {
+                menuItem.Image = null;
             }
             if (ret)
             {
@@ -451,6 +454,11 @@ namespace TrayDir
                 imgLoadSemaphore.Release();
                 enqueued = true;
             }
+            if (!imgLoadThread.IsAlive)
+            {
+                imgLoadThread = new Thread(LoadIconThread);
+                imgLoadThread.Start();
+            }
         }
         public void LoadChildrenIconEvent(Object obj, EventArgs args)
         {
@@ -463,24 +471,6 @@ namespace TrayDir
             {
                 child.EnqueueImgLoad();
             }
-        }
-        public bool ClearIcon()
-        {
-            bool ret = !loadedIcon;
-            if (menuItem.Image != null)
-            {
-                menuIcon = menuItem.Image;
-                menuItem.Image = null;
-            }
-            if (ret)
-            {
-                foreach (IMenuItem child in children)
-                {
-                    ret = child.ClearIcon() && ret;
-                }
-            }
-            loadedIcon = false;
-            return ret;
         }
         public void AddToCollection(ToolStripItemCollection collection)
         {
