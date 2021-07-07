@@ -1,5 +1,7 @@
 [![GitHub release](https://img.shields.io/github/release/SamuelSVD/TrayDir.svg)](../../releases/latest)
 
+# Update Pending! V3 Coming Soon!
+
 # TrayDir
 A windows application that gives the user the ability to access files and folders from the system tray.
 
