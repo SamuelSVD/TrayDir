@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "TrayDir"
-#define MyAppVersion "2.2.2"
+#define MyAppVersion "3.0.0"
 #define MyAppPublisher "samver"
 #define MyAppURL "https://samver.ca/TrayDir"
 #define MyAppExeName "TrayDir.exe"
@@ -29,7 +29,7 @@ LicenseFile=license.txt
 ; PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Programming\samverApps\TrayDir\Installer\bin
 OutputBaseFilename="TrayDir_{#MyAppVersion}_Install"
-SetupIconFile=C:\Programming\samverApps\TrayDir\Resources\file-exe.ico
+SetupIconFile=C:\Programming\samverApps\TrayDir\TrayDir\Resources\file-exe.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
