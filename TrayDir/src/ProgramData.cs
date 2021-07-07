@@ -13,8 +13,11 @@ namespace TrayDir
         public List<TrayInstance> trayInstances;
         private static string config;
         public static ProgramData pd;
+        [XmlIgnore]
+        public bool initialized;
         public ProgramData()
         {
+            initialized = false;
             settings = new Settings();
             trayInstances = new List<TrayInstance>();
             ProgramData.pd = this;
@@ -37,7 +40,10 @@ namespace TrayDir
         }
         public void Save()
         {
-            XMLUtils.SaveToFile(this, config);
+            if (initialized)
+            {
+                XMLUtils.SaveToFile(this, config);
+            }
         }
         public void Update()
         {
@@ -45,7 +51,7 @@ namespace TrayDir
             {
                 foreach (TrayInstance instance in trayInstances)
                 {
-                    instance.view.UpdateTrayMenu();
+                    instance.view.tray.BuildTrayMenu();
                 }
             }
             CheckStartup();
@@ -56,7 +62,7 @@ namespace TrayDir
             {
                 foreach (TrayInstance instance in trayInstances)
                 {
-                    instance.view.SetFormHiddenMenu();
+                    instance.view.tray.SetFormHiddenMenu();
                 }
             }
         }
@@ -66,7 +72,10 @@ namespace TrayDir
             {
                 foreach (TrayInstance instance in trayInstances)
                 {
-                    instance.view.SetFormShownMenu();
+                    if (instance.view != null)
+                    {
+                        instance.view.tray.SetFormShownMenu();
+                    }
                 }
             }
         }
@@ -78,7 +87,22 @@ namespace TrayDir
                 {
                     instance.paths.Add(new TrayInstancePath(TrayInstance.defaultPath));
                 }
+                if (instance.PathCount != instance.NodeCount)
+                {
+                    instance.nodes.children.Clear();
+                    foreach(TrayInstancePath tip in instance.paths)
+                    {
+                        TrayInstanceNode tin = new TrayInstanceNode();
+                        tin.id = instance.paths.IndexOf(tip);
+                        tin.type = TrayInstanceNode.NodeType.Path;
+                        instance.nodes.children.Add(tin);
+                        tin.parent = instance.nodes;
+                    }
+                }
+                instance.nodes.SetInstance(instance);
+                instance.nodes.FixChildren();
             }
+            
         }
         public void CheckStartup()
         {
@@ -103,7 +127,7 @@ namespace TrayDir
             {
                 if (ti.view != null)
                 {
-                    ti.view.Rebuild();
+                    ti.view.tray.Rebuild();
                 }
             }
         }

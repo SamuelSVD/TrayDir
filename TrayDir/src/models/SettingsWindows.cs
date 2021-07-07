@@ -10,6 +10,8 @@ namespace TrayDir
         [XmlAttribute]
         public bool MinimizeOnClose = false;
         [XmlAttribute]
+        public bool HideOnMinimize = true;
+        [XmlAttribute]
         public bool StartMinimized = false;
         [XmlAttribute]
         public bool StartWithWindows = true;

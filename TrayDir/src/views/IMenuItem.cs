@@ -15,13 +15,18 @@ namespace TrayDir
         private static Thread mainThread;
         private static Semaphore imgLoadSemaphore;
         private static Queue<IMenuItem> imgLoadQueue;
+        private static Dictionary<string, Icon> imgKnownIcons;
 
         private TrayInstance instance;
-        private TrayInstancePath tiPath;
         public ToolStripMenuItem menuItem;
         public List<IMenuItem> children;
         public IMenuItem parent;
-        private Image menuIcon;
+
+        public TrayInstancePath tiPath;
+        public TrayInstanceVirtualFolder tiVirtualFolder;
+        public TrayInstancePlugin tiPlugin;
+
+        private Icon menuIcon;
 
         public readonly bool isDir = false;
         public readonly bool isFile = false;
@@ -29,6 +34,25 @@ namespace TrayDir
         private bool assignedClickEvent = false;
         private bool enqueued;
 
+        private string alias
+        {
+            get
+            {
+                if (tiPath != null)
+                {
+                    return tiPath.alias;
+                }
+                if (tiVirtualFolder != null)
+                {
+                    return tiVirtualFolder.alias;
+                }
+                if (tiPlugin != null)
+                {
+                    return tiPlugin.alias;
+                }
+                return null;
+            }
+        }
         protected int depth
         {
             get
@@ -48,6 +72,7 @@ namespace TrayDir
             while (true && mainThread.IsAlive)
             {
                 imgLoadSemaphore.WaitOne();
+                bool doWait = true;
                 if (imgLoadQueue.Count > 0)
                 {
                     IMenuItem mi = imgLoadQueue.Dequeue();
@@ -55,7 +80,24 @@ namespace TrayDir
                     {
                         if (mi.menuIcon is null && mi.isFile)
                         {
-                            mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
+                            string ext = Path.GetExtension(mi.tiPath.path);
+                            if (ext.Length == 0 || ext == ".ico" || ext == ".lnk" || ext == ".exe" || ext == ".url")
+                            {
+                                mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path);
+                            }
+                            else
+                            {
+                                if (imgKnownIcons.ContainsKey(ext))
+                                {
+                                    mi.menuIcon = imgKnownIcons[ext];
+                                    doWait = false;
+                                }
+                                else
+                                {
+                                    imgKnownIcons[ext] = Icon.ExtractAssociatedIcon(mi.tiPath.path);
+                                    mi.menuIcon = imgKnownIcons[ext];
+                                }
+                            }
                         }
                     }
                     catch { }
@@ -69,11 +111,12 @@ namespace TrayDir
                     break;
                 }
                 s.Start();
-                Thread.Sleep(10);
+                if (doWait) Thread.Sleep(10);
             }
         }
-        public IMenuItem(TrayInstance instance, TrayInstancePath path) : this(instance, path, null) { }
-        public IMenuItem(TrayInstance instance, TrayInstancePath tiPath, IMenuItem parent)
+        public IMenuItem(TrayInstance instance, TrayInstancePath path) : this(instance, path, null, null) { }
+        public IMenuItem(TrayInstance instance, TrayInstanceVirtualFolder virtualFolder) : this(instance, null, virtualFolder, null) { }
+        public IMenuItem(TrayInstance instance, TrayInstancePath tiPath, TrayInstanceVirtualFolder tiVirtualFolder, IMenuItem parent)
         {
             if (imgLoadSemaphore is null)
             {
@@ -82,6 +125,10 @@ namespace TrayDir
             if (imgLoadQueue is null)
             {
                 imgLoadQueue = new Queue<IMenuItem>();
+            }
+            if (imgKnownIcons is null)
+            {
+                imgKnownIcons = new Dictionary<string, Icon>();
             }
             if (imgLoadThread is null)
             {
@@ -92,10 +139,12 @@ namespace TrayDir
 
             this.instance = instance;
             this.tiPath = tiPath;
+            this.tiVirtualFolder = tiVirtualFolder;
             this.parent = parent;
+
             children = new List<IMenuItem>();
-            isDir = AppUtils.PathIsDirectory(tiPath.path);
-            isFile = AppUtils.PathIsFile(tiPath.path);
+            isDir = tiPath != null ? AppUtils.PathIsDirectory(tiPath.path) : false;
+            isFile = tiPath != null ? AppUtils.PathIsFile(tiPath.path) : false;
             MakeChildren();
         }
         private void MakeChildren()
@@ -118,7 +167,7 @@ namespace TrayDir
                         }
                         if (!match)
                         {
-                            children.Add(new IMenuItem(instance, new TrayInstancePath(fp), this));
+                            children.Add(new IMenuItem(instance, new TrayInstancePath(fp), null, this));
                         }
                     }
                 }
@@ -135,14 +184,14 @@ namespace TrayDir
                 mi.menuItem.Enabled = true;
                 mi = mi.parent;
             }
-            instance.view.notifyIcon.ContextMenuStrip.AutoClose = true;
-            instance.view.notifyIcon.ContextMenuStrip.Enabled = true;
-            instance.view.notifyIcon.ContextMenuStrip.Close();
+            instance.view.tray.notifyIcon.ContextMenuStrip.AutoClose = true;
+            instance.view.tray.notifyIcon.ContextMenuStrip.Enabled = true;
+            instance.view.tray.notifyIcon.ContextMenuStrip.Close();
         }
         private void MenuSave()
         {
             IMenuItem mi = parent;
-            instance.view.notifyIcon.ContextMenuStrip.Show();
+            instance.view.tray.notifyIcon.ContextMenuStrip.Show();
             while (mi != null)
             {
                 mi.menuItem.DropDown.AutoClose = false;
@@ -150,12 +199,12 @@ namespace TrayDir
                 mi.menuItem.Enabled = false;
                 mi = mi.parent;
             }
-            instance.view.notifyIcon.ContextMenuStrip.AutoClose = false;
-            instance.view.notifyIcon.ContextMenuStrip.Enabled = false;
+            instance.view.tray.notifyIcon.ContextMenuStrip.AutoClose = false;
+            instance.view.tray.notifyIcon.ContextMenuStrip.Enabled = false;
         }
         private void Run(object obj, EventArgs args)
         {
-            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            if (isDir)
             {
                 AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, false);
             }
@@ -166,7 +215,7 @@ namespace TrayDir
         }
         private void Explore(object obj, EventArgs args)
         {
-            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            if (isDir)
             {
                 AppUtils.ExplorePath(new DirectoryInfo(tiPath.path).FullName);
             }
@@ -177,7 +226,7 @@ namespace TrayDir
         }
         private void RunAs(object obj, EventArgs args)
         {
-            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            if (isDir)
             {
                 AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, true);
             }
@@ -188,7 +237,7 @@ namespace TrayDir
         }
         private void OpenCmd(object obj, EventArgs args)
         {
-            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            if (isDir)
             {
                 AppUtils.OpenCmdPath(new DirectoryInfo(tiPath.path).FullName);
             }
@@ -199,7 +248,7 @@ namespace TrayDir
         }
         private void OpenAdminCmd(object obj, EventArgs args)
         {
-            if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+            if (isDir)
             {
                 AppUtils.OpenAdminCmdPath(new DirectoryInfo(tiPath.path).FullName);
             }
@@ -257,17 +306,48 @@ namespace TrayDir
                 }
             }
         }
+        // Grabbed from https://stackoverflow.com/questions/26587843/prevent-toolstripmenuitems-from-jumping-to-second-screen
+        private void submenu_DropDownOpening(object sender, EventArgs e)
+        {
+            if (menuItem.HasDropDownItems == false)
+            {
+                return; // not a drop down item
+            }
+            // Current bounds of the current monitor
+            Rectangle Bounds = menuItem.GetCurrentParent().Bounds;
+            Screen CurrentScreen = Screen.FromPoint(Bounds.Location);
+
+            // Look how big our children are:
+            int MaxWidth = 0;
+            foreach (ToolStripMenuItem subitem in menuItem.DropDownItems)
+            {
+                MaxWidth = Math.Max(subitem.Width, MaxWidth);
+            }
+            MaxWidth += 10; // Add a little wiggle room
+
+            int FarRight = Bounds.Right + MaxWidth;
+            int CurrentMonitorRight = CurrentScreen.Bounds.Right;
+
+            if (FarRight > CurrentMonitorRight)
+            {
+                menuItem.DropDownDirection = ToolStripDropDownDirection.Left;
+            }
+            else
+            {
+                menuItem.DropDownDirection = ToolStripDropDownDirection.Right;
+            }
+        }
         public void Load()
         {
             if (menuItem == null)
             {
                 menuItem = new ToolStripMenuItem();
+                menuItem.DropDownOpening += submenu_DropDownOpening;
             }
-            bool useAlias = (tiPath.alias != null && tiPath.alias != "");
-
+            bool useAlias = (alias != null && alias != "");
             if (useAlias)
             {
-                menuItem.Text = tiPath.alias;
+                menuItem.Text = alias;
             }
             else
             {
@@ -349,9 +429,12 @@ namespace TrayDir
         public bool LoadIcon()
         {
             bool ret = loadedIcon;
-            if (loadedIcon && menuIcon != null)
+            if (ProgramData.pd.settings.app.ShowIconsInMenus && loadedIcon && menuIcon != null)
             {
-                menuItem.Image = menuIcon;
+                menuItem.Image = menuIcon.ToBitmap();
+            } else
+            {
+                menuItem.Image = null;
             }
             if (ret)
             {
@@ -371,6 +454,11 @@ namespace TrayDir
                 imgLoadSemaphore.Release();
                 enqueued = true;
             }
+            if (!imgLoadThread.IsAlive)
+            {
+                imgLoadThread = new Thread(LoadIconThread);
+                imgLoadThread.Start();
+            }
         }
         public void LoadChildrenIconEvent(Object obj, EventArgs args)
         {
@@ -384,23 +472,109 @@ namespace TrayDir
                 child.EnqueueImgLoad();
             }
         }
-        public bool ClearIcon()
+        public void AddToCollection(ToolStripItemCollection collection)
         {
-            bool ret = !loadedIcon;
-            if (menuItem.Image != null)
+            collection.Add(menuItem);
+
+            if (children.Count != menuItem.DropDownItems.Count)
             {
-                menuIcon = menuItem.Image;
-                menuItem.Image = null;
-            }
-            if (ret)
-            {
-                foreach (IMenuItem child in children)
+                menuItem.DropDownItems.Clear();
+                List<IMenuItem> dirMenuItems = new List<IMenuItem>();
+                List<IMenuItem> fileMenuItems = new List<IMenuItem>();
+
+                if (ProgramData.pd.settings.app.MenuSorting != "None")
                 {
-                    ret = child.ClearIcon() && ret;
+                    if (ProgramData.pd.settings.app.MenuSorting == "Folders Top")
+                    {
+                        foreach (IMenuItem child in dirMenuItems)
+                        {
+                            menuItem.DropDownItems.Add(child.menuItem);
+                        }
+                        foreach (IMenuItem child in fileMenuItems)
+                        {
+                            menuItem.DropDownItems.Add(child.menuItem);
+                        }
+                    }
+                    else
+                    {
+                        foreach (IMenuItem child in fileMenuItems)
+                        {
+                            menuItem.DropDownItems.Add(child.menuItem);
+                        }
+                        foreach (IMenuItem child in dirMenuItems)
+                        {
+                            menuItem.DropDownItems.Add(child.menuItem);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (IMenuItem child in children)
+                    {
+                        menuItem.DropDownItems.Add(child.menuItem);
+                    }
                 }
             }
-            loadedIcon = false;
-            return ret;
+        }
+        public void AddToCollectionExpanded(ToolStripItemCollection collection)
+        {
+            if (children.Count > 0)
+            {
+                if (children.Count != menuItem.DropDownItems.Count)
+                {
+                    menuItem.DropDownItems.Clear();
+                }
+                List<IMenuItem> dirMenuItems = new List<IMenuItem>();
+                List<IMenuItem> fileMenuItems = new List<IMenuItem>();
+
+                foreach (IMenuItem child in children)
+                {
+                    if (child.isDir)
+                    {
+                        dirMenuItems.Add(child);
+                    }
+                    else if (child.isFile)
+                    {
+                        fileMenuItems.Add(child);
+                    }
+                }
+                if (ProgramData.pd.settings.app.MenuSorting != "None")
+                {
+                    if (ProgramData.pd.settings.app.MenuSorting == "Folders Top")
+                    {
+                        foreach (IMenuItem child in dirMenuItems)
+                        {
+                            collection.Add(child.menuItem);
+                        }
+                        foreach (IMenuItem child in fileMenuItems)
+                        {
+                            collection.Add(child.menuItem);
+                        }
+                    }
+                    else
+                    {
+                        foreach (IMenuItem child in fileMenuItems)
+                        {
+                            collection.Add(child.menuItem);
+                        }
+                        foreach (IMenuItem child in dirMenuItems)
+                        {
+                            collection.Add(child.menuItem);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (IMenuItem child in children)
+                    {
+                        collection.Add(child.menuItem);
+                    }
+                }
+            }
+            else
+            {
+                collection.Add(menuItem);
+            }
         }
     }
 }

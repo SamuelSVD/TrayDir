@@ -59,18 +59,23 @@ namespace TrayDir
             ov.SetTooltip("When enabled, closing the window will not exit the application");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "MinimizeOnClose");
 
-            ov = new OptionView("Start Minimized", ProgramData.pd.settings.win.StartMinimized);
+            ov = new OptionView("Hide On Minimize", ProgramData.pd.settings.win.HideOnMinimize);
             ov.AddTo(WinGroupLayout, 1);
+            ov.SetTooltip("When enabled, minimizing the window will hide the application");
+            ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "HideOnMinimize");
+
+            ov = new OptionView("Start Minimized", ProgramData.pd.settings.win.StartMinimized);
+            ov.AddTo(WinGroupLayout, 2);
             ov.SetTooltip("When enabled, the application will always start hidden, only visible in system tray");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "StartMinimized");
 
             ov = new OptionView("Start With Windows", ProgramData.pd.settings.win.StartWithWindows);
-            ov.AddTo(WinGroupLayout, 2);
+            ov.AddTo(WinGroupLayout, 3);
             ov.SetTooltip("When enabled, the application will always start hidden, only visible in system tray");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "StartWithWindows");
 
             ov = new OptionView("Check For Updates on Startup", ProgramData.pd.settings.win.CheckForUpdates);
-            ov.AddTo(WinGroupLayout, 3);
+            ov.AddTo(WinGroupLayout, 4);
             ov.SetTooltip("When enabled, TrayDir will check for update on startup");
             ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "CheckForUpdates");
         }

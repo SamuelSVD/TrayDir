@@ -104,9 +104,25 @@
     <Compile Include="src\forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\forms\IOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\forms\IOptionsForm.Designer.cs">
+      <DependentUpon>IOptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\forms\ITreeViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\forms\ITreeViewForm.Designer.cs">
+      <DependentUpon>ITreeViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\models\SettingsWindows.cs" />
     <Compile Include="src\models\StringIndexable.cs" />
+    <Compile Include="src\models\TrayInstanceNode.cs" />
+    <Compile Include="src\models\TrayInstancePluginParamter.cs" />
+    <Compile Include="src\models\TrayInstanceVirtualFolder.cs" />
     <Compile Include="src\models\TrayInstancePath.cs" />
+    <Compile Include="src\models\TrayInstancePlugin.cs" />
     <Compile Include="src\utils\ControlUtils.cs" />
     <Compile Include="src\utils\AppUtils.cs" />
     <Compile Include="lib\FolderSelectDialog\FolderSelectDialog.cs" />
@@ -135,16 +151,17 @@
     <Compile Include="src\utils\UpdateUtils.cs" />
     <Compile Include="src\utils\XMLUtils.cs" />
     <Compile Include="src\views\ComboBoxView.cs" />
-    <Compile Include="src\views\IIconOption.cs" />
+    <Compile Include="src\views\ITray.cs" />
     <Compile Include="src\views\IMenuItem.cs" />
+    <Compile Include="src\views\ITreeNode.cs" />
     <Compile Include="src\views\IView.cs" />
-    <Compile Include="src\views\IOptionsView.cs" />
-    <Compile Include="src\views\IPathsView.cs" />
     <Compile Include="src\views\OptionView.cs" />
-    <Compile Include="src\views\PathView.cs" />
     <EmbeddedResource Include="src\forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\IOptionsForm.resx">
+      <DependentUpon>IOptionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -158,7 +175,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="src\forms\ITreeViewForm.resx">
+      <DependentUpon>ITreeViewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,7 +198,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\add.png" />
+    <Content Include="Resources\delete.png" />
+    <Content Include="Resources\document.png" />
+    <Content Include="Resources\document_new.png" />
+    <Content Include="Resources\down.png" />
     <Content Include="Resources\file-exe.ico" />
+    <Content Include="Resources\folder.png" />
+    <Content Include="Resources\folder_blue.png" />
+    <Content Include="Resources\folder_blue_new.png" />
+    <Content Include="Resources\folder_new.png" />
+    <None Include="Resources\indent_in.png" />
+    <None Include="Resources\indent_out.png" />
+    <Content Include="Resources\question.png" />
+    <Content Include="Resources\runnable.png" />
+    <Content Include="Resources\runnable_new.png" />
+    <Content Include="Resources\up.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

@@ -91,7 +91,7 @@ namespace TrayDir
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.mainMenu.Size = new System.Drawing.Size(566, 24);
+            this.mainMenu.Size = new System.Drawing.Size(348, 24);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "mainMenu";
             // 
@@ -200,14 +200,14 @@ namespace TrayDir
             // rebuildCurrentToolStripMenuItem
             // 
             this.rebuildCurrentToolStripMenuItem.Name = "rebuildCurrentToolStripMenuItem";
-            this.rebuildCurrentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rebuildCurrentToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.rebuildCurrentToolStripMenuItem.Text = "Rebuild Current";
             this.rebuildCurrentToolStripMenuItem.Click += new System.EventHandler(this.rebuildCurrentToolStripMenuItem_Click);
             // 
             // rebuildAllToolStripMenuItem
             // 
             this.rebuildAllToolStripMenuItem.Name = "rebuildAllToolStripMenuItem";
-            this.rebuildAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rebuildAllToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.rebuildAllToolStripMenuItem.Text = "Rebuild All";
             this.rebuildAllToolStripMenuItem.Click += new System.EventHandler(this.rebuildAllToolStripMenuItem_Click);
             // 
@@ -240,7 +240,7 @@ namespace TrayDir
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(566, 0);
+            this.panel1.Size = new System.Drawing.Size(348, 0);
             this.panel1.TabIndex = 0;
             // 
             // iconLoadTimer
@@ -259,8 +259,7 @@ namespace TrayDir
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(566, 70);
+            this.ClientSize = new System.Drawing.Size(348, 119);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.mainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

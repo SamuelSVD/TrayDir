@@ -10,8 +10,8 @@ namespace TrayDir
         public static MainForm form;
         private bool allowVisible;     // ContextMenu's Show command used
         private bool allowClose;       // ContextMenu's Exit command used
-        private int prevHeight;
-        private TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
+        private int __debug_i;
+        public TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
         private TrayInstance onShowInstance;
         public ProgramData pd;
         public FileDialog fd;
@@ -33,7 +33,6 @@ namespace TrayDir
 
             pd.FixInstances();
             pd.CheckStartup();
-            pd.Save();
             InitializeContent();
             BuildExploreDropdown();
             BuildRebuildDropdown();
@@ -63,7 +62,8 @@ namespace TrayDir
         {
             instanceTabs = new SmartTabControl();
             instanceTabs.AllowDrop = true;
-            instanceTabs.Dock = DockStyle.Top;
+            //instanceTabs.Dock = DockStyle.Top;
+            instanceTabs.Anchor = (AnchorStyles)5;
             instanceTabs.Name = "instanceTabs";
             instanceTabs.SelectedIndex = 0;
             instanceTabs.TabIndex = 0;
@@ -108,7 +108,7 @@ namespace TrayDir
         {
             foreach (TrayInstance ti in pd.trayInstances)
             {
-                ti.view.paths.FixPaths();
+                //ti.view.paths.FixPaths();
             }
         }
         public void OnTabSwapped(object sender, SmartTabControl.TabSwappedArgs tsa)
@@ -137,7 +137,7 @@ namespace TrayDir
             instanceTabs.TabPages.Add(newTabTabPage);
             instanceTabs.SelectedIndex = i;
             IView iv = CreateViewFromInstance(instance, tp);
-            iv.notifyIcon.DoubleClick += new EventHandler(delegate (object obj, EventArgs args)
+            iv.tray.notifyIcon.DoubleClick += new EventHandler(delegate (object obj, EventArgs args)
             {
                 onShowInstance = instance;
                 ShowApp(obj, args);
@@ -157,8 +157,23 @@ namespace TrayDir
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                HideApp(sender, e);
+                bool block = true;
+                foreach (TrayInstance instance in pd.trayInstances)
+                {
+                    if (!instance.settings.HideFromTray)
+                    {
+                        block = false;
+                        break;
+                    }
+                }
+                if (!block && pd.settings.win.HideOnMinimize)
+                {
+                    HideApp(sender, e);
+                }
                 pd.FormHidden();
+            } else
+            {
+                pd.FormShowed();
             }
         }
         public void BuildRebuildDropdown()
@@ -242,14 +257,29 @@ namespace TrayDir
         {
             if (!allowClose && pd.settings.win.MinimizeOnClose)
             {
-                HideApp(this, null);
+                bool block = true;
+                foreach(TrayInstance instance in pd.trayInstances)
+                {
+                    if (!instance.settings.HideFromTray)
+                    {
+                        block = false;
+                        break;
+                    }
+                }
+                if (!block && !pd.settings.win.MinimizeOnClose)
+                {
+                    HideApp(this, null);
+                } else
+                {
+                    WindowState = FormWindowState.Minimized;
+                }
                 e.Cancel = true;
             }
             else
             {
                 foreach (TrayInstance i in pd.trayInstances)
                 {
-                    i.view.Hide();
+                    i.view.tray.Hide();
                 }
             }
             base.OnFormClosing(e);
@@ -279,6 +309,10 @@ namespace TrayDir
         public void ExitApp(object sender, EventArgs e)
         {
             allowClose = true;
+            foreach (TrayInstance instance in pd.trayInstances)
+            {
+                instance.view.tray.Hide();
+            }
             Application.Exit();
         }
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -293,12 +327,12 @@ namespace TrayDir
             tp.Text = instance.instanceName;
             tp.Controls.Add(iv.GetControl());
 
-            iv.setEventHandlers(new EventHandler(delegate (Object obj, EventArgs args)
+            iv.tray.setEventHandlers(new EventHandler(delegate (Object obj, EventArgs args)
             {
                 onShowInstance = instance;
                 ShowApp(obj, args);
             }), HideApp, ExitApp);
-            iv.UpdateTrayMenu();
+            iv.tray.BuildTrayMenu();
             return iv;
         }
         private void timer1_Tick(object sender, EventArgs e)
@@ -315,18 +349,25 @@ namespace TrayDir
         }
         private void resizeForm()
         {
+            if (Program.DEBUG)
+            {
+                __debug_i += 1;
+                if (__debug_i % 2 == 0)
+                {
+                    Text = instanceTabs.SelectedTab.ClientSize.ToString();
+                }
+                else
+                {
+                    Text = trayInstance.view.GetControl().ClientSize.ToString();
+                }
+            }
             if (Visible && instanceTabs.SelectedIndex >= 0)
             {
                 if (Program.DEBUG) instanceTabs.SelectedTab.BackColor = Color.Red;
                 if (trayInstance.view != null)
                 {
-                    instanceTabs.SelectedTab.ClientSize = new Size(instanceTabs.SelectedTab.ClientSize.Width, trayInstance.view.p.Size.Height);
-                    instanceTabs.ClientSize = new Size(instanceTabs.ClientSize.Width, instanceTabs.SelectedTab.ClientSize.Height + instanceTabs.SelectedTab.Top + instanceTabs.Margin.Bottom);
-                    if (prevHeight == 0 || prevHeight > instanceTabs.ClientSize.Height)
-                    {
-                        ClientSize = new Size(ClientSize.Width, instanceTabs.Height + mainMenu.Height);
-                    }
-                    prevHeight = instanceTabs.ClientSize.Height;
+                    instanceTabs.SelectedTab.ClientSize = new Size(trayInstance.view.treeviewForm.tableLayoutPanel1.Width + 15, trayInstance.view.p.Size.Height);
+                    instanceTabs.ClientSize = new Size(instanceTabs.SelectedTab.ClientSize.Width, instanceTabs.SelectedTab.ClientSize.Height + instanceTabs.SelectedTab.Top + instanceTabs.Margin.Bottom);
                 }
             }
             PerformLayout();
@@ -358,7 +399,7 @@ namespace TrayDir
             {
                 trayInstance.instanceName = input;
                 instanceTabs.SelectedTab.Text = input;
-                trayInstance.view.notifyIcon.Text = input;
+                trayInstance.view.tray.notifyIcon.Text = input;
                 pd.Save();
             }
         }
@@ -374,55 +415,16 @@ namespace TrayDir
             {
                 instanceTabs.TabPages.Remove(ti.view.InstanceTabPage);
                 pd.trayInstances.Remove(ti);
-                ti.view.Hide();
+                ti.view.tray.Hide();
                 deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
                 BuildRebuildDropdown();
                 pd.Save();
             }
         }
-        public void SwapPaths(int a, int b)
-        {
-            TrayInstancePath sa = trayInstance.paths[a];
-            trayInstance.paths[a] = trayInstance.paths[b];
-            trayInstance.paths[b] = sa;
-            trayInstance.view.paths.FixPaths();
-            trayInstance.view.UpdateTrayMenu();
-            pd.Save();
-            BuildExploreDropdown();
-        }
-        public void RemovePath(int i)
-        {
-            trayInstance.paths.RemoveAt(i);
-            trayInstance.view.paths.FixPaths();
-            trayInstance.view.UpdateTrayMenu();
-            pd.Save();
-            BuildExploreDropdown();
-        }
-        public void InsertPath(int i)
-        {
-            trayInstance.paths.Insert(i, new TrayInstancePath(TrayInstance.defaultPath));
-            trayInstance.view.paths.FixPaths();
-            trayInstance.view.UpdateTrayMenu();
-            pd.Save();
-            BuildExploreDropdown();
-        }
-        public void EditPath(int i)
-        {
-            string input = trayInstance.paths[i].alias;
-            if (InputDialog.ShowStringInputDialog("Edit Display Name", ref input) == DialogResult.OK)
-            {
-                trayInstance.paths[i].alias = input;
-                trayInstance.view.UpdateTrayMenu();
-                pd.Save();
-            }
-        }
-
-
         private void exportToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             AppUtils.ExportInstance(trayInstance);
         }
-
         private void importToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             TrayInstance i = AppUtils.ImportInstance();
@@ -437,26 +439,23 @@ namespace TrayDir
                 MessageBox.Show("Error: Unable to import file.", "Import failed");
             }
         }
-
         private void iconLoadTimer_Tick(object sender, EventArgs e)
         {
             bool ret = true;
-            foreach(TrayInstance ti in pd.trayInstances)
+            foreach (TrayInstance ti in pd.trayInstances)
             {
-                ret = ti.view.UpdateMenuIcons() && ret;
+                ret = ti.view.tray.UpdateMenuIcons() && ret;
             }
             if (ret)
             {
                 iconLoadTimer.Stop();
             }
         }
-
         private void rebuildCurrentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            trayInstance.view.Rebuild();
+            trayInstance.view.tray.Rebuild();
             resizeForm();
         }
-
         private void rebuildAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pd.RebuildAll();
@@ -474,14 +473,13 @@ namespace TrayDir
                 AppUtils.ExplorePath(Path.GetFullPath(path));
             }
         }
-
         private void changeIgnoreRegexToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string input = trayInstance.ignoreRegex;
             if (InputDialog.ShowMultilineStringInputDialog("Edit Ignore Regex", ref input) == DialogResult.OK)
             {
                 trayInstance.ignoreRegex = input;
-                trayInstance.view.Rebuild();
+                trayInstance.view.tray.Rebuild();
                 pd.Save();
             }
         }
