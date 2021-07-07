@@ -166,11 +166,14 @@ namespace TrayDir
                         break;
                     }
                 }
-                if (!block)
+                if (!block && pd.settings.win.HideOnMinimize)
                 {
                     HideApp(sender, e);
-                    pd.FormHidden();
                 }
+                pd.FormHidden();
+            } else
+            {
+                pd.FormShowed();
             }
         }
         public void BuildRebuildDropdown()

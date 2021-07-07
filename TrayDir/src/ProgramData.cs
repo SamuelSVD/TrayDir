@@ -72,7 +72,10 @@ namespace TrayDir
             {
                 foreach (TrayInstance instance in trayInstances)
                 {
-                    instance.view.tray.SetFormShownMenu();
+                    if (instance.view != null)
+                    {
+                        instance.view.tray.SetFormShownMenu();
+                    }
                 }
             }
         }
