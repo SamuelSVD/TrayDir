@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -211,8 +212,9 @@ namespace TrayDir
             }
             else
             {
-                MainForm.form.fd.InitialDirectory = path;
+                MainForm.form.fd.InitialDirectory = Path.GetDirectoryName(path);
             }
+            MainForm.form.fd.FileName = Path.GetFileName(path);
             DialogResult d = MainForm.form.fd.ShowDialog();
             if (d == DialogResult.OK)
             {
@@ -229,11 +231,11 @@ namespace TrayDir
             string path = instance.paths[itn.tin.id].path;
             if (path == null || path == "")
             {
-                MainForm.form.fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                fs.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             }
             else
             {
-                MainForm.form.fd.InitialDirectory = path;
+                fs.InitialDirectory = Path.GetDirectoryName(path);
             }
             if (fs.ShowDialog())
             {
