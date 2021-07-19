@@ -16,7 +16,8 @@ namespace TrayDir
         private static Semaphore imgLoadSemaphore;
         private static Queue<IMenuItem> imgLoadQueue;
         private static Dictionary<string, Icon> imgKnownIcons;
-
+        public static Semaphore urlLoadSemaphore;
+        public static Queue<IMenuItem> urlLoadQueue;
         private TrayInstance instance;
         public ToolStripMenuItem menuItem;
         public List<IMenuItem> children;
@@ -71,48 +72,61 @@ namespace TrayDir
             s.Start();
             while (true && mainThread.IsAlive)
             {
-                imgLoadSemaphore.WaitOne();
-                bool doWait = true;
-                if (imgLoadQueue.Count > 0)
+                if (tryLoadIconThread(imgLoadSemaphore, imgLoadQueue))
                 {
-                    IMenuItem mi = imgLoadQueue.Dequeue();
-                    try
-                    {
-                        if (mi.menuIcon is null && mi.isFile)
-                        {
-                            string ext = Path.GetExtension(mi.tiPath.path);
-                            if (ext.Length == 0 || ext == ".ico" || ext == ".lnk" || ext == ".exe" || ext == ".url")
-                            {
-                                mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path);
-                            }
-                            else
-                            {
-                                if (imgKnownIcons.ContainsKey(ext))
-                                {
-                                    mi.menuIcon = imgKnownIcons[ext];
-                                    doWait = false;
-                                }
-                                else
-                                {
-                                    imgKnownIcons[ext] = Icon.ExtractAssociatedIcon(mi.tiPath.path);
-                                    mi.menuIcon = imgKnownIcons[ext];
-                                }
-                            }
-                        }
-                    }
-                    catch { }
-                    mi.loadedIcon = true;
                     s.Reset();
                 }
-                imgLoadSemaphore.Release();
                 s.Stop();
                 if (s.Elapsed.Seconds > 2)
                 {
                     break;
                 }
                 s.Start();
-                if (doWait) Thread.Sleep(10);
+                Thread.Sleep(1);
             }
+        }
+        public static bool tryLoadIconThread(Semaphore sem, Queue<IMenuItem> queue)
+        {
+            sem.WaitOne();
+            bool result = false;
+            if (queue.Count > 0)
+            {
+                IMenuItem mi = queue.Dequeue();
+                try
+                {
+                    if (mi.menuIcon is null && mi.isFile)
+                    {
+                        string ext = Path.GetExtension(mi.tiPath.path);
+                        if (ext.Length == 0 || ext == ".ico" || ext == ".lnk" || ext == ".exe" || (queue != imgLoadQueue && ext == ".url"))
+                        {
+                            mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path);
+                        } else if (queue == imgLoadQueue && ext == ".url")
+                        {
+                            urlLoadSemaphore.WaitOne();
+                            MainForm.form.imgLoadTimer.Enabled = true;
+                            urlLoadQueue.Enqueue(mi);
+                            urlLoadSemaphore.Release();
+                        }
+                        else
+                        {
+                            if (imgKnownIcons.ContainsKey(ext))
+                            {
+                                mi.menuIcon = imgKnownIcons[ext];
+                            }
+                            else
+                            {
+                                imgKnownIcons[ext] = Icon.ExtractAssociatedIcon(mi.tiPath.path);
+                                mi.menuIcon = imgKnownIcons[ext];
+                            }
+                        }
+                    }
+                }
+                catch { }
+                mi.loadedIcon = true;
+                result = true;
+            }
+            sem.Release();
+            return result;
         }
         public IMenuItem(TrayInstance instance, TrayInstancePath path) : this(instance, path, null, null) { }
         public IMenuItem(TrayInstance instance, TrayInstanceVirtualFolder virtualFolder) : this(instance, null, virtualFolder, null) { }
@@ -125,6 +139,14 @@ namespace TrayDir
             if (imgLoadQueue is null)
             {
                 imgLoadQueue = new Queue<IMenuItem>();
+            }
+            if (urlLoadSemaphore is null)
+            {
+                urlLoadSemaphore = new Semaphore(1, 1);
+            }
+            if (urlLoadQueue is null)
+            {
+                urlLoadQueue = new Queue<IMenuItem>();
             }
             if (imgKnownIcons is null)
             {

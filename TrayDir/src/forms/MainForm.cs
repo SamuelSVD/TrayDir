@@ -483,5 +483,17 @@ namespace TrayDir
                 pd.Save();
             }
         }
+
+        private void imgLoadTimer_Tick(object sender, EventArgs e)
+        {
+            if (IMenuItem.urlLoadQueue.Count > 0)
+            {
+                IMenuItem.tryLoadIconThread(IMenuItem.urlLoadSemaphore, IMenuItem.urlLoadQueue);
+                imgLoadTimer.Interval = 10;
+            } else
+            {
+                imgLoadTimer.Interval = 1000;
+            }
+        }
     }
 }

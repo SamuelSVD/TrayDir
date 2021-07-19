@@ -56,8 +56,9 @@ namespace TrayDir
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.iconLoadTimer = new System.Windows.Forms.Timer(this.components);
             this.iconList = new System.Windows.Forms.ImageList(this.components);
+            this.imgLoadTimer = new System.Windows.Forms.Timer(this.components);
+            this.iconLoadTimer = new System.Windows.Forms.Timer(this.components);
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -243,16 +244,22 @@ namespace TrayDir
             this.panel1.Size = new System.Drawing.Size(348, 0);
             this.panel1.TabIndex = 0;
             // 
-            // iconLoadTimer
-            // 
-            this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
-            // 
             // iconList
             // 
             this.iconList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("iconList.ImageStream")));
             this.iconList.TransparentColor = System.Drawing.Color.Transparent;
             this.iconList.Images.SetKeyName(0, "document.png");
             this.iconList.Images.SetKeyName(1, "folder.png");
+            // 
+            // imgLoadTimer
+            // 
+            this.imgLoadTimer.Enabled = true;
+            this.imgLoadTimer.Interval = 1000;
+            this.imgLoadTimer.Tick += new System.EventHandler(this.imgLoadTimer_Tick);
+            // 
+            // iconLoadTimer
+            // 
+            this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
             // 
             // MainForm
             // 
@@ -297,12 +304,13 @@ namespace TrayDir
         private ToolStripSeparator exportToolStripMenuItem;
         private ToolStripMenuItem importToolStripMenuItem;
         private ToolStripMenuItem exportToolStripMenuItem1;
-        public Timer iconLoadTimer;
         private ToolStripMenuItem rebuildCurrentToolStripMenuItem;
         private ToolStripMenuItem rebuildAllToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem1;
         private ToolStripMenuItem changeIgnoreRegexToolStripMenuItem;
         private ImageList iconList;
+        public Timer imgLoadTimer;
+        public Timer iconLoadTimer;
     }
 }
 
