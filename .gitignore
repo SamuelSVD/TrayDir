@@ -9,3 +9,4 @@ TrayDir/bin
 Installer/binaries
 TrayDir/lib/VisualStudioTabControl/obj/
 *.pfx
+*.exe
