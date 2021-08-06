@@ -18,6 +18,7 @@ namespace TrayDir
         public SmartTabControl instanceTabs;
         public TabPage newTabTabPage;
 
+        private bool loaded = false;
         public MainForm()
         {
             InitializeComponent();
@@ -51,12 +52,12 @@ namespace TrayDir
             {
                 UpdateUtils.CheckForUpdates();
             }
+            loaded = true;
         }
         private void InitializeContent()
         {
             CreateInstanceTabsLayout();
             InitializeInstanceTabs();
-            UpdateInstanceTabs();
         }
         private void CreateInstanceTabsLayout()
         {
@@ -104,13 +105,6 @@ namespace TrayDir
             }
             resizeForm();
         }
-        public void UpdateInstanceTabs()
-        {
-            foreach (TrayInstance ti in pd.trayInstances)
-            {
-                //ti.view.paths.FixPaths();
-            }
-        }
         public void OnTabSwapped(object sender, SmartTabControl.TabSwappedArgs tsa)
         {
             TrayInstance ti = pd.trayInstances[tsa.aOriginalIndex];
@@ -155,25 +149,29 @@ namespace TrayDir
         }
         private void MainForm_SizeChanged(object sender, EventArgs e)
         {
-            if (WindowState == FormWindowState.Minimized)
+            if (loaded)
             {
-                bool block = true;
-                foreach (TrayInstance instance in pd.trayInstances)
+                if (WindowState == FormWindowState.Minimized)
                 {
-                    if (!instance.settings.HideFromTray)
+                    bool block = true;
+                    foreach (TrayInstance instance in pd.trayInstances)
                     {
-                        block = false;
-                        break;
+                        if (!instance.settings.HideFromTray)
+                        {
+                            block = false;
+                            break;
+                        }
                     }
+                    if (!block && pd.settings.win.HideOnMinimize)
+                    {
+                        HideApp(sender, e);
+                    }
+                    pd.FormHidden();
                 }
-                if (!block && pd.settings.win.HideOnMinimize)
+                else
                 {
-                    HideApp(sender, e);
+                    pd.FormShowed();
                 }
-                pd.FormHidden();
-            } else
-            {
-                pd.FormShowed();
             }
         }
         public void BuildRebuildDropdown()
@@ -337,15 +335,18 @@ namespace TrayDir
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (Visible)
+            if (loaded)
             {
-                timer1.Interval = 1000;
+                if (Visible)
+                {
+                    timer1.Interval = 1000;
+                }
+                else
+                {
+                    timer1.Interval = 100;
+                }
+                resizeForm();
             }
-            else
-            {
-                timer1.Interval = 100;
-            }
-            resizeForm();
         }
         private void resizeForm()
         {
@@ -441,14 +442,17 @@ namespace TrayDir
         }
         private void iconLoadTimer_Tick(object sender, EventArgs e)
         {
-            bool ret = true;
-            foreach (TrayInstance ti in pd.trayInstances)
+            if (loaded)
             {
-                ret = ti.view.tray.UpdateMenuIcons() && ret;
-            }
-            if (ret)
-            {
-                iconLoadTimer.Stop();
+                bool ret = true;
+                foreach (TrayInstance ti in pd.trayInstances)
+                {
+                    ret = ti.view.tray.UpdateMenuIcons() && ret;
+                }
+                if (ret)
+                {
+                    iconLoadTimer.Stop();
+                }
             }
         }
         private void rebuildCurrentToolStripMenuItem_Click(object sender, EventArgs e)
@@ -486,7 +490,7 @@ namespace TrayDir
 
         private void imgLoadTimer_Tick(object sender, EventArgs e)
         {
-            if (IMenuItem.urlLoadQueue.Count > 0)
+            if (IMenuItem.urlLoadQueue != null && IMenuItem.urlLoadQueue.Count > 0)
             {
                 IMenuItem.tryLoadIconThread(IMenuItem.urlLoadSemaphore, IMenuItem.urlLoadQueue);
                 imgLoadTimer.Interval = 10;

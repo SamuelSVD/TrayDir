@@ -12,12 +12,19 @@ namespace TrayDir
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            MainForm.Init();
-            SettingsForm.Init();
-            ProgramData.pd.initialized = true;
-            Application.Run(MainForm.form);
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                MainForm.Init();
+                SettingsForm.Init();
+                ProgramData.pd.initialized = true;
+                Application.Run(MainForm.form);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Unhandled Fatal Exception: " + e.Message + "[" + e.StackTrace + "]");
+            }
         }
     }
 }
