@@ -428,16 +428,21 @@ namespace TrayDir
         }
         private void importToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            TrayInstance i = AppUtils.ImportInstance();
-            if (i != null)
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Tray Instance Export | *.tde";
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                pd.trayInstances.Add(i);
-                AddInstanceTabPage(i);
-                pd.Save();
-            }
-            else
-            {
-                MessageBox.Show("Error: Unable to import file.", "Import failed");
+                TrayInstance i = AppUtils.ImportInstance(ofd.FileName);
+                if (i != null)
+                {
+                    pd.trayInstances.Add(i);
+                    AddInstanceTabPage(i);
+                    pd.Save();
+                }
+                else
+                {
+                    MessageBox.Show("Error: Unable to import file.", "Import failed");
+                }
             }
         }
         private void iconLoadTimer_Tick(object sender, EventArgs e)

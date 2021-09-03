@@ -156,15 +156,10 @@ namespace TrayDir
                 MessageBox.Show("Exported to:" + sfd.FileName, "Export Done");
             }
         }
-        public static TrayInstance ImportInstance()
+        public static TrayInstance ImportInstance(string path)
         {
             TrayInstance i = null;
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Tray Instance Export | *.tde";
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                i = XMLUtils.LoadFromFile<TrayInstance>(ofd.FileName);
-            }
+            i = XMLUtils.LoadFromFile<TrayInstance>(path);
             return i;
         }
     }
