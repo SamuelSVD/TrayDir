@@ -167,7 +167,10 @@ namespace TrayDir
             children = new List<IMenuItem>();
             isDir = tiPath != null ? AppUtils.PathIsDirectory(tiPath.path) : false;
             isFile = tiPath != null ? AppUtils.PathIsFile(tiPath.path) : false;
-            MakeChildren();
+            if (isDir && !tiPath.shortcut)
+            {
+                MakeChildren();
+            }
         }
         private void MakeChildren()
         {
@@ -318,7 +321,7 @@ namespace TrayDir
             }
             else
             {
-                if (isDir & instance.settings.ExploreFoldersInTrayMenu)
+                if (isDir & (instance.settings.ExploreFoldersInTrayMenu || tiPath.shortcut))
                 {
                     AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, instance.settings.RunAsAdmin);
                 }
@@ -405,7 +408,12 @@ namespace TrayDir
                     fileMenuItems.Add(child);
                 }
             }
-            if (children.Count == 0 && isDir)
+            if (isDir && tiPath.shortcut)
+            {
+                children.Clear();
+                menuItem.DropDownItems.Clear();
+            }
+            if (children.Count == 0 && isDir && !tiPath.shortcut)
             {
                 menuItem.DropDownItems.Add("(Empty)");
             }

@@ -177,13 +177,11 @@ namespace TrayDir
             RefreshPathMenuItemList();
             RefreshVirtualFolderMenuItemList();
 
-            //AddPathsOnly();
             AddTrayTree(instance.nodes.children, notifyIcon.ContextMenuStrip.Items);
 
             notifyIcon.ContextMenuStrip.Items.Add("-");
             exitMenuItem = MakeAndAddMenuItem(exitMenuItem, "Exit", true, exitForm);
 
-            //          notifyIcon.ContextMenuStrip.AutoClose = false;
             UpdateTrayIcon();
         }
         private void AddPathsOnly()

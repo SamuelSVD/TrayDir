@@ -390,11 +390,13 @@ namespace TrayDir
         {
             instance.paths[selectedNode.tin.id].shortcut = true;
             selectedNode.Refresh();
+            instance.view.tray.Rebuild();
         }
         private void folderExpandMenuItem_click(object sender, EventArgs e)
         {
             instance.paths[selectedNode.tin.id].shortcut = false;
             selectedNode.Refresh();
+            instance.view.tray.Rebuild();
         }
         private void treeView2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
