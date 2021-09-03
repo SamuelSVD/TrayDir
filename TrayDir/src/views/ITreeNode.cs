@@ -100,8 +100,15 @@ namespace TrayDir
                     bool hasAlias = alias != null && alias != "";
                     if (tip.isDir)
                     {
-                        node.ImageIndex = 1;
-                        node.SelectedImageIndex = 1;
+                        if (tip.shortcut)
+                        {
+                            node.ImageIndex = 14;
+                            node.SelectedImageIndex = 14;
+                        } else
+                        {
+                            node.ImageIndex = 1;
+                            node.SelectedImageIndex = 1;
+                        }
                         node.Text = "";
                     }
                     else if (tip.isFile)

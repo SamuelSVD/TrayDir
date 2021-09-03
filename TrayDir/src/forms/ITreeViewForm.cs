@@ -17,15 +17,27 @@ namespace TrayDir
         private bool selectedDownable { get { return selectedNode != null ? !selectedNode.isLastChild : false; } }
         private ITreeNode __selectedNode;
         private TrayInstance instance;
+        private ContextMenu rightClickMenu;
+        private MenuItem renameMenuItem;
+        private MenuItem folderShortcutMenuItem;
+        private MenuItem folderExpandMenuItem;
+
         public ITreeViewForm(TrayInstance instance)
         {
+            rightClickMenu = new ContextMenu();
+            renameMenuItem = new MenuItem("Rename Item", renameButton_Click);
+            folderShortcutMenuItem = new MenuItem("Use folder link as shortcut", folderShortcutMenuItem_click);
+            folderExpandMenuItem = new MenuItem("Expand folder in tray menu", folderExpandMenuItem_click);
+            rightClickMenu.MenuItems.Add(renameMenuItem);
+            rightClickMenu.MenuItems.Add(folderShortcutMenuItem);
+            rightClickMenu.MenuItems.Add(folderExpandMenuItem);
+
             this.instance = instance;
             InitializeComponent();
             nodes = new List<ITreeNode>();
             foreach (TrayInstanceNode tin in instance.nodes.children)
             {
                 InitNodes(treeView2, tin, null);
-
             }
             treeView2.ExpandAll();
             TreeNode folder = new TreeNode();
@@ -94,6 +106,7 @@ namespace TrayDir
             imageList1.Images.Add(TrayDir.Properties.Resources.question);       //11
             imageList1.Images.Add(TrayDir.Properties.Resources.indent_in);      //12
             imageList1.Images.Add(TrayDir.Properties.Resources.indent_out);     //13
+            imageList1.Images.Add(TrayDir.Properties.Resources.folder_shortcut);//14
         }
         private void treeView2_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -371,6 +384,47 @@ namespace TrayDir
             if (selectedNode != null)
             {
                 renameButton_Click(sender, null);
+            }
+        }
+        private void folderShortcutMenuItem_click(object sender, EventArgs e)
+        {
+            instance.paths[selectedNode.tin.id].shortcut = true;
+            selectedNode.Refresh();
+        }
+        private void folderExpandMenuItem_click(object sender, EventArgs e)
+        {
+            instance.paths[selectedNode.tin.id].shortcut = false;
+            selectedNode.Refresh();
+        }
+        private void treeView2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && selectedNode != null)
+            {
+                if (e.Node != null)
+                {
+                    foreach (ITreeNode itn in nodes)
+                    {
+                        if (e.Node == itn.node)
+                        {
+                            selectedNode = itn;
+                            break;
+                        }
+                    }
+                }
+                if (selectedNode.tin.type == TrayInstanceNode.NodeType.Path)
+                {
+                    TrayInstancePath path = instance.paths[selectedNode.tin.id];
+                    if (path.isDir)
+                    {
+                        folderShortcutMenuItem.Visible = !path.shortcut;
+                        folderExpandMenuItem.Visible = path.shortcut;
+                    } else
+                    {
+                        folderShortcutMenuItem.Visible = false;
+                        folderExpandMenuItem.Visible = false;
+                    }
+                }
+                rightClickMenu.Show(treeView2, e.Location);
             }
         }
     }

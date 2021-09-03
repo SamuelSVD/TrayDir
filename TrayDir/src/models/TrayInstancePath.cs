@@ -7,7 +7,7 @@ namespace TrayDir
         [XmlAttribute]
         public string path;
         [XmlAttribute]
-        public bool expandPath;
+        public bool shortcut = false;
         [XmlAttribute]
         public string alias;
         public TrayInstancePath() : this("") { }

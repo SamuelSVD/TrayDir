@@ -75,6 +75,7 @@ namespace TrayDir
             this.imageList1.Images.SetKeyName(9, "folder_new.png");
             this.imageList1.Images.SetKeyName(10, "delete.png");
             this.imageList1.Images.SetKeyName(11, "question.png");
+            this.imageList1.Images.SetKeyName(12, "folder_shortcut.png");
             // 
             // tableLayoutPanel1
             // 
@@ -335,6 +336,7 @@ namespace TrayDir
             this.treeView2.TabIndex = 1;
             this.treeView2.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView2_BeforeCollapse);
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
+            this.treeView2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseClick);
             this.treeView2.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseDoubleClick);
             this.treeView2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView2_KeyDown);
             // 
