@@ -120,6 +120,10 @@ namespace TrayDir
                             }
                         }
                     }
+                    else if (mi.menuIcon is null && mi.isDir)
+                    {
+                        mi.menuIcon = Icon.FromHandle(new Bitmap(Properties.Resources.folder).GetHicon());
+                    }
                 }
                 catch { }
                 mi.loadedIcon = true;
