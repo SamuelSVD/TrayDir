@@ -328,6 +328,91 @@ namespace TrayDir
         {
             instance.view.optionsForm.ShowDialog();
         }
+        private void RecursiveAddToInstance(TrayInstance recursive_instance, TrayInstanceNode tin, TrayInstanceNode parent)
+        {
+            TrayInstanceNode newTin = new TrayInstanceNode();
+            newTin.type = tin.type;
+            if (tin.type == TrayInstanceNode.NodeType.Path)
+            {
+                newTin.id = recursive_instance.paths.Count;
+                recursive_instance.paths.Add(instance.paths[tin.id]);
+            }
+            if (tin.type == TrayInstanceNode.NodeType.VirtualFolder)
+            {
+                newTin.id = recursive_instance.vfolders.Count;
+                recursive_instance.vfolders.Add(instance.vfolders[tin.id]);
+            }
+            if (tin.type == TrayInstanceNode.NodeType.Plugin)
+            {
+                newTin.id = recursive_instance.plugins.Count;
+                recursive_instance.plugins.Add(instance.plugins[tin.id]);
+            }
+            if (parent == null)
+            {
+                recursive_instance.nodes.children.Add(newTin);
+            } else
+            {
+                parent.children.Add(newTin);
+            }
+            foreach(TrayInstanceNode tinChild in tin.children)
+            {
+                RecursiveAddToInstance(recursive_instance, tinChild, newTin);
+            }
+        }
+        private void CopyToClipboard()
+        {
+            TrayInstance copyInstance = new TrayInstance();
+            RecursiveAddToInstance(copyInstance, selectedNode.tin, null);
+            Clipboard.SetText(XMLUtils.XmlSerializeToString(copyInstance));
+        }
+        private void RecursiveLoadFromInstance(TrayInstance recursive_instance, TrayInstanceNode tin, ITreeNode parentNode)
+        {
+            TrayInstanceNode newTin = new TrayInstanceNode();
+            newTin.type = tin.type;
+            if (tin.type == TrayInstanceNode.NodeType.Path)
+            {
+                newTin.id = instance.paths.Count;
+                instance.paths.Add(recursive_instance.paths[tin.id]);
+            }
+            else if (tin.type == TrayInstanceNode.NodeType.Plugin)
+            {
+                newTin.id = instance.plugins.Count;
+                instance.plugins.Add(recursive_instance.plugins[tin.id]);
+            }
+            else if (tin.type == TrayInstanceNode.NodeType.VirtualFolder)
+            {
+                newTin.id = instance.vfolders.Count;
+                instance.vfolders.Add(recursive_instance.vfolders[tin.id]);
+            }
+            newTin.SetInstance(instance);
+            ITreeNode itn = new ITreeNode(newTin);
+            if (parentNode != null) treeView2.SelectedNode = parentNode.node;
+            insertNode(itn);
+            treeView2.SelectedNode = itn.node;
+            selectedNode = itn;
+            nodes.Add(itn);
+            foreach(TrayInstanceNode nodeChild in tin.children)
+            {
+                RecursiveLoadFromInstance(recursive_instance, nodeChild, itn);
+            }
+        }
+        private void PasteFromClipboard()
+        {
+            try
+            {
+                TrayInstance copyInstance = (TrayInstance)XMLUtils.XmlDeserializeFromString(Clipboard.GetText(), typeof(TrayInstance));
+                foreach(TrayInstanceNode tin in copyInstance.nodes.children)
+                {
+                    RecursiveLoadFromInstance(copyInstance, tin, null);
+                }
+                Save();
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
         public void treeView2_KeyDown(object sender, KeyEventArgs e)
         {
             if (selectedNode != null)
@@ -335,6 +420,20 @@ namespace TrayDir
                 if (e.KeyCode == Keys.F2)
                 {
                     renameButton_Click(sender, null);
+                }
+                if (e.KeyCode == Keys.C)
+                {
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        CopyToClipboard();
+                    }
+                }
+                if (e.KeyCode == Keys.V)
+                {
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        PasteFromClipboard();
+                    }
                 }
                 if (e.KeyCode == Keys.N)
                 {

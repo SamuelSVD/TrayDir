@@ -59,6 +59,8 @@ namespace TrayDir
             this.iconList = new System.Windows.Forms.ImageList(this.components);
             this.imgLoadTimer = new System.Windows.Forms.Timer(this.components);
             this.iconLoadTimer = new System.Windows.Forms.Timer(this.components);
+            this.pluginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.managePluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,12 +89,13 @@ namespace TrayDir
             this.instanceToolStripMenuItem,
             this.exploreToolStripMenuItem,
             this.rebuildToolStripMenuItem,
+            this.pluginToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.mainMenu.Size = new System.Drawing.Size(348, 24);
+            this.mainMenu.Size = new System.Drawing.Size(435, 24);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "mainMenu";
             // 
@@ -108,14 +111,14 @@ namespace TrayDir
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.Save);
             // 
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.ExitApp);
             // 
@@ -241,7 +244,7 @@ namespace TrayDir
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(348, 0);
+            this.panel1.Size = new System.Drawing.Size(435, 0);
             this.panel1.TabIndex = 0;
             // 
             // iconList
@@ -261,12 +264,26 @@ namespace TrayDir
             // 
             this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
             // 
+            // pluginToolStripMenuItem
+            // 
+            this.pluginToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.managePluginsToolStripMenuItem});
+            this.pluginToolStripMenuItem.Name = "pluginToolStripMenuItem";
+            this.pluginToolStripMenuItem.Size = new System.Drawing.Size(58, 22);
+            this.pluginToolStripMenuItem.Text = "Plugins";
+            // 
+            // managePluginsToolStripMenuItem
+            // 
+            this.managePluginsToolStripMenuItem.Name = "managePluginsToolStripMenuItem";
+            this.managePluginsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.managePluginsToolStripMenuItem.Text = "Manage Plugins...";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(348, 119);
+            this.ClientSize = new System.Drawing.Size(435, 119);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.mainMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -311,6 +328,8 @@ namespace TrayDir
         private ImageList iconList;
         public Timer imgLoadTimer;
         public Timer iconLoadTimer;
+        private ToolStripMenuItem pluginToolStripMenuItem;
+        private ToolStripMenuItem managePluginsToolStripMenuItem;
     }
 }
 
