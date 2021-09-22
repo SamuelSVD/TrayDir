@@ -116,6 +116,18 @@
     <Compile Include="src\forms\ITreeViewForm.Designer.cs">
       <DependentUpon>ITreeViewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\forms\PluginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\forms\PluginForm.Designer.cs">
+      <DependentUpon>PluginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\forms\PluginManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\forms\PluginManagerForm.Designer.cs">
+      <DependentUpon>PluginManagerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\models\SettingsWindows.cs" />
     <Compile Include="src\models\StringIndexable.cs" />
     <Compile Include="src\models\TrayInstanceNode.cs" />
@@ -123,6 +135,7 @@
     <Compile Include="src\models\TrayInstanceVirtualFolder.cs" />
     <Compile Include="src\models\TrayInstancePath.cs" />
     <Compile Include="src\models\TrayInstancePlugin.cs" />
+    <Compile Include="src\models\TrayPlugin.cs" />
     <Compile Include="src\utils\ControlUtils.cs" />
     <Compile Include="src\utils\AppUtils.cs" />
     <Compile Include="lib\FolderSelectDialog\FolderSelectDialog.cs" />
@@ -151,6 +164,7 @@
     <Compile Include="src\utils\UpdateUtils.cs" />
     <Compile Include="src\utils\XMLUtils.cs" />
     <Compile Include="src\views\ComboBoxView.cs" />
+    <Compile Include="src\views\PluginNode.cs" />
     <Compile Include="src\views\ITray.cs" />
     <Compile Include="src\views\IMenuItem.cs" />
     <Compile Include="src\views\ITreeNode.cs" />
@@ -179,6 +193,12 @@
     </Compile>
     <EmbeddedResource Include="src\forms\ITreeViewForm.resx">
       <DependentUpon>ITreeViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\PluginForm.resx">
+      <DependentUpon>PluginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\PluginManagerForm.resx">
+      <DependentUpon>PluginManagerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>

@@ -6,7 +6,7 @@ namespace TrayDir
     public class TrayInstancePlugin
     {
         [XmlAttribute]
-        public string plugin;
+        public int id;
         [XmlAttribute]
         public string alias;
         public List<TrayInstancePluginParameter> parameters;

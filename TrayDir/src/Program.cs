@@ -19,6 +19,7 @@ namespace TrayDir
                     Application.SetCompatibleTextRenderingDefault(false);
                     MainForm.Init();
                     SettingsForm.Init();
+                    PluginManagerForm.Init();
                     ProgramData.pd.initialized = true;
                     Application.Run(MainForm.form);
                 }

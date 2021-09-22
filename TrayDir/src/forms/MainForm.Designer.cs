@@ -52,6 +52,7 @@ namespace TrayDir
             this.rebuildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebuildCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebuildAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pluginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -59,8 +60,6 @@ namespace TrayDir
             this.iconList = new System.Windows.Forms.ImageList(this.components);
             this.imgLoadTimer = new System.Windows.Forms.Timer(this.components);
             this.iconLoadTimer = new System.Windows.Forms.Timer(this.components);
-            this.pluginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.managePluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,14 +110,14 @@ namespace TrayDir
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.Save);
             // 
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.ExitApp);
             // 
@@ -215,6 +214,13 @@ namespace TrayDir
             this.rebuildAllToolStripMenuItem.Text = "Rebuild All";
             this.rebuildAllToolStripMenuItem.Click += new System.EventHandler(this.rebuildAllToolStripMenuItem_Click);
             // 
+            // pluginToolStripMenuItem
+            // 
+            this.pluginToolStripMenuItem.Name = "pluginToolStripMenuItem";
+            this.pluginToolStripMenuItem.Size = new System.Drawing.Size(58, 22);
+            this.pluginToolStripMenuItem.Text = "Plugins";
+            this.pluginToolStripMenuItem.Click += new System.EventHandler(this.pluginToolStripMenuItem_Click);
+            // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
@@ -263,20 +269,6 @@ namespace TrayDir
             // iconLoadTimer
             // 
             this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
-            // 
-            // pluginToolStripMenuItem
-            // 
-            this.pluginToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.managePluginsToolStripMenuItem});
-            this.pluginToolStripMenuItem.Name = "pluginToolStripMenuItem";
-            this.pluginToolStripMenuItem.Size = new System.Drawing.Size(58, 22);
-            this.pluginToolStripMenuItem.Text = "Plugins";
-            // 
-            // managePluginsToolStripMenuItem
-            // 
-            this.managePluginsToolStripMenuItem.Name = "managePluginsToolStripMenuItem";
-            this.managePluginsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.managePluginsToolStripMenuItem.Text = "Manage Plugins...";
             // 
             // MainForm
             // 
@@ -329,7 +321,6 @@ namespace TrayDir
         public Timer imgLoadTimer;
         public Timer iconLoadTimer;
         private ToolStripMenuItem pluginToolStripMenuItem;
-        private ToolStripMenuItem managePluginsToolStripMenuItem;
     }
 }
 

@@ -11,6 +11,7 @@ namespace TrayDir
         [XmlElement(ElementName = "Settings")]
         public Settings settings;
         public List<TrayInstance> trayInstances;
+        public List<TrayPlugin> plugins;
         private static string config;
         public static ProgramData pd;
         [XmlIgnore]
@@ -20,6 +21,7 @@ namespace TrayDir
             initialized = false;
             settings = new Settings();
             trayInstances = new List<TrayInstance>();
+            plugins = new List<TrayPlugin>();
             ProgramData.pd = this;
         }
         public static ProgramData Load()
