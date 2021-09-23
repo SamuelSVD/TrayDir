@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -20,15 +13,14 @@ namespace TrayDir
             InitializeComponent();
             nameEdit.Text = plugin.tp.name;
             pathEdit.Text = plugin.tp.path;
+            paramNumericUpDown.Value = plugin.tp.parameterCount;
         }
-
         private void closeButton_Click(object sender, EventArgs e)
         {
             plugin.tp.name = nameEdit.Text;
             plugin.UpdateNode();
             Close();
         }
-
         private void browseButton_Click(object sender, EventArgs e)
         {
             MainForm.form.fd.DereferenceLinks = false;
@@ -47,9 +39,18 @@ namespace TrayDir
             {
                 plugin.tp.path = MainForm.form.fd.FileName;
                 pathEdit.Text = plugin.tp.path;
+                plugin.tp.name = Path.GetFileNameWithoutExtension(plugin.tp.path);
+                nameEdit.Text = plugin.tp.name;
                 plugin.UpdateNode();
-                ProgramData.pd.Save();
             }
+        }
+        private void paramNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            plugin.tp.parameterCount = (int)paramNumericUpDown.Value;
+        }
+        private void PluginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ProgramData.pd.Save();
         }
     }
 }

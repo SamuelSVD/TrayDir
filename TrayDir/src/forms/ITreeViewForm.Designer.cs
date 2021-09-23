@@ -48,7 +48,7 @@ namespace TrayDir
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.docPropertiesButton = new System.Windows.Forms.Button();
             this.folderPropertiesButton = new System.Windows.Forms.Button();
-            this.runnablePropertiesButton = new System.Windows.Forms.Button();
+            this.pluginPropertiesButton = new System.Windows.Forms.Button();
             this.renameButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.treeView2 = new System.Windows.Forms.TreeView();
@@ -210,6 +210,7 @@ namespace TrayDir
             this.newPluginButton.Size = new System.Drawing.Size(23, 23);
             this.newPluginButton.TabIndex = 2;
             this.newPluginButton.UseVisualStyleBackColor = true;
+            this.newPluginButton.Click += new System.EventHandler(this.newPluginButton_Click);
             // 
             // newVirtualFolderButton
             // 
@@ -255,7 +256,7 @@ namespace TrayDir
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel5.Controls.Add(this.docPropertiesButton, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.folderPropertiesButton, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.runnablePropertiesButton, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.pluginPropertiesButton, 0, 2);
             this.tableLayoutPanel5.Controls.Add(this.renameButton, 0, 3);
             this.tableLayoutPanel5.Controls.Add(this.button1, 0, 4);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -292,14 +293,15 @@ namespace TrayDir
             this.folderPropertiesButton.UseVisualStyleBackColor = true;
             this.folderPropertiesButton.Click += new System.EventHandler(this.folderPropertiesButton_Click);
             // 
-            // runnablePropertiesButton
+            // pluginPropertiesButton
             // 
-            this.runnablePropertiesButton.Location = new System.Drawing.Point(3, 61);
-            this.runnablePropertiesButton.Name = "runnablePropertiesButton";
-            this.runnablePropertiesButton.Size = new System.Drawing.Size(75, 23);
-            this.runnablePropertiesButton.TabIndex = 2;
-            this.runnablePropertiesButton.Text = "Plugin";
-            this.runnablePropertiesButton.UseVisualStyleBackColor = true;
+            this.pluginPropertiesButton.Location = new System.Drawing.Point(3, 61);
+            this.pluginPropertiesButton.Name = "pluginPropertiesButton";
+            this.pluginPropertiesButton.Size = new System.Drawing.Size(75, 23);
+            this.pluginPropertiesButton.TabIndex = 2;
+            this.pluginPropertiesButton.Text = "Plugin";
+            this.pluginPropertiesButton.UseVisualStyleBackColor = true;
+            this.pluginPropertiesButton.Click += new System.EventHandler(this.pluginPropertiesButton_Click);
             // 
             // renameButton
             // 
@@ -379,7 +381,7 @@ namespace TrayDir
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Button docPropertiesButton;
         private System.Windows.Forms.Button folderPropertiesButton;
-        private System.Windows.Forms.Button runnablePropertiesButton;
+        private System.Windows.Forms.Button pluginPropertiesButton;
         private System.Windows.Forms.Button renameButton;
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.Button downButton;

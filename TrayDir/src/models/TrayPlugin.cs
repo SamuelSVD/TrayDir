@@ -8,5 +8,11 @@ namespace TrayDir
         public string path;
         [XmlAttribute]
         public string name;
+        [XmlAttribute]
+        public int parameterCount;
+        public string getSignature()
+        {
+            return string.Format("{0} ({1})", name, path);
+        }
     }
 }

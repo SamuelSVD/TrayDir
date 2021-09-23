@@ -57,9 +57,9 @@ namespace TrayDir
             folderPropertiesButton.Image = imageList1.Images[1];
             folderPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             folderPropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
-            runnablePropertiesButton.Image = imageList1.Images[3];
-            runnablePropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            runnablePropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
+            pluginPropertiesButton.Image = imageList1.Images[3];
+            pluginPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+            pluginPropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
             UpdateButtonEnables();
         }
         public Control GetControl()
@@ -267,12 +267,12 @@ namespace TrayDir
             renameButton.Enabled = selectedNode != null;
             newDocButton.Enabled = true;
             newFolderButton.Enabled = true;
-            newPluginButton.Enabled = false;
+            newPluginButton.Enabled = true;
             newVirtualFolderButton.Enabled = true;
             deleteButton.Enabled = selectedNode != null;
             docPropertiesButton.Enabled = selectedNode != null ? selectedNode.tin.type == TrayInstanceNode.NodeType.Path : false;
             folderPropertiesButton.Enabled = selectedNode != null ? selectedNode.tin.type == TrayInstanceNode.NodeType.Path : false;
-            runnablePropertiesButton.Enabled = selectedNode != null ? selectedNode.tin.type == TrayInstanceNode.NodeType.Plugin : false;
+            pluginPropertiesButton.Enabled = selectedNode != null ? selectedNode.tin.type == TrayInstanceNode.NodeType.Plugin : false;
         }
         private void newVirtualFolderButton_Click(object sender, EventArgs e)
         {
@@ -527,6 +527,29 @@ namespace TrayDir
                 }
                 rightClickMenu.Show(treeView2, e.Location);
             }
+        }
+
+        private void newPluginButton_Click(object sender, EventArgs e)
+        {
+            TrayInstancePlugin tip = new TrayInstancePlugin();
+            instance.plugins.Add(tip);
+            int index = instance.plugins.IndexOf(tip);
+            TrayInstanceNode tin = new TrayInstanceNode();
+            tin.id = index;
+            tin.type = TrayInstanceNode.NodeType.Plugin;
+            tin.SetInstance(instance);
+            ITreeNode itn = new ITreeNode(tin);
+            insertNode(itn);
+            treeView2.SelectedNode = itn.node;
+            selectedNode = itn;
+            nodes.Add(itn);
+            pluginPropertiesButton_Click(sender, e);
+        }
+        private void pluginPropertiesButton_Click(object sender, EventArgs e)
+        {
+            ITreeNode itn = selectedNode;
+            IPluginForm ipf = new IPluginForm(instance.plugins[itn.tin.id]);
+            ipf.ShowDialog();
         }
     }
 }

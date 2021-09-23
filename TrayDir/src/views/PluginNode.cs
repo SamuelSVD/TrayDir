@@ -32,6 +32,16 @@ namespace TrayDir
                 s += " (" + tp.path + ")";
             }
             node.Text = s;
+            if (AppUtils.PathIsFile(tp.path))
+            {
+                node.TreeView.ImageList.Images.Add(Icon.ExtractAssociatedIcon(tp.path));
+                node.ImageIndex = node.TreeView.ImageList.Images.Count - 1;
+                node.SelectedImageIndex = node.ImageIndex;
+            } else
+            {
+                node.ImageIndex = - 1;
+                node.SelectedImageIndex = node.ImageIndex;
+            }
         }
     }
 }
