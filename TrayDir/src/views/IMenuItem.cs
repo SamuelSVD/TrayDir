@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using TrayDir.utils;
 
 namespace TrayDir
 {
@@ -15,7 +16,6 @@ namespace TrayDir
         private static Thread mainThread;
         private static Semaphore imgLoadSemaphore;
         private static Queue<IMenuItem> imgLoadQueue;
-        private static Dictionary<string, Icon> imgKnownIcons;
         public static Semaphore urlLoadSemaphore;
         public static Queue<IMenuItem> urlLoadQueue;
         private TrayInstance instance;
@@ -109,14 +109,11 @@ namespace TrayDir
                         }
                         else
                         {
-                            if (imgKnownIcons.ContainsKey(ext))
+                            mi.menuIcon = IconUtils.lookupIcon(ext);
+                            if (mi.menuIcon == null)
                             {
-                                mi.menuIcon = imgKnownIcons[ext];
-                            }
-                            else
-                            {
-                                imgKnownIcons[ext] = Icon.ExtractAssociatedIcon(mi.tiPath.path);
-                                mi.menuIcon = imgKnownIcons[ext];
+                                mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path);
+                                IconUtils.addIcon(ext, mi.menuIcon);
                             }
                         }
                     }
@@ -151,10 +148,6 @@ namespace TrayDir
             if (urlLoadQueue is null)
             {
                 urlLoadQueue = new Queue<IMenuItem>();
-            }
-            if (imgKnownIcons is null)
-            {
-                imgKnownIcons = new Dictionary<string, Icon>();
             }
             if (imgLoadThread is null)
             {
