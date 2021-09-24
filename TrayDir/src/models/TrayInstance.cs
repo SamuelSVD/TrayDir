@@ -67,10 +67,6 @@ namespace TrayDir
             {
                 node.__path = paths[node.id];
             }
-            foreach (TrayInstanceNode node in pluginNodes)
-            {
-                node.__plugin = plugins[node.id];
-            }
             foreach (TrayInstanceNode node in vfolderNodes)
             {
                 node.__vfolder = vfolders[node.id];

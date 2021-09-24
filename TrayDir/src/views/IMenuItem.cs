@@ -123,19 +123,16 @@ namespace TrayDir
                     } 
                     else if (mi.tiPlugin != null)
                     {
-                        if (mi.tiPlugin.id < ProgramData.pd.plugins.Count && mi.tiPlugin.id >= 0)
+                        TrayPlugin tp = mi.tiPlugin.plugin;
+                        if (tp != null && AppUtils.PathIsFile(tp.path))
                         {
-                            TrayPlugin tp = ProgramData.pd.plugins[mi.tiPlugin.id];
-                            if (AppUtils.PathIsFile(tp.path))
+                            Icon i = IconUtils.lookupIcon(tp.getSignature());
+                            if (i == null)
                             {
-                                Icon i = IconUtils.lookupIcon(tp.getSignature());
-                                if (i == null)
-                                {
-                                    i = Icon.ExtractAssociatedIcon(tp.path);
-                                    IconUtils.addIcon(tp.getSignature(), i);
-                                }
-                                mi.menuIcon = i;
+                                i = Icon.ExtractAssociatedIcon(tp.path);
+                                IconUtils.addIcon(tp.getSignature(), i);
                             }
+                            mi.menuIcon = i;
                         }
                     }
                 }
@@ -347,14 +344,9 @@ namespace TrayDir
                 }
                 else if (tiPlugin != null)
                 {
-                    runPlugin(tiPlugin);
+                    AppUtils.RunPlugin(tiPlugin);
                 }
             }
-        }
-        private void runPlugin(TrayInstancePlugin p)
-        {
-
-            MessageBox.Show("Plugin!");
         }
         // Grabbed from https://stackoverflow.com/questions/26587843/prevent-toolstripmenuitems-from-jumping-to-second-screen
         private void submenu_DropDownOpening(object sender, EventArgs e)
@@ -414,6 +406,25 @@ namespace TrayDir
                     else
                     {
                         menuItem.Text = Path.GetFileNameWithoutExtension(tiPath.path);
+                    }
+                }
+                else if (tiPlugin != null)
+                {
+                    TrayPlugin plugin = tiPlugin.plugin;
+                    if (plugin != null)
+                    {
+                        if (plugin.name == null || plugin.name == "")
+                        {
+                            menuItem.Text = "(plugin item)";
+                        }
+                        else
+                        {
+                            menuItem.Text = string.Format("({0})", plugin.name);
+                        }
+                    }
+                    else
+                    {
+                        menuItem.Text = "(plugin item)";
                     }
                 }
             }

@@ -138,11 +138,9 @@ namespace TrayDir
                     break;
                 case TrayInstanceNode.NodeType.Plugin:
                     string pluginName = "";
-                    if (ProgramData.pd.plugins.Count > tin.instance.plugins[tin.id].id && tin.instance.plugins[tin.id].id >= 0)
+                    TrayPlugin plugin = tin.__plugin.plugin;
+                    if (plugin != null)
                     {
-                        int iPluginID = tin.id;
-                        int pluginID = tin.instance.plugins[iPluginID].id;
-                        TrayPlugin plugin = ProgramData.pd.plugins[pluginID];
                         pluginName = plugin.name;
                         if (node.TreeView != null && AppUtils.PathIsFile(plugin.path))
                         {

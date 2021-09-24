@@ -162,5 +162,19 @@ namespace TrayDir
             i = XMLUtils.LoadFromFile<TrayInstance>(path);
             return i;
         }
+        public static void RunPlugin(TrayInstancePlugin p)
+        {
+            TrayPlugin plugin = p.plugin;
+            if (PathIsFile(plugin.path))
+            {
+                string parameters = "";
+                foreach(TrayInstancePluginParameter param in p.parameters)
+                {
+                    parameters += param.value + " ";
+                }
+                Process.Start(plugin.path, parameters);
+            }
+            MessageBox.Show("Plugin!");
+        }
     }
 }

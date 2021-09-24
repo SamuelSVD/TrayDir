@@ -15,10 +15,7 @@ namespace TrayDir
         {
             InitializeComponent();
             this.tip = tip;
-            if (tip.id >= 0 && tip.id <= ProgramData.pd.plugins.Count - 1)
-            {
-                selectedPlugin = ProgramData.pd.plugins[tip.id];
-            }
+            selectedPlugin = tip.plugin;
             LoadPlugins();
         }
         public void LoadPlugins()
@@ -44,7 +41,7 @@ namespace TrayDir
         {
             string selected = pluginComboBox.SelectedItem.ToString();
             tip.id = pluginIndex[selected];
-            TrayPlugin tp = ProgramData.pd.plugins[tip.id];
+            TrayPlugin tp = tip.plugin;
             selectedPlugin = tp;
             foreach (Control c in controls)
             {

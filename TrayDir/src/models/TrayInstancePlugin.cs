@@ -10,5 +10,17 @@ namespace TrayDir
         [XmlAttribute]
         public string alias;
         public List<TrayInstancePluginParameter> parameters = new List<TrayInstancePluginParameter>();
+        [XmlIgnore]
+        public TrayPlugin plugin
+        {
+            get
+            {
+                if (id >= 0 && id < ProgramData.pd.plugins.Count)
+                {
+                    return ProgramData.pd.plugins[id];
+                }
+                return null;
+            }
+        }
     }
 }

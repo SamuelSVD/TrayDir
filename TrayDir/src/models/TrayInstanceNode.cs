@@ -28,7 +28,13 @@ namespace TrayDir
         [XmlIgnore]
         public TrayInstanceVirtualFolder __vfolder;
         [XmlIgnore]
-        public TrayInstancePlugin __plugin;
+        public TrayInstancePlugin __plugin
+        {
+            get
+            {
+                return instance.plugins[id];
+            }
+        }
 
         public int NodeCount { get { int i = 0; if (type == NodeType.Path || type == NodeType.Plugin) i++; foreach (TrayInstanceNode tin in children) i += tin.NodeCount; return i; } }
         public int ParentIndex { get { if (parent == null) { return -1; } return parent.children.IndexOf(this); } }
