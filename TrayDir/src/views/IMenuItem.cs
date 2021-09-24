@@ -120,6 +120,23 @@ namespace TrayDir
                     else if (mi.menuIcon is null && mi.isDir)
                     {
                         mi.menuIcon = Icon.FromHandle(new Bitmap(Properties.Resources.folder).GetHicon());
+                    } 
+                    else if (mi.tiPlugin != null)
+                    {
+                        if (mi.tiPlugin.id < ProgramData.pd.plugins.Count && mi.tiPlugin.id >= 0)
+                        {
+                            TrayPlugin tp = ProgramData.pd.plugins[mi.tiPlugin.id];
+                            if (AppUtils.PathIsFile(tp.path))
+                            {
+                                Icon i = IconUtils.lookupIcon(tp.getSignature());
+                                if (i == null)
+                                {
+                                    i = Icon.ExtractAssociatedIcon(tp.path);
+                                    IconUtils.addIcon(tp.getSignature(), i);
+                                }
+                                mi.menuIcon = i;
+                            }
+                        }
                     }
                 }
                 catch { }
@@ -129,9 +146,10 @@ namespace TrayDir
             sem.Release();
             return result;
         }
-        public IMenuItem(TrayInstance instance, TrayInstancePath path) : this(instance, path, null, null) { }
-        public IMenuItem(TrayInstance instance, TrayInstanceVirtualFolder virtualFolder) : this(instance, null, virtualFolder, null) { }
-        public IMenuItem(TrayInstance instance, TrayInstancePath tiPath, TrayInstanceVirtualFolder tiVirtualFolder, IMenuItem parent)
+        public IMenuItem(TrayInstance instance, TrayInstancePath path) : this(instance, path, null, null, null) { }
+        public IMenuItem(TrayInstance instance, TrayInstancePlugin plugin) : this(instance, null, null, plugin, null) { }
+        public IMenuItem(TrayInstance instance, TrayInstanceVirtualFolder virtualFolder) : this(instance, null, virtualFolder, null, null) { }
+        public IMenuItem(TrayInstance instance, TrayInstancePath tiPath, TrayInstanceVirtualFolder tiVirtualFolder, TrayInstancePlugin tiPlugin, IMenuItem parent)
         {
             if (imgLoadSemaphore is null)
             {
@@ -159,6 +177,7 @@ namespace TrayDir
             this.instance = instance;
             this.tiPath = tiPath;
             this.tiVirtualFolder = tiVirtualFolder;
+            this.tiPlugin = tiPlugin;
             this.parent = parent;
 
             children = new List<IMenuItem>();
@@ -189,7 +208,7 @@ namespace TrayDir
                         }
                         if (!match)
                         {
-                            children.Add(new IMenuItem(instance, new TrayInstancePath(fp), null, this));
+                            children.Add(new IMenuItem(instance, new TrayInstancePath(fp), null, null, this));
                         }
                     }
                 }
@@ -318,7 +337,7 @@ namespace TrayDir
             }
             else
             {
-                if (isDir & (instance.settings.ExploreFoldersInTrayMenu || tiPath.shortcut))
+                if (isDir && (instance.settings.ExploreFoldersInTrayMenu || tiPath.shortcut))
                 {
                     AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, instance.settings.RunAsAdmin);
                 }
@@ -326,7 +345,16 @@ namespace TrayDir
                 {
                     AppUtils.OpenPath(Path.GetFullPath(tiPath.path), instance.settings.RunAsAdmin);
                 }
+                else if (tiPlugin != null)
+                {
+                    runPlugin(tiPlugin);
+                }
             }
+        }
+        private void runPlugin(TrayInstancePlugin p)
+        {
+
+            MessageBox.Show("Plugin!");
         }
         // Grabbed from https://stackoverflow.com/questions/26587843/prevent-toolstripmenuitems-from-jumping-to-second-screen
         private void submenu_DropDownOpening(object sender, EventArgs e)

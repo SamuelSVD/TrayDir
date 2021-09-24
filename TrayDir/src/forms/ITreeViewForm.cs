@@ -61,6 +61,10 @@ namespace TrayDir
             pluginPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             pluginPropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
             UpdateButtonEnables();
+            foreach(ITreeNode n in nodes)
+            {
+                n.Refresh();
+            }
         }
         public Control GetControl()
         {
@@ -551,6 +555,7 @@ namespace TrayDir
             IPluginForm ipf = new IPluginForm(instance.plugins[itn.tin.id]);
             ipf.ShowDialog();
             itn.Refresh();
+            itn.tin.instance.view.tray.Rebuild();
         }
     }
 }

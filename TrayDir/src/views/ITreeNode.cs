@@ -93,7 +93,6 @@ namespace TrayDir
             this.tin = tin;
             tin.itn = this;
             node = new TreeNode();
-            Refresh();
         }
         public void Refresh()
         {
@@ -145,7 +144,7 @@ namespace TrayDir
                         int pluginID = tin.instance.plugins[iPluginID].id;
                         TrayPlugin plugin = ProgramData.pd.plugins[pluginID];
                         pluginName = plugin.name;
-                        if (AppUtils.PathIsFile(plugin.path))
+                        if (node.TreeView != null && AppUtils.PathIsFile(plugin.path))
                         {
                             if (ITreeNode.pluginIndex.ContainsKey(plugin.getSignature()))
                             {

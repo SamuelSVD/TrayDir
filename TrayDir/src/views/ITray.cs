@@ -12,6 +12,7 @@ namespace TrayDir
         private TrayInstance instance;
         public List<IMenuItem> pathMenuItems;
         public List<IMenuItem> virtualFolderMenuItems;
+        public List<IMenuItem> pluginMenuItems;
         private ToolStripMenuItem showMenuItem;
         private ToolStripMenuItem hideMenuItem;
         private ToolStripMenuItem exitMenuItem;
@@ -28,6 +29,7 @@ namespace TrayDir
             UpdateTrayIcon();
             pathMenuItems = new List<IMenuItem>();
             virtualFolderMenuItems = new List<IMenuItem>();
+            pluginMenuItems = new List<IMenuItem>();
         }
 
         private ToolStripMenuItem MakeAndAddMenuItem(ToolStripMenuItem menuItem, string text, bool visible, EventHandler eh)
@@ -52,6 +54,7 @@ namespace TrayDir
         public void Rebuild()
         {
             pathMenuItems.Clear();
+            pluginMenuItems.Clear();
             BuildTrayMenu();
         }
         public void MenuOpened(Object obj, EventArgs args)
@@ -74,11 +77,52 @@ namespace TrayDir
                     child.EnqueueImgLoad();
                 }
             }
+            foreach(IMenuItem child in pluginMenuItems)
+            {
+                child.EnqueueImgLoad();
+            }
             MainForm.form.iconLoadTimer.Start();
         }
         public void MenuClosed(Object obj, EventArgs args)
         {
             MainForm.form.iconLoadTimer.Stop();
+        }
+        public void RefreshPluginMenuItemList()
+        {
+            foreach (TrayInstancePlugin tiPlugin in instance.plugins)
+            {
+                bool miFound = false;
+                foreach (IMenuItem mi in pluginMenuItems)
+                {
+                    if (mi.tiPlugin == tiPlugin) miFound = true;
+                }
+                if (!miFound)
+                {
+                    IMenuItem mi = new IMenuItem(instance, tiPlugin);
+                    pluginMenuItems.Add(mi);
+                }
+            }
+            List<IMenuItem> deletable = new List<IMenuItem>();
+            foreach (IMenuItem mi in pluginMenuItems)
+            {
+                bool miFound = false;
+                foreach (TrayInstancePlugin tiPlugin in instance.plugins)
+                {
+                    if (mi.tiPlugin == tiPlugin) miFound = true;
+                }
+                if (miFound)
+                {
+                    mi.Load();
+                }
+                else
+                {
+                    deletable.Add(mi);
+                }
+            }
+            foreach (IMenuItem mi in deletable)
+            {
+                pluginMenuItems.Remove(mi);
+            }
         }
         public void RefreshVirtualFolderMenuItemList()
         {
@@ -176,6 +220,7 @@ namespace TrayDir
 
             RefreshPathMenuItemList();
             RefreshVirtualFolderMenuItemList();
+            RefreshPluginMenuItemList();
 
             AddTrayTree(instance.nodes.children, notifyIcon.ContextMenuStrip.Items);
 
@@ -220,6 +265,14 @@ namespace TrayDir
                         }
                         break;
                     case TrayInstanceNode.NodeType.Plugin:
+                        foreach(IMenuItem mi in pluginMenuItems)
+                        {
+                            if (mi.tiPlugin == instance.plugins[node.id])
+                            {
+                                mi.AddToCollection(collection);
+                                AddTrayTree(node.children, mi.menuItem.DropDownItems);
+                            }
+                        }
                         break;
                     case TrayInstanceNode.NodeType.VirtualFolder:
                         foreach (IMenuItem mi in virtualFolderMenuItems)
@@ -238,6 +291,10 @@ namespace TrayDir
         {
             bool ret = true;
             foreach (IMenuItem mi in pathMenuItems)
+            {
+                ret = mi.LoadIcon() && ret;
+            }
+            foreach(IMenuItem mi in pluginMenuItems)
             {
                 ret = mi.LoadIcon() && ret;
             }
