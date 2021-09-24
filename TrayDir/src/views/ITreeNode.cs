@@ -134,6 +134,14 @@ namespace TrayDir
                     node.Text = tin.instance.vfolders[tin.id].alias;
                     break;
                 case TrayInstanceNode.NodeType.Plugin:
+                    string pluginName = "";
+                    if (ProgramData.pd.plugins.Count > tin.instance.plugins[tin.id].id && tin.instance.plugins[tin.id].id >= 0)
+                    {
+                        int iPluginID = tin.id;
+                        int pluginID = tin.instance.plugins[iPluginID].id;
+                        pluginName = ProgramData.pd.plugins[pluginID].name;
+                    }
+                    node.Text = string.Format("{0}({1})", tin.instance.plugins[tin.id].alias, pluginName);
                     break;
                 default:
                     break;

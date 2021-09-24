@@ -550,6 +550,7 @@ namespace TrayDir
             ITreeNode itn = selectedNode;
             IPluginForm ipf = new IPluginForm(instance.plugins[itn.tin.id]);
             ipf.ShowDialog();
+            itn.Refresh();
         }
     }
 }

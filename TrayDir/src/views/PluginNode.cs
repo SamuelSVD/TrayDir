@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using TrayDir.utils;
 
 namespace TrayDir
 {
@@ -34,7 +35,13 @@ namespace TrayDir
             node.Text = s;
             if (AppUtils.PathIsFile(tp.path))
             {
-                node.TreeView.ImageList.Images.Add(Icon.ExtractAssociatedIcon(tp.path));
+                Icon i = IconUtils.lookupIcon(tp.getSignature());
+                if (i == null)
+                {
+                    i = Icon.ExtractAssociatedIcon(tp.path);
+                    IconUtils.addIcon(tp.getSignature(), i);
+                }
+                node.TreeView.ImageList.Images.Add(i);
                 node.ImageIndex = node.TreeView.ImageList.Images.Count - 1;
                 node.SelectedImageIndex = node.ImageIndex;
             } else

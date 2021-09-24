@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -29,14 +23,14 @@ namespace TrayDir
         }
         public void LoadPlugins()
         {
-            foreach(TrayPlugin tp in ProgramData.pd.plugins)
+            foreach (TrayPlugin tp in ProgramData.pd.plugins)
             {
                 string t = tp.getSignature();
                 pluginIndex[t] = ProgramData.pd.plugins.IndexOf(tp);
                 int i = pluginComboBox.Items.Add(t);
-                
+
             }
-            for(int i = 0; i < pluginComboBox.Items.Count; i++)
+            for (int i = 0; i < pluginComboBox.Items.Count; i++)
             {
                 TrayPlugin tp = ProgramData.pd.plugins[pluginIndex[pluginComboBox.Items[i].ToString()]];
                 if (tp == selectedPlugin)
@@ -48,7 +42,8 @@ namespace TrayDir
         }
         private void pluginComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tip.id = pluginIndex[pluginComboBox.SelectedItem.ToString()];
+            string selected = pluginComboBox.SelectedItem.ToString();
+            tip.id = pluginIndex[selected];
             TrayPlugin tp = ProgramData.pd.plugins[tip.id];
             selectedPlugin = tp;
             foreach (Control c in controls)
@@ -81,7 +76,8 @@ namespace TrayDir
                     {
                         tipp = new TrayInstancePluginParameter();
                         tip.parameters.Add(tipp);
-                    } else
+                    }
+                    else
                     {
                         tipp = tip.parameters[i];
                         tb.Text = tipp.value;
@@ -92,13 +88,14 @@ namespace TrayDir
                     });
                 }
             }
-            for(int i = 0; i < pluginTableLayoutPanel.RowCount; i++)
+            for (int i = 0; i < pluginTableLayoutPanel.RowCount; i++)
             {
                 RowStyle rs;
                 if (pluginTableLayoutPanel.RowStyles.Count > i + 1)
                 {
                     rs = pluginTableLayoutPanel.RowStyles[i];
-                } else
+                }
+                else
                 {
                     rs = new RowStyle();
                     pluginTableLayoutPanel.RowStyles.Add(rs);
@@ -112,11 +109,11 @@ namespace TrayDir
             if (selectedPlugin != null)
             {
                 List<TrayInstancePluginParameter> par = new List<TrayInstancePluginParameter>();
-                for(int i = selectedPlugin.parameterCount; i < tip.parameters.Count; i++)
+                for (int i = selectedPlugin.parameterCount; i < tip.parameters.Count; i++)
                 {
                     par.Add(tip.parameters[i]);
                 }
-                foreach(TrayInstancePluginParameter p in par)
+                foreach (TrayInstancePluginParameter p in par)
                 {
                     tip.parameters.Remove(p);
                 }

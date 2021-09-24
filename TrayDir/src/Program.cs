@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using TrayDir.forms;
 
 namespace TrayDir
 {
@@ -25,7 +26,9 @@ namespace TrayDir
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message + "\n" + e.StackTrace, "TrayDir: Unhandled Exception");
+                    UnhandledExceptionForm f = new UnhandledExceptionForm();
+                    f.richEdit.Text = "Unhandled exception.\n" + e.Message + "\n" + e.StackTrace;
+                    f.ShowDialog();
                 }
             }
         }
