@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+using TrayDir.utils;
 
 namespace TrayDir
 {
@@ -6,6 +9,7 @@ namespace TrayDir
     {
         public TreeNode node;
         public TrayInstanceNode tin;
+        public static Dictionary<string, int> pluginIndex = new Dictionary<string, int>();
         public int index
         {
             get
@@ -139,7 +143,33 @@ namespace TrayDir
                     {
                         int iPluginID = tin.id;
                         int pluginID = tin.instance.plugins[iPluginID].id;
-                        pluginName = ProgramData.pd.plugins[pluginID].name;
+                        TrayPlugin plugin = ProgramData.pd.plugins[pluginID];
+                        pluginName = plugin.name;
+                        if (AppUtils.PathIsFile(plugin.path))
+                        {
+                            if (ITreeNode.pluginIndex.ContainsKey(plugin.getSignature()))
+                            {
+                                node.ImageIndex = ITreeNode.pluginIndex[plugin.getSignature()];
+                                node.SelectedImageIndex = node.ImageIndex;
+                            }
+                            else
+                            {
+                                Icon i = IconUtils.lookupIcon(plugin.getSignature());
+                                if (i == null)
+                                {
+                                    i = Icon.ExtractAssociatedIcon(plugin.path);
+                                    IconUtils.addIcon(plugin.getSignature(), i);
+                                }
+                                node.TreeView.ImageList.Images.Add(i);
+                                node.ImageIndex = node.TreeView.ImageList.Images.Count - 1;
+                                node.SelectedImageIndex = node.ImageIndex;
+                            }
+                        }
+                        else
+                        {
+                            node.ImageIndex = 11;
+                            node.SelectedImageIndex = 11;
+                        }
                     }
                     node.Text = string.Format("{0}({1})", tin.instance.plugins[tin.id].alias, pluginName);
                     break;

@@ -407,7 +407,7 @@ namespace TrayDir
                 }
                 Save();
             }
-            catch (Exception e)
+            catch
             {
 
             }
