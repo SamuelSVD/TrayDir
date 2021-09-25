@@ -556,6 +556,7 @@ namespace TrayDir
             ipf.ShowDialog();
             itn.Refresh();
             itn.tin.instance.view.tray.Rebuild();
+            Save();
         }
     }
 }

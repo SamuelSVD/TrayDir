@@ -138,7 +138,12 @@ namespace TrayDir
                     break;
                 case TrayInstanceNode.NodeType.Plugin:
                     string pluginName = "";
-                    TrayPlugin plugin = tin.__plugin.plugin;
+                    TrayInstancePlugin iPlugin = tin.GetPlugin();
+                    TrayPlugin plugin = null;
+                    if (iPlugin != null)
+                    {
+                        plugin = iPlugin.plugin;
+                    }
                     if (plugin != null)
                     {
                         pluginName = plugin.name;

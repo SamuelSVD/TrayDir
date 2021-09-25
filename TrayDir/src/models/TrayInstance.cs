@@ -71,6 +71,10 @@ namespace TrayDir
             {
                 node.__vfolder = vfolders[node.id];
             }
+            foreach (TrayInstanceNode node in pluginNodes)
+            {
+                node.__plugin = plugins[node.id];
+            }
 
             // Detect and remove paths that are not used
             List<TrayInstancePath> deletablePaths = new List<TrayInstancePath>();
