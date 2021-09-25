@@ -344,7 +344,7 @@ namespace TrayDir
                 }
                 else if (tiPlugin != null)
                 {
-                    AppUtils.RunPlugin(tiPlugin);
+                    AppUtils.RunPlugin(tiPlugin, instance.settings.RunAsAdmin);
                 }
             }
         }

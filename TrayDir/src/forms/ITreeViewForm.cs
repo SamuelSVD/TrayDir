@@ -159,6 +159,7 @@ namespace TrayDir
         {
             newPathButton_Click(sender, e);
             docPropertiesButton_Click(null, null);
+            selectedNode.Refresh();
             Save();
         }
 
@@ -166,6 +167,7 @@ namespace TrayDir
         {
             newPathButton_Click(sender, e);
             folderPropertiesButton_Click(null, null);
+            selectedNode.Refresh();
             Save();
         }
         private void newPathButton_Click(object sender, EventArgs e)
@@ -292,6 +294,7 @@ namespace TrayDir
             treeView2.SelectedNode = itn.node;
             selectedNode = itn;
             nodes.Add(itn);
+            itn.Refresh();
             Save();
         }
         private void renameButton_Click(object sender, EventArgs e)
@@ -348,8 +351,23 @@ namespace TrayDir
             }
             if (tin.type == TrayInstanceNode.NodeType.Plugin)
             {
+                if (recursive_instance.internalPlugins == null)
+                {
+                    recursive_instance.internalPlugins = new List<TrayPlugin>();
+                }
                 newTin.id = recursive_instance.plugins.Count;
-                recursive_instance.plugins.Add(instance.plugins[tin.id]);
+                TrayInstancePlugin ip = instance.plugins[tin.id].Copy();
+                if (ip.plugin != null)
+                {
+                    TrayPlugin tp = recursive_instance.getInternalPluginBySignature(ip.plugin.getSignature());
+                    if (tp == null)
+                    {
+                        recursive_instance.internalPlugins.Add(ip.plugin);
+                        tp = ip.plugin;
+                    }
+                    ip.id = recursive_instance.internalPlugins.IndexOf(tp);
+                }
+                recursive_instance.plugins.Add(ip);
             }
             if (parent == null)
             {
@@ -381,7 +399,19 @@ namespace TrayDir
             else if (tin.type == TrayInstanceNode.NodeType.Plugin)
             {
                 newTin.id = instance.plugins.Count;
-                instance.plugins.Add(recursive_instance.plugins[tin.id]);
+                TrayInstancePlugin tip = recursive_instance.plugins[tin.id];
+                TrayPlugin tp = recursive_instance.internalPlugins[tip.id];
+                TrayPlugin gtp = instance.getGlobalPluginBySignature(tp.getSignature());
+                if (gtp == null)
+                {
+                    tip.id = ProgramData.pd.plugins.Count;
+                    ProgramData.pd.plugins.Add(tp);
+                }
+                else
+                {
+                    tip.id = ProgramData.pd.plugins.IndexOf(gtp);
+                }
+                instance.plugins.Add(tip);
             }
             else if (tin.type == TrayInstanceNode.NodeType.VirtualFolder)
             {
@@ -399,6 +429,7 @@ namespace TrayDir
             {
                 RecursiveLoadFromInstance(recursive_instance, nodeChild, itn);
             }
+            itn.Refresh();
         }
         private void PasteFromClipboard()
         {
@@ -486,7 +517,14 @@ namespace TrayDir
         {
             if (selectedNode != null)
             {
-                renameButton_Click(sender, null);
+                if (selectedNode.tin.type == TrayInstanceNode.NodeType.Plugin)
+                {
+                    pluginPropertiesButton_Click(sender, e);
+                }
+                else
+                {
+                    renameButton_Click(sender, e);
+                }
             }
         }
         private void folderShortcutMenuItem_click(object sender, EventArgs e)

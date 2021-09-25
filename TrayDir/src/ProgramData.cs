@@ -85,14 +85,10 @@ namespace TrayDir
         {
             foreach (TrayInstance instance in trayInstances)
             {
-                if (instance.PathCount == 0)
-                {
-                    instance.paths.Add(new TrayInstancePath(TrayInstance.defaultPath));
-                }
-                if (instance.PathCount != instance.NodeCount)
+                if (instance.PathCount + instance.plugins.Count != instance.NodeCount)
                 {
                     instance.nodes.children.Clear();
-                    foreach(TrayInstancePath tip in instance.paths)
+                    foreach (TrayInstancePath tip in instance.paths)
                     {
                         TrayInstanceNode tin = new TrayInstanceNode();
                         tin.id = instance.paths.IndexOf(tip);
@@ -100,11 +96,18 @@ namespace TrayDir
                         instance.nodes.children.Add(tin);
                         tin.parent = instance.nodes;
                     }
+                    foreach (TrayInstancePlugin tip in instance.plugins)
+                    {
+                        TrayInstanceNode tin = new TrayInstanceNode();
+                        tin.id = instance.plugins.IndexOf(tip);
+                        tin.type = TrayInstanceNode.NodeType.Plugin;
+                        instance.nodes.children.Add(tin);
+                        tin.parent = instance.nodes;
+                    }
                 }
                 instance.nodes.SetInstance(instance);
                 instance.nodes.FixChildren();
             }
-            
         }
         public void CheckStartup()
         {

@@ -162,19 +162,57 @@ namespace TrayDir
             i = XMLUtils.LoadFromFile<TrayInstance>(path);
             return i;
         }
-        public static void RunPlugin(TrayInstancePlugin p)
+        public static void RunPlugin(TrayInstancePlugin p, bool runasadmin)
         {
+            if (runasadmin)
+            {
+                RunPluginAsAdmin(p);
+            }
+            else
+            {
+                RunPlugin(p);
+            }
+        }
+        public static void RunPlugin(TrayInstancePlugin p) {
             TrayPlugin plugin = p.plugin;
             if (PathIsFile(plugin.path))
             {
                 string parameters = "";
-                foreach(TrayInstancePluginParameter param in p.parameters)
+                foreach (TrayInstancePluginParameter param in p.parameters)
                 {
                     parameters += param.value + " ";
                 }
                 Process.Start(plugin.path, parameters);
             }
-            MessageBox.Show("Plugin!");
+        }
+        public static void RunPluginAsAdmin(TrayInstancePlugin p)
+        {
+            TrayPlugin plugin = p.plugin;
+            if (plugin != null)
+            {
+                string parameters = "";
+                foreach (TrayInstancePluginParameter param in p.parameters)
+                {
+                    parameters += param.value + " ";
+                }
+                Process proc = new Process();
+                proc.StartInfo.UseShellExecute = true;
+                proc.StartInfo.FileName = plugin.path;
+                proc.StartInfo.Verb = "runas";
+                proc.StartInfo.Arguments = parameters;
+                try
+                {
+                    if (PathIsFile(plugin.path))
+                    {
+                        proc.Start();
+                    }
+                }
+                catch (Exception e)
+                {
+                    
+                    MessageBox.Show("Error Executing As Admin: " + '\n' + plugin.path + '\n' + e.Message, "Error");
+                }
+            }
         }
     }
 }

@@ -22,5 +22,16 @@ namespace TrayDir
                 return null;
             }
         }
+        public TrayInstancePlugin Copy()
+        {
+            TrayInstancePlugin tip = new TrayInstancePlugin();
+            tip.id = id;
+            tip.alias = alias;
+            foreach(TrayInstancePluginParameter tipp in parameters)
+            {
+                tip.parameters.Add(tipp.Copy());
+            }
+            return tip;
+        }
     }
 }

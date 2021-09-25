@@ -36,6 +36,7 @@ namespace TrayDir
                     break;
                 }
             }
+            aliasEdit.Text = tip.alias;
         }
         private void pluginComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -59,7 +60,7 @@ namespace TrayDir
                 {
                     Label l = new Label();
                     l.Text = String.Format("Parameter {0}", i + 1);
-                    pluginTableLayoutPanel.Controls.Add(l, 0, (i + 1) * 2);
+                    pluginTableLayoutPanel.Controls.Add(l, 0, (i + 2) * 2);
                     l.AutoSize = true;
                     labels.Add(l);
                     TextBox tb = new TextBox();
@@ -67,7 +68,7 @@ namespace TrayDir
                     tb.AutoSize = true;
                     controls.Add(tb);
                     pluginTableLayoutPanel.SetColumnSpan(tb, 2);
-                    pluginTableLayoutPanel.Controls.Add(tb, 0, (i + 1) * 2 + 1);
+                    pluginTableLayoutPanel.Controls.Add(tb, 0, (i + 2) * 2 + 1);
                     TrayInstancePluginParameter tipp;
                     if (tip.parameters.Count < i + 1)
                     {
@@ -115,6 +116,7 @@ namespace TrayDir
                     tip.parameters.Remove(p);
                 }
             }
+            tip.alias = aliasEdit.Text;
         }
     }
 }

@@ -21,6 +21,7 @@ namespace TrayDir
         public List<TrayInstancePath> paths;
         public List<TrayInstanceVirtualFolder> vfolders;
         public List<TrayInstancePlugin> plugins;
+        public List<TrayPlugin> internalPlugins;
         public TrayInstanceNode nodes;
 
         public byte[] iconData;
@@ -158,6 +159,28 @@ namespace TrayDir
             {
                 node.id = vfolders.IndexOf(node.__vfolder);
             }
+        }
+        public TrayPlugin getGlobalPluginBySignature(string signature)
+        {
+            if (ProgramData.pd.plugins != null)
+            {
+                foreach (TrayPlugin tp in ProgramData.pd.plugins)
+                {
+                    if (tp.getSignature() == signature) return tp;
+                }
+            }
+            return null;
+        }
+        public TrayPlugin getInternalPluginBySignature(string signature)
+        {
+            if (internalPlugins != null)
+            {
+                foreach (TrayPlugin tp in internalPlugins)
+                {
+                    if (tp.getSignature() == signature) return tp;
+                }
+            }
+            return null;
         }
     }
 }

@@ -36,6 +36,8 @@ namespace TrayDir
             this.pathLabel = new System.Windows.Forms.Label();
             this.pluginComboBox = new System.Windows.Forms.ComboBox();
             this.closeButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.aliasEdit = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.pluginTableLayoutPanel.SuspendLayout();
@@ -56,7 +58,7 @@ namespace TrayDir
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(378, 108);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(378, 147);
             this.tableLayoutPanel4.TabIndex = 4;
             // 
             // groupBox1
@@ -68,7 +70,7 @@ namespace TrayDir
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 20, 5, 0);
-            this.groupBox1.Size = new System.Drawing.Size(372, 73);
+            this.groupBox1.Size = new System.Drawing.Size(372, 112);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Plugin Options";
@@ -81,13 +83,17 @@ namespace TrayDir
             this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.pluginTableLayoutPanel.Controls.Add(this.pathLabel, 0, 0);
             this.pluginTableLayoutPanel.Controls.Add(this.pluginComboBox, 0, 1);
+            this.pluginTableLayoutPanel.Controls.Add(this.label1, 0, 2);
+            this.pluginTableLayoutPanel.Controls.Add(this.aliasEdit, 0, 3);
             this.pluginTableLayoutPanel.Location = new System.Drawing.Point(5, 20);
             this.pluginTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
-            this.pluginTableLayoutPanel.RowCount = 2;
+            this.pluginTableLayoutPanel.RowCount = 4;
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 40);
+            this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 79);
             this.pluginTableLayoutPanel.TabIndex = 6;
             // 
             // pathLabel
@@ -116,13 +122,31 @@ namespace TrayDir
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(294, 82);
+            this.closeButton.Location = new System.Drawing.Point(294, 121);
             this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 2;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Display Name";
+            // 
+            // aliasEdit
+            // 
+            this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 2);
+            this.aliasEdit.Dock = System.Windows.Forms.DockStyle.Top;
+            this.aliasEdit.Location = new System.Drawing.Point(3, 56);
+            this.aliasEdit.Name = "aliasEdit";
+            this.aliasEdit.Size = new System.Drawing.Size(356, 20);
+            this.aliasEdit.TabIndex = 10;
             // 
             // IPluginForm
             // 
@@ -158,5 +182,7 @@ namespace TrayDir
         private System.Windows.Forms.Label pathLabel;
         private System.Windows.Forms.ComboBox pluginComboBox;
         private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox aliasEdit;
     }
 }
