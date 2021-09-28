@@ -17,5 +17,13 @@ namespace TrayDir
         {
             this.path = path;
         }
+        public TrayInstancePath Copy()
+        {
+            TrayInstancePath tip = new TrayInstancePath();
+            tip.path = path;
+            tip.shortcut = shortcut;
+            tip.alias = alias;
+            return tip;
+        }
     }
 }

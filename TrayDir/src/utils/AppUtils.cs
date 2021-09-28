@@ -148,11 +148,13 @@ namespace TrayDir
         public static void ExportInstance(TrayInstance instance)
         {
             SaveFileDialog sfd = new SaveFileDialog();
+            TrayInstance copy_instance = instance.Copy();
+            copy_instance.buildAndReferenceInternalPlugin();
             sfd.Filter = "Tray Instance Export | *.tde";
-            sfd.FileName = Regex.Replace(instance.instanceName, @"[^0-9a-zA-Z()_ ]+", "_");
+            sfd.FileName = Regex.Replace(copy_instance.instanceName, @"[^0-9a-zA-Z()_ ]+", "_");
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                XMLUtils.SaveToFile(instance, sfd.FileName);
+                XMLUtils.SaveToFile(copy_instance, sfd.FileName);
                 MessageBox.Show("Exported to:" + sfd.FileName, "Export Done");
             }
         }
@@ -160,6 +162,8 @@ namespace TrayDir
         {
             TrayInstance i = null;
             i = XMLUtils.LoadFromFile<TrayInstance>(path);
+            i.nodes.SetInstance(i);
+            i.nodes.FixChildren();
             return i;
         }
         public static void RunPlugin(TrayInstancePlugin p, bool runasadmin)

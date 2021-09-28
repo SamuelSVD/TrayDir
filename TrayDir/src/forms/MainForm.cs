@@ -436,6 +436,7 @@ namespace TrayDir
                 if (i != null)
                 {
                     pd.trayInstances.Add(i);
+                    i.loadGlobalFromInternalPluginAndRereference();
                     AddInstanceTabPage(i);
                     pd.Save();
                 }
@@ -444,6 +445,7 @@ namespace TrayDir
                     MessageBox.Show("Error: Unable to import file.", "Import failed");
                 }
             }
+            PluginManagerForm.form.initializeTree();
         }
         private void iconLoadTimer_Tick(object sender, EventArgs e)
         {
@@ -507,6 +509,7 @@ namespace TrayDir
         private void pluginToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PluginManagerForm.form.ShowDialog();
+            Save(sender, e);
         }
     }
 }

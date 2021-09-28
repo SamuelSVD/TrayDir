@@ -182,5 +182,79 @@ namespace TrayDir
             }
             return null;
         }
+        private void recursiveRereferencePlugins(TrayInstanceNode tin)
+        {
+            if (tin.type == TrayInstanceNode.NodeType.Plugin)
+            {
+                if (internalPlugins == null)
+                {
+                    internalPlugins = new List<TrayPlugin>();
+                }
+                TrayInstancePlugin ip = plugins[tin.id];
+                if (ip.plugin != null)
+                {
+                    TrayPlugin tp = getInternalPluginBySignature(ip.plugin.getSignature());
+                    if (tp == null)
+                    {
+                        internalPlugins.Add(ip.plugin);
+                        tp = ip.plugin;
+                    }
+                    ip.id = internalPlugins.IndexOf(tp);
+                }
+            }
+            foreach (TrayInstanceNode tinChild in tin.children)
+            {
+                recursiveRereferencePlugins(tinChild);
+            }
+        }
+        public void buildAndReferenceInternalPlugin()
+        {
+            recursiveRereferencePlugins(nodes);
+        }
+        public void loadGlobalFromInternalPluginAndRereference()
+        {
+            if(internalPlugins != null)
+            {
+                foreach(TrayPlugin plugin in internalPlugins)
+                {
+                    TrayPlugin gtp = getGlobalPluginBySignature(plugin.getSignature());
+                    if (gtp == null)
+                    {
+                        ProgramData.pd.plugins.Add(plugin);
+                        gtp = plugin;
+                    }
+                }
+                foreach (TrayInstancePlugin tip in plugins)
+                {
+                    if (tip.id < internalPlugins.Count && tip.id >= 0)
+                    {
+                        int newID = ProgramData.pd.plugins.IndexOf(getGlobalPluginBySignature(internalPlugins[tip.id].getSignature()));
+                        tip.id = newID;
+                    }
+                }
+            }
+        }
+        public TrayInstance Copy()
+        {
+            TrayInstance ti = new TrayInstance();
+            ti.settings = settings.Copy();
+            ti.iconPath = iconPath;
+            ti.instanceName = instanceName;
+            ti.ignoreRegex = ignoreRegex;
+            foreach(TrayInstancePath tip in paths)
+            {
+                ti.paths.Add(tip.Copy());
+            }
+            foreach(TrayInstanceVirtualFolder tivf in vfolders)
+            {
+                ti.vfolders.Add(tivf.Copy());
+            }
+            foreach(TrayInstancePlugin tip in plugins)
+            {
+                ti.plugins.Add(tip.Copy());
+            }
+            ti.nodes = nodes.Copy();
+            return ti;
+        }
     }
 }

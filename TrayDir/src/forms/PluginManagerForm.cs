@@ -23,7 +23,16 @@ namespace TrayDir
         public PluginManagerForm()
         {
             InitializeComponent();
+            initializeTree();
+        }
+        public static void Init()
+        {
+            form = new PluginManagerForm();
+        }
+        public void initializeTree()
+        {
             plugins = new List<PluginNode>();
+            treeView1.Nodes.Clear();
             foreach (TrayPlugin tp in ProgramData.pd.plugins)
             {
                 PluginNode pn = new PluginNode();
@@ -32,10 +41,6 @@ namespace TrayDir
                 treeView1.Nodes.Add(pn.node);
                 pn.UpdateNode();
             }
-        }
-        public static void Init()
-        {
-            form = new PluginManagerForm();
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -65,8 +70,24 @@ namespace TrayDir
             {
                 if (MessageBox.Show("Do you want to delete plugin: " + selectedNode.node.Text, "Delete plugin", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
-                    ProgramData.pd.plugins.Remove(selectedNode.tp);
-                    treeView1.Nodes.Remove(selectedNode.node);
+                    bool used = false;
+                    int pid = ProgramData.pd.plugins.IndexOf(selectedNode.tp);
+                    foreach(TrayInstance ti in ProgramData.pd.trayInstances)
+                    {
+                        foreach(TrayInstancePlugin tip in ti.plugins)
+                        {
+                            used = used || (tip.plugin == selectedNode.tp);
+                        }
+                    }
+                    if (!used)
+                    {
+                        ProgramData.pd.plugins.Remove(selectedNode.tp);
+                        treeView1.Nodes.Remove(selectedNode.node);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unable to delete. Plugin currently in use.");
+                    }
                 }
             }
         }

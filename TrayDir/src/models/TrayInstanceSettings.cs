@@ -26,5 +26,22 @@ namespace TrayDir
             HideFromTray = false;
             paths = new List<string>();
         }
+        public TrayInstanceSettings Copy()
+        {
+            TrayInstanceSettings tis = new TrayInstanceSettings();
+            tis.RunAsAdmin = RunAsAdmin;
+            tis.ShowFileExtensions = ShowFileExtensions;
+            tis.ExploreFoldersInTrayMenu = ExploreFoldersInTrayMenu;
+            tis.ExpandFirstPath = ExpandFirstPath;
+            tis.HideFromTray = HideFromTray;
+            if(paths != null)
+            {
+                foreach (string path in paths)
+                {
+                    tis.paths.Add(path);
+                }
+            }
+            return tis;
+        }
     }
 }

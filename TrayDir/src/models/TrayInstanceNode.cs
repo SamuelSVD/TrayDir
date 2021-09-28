@@ -140,5 +140,16 @@ namespace TrayDir
             }
             return null;
         }
+        public TrayInstanceNode Copy()
+        {
+            TrayInstanceNode tin = new TrayInstanceNode();
+            tin.type = type;
+            tin.id = id;
+            foreach(TrayInstanceNode c in children)
+            {
+                tin.children.Add(c.Copy());
+            }
+            return tin;
+        }
     }
 }

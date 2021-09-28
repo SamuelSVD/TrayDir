@@ -11,5 +11,11 @@ namespace TrayDir
         {
             this.alias = alias;
         }
+        public TrayInstanceVirtualFolder Copy()
+        {
+            TrayInstanceVirtualFolder tivf = new TrayInstanceVirtualFolder();
+            tivf.alias = alias;
+            return tivf;
+        }
     }
 }
