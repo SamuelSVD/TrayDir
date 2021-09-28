@@ -41,6 +41,7 @@ namespace TrayDir
                 treeView1.Nodes.Add(pn.node);
                 pn.UpdateNode();
             }
+            treeView1.Sort();
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -53,6 +54,7 @@ namespace TrayDir
             ProgramData.pd.plugins.Add(tp);
             treeView1.SelectedNode = pn.node;
             editButton_Click(sender, e);
+            treeView1.Sort();
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -61,6 +63,7 @@ namespace TrayDir
             {
                 PluginForm pf = new PluginForm(selectedNode);
                 pf.ShowDialog();
+                treeView1.Sort();
             }
         }
 
