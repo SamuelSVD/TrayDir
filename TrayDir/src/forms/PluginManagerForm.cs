@@ -66,7 +66,6 @@ namespace TrayDir
                 treeView1.Sort();
             }
         }
-
         private void deleteButton_Click(object sender, EventArgs e)
         {
             if (selectedNode != null)
