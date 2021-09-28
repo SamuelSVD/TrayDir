@@ -173,7 +173,7 @@ namespace TrayDir
                             node.SelectedImageIndex = 11;
                         }
                     }
-                    node.Text = string.Format("{0}({1})", tin.instance.plugins[tin.id].alias, pluginName);
+                    node.Text = string.Format("{0} ({1})", tin.instance.plugins[tin.id].alias, pluginName);
                     break;
                 default:
                     break;
