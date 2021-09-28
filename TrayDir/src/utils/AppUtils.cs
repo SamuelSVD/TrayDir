@@ -177,25 +177,25 @@ namespace TrayDir
                 RunPlugin(p);
             }
         }
-        public static void RunPlugin(TrayInstancePlugin p) {
-            TrayPlugin plugin = p.plugin;
-            if (PathIsFile(plugin.path))
+        public static void RunPlugin(TrayInstancePlugin tip) {
+            TrayPlugin plugin = tip.plugin;
+            if (plugin != null && plugin.path != null && PathIsFile(plugin.path))
             {
                 string parameters = "";
-                foreach (TrayInstancePluginParameter param in p.parameters)
+                foreach (TrayInstancePluginParameter param in tip.parameters)
                 {
                     parameters += param.value + " ";
                 }
                 Process.Start(plugin.path, parameters);
             }
         }
-        public static void RunPluginAsAdmin(TrayInstancePlugin p)
+        public static void RunPluginAsAdmin(TrayInstancePlugin tip)
         {
-            TrayPlugin plugin = p.plugin;
+            TrayPlugin plugin = tip.plugin;
             if (plugin != null)
             {
                 string parameters = "";
-                foreach (TrayInstancePluginParameter param in p.parameters)
+                foreach (TrayInstancePluginParameter param in tip.parameters)
                 {
                     parameters += param.value + " ";
                 }
