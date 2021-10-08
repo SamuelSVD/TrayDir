@@ -35,9 +35,9 @@ namespace TrayDir
             this.pluginTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.pathLabel = new System.Windows.Forms.Label();
             this.pluginComboBox = new System.Windows.Forms.ComboBox();
-            this.closeButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.aliasEdit = new System.Windows.Forms.TextBox();
+            this.closeButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.pluginTableLayoutPanel.SuspendLayout();
@@ -118,18 +118,6 @@ namespace TrayDir
             this.pluginComboBox.TabIndex = 8;
             this.pluginComboBox.SelectedIndexChanged += new System.EventHandler(this.pluginComboBox_SelectedIndexChanged);
             // 
-            // closeButton
-            // 
-            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(294, 121);
-            this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
-            this.closeButton.TabIndex = 2;
-            this.closeButton.Text = "Close";
-            this.closeButton.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -148,8 +136,21 @@ namespace TrayDir
             this.aliasEdit.Size = new System.Drawing.Size(356, 20);
             this.aliasEdit.TabIndex = 10;
             // 
+            // closeButton
+            // 
+            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.closeButton.Location = new System.Drawing.Point(294, 121);
+            this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.TabIndex = 2;
+            this.closeButton.Text = "Apply";
+            this.closeButton.UseVisualStyleBackColor = true;
+            // 
             // IPluginForm
             // 
+            this.AcceptButton = this.closeButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
