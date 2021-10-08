@@ -21,6 +21,10 @@ namespace TrayDir
         private MenuItem renameMenuItem;
         private MenuItem folderShortcutMenuItem;
         private MenuItem folderExpandMenuItem;
+        private MenuItem openInExplorerMenuItem;
+        private MenuItem openInCmdMenuItem;
+        private MenuItem openInCmdAdminMenuItem;
+
 
         public ITreeViewForm(TrayInstance instance)
         {
@@ -28,10 +32,15 @@ namespace TrayDir
             renameMenuItem = new MenuItem("Rename Item", renameButton_Click);
             folderShortcutMenuItem = new MenuItem("Use folder link as shortcut", folderShortcutMenuItem_click);
             folderExpandMenuItem = new MenuItem("Expand folder in tray menu", folderExpandMenuItem_click);
+            openInExplorerMenuItem = new MenuItem("Open In Explorer", openInExplorerMenuItem_click);
+            openInCmdMenuItem = new MenuItem("Open In Cmd", openInCmdMenuItem_click);
+            openInCmdAdminMenuItem = new MenuItem("Open In Cmd (Administrator)", openInCmdAdminMenuItem_click);
             rightClickMenu.MenuItems.Add(renameMenuItem);
             rightClickMenu.MenuItems.Add(folderShortcutMenuItem);
             rightClickMenu.MenuItems.Add(folderExpandMenuItem);
-
+            rightClickMenu.MenuItems.Add(openInExplorerMenuItem);
+            rightClickMenu.MenuItems.Add(openInCmdMenuItem);
+            rightClickMenu.MenuItems.Add(openInCmdAdminMenuItem);
             this.instance = instance;
             InitializeComponent();
             nodes = new List<ITreeNode>();
@@ -539,6 +548,15 @@ namespace TrayDir
             selectedNode.Refresh();
             instance.view.tray.Rebuild();
         }
+        private void openInExplorerMenuItem_click(object sender, EventArgs e) {
+            AppUtils.ExplorePath(instance.paths[selectedNode.tin.id].path);
+        }
+        private void openInCmdMenuItem_click(object sender, EventArgs e) {
+            AppUtils.OpenCmdPath(instance.paths[selectedNode.tin.id].path);
+        }
+        private void openInCmdAdminMenuItem_click(object sender, EventArgs e) {
+            AppUtils.OpenAdminCmdPath(instance.paths[selectedNode.tin.id].path);
+        }
         private void treeView2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == MouseButtons.Right && selectedNode != null)
@@ -559,13 +577,30 @@ namespace TrayDir
                     TrayInstancePath path = instance.paths[selectedNode.tin.id];
                     if (path.isDir)
                     {
+                        folderShortcutMenuItem.Enabled = true;
+                        folderExpandMenuItem.Enabled = true;
                         folderShortcutMenuItem.Visible = !path.shortcut;
                         folderExpandMenuItem.Visible = path.shortcut;
-                    } else
+                    }
+                    else
                     {
-                        folderShortcutMenuItem.Visible = false;
+                        folderShortcutMenuItem.Enabled = false;
+                        folderExpandMenuItem.Enabled = false;
+                        folderShortcutMenuItem.Visible = true;
                         folderExpandMenuItem.Visible = false;
                     }
+                    openInExplorerMenuItem.Enabled = true;
+                    openInCmdMenuItem.Enabled = true;
+                    openInCmdAdminMenuItem.Enabled = true;
+                }
+                else {
+                    folderShortcutMenuItem.Enabled = false;
+                    folderExpandMenuItem.Enabled = false;
+                    folderShortcutMenuItem.Visible = true;
+                    folderExpandMenuItem.Visible = false;
+                    openInExplorerMenuItem.Enabled = false;
+                    openInCmdMenuItem.Enabled = false;
+                    openInCmdAdminMenuItem.Enabled = false;
                 }
                 rightClickMenu.Show(treeView2, e.Location);
             }
