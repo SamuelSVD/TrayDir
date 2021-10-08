@@ -53,6 +53,18 @@ namespace TrayDir
             cbv.SetTooltip("Set tray menu folder / file sorting");
             cbv.combobox.Text = ProgramData.pd.settings.app.MenuSorting;
 
+            string[] s2 = new[] { "Yellow Folder", "Blue Folder"};
+            cbv = new ComboBoxView("Virtual Folder Menu Icon", s2);
+            cbv.AddTo(AppGroupLayout, 2);
+            ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "VFolderIcon");
+            cbv.combobox.SelectedIndexChanged += new EventHandler(delegate (object obj, EventArgs args) {
+                foreach(TrayInstance ti in ProgramData.pd.trayInstances) {
+                    ti.view.tray.Rebuild();
+                }
+            });
+            cbv.SetTooltip("When virtual folders choose between a yellow folder or blue folder icon");
+            cbv.combobox.Text = ProgramData.pd.settings.app.VFolderIcon;
+
             // Windows Options
             ov = new OptionView("Minimize On Close", ProgramData.pd.settings.win.MinimizeOnClose);
             ov.AddTo(WinGroupLayout, 0);

@@ -120,7 +120,14 @@ namespace TrayDir
                     else if (mi.menuIcon is null && mi.isDir)
                     {
                         mi.menuIcon = Icon.FromHandle(new Bitmap(Properties.Resources.folder).GetHicon());
-                    } 
+                    }
+                    else if (mi.menuIcon is null && mi.tiVirtualFolder != null) {
+                        if (ProgramData.pd.settings.app.VFolderIcon != "Yellow Folder") {
+                            mi.menuIcon = Icon.FromHandle(new Bitmap(Properties.Resources.folder_blue).GetHicon());
+                        } else {
+                            mi.menuIcon = Icon.FromHandle(new Bitmap(Properties.Resources.folder).GetHicon());
+                        }
+                    }
                     else if (mi.tiPlugin != null)
                     {
                         TrayPlugin tp = mi.tiPlugin.plugin;
@@ -509,7 +516,7 @@ namespace TrayDir
                     ret = child.LoadIcon() && ret;
                 }
             }
-            return ret && (isDir || menuItem.Image != null);
+            return ret && (isDir || menuItem.Image != null || tiVirtualFolder != null);
         }
         public void EnqueueImgLoad()
         {

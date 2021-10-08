@@ -55,6 +55,7 @@ namespace TrayDir
         {
             pathMenuItems.Clear();
             pluginMenuItems.Clear();
+            virtualFolderMenuItems.Clear();
             BuildTrayMenu();
         }
         public void MenuOpened(Object obj, EventArgs args)
@@ -78,6 +79,10 @@ namespace TrayDir
                 }
             }
             foreach(IMenuItem child in pluginMenuItems)
+            {
+                child.EnqueueImgLoad();
+            }
+            foreach(IMenuItem child in virtualFolderMenuItems)
             {
                 child.EnqueueImgLoad();
             }
@@ -295,6 +300,10 @@ namespace TrayDir
                 ret = mi.LoadIcon() && ret;
             }
             foreach(IMenuItem mi in pluginMenuItems)
+            {
+                ret = mi.LoadIcon() && ret;
+            }
+            foreach(IMenuItem mi in virtualFolderMenuItems) 
             {
                 ret = mi.LoadIcon() && ret;
             }
