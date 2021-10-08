@@ -333,7 +333,6 @@ namespace TrayDir
             this.treeView2.Location = new System.Drawing.Point(3, 3);
             this.treeView2.Name = "treeView2";
             this.treeView2.SelectedImageIndex = 0;
-            this.treeView2.ShowPlusMinus = false;
             this.treeView2.Size = new System.Drawing.Size(314, 201);
             this.treeView2.TabIndex = 1;
             this.treeView2.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView2_BeforeCollapse);

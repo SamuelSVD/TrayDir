@@ -328,7 +328,7 @@ namespace TrayDir
         }
         private void treeView2_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
         {
-            e.Cancel = true;
+//            e.Cancel = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
