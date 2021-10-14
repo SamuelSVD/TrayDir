@@ -22,6 +22,7 @@ namespace TrayDir
             initialized = false;
             settings = new Settings();
             trayInstances = new List<TrayInstance>();
+             archivedInstances = new List<TrayInstance>();
             plugins = new List<TrayPlugin>();
             ProgramData.pd = this;
         }
