@@ -11,6 +11,7 @@ namespace TrayDir
         [XmlElement(ElementName = "Settings")]
         public Settings settings;
         public List<TrayInstance> trayInstances;
+        public List<TrayInstance> archivedInstances;
         public List<TrayPlugin> plugins;
         private static string config;
         public static ProgramData pd;

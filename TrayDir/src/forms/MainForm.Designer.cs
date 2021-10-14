@@ -60,6 +60,9 @@ namespace TrayDir
             this.iconList = new System.Windows.Forms.ImageList(this.components);
             this.imgLoadTimer = new System.Windows.Forms.Timer(this.components);
             this.iconLoadTimer = new System.Windows.Forms.Timer(this.components);
+            this.archiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.archiveManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,6 +133,9 @@ namespace TrayDir
             this.exportToolStripMenuItem,
             this.importToolStripMenuItem,
             this.exportToolStripMenuItem1,
+            this.toolStripMenuItem2,
+            this.archiveToolStripMenuItem,
+            this.archiveManagerToolStripMenuItem,
             this.toolStripMenuItem1,
             this.changeIgnoreRegexToolStripMenuItem});
             this.instanceToolStripMenuItem.Name = "instanceToolStripMenuItem";
@@ -270,6 +276,25 @@ namespace TrayDir
             // 
             this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
             // 
+            // archiveToolStripMenuItem
+            // 
+            this.archiveToolStripMenuItem.Name = "archiveToolStripMenuItem";
+            this.archiveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.archiveToolStripMenuItem.Text = "Archive Instance";
+            this.archiveToolStripMenuItem.Click += new System.EventHandler(this.archiveToolStripMenuItem_Click);
+            // 
+            // archiveManagerToolStripMenuItem
+            // 
+            this.archiveManagerToolStripMenuItem.Name = "archiveManagerToolStripMenuItem";
+            this.archiveManagerToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.archiveManagerToolStripMenuItem.Text = "Archive Manager";
+            this.archiveManagerToolStripMenuItem.Click += new System.EventHandler(this.archiveManagerToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(193, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,6 +346,9 @@ namespace TrayDir
         public Timer imgLoadTimer;
         public Timer iconLoadTimer;
         private ToolStripMenuItem pluginToolStripMenuItem;
+        private ToolStripSeparator toolStripMenuItem2;
+        private ToolStripMenuItem archiveToolStripMenuItem;
+        private ToolStripMenuItem archiveManagerToolStripMenuItem;
     }
 }
 

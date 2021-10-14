@@ -31,6 +31,7 @@ namespace TrayDir
             }
 
             deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
+            archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
 
             pd.FixInstances();
             pd.CheckStartup();
@@ -121,7 +122,7 @@ namespace TrayDir
             }
             instanceTabs.SelectedIndex = 0;
         }
-        private void AddInstanceTabPage(TrayInstance instance)
+        public void AddInstanceTabPage(TrayInstance instance)
         {
             TabPage tp;
             tp = new TabPage(instance.instanceName);
@@ -390,6 +391,7 @@ namespace TrayDir
             pd.FixInstances();
             AddInstanceTabPage(ti);
             deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
+            archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
             pd.Save();
             Edit(this, e);
         }
@@ -418,6 +420,7 @@ namespace TrayDir
                 pd.trayInstances.Remove(ti);
                 ti.view.tray.Hide();
                 deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
+                archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
                 BuildRebuildDropdown();
                 pd.Save();
             }
@@ -438,6 +441,8 @@ namespace TrayDir
                     pd.trayInstances.Add(i);
                     i.loadGlobalFromInternalPluginAndRereference();
                     AddInstanceTabPage(i);
+                    deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
+                    archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
                     pd.Save();
                 }
                 else
@@ -510,6 +515,26 @@ namespace TrayDir
         {
             PluginManagerForm.form.ShowDialog();
             Save(sender, e);
+        }
+
+        private void archiveToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (MessageBox.Show("Do you want to archive instance: " + trayInstance.instanceName, "Archive", MessageBoxButtons.OKCancel) == DialogResult.OK) {
+                TrayInstance t = trayInstance;
+                ProgramData.pd.trayInstances.Remove(t);
+                ProgramData.pd.archivedInstances.Add(t);
+                t.view.tray.Hide();
+                instanceTabs.TabPages.Remove(instanceTabs.SelectedTab);
+                deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
+                archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
+                Save(sender, e);
+            }
+        }
+
+        private void archiveManagerToolStripMenuItem_Click(object sender, EventArgs e) {
+            InstanceManagerForm imf = new InstanceManagerForm();
+            imf.ShowDialog();
+            deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
+            archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
         }
     }
 }
