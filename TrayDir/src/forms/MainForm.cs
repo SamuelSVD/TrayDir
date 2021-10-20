@@ -535,6 +535,7 @@ namespace TrayDir
             imf.ShowDialog();
             deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
             archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
+            Save(sender, e);
         }
     }
 }
