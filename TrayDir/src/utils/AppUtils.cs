@@ -168,7 +168,7 @@ namespace TrayDir
         }
         public static void RunPlugin(TrayInstancePlugin p, bool runasadmin)
         {
-            if (runasadmin)
+            if (runasadmin || (p.plugin != null ? p.plugin.AlwaysRunAsAdmin : false))
             {
                 RunPluginAsAdmin(p);
             }
@@ -181,11 +181,7 @@ namespace TrayDir
             TrayPlugin plugin = tip.plugin;
             if (plugin != null && plugin.path != null && PathIsFile(plugin.path))
             {
-                string parameters = "";
-                foreach (TrayInstancePluginParameter param in tip.parameters)
-                {
-                    parameters += param.value + " ";
-                }
+                string parameters = BuildPluginCliParams(tip);
                 Process.Start(plugin.path, parameters);
             }
         }
@@ -194,11 +190,7 @@ namespace TrayDir
             TrayPlugin plugin = tip.plugin;
             if (plugin != null)
             {
-                string parameters = "";
-                foreach (TrayInstancePluginParameter param in tip.parameters)
-                {
-                    parameters += param.value + " ";
-                }
+                string parameters = BuildPluginCliParams(tip);
                 Process proc = new Process();
                 proc.StartInfo.UseShellExecute = true;
                 proc.StartInfo.FileName = plugin.path;
@@ -213,8 +205,35 @@ namespace TrayDir
                 }
                 catch (Exception e)
                 {
-                    
                     MessageBox.Show("Error Executing As Admin: " + '\n' + plugin.path + '\n' + e.Message, "Error");
+                }
+            }
+        }
+        public static string BuildPluginCliParams(TrayInstancePlugin tip) {
+            string parameters = "";
+            TrayPlugin tp = tip.plugin;
+            for (int i = 0; i < tip.parameters.Count; i++) {
+                TrayInstancePluginParameter param = tip.parameters[i];
+                TrayPluginParameter tpp = null;
+                if (i < tp.parameters.Count) {
+                    tpp = tp.parameters[i];
+                }
+                parameters += BuildPluginParameter(param, tpp) + " ";
+            }
+            return parameters;
+        }
+        public static string BuildPluginParameter(TrayInstancePluginParameter tipp, TrayPluginParameter tpp) {
+            if (tpp == null) {
+                return tipp.value;
+            } else {
+                if (tpp.isBoolean) {
+                    if (tipp.value.ToLower() == "true") {
+                        return tpp.prefix;
+                    } else {
+                        return "";
+                    }
+                } else {
+                    return String.Format("{0} {1}", tpp.prefix, tipp.value);
                 }
             }
         }

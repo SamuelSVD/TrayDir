@@ -110,6 +110,12 @@
     <Compile Include="src\forms\IOptionsForm.Designer.cs">
       <DependentUpon>IOptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\forms\PluginParameterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\forms\PluginParameterForm.Designer.cs">
+      <DependentUpon>PluginParameterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\forms\IPluginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +160,7 @@
     <Compile Include="src\models\TrayInstancePath.cs" />
     <Compile Include="src\models\TrayInstancePlugin.cs" />
     <Compile Include="src\models\TrayPlugin.cs" />
+    <Compile Include="src\models\TrayPluginParameter.cs" />
     <Compile Include="src\utils\ControlUtils.cs" />
     <Compile Include="src\utils\AppUtils.cs" />
     <Compile Include="lib\FolderSelectDialog\FolderSelectDialog.cs" />
@@ -196,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\IOptionsForm.resx">
       <DependentUpon>IOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\PluginParameterForm.resx">
+      <DependentUpon>PluginParameterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\IPluginForm.resx">
       <DependentUpon>IPluginForm.cs</DependentUpon>

@@ -6,9 +6,9 @@ namespace TrayDir
     public class TrayInstancePluginParameter
     {
         [XmlAttribute]
-        public string name;
+        public string name = "";
         [XmlAttribute]
-        public string value;
+        public string value = "";
         public TrayInstancePluginParameter Copy()
         {
             TrayInstancePluginParameter tipp = new TrayInstancePluginParameter();

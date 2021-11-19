@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("samver.ca")]
 [assembly: AssemblyProduct("TrayDir")]
-[assembly: AssemblyCopyright("Copyright © 2021 samver")]
+[assembly: AssemblyCopyright("Copyright © samver 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -33,6 +33,7 @@ namespace TrayDir
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.configureParamsButton = new System.Windows.Forms.Button();
             this.paramNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.pathLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,6 +42,7 @@ namespace TrayDir
             this.nameLabel = new System.Windows.Forms.Label();
             this.nameEdit = new System.Windows.Forms.TextBox();
             this.closeButton = new System.Windows.Forms.Button();
+            this.alwaysRunAsAdminCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -62,7 +64,7 @@ namespace TrayDir
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(378, 188);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(378, 240);
             this.tableLayoutPanel4.TabIndex = 3;
             // 
             // groupBox1
@@ -74,7 +76,7 @@ namespace TrayDir
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 20, 5, 0);
-            this.groupBox1.Size = new System.Drawing.Size(372, 153);
+            this.groupBox1.Size = new System.Drawing.Size(372, 205);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Plugin Options";
@@ -85,6 +87,7 @@ namespace TrayDir
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.Controls.Add(this.configureParamsButton, 1, 7);
             this.tableLayoutPanel3.Controls.Add(this.paramNumericUpDown, 0, 6);
             this.tableLayoutPanel3.Controls.Add(this.pathLabel, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 5);
@@ -92,10 +95,11 @@ namespace TrayDir
             this.tableLayoutPanel3.Controls.Add(this.pathEdit, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.nameLabel, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.nameEdit, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.alwaysRunAsAdminCheckBox, 0, 9);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(5, 20);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 7;
+            this.tableLayoutPanel3.RowCount = 10;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -103,8 +107,25 @@ namespace TrayDir
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(362, 120);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(362, 172);
             this.tableLayoutPanel3.TabIndex = 6;
+            // 
+            // configureParamsButton
+            // 
+            this.configureParamsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.configureParamsButton.AutoSize = true;
+            this.configureParamsButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel3.SetColumnSpan(this.configureParamsButton, 2);
+            this.configureParamsButton.Location = new System.Drawing.Point(241, 123);
+            this.configureParamsButton.Name = "configureParamsButton";
+            this.configureParamsButton.Size = new System.Drawing.Size(118, 23);
+            this.configureParamsButton.TabIndex = 4;
+            this.configureParamsButton.Text = "Configure Parameters";
+            this.configureParamsButton.UseVisualStyleBackColor = true;
+            this.configureParamsButton.Click += new System.EventHandler(this.configureParamsButton_Click);
             // 
             // paramNumericUpDown
             // 
@@ -173,7 +194,7 @@ namespace TrayDir
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(294, 162);
+            this.closeButton.Location = new System.Drawing.Point(294, 214);
             this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
@@ -181,6 +202,20 @@ namespace TrayDir
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
+            // alwaysRunAsAdminCheckBox
+            // 
+            this.alwaysRunAsAdminCheckBox.AutoSize = true;
+            this.alwaysRunAsAdminCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tableLayoutPanel3.SetColumnSpan(this.alwaysRunAsAdminCheckBox, 2);
+            this.alwaysRunAsAdminCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.alwaysRunAsAdminCheckBox.Location = new System.Drawing.Point(3, 152);
+            this.alwaysRunAsAdminCheckBox.Name = "alwaysRunAsAdminCheckBox";
+            this.alwaysRunAsAdminCheckBox.Size = new System.Drawing.Size(356, 17);
+            this.alwaysRunAsAdminCheckBox.TabIndex = 9;
+            this.alwaysRunAsAdminCheckBox.Text = "Always Run As Admin";
+            this.alwaysRunAsAdminCheckBox.UseVisualStyleBackColor = true;
+            this.alwaysRunAsAdminCheckBox.CheckedChanged += new System.EventHandler(this.alwaysRunAsAdmin_CheckedChanged);
             // 
             // PluginForm
             // 
@@ -221,5 +256,7 @@ namespace TrayDir
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.NumericUpDown paramNumericUpDown;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button configureParamsButton;
+        private System.Windows.Forms.CheckBox alwaysRunAsAdminCheckBox;
     }
 }

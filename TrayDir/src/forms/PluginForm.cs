@@ -14,6 +14,8 @@ namespace TrayDir
             nameEdit.Text = plugin.tp.name;
             pathEdit.Text = plugin.tp.path;
             paramNumericUpDown.Value = plugin.tp.parameterCount;
+            configureParamsButton.Enabled = plugin.tp.parameterCount > 0;
+            alwaysRunAsAdminCheckBox.Checked = plugin.tp.AlwaysRunAsAdmin;
         }
         private void closeButton_Click(object sender, EventArgs e)
         {
@@ -47,10 +49,19 @@ namespace TrayDir
         private void paramNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             plugin.tp.parameterCount = (int)paramNumericUpDown.Value;
+            configureParamsButton.Enabled = plugin.tp.parameterCount > 0;
         }
         private void PluginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ProgramData.pd.Save();
+        }
+        private void configureParamsButton_Click(object sender, EventArgs e) {
+            PluginParameterForm ppf = new PluginParameterForm(plugin.tp);
+            ppf.ShowDialog();
+        }
+
+        private void alwaysRunAsAdmin_CheckedChanged(object sender, EventArgs e) {
+            plugin.tp.AlwaysRunAsAdmin = alwaysRunAsAdminCheckBox.Checked;
         }
     }
 }

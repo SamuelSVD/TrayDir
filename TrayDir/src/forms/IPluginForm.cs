@@ -54,36 +54,24 @@ namespace TrayDir
                 pluginTableLayoutPanel.Controls.Remove(c);
             }
             labels.Clear();
+            int rowCount = 0;
             if (tp.parameterCount > 0)
             {
                 for (int i = 0; i < tp.parameterCount; i++)
                 {
-                    Label l = new Label();
-                    l.Text = String.Format("Parameter {0}", i + 1);
-                    pluginTableLayoutPanel.Controls.Add(l, 0, (i + 2) * 2);
-                    l.AutoSize = true;
-                    labels.Add(l);
-                    TextBox tb = new TextBox();
-                    tb.Dock = DockStyle.Top;
-                    tb.AutoSize = true;
-                    controls.Add(tb);
-                    pluginTableLayoutPanel.SetColumnSpan(tb, 2);
-                    pluginTableLayoutPanel.Controls.Add(tb, 0, (i + 2) * 2 + 1);
+                    TrayPluginParameter tpp = null;
+                    if (i < tp.parameters.Count) {
+                        tpp = tp.parameters[i];
+                    }
                     TrayInstancePluginParameter tipp;
-                    if (tip.parameters.Count < i + 1)
-                    {
+                    if (tip.parameters.Count < i + 1) {
                         tipp = new TrayInstancePluginParameter();
                         tip.parameters.Add(tipp);
                     }
-                    else
-                    {
+                    else {
                         tipp = tip.parameters[i];
-                        tb.Text = tipp.value;
                     }
-                    tb.TextChanged += new EventHandler(delegate (object obj, EventArgs args)
-                    {
-                        tipp.value = tb.Text;
-                    });
+                    AddParameterRow(tpp, tipp);
                 }
             }
             for (int i = 0; i < pluginTableLayoutPanel.RowCount; i++)
@@ -101,7 +89,88 @@ namespace TrayDir
                 rs.SizeType = SizeType.AutoSize;
             }
         }
-
+        private void AddParameterRow(TrayPluginParameter tpp, TrayInstancePluginParameter tipp) {
+            if (tpp == null) {
+                int paramCount = controls.Count;
+                int row = controls.Count + labels.Count;
+                Label l = new Label();
+                l.Text = String.Format("Parameter {0}", paramCount + 1);
+                pluginTableLayoutPanel.Controls.Add(l, 0, 4 + row);
+                pluginTableLayoutPanel.SetColumnSpan(l, 2);
+                row++;
+                l.AutoSize = true;
+                labels.Add(l);
+                TextBox tb = new TextBox();
+                tb.Dock = DockStyle.Top;
+                tb.AutoSize = true;
+                controls.Add(tb);
+                pluginTableLayoutPanel.SetColumnSpan(tb, 2);
+                pluginTableLayoutPanel.Controls.Add(tb, 0, 4 + row);
+                tb.Text = tipp.value;
+                tb.TextChanged += new EventHandler(delegate (object obj, EventArgs args)
+                {
+                    tipp.value = tb.Text;
+                });
+            } else {
+                if (tpp.isBoolean) {
+                    AddCheckboxParameterRow(tpp, tipp);
+                } else {
+                    AddTextParameterRow(tpp, tipp);
+                }
+            }
+        }
+        private void AddCheckboxParameterRow(TrayPluginParameter tpp, TrayInstancePluginParameter tipp) {
+            int paramCount = controls.Count;
+            int row = controls.Count + labels.Count;
+            CheckBox cb = new CheckBox();
+            if (tpp.name != "" && tpp.name != null) {
+                cb.Text = tpp.name;
+            }
+            else {
+                cb.Text = String.Format("Parameter {0}", paramCount + 1);
+            }
+            pluginTableLayoutPanel.Controls.Add(cb, 0, 4 + row);
+            row++;
+            cb.AutoSize = true;
+            controls.Add(cb);
+            pluginTableLayoutPanel.SetColumnSpan(cb, 2);
+            cb.Checked = tipp.value.ToLower() == "true";
+            cb.CheckedChanged += new EventHandler(delegate (object obj, EventArgs args) {
+                if (cb.Checked) {
+                    tipp.value = "true";
+                }
+                else {
+                    tipp.value = "false";
+                }
+            });
+        }
+        private void AddTextParameterRow(TrayPluginParameter tpp, TrayInstancePluginParameter tipp) {
+            int paramCount = controls.Count;
+            int row = controls.Count + labels.Count;
+            Label l = new Label();
+            if (tpp.name != "" && tpp.name != null) {
+                l.Text = tpp.name;
+            }
+            else {
+                l.Text = String.Format("Parameter {0}", paramCount + 1);
+            }
+            pluginTableLayoutPanel.Controls.Add(l, 0, 4 + row);
+            pluginTableLayoutPanel.SetColumnSpan(l, 2);
+            row++;
+            l.AutoSize = true;
+            labels.Add(l);
+            TextBox tb = new TextBox();
+            tb.Dock = DockStyle.Top;
+            tb.AutoSize = true;
+            controls.Add(tb);
+            pluginTableLayoutPanel.SetColumnSpan(tb, 2);
+            pluginTableLayoutPanel.Controls.Add(tb, 0, 4 + row);
+            tb.Text = tipp.value;
+            tb.TextChanged += new EventHandler(delegate (object obj, EventArgs args)
+            {
+                tipp.value = tb.Text;
+            });
+        }
         private void IPluginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (selectedPlugin != null)

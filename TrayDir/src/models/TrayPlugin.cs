@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace TrayDir
 {
@@ -10,9 +11,13 @@ namespace TrayDir
         public string name;
         [XmlAttribute]
         public int parameterCount;
+        [XmlAttribute]
+        public bool AlwaysRunAsAdmin = false;
+        public List<TrayPluginParameter> parameters = new List<TrayPluginParameter>();
         public string getSignature()
         {
-            return string.Format("{0} ({1})", name, path);
+            string sig = string.Format("{0} ({1})", name, path);
+            return sig;
         }
     }
 }
