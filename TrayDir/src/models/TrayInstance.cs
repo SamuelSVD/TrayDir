@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Xml.Serialization;
 
 
@@ -16,6 +17,8 @@ namespace TrayDir
         public string instanceName;
         [XmlAttribute]
         public string ignoreRegex = "";
+        [XmlAttribute]
+        public string Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
         [XmlIgnore]
         public IView view;
         public List<TrayInstancePath> paths;

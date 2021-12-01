@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Xml.Serialization;
 
 namespace TrayDir
@@ -15,6 +16,8 @@ namespace TrayDir
         public List<TrayPlugin> plugins;
         private static string config;
         public static ProgramData pd;
+        [XmlAttribute]
+        public string Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
         [XmlIgnore]
         public bool initialized;
         public ProgramData()

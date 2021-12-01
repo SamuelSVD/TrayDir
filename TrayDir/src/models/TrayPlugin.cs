@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Xml.Serialization;
 
 namespace TrayDir
@@ -13,6 +14,8 @@ namespace TrayDir
         public int parameterCount;
         [XmlAttribute]
         public bool AlwaysRunAsAdmin = false;
+        [XmlAttribute]
+        public string Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
         public List<TrayPluginParameter> parameters = new List<TrayPluginParameter>();
         public string getSignature()
         {
