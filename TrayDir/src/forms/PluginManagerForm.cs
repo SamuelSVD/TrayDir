@@ -97,5 +97,64 @@ namespace TrayDir
         {
             editButton_Click(sender, e);
         }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            editButton.Enabled = selectedNode != null;
+            deleteButton.Enabled = selectedNode != null;
+            exportButton.Enabled = selectedNode != null;
+        }
+
+        private void importButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Tray Plugin Export | *.tpe";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                TrayPlugin tp = AppUtils.ImportPlugin(ofd.FileName);
+                if (tp != null)
+                {
+                    bool imported = false;
+                    for(int i = 0; i < ProgramData.pd.plugins.Count; i++)
+                    {
+                        TrayPlugin tpc = ProgramData.pd.plugins[i];
+                        if (tpc.name == tp.name)
+                        {
+                            DialogResult dr = MessageBox.Show("There exists another plugin with the same name. Would you like to overwrite its configuration?", "Import Conflict", MessageBoxButtons.YesNoCancel);
+                            if (dr == DialogResult.Yes)
+                            {
+                                ProgramData.pd.plugins[i] = tp;
+                                imported = true;
+                                break;
+                            } else if (dr == DialogResult.No) {
+                                continue;
+                            } else {
+                                imported = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!imported) {
+                        ProgramData.pd.plugins.Add(tp);
+                    }
+                    ProgramData.pd.Save();
+                    PluginManagerForm.form.initializeTree();
+                } else {
+                    MessageBox.Show("Error: Unable to import file.", "Import failed");
+                }
+            }
+        }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            AppUtils.ExportPlugin(selectedNode.tp);
+        }
+
+        private void PluginManagerForm_Shown(object sender, EventArgs e)
+        {
+            editButton.Enabled = false;
+            deleteButton.Enabled = false;
+            exportButton.Enabled = false;
+        }
     }
 }

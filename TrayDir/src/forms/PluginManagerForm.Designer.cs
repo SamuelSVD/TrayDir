@@ -35,6 +35,8 @@ namespace TrayDir
             this.closeButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.importButton = new System.Windows.Forms.Button();
+            this.exportButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
@@ -59,17 +61,17 @@ namespace TrayDir
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(370, 230);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(736, 495);
             this.tableLayoutPanel4.TabIndex = 3;
             // 
             // closeButton
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(286, 204);
-            this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
+            this.closeButton.Location = new System.Drawing.Point(568, 445);
+            this.closeButton.Margin = new System.Windows.Forms.Padding(6, 6, 18, 6);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.Size = new System.Drawing.Size(150, 44);
             this.closeButton.TabIndex = 1;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
@@ -79,11 +81,11 @@ namespace TrayDir
             this.groupBox1.AutoSize = true;
             this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(0);
-            this.groupBox1.Size = new System.Drawing.Size(364, 198);
+            this.groupBox1.Size = new System.Drawing.Size(724, 433);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tray Options";
@@ -96,25 +98,52 @@ namespace TrayDir
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.importButton, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.exportButton, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.editButton, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.deleteButton, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.addButton, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.treeView1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 18);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 35);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(355, 167);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(706, 374);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // importButton
+            // 
+            this.importButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.importButton.Location = new System.Drawing.Point(6, 324);
+            this.importButton.Margin = new System.Windows.Forms.Padding(6);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(150, 44);
+            this.importButton.TabIndex = 9;
+            this.importButton.Text = "Import";
+            this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            // 
+            // exportButton
+            // 
+            this.exportButton.Location = new System.Drawing.Point(168, 324);
+            this.exportButton.Margin = new System.Windows.Forms.Padding(6);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(150, 44);
+            this.exportButton.TabIndex = 8;
+            this.exportButton.Text = "Export";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
             // 
             // editButton
             // 
             this.editButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.editButton.Location = new System.Drawing.Point(84, 141);
+            this.editButton.Location = new System.Drawing.Point(168, 268);
+            this.editButton.Margin = new System.Windows.Forms.Padding(6);
             this.editButton.Name = "editButton";
-            this.editButton.Size = new System.Drawing.Size(75, 23);
+            this.editButton.Size = new System.Drawing.Size(150, 44);
             this.editButton.TabIndex = 6;
             this.editButton.Text = "Edit";
             this.editButton.UseVisualStyleBackColor = true;
@@ -122,9 +151,10 @@ namespace TrayDir
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(165, 141);
+            this.deleteButton.Location = new System.Drawing.Point(330, 268);
+            this.deleteButton.Margin = new System.Windows.Forms.Padding(6);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.Size = new System.Drawing.Size(150, 44);
             this.deleteButton.TabIndex = 5;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -132,9 +162,10 @@ namespace TrayDir
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(3, 141);
+            this.addButton.Location = new System.Drawing.Point(6, 268);
+            this.addButton.Margin = new System.Windows.Forms.Padding(6);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(75, 23);
+            this.addButton.Size = new System.Drawing.Size(150, 44);
             this.addButton.TabIndex = 7;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
@@ -145,11 +176,13 @@ namespace TrayDir
             this.tableLayoutPanel1.SetColumnSpan(this.treeView1, 3);
             this.treeView1.ImageIndex = 0;
             this.treeView1.ImageList = this.imageList;
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
+            this.treeView1.Location = new System.Drawing.Point(6, 6);
+            this.treeView1.Margin = new System.Windows.Forms.Padding(6);
             this.treeView1.Name = "treeView1";
             this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.Size = new System.Drawing.Size(349, 132);
+            this.treeView1.Size = new System.Drawing.Size(694, 250);
             this.treeView1.TabIndex = 4;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
             // imageList
@@ -160,18 +193,20 @@ namespace TrayDir
             // 
             // PluginManagerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.closeButton;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1600, 865);
             this.Controls.Add(this.tableLayoutPanel4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "PluginManagerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Plugin Manager";
+            this.Shown += new System.EventHandler(this.PluginManagerForm_Shown);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -193,5 +228,7 @@ namespace TrayDir
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ImageList imageList;
+        private System.Windows.Forms.Button importButton;
+        private System.Windows.Forms.Button exportButton;
     }
 }

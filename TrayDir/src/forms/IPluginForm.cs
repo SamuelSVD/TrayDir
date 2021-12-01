@@ -54,7 +54,6 @@ namespace TrayDir
                 pluginTableLayoutPanel.Controls.Remove(c);
             }
             labels.Clear();
-            int rowCount = 0;
             if (tp.parameterCount > 0)
             {
                 for (int i = 0; i < tp.parameterCount; i++)

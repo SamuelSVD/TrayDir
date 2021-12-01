@@ -166,6 +166,24 @@ namespace TrayDir
             i.nodes.FixChildren();
             return i;
         }
+
+        public static void ExportPlugin(TrayPlugin plugin)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Tray Plugin Export | *.tpe";
+            sfd.FileName = Regex.Replace(plugin.name, @"[^0-9a-zA-Z()_ ]+", "_");
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                XMLUtils.SaveToFile(plugin, sfd.FileName);
+                MessageBox.Show("Exported to:" + sfd.FileName, "Export Done");
+            }
+        }
+        public static TrayPlugin ImportPlugin(string path)
+        {
+            TrayPlugin i = null;
+            i = XMLUtils.LoadFromFile<TrayPlugin>(path);
+            return i;
+        }
         public static void RunPlugin(TrayInstancePlugin p, bool runasadmin)
         {
             if (runasadmin || (p.plugin != null ? p.plugin.AlwaysRunAsAdmin : false))
