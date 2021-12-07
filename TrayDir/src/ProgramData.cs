@@ -54,11 +54,11 @@ namespace TrayDir
         }
         public void Update()
         {
-            if (trayInstances != null)
-            {
-                foreach (TrayInstance instance in trayInstances)
-                {
-                    instance.view.tray.BuildTrayMenu();
+            if (initialized) {
+                if (trayInstances != null) {
+                    foreach (TrayInstance instance in trayInstances) {
+                        instance.view.tray.BuildTrayMenu();
+                    }
                 }
             }
             CheckStartup();

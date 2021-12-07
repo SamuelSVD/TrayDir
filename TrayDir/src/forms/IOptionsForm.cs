@@ -7,6 +7,7 @@ namespace TrayDir
     public partial class IOptionsForm : Form
     {
         TrayInstance instance;
+        bool initialized = false;
         public IOptionsForm(TrayInstance instance)
         {
             InitializeComponent();
@@ -45,6 +46,7 @@ namespace TrayDir
             exploreCheckBox.Checked = instance.settings.ExploreFoldersInTrayMenu;
             expandFirstPathCheckBox.Checked = instance.settings.ExpandFirstPath;
             hideFromTrayCheckBox.Checked = instance.settings.HideFromTray;
+            initialized = true;
         }
         private void runasCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -53,7 +55,7 @@ namespace TrayDir
         private void showextensionsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             instance.settings.ShowFileExtensions = showextensionsCheckBox.Checked;
-            instance.view.tray.BuildTrayMenu();
+            if (initialized) instance.view.tray.BuildTrayMenu();
         }
         private void exploreCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -66,7 +68,7 @@ namespace TrayDir
         private void expandFirstPathCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             instance.settings.ExpandFirstPath = expandFirstPathCheckBox.Checked;
-            instance.view.tray.BuildTrayMenu();
+            if (initialized) instance.view.tray.BuildTrayMenu();
         }
 
         private void hideFromTrayCheckBox_CheckedChanged(object sender, EventArgs e)
