@@ -39,6 +39,7 @@ namespace TrayDir
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.instanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newInstanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +48,9 @@ namespace TrayDir
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.archiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.archiveManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.changeIgnoreRegexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebuildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,9 +64,6 @@ namespace TrayDir
             this.iconList = new System.Windows.Forms.ImageList(this.components);
             this.imgLoadTimer = new System.Windows.Forms.Timer(this.components);
             this.iconLoadTimer = new System.Windows.Forms.Timer(this.components);
-            this.archiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.archiveManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,6 +106,7 @@ namespace TrayDir
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem1,
+            this.saveAsToolStripMenuItem,
             this.exitToolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 22);
@@ -113,14 +115,21 @@ namespace TrayDir
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             this.saveToolStripMenuItem1.Click += new System.EventHandler(this.Save);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Text = "Save As...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.ExitApp);
             // 
@@ -181,6 +190,25 @@ namespace TrayDir
             this.exportToolStripMenuItem1.Size = new System.Drawing.Size(196, 22);
             this.exportToolStripMenuItem1.Text = "Export";
             this.exportToolStripMenuItem1.Click += new System.EventHandler(this.exportToolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(193, 6);
+            // 
+            // archiveToolStripMenuItem
+            // 
+            this.archiveToolStripMenuItem.Name = "archiveToolStripMenuItem";
+            this.archiveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.archiveToolStripMenuItem.Text = "Archive Instance";
+            this.archiveToolStripMenuItem.Click += new System.EventHandler(this.archiveToolStripMenuItem_Click);
+            // 
+            // archiveManagerToolStripMenuItem
+            // 
+            this.archiveManagerToolStripMenuItem.Name = "archiveManagerToolStripMenuItem";
+            this.archiveManagerToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.archiveManagerToolStripMenuItem.Text = "Archive Manager";
+            this.archiveManagerToolStripMenuItem.Click += new System.EventHandler(this.archiveManagerToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -276,25 +304,6 @@ namespace TrayDir
             // 
             this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
             // 
-            // archiveToolStripMenuItem
-            // 
-            this.archiveToolStripMenuItem.Name = "archiveToolStripMenuItem";
-            this.archiveToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.archiveToolStripMenuItem.Text = "Archive Instance";
-            this.archiveToolStripMenuItem.Click += new System.EventHandler(this.archiveToolStripMenuItem_Click);
-            // 
-            // archiveManagerToolStripMenuItem
-            // 
-            this.archiveManagerToolStripMenuItem.Name = "archiveManagerToolStripMenuItem";
-            this.archiveManagerToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.archiveManagerToolStripMenuItem.Text = "Archive Manager";
-            this.archiveManagerToolStripMenuItem.Click += new System.EventHandler(this.archiveManagerToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(193, 6);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,6 +358,7 @@ namespace TrayDir
         private ToolStripSeparator toolStripMenuItem2;
         private ToolStripMenuItem archiveToolStripMenuItem;
         private ToolStripMenuItem archiveManagerToolStripMenuItem;
+        private ToolStripMenuItem saveAsToolStripMenuItem;
     }
 }
 

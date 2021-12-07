@@ -537,5 +537,9 @@ namespace TrayDir
             archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
             Save(sender, e);
         }
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pd.SaveAs();
+        }
     }
 }

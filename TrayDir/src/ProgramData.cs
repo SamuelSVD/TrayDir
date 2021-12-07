@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 
 namespace TrayDir
@@ -47,9 +48,20 @@ namespace TrayDir
         }
         public void Save()
         {
-            if (initialized)
-            {
+            if (initialized) {
                 XMLUtils.SaveToFile(this, config);
+            }
+        }
+        public void SaveAs()
+        {
+            if (initialized) {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "TrayDir XML Export | *.xml";
+                sfd.FileName = "TrayDir";
+                if (sfd.ShowDialog() == DialogResult.OK) {
+                    XMLUtils.SaveToFile(this, sfd.FileName);
+                    MessageBox.Show("Saved to:" + sfd.FileName, "Export Done");
+                }
             }
         }
         public void Update()
