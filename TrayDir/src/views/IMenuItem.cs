@@ -31,6 +31,7 @@ namespace TrayDir
 
         public readonly bool isDir = false;
         public readonly bool isFile = false;
+        public readonly bool isPlugin = false;
         private bool loadedIcon = false;
         private bool assignedClickEvent = false;
         private bool enqueued;
@@ -187,6 +188,7 @@ namespace TrayDir
             children = new List<IMenuItem>();
             isDir = tiPath != null ? AppUtils.PathIsDirectory(tiPath.path) : false;
             isFile = tiPath != null ? AppUtils.PathIsFile(tiPath.path) : false;
+            isPlugin = tiPlugin != null;
             if (isDir && !tiPath.shortcut)
             {
                 MakeChildren();
@@ -256,17 +258,22 @@ namespace TrayDir
             else if (isFile)
             {
                 AppUtils.OpenPath(Path.GetFullPath(tiPath.path), false);
+            } else if (isPlugin) {
+                AppUtils.RunPlugin(tiPlugin, false);
             }
         }
         private void Explore(object obj, EventArgs args)
         {
-            if (isDir)
-            {
+            if (isDir) {
                 AppUtils.ExplorePath(new DirectoryInfo(tiPath.path).FullName);
-            }
-            else if (isFile)
-            {
+            } else if (isFile) {
                 AppUtils.ExplorePath(Path.GetFullPath(tiPath.path));
+            } else if (isPlugin) {
+                if (tiPlugin != null) {
+                    if (tiPlugin.plugin != null) {
+                        AppUtils.ExplorePath(tiPlugin.plugin.path);
+                    }
+                }
             }
         }
         private void RunAs(object obj, EventArgs args)
@@ -278,6 +285,9 @@ namespace TrayDir
             else if (isFile)
             {
                 AppUtils.OpenPath(Path.GetFullPath(tiPath.path), true);
+            }
+            else if (isPlugin) {
+                AppUtils.RunPlugin(tiPlugin, true);
             }
         }
         private void OpenCmd(object obj, EventArgs args)
@@ -331,7 +341,14 @@ namespace TrayDir
                     tsi = cmnu.Items.Add("Open in cmd (Administrator)");
                     tsi.Click += OpenAdminCmd;
                 }
-                else
+                if (isPlugin) {
+                    tsi = cmnu.Items.Add("Run");
+                    tsi.Click += Run;
+                    tsi = cmnu.Items.Add("Run (Administrator)");
+                    tsi.Click += RunAs;
+                    tsi = cmnu.Items.Add("Open in Explorer");
+                    tsi.Click += Explore;
+                } else
                 {
                     MenuDestroy(null, null);
                 }
