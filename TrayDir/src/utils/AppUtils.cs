@@ -12,30 +12,31 @@ namespace TrayDir
     {
         public static bool PathIsDirectory(string path)
         {
-            try
-            {
-                FileAttributes attr = File.GetAttributes(path);
-                //detect whether its a directory or file
-                return ((attr & FileAttributes.Directory) == FileAttributes.Directory);
+            if (path != "" && path != null) {
+                try {
+                    FileAttributes attr = File.GetAttributes(path);
+                    //detect whether its a directory or file
+                    return ((attr & FileAttributes.Directory) == FileAttributes.Directory);
+                }
+                catch {
+                    return false;
+                }
             }
-            catch
-            {
-                return false;
-            }
-
+            return false;
         }
         public static bool PathIsFile(string path)
         {
-            try
-            {
-                FileAttributes attr = File.GetAttributes(path);
-                //detect whether its a directory or file
-                return !((attr & FileAttributes.Directory) == FileAttributes.Directory);
+            if (path != "" && path != null) {
+                try {
+                    FileAttributes attr = File.GetAttributes(path);
+                    //detect whether its a directory or file
+                    return !((attr & FileAttributes.Directory) == FileAttributes.Directory);
+                }
+                catch {
+                    return false;
+                }
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
         public static string SplitCamelCase(string input)
         {
@@ -162,6 +163,8 @@ namespace TrayDir
         {
             TrayInstance i = null;
             i = XMLUtils.LoadFromFile<TrayInstance>(path);
+            i.FixPaths();
+            i.FixNodes();
             i.nodes.SetInstance(i);
             i.nodes.FixChildren();
             return i;

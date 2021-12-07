@@ -130,7 +130,6 @@ namespace TrayDir
             instanceTabs.TabPages.Remove(newTabTabPage);
             instanceTabs.TabPages.Add(tp);
             instanceTabs.TabPages.Add(newTabTabPage);
-            instanceTabs.SelectedIndex = i;
             IView iv = CreateViewFromInstance(instance, tp);
             iv.tray.notifyIcon.DoubleClick += new EventHandler(delegate (object obj, EventArgs args)
             {
@@ -138,6 +137,7 @@ namespace TrayDir
                 ShowApp(obj, args);
             });
             BuildRebuildDropdown();
+            instanceTabs.SelectedIndex = i;
         }
         public static void Init()
         {

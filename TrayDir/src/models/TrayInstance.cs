@@ -237,6 +237,39 @@ namespace TrayDir
                 }
             }
         }
+        public void FixPaths()
+        {
+            if (settings.paths != null) {
+                if (settings.paths.Count > 0) {
+                    foreach (string path in settings.paths) {
+                        paths.Add(new TrayInstancePath(path));
+                    }
+                }
+            }
+            settings.paths = null;
+        }
+        public void FixNodes()
+        {
+            if (PathCount + plugins.Count != NodeCount) {
+                nodes.children.Clear();
+                foreach (TrayInstancePath tip in paths) {
+                    TrayInstanceNode tin = new TrayInstanceNode();
+                    tin.id = paths.IndexOf(tip);
+                    tin.type = TrayInstanceNode.NodeType.Path;
+                    nodes.children.Add(tin);
+                    tin.parent = nodes;
+                }
+                foreach (TrayInstancePlugin tip in plugins) {
+                    TrayInstanceNode tin = new TrayInstanceNode();
+                    tin.id = plugins.IndexOf(tip);
+                    tin.type = TrayInstanceNode.NodeType.Plugin;
+                    nodes.children.Add(tin);
+                    tin.parent = nodes;
+                }
+            }
+            nodes.SetInstance(this);
+            nodes.FixChildren();
+        }
         public TrayInstance Copy()
         {
             TrayInstance ti = new TrayInstance();
