@@ -49,9 +49,12 @@ namespace TrayDir
             if (selectedNode != null)
             {
                 if (MessageBox.Show("Do you want to restore instance: " + selectedNode.node.Text, "Restore", MessageBoxButtons.OKCancel) == DialogResult.OK) {
-                    ProgramData.pd.trayInstances.Add(selectedNode.trayInstance);
-                    MainForm.form.AddInstanceTabPage(selectedNode.trayInstance);
-                    ProgramData.pd.archivedInstances.Remove(selectedNode.trayInstance);
+                    TrayInstance ti = selectedNode.trayInstance;
+                    ti.FixPaths();
+                    ti.FixNodes();
+                    ProgramData.pd.trayInstances.Add(ti);
+                    MainForm.form.AddInstanceTabPage(ti);
+                    ProgramData.pd.archivedInstances.Remove(ti);
                     treeView1.Nodes.Remove(selectedNode.node);
                     treeView1.Sort();
                 }
