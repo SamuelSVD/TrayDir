@@ -59,7 +59,7 @@ namespace TrayDir
             this.label2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.label2.Size = new System.Drawing.Size(172, 49);
             this.label2.TabIndex = 1;
-            this.label2.Text = "A program by Sam Vergara\r\nvisit samver.ca for more information\r\n© samver 2021";
+            this.label2.Text = "A program by Sam Vergara\r\nvisit samver.ca for more information\r\n© samver 2022";
             // 
             // versionLabel
             // 
