@@ -43,12 +43,11 @@ namespace TrayDir
                 }
                 node.TreeView.ImageList.Images.Add(i);
                 node.ImageIndex = node.TreeView.ImageList.Images.Count - 1;
-                node.SelectedImageIndex = node.ImageIndex;
             } else
             {
                 node.ImageIndex = - 1;
-                node.SelectedImageIndex = node.ImageIndex;
             }
+            node.SelectedImageIndex = node.ImageIndex;
         }
     }
 }

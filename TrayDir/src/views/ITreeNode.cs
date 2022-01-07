@@ -96,6 +96,7 @@ namespace TrayDir
         }
         public void Refresh()
         {
+            node.ImageIndex = IconUtils.QUESTION;
             switch (tin.type)
             {
                 case TrayInstanceNode.NodeType.Path:
@@ -105,25 +106,21 @@ namespace TrayDir
                     {
                         if (tip.shortcut)
                         {
-                            node.ImageIndex = 14;
-                            node.SelectedImageIndex = 14;
+                            node.ImageIndex = IconUtils.FOLDER_SHORTCUT;
                         } else
                         {
-                            node.ImageIndex = 1;
-                            node.SelectedImageIndex = 1;
+                            node.ImageIndex = IconUtils.FOLDER;
                         }
                         node.Text = "";
                     }
                     else if (tip.isFile)
                     {
-                        node.ImageIndex = 0;
-                        node.SelectedImageIndex = 0;
+                        node.ImageIndex = IconUtils.DOCUMENT;
                         node.Text = "";
                     }
                     else
                     {
-                        node.ImageIndex = 11;
-                        node.SelectedImageIndex = 11;
+                        node.ImageIndex = IconUtils.QUESTION;
                         node.Text = "ERROR: ";
                     }
 
@@ -132,8 +129,7 @@ namespace TrayDir
 
                     break;
                 case TrayInstanceNode.NodeType.VirtualFolder:
-                    node.ImageIndex = 2;
-                    node.SelectedImageIndex = 2;
+                    node.ImageIndex = IconUtils.FOLDER_BLUE;
                     node.Text = tin.instance.vfolders[tin.id].alias;
                     break;
                 case TrayInstanceNode.NodeType.Plugin:
@@ -152,7 +148,6 @@ namespace TrayDir
                             if (ITreeNode.pluginIndex.ContainsKey(plugin.getSignature()))
                             {
                                 node.ImageIndex = ITreeNode.pluginIndex[plugin.getSignature()];
-                                node.SelectedImageIndex = node.ImageIndex;
                             }
                             else
                             {
@@ -164,13 +159,7 @@ namespace TrayDir
                                 }
                                 node.TreeView.ImageList.Images.Add(i);
                                 node.ImageIndex = node.TreeView.ImageList.Images.Count - 1;
-                                node.SelectedImageIndex = node.ImageIndex;
                             }
-                        }
-                        else
-                        {
-                            node.ImageIndex = 11;
-                            node.SelectedImageIndex = 11;
                         }
                     }
                     node.Text = string.Format("{0} ({1})", tin.instance.plugins[tin.id].alias, pluginName);
@@ -178,6 +167,7 @@ namespace TrayDir
                 default:
                     break;
             }
+            node.SelectedImageIndex = node.ImageIndex;
         }
         public void MoveUp()
         {

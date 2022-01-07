@@ -19,6 +19,9 @@ namespace TrayDir
         public static ProgramData pd;
         [XmlAttribute]
         public string Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
+        [XmlAttribute]
+        //This version is meant to track the last ignored version through the updater. 
+        public string LatestVersion;
         [XmlIgnore]
         public bool initialized;
         public ProgramData()
