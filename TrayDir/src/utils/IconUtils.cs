@@ -10,13 +10,13 @@ namespace TrayDir.utils
 {
     class IconUtils
     {
-        private static Dictionary<string, Icon> imgKnownIcons = new Dictionary<string, Icon>();
+        private static Dictionary<string, Bitmap> imgKnownIcons = new Dictionary<string, Bitmap>();
         private static Semaphore imgLoadSemaphore = new Semaphore(1, 1);
 
-        public static Icon lookupIcon(string key)
+        public static Bitmap lookupIcon(string key)
         {
             imgLoadSemaphore.WaitOne();
-            Icon icon;
+            Bitmap icon;
             if (imgKnownIcons.ContainsKey(key))
             {
                 icon = imgKnownIcons[key];
@@ -28,7 +28,7 @@ namespace TrayDir.utils
             imgLoadSemaphore.Release();
             return icon;
         }
-        public static void addIcon(string key, Icon icon)
+        public static void addIcon(string key, Bitmap icon)
         {
             imgLoadSemaphore.WaitOne();
             imgKnownIcons[key] = icon;

@@ -22,12 +22,14 @@ namespace TrayDir
         public ToolStripMenuItem menuItem;
         public List<IMenuItem> children;
         public IMenuItem parent;
+        List<IMenuItem> dirMenuItems = new List<IMenuItem>();
+        List<IMenuItem> fileMenuItems = new List<IMenuItem>();
 
         public TrayInstancePath tiPath;
         public TrayInstanceVirtualFolder tiVirtualFolder;
         public TrayInstancePlugin tiPlugin;
 
-        private Icon menuIcon;
+        private Bitmap menuIcon;
 
         public readonly bool isDir = false;
         public readonly bool isFile = false;
@@ -100,7 +102,7 @@ namespace TrayDir
                         string ext = Path.GetExtension(mi.tiPath.path);
                         if (ext.Length == 0 || ext == ".ico" || ext == ".lnk" || ext == ".exe" || (queue != imgLoadQueue && ext == ".url"))
                         {
-                            mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path);
+                            mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
                         } else if (queue == imgLoadQueue && ext == ".url")
                         {
                             urlLoadSemaphore.WaitOne();
@@ -113,20 +115,20 @@ namespace TrayDir
                             mi.menuIcon = IconUtils.lookupIcon(ext);
                             if (mi.menuIcon == null)
                             {
-                                mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path);
+                                mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
                                 IconUtils.addIcon(ext, mi.menuIcon);
                             }
                         }
                     }
                     else if (mi.menuIcon is null && mi.isDir)
                     {
-                        mi.menuIcon = Icon.FromHandle(new Bitmap(Properties.Resources.folder).GetHicon());
+                        mi.menuIcon = new Bitmap(Properties.Resources.folder);
                     }
                     else if (mi.menuIcon is null && mi.tiVirtualFolder != null) {
                         if (ProgramData.pd.settings.app.VFolderIcon != "Yellow Folder") {
-                            mi.menuIcon = Icon.FromHandle(new Bitmap(Properties.Resources.folder_blue).GetHicon());
+                            mi.menuIcon = new Bitmap(Properties.Resources.folder_blue);
                         } else {
-                            mi.menuIcon = Icon.FromHandle(new Bitmap(Properties.Resources.folder).GetHicon());
+                            mi.menuIcon = new Bitmap(Properties.Resources.folder);
                         }
                     }
                     else if (mi.tiPlugin != null)
@@ -134,10 +136,10 @@ namespace TrayDir
                         TrayPlugin tp = mi.tiPlugin.plugin;
                         if (tp != null && AppUtils.PathIsFile(tp.path))
                         {
-                            Icon i = IconUtils.lookupIcon(tp.getSignature());
+                            Bitmap i = IconUtils.lookupIcon(tp.getSignature());
                             if (i == null)
                             {
-                                i = Icon.ExtractAssociatedIcon(tp.path);
+                                i = Icon.ExtractAssociatedIcon(tp.path).ToBitmap();
                                 IconUtils.addIcon(tp.getSignature(), i);
                             }
                             mi.menuIcon = i;
@@ -454,8 +456,8 @@ namespace TrayDir
             }
 
             menuItem.DropDownItems.Clear();
-            List<IMenuItem> dirMenuItems = new List<IMenuItem>();
-            List<IMenuItem> fileMenuItems = new List<IMenuItem>();
+            dirMenuItems.Clear();
+            fileMenuItems.Clear();
             foreach (IMenuItem child in children)
             {
                 child.Load();
@@ -521,7 +523,9 @@ namespace TrayDir
             bool ret = loadedIcon;
             if (ProgramData.pd.settings.app.ShowIconsInMenus && loadedIcon && menuIcon != null)
             {
-                menuItem.Image = menuIcon.ToBitmap();
+                if (menuItem.Image == null) {
+                    menuItem.Image = menuIcon;
+                }
             } else
             {
                 menuItem.Image = null;
@@ -569,8 +573,8 @@ namespace TrayDir
             if (children.Count != menuItem.DropDownItems.Count)
             {
                 menuItem.DropDownItems.Clear();
-                List<IMenuItem> dirMenuItems = new List<IMenuItem>();
-                List<IMenuItem> fileMenuItems = new List<IMenuItem>();
+                dirMenuItems.Clear();
+                fileMenuItems.Clear();
 
                 if (ProgramData.pd.settings.app.MenuSorting != "None")
                 {
@@ -614,8 +618,8 @@ namespace TrayDir
                 {
                     menuItem.DropDownItems.Clear();
                 }
-                List<IMenuItem> dirMenuItems = new List<IMenuItem>();
-                List<IMenuItem> fileMenuItems = new List<IMenuItem>();
+                dirMenuItems.Clear();
+                fileMenuItems.Clear();
 
                 foreach (IMenuItem child in children)
                 {

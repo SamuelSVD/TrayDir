@@ -35,10 +35,10 @@ namespace TrayDir
             node.Text = s;
             if (AppUtils.PathIsFile(tp.path))
             {
-                Icon i = IconUtils.lookupIcon(tp.getSignature());
+                Bitmap i = IconUtils.lookupIcon(tp.getSignature());
                 if (i == null)
                 {
-                    i = Icon.ExtractAssociatedIcon(tp.path);
+                    i = Icon.ExtractAssociatedIcon(tp.path).ToBitmap();
                     IconUtils.addIcon(tp.getSignature(), i);
                 }
                 node.TreeView.ImageList.Images.Add(i);

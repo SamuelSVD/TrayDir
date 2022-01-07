@@ -156,10 +156,10 @@ namespace TrayDir
                             }
                             else
                             {
-                                Icon i = IconUtils.lookupIcon(plugin.getSignature());
+                                Bitmap i = IconUtils.lookupIcon(plugin.getSignature());
                                 if (i == null)
                                 {
-                                    i = Icon.ExtractAssociatedIcon(plugin.path);
+                                    i = Icon.ExtractAssociatedIcon(plugin.path).ToBitmap();
                                     IconUtils.addIcon(plugin.getSignature(), i);
                                 }
                                 node.TreeView.ImageList.Images.Add(i);
