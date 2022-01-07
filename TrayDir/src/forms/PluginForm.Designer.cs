@@ -41,8 +41,8 @@ namespace TrayDir
             this.pathEdit = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
             this.nameEdit = new System.Windows.Forms.TextBox();
-            this.closeButton = new System.Windows.Forms.Button();
             this.alwaysRunAsAdminCheckBox = new System.Windows.Forms.CheckBox();
+            this.closeButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -190,19 +190,6 @@ namespace TrayDir
             this.nameEdit.Size = new System.Drawing.Size(356, 20);
             this.nameEdit.TabIndex = 4;
             // 
-            // closeButton
-            // 
-            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(294, 214);
-            this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
-            this.closeButton.TabIndex = 2;
-            this.closeButton.Text = "Close";
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-            // 
             // alwaysRunAsAdminCheckBox
             // 
             this.alwaysRunAsAdminCheckBox.AutoSize = true;
@@ -217,12 +204,27 @@ namespace TrayDir
             this.alwaysRunAsAdminCheckBox.UseVisualStyleBackColor = true;
             this.alwaysRunAsAdminCheckBox.CheckedChanged += new System.EventHandler(this.alwaysRunAsAdmin_CheckedChanged);
             // 
+            // closeButton
+            // 
+            this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.closeButton.Location = new System.Drawing.Point(294, 214);
+            this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.TabIndex = 2;
+            this.closeButton.Text = "Close";
+            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
             // PluginForm
             // 
+            this.AcceptButton = this.closeButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.CancelButton = this.closeButton;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

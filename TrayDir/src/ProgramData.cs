@@ -142,5 +142,17 @@ namespace TrayDir
                 ti.FixPaths();
             }
         }
+        public void RemovedPlugin(int i) {
+            foreach(TrayInstance ti in trayInstances) {
+                foreach(TrayInstancePlugin tip in ti.plugins) {
+                    if (tip.id > i) tip.id--;
+                }
+            }
+            foreach(TrayInstance ti in archivedInstances) {
+                foreach(TrayInstancePlugin tip in ti.plugins) {
+                    if (tip.id > i) tip.id--;
+                }
+            }
+        }
     }
 }

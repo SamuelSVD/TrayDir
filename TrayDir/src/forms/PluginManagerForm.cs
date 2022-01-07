@@ -74,17 +74,23 @@ namespace TrayDir
                 {
                     bool used = false;
                     int pid = ProgramData.pd.plugins.IndexOf(selectedNode.tp);
-                    foreach(TrayInstance ti in ProgramData.pd.trayInstances)
-                    {
-                        foreach(TrayInstancePlugin tip in ti.plugins)
-                        {
+                    foreach (TrayInstance ti in ProgramData.pd.trayInstances) {
+                        foreach (TrayInstancePlugin tip in ti.plugins) {
+                            used = used || (tip.plugin == selectedNode.tp);
+                        }
+                    }
+                    foreach (TrayInstance ti in ProgramData.pd.archivedInstances) {
+                        foreach (TrayInstancePlugin tip in ti.plugins) {
                             used = used || (tip.plugin == selectedNode.tp);
                         }
                     }
                     if (!used)
                     {
+                        int i = ProgramData.pd.plugins.IndexOf(selectedNode.tp);
                         ProgramData.pd.plugins.Remove(selectedNode.tp);
                         treeView1.Nodes.Remove(selectedNode.node);
+                        ProgramData.pd.RemovedPlugin(i);
+                        ProgramData.pd.Save();
                     }
                     else
                     {
@@ -152,6 +158,7 @@ namespace TrayDir
 
         private void PluginManagerForm_Shown(object sender, EventArgs e)
         {
+            treeView1.SelectedNode = null;
             editButton.Enabled = false;
             deleteButton.Enabled = false;
             exportButton.Enabled = false;
