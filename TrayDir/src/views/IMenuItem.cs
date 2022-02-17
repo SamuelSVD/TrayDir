@@ -88,6 +88,13 @@ namespace TrayDir
                 Thread.Sleep(1);
             }
         }
+        public static bool PerformIconLoading() {
+            if (IMenuItem.urlLoadQueue != null && IMenuItem.urlLoadQueue.Count > 0) {
+                IMenuItem.tryLoadIconThread(IMenuItem.urlLoadSemaphore, IMenuItem.urlLoadQueue);
+                return true;
+            }
+            return false;
+        }
         public static bool tryLoadIconThread(Semaphore sem, Queue<IMenuItem> queue)
         {
             sem.WaitOne();

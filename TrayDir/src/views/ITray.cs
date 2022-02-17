@@ -13,6 +13,15 @@ namespace TrayDir
         public List<IMenuItem> pathMenuItems;
         public List<IMenuItem> virtualFolderMenuItems;
         public List<IMenuItem> pluginMenuItems;
+        public List<IMenuItem> menuItems {
+            get {
+                List<IMenuItem> iml = new List<IMenuItem>();
+                iml.AddRange(pathMenuItems);
+                iml.AddRange(virtualFolderMenuItems);
+                iml.AddRange(pluginMenuItems);
+                return iml;
+            }
+        }
         private ToolStripMenuItem showMenuItem;
         private ToolStripMenuItem hideMenuItem;
         private ToolStripMenuItem exitMenuItem;

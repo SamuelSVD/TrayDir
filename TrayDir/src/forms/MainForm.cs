@@ -19,6 +19,7 @@ namespace TrayDir
         public TabPage newTabTabPage;
 
         private bool loaded = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -52,6 +53,9 @@ namespace TrayDir
             if (pd.settings.win.CheckForUpdates)
             {
                 UpdateUtils.CheckForUpdates();
+            }
+            if (pd.settings.app.ShowIconsInMenus) {
+                iconLoadTimer.Start();
             }
             loaded = true;
         }
@@ -454,17 +458,22 @@ namespace TrayDir
         }
         private void iconLoadTimer_Tick(object sender, EventArgs e)
         {
-            if (loaded)
-            {
+            if (LoadIconsTick()) {
+                iconLoadTimer.Stop();
+            }
+        }
+        private bool LoadIconsTick() {
+            if (loaded) {
                 bool ret = true;
-                foreach (TrayInstance ti in pd.trayInstances)
-                {
+                foreach (TrayInstance ti in pd.trayInstances) {
                     ret = ti.view.tray.UpdateMenuIcons() && ret;
+                    foreach (IMenuItem imi in ti.view.tray.menuItems) {
+                        imi.EnqueueImgLoad();
+                    }
                 }
-                if (ret)
-                {
-                    iconLoadTimer.Stop();
-                }
+                return ret;
+            } else {
+                return false;
             }
         }
         private void rebuildCurrentToolStripMenuItem_Click(object sender, EventArgs e)
@@ -502,12 +511,9 @@ namespace TrayDir
 
         private void imgLoadTimer_Tick(object sender, EventArgs e)
         {
-            if (IMenuItem.urlLoadQueue != null && IMenuItem.urlLoadQueue.Count > 0)
-            {
-                IMenuItem.tryLoadIconThread(IMenuItem.urlLoadSemaphore, IMenuItem.urlLoadQueue);
+            if (IMenuItem.PerformIconLoading()) {
                 imgLoadTimer.Interval = 10;
-            } else
-            {
+            } else {
                 imgLoadTimer.Interval = 1000;
             }
         }
