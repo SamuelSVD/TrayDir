@@ -277,7 +277,8 @@ namespace TrayDir
             ti.iconPath = iconPath;
             ti.instanceName = instanceName;
             ti.ignoreRegex = ignoreRegex;
-            foreach(TrayInstancePath tip in paths)
+            ti.iconData = iconData;
+            foreach (TrayInstancePath tip in paths)
             {
                 ti.paths.Add(tip.Copy());
             }
