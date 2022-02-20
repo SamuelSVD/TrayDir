@@ -8,7 +8,7 @@ namespace TrayDir
     public class SettingsApplication : StringIndexable
     {
         [XmlAttribute]
-        public bool ShowIconsInMenus;
+        public bool ShowIconsInMenus = true;
         [XmlAttribute]
         public string MenuSorting = "Folders Top";
         [XmlAttribute]
