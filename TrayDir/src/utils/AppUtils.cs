@@ -251,7 +251,9 @@ namespace TrayDir
                 if (i < tp.parameters.Count) {
                     tpp = tp.parameters[i];
                 }
-                parameters += BuildPluginParameter(param, tpp) + " ";
+                if (i < tip.parameters.Count - 1) {
+                    parameters += BuildPluginParameter(param, tpp) + " ";
+                }
             }
             return parameters;
         }

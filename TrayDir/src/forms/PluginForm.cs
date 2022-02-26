@@ -16,6 +16,7 @@ namespace TrayDir
             paramNumericUpDown.Value = plugin.tp.parameterCount;
             configureParamsButton.Enabled = plugin.tp.parameterCount > 0;
             alwaysRunAsAdminCheckBox.Checked = plugin.tp.AlwaysRunAsAdmin;
+            openIndirectCheckBox.Checked = plugin.tp.OpenIndirect;
         }
         private void closeButton_Click(object sender, EventArgs e)
         {
@@ -62,6 +63,10 @@ namespace TrayDir
 
         private void alwaysRunAsAdmin_CheckedChanged(object sender, EventArgs e) {
             plugin.tp.AlwaysRunAsAdmin = alwaysRunAsAdminCheckBox.Checked;
+        }
+
+        private void openExternallyCheckBox_Click(object sender, EventArgs e) {
+            plugin.tp.OpenIndirect = openIndirectCheckBox.Checked;
         }
     }
 }

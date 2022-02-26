@@ -33,6 +33,7 @@ namespace TrayDir
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.openIndirectCheckBox = new System.Windows.Forms.CheckBox();
             this.configureParamsButton = new System.Windows.Forms.Button();
             this.paramNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.pathLabel = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@ namespace TrayDir
             this.nameEdit = new System.Windows.Forms.TextBox();
             this.alwaysRunAsAdminCheckBox = new System.Windows.Forms.CheckBox();
             this.closeButton = new System.Windows.Forms.Button();
-            this.openExternallyCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -88,7 +88,7 @@ namespace TrayDir
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.Controls.Add(this.openExternallyCheckBox, 0, 10);
+            this.tableLayoutPanel3.Controls.Add(this.openIndirectCheckBox, 0, 10);
             this.tableLayoutPanel3.Controls.Add(this.configureParamsButton, 1, 7);
             this.tableLayoutPanel3.Controls.Add(this.paramNumericUpDown, 0, 6);
             this.tableLayoutPanel3.Controls.Add(this.pathLabel, 0, 0);
@@ -115,6 +115,20 @@ namespace TrayDir
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.Size = new System.Drawing.Size(362, 195);
             this.tableLayoutPanel3.TabIndex = 6;
+            // 
+            // openIndirectCheckBox
+            // 
+            this.openIndirectCheckBox.AutoSize = true;
+            this.openIndirectCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tableLayoutPanel3.SetColumnSpan(this.openIndirectCheckBox, 2);
+            this.openIndirectCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.openIndirectCheckBox.Location = new System.Drawing.Point(3, 175);
+            this.openIndirectCheckBox.Name = "openIndirectCheckBox";
+            this.openIndirectCheckBox.Size = new System.Drawing.Size(356, 17);
+            this.openIndirectCheckBox.TabIndex = 10;
+            this.openIndirectCheckBox.Text = "Run Plugin Indirectly";
+            this.openIndirectCheckBox.UseVisualStyleBackColor = true;
+            this.openIndirectCheckBox.Click += new System.EventHandler(this.openExternallyCheckBox_Click);
             // 
             // configureParamsButton
             // 
@@ -220,19 +234,6 @@ namespace TrayDir
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
             // 
-            // openExternallyCheckBox
-            // 
-            this.openExternallyCheckBox.AutoSize = true;
-            this.openExternallyCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.tableLayoutPanel3.SetColumnSpan(this.openExternallyCheckBox, 2);
-            this.openExternallyCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.openExternallyCheckBox.Location = new System.Drawing.Point(3, 175);
-            this.openExternallyCheckBox.Name = "openExternallyCheckBox";
-            this.openExternallyCheckBox.Size = new System.Drawing.Size(356, 17);
-            this.openExternallyCheckBox.TabIndex = 10;
-            this.openExternallyCheckBox.Text = "Run Plugin Indirectly";
-            this.openExternallyCheckBox.UseVisualStyleBackColor = true;
-            // 
             // PluginForm
             // 
             this.AcceptButton = this.closeButton;
@@ -276,6 +277,6 @@ namespace TrayDir
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button configureParamsButton;
         private System.Windows.Forms.CheckBox alwaysRunAsAdminCheckBox;
-        private System.Windows.Forms.CheckBox openExternallyCheckBox;
+        private System.Windows.Forms.CheckBox openIndirectCheckBox;
     }
 }
