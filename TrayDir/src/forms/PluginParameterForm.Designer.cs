@@ -41,6 +41,7 @@ namespace TrayDir
             this.label1 = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.closeButton = new System.Windows.Forms.Button();
+            this.alwaysIncludePrefixCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.pluginTableLayoutPanel.SuspendLayout();
@@ -61,7 +62,7 @@ namespace TrayDir
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(378, 209);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(378, 232);
             this.tableLayoutPanel4.TabIndex = 4;
             // 
             // groupBox1
@@ -73,7 +74,7 @@ namespace TrayDir
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 20, 5, 0);
-            this.groupBox1.Size = new System.Drawing.Size(372, 174);
+            this.groupBox1.Size = new System.Drawing.Size(372, 197);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Plugin Options";
@@ -84,6 +85,7 @@ namespace TrayDir
             this.pluginTableLayoutPanel.ColumnCount = 2;
             this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.pluginTableLayoutPanel.Controls.Add(this.alwaysIncludePrefixCheckBox, 0, 7);
             this.pluginTableLayoutPanel.Controls.Add(this.isBooleanCheckBox, 0, 6);
             this.pluginTableLayoutPanel.Controls.Add(this.prefixTextBox, 0, 5);
             this.pluginTableLayoutPanel.Controls.Add(this.pathLabel, 0, 0);
@@ -94,7 +96,7 @@ namespace TrayDir
             this.pluginTableLayoutPanel.Location = new System.Drawing.Point(5, 20);
             this.pluginTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
-            this.pluginTableLayoutPanel.RowCount = 7;
+            this.pluginTableLayoutPanel.RowCount = 8;
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -102,7 +104,8 @@ namespace TrayDir
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 141);
+            this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 164);
             this.pluginTableLayoutPanel.TabIndex = 6;
             // 
             // isBooleanCheckBox
@@ -183,13 +186,27 @@ namespace TrayDir
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(294, 183);
+            this.closeButton.Location = new System.Drawing.Point(294, 206);
             this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 2;
             this.closeButton.Text = "Apply";
             this.closeButton.UseVisualStyleBackColor = true;
+            // 
+            // alwaysIncludePrefixCheckBox
+            // 
+            this.alwaysIncludePrefixCheckBox.AutoSize = true;
+            this.alwaysIncludePrefixCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.pluginTableLayoutPanel.SetColumnSpan(this.alwaysIncludePrefixCheckBox, 2);
+            this.alwaysIncludePrefixCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.alwaysIncludePrefixCheckBox.Location = new System.Drawing.Point(3, 144);
+            this.alwaysIncludePrefixCheckBox.Name = "alwaysIncludePrefixCheckBox";
+            this.alwaysIncludePrefixCheckBox.Size = new System.Drawing.Size(356, 17);
+            this.alwaysIncludePrefixCheckBox.TabIndex = 12;
+            this.alwaysIncludePrefixCheckBox.Text = "Always include Prefix when executing plugin";
+            this.alwaysIncludePrefixCheckBox.UseVisualStyleBackColor = true;
+            this.alwaysIncludePrefixCheckBox.Click += new System.EventHandler(this.alwaysIncludePrefixCheckBox_Click);
             // 
             // PluginParameterForm
             // 
@@ -230,5 +247,6 @@ namespace TrayDir
         private System.Windows.Forms.TextBox prefixTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox isBooleanCheckBox;
+        private System.Windows.Forms.CheckBox alwaysIncludePrefixCheckBox;
     }
 }

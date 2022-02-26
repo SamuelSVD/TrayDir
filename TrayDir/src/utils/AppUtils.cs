@@ -189,7 +189,7 @@ namespace TrayDir
         }
         public static void RunPlugin(TrayInstancePlugin p, bool runasadmin)
         {
-            bool runExternally = (p.plugin != null ? !p.plugin.OpenIndirect : false);
+            bool runExternally = (p.plugin != null ? p.plugin.OpenIndirect : false);
             if ((!runExternally) && (runasadmin || (p.plugin != null ? p.plugin.AlwaysRunAsAdmin : false)))
             {
                 RunPluginAsAdmin(p);
@@ -213,7 +213,10 @@ namespace TrayDir
             TrayPlugin plugin = tip.plugin;
             if (plugin != null && plugin.path != null && PathIsFile(plugin.path)) {
                 string parameters = BuildPluginCliParams(tip);
-                parameters = String.Format("/c start \"TrayDir - Open Indirectly\" /d \"{0}\" \"{1}\" {2}", Path.GetDirectoryName(plugin.path), Path.GetFileName(plugin.path), parameters);
+                if (parameters != "") {
+                    parameters = " " + parameters;
+                }
+                parameters = String.Format("/c start \"TrayDir - Open Indirectly\" /d \"{0}\" \"{1}\"{2}", Path.GetDirectoryName(plugin.path), Path.GetFileName(plugin.path), parameters);
                 //parameters = String.Format("/k \"{0}\" {1} | exit", plugin.path, parameters);
                 Process.Start("cmd", parameters);
             }
@@ -251,8 +254,10 @@ namespace TrayDir
                 if (i < tp.parameters.Count) {
                     tpp = tp.parameters[i];
                 }
-                if (i < tip.parameters.Count - 1) {
-                    parameters += BuildPluginParameter(param, tpp) + " ";
+                string parameter = BuildPluginParameter(param, tpp);
+                parameters += parameter;
+                if ((parameter != "") && (i < (tip.parameters.Count - 1))) {
+                    parameters += " ";
                 }
             }
             return parameters;
@@ -268,7 +273,17 @@ namespace TrayDir
                         return "";
                     }
                 } else {
-                    return String.Format("{0} {1}", tpp.prefix, tipp.value);
+                    if (tpp.prefix != "") {
+                        if (tpp.alwaysIncludePrefix || tipp.value != "") {
+                            return String.Format("{0}{1}", tpp.prefix, tipp.value != "" ? " " + tipp.value : "");
+                        }
+                        else {
+                            return "";
+                        }
+                    }
+                    else {
+                        return tipp.value;
+                    }
                 }
             }
         }
