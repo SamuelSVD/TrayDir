@@ -189,9 +189,13 @@ namespace TrayDir
         }
         public static void RunPlugin(TrayInstancePlugin p, bool runasadmin)
         {
-            if (runasadmin || (p.plugin != null ? p.plugin.AlwaysRunAsAdmin : false))
+            bool runExternally = (p.plugin != null ? !p.plugin.OpenIndirect : false);
+            if ((!runExternally) && (runasadmin || (p.plugin != null ? p.plugin.AlwaysRunAsAdmin : false)))
             {
                 RunPluginAsAdmin(p);
+            }
+            else if (runExternally) {
+                RunPluginExternally(p);
             }
             else
             {
@@ -200,10 +204,18 @@ namespace TrayDir
         }
         public static void RunPlugin(TrayInstancePlugin tip) {
             TrayPlugin plugin = tip.plugin;
-            if (plugin != null && plugin.path != null && PathIsFile(plugin.path))
-            {
+            if (plugin != null && plugin.path != null && PathIsFile(plugin.path)) {
                 string parameters = BuildPluginCliParams(tip);
                 Process.Start(plugin.path, parameters);
+            }
+        }
+        public static void RunPluginExternally(TrayInstancePlugin tip) {
+            TrayPlugin plugin = tip.plugin;
+            if (plugin != null && plugin.path != null && PathIsFile(plugin.path)) {
+                string parameters = BuildPluginCliParams(tip);
+                parameters = String.Format("/c start \"TrayDir - Open Indirectly\" /d \"{0}\" \"{1}\" {2}", Path.GetDirectoryName(plugin.path), Path.GetFileName(plugin.path), parameters);
+                //parameters = String.Format("/k \"{0}\" {1} | exit", plugin.path, parameters);
+                Process.Start("cmd", parameters);
             }
         }
         public static void RunPluginAsAdmin(TrayInstancePlugin tip)

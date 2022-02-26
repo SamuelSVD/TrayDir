@@ -15,6 +15,8 @@ namespace TrayDir
         [XmlAttribute]
         public bool AlwaysRunAsAdmin = false;
         [XmlAttribute]
+        public bool OpenIndirect = false;
+        [XmlAttribute]
         public string Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
         public List<TrayPluginParameter> parameters = new List<TrayPluginParameter>();
         public string getSignature()
