@@ -479,6 +479,7 @@ namespace TrayDir
         private void rebuildCurrentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             trayInstance.view.tray.Rebuild();
+            trayInstance.view.treeviewForm.Rebuild();
             resizeForm();
         }
         private void rebuildAllToolStripMenuItem_Click(object sender, EventArgs e)

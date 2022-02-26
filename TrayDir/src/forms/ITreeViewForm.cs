@@ -156,6 +156,12 @@ namespace TrayDir
             MainForm.form.BuildExploreDropdown();
             ProgramData.pd.Save();
         }
+        public void Rebuild()
+        {
+            foreach(ITreeNode itn in nodes) {
+                itn.Refresh();
+            }
+        }
         private void upButton_Click(object sender, EventArgs e)
         {
             selectedNode.MoveUp();

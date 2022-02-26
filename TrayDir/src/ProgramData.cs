@@ -132,6 +132,7 @@ namespace TrayDir
                 if (ti.view != null)
                 {
                     ti.view.tray.Rebuild();
+                    ti.view.treeviewForm.Rebuild();
                 }
             }
         }
