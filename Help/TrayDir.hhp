@@ -1,0 +1,12 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=TrayDir.chm
+Contents file=C:\Programming\samverApps\TrayDir\Help\src\Table of Contents.hhc
+Default topic=src/index.htm
+Display compile progress=No
+Index file=C:\Programming\samverApps\TrayDir\Help\src\Index.hhk
+Language=0x409 English (United States)
+
+
+[INFOTYPES]
+
