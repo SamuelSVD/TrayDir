@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -547,6 +548,29 @@ namespace TrayDir
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pd.SaveAs();
+        }
+        private void donateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/sponsors/SamuelSVD");
+        }
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string helpPath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\traydir.chm";
+            try {
+                if (!File.Exists(helpPath)) {
+                    using (Stream input = new MemoryStream(Properties.Resource_Help.TrayDir))
+                    using (Stream output = File.Create(helpPath)) {
+                        input.CopyTo(output);
+                    }
+                }
+            }
+            catch { }
+            System.Diagnostics.Process.Start(helpPath);
+        }
+
+        private void mainMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

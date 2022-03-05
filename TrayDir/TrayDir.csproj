@@ -94,6 +94,11 @@
     <Compile Include="lib\VerticalSeparator\VerticalSeparator.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Properties\Resource_Help.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource_Help.resx</DependentUpon>
+    </Compile>
     <Compile Include="src\controls\NativeContextMenuStrip.cs" />
     <Compile Include="src\controls\SmartTabControl.cs">
       <SubType>Component</SubType>
@@ -197,6 +202,10 @@
     <Compile Include="src\views\ITreeNode.cs" />
     <Compile Include="src\views\IView.cs" />
     <Compile Include="src\views\OptionView.cs" />
+    <EmbeddedResource Include="Properties\Resource_Help.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource_Help.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -252,6 +261,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\TrayDir.chm" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
