@@ -42,110 +42,91 @@ namespace TrayDir
         {
             return System.Text.RegularExpressions.Regex.Replace(input, "([A-Z])", " $1", System.Text.RegularExpressions.RegexOptions.Compiled).Trim();
         }
-        public static void OpenPath(string path, bool runAsAdmin)
+        public static void ProcessStart(string fileName)
         {
-            try
-            {
-                if (runAsAdmin)
-                {
-                    ExecuteAsAdmin(path);
-                }
-                else
-                {
-                    Process.Start(path);
+            ProcessStart(fileName, false);
+        }
+        public static void ProcessStart(string fileName, bool runasadmin)
+        {
+            ProcessStart(fileName, "", runasadmin);
+        }
+        public static void ProcessStart(string fileName, string parameters, bool runasadmin)
+        {
+            ProcessStart("", fileName, parameters, runasadmin);
+        }
+        public static void ProcessStart(string startingPath, string fileName, string parameters, bool runasadmin)
+        {
+            Process proc = new Process();
+            if ((startingPath == null || startingPath == "") && PathIsFile(fileName)) {
+                proc.StartInfo.WorkingDirectory = new FileInfo(fileName).Directory.FullName;
+            }
+            if (PathIsDirectory(fileName)) {
+                    proc.StartInfo.FileName = "explorer.exe";
+                    proc.StartInfo.Arguments = fileName;
+            } else {
+                proc.StartInfo.FileName = fileName;
+                proc.StartInfo.Arguments = parameters != null? parameters.Trim() : "";
+                if (runasadmin) {
+                    proc.StartInfo.UseShellExecute = true;
+                    proc.StartInfo.FileName = fileName;
+                    proc.StartInfo.Verb = "runas";
                 }
             }
-            catch (Exception e)
+            try {
+                proc.Start();
+            }
+            catch (Exception e) {
+                MessageBox.Show(String.Format("Error starting.\n{0}\n{1}", fileName,e.Message), "Error");
+            }
+        }
+        public static void OpenPath(string path, bool runAsAdmin)
+        {
+            if (runAsAdmin)
             {
-                MessageBox.Show("Error Opening: " + path + '\n' + e.Message);
+                ProcessStart(path,true);
+            }
+            else
+            {
+                ProcessStart(path);
             }
         }
         public static void OpenCmdPath(string path)
         {
-            try
+            if (PathIsFile(path))
             {
-                if (PathIsFile(path))
-                {
-                    Process.Start("cmd", "/k cd \"" + new FileInfo(path).Directory.FullName + "\"");
-                }
-                else
-                {
-                    Process.Start("cmd", "/k cd \"" + path + "\"");
-                }
+                ProcessStart(new FileInfo(path).Directory.FullName, "cmd", "", false);
             }
-            catch (Exception e)
+            else
             {
-                MessageBox.Show("Error Exploring: " + path + '\n' + e.Message);
+                ProcessStart(path, "cmd", "", false);
             }
         }
         public static void OpenAdminCmdPath(string path)
         {
-            Process proc = new Process();
-            proc.StartInfo.UseShellExecute = true;
-            proc.StartInfo.FileName = "cmd";
-            proc.StartInfo.Verb = "runas";
-            try
+            if (PathIsFile(path))
             {
-                if (PathIsFile(path))
-                {
-                    proc.StartInfo.Arguments = "/k cd \"" + new FileInfo(path).Directory.FullName + "\"";
-                }
-                else
-                {
-                    proc.StartInfo.Arguments = "/k cd \"" + path + "\"";
-                }
-                proc.Start();
+                ProcessStart("cmd", String.Format("/k cd \"{0}\"",new FileInfo(path).Directory.FullName), true);
             }
-            catch (Exception e)
+            else
             {
-                MessageBox.Show("Error Opening As Admin: " + '\n' + path + '\n' + e.Message, "Error");
+                ProcessStart("cmd", String.Format("/k cd \"{0}\"", path), true);
             }
         }
         public static void ExplorePath(string path)
         {
-            try
+            if (PathIsFile(path))
             {
-                if (PathIsFile(path))
-                {
-                    Process.Start("explorer.exe", new FileInfo(path).Directory.FullName);
-                }
-                else
-                {
-                    Process.Start("explorer.exe", path);
-                }
+                ProcessStart("explorer.exe", new FileInfo(path).Directory.FullName, false);
             }
-            catch (Exception e)
+            else
             {
-                MessageBox.Show("Error Exploring: " + path + '\n' + e.Message);
-            }
-        }
-        private static void ExecuteAsAdmin(string path)
-        {
-            Process proc = new Process();
-            proc.StartInfo.UseShellExecute = true;
-            proc.StartInfo.FileName = path;
-            proc.StartInfo.Verb = "runas";
-            try
-            {
-                if (PathIsFile(path))
-                {
-                    proc.Start();
-                }
-                else
-                {
-                    Process.Start("explorer.exe", path);
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error Executing As Admin: " + '\n' + path + '\n' + e.Message, "Error");
+                ProcessStart("explorer.exe", path, false);
             }
         }
         public static bool StrToBool(string value)
         {
             return value == "1" ? true : false;
         }
-
         public static void ExportInstance(TrayInstance instance)
         {
             SaveFileDialog sfd = new SaveFileDialog();
@@ -206,7 +187,7 @@ namespace TrayDir
             TrayPlugin plugin = tip.plugin;
             if (plugin != null && plugin.path != null && PathIsFile(plugin.path)) {
                 string parameters = BuildPluginCliParams(tip);
-                Process.Start(plugin.path, parameters);
+                ProcessStart(plugin.path, parameters,false);
             }
         }
         public static void RunPluginExternally(TrayInstancePlugin tip) {
@@ -218,7 +199,7 @@ namespace TrayDir
                 }
                 parameters = String.Format("/c start \"TrayDir - Open Indirectly\" /d \"{0}\" \"{1}\"{2}", Path.GetDirectoryName(plugin.path), Path.GetFileName(plugin.path), parameters);
                 //parameters = String.Format("/k \"{0}\" {1} | exit", plugin.path, parameters);
-                Process.Start("cmd", parameters);
+                ProcessStart("cmd", parameters,false);
             }
         }
         public static void RunPluginAsAdmin(TrayInstancePlugin tip)
@@ -227,22 +208,7 @@ namespace TrayDir
             if (plugin != null)
             {
                 string parameters = BuildPluginCliParams(tip);
-                Process proc = new Process();
-                proc.StartInfo.UseShellExecute = true;
-                proc.StartInfo.FileName = plugin.path;
-                proc.StartInfo.Verb = "runas";
-                proc.StartInfo.Arguments = parameters;
-                try
-                {
-                    if (PathIsFile(plugin.path))
-                    {
-                        proc.Start();
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Error Executing As Admin: " + '\n' + plugin.path + '\n' + e.Message, "Error");
-                }
+                ProcessStart(plugin.path, parameters, true);
             }
         }
         public static string BuildPluginCliParams(TrayInstancePlugin tip) {
