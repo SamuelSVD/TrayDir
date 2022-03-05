@@ -57,8 +57,12 @@ namespace TrayDir
         public static void ProcessStart(string startingPath, string fileName, string parameters, bool runasadmin)
         {
             Process proc = new Process();
-            if ((startingPath == null || startingPath == "") && PathIsFile(fileName)) {
-                proc.StartInfo.WorkingDirectory = new FileInfo(fileName).Directory.FullName;
+            if ((startingPath == null || startingPath == "")) {
+                if (PathIsFile(fileName)) {
+                    proc.StartInfo.WorkingDirectory = new FileInfo(fileName).Directory.FullName;
+                }
+            } else {
+                proc.StartInfo.WorkingDirectory = startingPath;
             }
             if (PathIsDirectory(fileName)) {
                     proc.StartInfo.FileName = "explorer.exe";
