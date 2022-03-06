@@ -31,7 +31,6 @@ namespace TrayDir
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ITreeViewForm));
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.downButton = new System.Windows.Forms.Button();
@@ -58,24 +57,6 @@ namespace TrayDir
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "document.png");
-            this.imageList1.Images.SetKeyName(1, "folder.png");
-            this.imageList1.Images.SetKeyName(2, "folder_blue.png");
-            this.imageList1.Images.SetKeyName(3, "runnable.png");
-            this.imageList1.Images.SetKeyName(4, "g4566.png");
-            this.imageList1.Images.SetKeyName(5, "up.png");
-            this.imageList1.Images.SetKeyName(6, "down.png");
-            this.imageList1.Images.SetKeyName(7, "runnable_new.png");
-            this.imageList1.Images.SetKeyName(8, "g1.png");
-            this.imageList1.Images.SetKeyName(9, "folder_new.png");
-            this.imageList1.Images.SetKeyName(10, "delete.png");
-            this.imageList1.Images.SetKeyName(11, "question.png");
-            this.imageList1.Images.SetKeyName(12, "folder_shortcut.png");
             // 
             // tableLayoutPanel1
             // 
@@ -329,7 +310,6 @@ namespace TrayDir
             this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView2.HideSelection = false;
             this.treeView2.ImageIndex = 0;
-            this.treeView2.ImageList = this.imageList1;
             this.treeView2.Location = new System.Drawing.Point(3, 3);
             this.treeView2.Name = "treeView2";
             this.treeView2.SelectedImageIndex = 0;
@@ -365,7 +345,6 @@ namespace TrayDir
         }
 
         #endregion
-        private System.Windows.Forms.ImageList imageList1;
         public System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button newDocButton;

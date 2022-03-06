@@ -51,23 +51,26 @@ namespace TrayDir
             }
             treeView2.ExpandAll();
             TreeNode folder = new TreeNode();
-            LoadImages();
-            updateImage(upButton, 5);
-            updateImage(downButton, 6);
-            updateImage(indentButton, 12);
-            updateImage(outdentButton, 13);
-            updateImage(newDocButton, 8);
-            updateImage(newFolderButton, 9);
-            updateImage(newPluginButton, 7);
-            updateImage(newVirtualFolderButton, 4);
-            updateImage(deleteButton, 10);
-            docPropertiesButton.Image = imageList1.Images[0];
+            if (!IconUtils.initialized) {
+                IconUtils.Init(upButton.Font.Height);
+            }
+            this.treeView2.ImageList = IconUtils.imageList;
+            updateImage(upButton, IconUtils.UP);
+            updateImage(downButton, IconUtils.DOWN);
+            updateImage(indentButton, IconUtils.INDENT_IN);
+            updateImage(outdentButton, IconUtils.INDENT_OUT);
+            updateImage(newDocButton, IconUtils.DOCUMENT_NEW);
+            updateImage(newFolderButton, IconUtils.FOLDER_NEW);
+            updateImage(newPluginButton, IconUtils.RUNNABLE_NEW);
+            updateImage(newVirtualFolderButton, IconUtils.FOLDER_BLUE_NEW);
+            updateImage(deleteButton, IconUtils.DELETE);
+            docPropertiesButton.Image = IconUtils.DocumentImage;
             docPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             docPropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
-            folderPropertiesButton.Image = imageList1.Images[1];
+            folderPropertiesButton.Image = IconUtils.FolderImage;
             folderPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             folderPropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
-            pluginPropertiesButton.Image = imageList1.Images[3];
+            pluginPropertiesButton.Image = IconUtils.RunnableImage;
             pluginPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
             pluginPropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
             UpdateButtonEnables();
@@ -100,42 +103,8 @@ namespace TrayDir
         }
         private void updateImage(Button b, int index)
         {
-            b.Image = imageList1.Images[index];
+            b.Image = IconUtils.imageList.Images[index];
             b.Width = b.Height;
-        }
-        private void LoadImages()
-        {
-            imageList1.ImageSize = new Size(upButton.Font.Height, upButton.Font.Height);
-            imageList1.Images.Add(TrayDir.Properties.Resources.document);       //0
-            IconUtils.DOCUMENT = 0;
-            imageList1.Images.Add(TrayDir.Properties.Resources.folder);         //1
-            IconUtils.FOLDER = 1;
-            imageList1.Images.Add(TrayDir.Properties.Resources.folder_blue);    //2
-            IconUtils.FOLDER_BLUE = 2;
-            imageList1.Images.Add(TrayDir.Properties.Resources.runnable);       //3
-            IconUtils.RUNNABLE = 3;
-            imageList1.Images.Add(TrayDir.Properties.Resources.folder_blue_new);//4
-            IconUtils.FOLDER_BLUE_NEW = 4;
-            imageList1.Images.Add(TrayDir.Properties.Resources.up);             //5
-            IconUtils.UP = 5;
-            imageList1.Images.Add(TrayDir.Properties.Resources.down);           //6
-            IconUtils.DOWN = 6;
-            imageList1.Images.Add(TrayDir.Properties.Resources.runnable_new);   //7
-            IconUtils.RUNNABLE_NEW = 7;
-            imageList1.Images.Add(TrayDir.Properties.Resources.document_new);   //8
-            IconUtils.DOCUMENT_NEW = 8;
-            imageList1.Images.Add(TrayDir.Properties.Resources.folder_new);     //9
-            IconUtils.FOLDER_NEW = 9;
-            imageList1.Images.Add(TrayDir.Properties.Resources.delete);        //10
-            IconUtils.DELETE = 10;
-            imageList1.Images.Add(TrayDir.Properties.Resources.question);       //11
-            IconUtils.QUESTION = 11;
-            imageList1.Images.Add(TrayDir.Properties.Resources.indent_in);      //12
-            IconUtils.INDENT_IN = 12;
-            imageList1.Images.Add(TrayDir.Properties.Resources.indent_out);     //13
-            IconUtils.INDENT_OUT = 13;
-            imageList1.Images.Add(TrayDir.Properties.Resources.folder_shortcut);//14
-            IconUtils.FOLDER_SHORTCUT = 14;
         }
         private void treeView2_AfterSelect(object sender, TreeViewEventArgs e)
         {
