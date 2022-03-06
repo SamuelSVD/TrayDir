@@ -109,6 +109,18 @@
     <Compile Include="src\forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\forms\IFileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\forms\IFileForm.Designer.cs">
+      <DependentUpon>IFileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\forms\IFolderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\forms\IFolderForm.Designer.cs">
+      <DependentUpon>IFolderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\forms\IOptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -209,6 +221,12 @@
     <EmbeddedResource Include="src\forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\IFileForm.resx">
+      <DependentUpon>IFileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\IFolderForm.resx">
+      <DependentUpon>IFolderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\IOptionsForm.resx">
       <DependentUpon>IOptionsForm.cs</DependentUpon>
