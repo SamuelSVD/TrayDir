@@ -129,7 +129,11 @@ namespace TrayDir
                     }
                     else if (mi.menuIcon is null && mi.isDir)
                     {
-                        mi.menuIcon = new Bitmap(Properties.Resources.folder);
+                        if (mi.tiPath != null && mi.tiPath.shortcut) {
+                            mi.menuIcon = new Bitmap(Properties.Resources.folder_shortcut);
+                        } else {
+                            mi.menuIcon = new Bitmap(Properties.Resources.folder);
+                        }
                     }
                     else if (mi.menuIcon is null && mi.tiVirtualFolder != null) {
                         if (ProgramData.pd.settings.app.VFolderIcon != "Yellow Folder") {
