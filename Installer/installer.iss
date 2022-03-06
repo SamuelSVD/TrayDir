@@ -33,6 +33,7 @@ SetupIconFile=C:\Programming\samverApps\TrayDir\TrayDir\Resources\file-exe.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
+UsePreviousAppDir=no
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
