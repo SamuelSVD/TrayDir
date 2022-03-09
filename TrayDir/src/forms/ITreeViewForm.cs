@@ -158,7 +158,7 @@ namespace TrayDir
         private void newDocButton_Click(object sender, EventArgs e)
         {
             newPathButton_Click(sender, e);
-            docPropertiesButton_Click(null, null);
+            pathPropertiesButton_Click(null, null);
             selectedNode.Refresh();
             Save();
         }
@@ -220,10 +220,10 @@ namespace TrayDir
                 treeView2.Nodes.Add(itn.node);
             }
         }
-        private void docPropertiesButton_Click(object sender, EventArgs e)
+        private void pathPropertiesButton_Click(object sender, EventArgs e)
         {
             ITreeNode itn = selectedNode;
-            IFileForm iff = new IFileForm(instance.paths[itn.tin.id]);
+            IPathForm iff = new IPathForm(instance.paths[itn.tin.id]);
             iff.ShowDialog();
             itn.Refresh();
             itn.tin.instance.view.tray.Rebuild();
@@ -232,7 +232,7 @@ namespace TrayDir
         private void folderPropertiesButton_Click(object sender, EventArgs e)
         {
             ITreeNode itn = selectedNode;
-            IFolderForm iff = new IFolderForm(instance.paths[itn.tin.id]);
+            IPathForm iff = new IPathForm(instance.paths[itn.tin.id]);
             iff.ShowDialog();
             itn.Refresh();
             itn.tin.instance.view.tray.Rebuild();
@@ -494,6 +494,9 @@ namespace TrayDir
                 if (selectedNode.tin.type == TrayInstanceNode.NodeType.Plugin)
                 {
                     pluginPropertiesButton_Click(sender, e);
+                }
+                else if (selectedNode.tin.type == TrayInstanceNode.NodeType.Path) {
+                    pathPropertiesButton_Click(sender, e);
                 }
                 else
                 {

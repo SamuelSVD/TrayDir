@@ -261,7 +261,7 @@ namespace TrayDir
             this.docPropertiesButton.TabIndex = 0;
             this.docPropertiesButton.Text = "File";
             this.docPropertiesButton.UseVisualStyleBackColor = true;
-            this.docPropertiesButton.Click += new System.EventHandler(this.docPropertiesButton_Click);
+            this.docPropertiesButton.Click += new System.EventHandler(this.pathPropertiesButton_Click);
             // 
             // folderPropertiesButton
             // 
