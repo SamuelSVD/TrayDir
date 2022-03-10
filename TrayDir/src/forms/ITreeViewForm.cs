@@ -467,6 +467,11 @@ namespace TrayDir
                         newVirtualFolderButton_Click(sender, null);
                     }
                 }
+                if (e.KeyCode == Keys.E) {
+                    if (e.Modifiers == Keys.Control) {
+                        openInExplorerMenuItem_click(sender, null);
+                    }
+                }
                 if (e.KeyCode == Keys.F)
                 {
                     if (e.Modifiers == Keys.Control)
