@@ -24,6 +24,7 @@ namespace TrayDir.utils
         public static int RUNNABLE_NEW;
         public static int DOCUMENT_NEW;
         public static int FOLDER_NEW;
+        public static int EDIT;
         public static int DELETE;
         public static int QUESTION;
         public static int INDENT_IN;
@@ -45,7 +46,7 @@ namespace TrayDir.utils
         public static Image IndentInImage { get { return imageList.Images[INDENT_IN]; } }
         public static Image IndentOutImage { get { return imageList.Images[INDENT_OUT]; } }
         public static Image FolderShortcutImage { get { return imageList.Images[FOLDER_SHORTCUT]; } }
-
+        public static Image EditImage { get { return imageList.Images[EDIT]; } }
         public static void Init(int sizeWH)
         {
             imageList = new ImageList();
@@ -80,6 +81,8 @@ namespace TrayDir.utils
             IconUtils.INDENT_OUT = 13;
             imageList.Images.Add(TrayDir.Properties.Resources.folder_shortcut);//14
             IconUtils.FOLDER_SHORTCUT = 14;
+            imageList.Images.Add(TrayDir.Properties.Resources.edit);
+            IconUtils.EDIT = 15;
             initialized = true;
         }
         public static Bitmap lookupIcon(string key)

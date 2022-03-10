@@ -121,6 +121,12 @@
     <Compile Include="src\forms\IOptionsForm.Designer.cs">
       <DependentUpon>IOptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\forms\IVirtualFolderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\forms\IVirtualFolderForm.Designer.cs">
+      <DependentUpon>IVirtualFolderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\forms\PluginParameterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,9 @@
     <EmbeddedResource Include="src\forms\IOptionsForm.resx">
       <DependentUpon>IOptionsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\IVirtualFolderForm.resx">
+      <DependentUpon>IVirtualFolderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\forms\PluginParameterForm.resx">
       <DependentUpon>PluginParameterForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,6 +290,7 @@
     <Content Include="Resources\document.png" />
     <Content Include="Resources\document_new.png" />
     <Content Include="Resources\down.png" />
+    <None Include="Resources\edit.png" />
     <Content Include="Resources\file-exe.ico" />
     <Content Include="Resources\folder.png" />
     <Content Include="Resources\folder_blue.png" />

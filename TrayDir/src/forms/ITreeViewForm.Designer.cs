@@ -29,8 +29,6 @@ namespace TrayDir
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ITreeViewForm));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.downButton = new System.Windows.Forms.Button();
@@ -42,13 +40,10 @@ namespace TrayDir
             this.newFolderButton = new System.Windows.Forms.Button();
             this.newPluginButton = new System.Windows.Forms.Button();
             this.newVirtualFolderButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.docPropertiesButton = new System.Windows.Forms.Button();
-            this.folderPropertiesButton = new System.Windows.Forms.Button();
-            this.pluginPropertiesButton = new System.Windows.Forms.Button();
-            this.renameButton = new System.Windows.Forms.Button();
+            this.editButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel1.SuspendLayout();
@@ -153,7 +148,6 @@ namespace TrayDir
             this.tableLayoutPanel3.Controls.Add(this.newFolderButton, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.newPluginButton, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.newVirtualFolderButton, 3, 0);
-            this.tableLayoutPanel3.Controls.Add(this.deleteButton, 4, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(26, 0);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
@@ -203,16 +197,6 @@ namespace TrayDir
             this.newVirtualFolderButton.UseVisualStyleBackColor = true;
             this.newVirtualFolderButton.Click += new System.EventHandler(this.newVirtualFolderButton_Click);
             // 
-            // deleteButton
-            // 
-            this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.deleteButton.Location = new System.Drawing.Point(119, 3);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
-            this.deleteButton.TabIndex = 4;
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
-            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.AutoSize = true;
@@ -235,10 +219,8 @@ namespace TrayDir
             this.tableLayoutPanel5.AutoSize = true;
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel5.Controls.Add(this.docPropertiesButton, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.folderPropertiesButton, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.pluginPropertiesButton, 0, 2);
-            this.tableLayoutPanel5.Controls.Add(this.renameButton, 0, 3);
+            this.tableLayoutPanel5.Controls.Add(this.editButton, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.deleteButton, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.button1, 0, 4);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(323, 3);
@@ -252,47 +234,27 @@ namespace TrayDir
             this.tableLayoutPanel5.Size = new System.Drawing.Size(82, 201);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
-            // docPropertiesButton
+            // editButton
             // 
-            this.docPropertiesButton.AutoSize = true;
-            this.docPropertiesButton.Location = new System.Drawing.Point(3, 3);
-            this.docPropertiesButton.Name = "docPropertiesButton";
-            this.docPropertiesButton.Size = new System.Drawing.Size(75, 23);
-            this.docPropertiesButton.TabIndex = 0;
-            this.docPropertiesButton.Text = "File";
-            this.docPropertiesButton.UseVisualStyleBackColor = true;
-            this.docPropertiesButton.Click += new System.EventHandler(this.pathPropertiesButton_Click);
+            this.editButton.AutoSize = true;
+            this.editButton.Location = new System.Drawing.Point(3, 3);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(75, 23);
+            this.editButton.TabIndex = 0;
+            this.editButton.Text = "Edit";
+            this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 
-            // folderPropertiesButton
+            // deleteButton
             // 
-            this.folderPropertiesButton.AutoSize = true;
-            this.folderPropertiesButton.Location = new System.Drawing.Point(3, 32);
-            this.folderPropertiesButton.Name = "folderPropertiesButton";
-            this.folderPropertiesButton.Size = new System.Drawing.Size(75, 23);
-            this.folderPropertiesButton.TabIndex = 1;
-            this.folderPropertiesButton.Text = "Folder";
-            this.folderPropertiesButton.UseVisualStyleBackColor = true;
-            this.folderPropertiesButton.Click += new System.EventHandler(this.folderPropertiesButton_Click);
-            // 
-            // pluginPropertiesButton
-            // 
-            this.pluginPropertiesButton.Location = new System.Drawing.Point(3, 61);
-            this.pluginPropertiesButton.Name = "pluginPropertiesButton";
-            this.pluginPropertiesButton.Size = new System.Drawing.Size(75, 23);
-            this.pluginPropertiesButton.TabIndex = 2;
-            this.pluginPropertiesButton.Text = "Plugin";
-            this.pluginPropertiesButton.UseVisualStyleBackColor = true;
-            this.pluginPropertiesButton.Click += new System.EventHandler(this.pluginPropertiesButton_Click);
-            // 
-            // renameButton
-            // 
-            this.renameButton.Location = new System.Drawing.Point(3, 90);
-            this.renameButton.Name = "renameButton";
-            this.renameButton.Size = new System.Drawing.Size(75, 23);
-            this.renameButton.TabIndex = 3;
-            this.renameButton.Text = "Rename...";
-            this.renameButton.UseVisualStyleBackColor = true;
-            this.renameButton.Click += new System.EventHandler(this.renameButton_Click);
+            this.deleteButton.AutoSize = true;
+            this.deleteButton.Location = new System.Drawing.Point(3, 32);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.TabIndex = 1;
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.folderPropertiesButton_Click);
             // 
             // button1
             // 
@@ -309,10 +271,8 @@ namespace TrayDir
             // 
             this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView2.HideSelection = false;
-            this.treeView2.ImageIndex = 0;
             this.treeView2.Location = new System.Drawing.Point(3, 3);
             this.treeView2.Name = "treeView2";
-            this.treeView2.SelectedImageIndex = 0;
             this.treeView2.Size = new System.Drawing.Size(314, 201);
             this.treeView2.TabIndex = 1;
             this.treeView2.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView2_BeforeCollapse);
@@ -351,16 +311,13 @@ namespace TrayDir
         private System.Windows.Forms.Button newFolderButton;
         private System.Windows.Forms.Button newPluginButton;
         private System.Windows.Forms.Button newVirtualFolderButton;
-        private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button upButton;
         private System.Windows.Forms.Button indentButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.Button docPropertiesButton;
-        private System.Windows.Forms.Button folderPropertiesButton;
-        private System.Windows.Forms.Button pluginPropertiesButton;
-        private System.Windows.Forms.Button renameButton;
+        private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.Button downButton;
         private System.Windows.Forms.Button outdentButton;

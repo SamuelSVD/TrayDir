@@ -63,16 +63,12 @@ namespace TrayDir
             updateImage(newFolderButton, IconUtils.FOLDER_NEW);
             updateImage(newPluginButton, IconUtils.RUNNABLE_NEW);
             updateImage(newVirtualFolderButton, IconUtils.FOLDER_BLUE_NEW);
-            updateImage(deleteButton, IconUtils.DELETE);
-            docPropertiesButton.Image = IconUtils.DocumentImage;
-            docPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            docPropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
-            folderPropertiesButton.Image = IconUtils.FolderImage;
-            folderPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            folderPropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
-            pluginPropertiesButton.Image = IconUtils.RunnableImage;
-            pluginPropertiesButton.TextImageRelation = TextImageRelation.ImageBeforeText;
-            pluginPropertiesButton.TextAlign = ContentAlignment.MiddleLeft;
+            editButton.Image = IconUtils.EditImage;
+            editButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+            editButton.TextAlign = ContentAlignment.MiddleLeft;
+            deleteButton.Image = IconUtils.DeleteImage;
+            deleteButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+            deleteButton.TextAlign = ContentAlignment.MiddleLeft;
             UpdateButtonEnables();
             foreach(ITreeNode n in nodes)
             {
@@ -220,6 +216,22 @@ namespace TrayDir
                 treeView2.Nodes.Add(itn.node);
             }
         }
+        private void editButton_Click(object sender, EventArgs e) {
+            ITreeNode itn = selectedNode;
+            if (itn != null && itn.tin != null) {
+                switch (itn.tin.type) {
+                    case TrayInstanceNode.NodeType.Path:
+                        pathPropertiesButton_Click(sender, e);
+                        break;
+                    case TrayInstanceNode.NodeType.Plugin:
+                        pluginPropertiesButton_Click(sender, e);
+                        break;
+                    case TrayInstanceNode.NodeType.VirtualFolder:
+                        vFolderPropertiesButton_Click(sender, e);
+                        break;
+                }
+            }
+        }
         private void pathPropertiesButton_Click(object sender, EventArgs e)
         {
             ITreeNode itn = selectedNode;
@@ -244,15 +256,12 @@ namespace TrayDir
             downButton.Enabled = selectedDownable;
             indentButton.Enabled = selectedIndentable;
             outdentButton.Enabled = selectedOutdentable;
-            renameButton.Enabled = selectedNode != null;
             newDocButton.Enabled = true;
             newFolderButton.Enabled = true;
             newPluginButton.Enabled = true;
             newVirtualFolderButton.Enabled = true;
             deleteButton.Enabled = selectedNode != null;
-            docPropertiesButton.Enabled = selectedNode != null ? selectedNode.tin.type == TrayInstanceNode.NodeType.Path : false;
-            folderPropertiesButton.Enabled = selectedNode != null ? selectedNode.tin.type == TrayInstanceNode.NodeType.Path : false;
-            pluginPropertiesButton.Enabled = selectedNode != null ? selectedNode.tin.type == TrayInstanceNode.NodeType.Plugin : false;
+            editButton.Enabled = selectedNode != null;
         }
         private void newVirtualFolderButton_Click(object sender, EventArgs e)
         {
@@ -426,6 +435,9 @@ namespace TrayDir
         {
             if (selectedNode != null)
             {
+                if (e.KeyCode == Keys.Enter) {
+                    editButton_Click(sender, null);
+                }
                 if (e.KeyCode == Keys.F2)
                 {
                     renameButton_Click(sender, null);
@@ -500,7 +512,7 @@ namespace TrayDir
                 }
                 else
                 {
-                    renameButton_Click(sender, e);
+                    vFolderPropertiesButton_Click(sender, e);
                 }
             }
         }
@@ -590,11 +602,18 @@ namespace TrayDir
             nodes.Add(itn);
             pluginPropertiesButton_Click(sender, e);
         }
-        private void pluginPropertiesButton_Click(object sender, EventArgs e)
-        {
+        private void pluginPropertiesButton_Click(object sender, EventArgs e) {
             ITreeNode itn = selectedNode;
             IPluginForm ipf = new IPluginForm(instance.plugins[itn.tin.id]);
             ipf.ShowDialog();
+            itn.Refresh();
+            itn.tin.instance.view.tray.Rebuild();
+            Save();
+        }
+        private void vFolderPropertiesButton_Click(object sender, EventArgs e) {
+            ITreeNode itn = selectedNode;
+            IVirtualFolderForm ivff = new IVirtualFolderForm(instance.vfolders[itn.tin.id]);
+            ivff.ShowDialog();
             itn.Refresh();
             itn.tin.instance.view.tray.Rebuild();
             Save();
