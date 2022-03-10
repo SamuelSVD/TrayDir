@@ -92,6 +92,7 @@ namespace TrayDir
 
             instanceTabs.OnTabClick += OnTabClick;
             instanceTabs.OnTabsSwapped += OnTabSwapped;
+            toolTip.SetToolTip(newTabTabPage, "Insert new instance");
 
         }
         public void OnTabClick(object sender, SmartTabControl.TabClickedArgs tca)

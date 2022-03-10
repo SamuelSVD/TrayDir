@@ -174,7 +174,7 @@ namespace TrayDir
             this.pluginTableLayoutPanel.SetColumnSpan(this.shortcutCheckBox, 3);
             this.shortcutCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.shortcutCheckBox.Location = new System.Drawing.Point(2, 109);
-            this.shortcutCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.shortcutCheckBox.Margin = new System.Windows.Forms.Padding(2);
             this.shortcutCheckBox.Name = "shortcutCheckBox";
             this.shortcutCheckBox.Size = new System.Drawing.Size(360, 17);
             this.shortcutCheckBox.TabIndex = 14;
@@ -204,8 +204,9 @@ namespace TrayDir
             this.CancelButton = this.closeButton;
             this.ClientSize = new System.Drawing.Size(554, 320);
             this.Controls.Add(this.tableLayoutPanel4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "IPathForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Path";
