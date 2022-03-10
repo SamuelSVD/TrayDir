@@ -81,10 +81,10 @@ namespace TrayDir
             this.pluginTableLayoutPanel.ColumnCount = 2;
             this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.pluginTableLayoutPanel.Controls.Add(this.pathLabel, 0, 0);
-            this.pluginTableLayoutPanel.Controls.Add(this.pluginComboBox, 0, 1);
-            this.pluginTableLayoutPanel.Controls.Add(this.label1, 0, 2);
-            this.pluginTableLayoutPanel.Controls.Add(this.aliasEdit, 0, 3);
+            this.pluginTableLayoutPanel.Controls.Add(this.pathLabel, 0, 2);
+            this.pluginTableLayoutPanel.Controls.Add(this.pluginComboBox, 0, 3);
+            this.pluginTableLayoutPanel.Controls.Add(this.label1, 0, 0);
+            this.pluginTableLayoutPanel.Controls.Add(this.aliasEdit, 0, 2);
             this.pluginTableLayoutPanel.Location = new System.Drawing.Point(5, 20);
             this.pluginTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
@@ -93,13 +93,14 @@ namespace TrayDir
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 79);
             this.pluginTableLayoutPanel.TabIndex = 6;
             // 
             // pathLabel
             // 
             this.pathLabel.AutoSize = true;
-            this.pathLabel.Location = new System.Drawing.Point(3, 0);
+            this.pathLabel.Location = new System.Drawing.Point(3, 39);
             this.pathLabel.Name = "pathLabel";
             this.pathLabel.Size = new System.Drawing.Size(84, 13);
             this.pathLabel.TabIndex = 7;
@@ -111,7 +112,7 @@ namespace TrayDir
             this.pluginComboBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.pluginComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.pluginComboBox.FormattingEnabled = true;
-            this.pluginComboBox.Location = new System.Drawing.Point(3, 16);
+            this.pluginComboBox.Location = new System.Drawing.Point(3, 55);
             this.pluginComboBox.Name = "pluginComboBox";
             this.pluginComboBox.Size = new System.Drawing.Size(356, 21);
             this.pluginComboBox.Sorted = true;
@@ -121,7 +122,7 @@ namespace TrayDir
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 40);
+            this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 9;
@@ -131,7 +132,7 @@ namespace TrayDir
             // 
             this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 2);
             this.aliasEdit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.aliasEdit.Location = new System.Drawing.Point(3, 56);
+            this.aliasEdit.Location = new System.Drawing.Point(3, 16);
             this.aliasEdit.Name = "aliasEdit";
             this.aliasEdit.Size = new System.Drawing.Size(356, 20);
             this.aliasEdit.TabIndex = 10;

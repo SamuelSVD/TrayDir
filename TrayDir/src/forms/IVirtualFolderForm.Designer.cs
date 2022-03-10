@@ -55,7 +55,7 @@ namespace TrayDir
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(378, 147);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(378, 107);
             this.tableLayoutPanel4.TabIndex = 4;
             // 
             // groupBox1
@@ -67,7 +67,7 @@ namespace TrayDir
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 20, 5, 0);
-            this.groupBox1.Size = new System.Drawing.Size(372, 112);
+            this.groupBox1.Size = new System.Drawing.Size(372, 72);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Virtual Folder Options";
@@ -75,6 +75,7 @@ namespace TrayDir
             // pluginTableLayoutPanel
             // 
             this.pluginTableLayoutPanel.AutoSize = true;
+            this.pluginTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.pluginTableLayoutPanel.ColumnCount = 2;
             this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -88,7 +89,7 @@ namespace TrayDir
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 79);
+            this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 39);
             this.pluginTableLayoutPanel.TabIndex = 6;
             // 
             // label1
@@ -113,7 +114,7 @@ namespace TrayDir
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(294, 121);
+            this.closeButton.Location = new System.Drawing.Point(294, 81);
             this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
@@ -135,7 +136,7 @@ namespace TrayDir
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "IVirtualFolderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Edit Plugin";
+            this.Text = "Edit Virtual Folder";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IPluginForm_FormClosed);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
