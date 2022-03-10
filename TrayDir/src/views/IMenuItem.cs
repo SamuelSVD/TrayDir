@@ -8,10 +8,8 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using TrayDir.utils;
 
-namespace TrayDir
-{
-    public class IMenuItem
-    {
+namespace TrayDir {
+    public class IMenuItem {
         private static Thread imgLoadThread;
         private static Thread mainThread;
         private static Semaphore imgLoadSemaphore;
@@ -31,8 +29,8 @@ namespace TrayDir
 
         private Bitmap menuIcon;
 
-        public readonly bool isDir = false;
-        public readonly bool isFile = false;
+        public bool isDir { get { return tiPath != null ? AppUtils.PathIsDirectory(tiPath.path) : false; } }
+        public bool isFile { get { return tiPath != null ? AppUtils.PathIsFile(tiPath.path) : false; } } 
         public readonly bool isPlugin = false;
         private bool loadedIcon = false;
         private bool assignedClickEvent = false;
@@ -199,8 +197,6 @@ namespace TrayDir
             this.parent = parent;
 
             children = new List<IMenuItem>();
-            isDir = tiPath != null ? AppUtils.PathIsDirectory(tiPath.path) : false;
-            isFile = tiPath != null ? AppUtils.PathIsFile(tiPath.path) : false;
             isPlugin = tiPlugin != null;
             if (isDir && !tiPath.shortcut)
             {

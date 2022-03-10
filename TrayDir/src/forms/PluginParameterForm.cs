@@ -33,7 +33,6 @@ namespace TrayDir
                 parameterComboBox.Items.Add(String.Format("Parameter {0}", i + 1));
             }
             for (int i = 0; i < tp.parameterCount; i++) {
-                TrayPluginParameter tpp = null;
                 if (tp.parameters[i].name != "") {
                     parameterComboBox.Items[i]=tp.parameters[i].name;
                 }
