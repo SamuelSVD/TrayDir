@@ -77,7 +77,7 @@ namespace TrayDir
         }
         public Control GetControl()
         {
-            return this.tableLayoutPanel1;
+            return this.formTableLayoutPanel;
         }
         private ITreeNode InitNodes(TreeView tv, TrayInstanceNode tin, ITreeNode parent)
         {

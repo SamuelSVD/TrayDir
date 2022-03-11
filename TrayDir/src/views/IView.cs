@@ -10,8 +10,6 @@ namespace TrayDir
         public TabPage InstanceTabPage;
 
         public Panel p;
-        public TableLayoutPanel tlp;
-
 
         public ITreeViewForm treeviewForm;
         public IOptionsForm optionsForm;
@@ -26,19 +24,13 @@ namespace TrayDir
             optionsForm = new IOptionsForm(instance);
 
             p = new Panel();
-            p.Dock = DockStyle.Top;
+            p.Dock = DockStyle.Fill;
             p.AutoSize = true;
             p.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            Control c = treeviewForm.GetControl();
+            p.MinimumSize = c.Size;
             if (Program.DEBUG) p.BackColor = Color.Violet;
-
-            tlp = new TableLayoutPanel();
-            ControlUtils.ConfigureTableLayoutPanel(tlp);
-            p.Controls.Add(tlp);
-
-            tlp.Controls.Add(treeviewForm.GetControl(), 0, 0);
-
-            tlp.PerformLayout();
-
+            p.Controls.Add(c);
         }
         public Control GetControl()
         {
