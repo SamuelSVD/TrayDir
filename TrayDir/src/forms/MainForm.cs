@@ -25,6 +25,7 @@ namespace TrayDir
 		public MainForm()
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 
 			fd = new OpenFileDialog();
 			pd = ProgramData.Load();
