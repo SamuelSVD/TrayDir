@@ -8,6 +8,8 @@ namespace TrayDir
 	public partial class IPathForm : Form
 	{
 		TrayInstancePath tip;
+		private bool editFileOnShow = false;
+		private bool editFolderOnShow = false;
 		public IPathForm(TrayInstancePath tip)
 		{
 			InitializeComponent();
@@ -16,7 +18,14 @@ namespace TrayDir
 			aliasEdit.Text = tip.alias;
 			shortcutCheckBox.Checked = tip.shortcut;
 		}
-
+		public void ShowDialogNewFile() {
+			editFileOnShow = true;
+			ShowDialog();
+		}
+		public void ShowDialogNewFolder() {
+			editFolderOnShow = true;
+			ShowDialog();
+		}
 		private void folderBrowseButton_Click(object sender, EventArgs e)
 		{
 			FolderSelectDialog fs = new FolderSelectDialog();
@@ -52,6 +61,14 @@ namespace TrayDir
 		private void shortcutCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
 			tip.shortcut = shortcutCheckBox.Checked;
+		}
+
+		private void IPathForm_Shown(object sender, EventArgs e) {
+			if (editFileOnShow) {
+				fileBrowseButton_Click(sender, e);
+			} else if (editFolderOnShow) {
+				folderBrowseButton_Click(sender, e);
+			}
 		}
 	}
 }

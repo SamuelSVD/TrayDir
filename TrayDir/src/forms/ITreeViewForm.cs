@@ -11,6 +11,7 @@ namespace TrayDir
     public partial class ITreeViewForm : Form
     {
         private List<ITreeNode> nodes;
+		private bool selectedNodeNew = false;
         private ITreeNode selectedNode { get { return __selectedNode; } set { __selectedNode = value; UpdateButtonEnables(); } }
         private bool selectedIndentable { get { return selectedNode != null ? !selectedNode.isFirstChild && selectedNode.previousRelative.tin.type == TrayInstanceNode.NodeType.VirtualFolder : false; } }
         private bool selectedOutdentable { get { return selectedNode != null ? selectedNode.node.Parent != null : false; } }
@@ -153,19 +154,23 @@ namespace TrayDir
 
         private void newDocButton_Click(object sender, EventArgs e)
         {
-            newPathButton_Click(sender, e);
+			selectedNodeNew = true;
+			newPathButton_Click(sender, e);
             pathPropertiesButton_Click(null, null);
             selectedNode.Refresh();
             Save();
-        }
+			selectedNodeNew = false;
+		}
 
         private void newFolderButton_Click(object sender, EventArgs e)
         {
-            newPathButton_Click(sender, e);
+			selectedNodeNew = true;
+			newPathButton_Click(sender, e);
             folderPropertiesButton_Click(null, null);
             selectedNode.Refresh();
             Save();
-        }
+			selectedNodeNew = false;
+		}
         private void newPathButton_Click(object sender, EventArgs e)
         {
             TrayInstancePath tip = new TrayInstancePath();
@@ -236,8 +241,13 @@ namespace TrayDir
         {
             ITreeNode itn = selectedNode;
             IPathForm iff = new IPathForm(instance.paths[itn.tin.id]);
-            iff.ShowDialog();
-            itn.Refresh();
+			if (selectedNodeNew) {
+				iff.ShowDialogNewFile();
+			}
+			else {
+				iff.ShowDialog();
+			}
+			itn.Refresh();
             itn.tin.instance.view.tray.Rebuild();
             Save();
         }
@@ -245,8 +255,13 @@ namespace TrayDir
         {
             ITreeNode itn = selectedNode;
             IPathForm iff = new IPathForm(instance.paths[itn.tin.id]);
-            iff.ShowDialog();
-            itn.Refresh();
+			if (selectedNodeNew) {
+				iff.ShowDialogNewFolder();
+			}
+			else {
+				iff.ShowDialog();
+			}
+			itn.Refresh();
             itn.tin.instance.view.tray.Rebuild();
             Save();
         }
