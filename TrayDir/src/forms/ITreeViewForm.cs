@@ -442,7 +442,13 @@ namespace TrayDir
                 {
                     renameButton_Click(sender, null);
                 }
-                if (e.KeyCode == Keys.C)
+				if (e.KeyCode == Keys.X) {
+					if (e.Modifiers == Keys.Control) {
+						CopyToClipboard();
+						deleteButton_Click(sender, null);
+					}
+				}
+				if (e.KeyCode == Keys.C)
                 {
                     if (e.Modifiers == Keys.Control)
                     {
