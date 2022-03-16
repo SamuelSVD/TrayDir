@@ -8,7 +8,7 @@ namespace TrayDir
     public class SettingsWindows : StringIndexable
     {
         [XmlAttribute]
-        public bool MinimizeOnClose = false;
+        public bool MinimizeOnClose = true;
         [XmlAttribute]
         public bool HideOnMinimize = true;
         [XmlAttribute]
