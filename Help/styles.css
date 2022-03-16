@@ -1,3 +1,8 @@
 body {
-	color: blue;
+	font-family: "Calibri", Calibri, serif;
+}
+code {
+	border-radius: 5px;
+	padding: 5px 10px 5px 10px;
+	background-color: #D3D3D3;
 }

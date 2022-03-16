@@ -21,28 +21,23 @@
 		<param name="Local" value="src/instances.htm">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="Menu Items">
+		<param name="Name" value="Files">
+		<param name="Local" value="src/files.htm">
 		</OBJECT>
-	<UL>
-		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Files">
-			<param name="Local" value="src/files.htm">
-			</OBJECT>
-		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Folders">
-			<param name="Local" value="src/folders.htm">
-			</OBJECT>
-		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Virtual Folders">
-			<param name="Local" value="src/vfolders.htm">
-			</OBJECT>
-		<LI> <OBJECT type="text/sitemap">
-			<param name="Name" value="Plugins">
-			<param name="Local" value="src/plugins.htm">
-			</OBJECT>
-	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="Instance Settings">
+		<param name="Name" value="Folders">
+		<param name="Local" value="src/folders.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Virtual Folders">
+		<param name="Local" value="src/vfolders.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Plugins">
+		<param name="Local" value="src/plugins.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Instance Options">
 		<param name="Local" value="src/instancesettings.htm">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
