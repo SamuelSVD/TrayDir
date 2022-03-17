@@ -68,6 +68,7 @@ namespace TrayDir
 			this.imgLoadTimer = new System.Windows.Forms.Timer(this.components);
 			this.iconLoadTimer = new System.Windows.Forms.Timer(this.components);
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+			this.bugReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -106,7 +107,6 @@ namespace TrayDir
 			this.mainMenu.Size = new System.Drawing.Size(449, 24);
 			this.mainMenu.TabIndex = 1;
 			this.mainMenu.Text = "mainMenu";
-			this.mainMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mainMenu_ItemClicked);
 			// 
 			// fileToolStripMenuItem
 			// 
@@ -272,7 +272,8 @@ namespace TrayDir
 			// 
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItem1,
-            this.donateToolStripMenuItem});
+            this.donateToolStripMenuItem,
+            this.bugReportToolStripMenuItem});
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
 			this.helpToolStripMenuItem.Text = "Help";
@@ -280,14 +281,14 @@ namespace TrayDir
 			// helpToolStripMenuItem1
 			// 
 			this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-			this.helpToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
+			this.helpToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
 			this.helpToolStripMenuItem1.Text = "Help";
 			this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
 			// 
 			// donateToolStripMenuItem
 			// 
 			this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-			this.donateToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+			this.donateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.donateToolStripMenuItem.Text = "Donate";
 			this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
 			// 
@@ -332,6 +333,13 @@ namespace TrayDir
 			// iconLoadTimer
 			// 
 			this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this.bugReportToolStripMenuItem.Name = "bugReportToolStripMenuItem";
+			this.bugReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.bugReportToolStripMenuItem.Text = "Bug Report";
+			this.bugReportToolStripMenuItem.Click += new System.EventHandler(this.bugReportToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -391,6 +399,7 @@ namespace TrayDir
         private ToolStripMenuItem helpToolStripMenuItem1;
         private ToolStripMenuItem donateToolStripMenuItem;
         private ToolTip toolTip;
-    }
+		private ToolStripMenuItem bugReportToolStripMenuItem;
+	}
 }
 

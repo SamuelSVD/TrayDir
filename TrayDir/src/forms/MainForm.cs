@@ -549,10 +549,12 @@ namespace TrayDir
 			catch { }
 			System.Diagnostics.Process.Start(helpPath);
 		}
-
-		private void mainMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-		{
-
+		private void bugReportToolStripMenuItem_Click(object sender, EventArgs e) {
+			string address = "contact@samver.ca";
+			string subject = String.Format("TrayDir {0}: Bug Report", Program.RunningVersion);
+			string body = "Description:";
+			string mailto = String.Format("mailto:{0}?subject={1}&body={2}", address, subject, body);
+			AppUtils.ProcessStart(mailto);
 		}
 	}
 }

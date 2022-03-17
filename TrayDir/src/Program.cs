@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows.Forms;
 using TrayDir.forms;
 
@@ -7,7 +8,7 @@ namespace TrayDir
     static class Program
     {
         public static bool DEBUG = false;
-
+		public static string RunningVersion {  get { return Assembly.GetEntryAssembly().GetName().Version.ToString(); } }
         [STAThread]
         static void Main()
         {
