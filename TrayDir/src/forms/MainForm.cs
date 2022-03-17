@@ -539,11 +539,9 @@ namespace TrayDir
 		{
 			string helpPath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\traydir.chm";
 			try {
-				if (!File.Exists(helpPath)) {
-					using (Stream input = new MemoryStream(Properties.Resource_Help.TrayDir))
-					using (Stream output = File.Create(helpPath)) {
-						input.CopyTo(output);
-					}
+				using (Stream input = new MemoryStream(Properties.Resource_Help.TrayDir))
+				using (Stream output = File.Create(helpPath)) {
+					input.CopyTo(output);
 				}
 			}
 			catch { }
