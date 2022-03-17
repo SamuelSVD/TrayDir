@@ -186,5 +186,5 @@ namespace TrayDir
             }
             tip.alias = aliasEdit.Text;
         }
-    }
+	}
 }
