@@ -7,6 +7,28 @@
 </HEAD>
 <BODY>
 <h1>Plugin Manager</h1>
-
+<p>The plugin manager can be used to add new plugins to list of known plugins. Plugins can be configured to point to a specific file in the current user's file system, then parameters can be defined so they can vary by menu item.</p>
+<h2>Example</h2>
+<p>For example, I want to add Google Chrome as a plugin, with one parameter being the website's URL I want to open. To do this I would do the following:</p>
+<p>Create the plugin</p>
+<ol>
+<li>Open Plugin Manager.</li>
+<li>Click <code>Add</code> button.</li>
+<li>Click <code>Browse</code> then browse to and select the Google Chrome executable.</li>
+<li>Change the <code>Name</code> to be Google Chrome</li>
+<li>Change the parameter count to 1</li>
+<li>Click on <code>Configure Parameters</code></li>
+<li>Change <code>Parameter Name</code> to URL</li>
+<li>Click Apply and close the Plugin Manager</li>
+</ol>
+<p>Add the plugin item:</p>
+<ol>
+<li>Click the <code>Insert New Plugin Item</code> button. This button has the lightning bold with a plus sign.</li>
+<li>Change the <code>Display Name</code> to samver.ca</li>
+<li>Click the Plugin drop-down and select Google Chrome</li>
+<li>Type <code>https://samver.ca</code> into the URL text box.</li>
+<li>Click Apply</li>
+</ol>
+<p>The link to open chrome at samver.ca should now work. Simply right click the system tray icon, then click on the Chrome plugin item that should be named <code>samver.ca</code></p>
 </BODY>
 </HTML>

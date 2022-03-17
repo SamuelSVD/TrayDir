@@ -17,6 +17,14 @@
 		<param name="Local" value="src/gettingstarted.htm">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Program Settings">
+		<param name="Local" value="src/programsettings.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Instance Options">
+		<param name="Local" value="src/instancesettings.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Instances">
 		<param name="Local" value="src/instances.htm">
 		</OBJECT>
@@ -35,14 +43,6 @@
 	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Plugins">
 		<param name="Local" value="src/plugins.htm">
-		</OBJECT>
-	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="Instance Options">
-		<param name="Local" value="src/instancesettings.htm">
-		</OBJECT>
-	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="Program Settings">
-		<param name="Local" value="src/programsettings.htm">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Plugin Manager">
