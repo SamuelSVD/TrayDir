@@ -140,8 +140,11 @@ namespace TrayDir
 			IView iv = CreateViewFromInstance(instance, tp);
 			iv.tray.notifyIcon.DoubleClick += new EventHandler(delegate (object obj, EventArgs args)
 			{
-				onShowInstance = instance;
-				ShowApp(obj, args);
+				if (((MouseEventArgs)args).Button == MouseButtons.Left)
+				{
+					onShowInstance = instance;
+					ShowApp(obj, args);
+				}
 			});
 			BuildRebuildDropdown();
 			instanceTabs.SelectedIndex = i;
