@@ -11,7 +11,6 @@ namespace TrayDir
 		public static MainForm form;
 		private bool allowVisible;     // ContextMenu's Show command used
 		private bool allowClose;       // ContextMenu's Exit command used
-		private int __debug_i;
 		public TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
 		private TrayInstance onShowInstance;
 		public ProgramData pd;
