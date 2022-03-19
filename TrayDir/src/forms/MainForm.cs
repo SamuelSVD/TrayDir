@@ -536,7 +536,7 @@ namespace TrayDir
 		}
 		private void donateToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			System.Diagnostics.Process.Start("https://github.com/sponsors/SamuelSVD");
+			System.Diagnostics.Process.Start("https://www.paypal.com/donate/?business=QY2JZQHBAX65Y&no_recurring=0&item_name=I+make+open-source+software+tools%21+Every+donation+goes+a+long+way+to+support+continuing+to+develop+open-source+software%21+&currency_code=CAD");
 		}
 		private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
