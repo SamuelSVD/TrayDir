@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "TrayDir"
-#define MyAppVersion "3.1.3"
+#define MyAppVersion "3.1.4"
 #define MyAppPublisher "samver"
 #define MyAppURL "https://samver.ca/TrayDir"
 #define MyAppExeName "TrayDir.exe"
@@ -34,6 +34,7 @@ Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 UsePreviousAppDir=no
+DirExistsWarning=no
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
