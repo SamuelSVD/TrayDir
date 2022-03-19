@@ -70,5 +70,9 @@ namespace TrayDir
 				folderBrowseButton_Click(sender, e);
 			}
 		}
+		private void aliasEdit_TextChanged(object sender, EventArgs e)
+		{
+			tip.alias = aliasEdit.Text;
+		}
 	}
 }
