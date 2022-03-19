@@ -150,9 +150,14 @@ namespace TrayDir
 			instanceTabs.SelectedIndex = i;
 			instanceTabs.MinimumSize = new Size((instance.view.p.MinimumSize.Width), (instance.view.p.MinimumSize.Height + instanceTabs.ItemSize.Height));
 			if (!initializedMinSize) {
-				Size temp = this.Size;
-				temp.Height = instanceTabs.Height;
+				Size temp = new Size(0, 0);
+				temp.Width = instanceTabs.Width;
+				temp.Height = mainMenu.Height;
+				temp.Height += instance.view.p.MinimumSize.Height;
+				temp.Height += instanceTabs.ItemSize.Height;
 				temp.Height += tp.Height;
+				temp.Height += instanceTabs.Margin.Top;
+				temp.Height += instanceTabs.Margin.Bottom;
 				this.Size = temp;
 				this.MinimumSize = temp;
 				initializedMinSize = true;
