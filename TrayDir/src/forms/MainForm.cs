@@ -558,7 +558,7 @@ namespace TrayDir
 		private void bugReportToolStripMenuItem_Click(object sender, EventArgs e) {
 			string address = "contact@samver.ca";
 			string subject = String.Format("TrayDir {0}: Bug Report", Program.RunningVersion);
-			string body = "Description:";
+			string body = "Hello, I found a problem with TrayDir!%0D%0A%0D%0APlease include a description of your problem below.%0D%0ADescription:";
 			string mailto = String.Format("mailto:{0}?subject={1}&body={2}", address, subject, body);
 			AppUtils.ProcessStart(mailto);
 		}
