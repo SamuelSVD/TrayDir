@@ -74,7 +74,7 @@ namespace TrayDir
 				foreach (IMenuItem child in pathMenuItems)
 				{
 					child.EnqueueImgLoad();
-					foreach (IMenuItem subchild in child.children)
+					foreach (IMenuItem subchild in child.folderChildren)
 					{
 						subchild.EnqueueImgLoad();
 					}
@@ -236,7 +236,7 @@ namespace TrayDir
 			RefreshVirtualFolderMenuItemList();
 			RefreshPluginMenuItemList();
 
-			AddTrayTree(instance.nodes.children, notifyIcon.ContextMenuStrip.Items);
+			AddTrayTree(instance.nodes.children, notifyIcon.ContextMenuStrip.Items, null);
 
 			notifyIcon.ContextMenuStrip.Items.Add("-");
 			exitMenuItem = MakeAndAddMenuItem(exitMenuItem, "Exit", true, exitForm);
@@ -257,7 +257,7 @@ namespace TrayDir
 				}
 			}
 		}
-		private void AddTrayTree(List<TrayInstanceNode> nodes, ToolStripItemCollection collection)
+		private void AddTrayTree(List<TrayInstanceNode> nodes, ToolStripItemCollection collection, IMenuItem parent)
 		{
 			foreach(TrayInstanceNode node in nodes)
 			{
@@ -267,6 +267,7 @@ namespace TrayDir
 						{
 							if (mi.tiPath == instance.paths[node.id])
 							{
+								if (parent != null) parent.nodeChildren.Add(mi);
 								if (mi.tiPath.shortcut || (instance.settings.ExpandFirstPath && nodes.Count == 1 && collection == notifyIcon.ContextMenuStrip.Items))
 								{
 									mi.AddToCollectionExpanded(collection);
@@ -275,6 +276,7 @@ namespace TrayDir
 								{
 									mi.AddToCollection(collection);
 								}
+								break;
 							}
 						}
 						break;
@@ -283,9 +285,11 @@ namespace TrayDir
 						{
 							if (mi.tiPlugin == instance.plugins[node.id])
 							{
+								if (parent != null) parent.nodeChildren.Add(mi);
 								mi.AddToCollection(collection);
-								AddTrayTree(node.children, mi.menuItem.DropDownItems);
+								AddTrayTree(node.children, mi.menuItem.DropDownItems, mi);
 							}
+							break;
 						}
 						break;
 					case TrayInstanceNode.NodeType.VirtualFolder:
@@ -293,8 +297,10 @@ namespace TrayDir
 						{
 							if (mi.tiVirtualFolder == instance.vfolders[node.id])
 							{
+								if (parent != null) parent.nodeChildren.Add(mi);
 								mi.AddToCollection(collection);
-								AddTrayTree(node.children, mi.menuItem.DropDownItems);
+								AddTrayTree(node.children, mi.menuItem.DropDownItems, mi);
+								break;
 							}
 						}
 						break;
