@@ -12,7 +12,6 @@ namespace TrayDir
         public Panel p;
 
         public ITreeViewForm treeviewForm;
-        public IOptionsForm optionsForm;
         public ITray tray;
 
         public IView(TrayInstance instance)
@@ -21,7 +20,6 @@ namespace TrayDir
             instance.view = this;
             tray = new ITray(instance);
             treeviewForm = new ITreeViewForm(instance);
-            optionsForm = new IOptionsForm(instance);
 
             p = new Panel();
             p.Dock = DockStyle.Fill;

@@ -348,6 +348,7 @@ namespace TrayDir
 			iv.InstanceTabPage = tp;
 			tp.Text = instance.instanceName;
 			tp.Controls.Add(iv.GetControl());
+			iv.treeviewForm.setTabPage(tp);
 
 			iv.tray.setEventHandlers(new EventHandler(delegate (Object obj, EventArgs args)
 			{

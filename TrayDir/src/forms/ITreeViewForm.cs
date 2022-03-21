@@ -17,6 +17,7 @@ namespace TrayDir
         private bool selectedOutdentable { get { return selectedNode != null ? selectedNode.node.Parent != null : false; } }
         private bool selectedUpable { get { return selectedNode != null ? !selectedNode.isFirstChild : false; } }
         private bool selectedDownable { get { return selectedNode != null ? !selectedNode.isLastChild : false; } }
+		private TabPage tp;
         private ITreeNode __selectedNode;
         private TrayInstance instance;
         private ContextMenu rightClickMenu;
@@ -76,6 +77,10 @@ namespace TrayDir
                 n.Refresh();
             }
         }
+		public void setTabPage(TabPage tp)
+		{
+			this.tp = tp;
+		}
         public Control GetControl()
         {
             return this.formTableLayoutPanel;
@@ -331,7 +336,10 @@ namespace TrayDir
 
         private void button1_Click(object sender, EventArgs e)
         {
-            instance.view.optionsForm.ShowDialog();
+			IOptionsForm optionsForm = new IOptionsForm(instance);
+			optionsForm.ShowDialog();
+			tp.Text = instance.instanceName;
+			instance.view.tray.notifyIcon.Text = instance.instanceName;
         }
         private void RecursiveAddToInstance(TrayInstance recursive_instance, TrayInstanceNode tin, TrayInstanceNode parent)
         {
