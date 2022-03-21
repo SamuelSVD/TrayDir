@@ -10,18 +10,18 @@ using System.Windows.Forms;
 
 namespace TrayDir.forms
 {
-    public partial class UnhandledExceptionForm : Form
-    {
-        public RichTextBox richEdit
-        {
-            get
-            {
-                return richTextBox;
-            }
-        }
-        public UnhandledExceptionForm()
-        {
-            InitializeComponent();
-        }
-    }
+	public partial class UnhandledExceptionForm : Form
+	{
+		public RichTextBox richEdit
+		{
+			get
+			{
+				return richTextBox;
+			}
+		}
+		public UnhandledExceptionForm()
+		{
+			InitializeComponent();
+		}
+	}
 }

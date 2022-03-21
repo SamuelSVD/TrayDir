@@ -2,20 +2,20 @@
 
 namespace TrayDir
 {
-    public class TrayInstanceVirtualFolder
-    {
-        [XmlAttribute]
-        public string alias;
-        public TrayInstanceVirtualFolder() : this("") { }
-        public TrayInstanceVirtualFolder(string alias)
-        {
-            this.alias = alias;
-        }
-        public TrayInstanceVirtualFolder Copy()
-        {
-            TrayInstanceVirtualFolder tivf = new TrayInstanceVirtualFolder();
-            tivf.alias = alias;
-            return tivf;
-        }
-    }
+	public class TrayInstanceVirtualFolder
+	{
+		[XmlAttribute]
+		public string alias;
+		public TrayInstanceVirtualFolder() : this("") { }
+		public TrayInstanceVirtualFolder(string alias)
+		{
+			this.alias = alias;
+		}
+		public TrayInstanceVirtualFolder Copy()
+		{
+			TrayInstanceVirtualFolder tivf = new TrayInstanceVirtualFolder();
+			tivf.alias = alias;
+			return tivf;
+		}
+	}
 }
