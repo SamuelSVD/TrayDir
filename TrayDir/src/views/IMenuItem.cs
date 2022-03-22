@@ -37,6 +37,7 @@ namespace TrayDir {
 		private bool loadedIcon = false;
 		private bool assignedClickEvent = false;
 		private bool enqueued;
+		private bool painted;
 
 		private string alias
 		{
@@ -201,7 +202,16 @@ namespace TrayDir {
 			isPlugin = tiPlugin != null;
 			if (isDir && !tiPath.shortcut)
 			{
+				//MakeChildren();
+			}
+		}
+		private void LoadFolderChildren(object sender, PaintEventArgs e)
+		{
+			if (!painted) {
 				MakeChildren();
+				Load();
+				painted = true;
+				menuItem.Invalidate();
 			}
 		}
 		private void MakeChildren()
@@ -433,6 +443,7 @@ namespace TrayDir {
 			{
 				menuItem = new ToolStripMenuItem();
 				menuItem.DropDownOpening += submenu_DropDownOpening;
+				menuItem.Paint += LoadFolderChildren;
 			}
 			bool useAlias = (alias != null && alias != "");
 			if (useAlias)
@@ -540,6 +551,7 @@ namespace TrayDir {
 				assignedClickEvent = true;
 			}
 		}
+
 		public bool LoadIcon()
 		{
 			bool ret = loadedIcon;
@@ -548,7 +560,7 @@ namespace TrayDir {
 				if (menuItem.Image == null) {
 					menuItem.Image = menuIcon;
 				}
-			} else
+			} else if (menuItem != null)
 			{
 				menuItem.Image = null;
 			}
