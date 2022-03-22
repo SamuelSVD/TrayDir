@@ -14,6 +14,7 @@ namespace TrayDir
 		{
 			Size size = new Size(500, 50);
 			Form inputBox = new Form();
+			inputBox.Icon = MainForm.form.Icon;
 
 			inputBox.FormBorderStyle = FormBorderStyle.SizableToolWindow;
 			inputBox.AutoSize = true;
@@ -79,6 +80,7 @@ namespace TrayDir
 			Size size = new Size(500, 50);
 			Form inputBox = new Form();
 
+			inputBox.Icon = MainForm.form.Icon;
 			inputBox.FormBorderStyle = FormBorderStyle.SizableToolWindow;
 			inputBox.AutoSize = true;
 			inputBox.AutoSizeMode = AutoSizeMode.GrowOnly;
