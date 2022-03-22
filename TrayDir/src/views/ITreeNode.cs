@@ -164,6 +164,10 @@ namespace TrayDir
 					}
 					node.Text = string.Format("{0} ({1})", tin.instance.plugins[tin.id].alias, pluginName);
 					break;
+				case TrayInstanceNode.NodeType.Separator:
+					node.ImageIndex = IconUtils.SEPARATOR;
+					node.Text = "Separator";
+					break;
 				default:
 					break;
 			}

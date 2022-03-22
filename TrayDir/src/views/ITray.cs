@@ -304,6 +304,9 @@ namespace TrayDir
 							}
 						}
 						break;
+					case TrayInstanceNode.NodeType.Separator:
+						collection.Add("-");
+						break;
 				}
 			}
 		}

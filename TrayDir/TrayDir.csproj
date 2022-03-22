@@ -302,6 +302,7 @@
     <Content Include="Resources\question.png" />
     <Content Include="Resources\runnable.png" />
     <Content Include="Resources\runnable_new.png" />
+    <None Include="Resources\separator.png" />
     <Content Include="Resources\up.png" />
   </ItemGroup>
   <ItemGroup>

@@ -65,6 +65,7 @@ namespace TrayDir
 			updateImage(newFolderButton, IconUtils.FOLDER_NEW);
 			updateImage(newPluginButton, IconUtils.RUNNABLE_NEW);
 			updateImage(newVirtualFolderButton, IconUtils.FOLDER_BLUE_NEW);
+			updateImage(newSeparatorButton, IconUtils.SEPARATOR);
 			editButton.Image = IconUtils.EditImage;
 			editButton.TextImageRelation = TextImageRelation.ImageBeforeText;
 			editButton.TextAlign = ContentAlignment.MiddleLeft;
@@ -635,6 +636,19 @@ namespace TrayDir
 			selectedNode = itn;
 			nodes.Add(itn);
 			pluginPropertiesButton_Click(sender, e);
+		}
+		private void newSeparatorButton_Click(object sender, EventArgs e)
+		{
+			TrayInstanceNode tin = new TrayInstanceNode();
+			tin.type = TrayInstanceNode.NodeType.Separator;
+			tin.SetInstance(instance);
+			ITreeNode itn = new ITreeNode(tin);
+			insertNode(itn);
+			treeView2.SelectedNode = itn.node;
+			selectedNode = itn;
+			nodes.Add(itn);
+			itn.tin.instance.view.tray.Rebuild();
+			Save();
 		}
 		private void pluginPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;

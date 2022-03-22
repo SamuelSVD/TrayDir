@@ -9,7 +9,8 @@ namespace TrayDir
 		{
 			Path,
 			VirtualFolder,
-			Plugin
+			Plugin,
+			Separator
 		}
 		[XmlAttribute]
 		public NodeType type = NodeType.Path;
