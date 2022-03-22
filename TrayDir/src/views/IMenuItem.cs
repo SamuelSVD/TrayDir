@@ -207,12 +207,12 @@ namespace TrayDir {
 		}
 		private void LoadFolderChildren(object sender, PaintEventArgs e)
 		{
-			if (!painted) {
+			if (!painted && isDir) {
 				MakeChildren();
 				Load();
-				painted = true;
 				menuItem.Invalidate();
 			}
+			painted = true;
 		}
 		private void MakeChildren()
 		{
