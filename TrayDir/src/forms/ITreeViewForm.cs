@@ -647,6 +647,7 @@ namespace TrayDir
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
 			nodes.Add(itn);
+			itn.Refresh();
 			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}

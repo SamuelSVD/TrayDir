@@ -37,6 +37,7 @@ namespace TrayDir
             this.upButton = new System.Windows.Forms.Button();
             this.indentButton = new System.Windows.Forms.Button();
             this.topButtonsTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+			this.newSeparatorButton = new System.Windows.Forms.Button();
             this.newDocButton = new System.Windows.Forms.Button();
             this.newFolderButton = new System.Windows.Forms.Button();
             this.newPluginButton = new System.Windows.Forms.Button();
@@ -152,10 +153,12 @@ namespace TrayDir
             this.topButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.topButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.topButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.topButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.topButtonsTableLayoutPanel.Controls.Add(this.newDocButton, 0, 0);
             this.topButtonsTableLayoutPanel.Controls.Add(this.newFolderButton, 1, 0);
             this.topButtonsTableLayoutPanel.Controls.Add(this.newPluginButton, 2, 0);
             this.topButtonsTableLayoutPanel.Controls.Add(this.newVirtualFolderButton, 3, 0);
+			this.topButtonsTableLayoutPanel.Controls.Add(this.newSeparatorButton, 4, 0);
             this.topButtonsTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.topButtonsTableLayoutPanel.Location = new System.Drawing.Point(26, 0);
             this.topButtonsTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
@@ -208,6 +211,17 @@ namespace TrayDir
             this.toolTip.SetToolTip(this.newVirtualFolderButton, "Insert New Virtual Folder Item");
             this.newVirtualFolderButton.UseVisualStyleBackColor = true;
             this.newVirtualFolderButton.Click += new System.EventHandler(this.newVirtualFolderButton_Click);
+			// 
+			// newSeparatorButton
+			// 
+			this.newSeparatorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.newSeparatorButton.Location = new System.Drawing.Point(122, 3);
+			this.newSeparatorButton.Name = "newSeparatorButton";
+			this.newSeparatorButton.Size = new System.Drawing.Size(23, 23);
+			this.newSeparatorButton.TabIndex = 4;
+			this.toolTip.SetToolTip(this.newSeparatorButton, "Insert New Separator Item");
+			this.newSeparatorButton.UseVisualStyleBackColor = true;
+			this.newSeparatorButton.Click += new System.EventHandler(this.newSeparatorButton_Click);
             // 
             // ContentTableLayoutPanel
             // 
@@ -327,6 +341,7 @@ namespace TrayDir
         private System.Windows.Forms.Button newFolderButton;
         private System.Windows.Forms.Button newPluginButton;
         private System.Windows.Forms.Button newVirtualFolderButton;
+		private System.Windows.Forms.Button newSeparatorButton;
         private System.Windows.Forms.TableLayoutPanel leftButtonsTableLayoutPanel;
         private System.Windows.Forms.Button upButton;
         private System.Windows.Forms.Button indentButton;
