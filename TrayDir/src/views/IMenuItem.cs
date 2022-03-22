@@ -415,7 +415,7 @@ namespace TrayDir {
 
 			// Look how big our children are:
 			int MaxWidth = 0;
-			foreach (ToolStripMenuItem subitem in menuItem.DropDownItems)
+			foreach (ToolStripItem subitem in menuItem.DropDownItems)
 			{
 				MaxWidth = Math.Max(subitem.Width, MaxWidth);
 			}

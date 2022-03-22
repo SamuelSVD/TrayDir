@@ -229,7 +229,7 @@ namespace TrayDir
 		}
 		private void editButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
-			if (itn != null && itn.tin != null) {
+			if (itn != null && itn.tin != null && itn.tin.type != TrayInstanceNode.NodeType.Separator) {
 				switch (itn.tin.type) {
 					case TrayInstanceNode.NodeType.Path:
 						pathPropertiesButton_Click(sender, e);
@@ -282,7 +282,7 @@ namespace TrayDir
 			newPluginButton.Enabled = true;
 			newVirtualFolderButton.Enabled = true;
 			deleteButton.Enabled = selectedNode != null;
-			editButton.Enabled = selectedNode != null;
+			editButton.Enabled = selectedNode != null && selectedNode.tin.type != TrayInstanceNode.NodeType.Separator;
 		}
 		private void newVirtualFolderButton_Click(object sender, EventArgs e)
 		{
@@ -545,7 +545,7 @@ namespace TrayDir
 				else if (selectedNode.tin.type == TrayInstanceNode.NodeType.Path) {
 					pathPropertiesButton_Click(sender, e);
 				}
-				else
+				else if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder)
 				{
 					vFolderPropertiesButton_Click(sender, e);
 				}
