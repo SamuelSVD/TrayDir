@@ -200,14 +200,10 @@ namespace TrayDir {
 			this.parent = parent;
 
 			isPlugin = tiPlugin != null;
-			if (isDir && !tiPath.shortcut)
-			{
-				//MakeChildren();
-			}
 		}
 		private void LoadFolderChildren(object sender, PaintEventArgs e)
 		{
-			if (!painted && isDir) {
+			if (!painted && isDir && !tiPath.shortcut) {
 				MakeChildren();
 				Load();
 				menuItem.Invalidate();
