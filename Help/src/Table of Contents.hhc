@@ -37,6 +37,10 @@
 		<param name="Local" value="src/folders.htm">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Folder Filtering">
+		<param name="Local" value="src/regex.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Virtual Folders">
 		<param name="Local" value="src/vfolders.htm">
 		</OBJECT>

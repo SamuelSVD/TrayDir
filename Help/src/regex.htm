@@ -1,12 +1,102 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <HTML>
-<HEAD>
-<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
-<link rel="stylesheet" href="styles.css">
-<Title>RegEx</Title>
-</HEAD>
-<BODY>
-<h1>RegEx File Filtering</h1>
-
-</BODY>
+	<HEAD>
+		<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1"/>
+		<link rel="stylesheet" href="styles.css"/>
+		<Title>RegEx</Title>
+	</HEAD>
+	<BODY>
+		<h1>File Filtering</h1>
+		<p>It is possible to filter out which files get displayed when using a folder menu item. By default, TrayDir navigates explores the folder, gathers the list of items inside the folder, and creates the subsequent subfolder based on the contents.</p>
+		<p>You may run into situations where you want to add a folder item, but there is a lot of 'garbage', or files you don't really want to see.</p>
+		<h2>Example</h2>
+		<p>Using the following folder structure:</p>
+		<div class="codeblock">
+		<code>
+			<ul>
+				<li>ParentFolder
+					<ul>
+						<li>Folder 1
+							<ul>
+								<li>file1.obj</li>
+								<li>file1.txt</li>
+							</ul>
+</li>
+						<li>Folder 2
+							<ul>
+								<li>file2.obj</li>
+								<li>file2.txt</li>
+							</ul>
+</li>
+						<li>Folder 3
+							<ul>
+								<li>file3.obj</li>
+								<li>file3.txt</li>
+							</ul>
+</li>
+						<li>file4.html</li>
+						<li>file4.txt</li>
+					</ul>
+</li>
+			</ul>
+		</code>
+		</div>
+		<p>If I wanted to create a menu that appeared as follows:</p>
+		<div class="codeblock">
+		<code>
+			<ul>
+				<li>ParentFolder
+					<ul>
+						<li>Folder 1
+							<ul>
+								<li>file1.txt</li>
+							</ul>
+</li>
+						<li>Folder 3
+							<ul>
+								<li>file3.txt</li>
+							</ul>
+</li>
+						<li>file4.txt</li>
+					</ul>
+</li>
+			</ul>
+		</code>
+		</div>
+		<p>I would check if there are any common patterns. In this case, I want to exclude all files ending with
+			<code>.obj</code>
+			, the entire
+			<code>Folder2</code>
+			, and all files ending with
+			<code>.html</code>
+		</p>
+		<p>Filtering files follows something called "Regular Expressions" (RegEx). Regular Expressions are a specific way to represent patterns in lines of text. In TrayDir, we use RegEx filters to ignore certain folders or files.</p>
+		<p>For the example above, we need the following RegEx filters:</p>
+		<table>
+			<tr>
+				<th>Filter</th>
+				<th>Description</th>
+			</tr>
+			<tr>
+				<td><code>$(?<=Folder2)</code></td>
+				<td>Ignore all files in <code>Folder2</code></td>
+			</tr>
+			<tr>
+				<td><code>$(?<=\.obj)</code></td>
+				<td>Ignore all files ending in <code>.obj</code></td>
+			</tr>
+			<tr>
+				<td><code>$(?<=\.html)</code></td>
+				<td>Ignore all files ending in <code>.html</code></td>
+			</tr>
+		</table>
+		<p>Next up we would open the RegEx filtering by navigating to <code>Instance > Change Ignore RegEx...</code> and enter each of the filters above, separated by a new line.</p>
+		<h2>Links</h2>
+		<p>For more information on RegEx, check out C# RegEx filtering <a href = 'https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference'>https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference</a>
+		<p/>
+		<p/>
+		<p/>
+		<p/>
+		<p/>
+	</BODY>
 </HTML>

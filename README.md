@@ -49,9 +49,9 @@ Download the installer for the latest release by following this link:
 
 [http://github.com/samuelSVD/TrayDir/releases/latest](http://github.com/samuelSVD/TrayDir/releases/latest);
 
-## Regex Filtering
+## RegEx Filtering
 
-You can add a Regex pattern to ignore certain files or folders from being included in the tray menu. 
+You can add a RegEx pattern to ignore certain files or folders from being included in the tray menu. 
 
 Every new line is treated as a new pattern.
 
@@ -59,11 +59,11 @@ Every new line is treated as a new pattern.
 | --- | --- |
 | `$(?<=\.(gif\|png\|jpg))` | This pattern will ignore all files ending with `.gif`, `.png`, or `.jpg` |
 
-For more information on Regex and creating your own filters see [Regular Expressions](https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference)
+For more information on RegEx and creating your own filters see [Regular Expressions](https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference)
 
 ## Plugins
 
-Plugins work as a way to run external programs and make use of their [CLI](https://www.w3schools.com/whatis/whatis_cli.asp). You can add a plugin to TrayDir through the Plugin Manager,and navigate to the program or executable that you want to run when plugin items are selected from the menu item. Each plugin can be configured to have multiple parameters that can then each be configured to have an optional name, or be considered a flag (and appears as a checkbox when configured as such).
+Plugins work as a way to run external programs and make use of their [CLI](https://www.w3schools.com/whatis/whatis_cli.asp). You can add a plugin to TrayDir through the Plugin Manager, and navigate to the program or executable that you want to run when plugin items are selected from the menu item. Each plugin can be configured to have multiple parameters that can then each be configured to have an optional name, or be considered a flag (and appears as a checkbox when configured as such).
 
 For example, Window's Internet Explorer could be configured as a plugin. Looking through its [CLI](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/general-info/hh826025(v=vs.85)?redirectedfrom=MSDN) we can see that it accepts several parameters, but we will set up two parameters. The first will be URL, and the second will be the Private Browsing parameter, -private.
 
@@ -71,5 +71,5 @@ For example, Window's Internet Explorer could be configured as a plugin. Looking
 | --- | --- |
 | Configuring the plugin | ![image](https://user-images.githubusercontent.com/36249705/145105241-7e26f6a6-b312-4a0f-a7cc-a8622524a54c.png) |
 | Configuring the URL parameter | ![image](https://user-images.githubusercontent.com/36249705/145105259-369ee20b-002e-47c6-bc35-a1f8ad190fc1.png) |
-| Confguring the Private Browsing parameter | ![image](https://user-images.githubusercontent.com/36249705/145105252-a51fc3d8-c28c-4ef5-8e6d-612cc719d62c.png) |
+| Configuring the Private Browsing parameter | ![image](https://user-images.githubusercontent.com/36249705/145105252-a51fc3d8-c28c-4ef5-8e6d-612cc719d62c.png) |
 | Using the plugin in a menu item. Note that the parameters are displayed in the order they are configured in the plugin. | ![image](https://user-images.githubusercontent.com/36249705/145105271-037b53a0-6bb5-4b57-a7e7-951f24f3312e.png) |
