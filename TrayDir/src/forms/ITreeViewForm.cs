@@ -298,8 +298,7 @@ namespace TrayDir
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
 			nodes.Add(itn);
-			itn.Refresh();
-			Save();
+			vFolderPropertiesButton_Click(sender, e);
 		}
 		private void renameButton_Click(object sender, EventArgs e)
 		{
