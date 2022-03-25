@@ -347,7 +347,7 @@ namespace TrayDir {
 				ToolStripItem tsi;
 				if (isDir)
 				{
-					tsi = cmnu.Items.Add("Open in Explorer");
+					tsi = cmnu.Items.Add("Open in File Explorer");
 					tsi.Click += Explore;
 					tsi = cmnu.Items.Add("Open in cmd");
 					tsi.Click += OpenCmd;
@@ -360,7 +360,7 @@ namespace TrayDir {
 					tsi.Click += Run;
 					tsi = cmnu.Items.Add("Run (Administrator)");
 					tsi.Click += RunAs;
-					tsi = cmnu.Items.Add("Open in Explorer");
+					tsi = cmnu.Items.Add("Open in File Explorer");
 					tsi.Click += Explore;
 					tsi = cmnu.Items.Add("Open in cmd");
 					tsi.Click += OpenCmd;
@@ -372,7 +372,7 @@ namespace TrayDir {
 					tsi.Click += Run;
 					tsi = cmnu.Items.Add("Run (Administrator)");
 					tsi.Click += RunAs;
-					tsi = cmnu.Items.Add("Open in Explorer");
+					tsi = cmnu.Items.Add("Open in File Explorer");
 					tsi.Click += Explore;
 				}
 				else if (isVFolder) {
