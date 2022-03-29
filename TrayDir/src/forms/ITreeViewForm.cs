@@ -460,21 +460,15 @@ namespace TrayDir
 			{
 				if (e.KeyCode == Keys.Enter) {
 					editButton_Click(sender, null);
-					e.Handled = true;
-					e.SuppressKeyPress = true;
 				}
 				if (e.KeyCode == Keys.F2)
 				{
 					renameButton_Click(sender, null);
-					e.Handled = true;
-					e.SuppressKeyPress = true;
 				}
 				if (e.KeyCode == Keys.X) {
 					if (e.Modifiers == Keys.Control) {
 						CopyToClipboard();
 						deleteButton_Click(sender, null);
-						e.Handled = true;
-						e.SuppressKeyPress = true;
 					}
 				}
 				if (e.KeyCode == Keys.C)
@@ -482,8 +476,6 @@ namespace TrayDir
 					if (e.Modifiers == Keys.Control)
 					{
 						CopyToClipboard();
-						e.Handled = true;
-						e.SuppressKeyPress = true;
 					}
 				}
 				if (e.KeyCode == Keys.N)
@@ -491,21 +483,15 @@ namespace TrayDir
 					if (e.Modifiers == Keys.Control)
 					{
 						newDocButton_Click(sender, null);
-						e.Handled = true;
-						e.SuppressKeyPress = true;
 					}
 					if (e.Modifiers == (Keys.Control | Keys.Shift))
 					{
 						newVirtualFolderButton_Click(sender, null);
-						e.Handled = true;
-						e.SuppressKeyPress = true;
 					}
 				}
 				if (e.KeyCode == Keys.E) {
 					if (e.Modifiers == Keys.Control) {
 						openInExplorerMenuItem_click(sender, null);
-						e.Handled = true;
-						e.SuppressKeyPress = true;
 					}
 				}
 				if (e.KeyCode == Keys.F)
@@ -513,51 +499,39 @@ namespace TrayDir
 					if (e.Modifiers == Keys.Control)
 					{
 						newFolderButton_Click(sender, null);
-						e.Handled = true;
-						e.SuppressKeyPress = true;
 					}
 				}
 				if (e.KeyCode == Keys.Delete)
 				{
 					deleteButton_Click(sender, null);
-					e.Handled = true;
-					e.SuppressKeyPress = true;
 				}
 				if (e.Modifiers == Keys.Control)
 				{
 					if (e.KeyCode == Keys.Up && selectedUpable)
 					{
 						upButton_Click(sender, null);
-						e.Handled = true;
-						e.SuppressKeyPress = true;
 					}
 					if (e.KeyCode == Keys.Down && selectedDownable)
 					{
 						downButton_Click(sender, null);
-						e.Handled = true;
-						e.SuppressKeyPress = true;
 					}
 					if (e.KeyCode == Keys.Left && selectedOutdentable)
 					{
 						outdentButton_Click(sender, null);
-						e.Handled = true;
-						e.SuppressKeyPress = true;
 					}
 					if (e.KeyCode == Keys.Right && selectedIndentable)
 					{
 						indentButton_Click(sender, null);
-						e.Handled = true;
-						e.SuppressKeyPress = true;
 					}
 				}
 			}
 			if (e.KeyCode == Keys.V) {
 				if (e.Modifiers == Keys.Control) {
 					PasteFromClipboard();
-					e.Handled = true;
-					e.SuppressKeyPress = true;
 				}
 			}
+			e.Handled = true;
+			e.SuppressKeyPress = true;
 		}
 		private void treeView2_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
