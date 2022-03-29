@@ -61,6 +61,7 @@ namespace TrayDir
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bugReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.panel1 = new System.Windows.Forms.Panel();
@@ -68,7 +69,6 @@ namespace TrayDir
 			this.imgLoadTimer = new System.Windows.Forms.Timer(this.components);
 			this.iconLoadTimer = new System.Windows.Forms.Timer(this.components);
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-			this.bugReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -281,16 +281,23 @@ namespace TrayDir
 			// helpToolStripMenuItem1
 			// 
 			this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-			this.helpToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+			this.helpToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
 			this.helpToolStripMenuItem1.Text = "Help";
 			this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
 			// 
 			// donateToolStripMenuItem
 			// 
 			this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
-			this.donateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.donateToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
 			this.donateToolStripMenuItem.Text = "Donate";
 			this.donateToolStripMenuItem.Click += new System.EventHandler(this.donateToolStripMenuItem_Click);
+			// 
+			// bugReportToolStripMenuItem
+			// 
+			this.bugReportToolStripMenuItem.Name = "bugReportToolStripMenuItem";
+			this.bugReportToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+			this.bugReportToolStripMenuItem.Text = "Bug Report";
+			this.bugReportToolStripMenuItem.Click += new System.EventHandler(this.bugReportToolStripMenuItem_Click);
 			// 
 			// timer1
 			// 
@@ -334,15 +341,9 @@ namespace TrayDir
 			// 
 			this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
 			// 
-			// bugReportToolStripMenuItem
-			// 
-			this.bugReportToolStripMenuItem.Name = "bugReportToolStripMenuItem";
-			this.bugReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.bugReportToolStripMenuItem.Text = "Bug Report";
-			this.bugReportToolStripMenuItem.Click += new System.EventHandler(this.bugReportToolStripMenuItem_Click);
-			// 
 			// MainForm
 			// 
+			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
@@ -350,6 +351,7 @@ namespace TrayDir
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.mainMenu);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.KeyPreview = true;
 			this.MainMenuStrip = this.mainMenu;
 			this.Margin = new System.Windows.Forms.Padding(2);
 			this.MinimumSize = this.Size;
@@ -357,6 +359,9 @@ namespace TrayDir
 			this.Text = "TrayDir";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
+			this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
+			this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
 			this.mainMenu.ResumeLayout(false);
 			this.mainMenu.PerformLayout();
 			this.ResumeLayout(false);

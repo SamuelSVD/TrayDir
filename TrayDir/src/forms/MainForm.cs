@@ -70,6 +70,8 @@ namespace TrayDir
 		{
 			instanceTabs = new SmartTabControl();
 			instanceTabs.AllowDrop = true;
+			instanceTabs.DragEnter += MainForm_DragEnter;
+			instanceTabs.DragDrop += MainForm_DragDrop;
 			instanceTabs.Dock = DockStyle.Fill;
 			//instanceTabs.Anchor = (AnchorStyles)5;
 			instanceTabs.Name = "instanceTabs";
@@ -561,6 +563,24 @@ namespace TrayDir
 			string body = "Hello, I found a problem with TrayDir!%0D%0A%0D%0APlease include a description of your problem below.%0D%0ADescription:";
 			string mailto = String.Format("mailto:{0}?subject={1}&body={2}", address, subject, body);
 			AppUtils.ProcessStart(mailto);
+		}
+
+		private void MainForm_DragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.All;
+		}
+
+		private void MainForm_DragDrop(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
+				string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+				foreach (string file in files) Console.WriteLine(file);
+			}
+		}
+
+		private void MainForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			trayInstance.view.treeviewForm.treeView2_KeyDown(sender, e);
 		}
 	}
 }
