@@ -60,7 +60,7 @@ namespace TrayDir
 			this.tableLayoutPanel4.RowCount = 2;
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(756, 382);
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(380, 196);
 			this.tableLayoutPanel4.TabIndex = 5;
 			// 
 			// groupBox1
@@ -69,11 +69,10 @@ namespace TrayDir
 			this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.tableLayoutPanel4.SetColumnSpan(this.groupBox1, 2);
 			this.groupBox1.Controls.Add(this.pluginTableLayoutPanel);
-			this.groupBox1.Location = new System.Drawing.Point(6, 6);
-			this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.groupBox1.Location = new System.Drawing.Point(3, 3);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Padding = new System.Windows.Forms.Padding(10, 38, 10, 0);
-			this.groupBox1.Size = new System.Drawing.Size(744, 314);
+			this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 20, 5, 0);
+			this.groupBox1.Size = new System.Drawing.Size(374, 161);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "File Options";
@@ -93,7 +92,7 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.Controls.Add(this.pathTextBox, 0, 3);
 			this.pluginTableLayoutPanel.Controls.Add(this.folderBrowseButton, 2, 4);
 			this.pluginTableLayoutPanel.Controls.Add(this.shortcutCheckBox, 0, 5);
-			this.pluginTableLayoutPanel.Location = new System.Drawing.Point(10, 38);
+			this.pluginTableLayoutPanel.Location = new System.Drawing.Point(5, 20);
 			this.pluginTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
 			this.pluginTableLayoutPanel.RowCount = 6;
@@ -103,19 +102,18 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-			this.pluginTableLayoutPanel.Size = new System.Drawing.Size(724, 252);
+			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.pluginTableLayoutPanel.Size = new System.Drawing.Size(364, 128);
 			this.pluginTableLayoutPanel.TabIndex = 6;
 			// 
 			// fileBrowseButton
 			// 
 			this.fileBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.fileBrowseButton.AutoSize = true;
-			this.fileBrowseButton.Location = new System.Drawing.Point(390, 142);
-			this.fileBrowseButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.fileBrowseButton.Location = new System.Drawing.Point(205, 81);
 			this.fileBrowseButton.Name = "fileBrowseButton";
-			this.fileBrowseButton.Size = new System.Drawing.Size(150, 67);
+			this.fileBrowseButton.Size = new System.Drawing.Size(75, 23);
 			this.fileBrowseButton.TabIndex = 13;
 			this.fileBrowseButton.Text = "File";
 			this.fileBrowseButton.UseVisualStyleBackColor = true;
@@ -124,20 +122,18 @@ namespace TrayDir
 			// pathLabel
 			// 
 			this.pathLabel.AutoSize = true;
-			this.pathLabel.Location = new System.Drawing.Point(6, 68);
-			this.pathLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+			this.pathLabel.Location = new System.Drawing.Point(3, 39);
 			this.pathLabel.Name = "pathLabel";
-			this.pathLabel.Size = new System.Drawing.Size(56, 25);
+			this.pathLabel.Size = new System.Drawing.Size(29, 13);
 			this.pathLabel.TabIndex = 7;
 			this.pathLabel.Text = "Path";
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(6, 0);
-			this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+			this.label1.Location = new System.Drawing.Point(3, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(145, 25);
+			this.label1.Size = new System.Drawing.Size(72, 13);
 			this.label1.TabIndex = 9;
 			this.label1.Text = "Display Name";
 			// 
@@ -145,10 +141,9 @@ namespace TrayDir
 			// 
 			this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 3);
 			this.aliasEdit.Dock = System.Windows.Forms.DockStyle.Top;
-			this.aliasEdit.Location = new System.Drawing.Point(6, 31);
-			this.aliasEdit.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.aliasEdit.Location = new System.Drawing.Point(3, 16);
 			this.aliasEdit.Name = "aliasEdit";
-			this.aliasEdit.Size = new System.Drawing.Size(712, 31);
+			this.aliasEdit.Size = new System.Drawing.Size(358, 20);
 			this.aliasEdit.TabIndex = 10;
 			this.aliasEdit.TextChanged += new System.EventHandler(this.aliasEdit_TextChanged);
 			// 
@@ -156,20 +151,18 @@ namespace TrayDir
 			// 
 			this.pluginTableLayoutPanel.SetColumnSpan(this.pathTextBox, 3);
 			this.pathTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pathTextBox.Location = new System.Drawing.Point(6, 99);
-			this.pathTextBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.pathTextBox.Location = new System.Drawing.Point(3, 55);
 			this.pathTextBox.Name = "pathTextBox";
-			this.pathTextBox.Size = new System.Drawing.Size(712, 31);
+			this.pathTextBox.Size = new System.Drawing.Size(358, 20);
 			this.pathTextBox.TabIndex = 11;
 			this.pathTextBox.TextChanged += new System.EventHandler(this.pathTextBox_TextChanged);
 			// 
 			// folderBrowseButton
 			// 
 			this.folderBrowseButton.AutoSize = true;
-			this.folderBrowseButton.Location = new System.Drawing.Point(552, 142);
-			this.folderBrowseButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.folderBrowseButton.Location = new System.Drawing.Point(286, 81);
 			this.folderBrowseButton.Name = "folderBrowseButton";
-			this.folderBrowseButton.Size = new System.Drawing.Size(166, 67);
+			this.folderBrowseButton.Size = new System.Drawing.Size(75, 23);
 			this.folderBrowseButton.TabIndex = 12;
 			this.folderBrowseButton.Text = "Folder";
 			this.folderBrowseButton.UseVisualStyleBackColor = true;
@@ -181,10 +174,10 @@ namespace TrayDir
 			this.shortcutCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.pluginTableLayoutPanel.SetColumnSpan(this.shortcutCheckBox, 3);
 			this.shortcutCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.shortcutCheckBox.Location = new System.Drawing.Point(4, 219);
-			this.shortcutCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.shortcutCheckBox.Location = new System.Drawing.Point(2, 109);
+			this.shortcutCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.shortcutCheckBox.Name = "shortcutCheckBox";
-			this.shortcutCheckBox.Size = new System.Drawing.Size(716, 29);
+			this.shortcutCheckBox.Size = new System.Drawing.Size(360, 17);
 			this.shortcutCheckBox.TabIndex = 14;
 			this.shortcutCheckBox.Text = "Use folder as shortcut";
 			this.shortcutCheckBox.UseVisualStyleBackColor = true;
@@ -194,10 +187,10 @@ namespace TrayDir
 			// 
 			this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.closeButton.Location = new System.Drawing.Point(588, 332);
-			this.closeButton.Margin = new System.Windows.Forms.Padding(6, 6, 18, 6);
+			this.closeButton.Location = new System.Drawing.Point(296, 170);
+			this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
 			this.closeButton.Name = "closeButton";
-			this.closeButton.Size = new System.Drawing.Size(150, 44);
+			this.closeButton.Size = new System.Drawing.Size(75, 23);
 			this.closeButton.TabIndex = 2;
 			this.closeButton.Text = "Apply";
 			this.closeButton.UseVisualStyleBackColor = true;
@@ -205,16 +198,16 @@ namespace TrayDir
 			// IPathForm
 			// 
 			this.AcceptButton = this.closeButton;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.CancelButton = this.closeButton;
-			this.ClientSize = new System.Drawing.Size(1108, 615);
+			this.ClientSize = new System.Drawing.Size(554, 320);
 			this.Controls.Add(this.tableLayoutPanel4);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.Name = "IPathForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Edit Path";
