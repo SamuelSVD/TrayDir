@@ -116,7 +116,7 @@ namespace TrayDir
 			this.outdentButton.Name = "outdentButton";
 			this.outdentButton.Size = new System.Drawing.Size(20, 23);
 			this.outdentButton.TabIndex = 14;
-			this.toolTip.SetToolTip(this.outdentButton, "Move item out (CTRL+RIGHT)");
+			this.toolTip.SetToolTip(this.outdentButton, "Move item out (CTRL+LEFT)");
 			this.outdentButton.UseVisualStyleBackColor = true;
 			this.outdentButton.Click += new System.EventHandler(this.outdentButton_Click);
 			// 
@@ -139,7 +139,7 @@ namespace TrayDir
 			this.indentButton.Name = "indentButton";
 			this.indentButton.Size = new System.Drawing.Size(20, 23);
 			this.indentButton.TabIndex = 2;
-			this.toolTip.SetToolTip(this.indentButton, "Move item into Virtual Folder (CTRL+LEFT)");
+			this.toolTip.SetToolTip(this.indentButton, "Move item into Virtual Folder (CTRL+RIGHT)");
 			this.indentButton.UseVisualStyleBackColor = true;
 			this.indentButton.Click += new System.EventHandler(this.indentButton_Click);
 			// 
