@@ -456,82 +456,97 @@ namespace TrayDir
 		}
 		public void treeView2_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (selectedNode != null)
-			{
+			if (selectedNode != null) {
 				if (e.KeyCode == Keys.Enter) {
+					e.Handled = true;
+					e.SuppressKeyPress = true;
 					editButton_Click(sender, null);
 				}
-				if (e.KeyCode == Keys.F2)
-				{
+				if (e.KeyCode == Keys.F2) {
 					renameButton_Click(sender, null);
+					e.Handled = true;
+					e.SuppressKeyPress = true;
 				}
 				if (e.KeyCode == Keys.X) {
 					if (e.Modifiers == Keys.Control) {
 						CopyToClipboard();
 						deleteButton_Click(sender, null);
+						e.Handled = true;
+						e.SuppressKeyPress = true;
 					}
 				}
-				if (e.KeyCode == Keys.C)
-				{
-					if (e.Modifiers == Keys.Control)
-					{
+				if (e.KeyCode == Keys.C) {
+					if (e.Modifiers == Keys.Control) {
 						CopyToClipboard();
+						e.Handled = true;
+						e.SuppressKeyPress = true;
 					}
 				}
-				if (e.KeyCode == Keys.N)
-				{
-					if (e.Modifiers == Keys.Control)
-					{
+				if (e.KeyCode == Keys.N) {
+					if (e.Modifiers == Keys.Control) {
 						newDocButton_Click(sender, null);
+						e.Handled = true;
+						e.SuppressKeyPress = true;
 					}
-					if (e.Modifiers == (Keys.Control | Keys.Shift))
-					{
+					if (e.Modifiers == (Keys.Control | Keys.Shift)) {
 						newVirtualFolderButton_Click(sender, null);
+						e.Handled = true;
+						e.SuppressKeyPress = true;
 					}
 				}
 				if (e.KeyCode == Keys.E) {
 					if (e.Modifiers == Keys.Control) {
 						openInExplorerMenuItem_click(sender, null);
+						e.Handled = true;
+						e.SuppressKeyPress = true;
 					}
 				}
-				if (e.KeyCode == Keys.F)
-				{
-					if (e.Modifiers == Keys.Control)
-					{
+				if (e.KeyCode == Keys.F) {
+					if (e.Modifiers == Keys.Control) {
 						newFolderButton_Click(sender, null);
+						e.Handled = true;
+						e.SuppressKeyPress = true;
 					}
 				}
-				if (e.KeyCode == Keys.Delete)
-				{
+				if (e.KeyCode == Keys.Delete) {
 					deleteButton_Click(sender, null);
+					e.Handled = true;
+					e.SuppressKeyPress = true;
 				}
-				if (e.Modifiers == Keys.Control)
-				{
-					if (e.KeyCode == Keys.Up && selectedUpable)
-					{
+				if (e.Modifiers == Keys.Control) {
+					if (e.KeyCode == Keys.Up && selectedUpable) {
 						upButton_Click(sender, null);
+						e.Handled = true;
+						e.SuppressKeyPress = true;
 					}
-					if (e.KeyCode == Keys.Down && selectedDownable)
-					{
+					if (e.KeyCode == Keys.Down && selectedDownable) {
 						downButton_Click(sender, null);
+						e.Handled = true;
+						e.SuppressKeyPress = true;
 					}
-					if (e.KeyCode == Keys.Left && selectedOutdentable)
-					{
+					if (e.KeyCode == Keys.Left && selectedOutdentable) {
 						outdentButton_Click(sender, null);
+						e.Handled = true;
+						e.SuppressKeyPress = true;
 					}
-					if (e.KeyCode == Keys.Right && selectedIndentable)
-					{
+					if (e.KeyCode == Keys.Right && selectedIndentable) {
 						indentButton_Click(sender, null);
+						e.Handled = true;
+						e.SuppressKeyPress = true;
 					}
 				}
 			}
 			if (e.KeyCode == Keys.V) {
 				if (e.Modifiers == Keys.Control) {
 					PasteFromClipboard();
+					e.Handled = true;
+					e.SuppressKeyPress = true;
 				}
 			}
-			e.Handled = true;
-			e.SuppressKeyPress = true;
+			if (e.KeyCode == Keys.Escape) {
+				e.Handled = true;
+				e.SuppressKeyPress = true;
+			}
 		}
 		private void treeView2_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
