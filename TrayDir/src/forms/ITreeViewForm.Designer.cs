@@ -104,7 +104,7 @@ namespace TrayDir
 			this.downButton.Name = "downButton";
 			this.downButton.Size = new System.Drawing.Size(20, 23);
 			this.downButton.TabIndex = 14;
-			this.toolTip.SetToolTip(this.downButton, "Move item down");
+			this.toolTip.SetToolTip(this.downButton, "Move item down (CTRL+DOWN)");
 			this.downButton.UseVisualStyleBackColor = true;
 			this.downButton.Click += new System.EventHandler(this.downButton_Click);
 			// 
@@ -116,7 +116,7 @@ namespace TrayDir
 			this.outdentButton.Name = "outdentButton";
 			this.outdentButton.Size = new System.Drawing.Size(20, 23);
 			this.outdentButton.TabIndex = 14;
-			this.toolTip.SetToolTip(this.outdentButton, "Move item out");
+			this.toolTip.SetToolTip(this.outdentButton, "Move item out (CTRL+RIGHT)");
 			this.outdentButton.UseVisualStyleBackColor = true;
 			this.outdentButton.Click += new System.EventHandler(this.outdentButton_Click);
 			// 
@@ -128,7 +128,7 @@ namespace TrayDir
 			this.upButton.Name = "upButton";
 			this.upButton.Size = new System.Drawing.Size(20, 23);
 			this.upButton.TabIndex = 0;
-			this.toolTip.SetToolTip(this.upButton, "Move item up");
+			this.toolTip.SetToolTip(this.upButton, "Move item up (CTRL+UP)");
 			this.upButton.UseVisualStyleBackColor = true;
 			this.upButton.Click += new System.EventHandler(this.upButton_Click);
 			// 
@@ -139,7 +139,7 @@ namespace TrayDir
 			this.indentButton.Name = "indentButton";
 			this.indentButton.Size = new System.Drawing.Size(20, 23);
 			this.indentButton.TabIndex = 2;
-			this.toolTip.SetToolTip(this.indentButton, "Move item into Virtual Folder");
+			this.toolTip.SetToolTip(this.indentButton, "Move item into Virtual Folder (CTRL+LEFT)");
 			this.indentButton.UseVisualStyleBackColor = true;
 			this.indentButton.Click += new System.EventHandler(this.indentButton_Click);
 			// 
