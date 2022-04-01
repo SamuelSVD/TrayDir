@@ -681,5 +681,63 @@ namespace TrayDir
 			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}
+		private void treeView2_ItemDrag(object sender, ItemDragEventArgs e)
+		{
+			DoDragDrop(e.Item, DragDropEffects.Move);
+		}
+		private void treeView2_DragEnter(object sender, DragEventArgs e)
+		{
+			e.Effect = e.AllowedEffect;
+		}
+		private void treeView2_DragOver(object sender, DragEventArgs e)
+		{
+			Point targetPoint = treeView2.PointToClient(new Point(e.X, e.Y));
+			treeView2.SelectedNode = treeView2.GetNodeAt(targetPoint);
+		}
+		private void treeView2_DragDrop(object sender, DragEventArgs e)
+		{
+			Point targetPoint = treeView2.PointToClient(new Point(e.X, e.Y));
+			TreeNode targetNode = treeView2.GetNodeAt(targetPoint);
+			if (targetNode != null) {
+				TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+				MoveAOverB(draggedNode, targetNode);
+			}
+		}
+		private void MoveAOverB(TreeNode A, TreeNode B)
+		{
+			if ((!A.Equals(B)) && (!ContainsNode(A, B))) {
+				int targetNodeIndex;
+				if (B.Parent != null) {
+					targetNodeIndex = B.Parent.Nodes.IndexOf(B);
+					A.Remove();
+					B.Parent.Nodes.Insert(targetNodeIndex, A);
+				} else {
+					targetNodeIndex = treeView2.Nodes.IndexOf(B);
+					A.Remove();
+					treeView2.Nodes.Insert(targetNodeIndex, A);
+				}
+				TrayInstanceNode tA = TreeNodeToInstanceNode(A);
+				TrayInstanceNode tB = TreeNodeToInstanceNode(B);
+				if (tA != null && tB != null) {
+					tA.MoveOverB(tB);
+					Save();
+				}
+			}
+		}
+		private bool ContainsNode(TreeNode node1, TreeNode node2)
+		{
+			if (node2.Parent == null) return false;
+			if (node2.Parent.Equals(node1)) return true;
+			return ContainsNode(node1, node2.Parent);
+		}
+		private TrayInstanceNode TreeNodeToInstanceNode(TreeNode node)
+		{
+			foreach(ITreeNode n in nodes) {
+				if (node.Equals(n.node)) {
+					return n.tin;
+				}
+			}
+			return null;
+		}
 	}
 }

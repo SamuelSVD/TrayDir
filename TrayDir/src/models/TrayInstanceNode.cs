@@ -152,5 +152,22 @@ namespace TrayDir
 			}
 			return tin;
 		}
+		public void MoveOverB(TrayInstanceNode B)
+		{
+			if ((!this.Equals(B)) && (!ContainsNode(this, B))) {
+				int targetNodeIndex;
+				if (B.parent != null) {
+					targetNodeIndex = B.parent.children.IndexOf(B);
+					this.parent.children.Remove(this);
+					B.parent.children.Insert(targetNodeIndex, this);
+				}
+			}
+		}
+		private bool ContainsNode(TrayInstanceNode node1, TrayInstanceNode node2)
+		{
+			if (node2.parent == null) return false;
+			if (node2.parent.Equals(node1)) return true;
+			return ContainsNode(node1, node2.parent);
+		}
 	}
 }

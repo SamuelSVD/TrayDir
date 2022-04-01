@@ -298,6 +298,7 @@ namespace TrayDir
 			// 
 			// treeView2
 			// 
+			this.treeView2.AllowDrop = true;
 			this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.treeView2.HideSelection = false;
 			this.treeView2.Location = new System.Drawing.Point(3, 3);
@@ -305,9 +306,13 @@ namespace TrayDir
 			this.treeView2.Size = new System.Drawing.Size(239, 194);
 			this.treeView2.TabIndex = 1;
 			this.treeView2.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView2_BeforeCollapse);
+			this.treeView2.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView2_ItemDrag);
 			this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
 			this.treeView2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseClick);
 			this.treeView2.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseDoubleClick);
+			this.treeView2.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView2_DragDrop);
+			this.treeView2.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView2_DragEnter);
+			this.treeView2.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView2_DragOver);
 			this.treeView2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView2_KeyDown);
 			// 
 			// ITreeViewForm
