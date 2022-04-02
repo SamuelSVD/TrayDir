@@ -158,8 +158,9 @@ namespace TrayDir
 				int targetNodeIndex;
 				if (B.parent != null) {
 					targetNodeIndex = B.parent.children.IndexOf(B);
-					this.parent.children.Remove(this);
+					if (this.parent != null) this.parent.children.Remove(this);
 					B.parent.children.Insert(targetNodeIndex, this);
+					parent = B.parent;
 				}
 			}
 		}

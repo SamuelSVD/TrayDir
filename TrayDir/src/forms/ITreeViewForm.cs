@@ -698,10 +698,56 @@ namespace TrayDir
 		{
 			Point targetPoint = treeView2.PointToClient(new Point(e.X, e.Y));
 			TreeNode targetNode = treeView2.GetNodeAt(targetPoint);
-			if (targetNode != null) {
-				TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
-				MoveAOverB(draggedNode, targetNode);
+			if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
+				string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+				foreach (string file in files) {
+					Console.WriteLine(file);
+					if (targetNode != null) {
+						AddNewPathOverB(file, targetNode);
+					} else {
+						AddNewPath(file);
+					}
+				}
+			} else {
+				if (targetNode != null) {
+					TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+					MoveAOverB(draggedNode, targetNode);
+				}
 			}
+		}
+		private ITreeNode CreatePathNode()
+		{
+			return CreatePathNode("");
+		}
+		private ITreeNode CreatePathNode(string path)
+		{
+			TrayInstancePath tip = new TrayInstancePath();
+			tip.path = path;
+			instance.paths.Add(tip);
+			int index = instance.paths.IndexOf(tip);
+			TrayInstanceNode tin = new TrayInstanceNode();
+			tin.id = index;
+			tin.type = TrayInstanceNode.NodeType.Path;
+			tin.SetInstance(instance);
+			return new ITreeNode(tin);
+		}
+		private void AddNewPathOverB(string path, TreeNode B)
+		{
+			ITreeNode itn = CreatePathNode(path);
+			itn.Refresh();
+			nodes.Add(itn);
+			MoveAOverB(itn.node, B);
+			Save();
+		}
+		private void AddNewPath(string path)
+		{
+			ITreeNode itn = CreatePathNode(path);
+			itn.Refresh();
+			insertNode(itn);
+			treeView2.SelectedNode = itn.node;
+			selectedNode = itn;
+			nodes.Add(itn);
+			Save();
 		}
 		private void MoveAOverB(TreeNode A, TreeNode B)
 		{
