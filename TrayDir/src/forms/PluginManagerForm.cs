@@ -6,7 +6,6 @@ namespace TrayDir
 {
 	public partial class PluginManagerForm : Form
 	{
-		public static PluginManagerForm form;
 		List<PluginNode> plugins;
 		private PluginNode selectedNode
 		{
@@ -25,14 +24,15 @@ namespace TrayDir
 			InitializeComponent();
 			initializeTree();
 		}
-		public static void Init()
-		{
-			form = new PluginManagerForm();
-		}
 		public void initializeTree()
 		{
 			plugins = new List<PluginNode>();
 			treeView1.Nodes.Clear();
+			imageList = new ImageList();
+			imageList.Images.Clear();
+			imageList.ImageSize = new System.Drawing.Size(closeButton.Font.Height, closeButton.Font.Height);
+			imageList.Images.Add(Properties.Resources.empty);
+			treeView1.ImageList = imageList;
 			foreach (TrayPlugin tp in ProgramData.pd.plugins)
 			{
 				PluginNode pn = new PluginNode();
@@ -144,7 +144,6 @@ namespace TrayDir
 						ProgramData.pd.plugins.Add(tp);
 					}
 					ProgramData.pd.Save();
-					PluginManagerForm.form.initializeTree();
 				} else {
 					MessageBox.Show("Error: Unable to import file.", "Import failed");
 				}
