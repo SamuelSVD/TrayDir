@@ -291,6 +291,7 @@
     <Content Include="Resources\document_new.png" />
     <Content Include="Resources\down.png" />
     <None Include="Resources\edit.png" />
+    <None Include="Resources\empty.png" />
     <Content Include="Resources\file-exe.ico" />
     <Content Include="Resources\folder.png" />
     <Content Include="Resources\folder_blue.png" />

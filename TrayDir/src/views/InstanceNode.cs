@@ -7,7 +7,7 @@ namespace TrayDir
 	public class InstanceNode
 	{
 		public TreeNode node;
-		public TrayInstance trayInstance;
+		public TrayInstance instance;
 		public Icon icon;
 		public InstanceNode()
 		{
@@ -16,15 +16,20 @@ namespace TrayDir
 		public void UpdateNode()
 		{
 			string s = "";
-			if (trayInstance.instanceName == null || trayInstance.instanceName == "")
+			if (instance.instanceName == null || instance.instanceName == "")
 			{
 				s += "<No Name>";
-			} 
+			}
 			else
 			{
-				s += trayInstance.instanceName;
+				s += instance.instanceName;
 			}
 			node.Text = s;
+			if (instance.iconData != null && instance.iconData.Length != 0) {
+				try {
+					icon = TrayUtils.BytesToIcon(instance.iconData);
+				} catch { }
+			}
 		}
 	}
 }
