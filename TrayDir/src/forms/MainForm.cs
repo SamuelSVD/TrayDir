@@ -95,7 +95,7 @@ namespace TrayDir
 
 			instanceTabs.OnTabClick += OnTabClick;
 			instanceTabs.OnTabsSwapped += OnTabSwapped;
-			toolTip.SetToolTip(newTabTabPage, "Insert new instance");
+			toolTip.SetToolTip(newTabTabPage, Properties.Strings_en.Tooltip_InsertInstance);
 
 		}
 		public void OnTabClick(object sender, SmartTabControl.TabClickedArgs tca)
@@ -385,7 +385,7 @@ namespace TrayDir
 		}
 		private void New(object sender, EventArgs e)
 		{
-			TrayInstance ti = new TrayInstance("New Instance");
+			TrayInstance ti = new TrayInstance(Properties.Strings_en.Instance_NewInstance);
 			pd.trayInstances.Add(ti);
 			pd.FixInstances();
 			AddInstanceTabPage(ti);
@@ -397,7 +397,7 @@ namespace TrayDir
 		private void Edit(object sender, EventArgs e)
 		{
 			string input = trayInstance.instanceName;
-			if (InputDialog.ShowStringInputDialog("Edit Name", ref input) == DialogResult.OK)
+			if (InputDialog.ShowStringInputDialog(Properties.Strings_en.Form_EditName, ref input) == DialogResult.OK)
 			{
 				trayInstance.instanceName = input;
 				instanceTabs.SelectedTab.Text = input;
@@ -413,7 +413,7 @@ namespace TrayDir
 		private void PromptDelete(int i)
 		{
 			TrayInstance ti = pd.trayInstances[i];
-			if (pd.trayInstances.Count > 1 && (DialogResult.Yes == MessageBox.Show("Do you want to delete <" + ti.instanceName + ">?", "Close", MessageBoxButtons.YesNo)))
+			if (pd.trayInstances.Count > 1 && (DialogResult.Yes == MessageBox.Show(string.Format(Properties.Strings_en.Form_PromptDelete, ti.instanceName), Properties.Strings_en.Form_Close, MessageBoxButtons.YesNo)))
 			{
 				instanceTabs.TabPages.Remove(ti.view.InstanceTabPage);
 				pd.trayInstances.Remove(ti);
@@ -446,7 +446,7 @@ namespace TrayDir
 				}
 				else
 				{
-					MessageBox.Show("Error: Unable to import file.", "Import failed");
+					MessageBox.Show(Properties.Strings_en.Error_ImportFailed, Properties.Strings_en.Form_ImportFailed);
 				}
 			}
 		}
@@ -494,7 +494,7 @@ namespace TrayDir
 		private void changeIgnoreRegexToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			string input = trayInstance.ignoreRegex;
-			if (InputDialog.ShowMultilineStringInputDialog("Edit Ignore Regex", ref input) == DialogResult.OK)
+			if (InputDialog.ShowMultilineStringInputDialog(Properties.Strings_en.Form_EditIgnoreRegex, ref input) == DialogResult.OK)
 			{
 				trayInstance.ignoreRegex = input;
 				trayInstance.view.tray.Rebuild();
@@ -517,7 +517,7 @@ namespace TrayDir
 		}
 
 		private void archiveToolStripMenuItem_Click(object sender, EventArgs e) {
-			if (MessageBox.Show("Do you want to archive instance: " + trayInstance.instanceName, "Archive", MessageBoxButtons.OKCancel) == DialogResult.OK) {
+			if (MessageBox.Show(string.Format(Properties.Strings_en.Instance_Archive, trayInstance.instanceName), Properties.Strings_en.Form_Archive, MessageBoxButtons.OKCancel) == DialogResult.OK) {
 				TrayInstance t = trayInstance;
 				ProgramData.pd.trayInstances.Remove(t);
 				ProgramData.pd.archivedInstances.Add(t);
@@ -558,8 +558,8 @@ namespace TrayDir
 		}
 		private void bugReportToolStripMenuItem_Click(object sender, EventArgs e) {
 			string address = "contact@samver.ca";
-			string subject = String.Format("TrayDir {0}: Bug Report", Program.RunningVersion);
-			string body = "Hello, I found a problem with TrayDir!%0D%0A%0D%0APlease include a description of your problem below.%0D%0ADescription:";
+			string subject = String.Format(Properties.Strings_en.Email_Subject, Program.RunningVersion);
+			string body = Properties.Strings_en.Email_Body;
 			string mailto = String.Format("mailto:{0}?subject={1}&body={2}", address, subject, body);
 			AppUtils.ProcessStart(mailto);
 		}

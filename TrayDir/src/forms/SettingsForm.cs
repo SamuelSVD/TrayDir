@@ -41,20 +41,20 @@ namespace TrayDir
 			OptionView ov;
 
 			// Application Options
-			ov = new OptionView("Show Icons In Tray Menu", ProgramData.pd.settings.app.ShowIconsInMenus);
+			ov = new OptionView(Properties.Strings_en.Form_ShowIconsInTrayMenu, ProgramData.pd.settings.app.ShowIconsInMenus);
 			ov.AddTo(AppGroupLayout, 0);
-			ov.SetTooltip("When enabled, each menu item will show the icon associated with the file linked");
+			ov.SetTooltip(Properties.Strings_en.Tooltip_ShowIconsInTrayMenu);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.app, "ShowIconsInMenus");
 
 			string[] s = new[] { "Folders Top", "Folders Bottom", "None" };
-			ComboBoxView cbv = new ComboBoxView("Menu Sorting", s);
+			ComboBoxView cbv = new ComboBoxView(Properties.Strings_en.Form_MenuSorting, s);
 			cbv.AddTo(AppGroupLayout, 1);
 			ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "MenuSorting");
-			cbv.SetTooltip("Set tray menu folder / file sorting");
+			cbv.SetTooltip(Properties.Strings_en.Tooltip_MenuSorting);
 			cbv.combobox.Text = ProgramData.pd.settings.app.MenuSorting;
 
 			string[] s2 = new[] { "Yellow Folder", "Blue Folder"};
-			cbv = new ComboBoxView("Virtual Folder Menu Icon", s2);
+			cbv = new ComboBoxView(Properties.Strings_en.Form_VirtualFolderMenuIcon, s2);
 			cbv.AddTo(AppGroupLayout, 2);
 			ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "VFolderIcon");
 			cbv.combobox.SelectedIndexChanged += new EventHandler(delegate (object obj, EventArgs args) {
@@ -62,33 +62,33 @@ namespace TrayDir
 					ti.view.tray.Rebuild();
 				}
 			});
-			cbv.SetTooltip("When virtual folders choose between a yellow folder or blue folder icon");
+			cbv.SetTooltip(Properties.Strings_en.Tooltip_VirtualFolderMenuIcon);
 			cbv.combobox.Text = ProgramData.pd.settings.app.VFolderIcon;
 
 			// Windows Options
-			ov = new OptionView("Minimize On Close", ProgramData.pd.settings.win.MinimizeOnClose);
+			ov = new OptionView(Properties.Strings_en.Form_MinimizeOnClose, ProgramData.pd.settings.win.MinimizeOnClose);
 			ov.AddTo(WinGroupLayout, 0);
-			ov.SetTooltip("When enabled, closing the window will not exit the application");
+			ov.SetTooltip(Properties.Strings_en.Tooltip_MinimizeOnClose);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "MinimizeOnClose");
 
-			ov = new OptionView("Hide On Minimize", ProgramData.pd.settings.win.HideOnMinimize);
+			ov = new OptionView(Properties.Strings_en.Form_HideOnMinimize, ProgramData.pd.settings.win.HideOnMinimize);
 			ov.AddTo(WinGroupLayout, 1);
-			ov.SetTooltip("When enabled, minimizing the window will hide the application");
+			ov.SetTooltip(Properties.Strings_en.Tooltip_HideOnMinimize);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "HideOnMinimize");
 
-			ov = new OptionView("Start Minimized", ProgramData.pd.settings.win.StartMinimized);
+			ov = new OptionView(Properties.Strings_en.Form_StartMinimized, ProgramData.pd.settings.win.StartMinimized);
 			ov.AddTo(WinGroupLayout, 2);
-			ov.SetTooltip("When enabled, the application will always start hidden, only visible in system tray");
+			ov.SetTooltip(Properties.Strings_en.Tooltip_StartMinimized);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "StartMinimized");
 
-			ov = new OptionView("Start With Windows", ProgramData.pd.settings.win.StartWithWindows);
+			ov = new OptionView(Properties.Strings_en.Form_StartWithWindows, ProgramData.pd.settings.win.StartWithWindows);
 			ov.AddTo(WinGroupLayout, 3);
-			ov.SetTooltip("When enabled, the application will always start hidden, only visible in system tray");
+			ov.SetTooltip(Properties.Strings_en.Tooltip_StartWithWindows);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "StartWithWindows");
 
-			ov = new OptionView("Check For Updates on Startup", ProgramData.pd.settings.win.CheckForUpdates);
+			ov = new OptionView(Properties.Strings_en.Form_CheckForUpdatesOnStartup, ProgramData.pd.settings.win.CheckForUpdates);
 			ov.AddTo(WinGroupLayout, 4);
-			ov.SetTooltip("When enabled, TrayDir will check for update on startup");
+			ov.SetTooltip(Properties.Strings_en.Tooltip_CheckForUpdatesOnStartup);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "CheckForUpdates");
 		}
 

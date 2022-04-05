@@ -70,7 +70,7 @@ namespace TrayDir
 		{
 			if (selectedNode != null)
 			{
-				if (MessageBox.Show("Do you want to delete plugin: " + selectedNode.node.Text, "Delete plugin", MessageBoxButtons.OKCancel) == DialogResult.OK)
+				if (MessageBox.Show(String.Format(Properties.Strings_en.Plugin_Delete, selectedNode.node.Text), Properties.Strings_en.Form_Delete, MessageBoxButtons.OKCancel) == DialogResult.OK)
 				{
 					bool used = false;
 					int pid = ProgramData.pd.plugins.IndexOf(selectedNode.tp);
@@ -94,7 +94,7 @@ namespace TrayDir
 					}
 					else
 					{
-						MessageBox.Show("Unable to delete. Plugin currently in use.");
+						MessageBox.Show(Properties.Strings_en.Plugin_UnableToDelete);
 					}
 				}
 			}
@@ -126,7 +126,7 @@ namespace TrayDir
 						TrayPlugin tpc = ProgramData.pd.plugins[i];
 						if (tpc.name == tp.name)
 						{
-							DialogResult dr = MessageBox.Show("There exists another plugin with the same name. Would you like to overwrite its configuration?", "Import Conflict", MessageBoxButtons.YesNoCancel);
+							DialogResult dr = MessageBox.Show(Properties.Strings_en.Plugin_SameNameImport, Properties.Strings_en.Form_ImportConflict, MessageBoxButtons.YesNoCancel);
 							if (dr == DialogResult.Yes)
 							{
 								ProgramData.pd.plugins[i] = tp;
@@ -145,7 +145,7 @@ namespace TrayDir
 					}
 					ProgramData.pd.Save();
 				} else {
-					MessageBox.Show("Error: Unable to import file.", "Import failed");
+					MessageBox.Show(Properties.Strings_en.Error_ImportFailed, Properties.Strings_en.Form_ImportFailed);
 				}
 			}
 		}

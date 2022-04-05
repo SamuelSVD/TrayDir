@@ -53,7 +53,7 @@ namespace TrayDir
 		{
 			if (selectedNode != null)
 			{
-				if (MessageBox.Show("Do you want to restore instance: " + selectedNode.node.Text, "Restore", MessageBoxButtons.OKCancel) == DialogResult.OK) {
+				if (MessageBox.Show(string.Format(Properties.Strings_en.Instance_Restore, selectedNode.node.Text), Properties.Strings_en.Form_Restore, MessageBoxButtons.OKCancel) == DialogResult.OK) {
 					TrayInstance ti = selectedNode.instance;
 					ti.FixPaths();
 					ti.FixNodes();
@@ -69,7 +69,7 @@ namespace TrayDir
 		{
 			if (selectedNode != null)
 			{
-				if (MessageBox.Show("Do you want to delete instance: " + selectedNode.node.Text, "Delete", MessageBoxButtons.OKCancel) == DialogResult.OK)
+				if (MessageBox.Show(string.Format(Properties.Strings_en.Instance_Delete, selectedNode.node.Text), Properties.Strings_en.Form_Delete, MessageBoxButtons.OKCancel) == DialogResult.OK)
 				{
 					int pid = ProgramData.pd.archivedInstances.IndexOf(selectedNode.instance);
 					ProgramData.pd.archivedInstances.Remove(selectedNode.instance);

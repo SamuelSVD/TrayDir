@@ -32,12 +32,12 @@ namespace TrayDir
 		public ITreeViewForm(TrayInstance instance)
 		{
 			rightClickMenu = new ContextMenu();
-			renameMenuItem = new MenuItem("Rename Item", renameButton_Click);
-			folderShortcutMenuItem = new MenuItem("Use folder link as shortcut", folderShortcutMenuItem_click);
-			folderExpandMenuItem = new MenuItem("Expand folder in tray menu", folderExpandMenuItem_click);
-			openInExplorerMenuItem = new MenuItem("Open In File Explorer", openInExplorerMenuItem_click);
-			openInCmdMenuItem = new MenuItem("Open In Cmd", openInCmdMenuItem_click);
-			openInCmdAdminMenuItem = new MenuItem("Open In Cmd (Administrator)", openInCmdAdminMenuItem_click);
+			renameMenuItem = new MenuItem(Properties.Strings_en.Item_RenameItem, renameButton_Click);
+			folderShortcutMenuItem = new MenuItem(Properties.Strings_en.Item_UseAsShortcut, folderShortcutMenuItem_click);
+			folderExpandMenuItem = new MenuItem(Properties.Strings_en.Item_Expand, folderExpandMenuItem_click);
+			openInExplorerMenuItem = new MenuItem(Properties.Strings_en.Item_OpenFileExplorer, openInExplorerMenuItem_click);
+			openInCmdMenuItem = new MenuItem(Properties.Strings_en.Item_OpenCmd, openInCmdMenuItem_click);
+			openInCmdAdminMenuItem = new MenuItem(Properties.Strings_en.Item_OpenCmdAdmin, openInCmdAdminMenuItem_click);
 			rightClickMenu.MenuItems.Add(renameMenuItem);
 			rightClickMenu.MenuItems.Add(folderShortcutMenuItem);
 			rightClickMenu.MenuItems.Add(folderExpandMenuItem);
@@ -286,7 +286,7 @@ namespace TrayDir
 		}
 		private void newVirtualFolderButton_Click(object sender, EventArgs e)
 		{
-			TrayInstanceVirtualFolder tip = new TrayInstanceVirtualFolder("New VFolder");
+			TrayInstanceVirtualFolder tip = new TrayInstanceVirtualFolder(Properties.Strings_en.VirtualFolder_New);
 			instance.vfolders.Add(tip);
 			int index = instance.vfolders.IndexOf(tip);
 			TrayInstanceNode tin = new TrayInstanceNode();
@@ -303,7 +303,7 @@ namespace TrayDir
 		private void renameButton_Click(object sender, EventArgs e)
 		{
 			string input = selectedNode.alias;
-			if (InputDialog.ShowStringInputDialog("Edit Display Name", ref input) == DialogResult.OK)
+			if (InputDialog.ShowStringInputDialog(Properties.Strings_en.Form_EditDisplayName, ref input) == DialogResult.OK)
 			{
 				selectedNode.alias = input;
 				Save();
@@ -316,7 +316,7 @@ namespace TrayDir
 				bool deleteNode = true;
 				if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder && selectedNode.node.Nodes.Count > 0)
 				{
-					deleteNode = (MessageBox.Show("Delete virtual folder with its contents?", "", MessageBoxButtons.OKCancel) == DialogResult.OK);
+					deleteNode = (MessageBox.Show(Properties.Strings_en.VirtualFolder_DeleteContents, "", MessageBoxButtons.OKCancel) == DialogResult.OK);
 				}
 				if (deleteNode)
 				{

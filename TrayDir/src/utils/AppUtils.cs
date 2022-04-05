@@ -10,6 +10,9 @@ namespace TrayDir
 {
 	class AppUtils
 	{
+		private static string RUNAS = "runas";
+		private static string CMD = "cmd";
+		private static string EXPLORER = "explorer.exe";
 		public static bool PathIsDirectory(string path)
 		{
 			if (path != "" && path != null) {
@@ -65,7 +68,7 @@ namespace TrayDir
 				proc.StartInfo.WorkingDirectory = startingPath;
 			}
 			if (PathIsDirectory(fileName)) {
-					proc.StartInfo.FileName = "explorer.exe";
+					proc.StartInfo.FileName = EXPLORER;
 					proc.StartInfo.Arguments = fileName;
 			} else {
 				proc.StartInfo.FileName = fileName;
@@ -73,14 +76,14 @@ namespace TrayDir
 				if (runasadmin) {
 					proc.StartInfo.UseShellExecute = true;
 					proc.StartInfo.FileName = fileName;
-					proc.StartInfo.Verb = "runas";
+					proc.StartInfo.Verb = RUNAS;
 				}
 			}
 			try {
 				proc.Start();
 			}
 			catch (Exception e) {
-				MessageBox.Show(String.Format("Error starting.\n{0}\n{1}", fileName,e.Message), "Error");
+				MessageBox.Show(String.Format(Properties.Strings_en.ErrorStartingProcess, fileName, e.Message), Properties.Strings_en.Form_Error);
 			}
 		}
 		public static void OpenPath(string path, bool runAsAdmin)
@@ -98,33 +101,33 @@ namespace TrayDir
 		{
 			if (PathIsFile(path))
 			{
-				ProcessStart(new FileInfo(path).Directory.FullName, "cmd", "", false);
+				ProcessStart(new FileInfo(path).Directory.FullName, CMD, "", false);
 			}
 			else
 			{
-				ProcessStart(path, "cmd", "", false);
+				ProcessStart(path, CMD, "", false);
 			}
 		}
 		public static void OpenAdminCmdPath(string path)
 		{
 			if (PathIsFile(path))
 			{
-				ProcessStart("cmd", String.Format("/k cd \"{0}\"",new FileInfo(path).Directory.FullName), true);
+				ProcessStart(CMD, String.Format("/k cd \"{0}\"",new FileInfo(path).Directory.FullName), true);
 			}
 			else
 			{
-				ProcessStart("cmd", String.Format("/k cd \"{0}\"", path), true);
+				ProcessStart(CMD, String.Format("/k cd \"{0}\"", path), true);
 			}
 		}
 		public static void ExplorePath(string path)
 		{
 			if (PathIsFile(path))
 			{
-				ProcessStart("explorer.exe", new FileInfo(path).Directory.FullName, false);
+				ProcessStart(EXPLORER, new FileInfo(path).Directory.FullName, false);
 			}
 			else
 			{
-				ProcessStart("explorer.exe", path, false);
+				ProcessStart(EXPLORER, path, false);
 			}
 		}
 		public static bool StrToBool(string value)
@@ -141,7 +144,7 @@ namespace TrayDir
 			if (sfd.ShowDialog() == DialogResult.OK)
 			{
 				XMLUtils.SaveToFile(copy_instance, sfd.FileName);
-				MessageBox.Show("Exported to:" + sfd.FileName, "Export Done");
+				MessageBox.Show(string.Format(Properties.Strings_en.ExportedTo, sfd.FileName), Properties.Strings_en.Form_ExportDone);
 			}
 		}
 		public static TrayInstance ImportInstance(string path)
@@ -163,7 +166,7 @@ namespace TrayDir
 			if (sfd.ShowDialog() == DialogResult.OK)
 			{
 				XMLUtils.SaveToFile(plugin, sfd.FileName);
-				MessageBox.Show("Exported to:" + sfd.FileName, "Export Done");
+				MessageBox.Show(string.Format(Properties.Strings_en.ExportedTo, sfd.FileName), Properties.Strings_en.Form_ExportDone);
 			}
 		}
 		public static TrayPlugin ImportPlugin(string path)
@@ -202,8 +205,7 @@ namespace TrayDir
 					parameters = " " + parameters;
 				}
 				parameters = String.Format("/c start \"TrayDir - Open Indirectly\" /d \"{0}\" \"{1}\"{2}", Path.GetDirectoryName(plugin.path), Path.GetFileName(plugin.path), parameters);
-				//parameters = String.Format("/k \"{0}\" {1} | exit", plugin.path, parameters);
-				ProcessStart("cmd", parameters,false);
+				ProcessStart(CMD, parameters,false);
 			}
 		}
 		public static void RunPluginAsAdmin(TrayInstancePlugin tip)

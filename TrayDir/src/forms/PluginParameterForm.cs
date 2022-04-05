@@ -30,7 +30,7 @@ namespace TrayDir
 					tpp = new TrayPluginParameter();
 					tp.parameters.Add(tpp);
 				}
-				parameterComboBox.Items.Add(String.Format("Parameter {0}", i + 1));
+				parameterComboBox.Items.Add(String.Format(Properties.Strings_en.Plugin_ParameterN, i + 1));
 			}
 			for (int i = 0; i < tp.parameterCount; i++) {
 				if (tp.parameters[i].name != "") {
@@ -54,7 +54,7 @@ namespace TrayDir
 				parameterComboBox.Items[parameterComboBox.SelectedIndex] = tpp.name;
 			}
 			else {
-				parameterComboBox.Items[parameterComboBox.SelectedIndex] = String.Format("Parameter {0}", parameterComboBox.SelectedIndex + 1);
+				parameterComboBox.Items[parameterComboBox.SelectedIndex] = String.Format(Properties.Strings_en.Plugin_ParameterN, parameterComboBox.SelectedIndex + 1);
 			}
 		}
 		private void prefixTextBox_TextChanged(object sender, EventArgs e) {

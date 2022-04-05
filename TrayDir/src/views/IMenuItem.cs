@@ -347,36 +347,34 @@ namespace TrayDir {
 				ToolStripItem tsi;
 				if (isDir)
 				{
-					tsi = cmnu.Items.Add("Open in File Explorer");
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenFileExplorer);
 					tsi.Click += Explore;
-					tsi = cmnu.Items.Add("Open in cmd");
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmd);
 					tsi.Click += OpenCmd;
-					tsi = cmnu.Items.Add("Open in cmd (Administrator)");
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmdAdmin);
 					tsi.Click += OpenAdminCmd;
 				}
 				else if (isFile)
 				{
-					tsi = cmnu.Items.Add("Run");
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_Run);
 					tsi.Click += Run;
-					tsi = cmnu.Items.Add("Run (Administrator)");
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_RunAdmin);
 					tsi.Click += RunAs;
-					tsi = cmnu.Items.Add("Open in File Explorer");
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenFileExplorer);
 					tsi.Click += Explore;
-					tsi = cmnu.Items.Add("Open in cmd");
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmd);
 					tsi.Click += OpenCmd;
-					tsi = cmnu.Items.Add("Open in cmd (Administrator)");
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmdAdmin);
 					tsi.Click += OpenAdminCmd;
-				}
-				else if (isPlugin) {
-					tsi = cmnu.Items.Add("Run");
+				} else if (isPlugin) {
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_Run);
 					tsi.Click += Run;
-					tsi = cmnu.Items.Add("Run (Administrator)");
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_RunAdmin);
 					tsi.Click += RunAs;
-					tsi = cmnu.Items.Add("Open in File Explorer");
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenFileExplorer);
 					tsi.Click += Explore;
-				}
-				else if (isVFolder) {
-					tsi = cmnu.Items.Add("Run All");
+				} else if (isVFolder) {
+					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_RunAll);
 					tsi.Click += RunAll;
 				} else
 				{

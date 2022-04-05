@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Resources;
 using System.Windows.Forms;
 using TrayDir.forms;
 
@@ -13,7 +14,7 @@ namespace TrayDir
 		static void Main()
 		{
 			bool running = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Length > 1;
-			if (!running || MessageBox.Show("Another process of TrayDir is already running.\nDo you want to start a new one?","TrayDir",MessageBoxButtons.OKCancel) == DialogResult.OK)
+			if (!running || MessageBox.Show(Properties.Strings_en.ProcessRunning,"TrayDir",MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
 				try
 				{

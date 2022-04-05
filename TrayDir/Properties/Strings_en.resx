@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Email_Body" xml:space="preserve">
+    <value>Hello, I found a problem with TrayDir!%0D%0A%0D%0APlease include a description of your problem below.%0D%0ADescription:%0D%0A</value>
+  </data>
+  <data name="Email_Subject" xml:space="preserve">
+    <value>TrayDir {0}: Bug Report</value>
+  </data>
+  <data name="ErrorStartingProcess" xml:space="preserve">
+    <value>Error starting.
+{0}
+{1}</value>
+  </data>
+  <data name="Error_ImportFailed" xml:space="preserve">
+    <value>Error: Unable to import file.</value>
+  </data>
+  <data name="ExportedTo" xml:space="preserve">
+    <value>Exported to:
+{0}</value>
+  </data>
+  <data name="Form_Archive" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="Form_CheckForUpdatesOnStartup" xml:space="preserve">
+    <value>Check For Updates on Startup</value>
+  </data>
+  <data name="Form_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Form_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Form_EditDisplayName" xml:space="preserve">
+    <value>Edit Display Name</value>
+  </data>
+  <data name="Form_EditIgnoreRegex" xml:space="preserve">
+    <value>Edit Ignore RegEx</value>
+  </data>
+  <data name="Form_EditName" xml:space="preserve">
+    <value>Edit Name</value>
+  </data>
+  <data name="Form_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Form_ExportDone" xml:space="preserve">
+    <value>Export Done</value>
+  </data>
+  <data name="Form_HideOnMinimize" xml:space="preserve">
+    <value>Hide On Minimize</value>
+  </data>
+  <data name="Form_ImportConflict" xml:space="preserve">
+    <value>Import Conflict</value>
+  </data>
+  <data name="Form_ImportFailed" xml:space="preserve">
+    <value>Import Failed</value>
+  </data>
+  <data name="Form_MenuSorting" xml:space="preserve">
+    <value>Menu Sorting</value>
+  </data>
+  <data name="Form_MinimizeOnClose" xml:space="preserve">
+    <value>Minimize On Close</value>
+  </data>
+  <data name="Form_NewInstance" xml:space="preserve">
+    <value>New Instance</value>
+  </data>
+  <data name="Form_NewUpdateAvailable" xml:space="preserve">
+    <value>New Update Available</value>
+  </data>
+  <data name="Form_NewUpdateUpdateNow" xml:space="preserve">
+    <value>A new version of TrayDir is available, do you want to update now?</value>
+  </data>
+  <data name="Form_PromptDelete" xml:space="preserve">
+    <value>Do you want to delete &lt;{0}&gt;?</value>
+  </data>
+  <data name="Form_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="Form_ShowIconsInTrayMenu" xml:space="preserve">
+    <value>Show Icons In Tray Menu</value>
+  </data>
+  <data name="Form_StartMinimized" xml:space="preserve">
+    <value>Start Minimized</value>
+  </data>
+  <data name="Form_StartWithWindows" xml:space="preserve">
+    <value>Start With Windows</value>
+  </data>
+  <data name="Form_VirtualFolderMenuIcon" xml:space="preserve">
+    <value>Virtual Folder Menu Icon</value>
+  </data>
+  <data name="Instance_Archive" xml:space="preserve">
+    <value>Do you want to archive instance:
+{0}</value>
+  </data>
+  <data name="Instance_Delete" xml:space="preserve">
+    <value>Do you want to delete instance:
+{0}</value>
+  </data>
+  <data name="Instance_NewInstance" xml:space="preserve">
+    <value>New Instance</value>
+  </data>
+  <data name="Instance_Restore" xml:space="preserve">
+    <value>Do you want to restore instance:
+{0}</value>
+  </data>
+  <data name="Item_Expand" xml:space="preserve">
+    <value>Expand folder in tray menu</value>
+  </data>
+  <data name="Item_OpenCmd" xml:space="preserve">
+    <value>Open in command line</value>
+  </data>
+  <data name="Item_OpenCmdAdmin" xml:space="preserve">
+    <value>Open in command line (Administrator)</value>
+  </data>
+  <data name="Item_OpenFileExplorer" xml:space="preserve">
+    <value>Open in File Explorer</value>
+  </data>
+  <data name="Item_RenameItem" xml:space="preserve">
+    <value>Rename Item</value>
+  </data>
+  <data name="Item_UseAsShortcut" xml:space="preserve">
+    <value>Use folder link as shortcut</value>
+  </data>
+  <data name="MenuItem_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="MenuItem_OpenCmd" xml:space="preserve">
+    <value>Open in cmd</value>
+  </data>
+  <data name="MenuItem_OpenCmdAdmin" xml:space="preserve">
+    <value>Open in cmd (Administrator)</value>
+  </data>
+  <data name="MenuItem_OpenFileExplorer" xml:space="preserve">
+    <value>Open in File Explorer</value>
+  </data>
+  <data name="MenuItem_Run" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="MenuItem_RunAdmin" xml:space="preserve">
+    <value>Run (Administrator)</value>
+  </data>
+  <data name="MenuItem_RunAll" xml:space="preserve">
+    <value>Run all</value>
+  </data>
+  <data name="Plugin_Delete" xml:space="preserve">
+    <value>Do you want to delete plugin:
+{0}</value>
+  </data>
+  <data name="Plugin_ParameterN" xml:space="preserve">
+    <value>Parameter {0}</value>
+  </data>
+  <data name="Plugin_SameNameImport" xml:space="preserve">
+    <value>There exists another plugin with the same name. Would you like to overwrite its configuration?</value>
+  </data>
+  <data name="Plugin_UnableToDelete" xml:space="preserve">
+    <value>Unable to delete. Plugin currently in use.</value>
+  </data>
+  <data name="ProcessRunning" xml:space="preserve">
+    <value>Another process of TrayDir is already running.
+Do you want to start a new one?</value>
+  </data>
+  <data name="Tooltip_CheckForUpdatesOnStartup" xml:space="preserve">
+    <value>When enabled, TrayDir will check for update on startup</value>
+  </data>
+  <data name="Tooltip_HideOnMinimize" xml:space="preserve">
+    <value>When enabled, minimizing the window will hide the application</value>
+  </data>
+  <data name="Tooltip_InsertInstance" xml:space="preserve">
+    <value>Insert new instance</value>
+  </data>
+  <data name="Tooltip_MenuSorting" xml:space="preserve">
+    <value>Set tray menu folder / file sorting</value>
+  </data>
+  <data name="Tooltip_MinimizeOnClose" xml:space="preserve">
+    <value>When enabled, closing the window will not exit the application</value>
+  </data>
+  <data name="Tooltip_ShowIconsInTrayMenu" xml:space="preserve">
+    <value>When enabled, each menu item will show the icon associated with the file linked</value>
+  </data>
+  <data name="Tooltip_StartMinimized" xml:space="preserve">
+    <value>When enabled, the application will always start hidden, only visible in system tray</value>
+  </data>
+  <data name="Tooltip_StartWithWindows" xml:space="preserve">
+    <value>When enabled, the application will start when you log in to your account on Windows</value>
+  </data>
+  <data name="Tooltip_VirtualFolderMenuIcon" xml:space="preserve">
+    <value>When virtual folders choose between a yellow folder or blue folder icon</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version: {0}</value>
+  </data>
+  <data name="VirtualFolder_DeleteContents" xml:space="preserve">
+    <value>Delete Virtual Folder and its contents?</value>
+  </data>
+  <data name="VirtualFolder_New" xml:space="preserve">
+    <value>New Virtual Folder</value>
+  </data>
+</root>

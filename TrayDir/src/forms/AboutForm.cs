@@ -8,7 +8,7 @@ namespace TrayDir
 		public About()
 		{
 			InitializeComponent();
-			versionLabel.Text = "Version: " + Assembly.GetEntryAssembly().GetName().Version.ToString();
+			versionLabel.Text = string.Format(Properties.Strings_en.Version, Assembly.GetEntryAssembly().GetName().Version.ToString());
 		}
 	}
 }
