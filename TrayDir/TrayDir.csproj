@@ -222,6 +222,7 @@
     <EmbeddedResource Include="Properties\Strings_en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings_en.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resource_Help.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -234,18 +235,23 @@
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\IPathForm.resx">
       <DependentUpon>IPathForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\IOptionsForm.resx">
       <DependentUpon>IOptionsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\IVirtualFolderForm.resx">
       <DependentUpon>IVirtualFolderForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\PluginParameterForm.resx">
       <DependentUpon>PluginParameterForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\IPluginForm.resx">
       <DependentUpon>IPluginForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -263,21 +269,27 @@
     </Compile>
     <EmbeddedResource Include="src\forms\ITreeViewForm.resx">
       <DependentUpon>ITreeViewForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\PluginForm.resx">
       <DependentUpon>PluginForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\InstanceManagerForm.resx">
       <DependentUpon>InstanceManagerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\PluginManagerForm.resx">
       <DependentUpon>PluginManagerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\UnhandledExceptionForm.resx">
       <DependentUpon>UnhandledExceptionForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">

@@ -33,7 +33,7 @@ namespace TrayDir
 				parameterComboBox.Items.Add(String.Format(Properties.Strings_en.Plugin_ParameterN, i + 1));
 			}
 			for (int i = 0; i < tp.parameterCount; i++) {
-				if (tp.parameters[i].name != "") {
+				if (tp.parameters[i].name != string.Empty) {
 					parameterComboBox.Items[i]=tp.parameters[i].name;
 				}
 			}
@@ -50,7 +50,7 @@ namespace TrayDir
 		}
 		private void nameTextBox_TextChanged(object sender, EventArgs e) {
 			tpp.name = nameTextBox.Text;
-			if (tpp.name != "") {
+			if (tpp.name != string.Empty) {
 				parameterComboBox.Items[parameterComboBox.SelectedIndex] = tpp.name;
 			}
 			else {

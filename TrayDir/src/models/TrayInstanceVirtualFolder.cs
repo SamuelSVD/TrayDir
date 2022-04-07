@@ -6,7 +6,7 @@ namespace TrayDir
 	{
 		[XmlAttribute]
 		public string alias;
-		public TrayInstanceVirtualFolder() : this("") { }
+		public TrayInstanceVirtualFolder() : this(string.Empty) { }
 		public TrayInstanceVirtualFolder(string alias)
 		{
 			this.alias = alias;

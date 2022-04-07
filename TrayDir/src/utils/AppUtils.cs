@@ -15,7 +15,7 @@ namespace TrayDir
 		private static string EXPLORER = "explorer.exe";
 		public static bool PathIsDirectory(string path)
 		{
-			if (path != "" && path != null) {
+			if (path != string.Empty && path != null) {
 				try {
 					FileAttributes attr = File.GetAttributes(path);
 					//detect whether its a directory or file
@@ -29,7 +29,7 @@ namespace TrayDir
 		}
 		public static bool PathIsFile(string path)
 		{
-			if (path != "" && path != null) {
+			if (path != string.Empty && path != null) {
 				try {
 					FileAttributes attr = File.GetAttributes(path);
 					//detect whether its a directory or file
@@ -51,16 +51,16 @@ namespace TrayDir
 		}
 		public static void ProcessStart(string fileName, bool runasadmin)
 		{
-			ProcessStart(fileName, "", runasadmin);
+			ProcessStart(fileName, string.Empty, runasadmin);
 		}
 		public static void ProcessStart(string fileName, string parameters, bool runasadmin)
 		{
-			ProcessStart("", fileName, parameters, runasadmin);
+			ProcessStart(string.Empty, fileName, parameters, runasadmin);
 		}
 		public static void ProcessStart(string startingPath, string fileName, string parameters, bool runasadmin)
 		{
 			Process proc = new Process();
-			if ((startingPath == null || startingPath == "")) {
+			if ((startingPath == null || startingPath == string.Empty)) {
 				if (PathIsFile(fileName)) {
 					proc.StartInfo.WorkingDirectory = new FileInfo(fileName).Directory.FullName;
 				}
@@ -72,7 +72,7 @@ namespace TrayDir
 					proc.StartInfo.Arguments = fileName;
 			} else {
 				proc.StartInfo.FileName = fileName;
-				proc.StartInfo.Arguments = parameters != null? parameters.Trim() : "";
+				proc.StartInfo.Arguments = parameters != null? parameters.Trim() : string.Empty;
 				if (runasadmin) {
 					proc.StartInfo.UseShellExecute = true;
 					proc.StartInfo.FileName = fileName;
@@ -101,11 +101,11 @@ namespace TrayDir
 		{
 			if (PathIsFile(path))
 			{
-				ProcessStart(new FileInfo(path).Directory.FullName, CMD, "", false);
+				ProcessStart(new FileInfo(path).Directory.FullName, CMD, string.Empty, false);
 			}
 			else
 			{
-				ProcessStart(path, CMD, "", false);
+				ProcessStart(path, CMD, string.Empty, false);
 			}
 		}
 		public static void OpenAdminCmdPath(string path)
@@ -201,7 +201,7 @@ namespace TrayDir
 			TrayPlugin plugin = tip.plugin;
 			if (plugin != null && plugin.path != null && PathIsFile(plugin.path)) {
 				string parameters = BuildPluginCliParams(tip);
-				if (parameters != "") {
+				if (parameters != string.Empty) {
 					parameters = " " + parameters;
 				}
 				parameters = String.Format("/c start \"TrayDir - Open Indirectly\" /d \"{0}\" \"{1}\"{2}", Path.GetDirectoryName(plugin.path), Path.GetFileName(plugin.path), parameters);
@@ -218,7 +218,7 @@ namespace TrayDir
 			}
 		}
 		public static string BuildPluginCliParams(TrayInstancePlugin tip) {
-			string parameters = "";
+			string parameters = string.Empty;
 			TrayPlugin tp = tip.plugin;
 			for (int i = 0; i < tip.parameters.Count; i++) {
 				TrayInstancePluginParameter param = tip.parameters[i];
@@ -228,7 +228,7 @@ namespace TrayDir
 				}
 				string parameter = BuildPluginParameter(param, tpp);
 				parameters += parameter;
-				if ((parameter != "") && (i < (tip.parameters.Count - 1))) {
+				if ((parameter != string.Empty) && (i < (tip.parameters.Count - 1))) {
 					parameters += " ";
 				}
 			}
@@ -242,15 +242,15 @@ namespace TrayDir
 					if (tipp.value.ToLower() == "true") {
 						return tpp.prefix;
 					} else {
-						return "";
+						return string.Empty;
 					}
 				} else {
-					if (tpp.prefix != "") {
-						if (tpp.alwaysIncludePrefix || tipp.value != "") {
-							return String.Format("{0}{1}", tpp.prefix, tipp.value != "" ? " " + tipp.value : "");
+					if (tpp.prefix != string.Empty) {
+						if (tpp.alwaysIncludePrefix || tipp.value != string.Empty) {
+							return String.Format("{0}{1}", tpp.prefix, tipp.value != string.Empty ? " " + tipp.value : string.Empty);
 						}
 						else {
-							return "";
+							return string.Empty;
 						}
 					}
 					else {

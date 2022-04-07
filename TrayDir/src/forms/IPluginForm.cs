@@ -122,7 +122,7 @@ namespace TrayDir
 			int paramCount = controls.Count;
 			int row = controls.Count + labels.Count;
 			CheckBox cb = new CheckBox();
-			if (tpp.name != "" && tpp.name != null) {
+			if (tpp.name != string.Empty && tpp.name != null) {
 				cb.Text = tpp.name;
 			}
 			else {
@@ -147,7 +147,7 @@ namespace TrayDir
 			int paramCount = controls.Count;
 			int row = controls.Count + labels.Count;
 			Label l = new Label();
-			if (tpp.name != "" && tpp.name != null) {
+			if (tpp.name != string.Empty && tpp.name != null) {
 				l.Text = tpp.name;
 			}
 			else {

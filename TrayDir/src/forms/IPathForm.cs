@@ -30,7 +30,7 @@ namespace TrayDir
 		{
 			FolderSelectDialog fs = new FolderSelectDialog();
 			string path = tip.path;
-			if (path == null || path == "") {
+			if (path == null || path == string.Empty) {
 				fs.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 			} else {
 				fs.InitialDirectory = Path.GetDirectoryName(path);
@@ -47,7 +47,7 @@ namespace TrayDir
 		{
 			MainForm.form.fd.DereferenceLinks = false;
 			string path = tip.path;
-			if (path == null || path == "") {
+			if (path == null || path == string.Empty) {
 				MainForm.form.fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 			} else {
 				MainForm.form.fd.InitialDirectory = Path.GetDirectoryName(path);

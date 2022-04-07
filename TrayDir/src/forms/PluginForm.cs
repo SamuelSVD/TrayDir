@@ -28,7 +28,7 @@ namespace TrayDir
 		{
 			MainForm.form.fd.DereferenceLinks = false;
 			string path = plugin.tp.path;
-			if (path == null || path == "")
+			if (path == null || path == string.Empty)
 			{
 				MainForm.form.fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 			}

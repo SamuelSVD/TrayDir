@@ -9,7 +9,7 @@ namespace TrayDir
 	{
 		public static string BrowseForIconPath()
 		{
-			return BrowseForIconPath("");
+			return BrowseForIconPath(string.Empty);
 		}
 		public static string BrowseForIconPath(string startingPath)
 		{

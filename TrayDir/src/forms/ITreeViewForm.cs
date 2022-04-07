@@ -316,7 +316,7 @@ namespace TrayDir
 				bool deleteNode = true;
 				if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder && selectedNode.node.Nodes.Count > 0)
 				{
-					deleteNode = (MessageBox.Show(Properties.Strings_en.VirtualFolder_DeleteContents, "", MessageBoxButtons.OKCancel) == DialogResult.OK);
+					deleteNode = (MessageBox.Show(Properties.Strings_en.VirtualFolder_DeleteContents, string.Empty, MessageBoxButtons.OKCancel) == DialogResult.OK);
 				}
 				if (deleteNode)
 				{
@@ -717,7 +717,7 @@ namespace TrayDir
 		}
 		private ITreeNode CreatePathNode()
 		{
-			return CreatePathNode("");
+			return CreatePathNode(string.Empty);
 		}
 		private ITreeNode CreatePathNode(string path)
 		{

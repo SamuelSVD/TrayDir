@@ -41,7 +41,7 @@ namespace TrayDir.forms
             this.richTextBox.ReadOnly = true;
             this.richTextBox.Size = new System.Drawing.Size(465, 219);
             this.richTextBox.TabIndex = 0;
-            this.richTextBox.Text = "";
+            this.richTextBox.Text = string.Empty;
             // 
             // button1
             // 

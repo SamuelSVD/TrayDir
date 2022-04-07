@@ -222,7 +222,7 @@ namespace TrayDir {
 						bool match = false;
 						foreach(string regx in instance.regexList)
 						{
-							if (regx != "")
+							if (regx != string.Empty)
 							{
 								match = match || (Regex.Matches(fp, regx).Count > 0);
 							}
@@ -439,7 +439,7 @@ namespace TrayDir {
 				menuItem.DropDownOpening += submenu_DropDownOpening;
 				menuItem.Paint += LoadFolderChildren;
 			}
-			bool useAlias = (alias != null && alias != "");
+			bool useAlias = (alias != null && alias != string.Empty);
 			if (useAlias)
 			{
 				menuItem.Text = alias;
@@ -466,7 +466,7 @@ namespace TrayDir {
 					TrayPlugin plugin = tiPlugin.plugin;
 					if (plugin != null)
 					{
-						if (plugin.name == null || plugin.name == "")
+						if (plugin.name == null || plugin.name == string.Empty)
 						{
 							menuItem.Text = "(plugin item)";
 						}

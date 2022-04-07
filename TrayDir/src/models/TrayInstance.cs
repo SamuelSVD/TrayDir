@@ -16,7 +16,7 @@ namespace TrayDir
 		[XmlAttribute]
 		public string instanceName;
 		[XmlAttribute]
-		public string ignoreRegex = "";
+		public string ignoreRegex = string.Empty;
 		[XmlAttribute]
 		public string Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 		[XmlIgnore]
@@ -28,7 +28,7 @@ namespace TrayDir
 		public TrayInstanceNode nodes;
 
 		public byte[] iconData;
-		public static string defaultPath = "";
+		public static string defaultPath = string.Empty;
 		public int PathCount { get { return paths.Count; } }
 		public int NodeCount { get { int i = 0; i += nodes.NodeCount - 1; return i; } }
 		public string[] regexList { get { return ignoreRegex.Split('\r', '\n'); } }

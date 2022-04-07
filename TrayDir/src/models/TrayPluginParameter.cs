@@ -3,9 +3,9 @@
 namespace TrayDir {
 	public class TrayPluginParameter {
 		[XmlAttribute]
-		public string name = "";
+		public string name = string.Empty;
 		[XmlAttribute]
-		public string prefix = "";
+		public string prefix = string.Empty;
 		[XmlAttribute]
 		public bool alwaysIncludePrefix = false;
 		[XmlAttribute]
