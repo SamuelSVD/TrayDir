@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using TrayDir.utils;
 
 namespace TrayDir
 {
@@ -504,7 +505,7 @@ namespace TrayDir
 
 		private void imgLoadTimer_Tick(object sender, EventArgs e)
 		{
-			if (IMenuItem.PerformIconLoading()) {
+			if (IMenuItemIconUtils.PerformIconLoading()) {
 				imgLoadTimer.Interval = 10;
 			} else {
 				imgLoadTimer.Interval = 1000;

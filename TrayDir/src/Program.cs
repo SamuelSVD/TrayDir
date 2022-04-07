@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Resources;
 using System.Windows.Forms;
 using TrayDir.forms;
+using TrayDir.utils;
 
 namespace TrayDir
 {
@@ -20,6 +21,7 @@ namespace TrayDir
 				{
 					Application.EnableVisualStyles();
 					Application.SetCompatibleTextRenderingDefault(false);
+					IMenuItemIconUtils.Init();
 					MainForm.Init();
 					SettingsForm.Init();
 					ProgramData.pd.initialized = true;

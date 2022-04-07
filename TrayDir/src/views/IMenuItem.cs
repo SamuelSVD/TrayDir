@@ -10,12 +10,6 @@ using TrayDir.utils;
 
 namespace TrayDir {
 	public class IMenuItem {
-		private static Thread imgLoadThread;
-		private static Thread mainThread;
-		private static Semaphore imgLoadSemaphore;
-		private static Queue<IMenuItem> imgLoadQueue;
-		public static Semaphore urlLoadSemaphore;
-		public static Queue<IMenuItem> urlLoadQueue;
 		private TrayInstance instance;
 		public ToolStripMenuItem menuItem;
 		public List<IMenuItem> folderChildren = new List<IMenuItem>();
@@ -28,15 +22,15 @@ namespace TrayDir {
 		public TrayInstanceVirtualFolder tiVirtualFolder;
 		public TrayInstancePlugin tiPlugin;
 
-		private Bitmap menuIcon;
+		public Bitmap menuIcon;
 
 		public bool isDir { get { return tiPath != null ? AppUtils.PathIsDirectory(tiPath.path) : false; } }
 		public bool isFile { get { return tiPath != null ? AppUtils.PathIsFile(tiPath.path) : false; } } 
 		public bool isVFolder { get { return tiVirtualFolder != null; } }
 		public readonly bool isPlugin = false;
-		private bool loadedIcon = false;
+		public bool loadedIcon = false;
+		public bool enqueued;
 		private bool assignedClickEvent = false;
-		private bool enqueued;
 		private bool painted;
 
 		private string alias
@@ -70,129 +64,11 @@ namespace TrayDir {
 				return d;
 			}
 		}
-		private static void LoadIconThread()
-		{
-			Stopwatch s = new Stopwatch();
-			s.Start();
-			while (true && mainThread.IsAlive)
-			{
-				if (tryLoadIconThread(imgLoadSemaphore, imgLoadQueue))
-				{
-					s.Reset();
-				}
-				s.Stop();
-				if (s.Elapsed.Seconds > 2)
-				{
-					break;
-				}
-				s.Start();
-				Thread.Sleep(1);
-			}
-		}
-		public static bool PerformIconLoading() {
-			if (IMenuItem.urlLoadQueue != null && IMenuItem.urlLoadQueue.Count > 0) {
-				IMenuItem.tryLoadIconThread(IMenuItem.urlLoadSemaphore, IMenuItem.urlLoadQueue);
-				return true;
-			}
-			return false;
-		}
-		public static bool tryLoadIconThread(Semaphore sem, Queue<IMenuItem> queue)
-		{
-			sem.WaitOne();
-			bool result = false;
-			if (queue.Count > 0)
-			{
-				IMenuItem mi = queue.Dequeue();
-				try
-				{
-					if (mi.menuIcon is null && mi.isFile)
-					{
-						string ext = Path.GetExtension(mi.tiPath.path);
-						if (ext.Length == 0 || ext == ".ico" || ext == ".lnk" || ext == ".exe" || (queue != imgLoadQueue && ext == ".url"))
-						{
-							mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
-						} else if (queue == imgLoadQueue && ext == ".url")
-						{
-							urlLoadSemaphore.WaitOne();
-							MainForm.form.imgLoadTimer.Enabled = true;
-							urlLoadQueue.Enqueue(mi);
-							urlLoadSemaphore.Release();
-						}
-						else
-						{
-							mi.menuIcon = IconUtils.lookupIcon(ext);
-							if (mi.menuIcon == null)
-							{
-								mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
-								IconUtils.addIcon(ext, mi.menuIcon);
-							}
-						}
-					}
-					else if (mi.menuIcon is null && mi.isDir)
-					{
-						if (mi.tiPath != null && mi.tiPath.shortcut) {
-							mi.menuIcon = new Bitmap(Properties.Resources.folder_shortcut);
-						} else {
-							mi.menuIcon = new Bitmap(Properties.Resources.folder);
-						}
-					}
-					else if (mi.menuIcon is null && mi.tiVirtualFolder != null) {
-						if (ProgramData.pd.settings.app.VFolderIcon != "Yellow Folder") {
-							mi.menuIcon = new Bitmap(Properties.Resources.folder_blue);
-						} else {
-							mi.menuIcon = new Bitmap(Properties.Resources.folder);
-						}
-					}
-					else if (mi.tiPlugin != null)
-					{
-						TrayPlugin tp = mi.tiPlugin.plugin;
-						if (tp != null && AppUtils.PathIsFile(tp.path))
-						{
-							Bitmap i = IconUtils.lookupIcon(tp.getSignature());
-							if (i == null)
-							{
-								i = Icon.ExtractAssociatedIcon(tp.path).ToBitmap();
-								IconUtils.addIcon(tp.getSignature(), i);
-							}
-							mi.menuIcon = i;
-						}
-					}
-				}
-				catch { }
-				mi.loadedIcon = true;
-				result = true;
-			}
-			sem.Release();
-			return result;
-		}
 		public IMenuItem(TrayInstance instance, TrayInstancePath path) : this(instance, path, null, null, null) { }
 		public IMenuItem(TrayInstance instance, TrayInstancePlugin plugin) : this(instance, null, null, plugin, null) { }
 		public IMenuItem(TrayInstance instance, TrayInstanceVirtualFolder virtualFolder) : this(instance, null, virtualFolder, null, null) { }
 		public IMenuItem(TrayInstance instance, TrayInstancePath tiPath, TrayInstanceVirtualFolder tiVirtualFolder, TrayInstancePlugin tiPlugin, IMenuItem parent)
 		{
-			if (imgLoadSemaphore is null)
-			{
-				imgLoadSemaphore = new Semaphore(1, 1);
-			}
-			if (imgLoadQueue is null)
-			{
-				imgLoadQueue = new Queue<IMenuItem>();
-			}
-			if (urlLoadSemaphore is null)
-			{
-				urlLoadSemaphore = new Semaphore(1, 1);
-			}
-			if (urlLoadQueue is null)
-			{
-				urlLoadQueue = new Queue<IMenuItem>();
-			}
-			if (imgLoadThread is null)
-			{
-				mainThread = Thread.CurrentThread;
-				imgLoadThread = new Thread(LoadIconThread);
-				imgLoadThread.Start();
-			}
-
 			this.instance = instance;
 			this.tiPath = tiPath;
 			this.tiVirtualFolder = tiVirtualFolder;
@@ -569,26 +445,10 @@ namespace TrayDir {
 		}
 		public void EnqueueImgLoad()
 		{
-			if (!enqueued)
-			{
-				imgLoadSemaphore.WaitOne();
-				imgLoadQueue.Enqueue(this);
-				imgLoadSemaphore.Release();
-				enqueued = true;
-			}
-			if (!imgLoadThread.IsAlive)
-			{
-				imgLoadThread = new Thread(LoadIconThread);
-				imgLoadThread.Start();
-			}
+			IMenuItemIconUtils.EnqueueIconLoad(this);
 		}
 		public void LoadChildrenIconEvent(Object obj, EventArgs args)
 		{
-			if (!imgLoadThread.IsAlive)
-			{
-				imgLoadThread = new Thread(LoadIconThread);
-				imgLoadThread.Start();
-			}
 			foreach (IMenuItem child in folderChildren)
 			{
 				child.EnqueueImgLoad();
