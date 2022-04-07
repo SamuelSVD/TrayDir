@@ -15,10 +15,10 @@ namespace TrayDir
 		}
 		public void UpdateNode()
 		{
-			string s = "";
-			if (instance.instanceName == null || instance.instanceName == "")
+			string s = string.Empty;
+			if (instance.instanceName == null || instance.instanceName == string.Empty)
 			{
-				s += "<No Name>";
+				s += Properties.Strings_en.Node_NoName;
 			}
 			else
 			{

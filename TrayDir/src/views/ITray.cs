@@ -227,8 +227,8 @@ namespace TrayDir
 
 			//            notifyIcon.ContextMenuStrip.AutoClose = true;
 
-			showMenuItem = MakeAndAddMenuItem(showMenuItem, "Show", false, showForm);
-			hideMenuItem = MakeAndAddMenuItem(hideMenuItem, "Hide", true, hideForm);
+			showMenuItem = MakeAndAddMenuItem(showMenuItem, Properties.Strings_en.MenuItem_Show, false, showForm);
+			hideMenuItem = MakeAndAddMenuItem(hideMenuItem, Properties.Strings_en.MenuItem_Hide, true, hideForm);
 
 			notifyIcon.ContextMenuStrip.Items.Add("-");
 
@@ -239,7 +239,7 @@ namespace TrayDir
 			AddTrayTree(instance.nodes.children, notifyIcon.ContextMenuStrip.Items, null);
 
 			notifyIcon.ContextMenuStrip.Items.Add("-");
-			exitMenuItem = MakeAndAddMenuItem(exitMenuItem, "Exit", true, exitForm);
+			exitMenuItem = MakeAndAddMenuItem(exitMenuItem, Properties.Strings_en.MenuItem_Exit, true, exitForm);
 
 			UpdateTrayIcon();
 		}
@@ -330,7 +330,7 @@ namespace TrayDir
 		public void UpdateTrayIcon()
 		{
 			Icon i = this.GetInstanceIcon();
-			if (i != null && ((instance.iconPath != null && instance.iconPath != "") || (instance.iconData == null)))
+			if (i != null && ((instance.iconPath != null && instance.iconPath != string.Empty) || (instance.iconData == null)))
 			{
 				notifyIcon.Icon = i;
 				instance.iconData = TrayUtils.IconToBytes(i);
@@ -377,7 +377,7 @@ namespace TrayDir
 			}
 			catch (Exception e)
 			{
-				MessageBox.Show("Error loading icon: " + e.Message);
+				MessageBox.Show(String.Format(Properties.Strings_en.Form_ErrorLoadingIcon, e.Message));
 				i = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
 			}
 			return i;

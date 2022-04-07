@@ -15,18 +15,14 @@ namespace TrayDir
 		}
 		public void UpdateNode()
 		{
-			string s = "";
-			if (tp.name == null || tp.name == "")
-			{
-				//s += "<No Name>";
-			} 
-			else
+			string s = string.Empty;
+			if (tp.name != null && tp.name != string.Empty)
 			{
 				s += tp.name;
 			}
-			if (tp.path == null || tp.path == "")
+			if (tp.path == null || tp.path == string.Empty)
 			{
-				s += " (No Path Selected)";
+				s += Properties.Strings_en.Node_NoPathSelected;
 			}
 			else
 			{

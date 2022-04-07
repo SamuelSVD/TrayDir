@@ -181,6 +181,16 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error loading icon:
+        ///{0}.
+        /// </summary>
+        internal static string Form_ErrorLoadingIcon {
+            get {
+                return ResourceManager.GetString("Form_ErrorLoadingIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export Done.
         /// </summary>
         internal static string Form_ExportDone {
@@ -276,6 +286,15 @@ namespace TrayDir.Properties {
         internal static string Form_Restore {
             get {
                 return ResourceManager.GetString("Form_Restore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Separator.
+        /// </summary>
+        internal static string Form_Separator {
+            get {
+                return ResourceManager.GetString("Form_Separator", resourceCulture);
             }
         }
         
@@ -409,6 +428,24 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string MenuItem_Exit {
+            get {
+                return ResourceManager.GetString("MenuItem_Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide.
+        /// </summary>
+        internal static string MenuItem_Hide {
+            get {
+                return ResourceManager.GetString("MenuItem_Hide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         internal static string MenuItem_Open {
@@ -468,6 +505,42 @@ namespace TrayDir.Properties {
         internal static string MenuItem_RunAll {
             get {
                 return ResourceManager.GetString("MenuItem_RunAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        internal static string MenuItem_Show {
+            get {
+                return ResourceManager.GetString("MenuItem_Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ERROR:.
+        /// </summary>
+        internal static string Node_Error {
+            get {
+                return ResourceManager.GetString("Node_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;No Name&gt;.
+        /// </summary>
+        internal static string Node_NoName {
+            get {
+                return ResourceManager.GetString("Node_NoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  (No Path Selected).
+        /// </summary>
+        internal static string Node_NoPathSelected {
+            get {
+                return ResourceManager.GetString("Node_NoPathSelected", resourceCulture);
             }
         }
         

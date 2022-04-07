@@ -159,6 +159,10 @@
   <data name="Form_Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="Form_ErrorLoadingIcon" xml:space="preserve">
+    <value>Error loading icon:
+{0}</value>
+  </data>
   <data name="Form_ExportDone" xml:space="preserve">
     <value>Export Done</value>
   </data>
@@ -191,6 +195,9 @@
   </data>
   <data name="Form_Restore" xml:space="preserve">
     <value>Restore</value>
+  </data>
+  <data name="Form_Separator" xml:space="preserve">
+    <value>Separator</value>
   </data>
   <data name="Form_ShowIconsInTrayMenu" xml:space="preserve">
     <value>Show Icons In Tray Menu</value>
@@ -237,6 +244,12 @@
   <data name="Item_UseAsShortcut" xml:space="preserve">
     <value>Use folder link as shortcut</value>
   </data>
+  <data name="MenuItem_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="MenuItem_Hide" xml:space="preserve">
+    <value>Hide</value>
+  </data>
   <data name="MenuItem_Open" xml:space="preserve">
     <value>Open</value>
   </data>
@@ -257,6 +270,18 @@
   </data>
   <data name="MenuItem_RunAll" xml:space="preserve">
     <value>Run all</value>
+  </data>
+  <data name="MenuItem_Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Node_Error" xml:space="preserve">
+    <value>ERROR:</value>
+  </data>
+  <data name="Node_NoName" xml:space="preserve">
+    <value>&lt;No Name&gt;</value>
+  </data>
+  <data name="Node_NoPathSelected" xml:space="preserve">
+    <value> (No Path Selected)</value>
   </data>
   <data name="Plugin_Delete" xml:space="preserve">
     <value>Do you want to delete plugin:

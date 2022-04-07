@@ -101,7 +101,7 @@ namespace TrayDir
 			{
 				case TrayInstanceNode.NodeType.Path:
 					TrayInstancePath tip = tin.instance.paths[tin.id];
-					bool hasAlias = alias != null && alias != "";
+					bool hasAlias = alias != null && alias != string.Empty;
 					if (tip.isDir)
 					{
 						if (tip.shortcut)
@@ -111,20 +111,20 @@ namespace TrayDir
 						{
 							node.ImageIndex = IconUtils.FOLDER;
 						}
-						node.Text = "";
+						node.Text = string.Empty;
 					}
 					else if (tip.isFile)
 					{
 						node.ImageIndex = IconUtils.DOCUMENT;
-						node.Text = "";
+						node.Text = string.Empty;
 					}
 					else
 					{
 						node.ImageIndex = IconUtils.QUESTION;
-						node.Text = "ERROR: ";
+						node.Text = Properties.Strings_en.Node_Error;
 					}
 
-					node.Text += hasAlias ? alias : "";
+					node.Text += hasAlias ? alias : string.Empty;
 					node.Text += hasAlias ? " (" + tin.instance.paths[tin.id].path + ")" : tin.instance.paths[tin.id].path;
 
 					break;
@@ -166,7 +166,7 @@ namespace TrayDir
 					break;
 				case TrayInstanceNode.NodeType.Separator:
 					node.ImageIndex = IconUtils.SEPARATOR;
-					node.Text = "Separator";
+					node.Text = Properties.Strings_en.Form_Separator;
 					break;
 				default:
 					break;
