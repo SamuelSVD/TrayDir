@@ -453,23 +453,7 @@ namespace TrayDir
 		}
 		private void iconLoadTimer_Tick(object sender, EventArgs e)
 		{
-			if (LoadIconsTick()) {
-				iconLoadTimer.Stop();
-			}
-		}
-		private bool LoadIconsTick() {
-			if (loaded) {
-				bool ret = true;
-				foreach (TrayInstance ti in pd.trayInstances) {
-					ret = ti.view.tray.UpdateMenuIcons() && ret;
-					foreach (IMenuItem imi in ti.view.tray.menuItems) {
-						imi.EnqueueImgLoad();
-					}
-				}
-				return ret;
-			} else {
-				return false;
-			}
+			IMenuItemIconUtils.AssignIcons();
 		}
 		private void rebuildCurrentToolStripMenuItem_Click(object sender, EventArgs e)
 		{

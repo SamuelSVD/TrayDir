@@ -242,6 +242,10 @@ namespace TrayDir
 			exitMenuItem = MakeAndAddMenuItem(exitMenuItem, Properties.Strings_en.MenuItem_Exit, true, exitForm);
 
 			UpdateTrayIcon();
+
+			foreach (IMenuItem mi in menuItems) {
+				mi.EnqueueImgLoad();
+			}
 		}
 		private void AddPathsOnly()
 		{
@@ -309,23 +313,6 @@ namespace TrayDir
 						break;
 				}
 			}
-		}
-		public bool UpdateMenuIcons()
-		{
-			bool ret = true;
-			foreach (IMenuItem mi in pathMenuItems)
-			{
-				ret = mi.LoadIcon() && ret;
-			}
-			foreach(IMenuItem mi in pluginMenuItems)
-			{
-				ret = mi.LoadIcon() && ret;
-			}
-			foreach(IMenuItem mi in virtualFolderMenuItems) 
-			{
-				ret = mi.LoadIcon() && ret;
-			}
-			return ret;
 		}
 		public void UpdateTrayIcon()
 		{

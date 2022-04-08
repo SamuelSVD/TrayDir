@@ -16,15 +16,23 @@ namespace TrayDir.utils
 		private static Thread mainThread;
 		private static Semaphore imgLoadSemaphore;
 		public static Semaphore urlLoadSemaphore;
+		private static Semaphore imgLoadedSemaphore;
 		public static Queue<IMenuItem> urlLoadQueue;
-		private static Queue<IMenuItem> imgLoadQueue;
+		public static Queue<IMenuItem> imgLoadQueue;
+		public static Queue<IMenuItem> imgLoadedQueue;
 		public static void Init()
 		{
 			if (imgLoadSemaphore is null) {
 				imgLoadSemaphore = new Semaphore(1, 1);
 			}
+			if (imgLoadedSemaphore is null) {
+				imgLoadedSemaphore = new Semaphore(1, 1);
+			}
 			if (imgLoadQueue is null) {
 				imgLoadQueue = new Queue<IMenuItem>();
+			}
+			if (imgLoadedQueue is null) {
+				imgLoadedQueue = new Queue<IMenuItem>();
 			}
 			if (urlLoadSemaphore is null) {
 				urlLoadSemaphore = new Semaphore(1, 1);
@@ -108,6 +116,11 @@ namespace TrayDir.utils
 							mi.menuIcon = i;
 						}
 					}
+					if (mi.menuIcon != null) {
+						imgLoadedSemaphore.WaitOne();
+						imgLoadedQueue.Enqueue(mi);
+						imgLoadedSemaphore.Release();
+					}
 				}
 				catch { }
 				mi.loadedIcon = true;
@@ -128,6 +141,15 @@ namespace TrayDir.utils
 				imgLoadThread = new Thread(LoadIconThread);
 				imgLoadThread.Start();
 			}
+		}
+		public static void AssignIcons()
+		{
+			imgLoadedSemaphore.WaitOne();
+			while (imgLoadedQueue.Count > 0) {
+				IMenuItem mi = imgLoadedQueue.Dequeue();
+				mi.menuItem.Image = mi.menuIcon;
+			}
+			imgLoadedSemaphore.Release();
 		}
 	}
 }

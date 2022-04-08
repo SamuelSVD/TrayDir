@@ -421,28 +421,6 @@ namespace TrayDir {
 				assignedClickEvent = true;
 			}
 		}
-
-		public bool LoadIcon()
-		{
-			bool ret = loadedIcon;
-			if (ProgramData.pd.settings.app.ShowIconsInMenus && loadedIcon && menuIcon != null)
-			{
-				if (menuItem.Image == null) {
-					menuItem.Image = menuIcon;
-				}
-			} else if (menuItem != null)
-			{
-				menuItem.Image = null;
-			}
-			if (ret)
-			{
-				foreach (IMenuItem child in folderChildren)
-				{
-					ret = child.LoadIcon() && ret;
-				}
-			}
-			return ret && (isDir || menuItem.Image != null || tiVirtualFolder != null);
-		}
 		public void EnqueueImgLoad()
 		{
 			IMenuItemIconUtils.EnqueueIconLoad(this);
