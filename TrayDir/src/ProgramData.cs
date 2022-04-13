@@ -141,7 +141,16 @@ namespace TrayDir
 			foreach(TrayInstance ti in trayInstances)
 			{
 				ti.FixPaths();
+				ti.Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 			}
+			foreach(TrayInstance ti in archivedInstances) {
+				ti.FixPaths();
+				ti.Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
+			}
+			foreach(TrayPlugin tp in plugins) {
+				tp.Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
+			}
+			Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 		}
 		public void RemovedPlugin(int i) {
 			foreach(TrayInstance ti in trayInstances) {
