@@ -478,6 +478,11 @@ namespace TrayDir {
 		}
 		public void AddToCollectionExpanded(ToolStripItemCollection collection)
 		{
+			if (folderChildren.Count == 0) {
+				MakeChildren();
+				Load();
+				LoadChildrenIconEvent(this, null);
+			}
 			if (folderChildren.Count > 0)
 			{
 				if (folderChildren.Count != menuItem.DropDownItems.Count)
