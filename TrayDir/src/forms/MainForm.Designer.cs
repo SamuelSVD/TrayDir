@@ -334,7 +334,7 @@ namespace TrayDir
 			// imgLoadTimer
 			// 
 			this.imgLoadTimer.Enabled = true;
-			this.imgLoadTimer.Interval = 1000;
+			this.imgLoadTimer.Interval = 100;
 			this.imgLoadTimer.Tick += new System.EventHandler(this.imgLoadTimer_Tick);
 			// 
 			// iconLoadTimer

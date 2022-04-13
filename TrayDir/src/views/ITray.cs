@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using TrayDir.utils;
 
 namespace TrayDir
 {
@@ -69,6 +70,7 @@ namespace TrayDir
 		}
 		public void MenuOpened(Object obj, EventArgs args)
 		{
+			IMenuItemIconUtils.AssignIcons();
 			if (instance.settings.ExpandFirstPath && instance.PathCount == 1)
 			{
 				foreach (IMenuItem child in pathMenuItems)
