@@ -118,6 +118,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse.
+        /// </summary>
+        internal static string Form_Browse {
+            get {
+                return ResourceManager.GetString("Form_Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check For Updates on Startup.
         /// </summary>
         internal static string Form_CheckForUpdatesOnStartup {
@@ -191,11 +200,29 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expand First Path.
+        /// </summary>
+        internal static string Form_ExpandFirstPath {
+            get {
+                return ResourceManager.GetString("Form_ExpandFirstPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export Done.
         /// </summary>
         internal static string Form_ExportDone {
             get {
                 return ResourceManager.GetString("Form_ExportDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide From Tray.
+        /// </summary>
+        internal static string Form_HideFromTray {
+            get {
+                return ResourceManager.GetString("Form_HideFromTray", resourceCulture);
             }
         }
         
@@ -227,6 +254,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Instance Options.
+        /// </summary>
+        internal static string Form_InstanceOptions {
+            get {
+                return ResourceManager.GetString("Form_InstanceOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Menu Sorting.
         /// </summary>
         internal static string Form_MenuSorting {
@@ -241,6 +277,15 @@ namespace TrayDir.Properties {
         internal static string Form_MinimizeOnClose {
             get {
                 return ResourceManager.GetString("Form_MinimizeOnClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string Form_Name {
+            get {
+                return ResourceManager.GetString("Form_Name", resourceCulture);
             }
         }
         
@@ -272,6 +317,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Folders in File Explorer When Clicked.
+        /// </summary>
+        internal static string Form_OpenFoldersInFileExplorerOnClick {
+            get {
+                return ResourceManager.GetString("Form_OpenFoldersInFileExplorerOnClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to delete &lt;{0}&gt;?.
         /// </summary>
         internal static string Form_PromptDelete {
@@ -290,11 +344,29 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Run As Administrator.
+        /// </summary>
+        internal static string Form_RunAsAdministrator {
+            get {
+                return ResourceManager.GetString("Form_RunAsAdministrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Separator.
         /// </summary>
         internal static string Form_Separator {
             get {
                 return ResourceManager.GetString("Form_Separator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show File Extensions.
+        /// </summary>
+        internal static string Form_ShowFileExtensions {
+            get {
+                return ResourceManager.GetString("Form_ShowFileExtensions", resourceCulture);
             }
         }
         
@@ -322,6 +394,15 @@ namespace TrayDir.Properties {
         internal static string Form_StartWithWindows {
             get {
                 return ResourceManager.GetString("Form_StartWithWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tray Options.
+        /// </summary>
+        internal static string Form_TrayOptions {
+            get {
+                return ResourceManager.GetString("Form_TrayOptions", resourceCulture);
             }
         }
         
@@ -383,33 +464,6 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open in command line.
-        /// </summary>
-        internal static string Item_OpenCmd {
-            get {
-                return ResourceManager.GetString("Item_OpenCmd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open in command line (Administrator).
-        /// </summary>
-        internal static string Item_OpenCmdAdmin {
-            get {
-                return ResourceManager.GetString("Item_OpenCmdAdmin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open in File Explorer.
-        /// </summary>
-        internal static string Item_OpenFileExplorer {
-            get {
-                return ResourceManager.GetString("Item_OpenFileExplorer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Rename Item.
         /// </summary>
         internal static string Item_RenameItem {
@@ -455,7 +509,7 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open in cmd.
+        ///   Looks up a localized string similar to Open Location in Command Line.
         /// </summary>
         internal static string MenuItem_OpenCmd {
             get {
@@ -464,7 +518,7 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open in cmd (Administrator).
+        ///   Looks up a localized string similar to Open Location in Command Line (Administrator).
         /// </summary>
         internal static string MenuItem_OpenCmdAdmin {
             get {
@@ -473,7 +527,7 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open in File Explorer.
+        ///   Looks up a localized string similar to Open Location in File Explorer.
         /// </summary>
         internal static string MenuItem_OpenFileExplorer {
             get {
@@ -601,6 +655,25 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When this instance has a folder as the only item, the
+        ///folder&apos;s contents will be used as the main menu structure.
+        /// </summary>
+        internal static string Tooltip_ExpandFirstPath {
+            get {
+                return ResourceManager.GetString("Tooltip_ExpandFirstPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hide this instance from the sytem tray.
+        /// </summary>
+        internal static string Tooltip_HideFromTray {
+            get {
+                return ResourceManager.GetString("Tooltip_HideFromTray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When enabled, minimizing the window will hide the application.
         /// </summary>
         internal static string Tooltip_HideOnMinimize {
@@ -633,6 +706,34 @@ namespace TrayDir.Properties {
         internal static string Tooltip_MinimizeOnClose {
             get {
                 return ResourceManager.GetString("Tooltip_MinimizeOnClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Folder location in File Explorer when clicking on
+        ///them from the System Tray menu.
+        /// </summary>
+        internal static string Tooltip_OpenFoldersInFileExplorerOnClick {
+            get {
+                return ResourceManager.GetString("Tooltip_OpenFoldersInFileExplorerOnClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always run items from this instance as Administrator.
+        /// </summary>
+        internal static string Tooltip_RunAsAdministrator {
+            get {
+                return ResourceManager.GetString("Tooltip_RunAsAdministrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show file extensions. E.g. File.txt.
+        /// </summary>
+        internal static string Tooltip_ShowFileExtensions {
+            get {
+                return ResourceManager.GetString("Tooltip_ShowFileExtensions", resourceCulture);
             }
         }
         

@@ -61,14 +61,14 @@ namespace TrayDir
 			this.groupBox1.AutoSize = true;
 			this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.groupBox1.Controls.Add(this.tableLayoutPanel1);
-			this.groupBox1.Location = new System.Drawing.Point(6, 6);
-			this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 0);
+			this.groupBox1.Location = new System.Drawing.Point(3, 3);
+			this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Padding = new System.Windows.Forms.Padding(0);
-			this.groupBox1.Size = new System.Drawing.Size(677, 396);
+			this.groupBox1.Size = new System.Drawing.Size(341, 206);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Tray Options";
+			this.groupBox1.Text = global::TrayDir.Properties.Strings_en.Form_TrayOptions;
 			// 
 			// tableLayoutPanel1
 			// 
@@ -81,22 +81,21 @@ namespace TrayDir
 			this.tableLayoutPanel1.Controls.Add(this.verticalSeparator1, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 0);
 			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 35);
-			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 0);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 18);
+			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(659, 337);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(332, 175);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// verticalSeparator1
 			// 
 			this.verticalSeparator1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.verticalSeparator1.LineColor = System.Drawing.Color.LightGray;
-			this.verticalSeparator1.Location = new System.Drawing.Point(481, 6);
-			this.verticalSeparator1.Margin = new System.Windows.Forms.Padding(6);
+			this.verticalSeparator1.Location = new System.Drawing.Point(243, 3);
 			this.verticalSeparator1.Name = "verticalSeparator1";
-			this.verticalSeparator1.Size = new System.Drawing.Size(10, 325);
+			this.verticalSeparator1.Size = new System.Drawing.Size(5, 169);
 			this.verticalSeparator1.TabIndex = 4;
 			this.verticalSeparator1.Text = "verticalSeparator1";
 			// 
@@ -108,22 +107,21 @@ namespace TrayDir
 			this.tableLayoutPanel2.Controls.Add(this.resetButton, 0, 2);
 			this.tableLayoutPanel2.Controls.Add(this.iconBox, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.browseButton, 0, 1);
-			this.tableLayoutPanel2.Location = new System.Drawing.Point(497, 0);
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(251, 0);
 			this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
 			this.tableLayoutPanel2.RowCount = 3;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(162, 270);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(81, 141);
 			this.tableLayoutPanel2.TabIndex = 5;
 			// 
 			// resetButton
 			// 
-			this.resetButton.Location = new System.Drawing.Point(6, 216);
-			this.resetButton.Margin = new System.Windows.Forms.Padding(6);
+			this.resetButton.Location = new System.Drawing.Point(3, 113);
 			this.resetButton.Name = "resetButton";
-			this.resetButton.Size = new System.Drawing.Size(150, 48);
+			this.resetButton.Size = new System.Drawing.Size(75, 25);
 			this.resetButton.TabIndex = 3;
 			this.resetButton.Text = "Reset";
 			this.resetButton.UseVisualStyleBackColor = true;
@@ -131,23 +129,21 @@ namespace TrayDir
 			// iconBox
 			// 
 			this.iconBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.iconBox.Location = new System.Drawing.Point(6, 6);
-			this.iconBox.Margin = new System.Windows.Forms.Padding(6);
+			this.iconBox.Location = new System.Drawing.Point(3, 3);
 			this.iconBox.Name = "iconBox";
-			this.iconBox.Padding = new System.Windows.Forms.Padding(6);
-			this.iconBox.Size = new System.Drawing.Size(148, 142);
+			this.iconBox.Padding = new System.Windows.Forms.Padding(3);
+			this.iconBox.Size = new System.Drawing.Size(75, 75);
 			this.iconBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.iconBox.TabIndex = 1;
 			this.iconBox.TabStop = false;
 			// 
 			// browseButton
 			// 
-			this.browseButton.Location = new System.Drawing.Point(6, 160);
-			this.browseButton.Margin = new System.Windows.Forms.Padding(6);
+			this.browseButton.Location = new System.Drawing.Point(3, 84);
 			this.browseButton.Name = "browseButton";
-			this.browseButton.Size = new System.Drawing.Size(150, 44);
+			this.browseButton.Size = new System.Drawing.Size(75, 23);
 			this.browseButton.TabIndex = 2;
-			this.browseButton.Text = "Browse";
+			this.browseButton.Text = global::TrayDir.Properties.Strings_en.Form_Browse;
 			this.browseButton.UseVisualStyleBackColor = true;
 			// 
 			// tableLayoutPanel3
@@ -173,104 +169,96 @@ namespace TrayDir
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(475, 267);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(240, 152);
 			this.tableLayoutPanel3.TabIndex = 6;
 			// 
 			// hideFromTrayCheckBox
 			// 
-			this.hideFromTrayCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.hideFromTrayCheckBox.AutoSize = true;
 			this.hideFromTrayCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.hideFromTrayCheckBox.Location = new System.Drawing.Point(6, 232);
-			this.hideFromTrayCheckBox.Margin = new System.Windows.Forms.Padding(6);
+			this.hideFromTrayCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.hideFromTrayCheckBox.Location = new System.Drawing.Point(3, 132);
 			this.hideFromTrayCheckBox.Name = "hideFromTrayCheckBox";
-			this.hideFromTrayCheckBox.Size = new System.Drawing.Size(463, 29);
+			this.hideFromTrayCheckBox.Size = new System.Drawing.Size(234, 17);
 			this.hideFromTrayCheckBox.TabIndex = 8;
-			this.hideFromTrayCheckBox.Text = "Hide From Tray";
-			this.toolTip.SetToolTip(this.hideFromTrayCheckBox, "Hide this instance from the sytem tray");
+			this.hideFromTrayCheckBox.Text = global::TrayDir.Properties.Strings_en.Form_HideFromTray;
+			this.toolTip.SetToolTip(this.hideFromTrayCheckBox, global::TrayDir.Properties.Strings_en.Tooltip_HideFromTray);
 			this.hideFromTrayCheckBox.UseVisualStyleBackColor = true;
 			this.hideFromTrayCheckBox.CheckedChanged += new System.EventHandler(this.hideFromTrayCheckBox_CheckedChanged);
 			// 
 			// expandFirstPathCheckBox
 			// 
-			this.expandFirstPathCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.expandFirstPathCheckBox.AutoSize = true;
 			this.expandFirstPathCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.expandFirstPathCheckBox.Location = new System.Drawing.Point(6, 191);
-			this.expandFirstPathCheckBox.Margin = new System.Windows.Forms.Padding(6);
+			this.expandFirstPathCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.expandFirstPathCheckBox.Location = new System.Drawing.Point(3, 109);
 			this.expandFirstPathCheckBox.Name = "expandFirstPathCheckBox";
-			this.expandFirstPathCheckBox.Size = new System.Drawing.Size(463, 29);
+			this.expandFirstPathCheckBox.Size = new System.Drawing.Size(234, 17);
 			this.expandFirstPathCheckBox.TabIndex = 7;
-			this.expandFirstPathCheckBox.Text = "Expand First Path";
-			this.toolTip.SetToolTip(this.expandFirstPathCheckBox, "When this instance has a folder as the only item, the \r\nfolder\'s contents will be" +
-        " used as the main menu structure");
+			this.expandFirstPathCheckBox.Text = global::TrayDir.Properties.Strings_en.Form_ExpandFirstPath;
+			this.toolTip.SetToolTip(this.expandFirstPathCheckBox, global::TrayDir.Properties.Strings_en.Tooltip_ExpandFirstPath);
 			this.expandFirstPathCheckBox.UseVisualStyleBackColor = true;
 			this.expandFirstPathCheckBox.CheckedChanged += new System.EventHandler(this.expandFirstPathCheckBox_CheckedChanged);
 			// 
 			// exploreCheckBox
 			// 
 			this.exploreCheckBox.AutoSize = true;
-			this.exploreCheckBox.Location = new System.Drawing.Point(6, 150);
-			this.exploreCheckBox.Margin = new System.Windows.Forms.Padding(6);
+			this.exploreCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.exploreCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.exploreCheckBox.Location = new System.Drawing.Point(3, 86);
 			this.exploreCheckBox.Name = "exploreCheckBox";
-			this.exploreCheckBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-			this.exploreCheckBox.Size = new System.Drawing.Size(463, 29);
+			this.exploreCheckBox.Size = new System.Drawing.Size(234, 17);
 			this.exploreCheckBox.TabIndex = 3;
-			this.exploreCheckBox.Text = "Open Folders in File Explorer When Clicked";
-			this.toolTip.SetToolTip(this.exploreCheckBox, "Open Folder location in File Explorer when clicking on \r\nthem from the System Tra" +
-        "y menu");
+			this.exploreCheckBox.Text = global::TrayDir.Properties.Strings_en.Form_OpenFoldersInFileExplorerOnClick;
+			this.toolTip.SetToolTip(this.exploreCheckBox, global::TrayDir.Properties.Strings_en.Tooltip_OpenFoldersInFileExplorerOnClick);
 			this.exploreCheckBox.UseVisualStyleBackColor = true;
 			this.exploreCheckBox.CheckedChanged += new System.EventHandler(this.exploreCheckBox_CheckedChanged);
 			// 
 			// showextensionsCheckBox
 			// 
-			this.showextensionsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.showextensionsCheckBox.AutoSize = true;
 			this.showextensionsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.showextensionsCheckBox.Location = new System.Drawing.Point(6, 109);
-			this.showextensionsCheckBox.Margin = new System.Windows.Forms.Padding(6);
+			this.showextensionsCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.showextensionsCheckBox.Location = new System.Drawing.Point(3, 63);
 			this.showextensionsCheckBox.Name = "showextensionsCheckBox";
-			this.showextensionsCheckBox.Size = new System.Drawing.Size(463, 29);
+			this.showextensionsCheckBox.Size = new System.Drawing.Size(234, 17);
 			this.showextensionsCheckBox.TabIndex = 2;
-			this.showextensionsCheckBox.Text = "Show File Extensions";
-			this.toolTip.SetToolTip(this.showextensionsCheckBox, "Show file extensions. E.g. File.txt");
+			this.showextensionsCheckBox.Text = global::TrayDir.Properties.Strings_en.Form_ShowFileExtensions;
+			this.toolTip.SetToolTip(this.showextensionsCheckBox, global::TrayDir.Properties.Strings_en.Tooltip_ShowFileExtensions);
 			this.showextensionsCheckBox.UseVisualStyleBackColor = true;
 			this.showextensionsCheckBox.CheckedChanged += new System.EventHandler(this.showextensionsCheckBox_CheckedChanged);
 			// 
 			// runasCheckBox
 			// 
-			this.runasCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.runasCheckBox.AutoSize = true;
 			this.runasCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.runasCheckBox.Location = new System.Drawing.Point(6, 68);
-			this.runasCheckBox.Margin = new System.Windows.Forms.Padding(6);
+			this.runasCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.runasCheckBox.Location = new System.Drawing.Point(3, 40);
 			this.runasCheckBox.Name = "runasCheckBox";
-			this.runasCheckBox.Size = new System.Drawing.Size(463, 29);
+			this.runasCheckBox.Size = new System.Drawing.Size(234, 17);
 			this.runasCheckBox.TabIndex = 1;
-			this.runasCheckBox.Text = "Run As Administrator";
-			this.toolTip.SetToolTip(this.runasCheckBox, "Always run items from this instance as Administrator");
+			this.runasCheckBox.Text = global::TrayDir.Properties.Strings_en.Form_RunAsAdministrator;
+			this.toolTip.SetToolTip(this.runasCheckBox, global::TrayDir.Properties.Strings_en.Tooltip_RunAsAdministrator);
 			this.runasCheckBox.UseVisualStyleBackColor = true;
 			this.runasCheckBox.CheckedChanged += new System.EventHandler(this.runasCheckBox_CheckedChanged);
 			// 
 			// nameLabel
 			// 
 			this.nameLabel.AutoSize = true;
-			this.nameLabel.Location = new System.Drawing.Point(3, 0);
+			this.nameLabel.Location = new System.Drawing.Point(2, 0);
+			this.nameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.nameLabel.Name = "nameLabel";
-			this.nameLabel.Size = new System.Drawing.Size(68, 25);
+			this.nameLabel.Size = new System.Drawing.Size(35, 13);
 			this.nameLabel.TabIndex = 9;
 			this.nameLabel.Text = "Name";
 			// 
 			// nameTextBox
 			// 
 			this.nameTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.nameTextBox.Location = new System.Drawing.Point(3, 28);
+			this.nameTextBox.Location = new System.Drawing.Point(2, 15);
+			this.nameTextBox.Margin = new System.Windows.Forms.Padding(2);
 			this.nameTextBox.Name = "nameTextBox";
-			this.nameTextBox.Size = new System.Drawing.Size(469, 31);
+			this.nameTextBox.Size = new System.Drawing.Size(236, 20);
 			this.nameTextBox.TabIndex = 10;
 			this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
 			// 
@@ -278,12 +266,12 @@ namespace TrayDir
 			// 
 			this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.closeButton.Location = new System.Drawing.Point(521, 408);
-			this.closeButton.Margin = new System.Windows.Forms.Padding(6, 6, 18, 6);
+			this.closeButton.Location = new System.Drawing.Point(263, 212);
+			this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
 			this.closeButton.Name = "closeButton";
-			this.closeButton.Size = new System.Drawing.Size(150, 44);
+			this.closeButton.Size = new System.Drawing.Size(75, 23);
 			this.closeButton.TabIndex = 1;
-			this.closeButton.Text = "Close";
+			this.closeButton.Text = global::TrayDir.Properties.Strings_en.Form_Close;
 			this.closeButton.UseVisualStyleBackColor = true;
 			// 
 			// tableLayoutPanel4
@@ -300,20 +288,19 @@ namespace TrayDir
 			this.tableLayoutPanel4.RowCount = 2;
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(689, 458);
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(347, 238);
 			this.tableLayoutPanel4.TabIndex = 2;
 			// 
 			// IOptionsForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.CancelButton = this.closeButton;
-			this.ClientSize = new System.Drawing.Size(1296, 848);
+			this.ClientSize = new System.Drawing.Size(648, 441);
 			this.Controls.Add(this.tableLayoutPanel4);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-			this.Margin = new System.Windows.Forms.Padding(6);
 			this.Name = "IOptionsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Instance Options";

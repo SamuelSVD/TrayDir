@@ -138,6 +138,9 @@
   <data name="Form_Archive" xml:space="preserve">
     <value>Archive</value>
   </data>
+  <data name="Form_Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
   <data name="Form_CheckForUpdatesOnStartup" xml:space="preserve">
     <value>Check For Updates on Startup</value>
   </data>
@@ -163,8 +166,14 @@
     <value>Error loading icon:
 {0}</value>
   </data>
+  <data name="Form_ExpandFirstPath" xml:space="preserve">
+    <value>Expand First Path</value>
+  </data>
   <data name="Form_ExportDone" xml:space="preserve">
     <value>Export Done</value>
+  </data>
+  <data name="Form_HideFromTray" xml:space="preserve">
+    <value>Hide From Tray</value>
   </data>
   <data name="Form_HideOnMinimize" xml:space="preserve">
     <value>Hide On Minimize</value>
@@ -175,11 +184,17 @@
   <data name="Form_ImportFailed" xml:space="preserve">
     <value>Import Failed</value>
   </data>
+  <data name="Form_InstanceOptions" xml:space="preserve">
+    <value>Instance Options</value>
+  </data>
   <data name="Form_MenuSorting" xml:space="preserve">
     <value>Menu Sorting</value>
   </data>
   <data name="Form_MinimizeOnClose" xml:space="preserve">
     <value>Minimize On Close</value>
+  </data>
+  <data name="Form_Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="Form_NewInstance" xml:space="preserve">
     <value>New Instance</value>
@@ -190,14 +205,23 @@
   <data name="Form_NewUpdateUpdateNow" xml:space="preserve">
     <value>A new version of TrayDir is available, do you want to update now?</value>
   </data>
+  <data name="Form_OpenFoldersInFileExplorerOnClick" xml:space="preserve">
+    <value>Open Folders in File Explorer When Clicked</value>
+  </data>
   <data name="Form_PromptDelete" xml:space="preserve">
     <value>Do you want to delete &lt;{0}&gt;?</value>
   </data>
   <data name="Form_Restore" xml:space="preserve">
     <value>Restore</value>
   </data>
+  <data name="Form_RunAsAdministrator" xml:space="preserve">
+    <value>Run As Administrator</value>
+  </data>
   <data name="Form_Separator" xml:space="preserve">
     <value>Separator</value>
+  </data>
+  <data name="Form_ShowFileExtensions" xml:space="preserve">
+    <value>Show File Extensions</value>
   </data>
   <data name="Form_ShowIconsInTrayMenu" xml:space="preserve">
     <value>Show Icons In Tray Menu</value>
@@ -207,6 +231,9 @@
   </data>
   <data name="Form_StartWithWindows" xml:space="preserve">
     <value>Start With Windows</value>
+  </data>
+  <data name="Form_TrayOptions" xml:space="preserve">
+    <value>Tray Options</value>
   </data>
   <data name="Form_VirtualFolderMenuIcon" xml:space="preserve">
     <value>Virtual Folder Menu Icon</value>
@@ -229,15 +256,6 @@
   <data name="Item_Expand" xml:space="preserve">
     <value>Expand folder in tray menu</value>
   </data>
-  <data name="Item_OpenCmd" xml:space="preserve">
-    <value>Open in command line</value>
-  </data>
-  <data name="Item_OpenCmdAdmin" xml:space="preserve">
-    <value>Open in command line (Administrator)</value>
-  </data>
-  <data name="Item_OpenFileExplorer" xml:space="preserve">
-    <value>Open in File Explorer</value>
-  </data>
   <data name="Item_RenameItem" xml:space="preserve">
     <value>Rename Item</value>
   </data>
@@ -254,13 +272,13 @@
     <value>Open</value>
   </data>
   <data name="MenuItem_OpenCmd" xml:space="preserve">
-    <value>Open in cmd</value>
+    <value>Open Location in Command Line</value>
   </data>
   <data name="MenuItem_OpenCmdAdmin" xml:space="preserve">
-    <value>Open in cmd (Administrator)</value>
+    <value>Open Location in Command Line (Administrator)</value>
   </data>
   <data name="MenuItem_OpenFileExplorer" xml:space="preserve">
-    <value>Open in File Explorer</value>
+    <value>Open Location in File Explorer</value>
   </data>
   <data name="MenuItem_Run" xml:space="preserve">
     <value>Run</value>
@@ -303,6 +321,13 @@ Do you want to start a new one?</value>
   <data name="Tooltip_CheckForUpdatesOnStartup" xml:space="preserve">
     <value>When enabled, TrayDir will check for update on startup</value>
   </data>
+  <data name="Tooltip_ExpandFirstPath" xml:space="preserve">
+    <value>When this instance has a folder as the only item, the
+folder's contents will be used as the main menu structure</value>
+  </data>
+  <data name="Tooltip_HideFromTray" xml:space="preserve">
+    <value>Hide this instance from the sytem tray</value>
+  </data>
   <data name="Tooltip_HideOnMinimize" xml:space="preserve">
     <value>When enabled, minimizing the window will hide the application</value>
   </data>
@@ -314,6 +339,16 @@ Do you want to start a new one?</value>
   </data>
   <data name="Tooltip_MinimizeOnClose" xml:space="preserve">
     <value>When enabled, closing the window will not exit the application</value>
+  </data>
+  <data name="Tooltip_OpenFoldersInFileExplorerOnClick" xml:space="preserve">
+    <value>Open Folder location in File Explorer when clicking on
+them from the System Tray menu</value>
+  </data>
+  <data name="Tooltip_RunAsAdministrator" xml:space="preserve">
+    <value>Always run items from this instance as Administrator</value>
+  </data>
+  <data name="Tooltip_ShowFileExtensions" xml:space="preserve">
+    <value>Show file extensions. E.g. File.txt</value>
   </data>
   <data name="Tooltip_ShowIconsInTrayMenu" xml:space="preserve">
     <value>When enabled, each menu item will show the icon associated with the file linked</value>

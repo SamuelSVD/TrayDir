@@ -35,9 +35,9 @@ namespace TrayDir
 			renameMenuItem = new MenuItem(Properties.Strings_en.Item_RenameItem, renameButton_Click);
 			folderShortcutMenuItem = new MenuItem(Properties.Strings_en.Item_UseAsShortcut, folderShortcutMenuItem_click);
 			folderExpandMenuItem = new MenuItem(Properties.Strings_en.Item_Expand, folderExpandMenuItem_click);
-			openInExplorerMenuItem = new MenuItem(Properties.Strings_en.Item_OpenFileExplorer, openInExplorerMenuItem_click);
-			openInCmdMenuItem = new MenuItem(Properties.Strings_en.Item_OpenCmd, openInCmdMenuItem_click);
-			openInCmdAdminMenuItem = new MenuItem(Properties.Strings_en.Item_OpenCmdAdmin, openInCmdAdminMenuItem_click);
+			openInExplorerMenuItem = new MenuItem(Properties.Strings_en.MenuItem_OpenFileExplorer, openInExplorerMenuItem_click);
+			openInCmdMenuItem = new MenuItem(Properties.Strings_en.MenuItem_OpenCmd, openInCmdMenuItem_click);
+			openInCmdAdminMenuItem = new MenuItem(Properties.Strings_en.MenuItem_OpenCmdAdmin, openInCmdAdminMenuItem_click);
 			rightClickMenu.MenuItems.Add(renameMenuItem);
 			rightClickMenu.MenuItems.Add(folderShortcutMenuItem);
 			rightClickMenu.MenuItems.Add(folderExpandMenuItem);
