@@ -41,6 +41,10 @@
 		<param name="Local" value="src/regex.htm">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Separators">
+		<param name="Local" value="src/separator.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Virtual Folders">
 		<param name="Local" value="src/vfolders.htm">
 		</OBJECT>
