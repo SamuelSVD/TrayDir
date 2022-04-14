@@ -276,7 +276,7 @@ namespace TrayDir
 							if (mi.tiPath == instance.paths[node.id])
 							{
 								if (parent != null) parent.nodeChildren.Add(mi);
-								if (mi.tiPath.shortcut || (instance.settings.ExpandFirstPath && nodes.Count == 1 && collection == notifyIcon.ContextMenuStrip.Items))
+								if (!mi.tiPath.shortcut && (instance.settings.ExpandFirstPath && nodes.Count == 1 && collection == notifyIcon.ContextMenuStrip.Items))
 								{
 									mi.AddToCollectionExpanded(collection);
 								}
