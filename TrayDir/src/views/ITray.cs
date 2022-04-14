@@ -63,10 +63,12 @@ namespace TrayDir
 		}
 		public void Rebuild()
 		{
-			pathMenuItems.Clear();
-			pluginMenuItems.Clear();
-			virtualFolderMenuItems.Clear();
-			BuildTrayMenu();
+			if (MainForm.form != null) {
+				pathMenuItems.Clear();
+				pluginMenuItems.Clear();
+				virtualFolderMenuItems.Clear();
+				BuildTrayMenu();
+			}
 		}
 		public void MenuOpened(Object obj, EventArgs args)
 		{
@@ -294,8 +296,8 @@ namespace TrayDir
 								if (parent != null) parent.nodeChildren.Add(mi);
 								mi.AddToCollection(collection);
 								AddTrayTree(node.children, mi.menuItem.DropDownItems, mi);
+								break;
 							}
-							break;
 						}
 						break;
 					case TrayInstanceNode.NodeType.VirtualFolder:

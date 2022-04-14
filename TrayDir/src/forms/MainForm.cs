@@ -61,6 +61,7 @@ namespace TrayDir
 				iconLoadTimer.Start();
 			}
 			loaded = true;
+			pd.RebuildAll();
 		}
 		private void InitializeContent()
 		{

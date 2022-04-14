@@ -74,7 +74,7 @@ namespace TrayDir.utils
 		{
 			sem.WaitOne();
 			bool result = false;
-			if (queue.Count > 0) {
+			if (MainForm.form != null && queue.Count > 0) {
 				IMenuItem mi = queue.Dequeue();
 				try {
 					if (mi.menuIcon is null && mi.isFile) {
