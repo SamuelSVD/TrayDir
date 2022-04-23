@@ -15,10 +15,15 @@ namespace TrayDir
 			InitializeComponent();
 			this.tivf = tivf;
 			aliasEdit.Text = tivf.alias;
+			hideItemCheckBox.Checked = !tivf.visible;
 		}
 		private void IPluginForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			tivf.alias = aliasEdit.Text;
+		}
+
+		private void hideItemCheckBox_CheckedChanged(object sender, EventArgs e) {
+			tivf.visible = !hideItemCheckBox.Checked;
 		}
 	}
 }

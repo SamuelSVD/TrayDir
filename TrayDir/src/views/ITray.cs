@@ -78,9 +78,11 @@ namespace TrayDir
 				foreach (IMenuItem child in pathMenuItems)
 				{
 					child.EnqueueImgLoad();
+					child.menuItem.Visible = child.tiPath != null && child.tiPath.visible;
 					foreach (IMenuItem subchild in child.folderChildren)
 					{
 						subchild.EnqueueImgLoad();
+						subchild.menuItem.Visible = child.tiPath != null && child.tiPath.visible;
 					}
 				}
 			}
@@ -89,15 +91,18 @@ namespace TrayDir
 				foreach (IMenuItem child in pathMenuItems)
 				{
 					child.EnqueueImgLoad();
+					child.menuItem.Visible = child.tiPath != null && child.tiPath.visible;
 				}
 			}
 			foreach(IMenuItem child in pluginMenuItems)
 			{
 				child.EnqueueImgLoad();
+				child.menuItem.Visible = child.tiPlugin != null && child.tiPlugin.visible;
 			}
-			foreach(IMenuItem child in virtualFolderMenuItems)
+			foreach (IMenuItem child in virtualFolderMenuItems)
 			{
 				child.EnqueueImgLoad();
+				child.menuItem.Visible = child.tiVirtualFolder != null && child.tiVirtualFolder.visible;
 			}
 			MainForm.form.iconLoadTimer.Start();
 		}

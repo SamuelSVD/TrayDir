@@ -17,6 +17,7 @@ namespace TrayDir
 			pathTextBox.Text = tip.path;
 			aliasEdit.Text = tip.alias;
 			shortcutCheckBox.Checked = tip.shortcut;
+			hideItemCheckBox.Checked = !tip.visible;
 		}
 		public void ShowDialogNewFile() {
 			editFileOnShow = true;
@@ -73,6 +74,10 @@ namespace TrayDir
 		private void aliasEdit_TextChanged(object sender, EventArgs e)
 		{
 			tip.alias = aliasEdit.Text;
+		}
+
+		private void hideItemCheckBox_CheckedChanged(object sender, EventArgs e) {
+			tip.visible = !hideItemCheckBox.Checked;
 		}
 	}
 }

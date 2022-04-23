@@ -40,6 +40,7 @@ namespace TrayDir
 			this.folderBrowseButton = new System.Windows.Forms.Button();
 			this.shortcutCheckBox = new System.Windows.Forms.CheckBox();
 			this.closeButton = new System.Windows.Forms.Button();
+			this.hideItemCheckBox = new System.Windows.Forms.CheckBox();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.pluginTableLayoutPanel.SuspendLayout();
@@ -60,7 +61,7 @@ namespace TrayDir
 			this.tableLayoutPanel4.RowCount = 2;
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(380, 196);
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(380, 217);
 			this.tableLayoutPanel4.TabIndex = 5;
 			// 
 			// groupBox1
@@ -72,7 +73,7 @@ namespace TrayDir
 			this.groupBox1.Location = new System.Drawing.Point(3, 3);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 20, 5, 0);
-			this.groupBox1.Size = new System.Drawing.Size(374, 161);
+			this.groupBox1.Size = new System.Drawing.Size(374, 182);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "File Options";
@@ -85,6 +86,7 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.pluginTableLayoutPanel.Controls.Add(this.hideItemCheckBox, 0, 6);
 			this.pluginTableLayoutPanel.Controls.Add(this.fileBrowseButton, 1, 4);
 			this.pluginTableLayoutPanel.Controls.Add(this.pathLabel, 0, 2);
 			this.pluginTableLayoutPanel.Controls.Add(this.label1, 0, 0);
@@ -95,16 +97,15 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.Location = new System.Drawing.Point(5, 20);
 			this.pluginTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
-			this.pluginTableLayoutPanel.RowCount = 6;
+			this.pluginTableLayoutPanel.RowCount = 7;
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.pluginTableLayoutPanel.Size = new System.Drawing.Size(364, 128);
+			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.pluginTableLayoutPanel.Size = new System.Drawing.Size(364, 149);
 			this.pluginTableLayoutPanel.TabIndex = 6;
 			// 
 			// fileBrowseButton
@@ -175,7 +176,7 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.SetColumnSpan(this.shortcutCheckBox, 3);
 			this.shortcutCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
 			this.shortcutCheckBox.Location = new System.Drawing.Point(2, 109);
-			this.shortcutCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.shortcutCheckBox.Margin = new System.Windows.Forms.Padding(2);
 			this.shortcutCheckBox.Name = "shortcutCheckBox";
 			this.shortcutCheckBox.Size = new System.Drawing.Size(360, 17);
 			this.shortcutCheckBox.TabIndex = 14;
@@ -187,13 +188,28 @@ namespace TrayDir
 			// 
 			this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.closeButton.Location = new System.Drawing.Point(296, 170);
+			this.closeButton.Location = new System.Drawing.Point(296, 191);
 			this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
 			this.closeButton.Name = "closeButton";
 			this.closeButton.Size = new System.Drawing.Size(75, 23);
 			this.closeButton.TabIndex = 2;
 			this.closeButton.Text = "Apply";
 			this.closeButton.UseVisualStyleBackColor = true;
+			// 
+			// hideItemCheckBox
+			// 
+			this.hideItemCheckBox.AutoSize = true;
+			this.hideItemCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.pluginTableLayoutPanel.SetColumnSpan(this.hideItemCheckBox, 3);
+			this.hideItemCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.hideItemCheckBox.Location = new System.Drawing.Point(2, 130);
+			this.hideItemCheckBox.Margin = new System.Windows.Forms.Padding(2);
+			this.hideItemCheckBox.Name = "hideItemCheckBox";
+			this.hideItemCheckBox.Size = new System.Drawing.Size(360, 17);
+			this.hideItemCheckBox.TabIndex = 15;
+			this.hideItemCheckBox.Text = "Hide item from System Tray menu";
+			this.hideItemCheckBox.UseVisualStyleBackColor = true;
+			this.hideItemCheckBox.CheckedChanged += new System.EventHandler(this.hideItemCheckBox_CheckedChanged);
 			// 
 			// IPathForm
 			// 
@@ -207,7 +223,7 @@ namespace TrayDir
 			this.Controls.Add(this.tableLayoutPanel4);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "IPathForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Edit Path";
@@ -236,5 +252,6 @@ namespace TrayDir
         private System.Windows.Forms.Button folderBrowseButton;
         private System.Windows.Forms.Button fileBrowseButton;
         private System.Windows.Forms.CheckBox shortcutCheckBox;
-    }
+		private System.Windows.Forms.CheckBox hideItemCheckBox;
+	}
 }

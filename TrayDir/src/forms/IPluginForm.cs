@@ -11,11 +11,14 @@ namespace TrayDir
 		List<Control> controls = new List<Control>();
 		TrayPlugin selectedPlugin;
 		TrayInstancePlugin tip;
+		private int startingCount;
 		public IPluginForm(TrayInstancePlugin tip)
 		{
 			InitializeComponent();
 			this.tip = tip;
+			hideItemCheckBox.Checked = !tip.visible;
 			selectedPlugin = tip.plugin;
+			startingCount = pluginTableLayoutPanel.RowCount;
 			LoadPlugins();
 		}
 		public void LoadPlugins()
@@ -94,7 +97,7 @@ namespace TrayDir
 				int row = controls.Count + labels.Count;
 				Label l = new Label();
 				l.Text = String.Format(Properties.Strings_en.Plugin_ParameterN, paramCount + 1);
-				pluginTableLayoutPanel.Controls.Add(l, 0, 4 + row);
+				pluginTableLayoutPanel.Controls.Add(l, 0, startingCount + row);
 				pluginTableLayoutPanel.SetColumnSpan(l, 2);
 				row++;
 				l.AutoSize = true;
@@ -104,7 +107,7 @@ namespace TrayDir
 				tb.AutoSize = true;
 				controls.Add(tb);
 				pluginTableLayoutPanel.SetColumnSpan(tb, 2);
-				pluginTableLayoutPanel.Controls.Add(tb, 0, 4 + row);
+				pluginTableLayoutPanel.Controls.Add(tb, 0, startingCount + row);
 				tb.Text = tipp.value;
 				tb.TextChanged += new EventHandler(delegate (object obj, EventArgs args)
 				{
@@ -128,7 +131,7 @@ namespace TrayDir
 			else {
 				cb.Text = String.Format(Properties.Strings_en.Plugin_ParameterN, paramCount + 1);
 			}
-			pluginTableLayoutPanel.Controls.Add(cb, 0, 4 + row);
+			pluginTableLayoutPanel.Controls.Add(cb, 0, startingCount + row);
 			row++;
 			cb.AutoSize = true;
 			controls.Add(cb);
@@ -153,7 +156,7 @@ namespace TrayDir
 			else {
 				l.Text = String.Format(Properties.Strings_en.Plugin_ParameterN, paramCount + 1);
 			}
-			pluginTableLayoutPanel.Controls.Add(l, 0, 4 + row);
+			pluginTableLayoutPanel.Controls.Add(l, 0, startingCount + row);
 			pluginTableLayoutPanel.SetColumnSpan(l, 2);
 			row++;
 			l.AutoSize = true;
@@ -163,7 +166,7 @@ namespace TrayDir
 			tb.AutoSize = true;
 			controls.Add(tb);
 			pluginTableLayoutPanel.SetColumnSpan(tb, 2);
-			pluginTableLayoutPanel.Controls.Add(tb, 0, 4 + row);
+			pluginTableLayoutPanel.Controls.Add(tb, 0, startingCount + row);
 			tb.Text = tipp.value;
 			tb.TextChanged += new EventHandler(delegate (object obj, EventArgs args)
 			{
@@ -185,6 +188,9 @@ namespace TrayDir
 				}
 			}
 			tip.alias = aliasEdit.Text;
+		}
+		private void hideItemCheckBox_CheckedChanged(object sender, EventArgs e) {
+			tip.visible = !hideItemCheckBox.Checked;
 		}
 	}
 }

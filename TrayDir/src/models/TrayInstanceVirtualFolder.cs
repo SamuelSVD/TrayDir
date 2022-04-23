@@ -6,6 +6,8 @@ namespace TrayDir
 	{
 		[XmlAttribute]
 		public string alias;
+		[XmlAttribute]
+		public bool visible = true;
 		public TrayInstanceVirtualFolder() : this(string.Empty) { }
 		public TrayInstanceVirtualFolder(string alias)
 		{

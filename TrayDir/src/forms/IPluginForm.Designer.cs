@@ -38,6 +38,7 @@ namespace TrayDir
 			this.label1 = new System.Windows.Forms.Label();
 			this.aliasEdit = new System.Windows.Forms.TextBox();
 			this.closeButton = new System.Windows.Forms.Button();
+			this.hideItemCheckBox = new System.Windows.Forms.CheckBox();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.pluginTableLayoutPanel.SuspendLayout();
@@ -58,7 +59,7 @@ namespace TrayDir
 			this.tableLayoutPanel4.RowCount = 2;
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(378, 147);
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(378, 168);
 			this.tableLayoutPanel4.TabIndex = 4;
 			// 
 			// groupBox1
@@ -70,7 +71,7 @@ namespace TrayDir
 			this.groupBox1.Location = new System.Drawing.Point(3, 3);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 20, 5, 0);
-			this.groupBox1.Size = new System.Drawing.Size(372, 112);
+			this.groupBox1.Size = new System.Drawing.Size(372, 133);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Plugin Options";
@@ -81,20 +82,22 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.ColumnCount = 2;
 			this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.pluginTableLayoutPanel.Controls.Add(this.hideItemCheckBox, 0, 4);
 			this.pluginTableLayoutPanel.Controls.Add(this.pathLabel, 0, 2);
 			this.pluginTableLayoutPanel.Controls.Add(this.pluginComboBox, 0, 3);
 			this.pluginTableLayoutPanel.Controls.Add(this.label1, 0, 0);
-			this.pluginTableLayoutPanel.Controls.Add(this.aliasEdit, 0, 2);
+			this.pluginTableLayoutPanel.Controls.Add(this.aliasEdit, 0, 1);
 			this.pluginTableLayoutPanel.Location = new System.Drawing.Point(5, 20);
 			this.pluginTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
-			this.pluginTableLayoutPanel.RowCount = 4;
+			this.pluginTableLayoutPanel.RowCount = 5;
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 79);
+			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 100);
 			this.pluginTableLayoutPanel.TabIndex = 6;
 			// 
 			// pathLabel
@@ -141,13 +144,28 @@ namespace TrayDir
 			// 
 			this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.closeButton.Location = new System.Drawing.Point(294, 121);
+			this.closeButton.Location = new System.Drawing.Point(294, 142);
 			this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
 			this.closeButton.Name = "closeButton";
 			this.closeButton.Size = new System.Drawing.Size(75, 23);
 			this.closeButton.TabIndex = 2;
 			this.closeButton.Text = "Apply";
 			this.closeButton.UseVisualStyleBackColor = true;
+			// 
+			// hideItemCheckBox
+			// 
+			this.hideItemCheckBox.AutoSize = true;
+			this.hideItemCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.pluginTableLayoutPanel.SetColumnSpan(this.hideItemCheckBox, 3);
+			this.hideItemCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.hideItemCheckBox.Location = new System.Drawing.Point(2, 81);
+			this.hideItemCheckBox.Margin = new System.Windows.Forms.Padding(2);
+			this.hideItemCheckBox.Name = "hideItemCheckBox";
+			this.hideItemCheckBox.Size = new System.Drawing.Size(358, 17);
+			this.hideItemCheckBox.TabIndex = 16;
+			this.hideItemCheckBox.Text = "Hide item from System Tray menu";
+			this.hideItemCheckBox.UseVisualStyleBackColor = true;
+			this.hideItemCheckBox.CheckedChanged += new System.EventHandler(this.hideItemCheckBox_CheckedChanged);
 			// 
 			// IPluginForm
 			// 
@@ -186,5 +204,6 @@ namespace TrayDir
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox aliasEdit;
-    }
+		private System.Windows.Forms.CheckBox hideItemCheckBox;
+	}
 }

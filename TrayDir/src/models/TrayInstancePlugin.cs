@@ -9,6 +9,8 @@ namespace TrayDir
 		public int id = -1;
 		[XmlAttribute]
 		public string alias;
+		[XmlAttribute]
+		public bool visible = true;
 		public List<TrayInstancePluginParameter> parameters = new List<TrayInstancePluginParameter>();
 		[XmlIgnore]
 		public TrayPlugin plugin
