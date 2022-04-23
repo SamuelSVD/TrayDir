@@ -455,6 +455,33 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        internal static string Item_CopyItem {
+            get {
+                return ResourceManager.GetString("Item_CopyItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Item_DeleteItem {
+            get {
+                return ResourceManager.GetString("Item_DeleteItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duplicate.
+        /// </summary>
+        internal static string Item_DuplicateItem {
+            get {
+                return ResourceManager.GetString("Item_DuplicateItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expand folder in tray menu.
         /// </summary>
         internal static string Item_Expand {
@@ -464,7 +491,16 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rename Item.
+        ///   Looks up a localized string similar to Paste.
+        /// </summary>
+        internal static string Item_PasteItem {
+            get {
+                return ResourceManager.GetString("Item_PasteItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rename.
         /// </summary>
         internal static string Item_RenameItem {
             get {

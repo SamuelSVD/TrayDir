@@ -253,11 +253,23 @@
     <value>Do you want to restore instance:
 {0}</value>
   </data>
+  <data name="Item_CopyItem" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Item_DeleteItem" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Item_DuplicateItem" xml:space="preserve">
+    <value>Duplicate</value>
+  </data>
   <data name="Item_Expand" xml:space="preserve">
     <value>Expand folder in tray menu</value>
   </data>
+  <data name="Item_PasteItem" xml:space="preserve">
+    <value>Paste</value>
+  </data>
   <data name="Item_RenameItem" xml:space="preserve">
-    <value>Rename Item</value>
+    <value>Rename</value>
   </data>
   <data name="Item_UseAsShortcut" xml:space="preserve">
     <value>Use folder link as shortcut</value>

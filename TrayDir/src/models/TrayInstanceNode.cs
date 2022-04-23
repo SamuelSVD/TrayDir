@@ -133,6 +133,18 @@ namespace TrayDir
 			}
 			return allnodes;
 		}
+		public TrayInstancePath GetPath() {
+			if (instance.paths.Count > id && id >= 0) {
+				return instance.paths[id];
+			}
+			return null;
+		}
+		public TrayInstanceVirtualFolder GetVirtualFolder() {
+			if(instance.vfolders.Count > id && id >= 0) {
+				return instance.vfolders[id];
+			}
+			return null;
+		}
 		public TrayInstancePlugin GetPlugin()
 		{
 			if (instance.plugins.Count > id && id >= 0)

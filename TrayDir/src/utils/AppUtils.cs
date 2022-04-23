@@ -43,7 +43,7 @@ namespace TrayDir
 		}
 		public static string SplitCamelCase(string input)
 		{
-			return System.Text.RegularExpressions.Regex.Replace(input, "([A-Z])", " $1", System.Text.RegularExpressions.RegexOptions.Compiled).Trim();
+			return Regex.Replace(input, "([A-Z])", " $1", RegexOptions.Compiled).Trim();
 		}
 		public static void ProcessStart(string fileName)
 		{
@@ -147,6 +147,73 @@ namespace TrayDir
 				MessageBox.Show(string.Format(Properties.Strings_en.ExportedTo, sfd.FileName), Properties.Strings_en.Form_ExportDone);
 			}
 		}
+		internal static void Run(IMenuItem menuItem) {
+			if (menuItem.isDir) {
+				OpenPath(new DirectoryInfo(menuItem.tiPath.path).FullName, false);
+			} else if (menuItem.isFile) {
+				OpenPath(Path.GetFullPath(menuItem.tiPath.path), false);
+			} else if (menuItem.isPlugin) {
+				RunPlugin(menuItem.tiPlugin, false);
+			}
+		}
+		internal static void OpenCmd(IMenuItem menuItem) {
+			if (menuItem.isDir) {
+				OpenCmdPath(new DirectoryInfo(menuItem.tiPath.path).FullName);
+			} else if (menuItem.isFile) {
+				OpenCmdPath(Path.GetFullPath(menuItem.tiPath.path));
+			}
+		}
+		internal static void RunAs(TrayInstanceNode node) {
+			switch(node.type) {
+				case TrayInstanceNode.NodeType.Path:
+					RunAs(node.GetPath());
+					break;
+				case TrayInstanceNode.NodeType.Plugin:
+					RunAs(node.GetPlugin());
+					break;
+			}
+		}
+		internal static void Run(TrayInstanceNode node) {
+			switch(node.type) {
+				case TrayInstanceNode.NodeType.Path:
+					Run(node.GetPath());
+					break;
+				case TrayInstanceNode.NodeType.Plugin:
+					Run(node.GetPlugin());
+					break;
+			}
+		}
+		internal static void OpenAdminCmd(IMenuItem menuItem) {
+			if (menuItem.isDir) {
+				OpenAdminCmdPath(new DirectoryInfo(menuItem.tiPath.path).FullName);
+			} else if (menuItem.isFile) {
+				OpenAdminCmdPath(Path.GetFullPath(menuItem.tiPath.path));
+			}
+		}
+		internal static void RunAs(IMenuItem menuItem) {
+			if (menuItem.isDir) {
+				OpenPath(new DirectoryInfo(menuItem.tiPath.path).FullName, true);
+			} else if (menuItem.isFile) {
+				OpenPath(Path.GetFullPath(menuItem.tiPath.path), true);
+			} else if (menuItem.isPlugin) {
+				RunPlugin(menuItem.tiPlugin, true);
+			}
+		}
+
+		internal static void Explore(IMenuItem menuItem) {
+			if (menuItem.isDir) {
+				ExplorePath(new DirectoryInfo(menuItem.tiPath.path).FullName);
+			} else if (menuItem.isFile) {
+				ExplorePath(Path.GetFullPath(menuItem.tiPath.path));
+			} else if (menuItem.isPlugin) {
+				if (menuItem.tiPlugin != null) {
+					if (menuItem.tiPlugin.plugin != null) {
+						ExplorePath(menuItem.tiPlugin.plugin.path);
+					}
+				}
+			}
+		}
+
 		public static TrayInstance ImportInstance(string path)
 		{
 			TrayInstance i = null;
@@ -169,6 +236,17 @@ namespace TrayDir
 				MessageBox.Show(string.Format(Properties.Strings_en.ExportedTo, sfd.FileName), Properties.Strings_en.Form_ExportDone);
 			}
 		}
+
+		internal static void Open(IMenuItem menuItem) {
+			if (menuItem.isDir && (menuItem.instance.settings.ExploreFoldersInTrayMenu || menuItem.tiPath.shortcut)) {
+				OpenPath(new DirectoryInfo(menuItem.tiPath.path).FullName, menuItem.instance.settings.RunAsAdmin);
+			} else if (menuItem.isFile) {
+				OpenPath(Path.GetFullPath(menuItem.tiPath.path), menuItem.instance.settings.RunAsAdmin);
+			} else if (menuItem.tiPlugin != null) {
+				RunPlugin(menuItem.tiPlugin, menuItem.instance.settings.RunAsAdmin);
+			}
+		}
+
 		public static TrayPlugin ImportPlugin(string path)
 		{
 			TrayPlugin i = null;
@@ -180,17 +258,17 @@ namespace TrayDir
 			bool runExternally = (p.plugin != null ? p.plugin.OpenIndirect : false);
 			if ((!runExternally) && (runasadmin || (p.plugin != null ? p.plugin.AlwaysRunAsAdmin : false)))
 			{
-				RunPluginAsAdmin(p);
+				RunAs(p);
 			}
 			else if (runExternally) {
 				RunPluginExternally(p);
 			}
 			else
 			{
-				RunPlugin(p);
+				Run(p);
 			}
 		}
-		public static void RunPlugin(TrayInstancePlugin tip) {
+		public static void Run(TrayInstancePlugin tip) {
 			TrayPlugin plugin = tip.plugin;
 			if (plugin != null && plugin.path != null && PathIsFile(plugin.path)) {
 				string parameters = BuildPluginCliParams(tip);
@@ -208,13 +286,27 @@ namespace TrayDir
 				ProcessStart(CMD, parameters,false);
 			}
 		}
-		public static void RunPluginAsAdmin(TrayInstancePlugin tip)
+		public static void Run(TrayInstancePath tip) {
+			if (tip.isDir) {
+				OpenPath(new DirectoryInfo(tip.path).FullName, false);
+			} else if (tip.isFile) {
+				OpenPath(Path.GetFullPath(tip.path), false);
+			}
+		}
+		public static void RunAs(TrayInstancePlugin tip)
 		{
 			TrayPlugin plugin = tip.plugin;
 			if (plugin != null)
 			{
 				string parameters = BuildPluginCliParams(tip);
 				ProcessStart(plugin.path, parameters, true);
+			}
+		}
+		public static void RunAs(TrayInstancePath tip) {
+			if (tip.isDir) {
+				OpenPath(new DirectoryInfo(tip.path).FullName, false);
+			} else if (tip.isFile) {
+				OpenPath(Path.GetFullPath(tip.path), true);
 			}
 		}
 		public static string BuildPluginCliParams(TrayInstancePlugin tip) {

@@ -116,7 +116,7 @@ namespace TrayDir
 				}
 				if (!miFound)
 				{
-					IMenuItem mi = new IMenuItem(instance, tiPlugin);
+					IMenuItem mi = new IMenuItem(instance, null, tiPlugin);
 					pluginMenuItems.Add(mi);
 				}
 			}
@@ -153,7 +153,7 @@ namespace TrayDir
 				}
 				if (!miFound)
 				{
-					IMenuItem mi = new IMenuItem(instance, tiVirtualFolder);
+					IMenuItem mi = new IMenuItem(instance, null, tiVirtualFolder);
 					virtualFolderMenuItems.Add(mi);
 				}
 			}
@@ -190,7 +190,7 @@ namespace TrayDir
 				}
 				if (!miFound)
 				{
-					IMenuItem mi = new IMenuItem(instance, tiPath);
+					IMenuItem mi = new IMenuItem(instance, null, tiPath);
 					pathMenuItems.Add(mi);
 				}
 			}

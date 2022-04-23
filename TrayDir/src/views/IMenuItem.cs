@@ -10,24 +10,25 @@ using TrayDir.utils;
 
 namespace TrayDir {
 	public class IMenuItem {
-		private TrayInstance instance;
+		internal TrayInstance instance;
+		internal TrayInstanceNode tiNode;
+		internal TrayInstancePath tiPath;
+		internal TrayInstanceVirtualFolder tiVirtualFolder;
+		internal TrayInstancePlugin tiPlugin;
+
 		public ToolStripMenuItem menuItem;
 		public List<IMenuItem> folderChildren = new List<IMenuItem>();
 		public List<IMenuItem> nodeChildren = new List<IMenuItem>();
 		public IMenuItem parent;
-		List<IMenuItem> dirMenuItems = new List<IMenuItem>();
-		List<IMenuItem> fileMenuItems = new List<IMenuItem>();
-
-		public TrayInstancePath tiPath;
-		public TrayInstanceVirtualFolder tiVirtualFolder;
-		public TrayInstancePlugin tiPlugin;
-
 		public Bitmap menuIcon;
+
+		private List<IMenuItem> dirMenuItems = new List<IMenuItem>();
+		private List<IMenuItem> fileMenuItems = new List<IMenuItem>();
 
 		public bool isDir { get { return tiPath != null ? AppUtils.PathIsDirectory(tiPath.path) : false; } }
 		public bool isFile { get { return tiPath != null ? AppUtils.PathIsFile(tiPath.path) : false; } } 
 		public bool isVFolder { get { return tiVirtualFolder != null; } }
-		public readonly bool isPlugin = false;
+		public bool isPlugin { get { return tiPlugin != null; } }
 		public bool loadedIcon = false;
 		public bool enqueued;
 		private bool assignedClickEvent = false;
@@ -64,18 +65,17 @@ namespace TrayDir {
 				return d;
 			}
 		}
-		public IMenuItem(TrayInstance instance, TrayInstancePath path) : this(instance, path, null, null, null) { }
-		public IMenuItem(TrayInstance instance, TrayInstancePlugin plugin) : this(instance, null, null, plugin, null) { }
-		public IMenuItem(TrayInstance instance, TrayInstanceVirtualFolder virtualFolder) : this(instance, null, virtualFolder, null, null) { }
-		public IMenuItem(TrayInstance instance, TrayInstancePath tiPath, TrayInstanceVirtualFolder tiVirtualFolder, TrayInstancePlugin tiPlugin, IMenuItem parent)
+		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstancePath path) : this(instance, tiNode, path, null, null, null) { }
+		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstancePlugin plugin) : this(instance, tiNode, null, null, plugin, null) { }
+		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceVirtualFolder virtualFolder) : this(instance, tiNode, null, virtualFolder, null, null) { }
+		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstancePath tiPath, TrayInstanceVirtualFolder tiVirtualFolder, TrayInstancePlugin tiPlugin, IMenuItem parent)
 		{
 			this.instance = instance;
+			this.tiNode = tiNode;
 			this.tiPath = tiPath;
 			this.tiVirtualFolder = tiVirtualFolder;
 			this.tiPlugin = tiPlugin;
 			this.parent = parent;
-
-			isPlugin = tiPlugin != null;
 		}
 		private void LoadFolderChildren(object sender, PaintEventArgs e)
 		{
@@ -106,7 +106,7 @@ namespace TrayDir {
 						}
 						if (!match)
 						{
-							folderChildren.Add(new IMenuItem(instance, new TrayInstancePath(fp), null, null, this));
+							folderChildren.Add(new IMenuItem(instance, null, new TrayInstancePath(fp), null, null, this));
 						}
 					}
 				}
@@ -143,22 +143,13 @@ namespace TrayDir {
 		}
 		private void Run(object obj, EventArgs args)
 		{
-			if (isDir)
-			{
-				AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, false);
-			}
-			else if (isFile)
-			{
-				AppUtils.OpenPath(Path.GetFullPath(tiPath.path), false);
-			} else if (isPlugin) {
-				AppUtils.RunPlugin(tiPlugin, false);
-			}
+			AppUtils.Run(this);
 		}
 		private void RunAll(object obj, EventArgs args)
 		{
 			foreach(IMenuItem imi in nodeChildren) {
 				if (imi.isDir || imi.isFile || imi.isPlugin) {
-					imi.Run(obj, args);
+					AppUtils.Run(imi);
 				} else if (imi.isVFolder) {
 					imi.RunAll(obj, args);
 				}
@@ -166,117 +157,61 @@ namespace TrayDir {
 		}
 		private void Explore(object obj, EventArgs args)
 		{
-			if (isDir) {
-				AppUtils.ExplorePath(new DirectoryInfo(tiPath.path).FullName);
-			} else if (isFile) {
-				AppUtils.ExplorePath(Path.GetFullPath(tiPath.path));
-			} else if (isPlugin) {
-				if (tiPlugin != null) {
-					if (tiPlugin.plugin != null) {
-						AppUtils.ExplorePath(tiPlugin.plugin.path);
-					}
-				}
-			}
+			AppUtils.Explore(this);
 		}
 		private void RunAs(object obj, EventArgs args)
 		{
-			if (isDir)
-			{
-				AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, true);
-			}
-			else if (isFile)
-			{
-				AppUtils.OpenPath(Path.GetFullPath(tiPath.path), true);
-			}
-			else if (isPlugin) {
-				AppUtils.RunPlugin(tiPlugin, true);
-			}
+			AppUtils.RunAs(this);
 		}
 		private void OpenCmd(object obj, EventArgs args)
 		{
-			if (isDir)
-			{
-				AppUtils.OpenCmdPath(new DirectoryInfo(tiPath.path).FullName);
-			}
-			else if (isFile)
-			{
-				AppUtils.OpenCmdPath(Path.GetFullPath(tiPath.path));
-			}
+			AppUtils.OpenCmd(this);
 		}
 		private void OpenAdminCmd(object obj, EventArgs args)
 		{
-			if (isDir)
-			{
-				AppUtils.OpenAdminCmdPath(new DirectoryInfo(tiPath.path).FullName);
-			}
-			else if (isFile)
-			{
-				AppUtils.OpenAdminCmdPath(Path.GetFullPath(tiPath.path));
-			}
+			AppUtils.OpenAdminCmd(this);
 		}
 		public void MenuItemClick(object obj, MouseEventArgs args)
 		{
 			if (((MouseEventArgs)args).Button == MouseButtons.Right) {
-				MenuSave();
-				Point pt = System.Windows.Forms.Cursor.Position;
-				ContextMenuStrip cmnu = new ContextMenuStrip();
-				ToolStripItem tsi;
-				if (isDir)
-				{
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenFileExplorer);
-					tsi.Click += Explore;
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmd);
-					tsi.Click += OpenCmd;
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmdAdmin);
-					tsi.Click += OpenAdminCmd;
-				}
-				else if (isFile)
-				{
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_Run);
-					tsi.Click += Run;
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_RunAdmin);
-					tsi.Click += RunAs;
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenFileExplorer);
-					tsi.Click += Explore;
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmd);
-					tsi.Click += OpenCmd;
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmdAdmin);
-					tsi.Click += OpenAdminCmd;
-				} else if (isPlugin) {
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_Run);
-					tsi.Click += Run;
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_RunAdmin);
-					tsi.Click += RunAs;
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenFileExplorer);
-					tsi.Click += Explore;
-				} else if (isVFolder) {
-					tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_RunAll);
-					tsi.Click += RunAll;
-				} else
-				{
-					MenuDestroy(null, null);
-				}
-				cmnu.Show();
-				cmnu.Location = pt;
-				cmnu.Closing += MenuDestroy;
+				showContextMenu();
 			}
 			else
 			{
-				if (isDir && (instance.settings.ExploreFoldersInTrayMenu || tiPath.shortcut))
-				{
-					AppUtils.OpenPath(new DirectoryInfo(tiPath.path).FullName, instance.settings.RunAsAdmin);
-				}
-				else if (isFile)
-				{
-					AppUtils.OpenPath(Path.GetFullPath(tiPath.path), instance.settings.RunAsAdmin);
-				}
-				else if (tiPlugin != null)
-				{
-					AppUtils.RunPlugin(tiPlugin, instance.settings.RunAsAdmin);
-				}
+				AppUtils.Open(this);
 			}
 		}
 		// Grabbed from https://stackoverflow.com/questions/26587843/prevent-toolstripmenuitems-from-jumping-to-second-screen
+		private void showContextMenu() {
+			MenuSave();
+			Point pt = System.Windows.Forms.Cursor.Position;
+			ContextMenuStrip cmnu = new ContextMenuStrip();
+			ToolStripItem tsi;
+
+			if (isFile || isPlugin) {
+				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_Run);
+				tsi.Click += Run;
+				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_RunAdmin);
+				tsi.Click += RunAs;
+			}
+			if (isDir || isFile || isPlugin) {
+				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenFileExplorer);
+				tsi.Click += Explore;
+			}
+			if (isDir || isFile) {
+				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmd);
+				tsi.Click += OpenCmd;
+				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmdAdmin);
+				tsi.Click += OpenAdminCmd;
+			}
+			if (isVFolder) {
+				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_RunAll);
+				tsi.Click += RunAll;
+			}
+			cmnu.Show();
+			cmnu.Location = pt;
+			cmnu.Closing += MenuDestroy;
+		}
 		private void submenu_DropDownOpening(object sender, EventArgs e)
 		{
 			if (menuItem.HasDropDownItems == false)

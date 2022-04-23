@@ -22,8 +22,16 @@ namespace TrayDir
 		private TrayInstance instance;
 		private ContextMenu rightClickMenu;
 		private MenuItem renameMenuItem;
+
+		private MenuItem copyMenuItem;
+		private MenuItem pasteMenuItem;
+		private MenuItem deleteMenuItem;
+		private MenuItem duplicateMenuItem;
+
 		private MenuItem folderShortcutMenuItem;
 		private MenuItem folderExpandMenuItem;
+		private MenuItem runMenuItem;
+		private MenuItem runasMenuItem;
 		private MenuItem openInExplorerMenuItem;
 		private MenuItem openInCmdMenuItem;
 		private MenuItem openInCmdAdminMenuItem;
@@ -33,14 +41,33 @@ namespace TrayDir
 		{
 			rightClickMenu = new ContextMenu();
 			renameMenuItem = new MenuItem(Properties.Strings_en.Item_RenameItem, renameButton_Click);
+
+			copyMenuItem = new MenuItem(Properties.Strings_en.Item_CopyItem, copyButton_Click);
+			pasteMenuItem = new MenuItem(Properties.Strings_en.Item_PasteItem, pasteButton_Click);
+			deleteMenuItem = new MenuItem(Properties.Strings_en.Item_DeleteItem, deleteButton_Click);
+			duplicateMenuItem = new MenuItem(Properties.Strings_en.Item_DuplicateItem, duplicateButton_Click);
+
 			folderShortcutMenuItem = new MenuItem(Properties.Strings_en.Item_UseAsShortcut, folderShortcutMenuItem_click);
 			folderExpandMenuItem = new MenuItem(Properties.Strings_en.Item_Expand, folderExpandMenuItem_click);
+			runMenuItem = new MenuItem(Properties.Strings_en.MenuItem_Run, runMenuItem_click);
+			runasMenuItem = new MenuItem(Properties.Strings_en.MenuItem_RunAdmin, runasMenuItem_click);
 			openInExplorerMenuItem = new MenuItem(Properties.Strings_en.MenuItem_OpenFileExplorer, openInExplorerMenuItem_click);
 			openInCmdMenuItem = new MenuItem(Properties.Strings_en.MenuItem_OpenCmd, openInCmdMenuItem_click);
 			openInCmdAdminMenuItem = new MenuItem(Properties.Strings_en.MenuItem_OpenCmdAdmin, openInCmdAdminMenuItem_click);
+
+			//Add menu items to context menu
 			rightClickMenu.MenuItems.Add(renameMenuItem);
+			rightClickMenu.MenuItems.Add("-");
+			rightClickMenu.MenuItems.Add(copyMenuItem);
+			rightClickMenu.MenuItems.Add(pasteMenuItem);
+			rightClickMenu.MenuItems.Add(deleteMenuItem);
+			rightClickMenu.MenuItems.Add(duplicateMenuItem);
+			rightClickMenu.MenuItems.Add("-");
 			rightClickMenu.MenuItems.Add(folderShortcutMenuItem);
 			rightClickMenu.MenuItems.Add(folderExpandMenuItem);
+			rightClickMenu.MenuItems.Add("-");
+			rightClickMenu.MenuItems.Add(runMenuItem);
+			rightClickMenu.MenuItems.Add(runasMenuItem);
 			rightClickMenu.MenuItems.Add(openInExplorerMenuItem);
 			rightClickMenu.MenuItems.Add(openInCmdMenuItem);
 			rightClickMenu.MenuItems.Add(openInCmdAdminMenuItem);
@@ -77,6 +104,22 @@ namespace TrayDir
 			{
 				n.Refresh();
 			}
+		}
+		private void runasMenuItem_click(object sender, EventArgs e) {
+			AppUtils.RunAs(selectedNode.tin);
+		}
+		private void runMenuItem_click(object sender, EventArgs e) {
+			AppUtils.Run(selectedNode.tin);
+		}
+		private void duplicateButton_Click(object sender, EventArgs e) {
+			CopyToClipboard();
+			PasteFromClipboard();
+		}
+		private void pasteButton_Click(object sender, EventArgs e) {
+			PasteFromClipboard();
+		}
+		private void copyButton_Click(object sender, EventArgs e) {
+			CopyToClipboard();
 		}
 		public void setTabPage(TabPage tp)
 		{
@@ -139,13 +182,11 @@ namespace TrayDir
 			selectedNode.MoveUp();
 			Save();
 		}
-
 		private void downButton_Click(object sender, EventArgs e)
 		{
 			selectedNode.MoveDown();
 			Save();
 		}
-
 		private void indentButton_Click(object sender, EventArgs e)
 		{
 			selectedNode.MoveIn();
@@ -590,6 +631,16 @@ namespace TrayDir
 		{
 			if (e.Button == MouseButtons.Right && selectedNode != null)
 			{
+				folderShortcutMenuItem.Enabled = false;
+				folderExpandMenuItem.Enabled = false;
+				folderShortcutMenuItem.Visible = true;
+				folderExpandMenuItem.Visible = false;
+				runMenuItem.Enabled = false;
+				runasMenuItem.Enabled = false;
+				openInExplorerMenuItem.Enabled = false;
+				openInCmdMenuItem.Enabled = false;
+				openInCmdAdminMenuItem.Enabled = false;
+
 				if (e.Node != null)
 				{
 					foreach (ITreeNode itn in nodes)
@@ -603,38 +654,31 @@ namespace TrayDir
 				}
 				if (selectedNode.tin.type == TrayInstanceNode.NodeType.Path)
 				{
-					TrayInstancePath path = instance.paths[selectedNode.tin.id];
-					if (path.isDir)
-					{
-						folderShortcutMenuItem.Enabled = true;
-						folderExpandMenuItem.Enabled = true;
-						folderShortcutMenuItem.Visible = !path.shortcut;
-						folderExpandMenuItem.Visible = path.shortcut;
+					TrayInstancePath path = selectedNode.tin.GetPath();
+					if (path != null) {
+						if (path.isDir) {
+							folderShortcutMenuItem.Enabled = true;
+							folderExpandMenuItem.Enabled = true;
+							folderShortcutMenuItem.Visible = !path.shortcut;
+							folderExpandMenuItem.Visible = path.shortcut;
+						}
+						runMenuItem.Enabled = path.isFile;
+						runasMenuItem.Enabled = path.isFile;
+						openInExplorerMenuItem.Enabled = true;
+						openInCmdMenuItem.Enabled = true;
+						openInCmdAdminMenuItem.Enabled = true;
 					}
-					else
-					{
-						folderShortcutMenuItem.Enabled = false;
-						folderExpandMenuItem.Enabled = false;
-						folderShortcutMenuItem.Visible = true;
-						folderExpandMenuItem.Visible = false;
-					}
+				}
+				if (selectedNode.tin.type == TrayInstanceNode.NodeType.Plugin) {
+					runMenuItem.Enabled = true;
+					runasMenuItem.Enabled = true;
 					openInExplorerMenuItem.Enabled = true;
 					openInCmdMenuItem.Enabled = true;
 					openInCmdAdminMenuItem.Enabled = true;
 				}
-				else {
-					folderShortcutMenuItem.Enabled = false;
-					folderExpandMenuItem.Enabled = false;
-					folderShortcutMenuItem.Visible = true;
-					folderExpandMenuItem.Visible = false;
-					openInExplorerMenuItem.Enabled = false;
-					openInCmdMenuItem.Enabled = false;
-					openInCmdAdminMenuItem.Enabled = false;
-				}
 				rightClickMenu.Show(treeView2, e.Location);
 			}
 		}
-
 		private void newPluginButton_Click(object sender, EventArgs e)
 		{
 			TrayInstancePlugin tip = new TrayInstancePlugin();
