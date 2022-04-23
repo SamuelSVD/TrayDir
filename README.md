@@ -1,57 +1,80 @@
 [![GitHub release](https://img.shields.io/github/release/SamuelSVD/TrayDir.svg)](../../releases/latest)
+[![GitHub release](https://img.shields.io/github/downloads/SamuelSVD/TrayDir/total)](../../releases/latest)
 
 # TrayDir
-A windows application that gives the user the ability to access files and folders from the system tray.
+A windows application that gives the user the ability to access files, folders, and programs from the system tray.
 
-## How To Use
+## Download TrayDir
 
-When you first start up TrayDir, you will be greeted with the form containing one instance, New Instance. Each instance will have its own icon in the system tray. 
-Each instance can be configured to have multiple items inside which work as shortcuts to different file or folder locations. 
+Download installer from samver.ca
 
-However you configure the items in the form is how the menu will look when you right click on the icon down in the system tray, meaning you can have custom links in whatever structure you want.
+[https://samver.ca/traydir](https://samver.ca/traydir)
 
-### Adding New Items
+Download installer from GitHub in the latest release
 
-You can add new items by making use of the top buttons. You can add a new file link, new folder link, or new virtual folder to the tree of items.
-
-![image](https://user-images.githubusercontent.com/36249705/124690601-72649b00-dea8-11eb-81f7-2de9e0b47c08.png)
-
-### Creating New Instances
-
-You can create a new instance by clicking on the + tab, or by clicking on Instance | New from the menu bar
-
-## Example
-
-Below we have an example of an instance called New Instance. It has a file link, a folder link, and a virtual folder with two file links inside.
-
-![image](https://user-images.githubusercontent.com/36249705/124690456-392c2b00-dea8-11eb-9511-393a1566618e.png)
-
-The right-click tray menu appears in the same order as the tree view above, and when you hover over the tray icon, it shows the instance name "New Instance"
-
-
-![image](https://user-images.githubusercontent.com/36249705/124690464-3b8e8500-dea8-11eb-8183-6bf2798ce7ed.png)
-![image](https://user-images.githubusercontent.com/36249705/124691926-a5a82980-deaa-11eb-9e1d-e484f65d80d2.png)
-
-Note: you can change the icon that appears in the tray by clicking on the `Options...` button, then browse for the icon that you would like to use.
-
-![image](https://user-images.githubusercontent.com/36249705/124692192-1bac9080-deab-11eb-97a0-e7a00282d0a1.png)
-![image](https://user-images.githubusercontent.com/36249705/124692198-1ea78100-deab-11eb-9564-9292c349480c.png)
-
-
+[http://github.com/samuelSVD/TrayDir/releases/latest](http://github.com/samuelSVD/TrayDir/releases/latest)
 
 ## Supported Platforms
 
-Currently TrayDir is only supported/tested on Windows 10.
+Currently TrayDir is only tested on Windows 10, but also works on Windows 11.
 
-## Download Latest
+# Getting Started
+When you first open up TrayDir you are greeted with the default new instance. At the top you will find five buttons corresponding with the following functions:
 
-Download the installer for the latest release by following this link:
+- New File: Inserts a new file menu item
+- New Folder: Inserts a new folder menu item
+- New Plugin: Inserts a new plugin menu item
+- New Virtual Folder: Inserts a new virtual folder menu item
+- New Separator: Inserts a separator item that displays as a horizontal bar
 
-[http://github.com/samuelSVD/TrayDir/releases/latest](http://github.com/samuelSVD/TrayDir/releases/latest);
+![TrayDir_example_instancebuttons](https://user-images.githubusercontent.com/36249705/164873655-de6e4ac9-56f8-497d-95fe-e5197d433e7e.png)
 
+### What is the System Tray?
+
+The system tray is the list of items at the bottom right of your windows task bar. In most cases, this is where the time, date, Wi-Fi connection, and other settings are displayed.
+
+### Modifying TrayDir
+You can start modifying TrayDir by clicking on the New File button at the top to add a new file link. This will result in a new file item being added to the list of items, and begins browsing for a file in your file system. When you select a file and apply the changes, this file will appear in the right-click menu of TrayDir in the System Tray
+
+If you right click on the TrayDir icon in the system tray, you will be greeted by the Tray Menu, containing the file item that you added to the list. When clicked, this file will be opened as if you had selected it directly through a File Explorer window.
+
+## Instances
+
+### What is an Instance?
+
+An instance refers to one specific configuration of links. Each instance has its own icon in the system tray, with a unique corresponding menu.
+
+### Adding New Instances
+
+In case you want a new icon in the system tray for a separate set of items, either click on the ```+``` beside the New Instance name or click on the menu ```Instance > New```. From here you should be able to select the new instance in a new named tab near the top of the form, and see the new icon in the system tray.
+
+### Renaming an Instance and Chaning its Icon
+
+If you hover over the TrayDir icon in the system tray, you will notice that it is named ```New Instance```. This name can be modified by clicking on the top menu, ```Instance > Edit Name```.
+
+
+### Changing the Icon
+
+The icon used in the System Tray can also be modified by clicking the ```Options``` button at the bottom right, then clicking ```Browse``` under the image. You can select any file and TrayDir will use that file's icon for itself.
+
+Want a different icon for your instance? One option is to create an image file (I recommend .png), then run it through [convertico.com](https://convertico.com/) to convert it to a valid icon file (.ico). From there, download the file and browse to the file location through the instance's icon browse button. A good resource for images you could use is [flaticon.com](https://www.flaticon.com/) 
+
+# Example - Link to PC Games!
+
+Below we have an example of an instance named My Games.
+
+| Description | Image |
+| --- | --- |
+| It contains a link to a folder, and a virtual folder with two file links inside. | ![TrayDir_example_gamesinstance](https://user-images.githubusercontent.com/36249705/164873135-3a2d9d99-8ef6-4828-936c-22ea06e9855d.png)<br/>My Games - Folder Structure | 
+| This ```My Games``` instance is configured with a yellow G as the icon to use in the system tray. | ![TrayDir_example_gamesinstanceoptions](https://user-images.githubusercontent.com/36249705/164873145-ee977a89-2e38-4e38-8049-e65f9eecee37.png)<br/>My Games - Instance Options |
+| When we hover the cursor over the icon in the system menu, you can see the instance name, ```My Games```. Notice there is another icon in the system tray for the Work instance. | ![TrayDir_example_hover](https://user-images.githubusercontent.com/36249705/164873155-47a638e8-20b0-408f-9a95-eef9542ced97.png)<br/>My Games - Name & Icon |
+| When you right-click the tray menu, the same item structure appears as it appeared in the main window. Clicking on the items here will open the files. | ![TrayDir_example_menu](https://user-images.githubusercontent.com/36249705/164873163-c97ebe2b-537d-46a6-a75d-981bf6c198a7.png)<br/>My Games - System Tray Menu |
+| The folders can also be expanded, so if you add a folder item TrayDir will automatically expand them for you to have quick access.<br/>All subfolders will be accessible, since they keep on expanding further as required. | ![TrayDir_example_menufolder](https://user-images.githubusercontent.com/36249705/164873168-dc08a9b1-9aba-4f67-beec-cfbbc540b7ef.png)<br/>My Games - System Tray Menu (Folder) |
+
+# Advanced Functionality
 ## RegEx Filtering
 
-You can add a RegEx pattern to ignore certain files or folders from being included in the tray menu. 
+Do you want to point TrayDir to a folder containing a lot of files you don't care about? You can add a RegEx pattern to ignore certain files or folders from being included in the tray menu.
 
 Every new line is treated as a new pattern.
 
