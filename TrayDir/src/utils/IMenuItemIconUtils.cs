@@ -59,7 +59,7 @@ namespace TrayDir.utils
 					break;
 				}
 				s.Start();
-				Thread.Sleep(1);
+				Thread.Sleep(0);
 			}
 		}
 		public static bool PerformIconLoading()
