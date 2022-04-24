@@ -242,6 +242,15 @@ namespace TrayDir {
 				menuItem.DropDownDirection = ToolStripDropDownDirection.Right;
 			}
 		}
+		internal void UpdateVisibility() {
+			if ((isFile || isDir) && (tiPath != null)) {
+				menuItem.Visible = tiPath.visible;
+			} else if (isPlugin && (tiPlugin != null)) {
+				menuItem.Visible = tiPlugin.visible;
+			} else if (isVFolder) {
+				menuItem.Visible = tiVirtualFolder.visible;
+			}
+		}
 		public void Load()
 		{
 			if (menuItem == null)
