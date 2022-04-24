@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -12,6 +13,7 @@ namespace TrayDir
 	class UpdateUtils
 	{
 		private static string SOURCE = "https://api.github.com/repos/SamuelSVD/TrayDir/releases/latest";
+		private static Thread mainThread;
 		private static Thread updatesThread;
 		private class GitHubRelease {
 			public string html_url;
@@ -40,30 +42,33 @@ namespace TrayDir
 		{
 			if (updatesThread == null || !updatesThread.IsAlive)
 			{
+				mainThread = Thread.CurrentThread;
 				updatesThread = new Thread(UpdatesThread);
 				updatesThread.Start();
 			}
 		}
 		private static async void UpdatesThread()
 		{
-			try
-			{
-				string JSON = await GetVersion();
-				JavaScriptSerializer json_serializer = new JavaScriptSerializer();
-				GitHubRelease latestRelease = json_serializer.Deserialize<GitHubRelease>(JSON);
-				if (latestRelease.tag_name != ProgramData.pd.LatestVersion) {
-					if (SemverCompare(Assembly.GetEntryAssembly().GetName().Version.ToString(), latestRelease.tag_name)) {
-						if (MessageBox.Show(Properties.Strings_en.Form_NewUpdateUpdateNow, Properties.Strings_en.Form_NewUpdateAvailable, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-							System.Diagnostics.Process.Start(latestRelease.html_url);
-						} else {
-							ProgramData.pd.LatestVersion = latestRelease.tag_name;
+			bool run = true;
+			while (run && mainThread.IsAlive) {
+				try {
+					string JSON = await GetVersion();
+					run = false;
+					JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+					GitHubRelease latestRelease = json_serializer.Deserialize<GitHubRelease>(JSON);
+					if (latestRelease.tag_name != ProgramData.pd.LatestVersion) {
+						if (SemverCompare(Assembly.GetEntryAssembly().GetName().Version.ToString(), latestRelease.tag_name)) {
+							if (MessageBox.Show(Properties.Strings_en.Form_NewUpdateUpdateNow, Properties.Strings_en.Form_NewUpdateAvailable, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+								System.Diagnostics.Process.Start(latestRelease.html_url);
+							} else {
+								ProgramData.pd.LatestVersion = latestRelease.tag_name;
+							}
 						}
 					}
 				}
-			}
-			catch
-			{
-
+				catch {
+					Thread.Sleep(1000);
+				}
 			}
 		}
 		public async static Task<string> GetVersion()
