@@ -7,6 +7,7 @@ namespace TrayDir
 {
 	public class ITreeNode
 	{
+		private static Font strikethroughFont;
 		public TreeNode node;
 		public TrayInstanceNode tin;
 		public static Dictionary<string, int> pluginIndex = new Dictionary<string, int>();
@@ -96,41 +97,40 @@ namespace TrayDir
 		}
 		public void Refresh()
 		{
+			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
 			switch (tin.type)
 			{
 				case TrayInstanceNode.NodeType.Path:
-					TrayInstancePath tip = tin.instance.paths[tin.id];
-					bool hasAlias = alias != null && alias != string.Empty;
-					if (tip.isDir)
-					{
-						if (tip.shortcut)
-						{
-							node.ImageIndex = IconUtils.FOLDER_SHORTCUT;
-						} else
-						{
-							node.ImageIndex = IconUtils.FOLDER;
+					TrayInstancePath tip = tin.GetPath();
+					if (tip != null) {
+						bool hasAlias = alias != null && alias != string.Empty;
+						if (tip.isDir) {
+							if (tip.shortcut) {
+								node.ImageIndex = IconUtils.FOLDER_SHORTCUT;
+							} else {
+								node.ImageIndex = IconUtils.FOLDER;
+							}
+							node.Text = string.Empty;
+						} else if (tip.isFile) {
+							node.ImageIndex = IconUtils.DOCUMENT;
+							node.Text = string.Empty;
+						} else {
+							node.ImageIndex = IconUtils.QUESTION;
+							node.Text = Properties.Strings_en.Node_Error;
 						}
-						node.Text = string.Empty;
+						hidden = !tip.visible;
+						node.Text += hasAlias ? alias : string.Empty;
+						node.Text += hasAlias ? " (" + tin.instance.paths[tin.id].path + ")" : tin.instance.paths[tin.id].path;
 					}
-					else if (tip.isFile)
-					{
-						node.ImageIndex = IconUtils.DOCUMENT;
-						node.Text = string.Empty;
-					}
-					else
-					{
-						node.ImageIndex = IconUtils.QUESTION;
-						node.Text = Properties.Strings_en.Node_Error;
-					}
-
-					node.Text += hasAlias ? alias : string.Empty;
-					node.Text += hasAlias ? " (" + tin.instance.paths[tin.id].path + ")" : tin.instance.paths[tin.id].path;
-
 					break;
 				case TrayInstanceNode.NodeType.VirtualFolder:
-					node.ImageIndex = IconUtils.FOLDER_BLUE;
-					node.Text = tin.instance.vfolders[tin.id].alias;
+					TrayInstanceVirtualFolder tivf = tin.GetVirtualFolder();
+					if (tivf != null) {
+						node.ImageIndex = IconUtils.FOLDER_BLUE;
+						node.Text =  tivf.alias;
+						hidden = !tivf.visible;
+					}
 					break;
 				case TrayInstanceNode.NodeType.Plugin:
 					string pluginName = "";
@@ -139,6 +139,7 @@ namespace TrayDir
 					if (iPlugin != null)
 					{
 						plugin = iPlugin.plugin;
+						hidden = !iPlugin.visible;
 					}
 					if (plugin != null)
 					{
@@ -172,6 +173,12 @@ namespace TrayDir
 					break;
 			}
 			node.SelectedImageIndex = node.ImageIndex;
+			if (hidden) {
+				ITreeNode.strikethroughFont = new Font(node.TreeView.Font.FontFamily, node.TreeView.Font.Size, FontStyle.Strikeout);
+				node.NodeFont = strikethroughFont;
+			} else {
+				node.NodeFont = node.TreeView.Font;
+			}
 		}
 		public void MoveUp()
 		{
