@@ -631,6 +631,7 @@ namespace TrayDir
 		{
 			if (e.Button == MouseButtons.Right && selectedNode != null)
 			{
+				pasteMenuItem.Enabled = (Clipboard.ContainsText(TextDataFormat.Text) && Clipboard.GetText().StartsWith("<?xml"));
 				folderShortcutMenuItem.Enabled = false;
 				folderExpandMenuItem.Enabled = false;
 				folderShortcutMenuItem.Visible = true;
