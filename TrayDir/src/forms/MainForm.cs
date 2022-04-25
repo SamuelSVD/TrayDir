@@ -38,7 +38,7 @@ namespace TrayDir
 			archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
 
 			pd.FixInstances();
-			pd.CheckStartup();
+			if (!Program.IGNORESTARTUP) pd.CheckStartup();
 			InitializeContent();
 			BuildExploreDropdown();
 			BuildRebuildDropdown();
