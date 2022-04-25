@@ -166,6 +166,9 @@
     <value>Error loading icon:
 {0}</value>
   </data>
+  <data name="Form_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
   <data name="Form_ExpandFirstPath" xml:space="preserve">
     <value>Expand First Path</value>
   </data>
@@ -192,6 +195,9 @@
   </data>
   <data name="Form_MinimizeOnClose" xml:space="preserve">
     <value>Minimize On Close</value>
+  </data>
+  <data name="Form_MinimizeToTray" xml:space="preserve">
+    <value>Minimize TrayDir to the System Tray?</value>
   </data>
   <data name="Form_Name" xml:space="preserve">
     <value>Name</value>

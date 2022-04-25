@@ -281,31 +281,37 @@ namespace TrayDir
 		}
 		protected override void OnFormClosing(FormClosingEventArgs e)
 		{
-			if (!allowClose && pd.settings.win.MinimizeOnClose)
-			{
-				bool block = true;
-				foreach(TrayInstance instance in pd.trayInstances)
-				{
-					if (!instance.settings.HideFromTray)
-					{
-						block = false;
-						break;
-					}
+			bool block = true;
+			foreach (TrayInstance instance in pd.trayInstances) {
+				if (!instance.settings.HideFromTray) {
+					block = false;
+					break;
 				}
-				if (!block && !pd.settings.win.MinimizeOnClose)
-				{
+			}
+			if (!allowClose && pd.settings.win.MinimizeOnClose) {
+				if (!block && !pd.settings.win.MinimizeOnClose) {
 					HideApp(this, null);
-				} else
-				{
+				} else {
 					WindowState = FormWindowState.Minimized;
 				}
 				e.Cancel = true;
-			}
-			else
-			{
-				foreach (TrayInstance i in pd.trayInstances)
-				{
-					i.view.tray.Hide();
+			} else {
+				if (!block && Visible) {
+					switch (MessageBox.Show(Properties.Strings_en.Form_MinimizeToTray, Properties.Strings_en.Form_Exit, MessageBoxButtons.YesNo)) {
+						case DialogResult.Yes:
+							HideApp(this, null);
+							e.Cancel = true;
+							break;
+						case DialogResult.No:
+							foreach (TrayInstance i in pd.trayInstances) {
+								i.view.tray.Hide();
+							}
+							break;
+					}
+				} else {
+					foreach (TrayInstance i in pd.trayInstances) {
+						i.view.tray.Hide();
+					}
 				}
 			}
 			base.OnFormClosing(e);

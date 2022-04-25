@@ -200,6 +200,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string Form_Exit {
+            get {
+                return ResourceManager.GetString("Form_Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expand First Path.
         /// </summary>
         internal static string Form_ExpandFirstPath {
@@ -277,6 +286,15 @@ namespace TrayDir.Properties {
         internal static string Form_MinimizeOnClose {
             get {
                 return ResourceManager.GetString("Form_MinimizeOnClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimize TrayDir to the System Tray?.
+        /// </summary>
+        internal static string Form_MinimizeToTray {
+            get {
+                return ResourceManager.GetString("Form_MinimizeToTray", resourceCulture);
             }
         }
         
