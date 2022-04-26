@@ -8,8 +8,8 @@ code {
 }
 table, td, tr, th {
 	padding: 3px;
-	border: solid;
-	border-color:black;
+	border: 1px solid black;
+	border-collapse: collapse;
 }
 .codeblock {
 	border-radius: 5px;
