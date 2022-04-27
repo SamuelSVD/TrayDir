@@ -505,7 +505,7 @@ namespace TrayDir
 				imgLoadTimer.Interval = 1000;
 			}
 		}
-		private void pluginToolStripMenuItem_Click(object sender, EventArgs e)
+		internal void pluginToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			new PluginManagerForm().ShowDialog();
 			Save(sender, e);

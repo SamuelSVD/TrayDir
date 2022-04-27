@@ -138,6 +138,9 @@
   <data name="Form_Archive" xml:space="preserve">
     <value>Archive</value>
   </data>
+  <data name="Form_Attention" xml:space="preserve">
+    <value>Attention</value>
+  </data>
   <data name="Form_Browse" xml:space="preserve">
     <value>Browse</value>
   </data>
@@ -210,6 +213,10 @@
   </data>
   <data name="Form_NewUpdateUpdateNow" xml:space="preserve">
     <value>A new version of TrayDir is available, do you want to update now?</value>
+  </data>
+  <data name="Form_NoPluginsDefined" xml:space="preserve">
+    <value>There are no plugins configured.
+Would you like to configure one now?</value>
   </data>
   <data name="Form_OpenFoldersInFileExplorerOnClick" xml:space="preserve">
     <value>Open Folders in File Explorer When Clicked</value>

@@ -118,6 +118,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attention.
+        /// </summary>
+        internal static string Form_Attention {
+            get {
+                return ResourceManager.GetString("Form_Attention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Browse.
         /// </summary>
         internal static string Form_Browse {
@@ -331,6 +340,16 @@ namespace TrayDir.Properties {
         internal static string Form_NewUpdateUpdateNow {
             get {
                 return ResourceManager.GetString("Form_NewUpdateUpdateNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no plugins configured.
+        ///Would you like to configure one now?.
+        /// </summary>
+        internal static string Form_NoPluginsDefined {
+            get {
+                return ResourceManager.GetString("Form_NoPluginsDefined", resourceCulture);
             }
         }
         

@@ -682,6 +682,15 @@ namespace TrayDir
 		}
 		private void newPluginButton_Click(object sender, EventArgs e)
 		{
+			if (ProgramData.pd.plugins.Count == 0) {
+				switch (MessageBox.Show(Properties.Strings_en.Form_NoPluginsDefined, Properties.Strings_en.Form_Attention, MessageBoxButtons.YesNo)) {
+					case DialogResult.No:
+						return;
+					case DialogResult.Yes:
+						MainForm.form.pluginToolStripMenuItem_Click(sender, e);
+						return;
+				}
+			}
 			TrayInstancePlugin tip = new TrayInstancePlugin();
 			instance.plugins.Add(tip);
 			int index = instance.plugins.IndexOf(tip);
