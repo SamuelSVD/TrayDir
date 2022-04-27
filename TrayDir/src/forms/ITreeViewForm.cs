@@ -476,6 +476,10 @@ namespace TrayDir
 			{
 				RecursiveLoadFromInstance(recursive_instance, nodeChild, itn);
 			}
+			if (parentNode == null) {
+				selectedNode = itn;
+				outdentButton_Click(this, null);
+			}
 			itn.Refresh();
 		}
 		private void PasteFromClipboard()
