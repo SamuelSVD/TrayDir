@@ -76,7 +76,7 @@ namespace TrayDir
 					}
 				}
 			}
-			CheckStartup();
+			if (!Program.IGNORESTARTUP) CheckStartup();
 		}
 		public void FormHidden()
 		{
