@@ -246,7 +246,6 @@ namespace TrayDir
 				RunPlugin(menuItem.tiPlugin, menuItem.instance.settings.RunAsAdmin);
 			}
 		}
-
 		public static TrayPlugin ImportPlugin(string path)
 		{
 			TrayPlugin i = null;
@@ -255,6 +254,10 @@ namespace TrayDir
 		}
 		public static void RunPlugin(TrayInstancePlugin p, bool runasadmin)
 		{
+			if (!p.isValid()) {
+				MessageBox.Show(Properties.Strings_en.Form_PluginInvalid, Properties.Strings_en.Form_Error);
+				return;
+			}
 			bool runExternally = (p.plugin != null ? p.plugin.OpenIndirect : false);
 			if ((!runExternally) && (runasadmin || (p.plugin != null ? p.plugin.AlwaysRunAsAdmin : false)))
 			{

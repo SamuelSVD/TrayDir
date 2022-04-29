@@ -363,6 +363,16 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plugin parameters are invalid.
+        ///Verify all required parameters are provided..
+        /// </summary>
+        internal static string Form_PluginInvalid {
+            get {
+                return ResourceManager.GetString("Form_PluginInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to delete &lt;{0}&gt;?.
         /// </summary>
         internal static string Form_PromptDelete {

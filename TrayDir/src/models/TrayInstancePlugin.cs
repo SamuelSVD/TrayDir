@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace TrayDir
@@ -34,6 +35,20 @@ namespace TrayDir
 				tip.parameters.Add(tipp.Copy());
 			}
 			return tip;
+		}
+
+		internal bool isValid() {
+			TrayPlugin p = plugin;
+			bool valid = true;
+			if (p != null) {
+				for(int i = 0; i < p.parameters.Count; i++) {
+					TrayPluginParameter tpp = p.parameters[i];
+					valid &= !(tpp.required || tpp.isBoolean) || ((parameters.Count > i) && parameters[i].value != "");
+				}
+			} else {
+				valid = false;
+			}
+			return valid;
 		}
 	}
 }
