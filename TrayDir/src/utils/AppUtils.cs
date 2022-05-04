@@ -258,7 +258,7 @@ namespace TrayDir
 				MessageBox.Show(Properties.Strings_en.Form_PluginInvalid, Properties.Strings_en.Form_Error);
 				return;
 			}
-			bool runExternally = (p.plugin != null ? p.plugin.OpenIndirect : false);
+			bool runExternally = (p.plugin != null ? p.plugin.OpenIndirect && !p.plugin.isScript : false);
 			if ((!runExternally) && (runasadmin || (p.plugin != null ? p.plugin.AlwaysRunAsAdmin : false)))
 			{
 				RunAs(p);
