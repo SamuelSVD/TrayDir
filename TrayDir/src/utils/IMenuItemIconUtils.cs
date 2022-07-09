@@ -95,25 +95,35 @@ namespace TrayDir.utils
 						}
 					} else if (mi.menuIcon is null && mi.isDir) {
 						if (mi.tiPath != null && mi.tiPath.shortcut) {
-							mi.menuIcon = new Bitmap(Properties.Resources.folder_shortcut);
+							mi.menuIcon = Properties.Resources.folder_shortcut;
 						} else {
-							mi.menuIcon = new Bitmap(Properties.Resources.folder);
+							mi.menuIcon = Properties.Resources.folder;
 						}
 					} else if (mi.menuIcon is null && mi.tiVirtualFolder != null) {
 						if (ProgramData.pd.settings.app.VFolderIcon != "Yellow Folder") {
-							mi.menuIcon = new Bitmap(Properties.Resources.folder_blue);
+							mi.menuIcon = Properties.Resources.folder_blue;
 						} else {
-							mi.menuIcon = new Bitmap(Properties.Resources.folder);
+							mi.menuIcon = Properties.Resources.folder;
 						}
 					} else if (mi.tiPlugin != null) {
 						TrayPlugin tp = mi.tiPlugin.plugin;
-						if (tp != null && AppUtils.PathIsFile(tp.path)) {
-							Bitmap i = IconUtils.lookupIcon(tp.getSignature());
-							if (i == null) {
-								i = Icon.ExtractAssociatedIcon(tp.path).ToBitmap();
-								IconUtils.addIcon(tp.getSignature(), i);
+						if (tp != null) {
+							if (tp.isScript) {
+								if (mi.tiPlugin.isValid()) {
+									mi.menuIcon = Properties.Resources.runnable;
+								} else {
+									mi.menuIcon = Properties.Resources.runnable_error;
+								}
+							} else {
+								if (AppUtils.PathIsFile(tp.path)) {
+									Bitmap i = IconUtils.lookupIcon(tp.getSignature());
+									if (i == null) {
+										i = Icon.ExtractAssociatedIcon(tp.path).ToBitmap();
+										IconUtils.addIcon(tp.getSignature(), i);
+									}
+									mi.menuIcon = i;
+								}
 							}
-							mi.menuIcon = i;
 						}
 					}
 					if (mi.menuIcon != null) {

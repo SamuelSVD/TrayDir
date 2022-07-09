@@ -325,6 +325,7 @@
     <Content Include="Resources\folder_shortcut.png" />
     <Content Include="Resources\question.png" />
     <Content Include="Resources\runnable.png" />
+    <None Include="Resources\runnable_error.png" />
     <Content Include="Resources\runnable_new.png" />
     <None Include="Resources\separator.png" />
     <Content Include="Resources\up.png" />

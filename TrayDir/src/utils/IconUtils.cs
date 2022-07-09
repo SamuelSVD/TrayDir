@@ -31,6 +31,7 @@ namespace TrayDir.utils
 		public static int INDENT_OUT;
 		public static int FOLDER_SHORTCUT;
 		public static int SEPARATOR;
+		public static int RUNNABLE_ERROR;
 		public static bool initialized = false;
 		public static Image DocumentImage { get { return imageList.Images[DOCUMENT]; } }
 		public static Image FolderImage { get { return imageList.Images[FOLDER]; } }
@@ -49,6 +50,7 @@ namespace TrayDir.utils
 		public static Image FolderShortcutImage { get { return imageList.Images[FOLDER_SHORTCUT]; } }
 		public static Image EditImage { get { return imageList.Images[EDIT]; } }
 		public static Image SeparatorImage { get { return imageList.Images[SEPARATOR]; } }
+		public static Image RunnableError { get { return imageList.Images[RUNNABLE_ERROR]; } }
 		public static void Init(int sizeWH)
 		{
 			imageList = new ImageList();
@@ -87,6 +89,8 @@ namespace TrayDir.utils
 			IconUtils.EDIT = 15;
 			imageList.Images.Add(TrayDir.Properties.Resources.separator);
 			IconUtils.SEPARATOR = 16;
+			imageList.Images.Add(TrayDir.Properties.Resources.runnable_error);
+			IconUtils.RUNNABLE_ERROR = 17;
 			initialized = true;
 		}
 		public static Bitmap lookupIcon(string key)

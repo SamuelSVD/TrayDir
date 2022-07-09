@@ -233,6 +233,16 @@ namespace TrayDir.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap runnable_error {
+            get {
+                object obj = ResourceManager.GetObject("runnable_error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap runnable_new {
             get {
                 object obj = ResourceManager.GetObject("runnable_new", resourceCulture);

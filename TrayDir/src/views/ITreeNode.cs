@@ -144,22 +144,30 @@ namespace TrayDir
 					if (plugin != null)
 					{
 						pluginName = plugin.name;
-						if (node.TreeView != null && AppUtils.PathIsFile(plugin.path))
+						if (node.TreeView != null)
 						{
-							if (ITreeNode.pluginIndex.ContainsKey(plugin.getSignature()))
-							{
-								node.ImageIndex = ITreeNode.pluginIndex[plugin.getSignature()];
-							}
-							else
-							{
-								Bitmap i = IconUtils.lookupIcon(plugin.getSignature());
-								if (i == null)
-								{
-									i = Icon.ExtractAssociatedIcon(plugin.path).ToBitmap();
-									IconUtils.addIcon(plugin.getSignature(), i);
+							if (plugin.isScript) {
+								if (iPlugin.isValid()) {
+									node.ImageIndex = IconUtils.RUNNABLE;
+								} else {
+									node.ImageIndex = IconUtils.RUNNABLE_ERROR;
 								}
-								node.TreeView.ImageList.Images.Add(i);
-								node.ImageIndex = node.TreeView.ImageList.Images.Count - 1;
+							}
+							else {
+								if (AppUtils.PathIsFile(plugin.path)) {
+
+									if (ITreeNode.pluginIndex.ContainsKey(plugin.getSignature())) {
+										node.ImageIndex = ITreeNode.pluginIndex[plugin.getSignature()];
+									} else {
+										Bitmap i = IconUtils.lookupIcon(plugin.getSignature());
+										if (i == null) {
+											i = Icon.ExtractAssociatedIcon(plugin.path).ToBitmap();
+											IconUtils.addIcon(plugin.getSignature(), i);
+										}
+										node.TreeView.ImageList.Images.Add(i);
+										node.ImageIndex = node.TreeView.ImageList.Images.Count - 1;
+									}
+								}
 							}
 						}
 					}
