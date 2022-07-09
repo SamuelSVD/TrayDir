@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
+using TrayDir.utils;
 
 namespace TrayDir
 {
@@ -30,8 +32,10 @@ namespace TrayDir
 			treeView1.Nodes.Clear();
 			imageList = new ImageList();
 			imageList.Images.Clear();
+			foreach(Bitmap image in IconUtils.imageList.Images) {
+				imageList.Images.Add(image);
+			}
 			imageList.ImageSize = new System.Drawing.Size(closeButton.Font.Height, closeButton.Font.Height);
-			imageList.Images.Add(Properties.Resources.empty);
 			treeView1.ImageList = imageList;
 			foreach (TrayPlugin tp in ProgramData.pd.plugins)
 			{
