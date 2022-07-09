@@ -64,11 +64,18 @@ namespace TrayDir
 		public void Rebuild()
 		{
 			if (MainForm.form != null) {
-				pathMenuItems.Clear();
-				pluginMenuItems.Clear();
-				virtualFolderMenuItems.Clear();
+				ClearList(pathMenuItems);
+				ClearList(pluginMenuItems);
+				ClearList(virtualFolderMenuItems);
 				BuildTrayMenu();
+				GC.Collect();
 			}
+		}
+		private void ClearList(List<IMenuItem> list) {
+			foreach (IMenuItem item in list) {
+				item.RemoveChildren();
+			}
+			list.Clear();
 		}
 		public void MenuOpened(Object obj, EventArgs args)
 		{

@@ -485,5 +485,21 @@ namespace TrayDir {
 				collection.Add(menuItem);
 			}
 		}
+		internal void RemoveChildren() {
+			RemoveChildren(folderChildren);
+			RemoveChildren(nodeChildren);
+			RemoveChildren(dirMenuItems);
+			RemoveChildren(fileMenuItems);
+	}
+		internal void RemoveChildren(List<IMenuItem> list) {
+			int c = list.Count;
+			for(int i = 0; i < c; i++) {
+				IMenuItem child = list[0];
+				list.RemoveAt(0);
+				child.RemoveChildren();
+				child.parent = null;
+			}
+			list.Clear();
+		}
 	}
 }

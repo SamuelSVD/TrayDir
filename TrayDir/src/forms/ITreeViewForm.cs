@@ -167,7 +167,7 @@ namespace TrayDir
 		private void Save()
 		{
 			instance.Repair();
-			instance.view.tray.Rebuild();
+			instance.view?.Rebuild();
 			MainForm.form.BuildExploreDropdown();
 			ProgramData.pd.Save();
 		}
@@ -295,7 +295,6 @@ namespace TrayDir
 				iff.ShowDialog();
 			}
 			itn.Refresh();
-			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}
 		private void folderPropertiesButton_Click(object sender, EventArgs e)
@@ -728,7 +727,6 @@ namespace TrayDir
 			IPluginForm ipf = new IPluginForm(instance.plugins[itn.tin.id]);
 			ipf.ShowDialog();
 			itn.Refresh();
-			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}
 		private void vFolderPropertiesButton_Click(object sender, EventArgs e) {
