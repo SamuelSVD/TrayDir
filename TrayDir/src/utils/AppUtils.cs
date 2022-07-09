@@ -273,20 +273,50 @@ namespace TrayDir
 		}
 		public static void Run(TrayInstancePlugin tip) {
 			TrayPlugin plugin = tip.plugin;
-			if (plugin != null && plugin.path != null && PathIsFile(plugin.path)) {
-				string parameters = BuildPluginCliParams(tip);
-				ProcessStart(plugin.path, parameters,false);
+			if (plugin != null && tip.isValid()) {
+				if (plugin.isScript) {
+					string command = "";
+					string[] commands = String.Format(plugin.scriptText, tip.ParametersAsStringArray).Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+					for (int i = 0; i < commands.Length; i++) {
+						string cmd = commands[i].Trim();
+						if (i != 0 && cmd != "") command += "&";
+						command += cmd;
+					}
+					if (command != "") {
+						ProcessStart(CMD, "/C " + command, false);
+					}
+				} else {
+					if (plugin.path != null && PathIsFile(plugin.path)) {
+						string parameters = BuildPluginCliParams(tip);
+						ProcessStart(plugin.path, parameters, false);
+					}
+				}
 			}
 		}
 		public static void RunPluginExternally(TrayInstancePlugin tip) {
 			TrayPlugin plugin = tip.plugin;
-			if (plugin != null && plugin.path != null && PathIsFile(plugin.path)) {
-				string parameters = BuildPluginCliParams(tip);
-				if (parameters != string.Empty) {
-					parameters = " " + parameters;
+			if (plugin != null && tip.isValid()) {
+				if (plugin.isScript) {
+					string command = "";
+					string[] commands = String.Format(plugin.scriptText, tip.ParametersAsStringArray).Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+					for (int i = 0; i < commands.Length; i++) {
+						string cmd = commands[i].Trim();
+						if (i != 0 && cmd != "") command += "&";
+						command += cmd;
+					}
+					if (command != "") {
+						ProcessStart(CMD, "/C " + command, false);
+					}
+				} else {
+					if (plugin.path != null && PathIsFile(plugin.path)) {
+						string parameters = BuildPluginCliParams(tip);
+						if (parameters != string.Empty) {
+							parameters = " " + parameters;
+						}
+						parameters = String.Format("/c start \"TrayDir - Open Indirectly\" /d \"{0}\" \"{1}\"{2}", Path.GetDirectoryName(plugin.path), Path.GetFileName(plugin.path), parameters);
+						ProcessStart(CMD, parameters, false);
+					}
 				}
-				parameters = String.Format("/c start \"TrayDir - Open Indirectly\" /d \"{0}\" \"{1}\"{2}", Path.GetDirectoryName(plugin.path), Path.GetFileName(plugin.path), parameters);
-				ProcessStart(CMD, parameters,false);
 			}
 		}
 		public static void Run(TrayInstancePath tip) {
@@ -299,10 +329,23 @@ namespace TrayDir
 		public static void RunAs(TrayInstancePlugin tip)
 		{
 			TrayPlugin plugin = tip.plugin;
-			if (plugin != null)
+			if (plugin != null && tip.isValid())
 			{
-				string parameters = BuildPluginCliParams(tip);
-				ProcessStart(plugin.path, parameters, true);
+				if (plugin.isScript) {
+					string command = "";
+					string[] commands = String.Format(plugin.scriptText, tip.ParametersAsStringArray).Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+					for(int i = 0; i < commands.Length; i++) {
+						string cmd = commands[i].Trim();
+						if (i != 0 && cmd != "") command += "&";
+						command += cmd;
+					}
+					if (command != "") {
+						ProcessStart(CMD, "/C " + command, true);
+					}
+				} else {
+					string parameters = BuildPluginCliParams(tip);
+					ProcessStart(plugin.path, parameters, true);
+				}
 			}
 		}
 		public static void RunAs(TrayInstancePath tip) {

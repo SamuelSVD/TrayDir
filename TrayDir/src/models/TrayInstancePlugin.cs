@@ -25,6 +25,17 @@ namespace TrayDir
 				return null;
 			}
 		}
+		[XmlIgnore]
+		internal string[] ParametersAsStringArray {
+			get {
+				List<string> list = new List<string>();
+				foreach (TrayInstancePluginParameter tipp in parameters) {
+					list.Add(tipp.value.ToString());
+				}
+				return list.ToArray();
+			}
+		}
+
 		public TrayInstancePlugin Copy()
 		{
 			TrayInstancePlugin tip = new TrayInstancePlugin();

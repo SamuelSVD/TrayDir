@@ -33,6 +33,7 @@ namespace TrayDir
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+			this.scriptCheckBox = new System.Windows.Forms.CheckBox();
 			this.openIndirectCheckBox = new System.Windows.Forms.CheckBox();
 			this.configureParamsButton = new System.Windows.Forms.Button();
 			this.paramNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -43,9 +44,8 @@ namespace TrayDir
 			this.nameLabel = new System.Windows.Forms.Label();
 			this.nameEdit = new System.Windows.Forms.TextBox();
 			this.alwaysRunAsAdminCheckBox = new System.Windows.Forms.CheckBox();
-			this.closeButton = new System.Windows.Forms.Button();
-			this.scriptCheckBox = new System.Windows.Forms.CheckBox();
 			this.scriptText = new System.Windows.Forms.TextBox();
+			this.closeButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
@@ -121,6 +121,20 @@ namespace TrayDir
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tableLayoutPanel3.Size = new System.Drawing.Size(362, 293);
 			this.tableLayoutPanel3.TabIndex = 6;
+			// 
+			// scriptCheckBox
+			// 
+			this.scriptCheckBox.AutoSize = true;
+			this.scriptCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.tableLayoutPanel3.SetColumnSpan(this.scriptCheckBox, 2);
+			this.scriptCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.scriptCheckBox.Location = new System.Drawing.Point(3, 198);
+			this.scriptCheckBox.Name = "scriptCheckBox";
+			this.scriptCheckBox.Size = new System.Drawing.Size(356, 17);
+			this.scriptCheckBox.TabIndex = 11;
+			this.scriptCheckBox.Text = "Configure plugin as script";
+			this.scriptCheckBox.UseVisualStyleBackColor = true;
+			this.scriptCheckBox.CheckedChanged += new System.EventHandler(this.scriptCheckBox_CheckedChanged);
 			// 
 			// openIndirectCheckBox
 			// 
@@ -227,6 +241,18 @@ namespace TrayDir
 			this.alwaysRunAsAdminCheckBox.UseVisualStyleBackColor = true;
 			this.alwaysRunAsAdminCheckBox.CheckedChanged += new System.EventHandler(this.alwaysRunAsAdmin_CheckedChanged);
 			// 
+			// scriptText
+			// 
+			this.scriptText.AcceptsReturn = true;
+			this.tableLayoutPanel3.SetColumnSpan(this.scriptText, 2);
+			this.scriptText.Dock = System.Windows.Forms.DockStyle.Top;
+			this.scriptText.Location = new System.Drawing.Point(3, 221);
+			this.scriptText.Multiline = true;
+			this.scriptText.Name = "scriptText";
+			this.scriptText.Size = new System.Drawing.Size(356, 69);
+			this.scriptText.TabIndex = 12;
+			this.scriptText.TextChanged += new System.EventHandler(this.scriptText_TextChanged);
+			// 
 			// closeButton
 			// 
 			this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -239,31 +265,6 @@ namespace TrayDir
 			this.closeButton.Text = "Close";
 			this.closeButton.UseVisualStyleBackColor = true;
 			this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-			// 
-			// scriptCheckBox
-			// 
-			this.scriptCheckBox.AutoSize = true;
-			this.scriptCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.tableLayoutPanel3.SetColumnSpan(this.scriptCheckBox, 2);
-			this.scriptCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.scriptCheckBox.Location = new System.Drawing.Point(3, 198);
-			this.scriptCheckBox.Name = "scriptCheckBox";
-			this.scriptCheckBox.Size = new System.Drawing.Size(356, 17);
-			this.scriptCheckBox.TabIndex = 11;
-			this.scriptCheckBox.Text = "Configure plugin as script";
-			this.scriptCheckBox.UseVisualStyleBackColor = true;
-			this.scriptCheckBox.CheckedChanged += new System.EventHandler(this.scriptCheckBox_CheckedChanged);
-			// 
-			// scriptText
-			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.scriptText, 2);
-			this.scriptText.Dock = System.Windows.Forms.DockStyle.Top;
-			this.scriptText.Location = new System.Drawing.Point(3, 221);
-			this.scriptText.Multiline = true;
-			this.scriptText.Name = "scriptText";
-			this.scriptText.Size = new System.Drawing.Size(356, 69);
-			this.scriptText.TabIndex = 12;
-			this.scriptText.TextChanged += new System.EventHandler(this.scriptText_TextChanged);
 			// 
 			// PluginForm
 			// 
