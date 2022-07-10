@@ -351,7 +351,7 @@ namespace TrayDir
 		}
 		private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			SettingsForm.form.ShowDialog();
+			new SettingsForm().ShowDialog();
 		}
 		private void MainForm_Load(object sender, EventArgs e) { }
 		private IView CreateViewFromInstance(TrayInstance instance, TabPage tp)
