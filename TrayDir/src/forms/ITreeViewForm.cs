@@ -308,7 +308,6 @@ namespace TrayDir
 				iff.ShowDialog();
 			}
 			itn.Refresh();
-			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}
 		private void UpdateButtonEnables()
@@ -613,13 +612,13 @@ namespace TrayDir
 		{
 			instance.paths[selectedNode.tin.id].shortcut = true;
 			selectedNode.Refresh();
-			instance.view.tray.Rebuild();
+			instance.view?.Rebuild();
 		}
 		private void folderExpandMenuItem_click(object sender, EventArgs e)
 		{
 			instance.paths[selectedNode.tin.id].shortcut = false;
 			selectedNode.Refresh();
-			instance.view.tray.Rebuild();
+			instance.view?.Rebuild();
 		}
 		private void openInExplorerMenuItem_click(object sender, EventArgs e) {
 			AppUtils.ExplorePath(instance.paths[selectedNode.tin.id].path);
@@ -719,7 +718,6 @@ namespace TrayDir
 			selectedNode = itn;
 			nodes.Add(itn);
 			itn.Refresh();
-			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}
 		private void pluginPropertiesButton_Click(object sender, EventArgs e) {
@@ -734,7 +732,6 @@ namespace TrayDir
 			IVirtualFolderForm ivff = new IVirtualFolderForm(instance.vfolders[itn.tin.id]);
 			ivff.ShowDialog();
 			itn.Refresh();
-			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}
 		private void treeView2_ItemDrag(object sender, ItemDragEventArgs e)

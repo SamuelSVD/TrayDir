@@ -466,8 +466,7 @@ namespace TrayDir
 		}
 		private void rebuildCurrentToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			trayInstance.view.tray.Rebuild();
-			trayInstance.view.treeviewForm.Rebuild();
+			trayInstance.view?.Rebuild();
 		}
 		private void rebuildAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -491,7 +490,7 @@ namespace TrayDir
 			if (InputDialog.ShowMultilineStringInputDialog(Properties.Strings_en.Form_EditIgnoreRegex, ref input) == DialogResult.OK)
 			{
 				trayInstance.ignoreRegex = input;
-				trayInstance.view.tray.Rebuild();
+				trayInstance.view?.Rebuild();
 				pd.Save();
 			}
 		}

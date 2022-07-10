@@ -490,6 +490,7 @@ namespace TrayDir {
 			RemoveChildren(nodeChildren);
 			RemoveChildren(dirMenuItems);
 			RemoveChildren(fileMenuItems);
+			parent = null;
 	}
 		internal void RemoveChildren(List<IMenuItem> list) {
 			int c = list.Count;
@@ -497,7 +498,6 @@ namespace TrayDir {
 				IMenuItem child = list[0];
 				list.RemoveAt(0);
 				child.RemoveChildren();
-				child.parent = null;
 			}
 			list.Clear();
 		}

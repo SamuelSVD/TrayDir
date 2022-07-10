@@ -185,7 +185,7 @@ namespace TrayDir
 				ITreeNode.strikethroughFont = new Font(node.TreeView.Font.FontFamily, node.TreeView.Font.Size, FontStyle.Strikeout);
 				node.NodeFont = strikethroughFont;
 			} else {
-				node.NodeFont = node.TreeView.Font;
+				node.NodeFont = node.TreeView?.Font;
 			}
 		}
 		public void MoveUp()
