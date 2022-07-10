@@ -50,25 +50,29 @@ namespace TrayDir
 		private static async void UpdatesThread()
 		{
 			bool run = true;
+			int count = 0;
 			while (run && mainThread.IsAlive) {
-				try {
-					string JSON = await GetVersion();
-					run = false;
-					JavaScriptSerializer json_serializer = new JavaScriptSerializer();
-					GitHubRelease latestRelease = json_serializer.Deserialize<GitHubRelease>(JSON);
-					if (latestRelease.tag_name != ProgramData.pd.LatestVersion) {
-						if (SemverCompare(Assembly.GetEntryAssembly().GetName().Version.ToString(), latestRelease.tag_name)) {
-							if (MessageBox.Show(Properties.Strings_en.Form_NewUpdateUpdateNow, Properties.Strings_en.Form_NewUpdateAvailable, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-								System.Diagnostics.Process.Start(latestRelease.html_url);
-							} else {
-								ProgramData.pd.LatestVersion = latestRelease.tag_name;
+				if (count % 600 == 0) {
+					try {
+						string JSON = await GetVersion();
+						JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+						GitHubRelease latestRelease = json_serializer.Deserialize<GitHubRelease>(JSON);
+						if (latestRelease.tag_name != ProgramData.pd.LatestVersion) {
+							if (SemverCompare(Assembly.GetEntryAssembly().GetName().Version.ToString(), latestRelease.tag_name)) {
+								if (MessageBox.Show(Properties.Strings_en.Form_NewUpdateUpdateNow, Properties.Strings_en.Form_NewUpdateAvailable, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+									System.Diagnostics.Process.Start(latestRelease.html_url);
+								} else {
+									ProgramData.pd.LatestVersion = latestRelease.tag_name;
+								}
 							}
 						}
+						run = false;
 					}
+					catch {
+					}
+					count++;
 				}
-				catch {
-					Thread.Sleep(1000);
-				}
+				Thread.Sleep(1000);
 			}
 		}
 		public async static Task<string> GetVersion()
