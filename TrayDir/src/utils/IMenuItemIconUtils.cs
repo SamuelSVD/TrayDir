@@ -77,7 +77,9 @@ namespace TrayDir.utils
 			if (MainForm.form != null && queue.Count > 0) {
 				IMenuItem mi = queue.Dequeue();
 				try {
-					if (mi.menuIcon is null && mi.isFile) {
+					if (mi.menuIcon is null && mi.isErr) {
+						mi.menuIcon = (Bitmap)IconUtils.QuestionImage;
+					} else if (mi.menuIcon is null && mi.isFile) {
 						string ext = Path.GetExtension(mi.tiPath.path);
 						if (ext.Length == 0 || ext == ".ico" || ext == ".lnk" || ext == ".exe" || (queue != imgLoadQueue && ext == ".url")) {
 							mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
