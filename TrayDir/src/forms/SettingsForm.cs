@@ -47,6 +47,7 @@ namespace TrayDir
 
 			string[] s2 = new[] { "Yellow Folder", "Blue Folder"};
 			cbv = new ComboBoxView(Properties.Strings_en.Form_VirtualFolderMenuIcon, s2);
+			cbv.combobox.Text = ProgramData.pd.settings.app.VFolderIcon;
 			cbv.AddTo(AppGroupLayout, 2);
 			ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "VFolderIcon");
 			cbv.combobox.SelectedIndexChanged += new EventHandler(delegate (object obj, EventArgs args) {
@@ -55,7 +56,6 @@ namespace TrayDir
 				}
 			});
 			cbv.SetTooltip(Properties.Strings_en.Tooltip_VirtualFolderMenuIcon);
-			cbv.combobox.Text = ProgramData.pd.settings.app.VFolderIcon;
 
 			// Windows Options
 			ov = new OptionView(Properties.Strings_en.Form_MinimizeOnClose, ProgramData.pd.settings.win.MinimizeOnClose);
