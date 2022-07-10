@@ -52,7 +52,6 @@ namespace TrayDir
 			{
 				allowVisible = true;
 			}
-			MaximizeBox = false;
 			if (pd.settings.win.CheckForUpdates)
 			{
 				UpdateUtils.CheckForUpdates();
