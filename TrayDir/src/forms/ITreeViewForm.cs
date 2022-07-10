@@ -378,7 +378,7 @@ namespace TrayDir
 			IOptionsForm optionsForm = new IOptionsForm(instance);
 			optionsForm.ShowDialog();
 			tp.Text = instance.instanceName;
-			instance.view.tray.notifyIcon.Text = instance.instanceName;
+			instance.view.tray.SetText(instance.instanceName);
 		}
 		private void RecursiveAddToInstance(TrayInstance recursive_instance, TrayInstanceNode tin, TrayInstanceNode parent)
 		{

@@ -12,7 +12,7 @@ namespace TrayDir
 		{
 			InitializeComponent();
 			this.instance = instance;
-			Icon = instance.view.tray.notifyIcon.Icon;
+			Icon = instance.view.tray.icon;
 			iconBox.Image = Icon.ToBitmap();
 
 			EventHandler bClick = new EventHandler(delegate (object obj, EventArgs args)
@@ -24,7 +24,7 @@ namespace TrayDir
 					instance.iconData = null;
 					resetButton.Enabled = true;
 					instance.view.tray.UpdateTrayIcon();
-					iconBox.Image = instance.view.tray.notifyIcon.Icon.ToBitmap();
+					iconBox.Image = instance.view.tray.icon.ToBitmap();
 					MainForm.form.pd.Save();
 				}
 			});
@@ -35,7 +35,7 @@ namespace TrayDir
 				instance.iconPath = System.Reflection.Assembly.GetEntryAssembly().Location;
 				instance.iconData = null;
 				instance.view.tray.UpdateTrayIcon();
-				iconBox.Image = instance.view.tray.notifyIcon.Icon.ToBitmap();
+				iconBox.Image = instance.view.tray.icon.ToBitmap();
 				MainForm.form.pd.Save();
 				resetButton.Enabled = false;
 			});

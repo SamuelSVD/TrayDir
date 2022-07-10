@@ -14,7 +14,7 @@ namespace TrayDir
 
 		public ITreeViewForm treeviewForm;
 		public ITray tray;
-
+		
 		public IView(TrayInstance instance)
 		{
 			this.instance = instance;
