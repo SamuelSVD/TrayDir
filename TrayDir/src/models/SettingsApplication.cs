@@ -12,6 +12,6 @@ namespace TrayDir
 		[XmlAttribute]
 		public string MenuSorting = "Folders Top";
 		[XmlAttribute]
-		public string VFolderIcon = "Yellow Folder";
+		public string VFolderIcon = "Blue Folder";
 	}
 }

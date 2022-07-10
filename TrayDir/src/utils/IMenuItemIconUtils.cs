@@ -126,6 +126,8 @@ namespace TrayDir.utils
 									mi.menuIcon = i;
 								}
 							}
+						} else {
+							mi.menuIcon = (Bitmap)IconUtils.QuestionImage;
 						}
 					}
 					if (mi.menuIcon != null) {
