@@ -38,7 +38,7 @@ namespace TrayDir
 			archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
 
 			pd.FixInstances();
-			pd.CheckStartup();
+			if (!Program.IGNORESTARTUP) pd.CheckStartup();
 			InitializeContent();
 			BuildExploreDropdown();
 			BuildRebuildDropdown();
@@ -52,7 +52,6 @@ namespace TrayDir
 			{
 				allowVisible = true;
 			}
-			MaximizeBox = false;
 			if (pd.settings.win.CheckForUpdates)
 			{
 				UpdateUtils.CheckForUpdates();
@@ -281,31 +280,37 @@ namespace TrayDir
 		}
 		protected override void OnFormClosing(FormClosingEventArgs e)
 		{
-			if (!allowClose && pd.settings.win.MinimizeOnClose)
-			{
-				bool block = true;
-				foreach(TrayInstance instance in pd.trayInstances)
-				{
-					if (!instance.settings.HideFromTray)
-					{
-						block = false;
-						break;
-					}
+			bool block = true;
+			foreach (TrayInstance instance in pd.trayInstances) {
+				if (!instance.settings.HideFromTray) {
+					block = false;
+					break;
 				}
-				if (!block && !pd.settings.win.MinimizeOnClose)
-				{
+			}
+			if (!allowClose && pd.settings.win.MinimizeOnClose) {
+				if (!block && !pd.settings.win.MinimizeOnClose) {
 					HideApp(this, null);
-				} else
-				{
+				} else {
 					WindowState = FormWindowState.Minimized;
 				}
 				e.Cancel = true;
-			}
-			else
-			{
-				foreach (TrayInstance i in pd.trayInstances)
-				{
-					i.view.tray.Hide();
+			} else {
+				if (!block && Visible) {
+					switch (MessageBox.Show(Properties.Strings_en.Form_MinimizeToTray, Properties.Strings_en.Form_Exit, MessageBoxButtons.YesNo)) {
+						case DialogResult.Yes:
+							HideApp(this, null);
+							e.Cancel = true;
+							break;
+						case DialogResult.No:
+							foreach (TrayInstance i in pd.trayInstances) {
+								i.view.tray.Hide();
+							}
+							break;
+					}
+				} else {
+					foreach (TrayInstance i in pd.trayInstances) {
+						i.view.tray.Hide();
+					}
 				}
 			}
 			base.OnFormClosing(e);
@@ -346,7 +351,7 @@ namespace TrayDir
 		}
 		private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			SettingsForm.form.ShowDialog();
+			new SettingsForm().ShowDialog();
 		}
 		private void MainForm_Load(object sender, EventArgs e) { }
 		private IView CreateViewFromInstance(TrayInstance instance, TabPage tp)
@@ -406,7 +411,7 @@ namespace TrayDir
 			{
 				trayInstance.instanceName = input;
 				instanceTabs.SelectedTab.Text = input;
-				trayInstance.view.tray.notifyIcon.Text = input;
+				trayInstance.view.tray.SetText(input);
 				pd.Save();
 			}
 		}
@@ -461,8 +466,7 @@ namespace TrayDir
 		}
 		private void rebuildCurrentToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			trayInstance.view.tray.Rebuild();
-			trayInstance.view.treeviewForm.Rebuild();
+			trayInstance.view?.Rebuild();
 		}
 		private void rebuildAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -486,7 +490,7 @@ namespace TrayDir
 			if (InputDialog.ShowMultilineStringInputDialog(Properties.Strings_en.Form_EditIgnoreRegex, ref input) == DialogResult.OK)
 			{
 				trayInstance.ignoreRegex = input;
-				trayInstance.view.tray.Rebuild();
+				trayInstance.view?.Rebuild();
 				pd.Save();
 			}
 		}
@@ -499,7 +503,7 @@ namespace TrayDir
 				imgLoadTimer.Interval = 1000;
 			}
 		}
-		private void pluginToolStripMenuItem_Click(object sender, EventArgs e)
+		internal void pluginToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			new PluginManagerForm().ShowDialog();
 			Save(sender, e);

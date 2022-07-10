@@ -76,7 +76,7 @@ namespace TrayDir
 					}
 				}
 			}
-			CheckStartup();
+			if (!Program.IGNORESTARTUP) CheckStartup();
 		}
 		public void FormHidden()
 		{
@@ -129,11 +129,7 @@ namespace TrayDir
 		{
 			foreach (TrayInstance ti in pd.trayInstances)
 			{
-				if (ti.view != null)
-				{
-					ti.view.tray.Rebuild();
-					ti.view.treeviewForm.Rebuild();
-				}
+				ti.view?.Rebuild();
 			}
 		}
 		private void PerformUpdate()

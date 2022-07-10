@@ -167,7 +167,7 @@ namespace TrayDir
 		private void Save()
 		{
 			instance.Repair();
-			instance.view.tray.Rebuild();
+			instance.view?.Rebuild();
 			MainForm.form.BuildExploreDropdown();
 			ProgramData.pd.Save();
 		}
@@ -295,7 +295,6 @@ namespace TrayDir
 				iff.ShowDialog();
 			}
 			itn.Refresh();
-			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}
 		private void folderPropertiesButton_Click(object sender, EventArgs e)
@@ -309,7 +308,6 @@ namespace TrayDir
 				iff.ShowDialog();
 			}
 			itn.Refresh();
-			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}
 		private void UpdateButtonEnables()
@@ -380,7 +378,7 @@ namespace TrayDir
 			IOptionsForm optionsForm = new IOptionsForm(instance);
 			optionsForm.ShowDialog();
 			tp.Text = instance.instanceName;
-			instance.view.tray.notifyIcon.Text = instance.instanceName;
+			instance.view.tray.SetText(instance.instanceName);
 		}
 		private void RecursiveAddToInstance(TrayInstance recursive_instance, TrayInstanceNode tin, TrayInstanceNode parent)
 		{
@@ -475,6 +473,10 @@ namespace TrayDir
 			foreach(TrayInstanceNode nodeChild in tin.children)
 			{
 				RecursiveLoadFromInstance(recursive_instance, nodeChild, itn);
+			}
+			if (parentNode == null) {
+				selectedNode = itn;
+				outdentButton_Click(this, null);
 			}
 			itn.Refresh();
 		}
@@ -610,13 +612,13 @@ namespace TrayDir
 		{
 			instance.paths[selectedNode.tin.id].shortcut = true;
 			selectedNode.Refresh();
-			instance.view.tray.Rebuild();
+			instance.view?.Rebuild();
 		}
 		private void folderExpandMenuItem_click(object sender, EventArgs e)
 		{
 			instance.paths[selectedNode.tin.id].shortcut = false;
 			selectedNode.Refresh();
-			instance.view.tray.Rebuild();
+			instance.view?.Rebuild();
 		}
 		private void openInExplorerMenuItem_click(object sender, EventArgs e) {
 			AppUtils.ExplorePath(instance.paths[selectedNode.tin.id].path);
@@ -682,6 +684,15 @@ namespace TrayDir
 		}
 		private void newPluginButton_Click(object sender, EventArgs e)
 		{
+			if (ProgramData.pd.plugins.Count == 0) {
+				switch (MessageBox.Show(Properties.Strings_en.Form_NoPluginsDefined, Properties.Strings_en.Form_Attention, MessageBoxButtons.YesNo)) {
+					case DialogResult.No:
+						return;
+					case DialogResult.Yes:
+						MainForm.form.pluginToolStripMenuItem_Click(sender, e);
+						return;
+				}
+			}
 			TrayInstancePlugin tip = new TrayInstancePlugin();
 			instance.plugins.Add(tip);
 			int index = instance.plugins.IndexOf(tip);
@@ -707,7 +718,6 @@ namespace TrayDir
 			selectedNode = itn;
 			nodes.Add(itn);
 			itn.Refresh();
-			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}
 		private void pluginPropertiesButton_Click(object sender, EventArgs e) {
@@ -715,7 +725,6 @@ namespace TrayDir
 			IPluginForm ipf = new IPluginForm(instance.plugins[itn.tin.id]);
 			ipf.ShowDialog();
 			itn.Refresh();
-			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}
 		private void vFolderPropertiesButton_Click(object sender, EventArgs e) {
@@ -723,7 +732,6 @@ namespace TrayDir
 			IVirtualFolderForm ivff = new IVirtualFolderForm(instance.vfolders[itn.tin.id]);
 			ivff.ShowDialog();
 			itn.Refresh();
-			itn.tin.instance.view.tray.Rebuild();
 			Save();
 		}
 		private void treeView2_ItemDrag(object sender, ItemDragEventArgs e)

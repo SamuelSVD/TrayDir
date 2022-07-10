@@ -11,7 +11,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
+    <Deterministic>false</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -325,6 +325,7 @@
     <Content Include="Resources\folder_shortcut.png" />
     <Content Include="Resources\question.png" />
     <Content Include="Resources\runnable.png" />
+    <None Include="Resources\runnable_error.png" />
     <Content Include="Resources\runnable_new.png" />
     <None Include="Resources\separator.png" />
     <Content Include="Resources\up.png" />

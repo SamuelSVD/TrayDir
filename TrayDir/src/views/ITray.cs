@@ -11,9 +11,18 @@ namespace TrayDir
 		public NotifyIcon notifyIcon;
 
 		private TrayInstance instance;
-		public List<IMenuItem> pathMenuItems;
-		public List<IMenuItem> virtualFolderMenuItems;
-		public List<IMenuItem> pluginMenuItems;
+		private List<IMenuItem> pathMenuItems;
+		private List<IMenuItem> virtualFolderMenuItems;
+		private List<IMenuItem> pluginMenuItems;
+		
+		private ToolStripMenuItem showMenuItem;
+		private ToolStripMenuItem hideMenuItem;
+		private ToolStripMenuItem exitMenuItem;
+
+		private EventHandler showForm;
+		private EventHandler hideForm;
+		private EventHandler exitForm;
+
 		public List<IMenuItem> menuItems {
 			get {
 				List<IMenuItem> iml = new List<IMenuItem>();
@@ -23,13 +32,10 @@ namespace TrayDir
 				return iml;
 			}
 		}
-		private ToolStripMenuItem showMenuItem;
-		private ToolStripMenuItem hideMenuItem;
-		private ToolStripMenuItem exitMenuItem;
-
-		private EventHandler showForm;
-		private EventHandler hideForm;
-		private EventHandler exitForm;
+		public Icon icon {
+			get { return notifyIcon.Icon; }
+			set { notifyIcon.Icon = value; }
+		}
 
 		public ITray(TrayInstance instance)
 		{
@@ -64,11 +70,18 @@ namespace TrayDir
 		public void Rebuild()
 		{
 			if (MainForm.form != null) {
-				pathMenuItems.Clear();
-				pluginMenuItems.Clear();
-				virtualFolderMenuItems.Clear();
+				ClearList(pathMenuItems);
+				ClearList(pluginMenuItems);
+				ClearList(virtualFolderMenuItems);
 				BuildTrayMenu();
+				GC.Collect();
 			}
+		}
+		private void ClearList(List<IMenuItem> list) {
+			foreach (IMenuItem item in list) {
+				item.RemoveChildren();
+			}
+			list.Clear();
 		}
 		public void MenuOpened(Object obj, EventArgs args)
 		{
@@ -374,6 +387,10 @@ namespace TrayDir
 				i = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
 			}
 			return i;
+		}
+
+		internal void SetText(string text) {
+			notifyIcon.Text = text;
 		}
 	}
 }

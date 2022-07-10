@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TrayDir
@@ -13,7 +14,7 @@ namespace TrayDir
 
 		public ITreeViewForm treeviewForm;
 		public ITray tray;
-
+		
 		public IView(TrayInstance instance)
 		{
 			this.instance = instance;
@@ -33,6 +34,11 @@ namespace TrayDir
 		public Control GetControl()
 		{
 			return p;
+		}
+
+		internal void Rebuild() {
+			tray.Rebuild();
+			treeviewForm.Rebuild();
 		}
 	}
 }

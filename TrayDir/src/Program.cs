@@ -10,12 +10,16 @@ namespace TrayDir
 	static class Program
 	{
 		public static bool DEBUG = false;
+		public static bool IGNORESTARTUP = false;
 		public static string RunningVersion {  get { return Assembly.GetEntryAssembly().GetName().Version.ToString(); } }
 		[STAThread]
-		static void Main()
+		static void Main(string[] args)
 		{
+			if (args.Length > 0) {
+				IGNORESTARTUP = args[0] == "--ignorestartup";
+			}
 			bool running = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Length > 1;
-			if (!running || MessageBox.Show(Properties.Strings_en.ProcessRunning,"TrayDir",MessageBoxButtons.OKCancel) == DialogResult.OK)
+			if (IGNORESTARTUP || !running || MessageBox.Show(Properties.Strings_en.ProcessRunning,"TrayDir",MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
 				try
 				{
@@ -23,7 +27,6 @@ namespace TrayDir
 					Application.SetCompatibleTextRenderingDefault(false);
 					IMenuItemIconUtils.Init();
 					MainForm.Init();
-					SettingsForm.Init();
 					ProgramData.pd.initialized = true;
 					Application.Run(MainForm.form);
 				}

@@ -43,6 +43,7 @@ namespace TrayDir
 			prefixTextBox.Text = tpp.prefix;
 			isBooleanCheckBox.Checked = tpp.isBoolean;
 			alwaysIncludePrefixCheckBox.Checked = tpp.alwaysIncludePrefix;
+			requiredCheckBox.Checked = tpp.required;
 		}
 		private void parameterComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -65,6 +66,10 @@ namespace TrayDir
 		}
 		private void alwaysIncludePrefixCheckBox_Click(object sender, EventArgs e) {
 			tpp.alwaysIncludePrefix = alwaysIncludePrefixCheckBox.Checked;
+		}
+
+		private void requiredCheckBox_CheckedChanged(object sender, EventArgs e) {
+			tpp.required = requiredCheckBox.Checked;
 		}
 	}
 }

@@ -56,5 +56,9 @@
 		<param name="Name" value="Plugin Manager">
 		<param name="Local" value="src/pluginmanager.htm">
 		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Shortcuts">
+		<param name="Local" value="src/shortcuts.htm">
+		</OBJECT>
 </UL>
 </BODY></HTML>

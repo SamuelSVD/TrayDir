@@ -17,6 +17,15 @@ namespace TrayDir
 			configureParamsButton.Enabled = plugin.tp.parameterCount > 0;
 			alwaysRunAsAdminCheckBox.Checked = plugin.tp.AlwaysRunAsAdmin;
 			openIndirectCheckBox.Checked = plugin.tp.OpenIndirect;
+			scriptCheckBox.Checked = plugin.tp.isScript;
+			scriptText.Text = plugin.tp.scriptText;
+			updateEnabled();
+		}
+		private void updateEnabled() {
+			pathEdit.Enabled = !scriptCheckBox.Checked;
+			browseButton.Enabled = !scriptCheckBox.Checked;
+			openIndirectCheckBox.Enabled = !scriptCheckBox.Checked;
+			scriptText.Enabled = scriptCheckBox.Checked;
 		}
 		private void closeButton_Click(object sender, EventArgs e)
 		{
@@ -67,6 +76,15 @@ namespace TrayDir
 
 		private void openExternallyCheckBox_Click(object sender, EventArgs e) {
 			plugin.tp.OpenIndirect = openIndirectCheckBox.Checked;
+		}
+
+		private void scriptCheckBox_CheckedChanged(object sender, EventArgs e) {
+			plugin.tp.isScript = scriptCheckBox.Checked;
+			updateEnabled();
+		}
+
+		private void scriptText_TextChanged(object sender, EventArgs e) {
+			plugin.tp.scriptText = scriptText.Text;
 		}
 	}
 }

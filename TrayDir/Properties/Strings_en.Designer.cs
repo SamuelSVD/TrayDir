@@ -118,6 +118,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attention.
+        /// </summary>
+        internal static string Form_Attention {
+            get {
+                return ResourceManager.GetString("Form_Attention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Browse.
         /// </summary>
         internal static string Form_Browse {
@@ -196,6 +205,15 @@ namespace TrayDir.Properties {
         internal static string Form_ErrorLoadingIcon {
             get {
                 return ResourceManager.GetString("Form_ErrorLoadingIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string Form_Exit {
+            get {
+                return ResourceManager.GetString("Form_Exit", resourceCulture);
             }
         }
         
@@ -281,6 +299,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minimize TrayDir to the System Tray?.
+        /// </summary>
+        internal static string Form_MinimizeToTray {
+            get {
+                return ResourceManager.GetString("Form_MinimizeToTray", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string Form_Name {
@@ -317,11 +344,31 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no plugins configured.
+        ///Would you like to configure one now?.
+        /// </summary>
+        internal static string Form_NoPluginsDefined {
+            get {
+                return ResourceManager.GetString("Form_NoPluginsDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Folders in File Explorer When Clicked.
         /// </summary>
         internal static string Form_OpenFoldersInFileExplorerOnClick {
             get {
                 return ResourceManager.GetString("Form_OpenFoldersInFileExplorerOnClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plugin parameters are invalid.
+        ///Verify all required parameters are provided..
+        /// </summary>
+        internal static string Form_PluginInvalid {
+            get {
+                return ResourceManager.GetString("Form_PluginInvalid", resourceCulture);
             }
         }
         

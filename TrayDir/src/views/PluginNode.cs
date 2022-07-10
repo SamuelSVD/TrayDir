@@ -41,7 +41,11 @@ namespace TrayDir
 				node.ImageIndex = node.TreeView.ImageList.Images.Count - 1;
 			} else
 			{
-				node.ImageIndex = - 1;
+				if (tp.isScript) {
+					node.ImageIndex = IconUtils.RUNNABLE;
+				} else {
+					node.ImageIndex = IconUtils.QUESTION;
+				}
 			}
 			node.SelectedImageIndex = node.ImageIndex;
 		}

@@ -25,6 +25,7 @@ namespace TrayDir {
 		private List<IMenuItem> dirMenuItems = new List<IMenuItem>();
 		private List<IMenuItem> fileMenuItems = new List<IMenuItem>();
 
+		public bool isErr { get { return tiPath != null ? !(Directory.Exists(tiPath.path)||File.Exists(tiPath.path)) : false; } }
 		public bool isDir { get { return tiPath != null ? AppUtils.PathIsDirectory(tiPath.path) : false; } }
 		public bool isFile { get { return tiPath != null ? AppUtils.PathIsFile(tiPath.path) : false; } } 
 		public bool isVFolder { get { return tiVirtualFolder != null; } }
@@ -484,6 +485,22 @@ namespace TrayDir {
 			{
 				collection.Add(menuItem);
 			}
+		}
+		internal void RemoveChildren() {
+			RemoveChildren(folderChildren);
+			RemoveChildren(nodeChildren);
+			RemoveChildren(dirMenuItems);
+			RemoveChildren(fileMenuItems);
+			parent = null;
+	}
+		internal void RemoveChildren(List<IMenuItem> list) {
+			int c = list.Count;
+			for(int i = 0; i < c; i++) {
+				IMenuItem child = list[0];
+				list.RemoveAt(0);
+				child.RemoveChildren();
+			}
+			list.Clear();
 		}
 	}
 }

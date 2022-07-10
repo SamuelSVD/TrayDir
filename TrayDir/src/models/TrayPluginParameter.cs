@@ -10,6 +10,8 @@ namespace TrayDir {
 		public bool alwaysIncludePrefix = false;
 		[XmlAttribute]
 		public bool isBoolean = false;
+		[XmlAttribute]
+		public bool required = false;
 		public string getSignature() {
 			return string.Format("{0}, {1}, {2}", name, prefix, isBoolean);
 		}
