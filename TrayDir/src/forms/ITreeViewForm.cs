@@ -360,6 +360,7 @@ namespace TrayDir
 				if (deleteNode)
 				{
 					selectedNode.Delete();
+					nodes.Remove(selectedNode);
 					Save();
 				}
 				if (treeView2.Nodes.Count == 0)
