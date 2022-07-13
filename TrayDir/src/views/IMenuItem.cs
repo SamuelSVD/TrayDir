@@ -492,13 +492,14 @@ namespace TrayDir {
 			RemoveChildren(dirMenuItems);
 			RemoveChildren(fileMenuItems);
 			parent = null;
-	}
+		}
 		internal void RemoveChildren(List<IMenuItem> list) {
 			int c = list.Count;
 			for(int i = 0; i < c; i++) {
 				IMenuItem child = list[0];
 				list.RemoveAt(0);
 				child.RemoveChildren();
+				if(child.tiNode != null) child.tiNode.parent = null;
 			}
 			list.Clear();
 		}

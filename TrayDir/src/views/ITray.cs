@@ -286,44 +286,49 @@ namespace TrayDir
 			{
 				switch(node.type) {
 					case TrayInstanceNode.NodeType.Path:
-						foreach(IMenuItem mi in pathMenuItems)
-						{
-							if (mi.tiPath == instance.paths[node.id])
+						if (node.id < instance.paths.Count) {
+							foreach(IMenuItem mi in pathMenuItems)
 							{
-								if (parent != null) parent.nodeChildren.Add(mi);
-								if (!mi.tiPath.shortcut && (instance.settings.ExpandFirstPath && nodes.Count == 1 && collection == notifyIcon.ContextMenuStrip.Items))
+								if (mi.tiPath == instance.paths[node.id])
 								{
-									mi.AddToCollectionExpanded(collection);
+									mi.tiNode = node;
+									if (parent != null) parent.nodeChildren.Add(mi);
+									if (!mi.tiPath.shortcut && (instance.settings.ExpandFirstPath && nodes.Count == 1 && collection == notifyIcon.ContextMenuStrip.Items))
+									{
+										mi.AddToCollectionExpanded(collection);
+									}
+									else
+									{
+										mi.AddToCollection(collection);
+									}
+									break;
 								}
-								else
-								{
-									mi.AddToCollection(collection);
-								}
-								break;
 							}
 						}
 						break;
 					case TrayInstanceNode.NodeType.Plugin:
-						foreach(IMenuItem mi in pluginMenuItems)
-						{
-							if (mi.tiPlugin == instance.plugins[node.id])
-							{
-								if (parent != null) parent.nodeChildren.Add(mi);
-								mi.AddToCollection(collection);
-								AddTrayTree(node.children, mi.menuItem.DropDownItems, mi);
-								break;
+						if (node.id < instance.plugins.Count) {
+							foreach (IMenuItem mi in pluginMenuItems) {
+								if (mi.tiPlugin == instance.plugins[node.id]) {
+									mi.tiNode = node;
+									if (parent != null) parent.nodeChildren.Add(mi);
+									mi.AddToCollection(collection);
+									AddTrayTree(node.children, mi.menuItem.DropDownItems, mi);
+									break;
+								}
 							}
 						}
 						break;
 					case TrayInstanceNode.NodeType.VirtualFolder:
-						foreach (IMenuItem mi in virtualFolderMenuItems)
-						{
-							if (mi.tiVirtualFolder == instance.vfolders[node.id])
-							{
-								if (parent != null) parent.nodeChildren.Add(mi);
-								mi.AddToCollection(collection);
-								AddTrayTree(node.children, mi.menuItem.DropDownItems, mi);
-								break;
+						if (node.id < instance.vfolders.Count) {
+							foreach (IMenuItem mi in virtualFolderMenuItems) {
+								if (mi.tiVirtualFolder == instance.vfolders[node.id]) {
+									mi.tiNode = node;
+									if (parent != null) parent.nodeChildren.Add(mi);
+									mi.AddToCollection(collection);
+									AddTrayTree(node.children, mi.menuItem.DropDownItems, mi);
+									break;
+								}
 							}
 						}
 						break;
