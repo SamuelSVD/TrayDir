@@ -499,7 +499,6 @@ namespace TrayDir {
 				IMenuItem child = list[0];
 				list.RemoveAt(0);
 				child.RemoveChildren();
-				if(child.tiNode != null) child.tiNode.parent = null;
 			}
 			list.Clear();
 		}
