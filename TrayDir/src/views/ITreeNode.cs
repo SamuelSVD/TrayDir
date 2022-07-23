@@ -323,7 +323,7 @@ namespace TrayDir
 			}
 			else
 			{
-				node.TreeView.Nodes.Remove(node);
+				node.TreeView?.Nodes.Remove(node);
 			}
 			switch(tin.type)
 			{
