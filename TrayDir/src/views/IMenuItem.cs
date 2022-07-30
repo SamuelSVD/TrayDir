@@ -17,13 +17,13 @@ namespace TrayDir {
 		internal TrayInstancePlugin tiPlugin;
 
 		public ToolStripMenuItem menuItem;
-		public List<IMenuItem> folderChildren = new List<IMenuItem>();
+		public List<IMenuItem> folderChildren;
 		public List<IMenuItem> nodeChildren = new List<IMenuItem>();
 		public IMenuItem parent;
 		public Bitmap menuIcon;
 
-		private List<IMenuItem> dirMenuItems = new List<IMenuItem>();
-		private List<IMenuItem> fileMenuItems = new List<IMenuItem>();
+		private List<IMenuItem> dirMenuItems;
+		private List<IMenuItem> fileMenuItems;
 
 		public bool isErr { get { return tiPath != null ? !(Directory.Exists(tiPath.path)||File.Exists(tiPath.path)) : false; } }
 		public bool isDir { get { return tiPath != null ? AppUtils.PathIsDirectory(tiPath.path) : false; } }
@@ -77,6 +77,11 @@ namespace TrayDir {
 			this.tiVirtualFolder = tiVirtualFolder;
 			this.tiPlugin = tiPlugin;
 			this.parent = parent;
+			if (tiPath != null) {
+					folderChildren = new List<IMenuItem>();
+					dirMenuItems = new List<IMenuItem>();
+					fileMenuItems = new List<IMenuItem>();
+			}
 		}
 		private void LoadFolderChildren(object sender, PaintEventArgs e)
 		{
@@ -304,59 +309,45 @@ namespace TrayDir {
 			}
 
 			menuItem.DropDownItems.Clear();
-			dirMenuItems.Clear();
-			fileMenuItems.Clear();
-			foreach (IMenuItem child in folderChildren)
-			{
-				child.Load();
-				if (child.isDir)
-				{
-					dirMenuItems.Add(child);
-				}
-				if (child.isFile)
-				{
-					fileMenuItems.Add(child);
-				}
-			}
-			if (isDir && tiPath.shortcut)
-			{
-				folderChildren.Clear();
-				menuItem.DropDownItems.Clear();
-			}
-			if (folderChildren.Count == 0 && isDir && !tiPath.shortcut)
-			{
-				menuItem.DropDownItems.Add("(Empty)");
-			}
-			if (ProgramData.pd.settings.app.MenuSorting != "None")
-			{
-				if (ProgramData.pd.settings.app.MenuSorting == "Folders Top")
-				{
-					foreach (IMenuItem child in dirMenuItems)
-					{
-						menuItem.DropDownItems.Add(child.menuItem);
+			if (tiPath != null) {
+				dirMenuItems?.Clear();
+				fileMenuItems?.Clear();
+				foreach (IMenuItem child in folderChildren) {
+					child.Load();
+					if (child.isDir) {
+						dirMenuItems.Add(child);
 					}
-					foreach (IMenuItem child in fileMenuItems)
-					{
-						menuItem.DropDownItems.Add(child.menuItem);
+					if (child.isFile) {
+						fileMenuItems.Add(child);
 					}
 				}
-				else
-				{
-					foreach (IMenuItem child in fileMenuItems)
-					{
-						menuItem.DropDownItems.Add(child.menuItem);
-					}
-					foreach (IMenuItem child in dirMenuItems)
-					{
-						menuItem.DropDownItems.Add(child.menuItem);
-					}
+				if (isDir && tiPath.shortcut) {
+					folderChildren.Clear();
+					menuItem.DropDownItems.Clear();
 				}
-			}
-			else
-			{
-				foreach (IMenuItem child in folderChildren)
-				{
-					menuItem.DropDownItems.Add(child.menuItem);
+				if (folderChildren.Count == 0 && isDir && !tiPath.shortcut) {
+					menuItem.DropDownItems.Add("(Empty)");
+				}
+				if (ProgramData.pd.settings.app.MenuSorting != "None") {
+					if (ProgramData.pd.settings.app.MenuSorting == "Folders Top") {
+						foreach (IMenuItem child in dirMenuItems) {
+							menuItem.DropDownItems.Add(child.menuItem);
+						}
+						foreach (IMenuItem child in fileMenuItems) {
+							menuItem.DropDownItems.Add(child.menuItem);
+						}
+					} else {
+						foreach (IMenuItem child in fileMenuItems) {
+							menuItem.DropDownItems.Add(child.menuItem);
+						}
+						foreach (IMenuItem child in dirMenuItems) {
+							menuItem.DropDownItems.Add(child.menuItem);
+						}
+					}
+				} else {
+					foreach (IMenuItem child in folderChildren) {
+						menuItem.DropDownItems.Add(child.menuItem);
+					}
 				}
 			}
 			if (!assignedClickEvent)
@@ -381,42 +372,32 @@ namespace TrayDir {
 		{
 			collection.Add(menuItem);
 
-			if (folderChildren.Count != menuItem.DropDownItems.Count)
-			{
-				menuItem.DropDownItems.Clear();
-				dirMenuItems.Clear();
-				fileMenuItems.Clear();
+			if (tiPath != null) {
+				if (folderChildren.Count != menuItem.DropDownItems.Count) {
+					menuItem.DropDownItems.Clear();
+					dirMenuItems.Clear();
+					fileMenuItems.Clear();
 
-				if (ProgramData.pd.settings.app.MenuSorting != "None")
-				{
-					if (ProgramData.pd.settings.app.MenuSorting == "Folders Top")
-					{
-						foreach (IMenuItem child in dirMenuItems)
-						{
+					if (ProgramData.pd.settings.app.MenuSorting != "None") {
+						if (ProgramData.pd.settings.app.MenuSorting == "Folders Top") {
+							foreach (IMenuItem child in dirMenuItems) {
+								menuItem.DropDownItems.Add(child.menuItem);
+							}
+							foreach (IMenuItem child in fileMenuItems) {
+								menuItem.DropDownItems.Add(child.menuItem);
+							}
+						} else {
+							foreach (IMenuItem child in fileMenuItems) {
+								menuItem.DropDownItems.Add(child.menuItem);
+							}
+							foreach (IMenuItem child in dirMenuItems) {
+								menuItem.DropDownItems.Add(child.menuItem);
+							}
+						}
+					} else {
+						foreach (IMenuItem child in folderChildren) {
 							menuItem.DropDownItems.Add(child.menuItem);
 						}
-						foreach (IMenuItem child in fileMenuItems)
-						{
-							menuItem.DropDownItems.Add(child.menuItem);
-						}
-					}
-					else
-					{
-						foreach (IMenuItem child in fileMenuItems)
-						{
-							menuItem.DropDownItems.Add(child.menuItem);
-						}
-						foreach (IMenuItem child in dirMenuItems)
-						{
-							menuItem.DropDownItems.Add(child.menuItem);
-						}
-					}
-				}
-				else
-				{
-					foreach (IMenuItem child in folderChildren)
-					{
-						menuItem.DropDownItems.Add(child.menuItem);
 					}
 				}
 			}
@@ -487,10 +468,12 @@ namespace TrayDir {
 			}
 		}
 		internal void RemoveChildren() {
-			RemoveChildren(folderChildren);
 			RemoveChildren(nodeChildren);
-			RemoveChildren(dirMenuItems);
-			RemoveChildren(fileMenuItems);
+			if (tiPath != null) {
+				RemoveChildren(folderChildren);
+				RemoveChildren(dirMenuItems);
+				RemoveChildren(fileMenuItems);
+			}
 			parent = null;
 		}
 		internal void RemoveChildren(List<IMenuItem> list) {
