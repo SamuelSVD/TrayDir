@@ -359,8 +359,8 @@ namespace TrayDir
 				}
 				if (deleteNode)
 				{
-					selectedNode.Delete();
 					nodes.Remove(selectedNode);
+					selectedNode.Delete();
 					Save();
 				}
 				if (treeView2.Nodes.Count == 0)
