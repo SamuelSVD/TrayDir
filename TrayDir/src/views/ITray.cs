@@ -266,20 +266,6 @@ namespace TrayDir
 				mi.UpdateVisibility();
 			}
 		}
-		private void AddPathsOnly()
-		{
-			foreach (IMenuItem mi in pathMenuItems)
-			{
-				if (mi.tiPath.shortcut)
-				{
-					mi.AddToCollectionExpanded(notifyIcon.ContextMenuStrip.Items);
-				}
-				else
-				{
-					mi.AddToCollection(notifyIcon.ContextMenuStrip.Items);
-				}
-			}
-		}
 		private void AddTrayTree(List<TrayInstanceNode> nodes, ToolStripItemCollection collection, IMenuItem parent)
 		{
 			foreach(TrayInstanceNode node in nodes)
