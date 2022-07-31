@@ -66,6 +66,7 @@ namespace TrayDir {
 				return d;
 			}
 		}
+
 		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstancePath path) : this(instance, tiNode, path, null, null, null) { }
 		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstancePlugin plugin) : this(instance, tiNode, null, null, plugin, null) { }
 		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceVirtualFolder virtualFolder) : this(instance, tiNode, null, virtualFolder, null, null) { }
@@ -186,6 +187,18 @@ namespace TrayDir {
 			{
 				AppUtils.Open(this);
 			}
+		}
+		private int _clicks = 0;
+		public void MenuItemDoubleClick(object obj, EventArgs args) {
+			_clicks += 1;
+			if (_clicks >= 2) {
+				Run(obj, args);
+				RunAll(obj, args);
+				_clicks = 0;
+			}
+		}
+		public void MenuItemDropDownClosed(object obj, EventArgs args) {
+			_clicks = 0;
 		}
 		// Grabbed from https://stackoverflow.com/questions/26587843/prevent-toolstripmenuitems-from-jumping-to-second-screen
 		private void showContextMenu() {
@@ -353,7 +366,9 @@ namespace TrayDir {
 			if (!assignedClickEvent)
 			{
 				menuItem.MouseDown += MenuItemClick;
+				menuItem.Click += MenuItemDoubleClick;
 				menuItem.DropDownOpened += LoadChildrenIconEvent;
+				menuItem.DropDownClosed += MenuItemDropDownClosed;
 				assignedClickEvent = true;
 			}
 		}
