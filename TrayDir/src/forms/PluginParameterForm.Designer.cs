@@ -121,7 +121,7 @@ namespace TrayDir
 			this.requiredCheckBox.Name = "requiredCheckBox";
 			this.requiredCheckBox.Size = new System.Drawing.Size(356, 17);
 			this.requiredCheckBox.TabIndex = 13;
-			this.requiredCheckBox.Text = "Paramter value required";
+			this.requiredCheckBox.Text = "Parameter value required";
 			this.requiredCheckBox.UseVisualStyleBackColor = true;
 			this.requiredCheckBox.CheckedChanged += new System.EventHandler(this.requiredCheckBox_CheckedChanged);
 			// 
