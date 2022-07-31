@@ -18,7 +18,7 @@ namespace TrayDir
 			string s = string.Empty;
 			if (instance.instanceName == null || instance.instanceName == string.Empty)
 			{
-				s += Properties.Strings_en.Node_NoName;
+				s += Properties.Strings.Node_NoName;
 			}
 			else
 			{

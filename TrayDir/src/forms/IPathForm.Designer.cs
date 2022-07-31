@@ -48,44 +48,22 @@ namespace TrayDir
 			// 
 			// tableLayoutPanel4
 			// 
-			this.tableLayoutPanel4.AutoSize = true;
-			this.tableLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel4.ColumnCount = 2;
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
 			this.tableLayoutPanel4.Controls.Add(this.groupBox1, 0, 0);
 			this.tableLayoutPanel4.Controls.Add(this.closeButton, 1, 1);
-			this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-			this.tableLayoutPanel4.RowCount = 2;
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(380, 217);
-			this.tableLayoutPanel4.TabIndex = 5;
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.AutoSize = true;
-			this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			resources.ApplyResources(this.groupBox1, "groupBox1");
 			this.tableLayoutPanel4.SetColumnSpan(this.groupBox1, 2);
 			this.groupBox1.Controls.Add(this.pluginTableLayoutPanel);
-			this.groupBox1.Location = new System.Drawing.Point(3, 3);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 20, 5, 0);
-			this.groupBox1.Size = new System.Drawing.Size(374, 182);
-			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "File Options";
 			// 
 			// pluginTableLayoutPanel
 			// 
-			this.pluginTableLayoutPanel.AutoSize = true;
-			this.pluginTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.pluginTableLayoutPanel.ColumnCount = 3;
-			this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.pluginTableLayoutPanel, "pluginTableLayoutPanel");
 			this.pluginTableLayoutPanel.Controls.Add(this.hideItemCheckBox, 0, 6);
 			this.pluginTableLayoutPanel.Controls.Add(this.fileBrowseButton, 1, 4);
 			this.pluginTableLayoutPanel.Controls.Add(this.pathLabel, 0, 2);
@@ -94,142 +72,81 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.Controls.Add(this.pathTextBox, 0, 3);
 			this.pluginTableLayoutPanel.Controls.Add(this.folderBrowseButton, 2, 4);
 			this.pluginTableLayoutPanel.Controls.Add(this.shortcutCheckBox, 0, 5);
-			this.pluginTableLayoutPanel.Location = new System.Drawing.Point(5, 20);
-			this.pluginTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
-			this.pluginTableLayoutPanel.RowCount = 7;
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.Size = new System.Drawing.Size(364, 149);
-			this.pluginTableLayoutPanel.TabIndex = 6;
 			// 
 			// hideItemCheckBox
 			// 
-			this.hideItemCheckBox.AutoSize = true;
-			this.hideItemCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			resources.ApplyResources(this.hideItemCheckBox, "hideItemCheckBox");
 			this.pluginTableLayoutPanel.SetColumnSpan(this.hideItemCheckBox, 3);
-			this.hideItemCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.hideItemCheckBox.Location = new System.Drawing.Point(2, 130);
-			this.hideItemCheckBox.Margin = new System.Windows.Forms.Padding(2);
 			this.hideItemCheckBox.Name = "hideItemCheckBox";
-			this.hideItemCheckBox.Size = new System.Drawing.Size(360, 17);
-			this.hideItemCheckBox.TabIndex = 15;
-			this.hideItemCheckBox.Text = "Hide item from System Tray menu";
 			this.hideItemCheckBox.UseVisualStyleBackColor = true;
 			this.hideItemCheckBox.CheckedChanged += new System.EventHandler(this.hideItemCheckBox_CheckedChanged);
 			// 
 			// fileBrowseButton
 			// 
-			this.fileBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.fileBrowseButton.AutoSize = true;
-			this.fileBrowseButton.Location = new System.Drawing.Point(205, 81);
+			resources.ApplyResources(this.fileBrowseButton, "fileBrowseButton");
 			this.fileBrowseButton.Name = "fileBrowseButton";
-			this.fileBrowseButton.Size = new System.Drawing.Size(75, 23);
-			this.fileBrowseButton.TabIndex = 13;
-			this.fileBrowseButton.Text = "File";
 			this.fileBrowseButton.UseVisualStyleBackColor = true;
 			this.fileBrowseButton.Click += new System.EventHandler(this.fileBrowseButton_Click);
 			// 
 			// pathLabel
 			// 
-			this.pathLabel.AutoSize = true;
-			this.pathLabel.Location = new System.Drawing.Point(3, 39);
+			resources.ApplyResources(this.pathLabel, "pathLabel");
 			this.pathLabel.Name = "pathLabel";
-			this.pathLabel.Size = new System.Drawing.Size(29, 13);
-			this.pathLabel.TabIndex = 7;
-			this.pathLabel.Text = "Path";
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 0);
+			resources.ApplyResources(this.label1, "label1");
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(72, 13);
-			this.label1.TabIndex = 9;
-			this.label1.Text = "Display Name";
 			// 
 			// aliasEdit
 			// 
 			this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 3);
-			this.aliasEdit.Dock = System.Windows.Forms.DockStyle.Top;
-			this.aliasEdit.Location = new System.Drawing.Point(3, 16);
+			resources.ApplyResources(this.aliasEdit, "aliasEdit");
 			this.aliasEdit.Name = "aliasEdit";
-			this.aliasEdit.Size = new System.Drawing.Size(358, 20);
-			this.aliasEdit.TabIndex = 10;
 			this.aliasEdit.TextChanged += new System.EventHandler(this.aliasEdit_TextChanged);
 			// 
 			// pathTextBox
 			// 
 			this.pluginTableLayoutPanel.SetColumnSpan(this.pathTextBox, 3);
-			this.pathTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pathTextBox.Location = new System.Drawing.Point(3, 55);
+			resources.ApplyResources(this.pathTextBox, "pathTextBox");
 			this.pathTextBox.Name = "pathTextBox";
-			this.pathTextBox.Size = new System.Drawing.Size(358, 20);
-			this.pathTextBox.TabIndex = 11;
 			this.pathTextBox.TextChanged += new System.EventHandler(this.pathTextBox_TextChanged);
 			// 
 			// folderBrowseButton
 			// 
-			this.folderBrowseButton.AutoSize = true;
-			this.folderBrowseButton.Location = new System.Drawing.Point(286, 81);
+			resources.ApplyResources(this.folderBrowseButton, "folderBrowseButton");
 			this.folderBrowseButton.Name = "folderBrowseButton";
-			this.folderBrowseButton.Size = new System.Drawing.Size(75, 23);
-			this.folderBrowseButton.TabIndex = 12;
-			this.folderBrowseButton.Text = "Folder";
 			this.folderBrowseButton.UseVisualStyleBackColor = true;
 			this.folderBrowseButton.Click += new System.EventHandler(this.folderBrowseButton_Click);
 			// 
 			// shortcutCheckBox
 			// 
-			this.shortcutCheckBox.AutoSize = true;
-			this.shortcutCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			resources.ApplyResources(this.shortcutCheckBox, "shortcutCheckBox");
 			this.pluginTableLayoutPanel.SetColumnSpan(this.shortcutCheckBox, 3);
-			this.shortcutCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.shortcutCheckBox.Location = new System.Drawing.Point(2, 109);
-			this.shortcutCheckBox.Margin = new System.Windows.Forms.Padding(2);
 			this.shortcutCheckBox.Name = "shortcutCheckBox";
-			this.shortcutCheckBox.Size = new System.Drawing.Size(360, 17);
-			this.shortcutCheckBox.TabIndex = 14;
-			this.shortcutCheckBox.Text = "Use folder as shortcut";
 			this.shortcutCheckBox.UseVisualStyleBackColor = true;
 			this.shortcutCheckBox.CheckedChanged += new System.EventHandler(this.shortcutCheckBox_CheckedChanged);
 			// 
 			// closeButton
 			// 
-			this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			resources.ApplyResources(this.closeButton, "closeButton");
 			this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.closeButton.Location = new System.Drawing.Point(296, 191);
-			this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
 			this.closeButton.Name = "closeButton";
-			this.closeButton.Size = new System.Drawing.Size(75, 23);
-			this.closeButton.TabIndex = 2;
-			this.closeButton.Text = "Apply";
 			this.closeButton.UseVisualStyleBackColor = true;
 			// 
 			// IPathForm
 			// 
 			this.AcceptButton = this.closeButton;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoSize = true;
-			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.CancelButton = this.closeButton;
-			this.ClientSize = new System.Drawing.Size(554, 320);
 			this.Controls.Add(this.tableLayoutPanel4);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.HelpButton = true;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Margin = new System.Windows.Forms.Padding(2);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "IPathForm";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Edit Path";
 			this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.IPathForm_HelpButtonClicked);
 			this.Shown += new System.EventHandler(this.IPathForm_Shown);
 			this.tableLayoutPanel4.ResumeLayout(false);

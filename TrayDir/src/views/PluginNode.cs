@@ -22,7 +22,7 @@ namespace TrayDir
 			}
 			if (tp.path == null || tp.path == string.Empty)
 			{
-				s += Properties.Strings_en.Node_NoPathSelected;
+				s += Properties.Strings.Node_NoPathSelected;
 			}
 			else
 			{

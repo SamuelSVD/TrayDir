@@ -208,23 +208,23 @@ namespace TrayDir {
 			ToolStripItem tsi;
 
 			if (isFile || isPlugin) {
-				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_Run);
+				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_Run);
 				tsi.Click += Run;
-				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_RunAdmin);
+				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_RunAdmin);
 				tsi.Click += RunAs;
 			}
 			if (isDir || isFile || isPlugin) {
-				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenFileExplorer);
+				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_OpenFileExplorer);
 				tsi.Click += Explore;
 			}
 			if (isDir || isFile) {
-				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmd);
+				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_OpenCmd);
 				tsi.Click += OpenCmd;
-				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_OpenCmdAdmin);
+				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_OpenCmdAdmin);
 				tsi.Click += OpenAdminCmd;
 			}
 			if (isVFolder) {
-				tsi = cmnu.Items.Add(Properties.Strings_en.MenuItem_RunAll);
+				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_RunAll);
 				tsi.Click += RunAll;
 			}
 			cmnu.Show();

@@ -40,20 +40,20 @@ namespace TrayDir
 		public ITreeViewForm(TrayInstance instance)
 		{
 			rightClickMenu = new ContextMenu();
-			renameMenuItem = new MenuItem(Properties.Strings_en.Item_RenameItem, renameButton_Click);
+			renameMenuItem = new MenuItem(Properties.Strings.Item_RenameItem, renameButton_Click);
 
-			copyMenuItem = new MenuItem(Properties.Strings_en.Item_CopyItem, copyButton_Click);
-			pasteMenuItem = new MenuItem(Properties.Strings_en.Item_PasteItem, pasteButton_Click);
-			deleteMenuItem = new MenuItem(Properties.Strings_en.Item_DeleteItem, deleteButton_Click);
-			duplicateMenuItem = new MenuItem(Properties.Strings_en.Item_DuplicateItem, duplicateButton_Click);
+			copyMenuItem = new MenuItem(Properties.Strings.Item_CopyItem, copyButton_Click);
+			pasteMenuItem = new MenuItem(Properties.Strings.Item_PasteItem, pasteButton_Click);
+			deleteMenuItem = new MenuItem(Properties.Strings.Item_DeleteItem, deleteButton_Click);
+			duplicateMenuItem = new MenuItem(Properties.Strings.Item_DuplicateItem, duplicateButton_Click);
 
-			folderShortcutMenuItem = new MenuItem(Properties.Strings_en.Item_UseAsShortcut, folderShortcutMenuItem_click);
-			folderExpandMenuItem = new MenuItem(Properties.Strings_en.Item_Expand, folderExpandMenuItem_click);
-			runMenuItem = new MenuItem(Properties.Strings_en.MenuItem_Run, runMenuItem_click);
-			runasMenuItem = new MenuItem(Properties.Strings_en.MenuItem_RunAdmin, runasMenuItem_click);
-			openInExplorerMenuItem = new MenuItem(Properties.Strings_en.MenuItem_OpenFileExplorer, openInExplorerMenuItem_click);
-			openInCmdMenuItem = new MenuItem(Properties.Strings_en.MenuItem_OpenCmd, openInCmdMenuItem_click);
-			openInCmdAdminMenuItem = new MenuItem(Properties.Strings_en.MenuItem_OpenCmdAdmin, openInCmdAdminMenuItem_click);
+			folderShortcutMenuItem = new MenuItem(Properties.Strings.Item_UseAsShortcut, folderShortcutMenuItem_click);
+			folderExpandMenuItem = new MenuItem(Properties.Strings.Item_Expand, folderExpandMenuItem_click);
+			runMenuItem = new MenuItem(Properties.Strings.MenuItem_Run, runMenuItem_click);
+			runasMenuItem = new MenuItem(Properties.Strings.MenuItem_RunAdmin, runasMenuItem_click);
+			openInExplorerMenuItem = new MenuItem(Properties.Strings.MenuItem_OpenFileExplorer, openInExplorerMenuItem_click);
+			openInCmdMenuItem = new MenuItem(Properties.Strings.MenuItem_OpenCmd, openInCmdMenuItem_click);
+			openInCmdAdminMenuItem = new MenuItem(Properties.Strings.MenuItem_OpenCmdAdmin, openInCmdAdminMenuItem_click);
 
 			//Add menu items to context menu
 			rightClickMenu.MenuItems.Add(renameMenuItem);
@@ -325,7 +325,7 @@ namespace TrayDir
 		}
 		private void newVirtualFolderButton_Click(object sender, EventArgs e)
 		{
-			TrayInstanceVirtualFolder tip = new TrayInstanceVirtualFolder(Properties.Strings_en.VirtualFolder_New);
+			TrayInstanceVirtualFolder tip = new TrayInstanceVirtualFolder(Properties.Strings.VirtualFolder_New);
 			instance.vfolders.Add(tip);
 			int index = instance.vfolders.IndexOf(tip);
 			TrayInstanceNode tin = new TrayInstanceNode();
@@ -342,7 +342,7 @@ namespace TrayDir
 		private void renameButton_Click(object sender, EventArgs e)
 		{
 			string input = selectedNode.alias;
-			if (InputDialog.ShowStringInputDialog(Properties.Strings_en.Form_EditDisplayName, ref input) == DialogResult.OK)
+			if (InputDialog.ShowStringInputDialog(Properties.Strings.Form_EditDisplayName, ref input) == DialogResult.OK)
 			{
 				selectedNode.alias = input;
 				Save();
@@ -355,7 +355,7 @@ namespace TrayDir
 				bool deleteNode = true;
 				if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder && selectedNode.node.Nodes.Count > 0)
 				{
-					deleteNode = (MessageBox.Show(Properties.Strings_en.VirtualFolder_DeleteContents, string.Empty, MessageBoxButtons.OKCancel) == DialogResult.OK);
+					deleteNode = (MessageBox.Show(Properties.Strings.VirtualFolder_DeleteContents, string.Empty, MessageBoxButtons.OKCancel) == DialogResult.OK);
 				}
 				if (deleteNode)
 				{
@@ -686,7 +686,7 @@ namespace TrayDir
 		private void newPluginButton_Click(object sender, EventArgs e)
 		{
 			if (ProgramData.pd.plugins.Count == 0) {
-				switch (MessageBox.Show(Properties.Strings_en.Form_NoPluginsDefined, Properties.Strings_en.Form_Attention, MessageBoxButtons.YesNo)) {
+				switch (MessageBox.Show(Properties.Strings.Form_NoPluginsDefined, Properties.Strings.Form_Attention, MessageBoxButtons.YesNo)) {
 					case DialogResult.No:
 						return;
 					case DialogResult.Yes:

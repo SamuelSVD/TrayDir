@@ -43,121 +43,65 @@ namespace TrayDir
 			// 
 			// tableLayoutPanel4
 			// 
-			this.tableLayoutPanel4.AutoSize = true;
-			this.tableLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel4.ColumnCount = 2;
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
 			this.tableLayoutPanel4.Controls.Add(this.groupBox1, 0, 0);
 			this.tableLayoutPanel4.Controls.Add(this.closeButton, 1, 1);
-			this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-			this.tableLayoutPanel4.RowCount = 2;
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(378, 128);
-			this.tableLayoutPanel4.TabIndex = 4;
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.AutoSize = true;
-			this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			resources.ApplyResources(this.groupBox1, "groupBox1");
 			this.tableLayoutPanel4.SetColumnSpan(this.groupBox1, 2);
 			this.groupBox1.Controls.Add(this.pluginTableLayoutPanel);
-			this.groupBox1.Location = new System.Drawing.Point(3, 3);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 20, 5, 0);
-			this.groupBox1.Size = new System.Drawing.Size(372, 93);
-			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Virtual Folder Options";
 			// 
 			// pluginTableLayoutPanel
 			// 
-			this.pluginTableLayoutPanel.AutoSize = true;
-			this.pluginTableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.pluginTableLayoutPanel.ColumnCount = 2;
-			this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.pluginTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.pluginTableLayoutPanel, "pluginTableLayoutPanel");
 			this.pluginTableLayoutPanel.Controls.Add(this.hideItemCheckBox, 0, 4);
 			this.pluginTableLayoutPanel.Controls.Add(this.label1, 0, 2);
 			this.pluginTableLayoutPanel.Controls.Add(this.aliasEdit, 0, 3);
-			this.pluginTableLayoutPanel.Location = new System.Drawing.Point(5, 20);
-			this.pluginTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
-			this.pluginTableLayoutPanel.RowCount = 5;
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 60);
-			this.pluginTableLayoutPanel.TabIndex = 6;
 			// 
 			// hideItemCheckBox
 			// 
-			this.hideItemCheckBox.AutoSize = true;
-			this.hideItemCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			resources.ApplyResources(this.hideItemCheckBox, "hideItemCheckBox");
 			this.pluginTableLayoutPanel.SetColumnSpan(this.hideItemCheckBox, 3);
-			this.hideItemCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.hideItemCheckBox.Location = new System.Drawing.Point(2, 41);
-			this.hideItemCheckBox.Margin = new System.Windows.Forms.Padding(2);
 			this.hideItemCheckBox.Name = "hideItemCheckBox";
-			this.hideItemCheckBox.Size = new System.Drawing.Size(358, 17);
-			this.hideItemCheckBox.TabIndex = 16;
-			this.hideItemCheckBox.Text = "Hide item from System Tray menu";
 			this.hideItemCheckBox.UseVisualStyleBackColor = true;
 			this.hideItemCheckBox.CheckedChanged += new System.EventHandler(this.hideItemCheckBox_CheckedChanged);
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 0);
+			resources.ApplyResources(this.label1, "label1");
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(72, 13);
-			this.label1.TabIndex = 9;
-			this.label1.Text = "Display Name";
 			// 
 			// aliasEdit
 			// 
 			this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 2);
-			this.aliasEdit.Dock = System.Windows.Forms.DockStyle.Top;
-			this.aliasEdit.Location = new System.Drawing.Point(3, 16);
+			resources.ApplyResources(this.aliasEdit, "aliasEdit");
 			this.aliasEdit.Name = "aliasEdit";
-			this.aliasEdit.Size = new System.Drawing.Size(356, 20);
-			this.aliasEdit.TabIndex = 10;
 			// 
 			// closeButton
 			// 
-			this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			resources.ApplyResources(this.closeButton, "closeButton");
 			this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.closeButton.Location = new System.Drawing.Point(294, 102);
-			this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
 			this.closeButton.Name = "closeButton";
-			this.closeButton.Size = new System.Drawing.Size(75, 23);
-			this.closeButton.TabIndex = 2;
-			this.closeButton.Text = "Apply";
 			this.closeButton.UseVisualStyleBackColor = true;
 			// 
 			// IVirtualFolderForm
 			// 
 			this.AcceptButton = this.closeButton;
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoSize = true;
-			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.CancelButton = this.closeButton;
-			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.tableLayoutPanel4);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.HelpButton = true;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "IVirtualFolderForm";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Edit Virtual Folder";
 			this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.IVirtualFolderForm_HelpButtonClicked);
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IPluginForm_FormClosed);
 			this.tableLayoutPanel4.ResumeLayout(false);

@@ -75,7 +75,7 @@ namespace TrayDir
 		{
 			if (selectedNode != null)
 			{
-				if (MessageBox.Show(String.Format(Properties.Strings_en.Plugin_Delete, selectedNode.node.Text), Properties.Strings_en.Form_Delete, MessageBoxButtons.OKCancel) == DialogResult.OK)
+				if (MessageBox.Show(String.Format(Properties.Strings.Plugin_Delete, selectedNode.node.Text), Properties.Strings.Form_Delete, MessageBoxButtons.OKCancel) == DialogResult.OK)
 				{
 					bool used = false;
 					int pid = ProgramData.pd.plugins.IndexOf(selectedNode.tp);
@@ -99,7 +99,7 @@ namespace TrayDir
 					}
 					else
 					{
-						MessageBox.Show(Properties.Strings_en.Plugin_UnableToDelete);
+						MessageBox.Show(Properties.Strings.Plugin_UnableToDelete);
 					}
 				}
 			}
@@ -131,7 +131,7 @@ namespace TrayDir
 						TrayPlugin tpc = ProgramData.pd.plugins[i];
 						if (tpc.name == tp.name)
 						{
-							DialogResult dr = MessageBox.Show(Properties.Strings_en.Plugin_SameNameImport, Properties.Strings_en.Form_ImportConflict, MessageBoxButtons.YesNoCancel);
+							DialogResult dr = MessageBox.Show(Properties.Strings.Plugin_SameNameImport, Properties.Strings.Form_ImportConflict, MessageBoxButtons.YesNoCancel);
 							if (dr == DialogResult.Yes)
 							{
 								ProgramData.pd.plugins[i] = tp;
@@ -150,7 +150,7 @@ namespace TrayDir
 					}
 					ProgramData.pd.Save();
 				} else {
-					MessageBox.Show(Properties.Strings_en.Error_ImportFailed, Properties.Strings_en.Form_ImportFailed);
+					MessageBox.Show(Properties.Strings.Error_ImportFailed, Properties.Strings.Form_ImportFailed);
 				}
 			}
 		}

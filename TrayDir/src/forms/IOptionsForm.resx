@@ -117,7 +117,599 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="groupBox1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel1.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="verticalSeparator1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="verticalSeparator1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 3</value>
+  </data>
+  <data name="verticalSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>5, 169</value>
+  </data>
+  <data name="verticalSeparator1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="verticalSeparator1.Text" xml:space="preserve">
+    <value>verticalSeparator1</value>
+  </data>
+  <data name="&gt;&gt;verticalSeparator1.Name" xml:space="preserve">
+    <value>verticalSeparator1</value>
+  </data>
+  <data name="&gt;&gt;verticalSeparator1.Type" xml:space="preserve">
+    <value>TrayDir.VerticalSeparator, TrayDir, Version=3.3.0.24102, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;verticalSeparator1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;verticalSeparator1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="resetButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 113</value>
+  </data>
+  <data name="resetButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 25</value>
+  </data>
+  <data name="resetButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="resetButton.Text" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="&gt;&gt;resetButton.Name" xml:space="preserve">
+    <value>resetButton</value>
+  </data>
+  <data name="&gt;&gt;resetButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;resetButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;resetButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="iconBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="iconBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="iconBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 75</value>
+  </data>
+  <data name="iconBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="iconBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;iconBox.Name" xml:space="preserve">
+    <value>iconBox</value>
+  </data>
+  <data name="&gt;&gt;iconBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iconBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;iconBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 84</value>
+  </data>
+  <data name="browseButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="browseButton.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="browseButton.Text" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="&gt;&gt;browseButton.Name" xml:space="preserve">
+    <value>browseButton</value>
+  </data>
+  <data name="&gt;&gt;browseButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;browseButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;browseButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 0</value>
+  </data>
+  <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 141</value>
+  </data>
+  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="resetButton" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="iconBox" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="browseButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tableLayoutPanel3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="hideFromTrayCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="hideFromTrayCheckBox.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="hideFromTrayCheckBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="hideFromTrayCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 132</value>
+  </data>
+  <data name="hideFromTrayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 17</value>
+  </data>
+  <data name="hideFromTrayCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="hideFromTrayCheckBox.Text" xml:space="preserve">
+    <value>Hide From Tray</value>
+  </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="hideFromTrayCheckBox.ToolTip" xml:space="preserve">
+    <value>Hide this instance from the sytem tray</value>
+  </data>
+  <data name="&gt;&gt;hideFromTrayCheckBox.Name" xml:space="preserve">
+    <value>hideFromTrayCheckBox</value>
+  </data>
+  <data name="&gt;&gt;hideFromTrayCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hideFromTrayCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;hideFromTrayCheckBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="expandFirstPathCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="expandFirstPathCheckBox.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="expandFirstPathCheckBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="expandFirstPathCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 109</value>
+  </data>
+  <data name="expandFirstPathCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 17</value>
+  </data>
+  <data name="expandFirstPathCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="expandFirstPathCheckBox.Text" xml:space="preserve">
+    <value>Expand First Path</value>
+  </data>
+  <data name="expandFirstPathCheckBox.ToolTip" xml:space="preserve">
+    <value>When this instance has a folder as the only item, the 
+folder's contents will be used as the main menu structure</value>
+  </data>
+  <data name="&gt;&gt;expandFirstPathCheckBox.Name" xml:space="preserve">
+    <value>expandFirstPathCheckBox</value>
+  </data>
+  <data name="&gt;&gt;expandFirstPathCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;expandFirstPathCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;expandFirstPathCheckBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="exploreCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="exploreCheckBox.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="exploreCheckBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="exploreCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 86</value>
+  </data>
+  <data name="exploreCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 17</value>
+  </data>
+  <data name="exploreCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="exploreCheckBox.Text" xml:space="preserve">
+    <value>Open Folders in File Explorer When Clicked</value>
+  </data>
+  <data name="exploreCheckBox.ToolTip" xml:space="preserve">
+    <value>Open Folder location in File Explorer when clicking on them from the System Tray menu</value>
+  </data>
+  <data name="&gt;&gt;exploreCheckBox.Name" xml:space="preserve">
+    <value>exploreCheckBox</value>
+  </data>
+  <data name="&gt;&gt;exploreCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exploreCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;exploreCheckBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="showextensionsCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="showextensionsCheckBox.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="showextensionsCheckBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="showextensionsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 63</value>
+  </data>
+  <data name="showextensionsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 17</value>
+  </data>
+  <data name="showextensionsCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="showextensionsCheckBox.Text" xml:space="preserve">
+    <value>Show File Extensions</value>
+  </data>
+  <data name="showextensionsCheckBox.ToolTip" xml:space="preserve">
+    <value>Show file extensions. E.g. File.txt</value>
+  </data>
+  <data name="&gt;&gt;showextensionsCheckBox.Name" xml:space="preserve">
+    <value>showextensionsCheckBox</value>
+  </data>
+  <data name="&gt;&gt;showextensionsCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;showextensionsCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;showextensionsCheckBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="runasCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="runasCheckBox.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="runasCheckBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="runasCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 40</value>
+  </data>
+  <data name="runasCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 17</value>
+  </data>
+  <data name="runasCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="runasCheckBox.Text" xml:space="preserve">
+    <value>Run As Administrator</value>
+  </data>
+  <data name="runasCheckBox.ToolTip" xml:space="preserve">
+    <value>Always run items from this instance as Administrator</value>
+  </data>
+  <data name="&gt;&gt;runasCheckBox.Name" xml:space="preserve">
+    <value>runasCheckBox</value>
+  </data>
+  <data name="&gt;&gt;runasCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;runasCheckBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;runasCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="nameLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="nameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 0</value>
+  </data>
+  <data name="nameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="nameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="nameLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="nameLabel.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="&gt;&gt;nameLabel.Name" xml:space="preserve">
+    <value>nameLabel</value>
+  </data>
+  <data name="&gt;&gt;nameLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nameLabel.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;nameLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="nameTextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="nameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 15</value>
+  </data>
+  <data name="nameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 20</value>
+  </data>
+  <data name="nameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;nameTextBox.Name" xml:space="preserve">
+    <value>nameTextBox</value>
+  </data>
+  <data name="&gt;&gt;nameTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nameTextBox.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;nameTextBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>240, 152</value>
+  </data>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="hideFromTrayCheckBox" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="expandFirstPathCheckBox" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="exploreCheckBox" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="showextensionsCheckBox" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="runasCheckBox" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nameLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="nameTextBox" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 18</value>
+  </data>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>332, 175</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="verticalSeparator1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel2" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="tableLayoutPanel3" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 0</value>
+  </data>
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 206</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Tray Options</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="closeButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="closeButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>263, 212</value>
+  </data>
+  <data name="closeButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 9, 3</value>
+  </data>
+  <data name="closeButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="closeButton.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="closeButton.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="&gt;&gt;closeButton.Name" xml:space="preserve">
+    <value>closeButton</value>
+  </data>
+  <data name="&gt;&gt;closeButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;closeButton.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;closeButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel4.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="tableLayoutPanel4.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>347, 238</value>
+  </data>
+  <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Name" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="closeButton" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="groupBox1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>648, 441</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Instance Options</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
+    <value>toolTip</value>
+  </data>
+  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>IOptionsForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
