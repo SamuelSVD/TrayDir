@@ -27,7 +27,7 @@ namespace TrayDir
 		public string scriptText = "";
 		public string getSignature()
 		{
-			string sig = string.Format("{0} ({1})", name, path);
+			string sig = string.Format("{0} ({1})", name, isScript ? "Script" : path);
 			return sig;
 		}
 	}
