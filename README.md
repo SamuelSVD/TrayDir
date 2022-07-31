@@ -86,13 +86,32 @@ For more information on RegEx and creating your own filters see [Regular Express
 
 ## Plugins
 
-Plugins work as a way to run external programs and make use of their [CLI](https://www.w3schools.com/whatis/whatis_cli.asp). You can add a plugin to TrayDir through the Plugin Manager, and navigate to the program or executable that you want to run when plugin items are selected from the menu item. Each plugin can be configured to have multiple parameters that can then each be configured to have an optional name, or be considered a flag (and appears as a checkbox when configured as such).
+Plugins work as a way to run external programs and make use of their command-line interface, also known as its [CLI](https://www.w3schools.com/whatis/whatis_cli.asp). They may also be written as custom command-line scripts. You can add a plugin to TrayDir through the Plugin Manager, and configure the plugin accordingly.
 
-For example, Window's Internet Explorer could be configured as a plugin. Looking through its [CLI](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/general-info/hh826025(v=vs.85)?redirectedfrom=MSDN) we can see that it accepts several parameters, but we will set up two parameters. The first will be URL, and the second will be the Private Browsing parameter, -private.
+### Program Plugins
+
+Program plugins are a link to a program. These plugins make use of its CLI. Using the Plugin Manager, create a new plugin and navigate to the program or executable that you want to run. Each plugin can be configured to have multiple parameters that can then each be configured to have an optional name, or be considered a flag, as well as some other options.
+
+For example, Window's Internet Explorer could be configured as a plugin. Looking through its [CLI](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/general-info/hh826025(v=vs.85)?redirectedfrom=MSDN) we can see that it accepts several parameters, but we will set up two parameters. The first will be URL, and the second will be the Private Browsing parameter. This is to demonstrate the function of the flag parameter setting.
 
 | Description | Image |
 | --- | --- |
-| Configuring the plugin | ![image](https://user-images.githubusercontent.com/36249705/145105241-7e26f6a6-b312-4a0f-a7cc-a8622524a54c.png) |
-| Configuring the URL parameter | ![image](https://user-images.githubusercontent.com/36249705/145105259-369ee20b-002e-47c6-bc35-a1f8ad190fc1.png) |
-| Configuring the Private Browsing parameter | ![image](https://user-images.githubusercontent.com/36249705/145105252-a51fc3d8-c28c-4ef5-8e6d-612cc719d62c.png) |
-| Using the plugin in a menu item. Note that the parameters are displayed in the order they are configured in the plugin. | ![image](https://user-images.githubusercontent.com/36249705/145105271-037b53a0-6bb5-4b57-a7e7-951f24f3312e.png) |
+| Configuring the plugin | ![image](https://user-images.githubusercontent.com/36249705/182011658-7542aa09-4200-49f7-ba38-b1d1bd15823c.png) |
+| Configuring the URL parameter | ![image](https://user-images.githubusercontent.com/36249705/182011663-b1052bb0-4411-4b0f-9d88-ac7bdf8022cd.png) |
+| Configuring the Private Browsing parameter | ![image](https://user-images.githubusercontent.com/36249705/182011670-16002c3e-858c-4da1-bc8d-72614360484d.png) |
+| Using the plugin in a menu item. Note that the parameters are displayed in the order they are configured in the plugin. | ![image](https://user-images.githubusercontent.com/36249705/182011694-50496719-65ea-4019-95ca-f4fe396cb583.png) |
+
+## Script Plugins
+
+Script plugins are configured as a set of command-line commands that the PC will interpret and apply the input parameters.
+
+As an example we are going to make the Windows `copy` command accessible to easily copy a file from one destination to another.
+
+
+| Description | Image |
+| --- | --- |
+| Configuring the plugin | ![image](https://user-images.githubusercontent.com/36249705/182011113-abe6d41d-78ba-4506-a7bd-19e324e6b7e2.png) |
+| Configuring the `Copy From` parameter | ![image](https://user-images.githubusercontent.com/36249705/182011506-83c33c23-94c1-4bab-84e7-b037c5030e8b.png) |
+| Configuring the `Copy To` parameter | ![image](https://user-images.githubusercontent.com/36249705/182011510-3519dadb-8fb1-44b4-bd02-4c4da891005f.png) |
+| Using the plugin in a menu item. When we run this script item, the contents of test1.py are copied to test2.py | ![image](https://user-images.githubusercontent.com/36249705/182011138-0cc1b483-888c-49ae-8f74-2f1cc3357c84.png) |
+
