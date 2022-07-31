@@ -23,5 +23,17 @@ namespace TrayDir.forms
 		{
 			InitializeComponent();
 		}
+
+		private void reportButton_Click(object sender, EventArgs e) {
+			string address = "contact@samver.ca";
+			string subject = String.Format(Properties.Strings_en.Email_Subject_Unexpected, Program.RunningVersion);
+			string body = Properties.Strings_en.Email_Body;
+			foreach (char c in richEdit.Text.Replace("\r\n", "\r").Replace("\n", "\r")) {
+				int v = Convert.ToInt32(c);
+				body += String.Format($"%{v:X2}");
+			}
+			string mailto = String.Format("mailto:{0}?subject={1}&body={2}", address, subject, body);
+			AppUtils.ProcessStart(mailto);
+		}
 	}
 }

@@ -29,43 +29,56 @@ namespace TrayDir.forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UnhandledExceptionForm));
-            this.richTextBox = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.SuspendLayout();
-            // 
-            // richTextBox
-            // 
-            this.richTextBox.Location = new System.Drawing.Point(12, 12);
-            this.richTextBox.Name = "richTextBox";
-            this.richTextBox.ReadOnly = true;
-            this.richTextBox.Size = new System.Drawing.Size(465, 219);
-            this.richTextBox.TabIndex = 0;
-            this.richTextBox.Text = string.Empty;
-            // 
-            // button1
-            // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(205, 237);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "OK";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // UnhandledExceptionForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.button1;
-            this.ClientSize = new System.Drawing.Size(489, 269);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.richTextBox);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "UnhandledExceptionForm";
-            this.Text = "Unhandled Exception";
-            this.ResumeLayout(false);
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UnhandledExceptionForm));
+			this.richTextBox = new System.Windows.Forms.RichTextBox();
+			this.button1 = new System.Windows.Forms.Button();
+			this.reportButton = new System.Windows.Forms.Button();
+			this.SuspendLayout();
+			// 
+			// richTextBox
+			// 
+			this.richTextBox.Location = new System.Drawing.Point(12, 12);
+			this.richTextBox.Name = "richTextBox";
+			this.richTextBox.ReadOnly = true;
+			this.richTextBox.Size = new System.Drawing.Size(465, 219);
+			this.richTextBox.TabIndex = 0;
+			this.richTextBox.Text = "";
+			// 
+			// button1
+			// 
+			this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.button1.Location = new System.Drawing.Point(321, 237);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(75, 23);
+			this.button1.TabIndex = 1;
+			this.button1.Text = "Close";
+			this.button1.UseVisualStyleBackColor = true;
+			// 
+			// reportButton
+			// 
+			this.reportButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+			this.reportButton.Location = new System.Drawing.Point(402, 237);
+			this.reportButton.Name = "reportButton";
+			this.reportButton.Size = new System.Drawing.Size(75, 23);
+			this.reportButton.TabIndex = 1;
+			this.reportButton.Text = "Bug Report";
+			this.reportButton.UseVisualStyleBackColor = true;
+			this.reportButton.Click += new System.EventHandler(this.reportButton_Click);
+			// 
+			// UnhandledExceptionForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.CancelButton = this.button1;
+			this.ClientSize = new System.Drawing.Size(489, 269);
+			this.Controls.Add(this.reportButton);
+			this.Controls.Add(this.button1);
+			this.Controls.Add(this.richTextBox);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Name = "UnhandledExceptionForm";
+			this.Text = "Unhandled Exception";
+			this.ResumeLayout(false);
 
         }
 
@@ -73,5 +86,6 @@ namespace TrayDir.forms
 
         private System.Windows.Forms.RichTextBox richTextBox;
         private System.Windows.Forms.Button button1;
-    }
+		private System.Windows.Forms.Button reportButton;
+	}
 }

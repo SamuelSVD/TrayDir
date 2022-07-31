@@ -33,7 +33,7 @@ namespace TrayDir
 				catch (Exception e)
 				{
 					UnhandledExceptionForm f = new UnhandledExceptionForm();
-					f.richEdit.Text = "Unhandled exception.\n" + e.Message + "\n" + e.StackTrace;
+					f.richEdit.Text = "Unhandled exception."+ Environment.NewLine + e.Message + Environment.NewLine + e.StackTrace;
 					f.ShowDialog();
 				}
 			}
