@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Utils;
 
 namespace TrayDir
 {
@@ -94,6 +95,10 @@ namespace TrayDir
 			{
 				this.SettingsTabControl.SelectedTab = this.WinSettingsTabPage;
 			}
+		}
+
+		private void SettingsForm_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e) {
+			HelpUtils.ShowHelp(this, "src/programsettings.htm");
 		}
 	}
 }

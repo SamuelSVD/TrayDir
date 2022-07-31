@@ -547,7 +547,7 @@ namespace TrayDir
 				}
 			}
 			catch { }
-			System.Diagnostics.Process.Start(helpPath);
+			Help.ShowHelp(this, helpPath);
 		}
 		private void bugReportToolStripMenuItem_Click(object sender, EventArgs e) {
 			string address = "contact@samver.ca";

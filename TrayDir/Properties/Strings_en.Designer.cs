@@ -19,7 +19,7 @@ namespace TrayDir.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Strings_en {
@@ -61,7 +61,7 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hello, I found a problem with TrayDir!%0D%0A%0D%0APlease include a description of your problem below.%0D%0ADescription:%0D%0A.
+        ///   Looks up a localized string similar to Hello, I found a problem with TrayDir!%0D%0DPlease include a description of your problem below.%0DDescription:%0D.
         /// </summary>
         internal static string Email_Body {
             get {
@@ -75,6 +75,15 @@ namespace TrayDir.Properties {
         internal static string Email_Subject {
             get {
                 return ResourceManager.GetString("Email_Subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TrayDir {0}: Bug Report - Unhandled Exception.
+        /// </summary>
+        internal static string Email_Subject_Unexpected {
+            get {
+                return ResourceManager.GetString("Email_Subject_Unexpected", resourceCulture);
             }
         }
         

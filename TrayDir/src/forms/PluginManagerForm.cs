@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using TrayDir.utils;
+using Utils;
 
 namespace TrayDir
 {
@@ -165,6 +166,10 @@ namespace TrayDir
 			editButton.Enabled = false;
 			deleteButton.Enabled = false;
 			exportButton.Enabled = false;
+		}
+
+		private void PluginManagerForm_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e) {
+			HelpUtils.ShowHelp(this, "src/pluginmanager.htm");
 		}
 	}
 }

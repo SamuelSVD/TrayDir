@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Utils;
 
 namespace TrayDir
 {
@@ -24,6 +25,10 @@ namespace TrayDir
 
 		private void hideItemCheckBox_CheckedChanged(object sender, EventArgs e) {
 			tivf.visible = !hideItemCheckBox.Checked;
+		}
+
+		private void IVirtualFolderForm_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e) {
+			HelpUtils.ShowHelp(this, "src/vfolders.htm");
 		}
 	}
 }

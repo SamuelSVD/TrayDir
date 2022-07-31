@@ -33,6 +33,7 @@ namespace TrayDir
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.pluginTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+			this.requiredCheckBox = new System.Windows.Forms.CheckBox();
 			this.alwaysIncludePrefixCheckBox = new System.Windows.Forms.CheckBox();
 			this.isBooleanCheckBox = new System.Windows.Forms.CheckBox();
 			this.prefixTextBox = new System.Windows.Forms.TextBox();
@@ -42,7 +43,6 @@ namespace TrayDir
 			this.label1 = new System.Windows.Forms.Label();
 			this.nameTextBox = new System.Windows.Forms.TextBox();
 			this.closeButton = new System.Windows.Forms.Button();
-			this.requiredCheckBox = new System.Windows.Forms.CheckBox();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.pluginTableLayoutPanel.SuspendLayout();
@@ -110,6 +110,20 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 187);
 			this.pluginTableLayoutPanel.TabIndex = 6;
+			// 
+			// requiredCheckBox
+			// 
+			this.requiredCheckBox.AutoSize = true;
+			this.requiredCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.pluginTableLayoutPanel.SetColumnSpan(this.requiredCheckBox, 2);
+			this.requiredCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.requiredCheckBox.Location = new System.Drawing.Point(3, 167);
+			this.requiredCheckBox.Name = "requiredCheckBox";
+			this.requiredCheckBox.Size = new System.Drawing.Size(356, 17);
+			this.requiredCheckBox.TabIndex = 13;
+			this.requiredCheckBox.Text = "Paramter value required";
+			this.requiredCheckBox.UseVisualStyleBackColor = true;
+			this.requiredCheckBox.CheckedChanged += new System.EventHandler(this.requiredCheckBox_CheckedChanged);
 			// 
 			// alwaysIncludePrefixCheckBox
 			// 
@@ -211,20 +225,6 @@ namespace TrayDir
 			this.closeButton.Text = "Apply";
 			this.closeButton.UseVisualStyleBackColor = true;
 			// 
-			// requiredCheckBox
-			// 
-			this.requiredCheckBox.AutoSize = true;
-			this.requiredCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.pluginTableLayoutPanel.SetColumnSpan(this.requiredCheckBox, 2);
-			this.requiredCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.requiredCheckBox.Location = new System.Drawing.Point(3, 167);
-			this.requiredCheckBox.Name = "requiredCheckBox";
-			this.requiredCheckBox.Size = new System.Drawing.Size(356, 17);
-			this.requiredCheckBox.TabIndex = 13;
-			this.requiredCheckBox.Text = "Paramter value required";
-			this.requiredCheckBox.UseVisualStyleBackColor = true;
-			this.requiredCheckBox.CheckedChanged += new System.EventHandler(this.requiredCheckBox_CheckedChanged);
-			// 
 			// PluginParameterForm
 			// 
 			this.AcceptButton = this.closeButton;
@@ -235,11 +235,15 @@ namespace TrayDir
 			this.CancelButton = this.closeButton;
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.tableLayoutPanel4);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.HelpButton = true;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "PluginParameterForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Edit Plugin";
+			this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.PluginParameterForm_HelpButtonClicked);
 			this.tableLayoutPanel4.ResumeLayout(false);
 			this.tableLayoutPanel4.PerformLayout();
 			this.groupBox1.ResumeLayout(false);

@@ -32,10 +32,10 @@ namespace TrayDir
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.pluginTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+			this.hideItemCheckBox = new System.Windows.Forms.CheckBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.aliasEdit = new System.Windows.Forms.TextBox();
 			this.closeButton = new System.Windows.Forms.Button();
-			this.hideItemCheckBox = new System.Windows.Forms.CheckBox();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.pluginTableLayoutPanel.SuspendLayout();
@@ -95,6 +95,21 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.Size = new System.Drawing.Size(362, 60);
 			this.pluginTableLayoutPanel.TabIndex = 6;
 			// 
+			// hideItemCheckBox
+			// 
+			this.hideItemCheckBox.AutoSize = true;
+			this.hideItemCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.pluginTableLayoutPanel.SetColumnSpan(this.hideItemCheckBox, 3);
+			this.hideItemCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
+			this.hideItemCheckBox.Location = new System.Drawing.Point(2, 41);
+			this.hideItemCheckBox.Margin = new System.Windows.Forms.Padding(2);
+			this.hideItemCheckBox.Name = "hideItemCheckBox";
+			this.hideItemCheckBox.Size = new System.Drawing.Size(358, 17);
+			this.hideItemCheckBox.TabIndex = 16;
+			this.hideItemCheckBox.Text = "Hide item from System Tray menu";
+			this.hideItemCheckBox.UseVisualStyleBackColor = true;
+			this.hideItemCheckBox.CheckedChanged += new System.EventHandler(this.hideItemCheckBox_CheckedChanged);
+			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
@@ -125,21 +140,6 @@ namespace TrayDir
 			this.closeButton.Text = "Apply";
 			this.closeButton.UseVisualStyleBackColor = true;
 			// 
-			// hideItemCheckBox
-			// 
-			this.hideItemCheckBox.AutoSize = true;
-			this.hideItemCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.pluginTableLayoutPanel.SetColumnSpan(this.hideItemCheckBox, 3);
-			this.hideItemCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
-			this.hideItemCheckBox.Location = new System.Drawing.Point(2, 41);
-			this.hideItemCheckBox.Margin = new System.Windows.Forms.Padding(2);
-			this.hideItemCheckBox.Name = "hideItemCheckBox";
-			this.hideItemCheckBox.Size = new System.Drawing.Size(358, 17);
-			this.hideItemCheckBox.TabIndex = 16;
-			this.hideItemCheckBox.Text = "Hide item from System Tray menu";
-			this.hideItemCheckBox.UseVisualStyleBackColor = true;
-			this.hideItemCheckBox.CheckedChanged += new System.EventHandler(this.hideItemCheckBox_CheckedChanged);
-			// 
 			// IVirtualFolderForm
 			// 
 			this.AcceptButton = this.closeButton;
@@ -150,11 +150,15 @@ namespace TrayDir
 			this.CancelButton = this.closeButton;
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.tableLayoutPanel4);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.HelpButton = true;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "IVirtualFolderForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Edit Virtual Folder";
+			this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.IVirtualFolderForm_HelpButtonClicked);
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IPluginForm_FormClosed);
 			this.tableLayoutPanel4.ResumeLayout(false);
 			this.tableLayoutPanel4.PerformLayout();

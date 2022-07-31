@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Utils;
 
 namespace TrayDir
 {
@@ -70,6 +71,10 @@ namespace TrayDir
 
 		private void requiredCheckBox_CheckedChanged(object sender, EventArgs e) {
 			tpp.required = requiredCheckBox.Checked;
+		}
+
+		private void PluginParameterForm_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e) {
+			HelpUtils.ShowHelp(this, "src/plugin_parameters.htm");
 		}
 	}
 }

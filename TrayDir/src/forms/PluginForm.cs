@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using Utils;
 
-namespace TrayDir
-{
+namespace TrayDir {
 	public partial class PluginForm : Form
 	{
 		private PluginNode plugin;
@@ -85,6 +85,9 @@ namespace TrayDir
 
 		private void scriptText_TextChanged(object sender, EventArgs e) {
 			plugin.tp.scriptText = scriptText.Text;
+		}
+		private void PluginForm_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e) {
+			HelpUtils.ShowHelp(this, "src/plugins.htm");
 		}
 	}
 }

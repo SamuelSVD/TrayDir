@@ -7,7 +7,7 @@
 </HEAD>
 <BODY>
 <h1>Plugin Manager</h1>
-<p>The plugin manager can be used to add new plugins to list of known plugins. Plugins can be configured to point to a specific file in the current user's file system, then parameters can be defined so they can vary by menu item.</p>
+<p>The plugin manager can be used to add new plugins to list of known plugins. Plugins can be configured to point to a specific file in the current user's file system or as a custom command-line script. Parameters can be defined so they can vary by plugin type, and menu item instance.</p>
 <h2>Example</h2>
 <p>For example, I want to add Google Chrome as a plugin, with one parameter being the website's URL I want to open. To do this I would do the following:</p>
 <p>Create the plugin</p>
@@ -30,5 +30,34 @@
 <li>Click Apply</li>
 </ol>
 <p>The link to open chrome at samver.ca should now work. Simply right click the system tray icon, then click on the Chrome plugin item that should be named <code>samver.ca</code></p>
+<h2>Example - Script</h2>
+<p>Another example. I want to create a script that will copy a file from one location to another. To do this I want to make use of the batch command <code>copy</code>.
+<p>Create the plugin</p>
+<ol>
+<li>Open Plugin Manager.</li>
+<li>Click <code>Add</code> button.</li>
+<li>Click the <code>Configure plugin as script</code> check box.</li>
+<li>Enter the following into the text box: <code>copy {0} {1}</code></li>
+<li>Change the <code>Name</code> to be <code>Copy Script</code></li>
+<li>Change the parameter count to 2</li>
+<li>Click on <code>Configure Parameters</code></li>
+<li>Change the Parameter 1 <code>Parameter Name</code> to <code>Copy From</code></li>
+<li>Check the checkbox to set this parameter as required</li>
+<li>Choose Parameter 2 from the "Choose a parameter" drop down list</li>
+<li>Change the Parameter 2 <code>Parameter Name</code> to <code>Copy To</code></li>
+<li>Check the checkbox to set this parameter as required</li>
+<li>Click Apply and close the Plugin Manager</li>
+</ol>
+<p>Add the plugin item:</p>
+<ol>
+<li>Click the <code>Insert New Plugin Item</code> button. This button has the lightning bold with a plus sign.</li>
+<li>Change the <code>Display Name</code> to Copy File</li>
+<li>Click the Plugin drop-down and select Copy Script</li>
+<li>Add the path to a file in the <code>Copy From</code> parameter.</li>
+<li>Add a different path to a file in the <code>Copy To</code> parameter.</li>
+<li>Click Apply</li>
+</ol>
+<p>When this plugin is ran, the contents of the file pointed by <code>Copy From</code> will be copied into the file at <code>Copy To</code>.</p>
+
 </BODY>
 </HTML>

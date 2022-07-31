@@ -68,7 +68,7 @@ namespace TrayDir
 			this.groupBox1.Size = new System.Drawing.Size(341, 206);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = global::TrayDir.Properties.Strings_en.Form_TrayOptions;
+			this.groupBox1.Text = "Tray Options";
 			// 
 			// tableLayoutPanel1
 			// 
@@ -300,10 +300,14 @@ namespace TrayDir
 			this.CancelButton = this.closeButton;
 			this.ClientSize = new System.Drawing.Size(648, 441);
 			this.Controls.Add(this.tableLayoutPanel4);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.HelpButton = true;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "IOptionsForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Instance Options";
+			this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.IOptionsForm_HelpButtonClicked);
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IOptionsForm_FormClosed);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();

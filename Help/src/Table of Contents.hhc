@@ -29,6 +29,10 @@
 		<param name="Local" value="src/instances.htm">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Instance Archive">
+		<param name="Local" value="src/instance_archive.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Files">
 		<param name="Local" value="src/files.htm">
 		</OBJECT>
@@ -51,6 +55,10 @@
 	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Plugins">
 		<param name="Local" value="src/plugins.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Plugin Parameters">
+		<param name="Local" value="src/plugin_parameters.htm">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
 		<param name="Name" value="Plugin Manager">

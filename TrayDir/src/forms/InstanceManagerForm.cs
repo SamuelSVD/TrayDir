@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Utils;
 
 namespace TrayDir
 {
@@ -76,6 +77,10 @@ namespace TrayDir
 					treeView1.Nodes.Remove(selectedNode.node);
 				}
 			}
+		}
+
+		private void InstanceManagerForm_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e) {
+			HelpUtils.ShowHelp(this, "src/instance_archive.htm");
 		}
 	}
 }

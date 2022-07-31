@@ -207,6 +207,7 @@
     <Compile Include="src\models\TrayInstance.cs" />
     <Compile Include="src\models\TrayInstanceSettings.cs" />
     <Compile Include="src\utils\DialogUtils.cs" />
+    <Compile Include="src\utils\HelpUtils.cs" />
     <Compile Include="src\utils\IconUtils.cs" />
     <Compile Include="src\utils\IMenuItemIconUtils.cs" />
     <Compile Include="src\utils\TrayUtils.cs" />
