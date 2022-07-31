@@ -19,7 +19,7 @@ namespace TrayDir
 				IGNORESTARTUP = args[0] == "--ignorestartup";
 			}
 			bool running = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Length > 1;
-			if (IGNORESTARTUP || !running || MessageBox.Show(Properties.Strings_en.ProcessRunning,"TrayDir",MessageBoxButtons.OKCancel) == DialogResult.OK)
+			if (IGNORESTARTUP || !running || MessageBox.Show(Properties.Strings.ProcessRunning,"TrayDir",MessageBoxButtons.OKCancel) == DialogResult.OK)
 			{
 				try
 				{

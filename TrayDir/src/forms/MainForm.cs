@@ -96,7 +96,7 @@ namespace TrayDir
 
 			instanceTabs.OnTabClick += OnTabClick;
 			instanceTabs.OnTabsSwapped += OnTabSwapped;
-			toolTip.SetToolTip(newTabTabPage, Properties.Strings_en.Tooltip_InsertInstance);
+			toolTip.SetToolTip(newTabTabPage, Properties.Strings.Tooltip_InsertInstance);
 
 		}
 		public void OnTabClick(object sender, SmartTabControl.TabClickedArgs tca)
@@ -296,7 +296,7 @@ namespace TrayDir
 				e.Cancel = true;
 			} else {
 				if (!block && Visible) {
-					switch (MessageBox.Show(Properties.Strings_en.Form_MinimizeToTray, Properties.Strings_en.Form_Exit, MessageBoxButtons.YesNo)) {
+					switch (MessageBox.Show(Properties.Strings.Form_MinimizeToTray, Properties.Strings.Form_Exit, MessageBoxButtons.YesNo)) {
 						case DialogResult.Yes:
 							HideApp(this, null);
 							e.Cancel = true;
@@ -395,7 +395,7 @@ namespace TrayDir
 		}
 		private void New(object sender, EventArgs e)
 		{
-			TrayInstance ti = new TrayInstance(Properties.Strings_en.Instance_NewInstance);
+			TrayInstance ti = new TrayInstance(Properties.Strings.Instance_NewInstance);
 			pd.trayInstances.Add(ti);
 			pd.FixInstances();
 			AddInstanceTabPage(ti);
@@ -407,7 +407,7 @@ namespace TrayDir
 		private void Edit(object sender, EventArgs e)
 		{
 			string input = trayInstance.instanceName;
-			if (InputDialog.ShowStringInputDialog(Properties.Strings_en.Form_EditName, ref input) == DialogResult.OK)
+			if (InputDialog.ShowStringInputDialog(Properties.Strings.Form_EditName, ref input) == DialogResult.OK)
 			{
 				trayInstance.instanceName = input;
 				instanceTabs.SelectedTab.Text = input;
@@ -423,7 +423,7 @@ namespace TrayDir
 		private void PromptDelete(int i)
 		{
 			TrayInstance ti = pd.trayInstances[i];
-			if (pd.trayInstances.Count > 1 && (DialogResult.Yes == MessageBox.Show(string.Format(Properties.Strings_en.Form_PromptDelete, ti.instanceName), Properties.Strings_en.Form_Close, MessageBoxButtons.YesNo)))
+			if (pd.trayInstances.Count > 1 && (DialogResult.Yes == MessageBox.Show(string.Format(Properties.Strings.Form_PromptDelete, ti.instanceName), Properties.Strings.Form_Close, MessageBoxButtons.YesNo)))
 			{
 				instanceTabs.TabPages.Remove(ti.view.InstanceTabPage);
 				pd.trayInstances.Remove(ti);
@@ -456,7 +456,7 @@ namespace TrayDir
 				}
 				else
 				{
-					MessageBox.Show(Properties.Strings_en.Error_ImportFailed, Properties.Strings_en.Form_ImportFailed);
+					MessageBox.Show(Properties.Strings.Error_ImportFailed, Properties.Strings.Form_ImportFailed);
 				}
 			}
 		}
@@ -487,7 +487,7 @@ namespace TrayDir
 		private void changeIgnoreRegexToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			string input = trayInstance.ignoreRegex;
-			if (InputDialog.ShowMultilineStringInputDialog(Properties.Strings_en.Form_EditIgnoreRegex, ref input) == DialogResult.OK)
+			if (InputDialog.ShowMultilineStringInputDialog(Properties.Strings.Form_EditIgnoreRegex, ref input) == DialogResult.OK)
 			{
 				trayInstance.ignoreRegex = input;
 				trayInstance.view?.Rebuild();
@@ -510,7 +510,7 @@ namespace TrayDir
 		}
 
 		private void archiveToolStripMenuItem_Click(object sender, EventArgs e) {
-			if (MessageBox.Show(string.Format(Properties.Strings_en.Instance_Archive, trayInstance.instanceName), Properties.Strings_en.Form_Archive, MessageBoxButtons.OKCancel) == DialogResult.OK) {
+			if (MessageBox.Show(string.Format(Properties.Strings.Instance_Archive, trayInstance.instanceName), Properties.Strings.Form_Archive, MessageBoxButtons.OKCancel) == DialogResult.OK) {
 				TrayInstance t = trayInstance;
 				ProgramData.pd.trayInstances.Remove(t);
 				ProgramData.pd.archivedInstances.Add(t);
@@ -551,8 +551,8 @@ namespace TrayDir
 		}
 		private void bugReportToolStripMenuItem_Click(object sender, EventArgs e) {
 			string address = "contact@samver.ca";
-			string subject = String.Format(Properties.Strings_en.Email_Subject, Program.RunningVersion);
-			string body = Properties.Strings_en.Email_Body;
+			string subject = String.Format(Properties.Strings.Email_Subject, Program.RunningVersion);
+			string body = Properties.Strings.Email_Body;
 			string mailto = String.Format("mailto:{0}?subject={1}&body={2}", address, subject, body);
 			AppUtils.ProcessStart(mailto);
 		}

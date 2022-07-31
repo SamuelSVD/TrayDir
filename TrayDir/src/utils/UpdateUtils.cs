@@ -59,7 +59,7 @@ namespace TrayDir
 						GitHubRelease latestRelease = json_serializer.Deserialize<GitHubRelease>(JSON);
 						if (latestRelease.tag_name != ProgramData.pd.LatestVersion) {
 							if (SemverCompare(Assembly.GetEntryAssembly().GetName().Version.ToString(), latestRelease.tag_name)) {
-								if (MessageBox.Show(Properties.Strings_en.Form_NewUpdateUpdateNow, Properties.Strings_en.Form_NewUpdateAvailable, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+								if (MessageBox.Show(Properties.Strings.Form_NewUpdateUpdateNow, Properties.Strings.Form_NewUpdateAvailable, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 									System.Diagnostics.Process.Start(latestRelease.html_url);
 								} else {
 									ProgramData.pd.LatestVersion = latestRelease.tag_name;

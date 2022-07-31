@@ -34,20 +34,20 @@ namespace TrayDir
 			OptionView ov;
 
 			// Application Options
-			ov = new OptionView(Properties.Strings_en.Form_ShowIconsInTrayMenu, ProgramData.pd.settings.app.ShowIconsInMenus);
+			ov = new OptionView(Properties.Strings.Form_ShowIconsInTrayMenu, ProgramData.pd.settings.app.ShowIconsInMenus);
 			ov.AddTo(AppGroupLayout, 0);
-			ov.SetTooltip(Properties.Strings_en.Tooltip_ShowIconsInTrayMenu);
+			ov.SetTooltip(Properties.Strings.Tooltip_ShowIconsInTrayMenu);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.app, "ShowIconsInMenus");
 
 			string[] s = new[] { "Folders Top", "Folders Bottom", "None" };
-			ComboBoxView cbv = new ComboBoxView(Properties.Strings_en.Form_MenuSorting, s);
+			ComboBoxView cbv = new ComboBoxView(Properties.Strings.Form_MenuSorting, s);
 			cbv.AddTo(AppGroupLayout, 1);
 			ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "MenuSorting");
-			cbv.SetTooltip(Properties.Strings_en.Tooltip_MenuSorting);
+			cbv.SetTooltip(Properties.Strings.Tooltip_MenuSorting);
 			cbv.combobox.Text = ProgramData.pd.settings.app.MenuSorting;
 
 			string[] s2 = new[] { "Yellow Folder", "Blue Folder"};
-			cbv = new ComboBoxView(Properties.Strings_en.Form_VirtualFolderMenuIcon, s2);
+			cbv = new ComboBoxView(Properties.Strings.Form_VirtualFolderMenuIcon, s2);
 			cbv.combobox.Text = ProgramData.pd.settings.app.VFolderIcon;
 			cbv.AddTo(AppGroupLayout, 2);
 			ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "VFolderIcon");
@@ -56,32 +56,32 @@ namespace TrayDir
 					ti.view?.Rebuild();
 				}
 			});
-			cbv.SetTooltip(Properties.Strings_en.Tooltip_VirtualFolderMenuIcon);
+			cbv.SetTooltip(Properties.Strings.Tooltip_VirtualFolderMenuIcon);
 
 			// Windows Options
-			ov = new OptionView(Properties.Strings_en.Form_MinimizeOnClose, ProgramData.pd.settings.win.MinimizeOnClose);
+			ov = new OptionView(Properties.Strings.Form_MinimizeOnClose, ProgramData.pd.settings.win.MinimizeOnClose);
 			ov.AddTo(WinGroupLayout, 0);
-			ov.SetTooltip(Properties.Strings_en.Tooltip_MinimizeOnClose);
+			ov.SetTooltip(Properties.Strings.Tooltip_MinimizeOnClose);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "MinimizeOnClose");
 
-			ov = new OptionView(Properties.Strings_en.Form_HideOnMinimize, ProgramData.pd.settings.win.HideOnMinimize);
+			ov = new OptionView(Properties.Strings.Form_HideOnMinimize, ProgramData.pd.settings.win.HideOnMinimize);
 			ov.AddTo(WinGroupLayout, 1);
-			ov.SetTooltip(Properties.Strings_en.Tooltip_HideOnMinimize);
+			ov.SetTooltip(Properties.Strings.Tooltip_HideOnMinimize);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "HideOnMinimize");
 
-			ov = new OptionView(Properties.Strings_en.Form_StartMinimized, ProgramData.pd.settings.win.StartMinimized);
+			ov = new OptionView(Properties.Strings.Form_StartMinimized, ProgramData.pd.settings.win.StartMinimized);
 			ov.AddTo(WinGroupLayout, 2);
-			ov.SetTooltip(Properties.Strings_en.Tooltip_StartMinimized);
+			ov.SetTooltip(Properties.Strings.Tooltip_StartMinimized);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "StartMinimized");
 
-			ov = new OptionView(Properties.Strings_en.Form_StartWithWindows, ProgramData.pd.settings.win.StartWithWindows);
+			ov = new OptionView(Properties.Strings.Form_StartWithWindows, ProgramData.pd.settings.win.StartWithWindows);
 			ov.AddTo(WinGroupLayout, 3);
-			ov.SetTooltip(Properties.Strings_en.Tooltip_StartWithWindows);
+			ov.SetTooltip(Properties.Strings.Tooltip_StartWithWindows);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "StartWithWindows");
 
-			ov = new OptionView(Properties.Strings_en.Form_CheckForUpdatesOnStartup, ProgramData.pd.settings.win.CheckForUpdates);
+			ov = new OptionView(Properties.Strings.Form_CheckForUpdatesOnStartup, ProgramData.pd.settings.win.CheckForUpdates);
 			ov.AddTo(WinGroupLayout, 4);
-			ov.SetTooltip(Properties.Strings_en.Tooltip_CheckForUpdatesOnStartup);
+			ov.SetTooltip(Properties.Strings.Tooltip_CheckForUpdatesOnStartup);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "CheckForUpdates");
 		}
 

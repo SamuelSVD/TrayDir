@@ -49,133 +49,77 @@ namespace TrayDir
 			// 
 			// tableLayoutPanel4
 			// 
-			this.tableLayoutPanel4.AutoSize = true;
-			this.tableLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel4.ColumnCount = 1;
-			this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
 			this.tableLayoutPanel4.Controls.Add(this.closeButton, 0, 1);
 			this.tableLayoutPanel4.Controls.Add(this.groupBox1, 0, 0);
-			this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-			this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-			this.tableLayoutPanel4.RowCount = 2;
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(370, 259);
-			this.tableLayoutPanel4.TabIndex = 3;
 			// 
 			// closeButton
 			// 
-			this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			resources.ApplyResources(this.closeButton, "closeButton");
 			this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.closeButton.Location = new System.Drawing.Point(286, 233);
-			this.closeButton.Margin = new System.Windows.Forms.Padding(3, 3, 9, 3);
 			this.closeButton.Name = "closeButton";
-			this.closeButton.Size = new System.Drawing.Size(75, 23);
-			this.closeButton.TabIndex = 1;
-			this.closeButton.Text = "Close";
 			this.closeButton.UseVisualStyleBackColor = true;
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.AutoSize = true;
-			this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			resources.ApplyResources(this.groupBox1, "groupBox1");
 			this.groupBox1.Controls.Add(this.tableLayoutPanel1);
-			this.groupBox1.Location = new System.Drawing.Point(3, 3);
-			this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Padding = new System.Windows.Forms.Padding(0);
-			this.groupBox1.Size = new System.Drawing.Size(364, 227);
-			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Tray Options";
 			// 
 			// tableLayoutPanel1
 			// 
-			this.tableLayoutPanel1.AutoSize = true;
-			this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.tableLayoutPanel1.ColumnCount = 3;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
 			this.tableLayoutPanel1.Controls.Add(this.importButton, 0, 2);
 			this.tableLayoutPanel1.Controls.Add(this.exportButton, 0, 2);
 			this.tableLayoutPanel1.Controls.Add(this.editButton, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.deleteButton, 2, 1);
 			this.tableLayoutPanel1.Controls.Add(this.addButton, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.treeView1, 0, 0);
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 18);
-			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 3;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(355, 196);
-			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// importButton
 			// 
-			this.importButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.importButton.Location = new System.Drawing.Point(3, 170);
+			resources.ApplyResources(this.importButton, "importButton");
 			this.importButton.Name = "importButton";
-			this.importButton.Size = new System.Drawing.Size(75, 23);
-			this.importButton.TabIndex = 9;
-			this.importButton.Text = "Import";
 			this.importButton.UseVisualStyleBackColor = true;
 			this.importButton.Click += new System.EventHandler(this.importButton_Click);
 			// 
 			// exportButton
 			// 
-			this.exportButton.Location = new System.Drawing.Point(84, 170);
+			resources.ApplyResources(this.exportButton, "exportButton");
 			this.exportButton.Name = "exportButton";
-			this.exportButton.Size = new System.Drawing.Size(75, 23);
-			this.exportButton.TabIndex = 8;
-			this.exportButton.Text = "Export";
 			this.exportButton.UseVisualStyleBackColor = true;
 			this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
 			// 
 			// editButton
 			// 
-			this.editButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.editButton.Location = new System.Drawing.Point(84, 141);
+			resources.ApplyResources(this.editButton, "editButton");
 			this.editButton.Name = "editButton";
-			this.editButton.Size = new System.Drawing.Size(75, 23);
-			this.editButton.TabIndex = 6;
-			this.editButton.Text = "Edit";
 			this.editButton.UseVisualStyleBackColor = true;
 			this.editButton.Click += new System.EventHandler(this.editButton_Click);
 			// 
 			// deleteButton
 			// 
-			this.deleteButton.Location = new System.Drawing.Point(165, 141);
+			resources.ApplyResources(this.deleteButton, "deleteButton");
 			this.deleteButton.Name = "deleteButton";
-			this.deleteButton.Size = new System.Drawing.Size(75, 23);
-			this.deleteButton.TabIndex = 5;
-			this.deleteButton.Text = "Delete";
 			this.deleteButton.UseVisualStyleBackColor = true;
 			this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
 			// 
 			// addButton
 			// 
-			this.addButton.Location = new System.Drawing.Point(3, 141);
+			resources.ApplyResources(this.addButton, "addButton");
 			this.addButton.Name = "addButton";
-			this.addButton.Size = new System.Drawing.Size(75, 23);
-			this.addButton.TabIndex = 7;
-			this.addButton.Text = "Add";
 			this.addButton.UseVisualStyleBackColor = true;
 			this.addButton.Click += new System.EventHandler(this.addButton_Click);
 			// 
 			// treeView1
 			// 
 			this.tableLayoutPanel1.SetColumnSpan(this.treeView1, 3);
-			this.treeView1.ImageIndex = 0;
+			resources.ApplyResources(this.treeView1, "treeView1");
 			this.treeView1.ImageList = this.imageList;
-			this.treeView1.Location = new System.Drawing.Point(3, 3);
 			this.treeView1.Name = "treeView1";
-			this.treeView1.SelectedImageIndex = 0;
-			this.treeView1.Size = new System.Drawing.Size(349, 132);
-			this.treeView1.TabIndex = 4;
 			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
 			this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
 			// 
@@ -187,21 +131,15 @@ namespace TrayDir
 			// 
 			// PluginManagerForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoSize = true;
-			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.CancelButton = this.closeButton;
-			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.tableLayoutPanel4);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.HelpButton = true;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "PluginManagerForm";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Plugin Manager";
 			this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.PluginManagerForm_HelpButtonClicked);
 			this.Shown += new System.EventHandler(this.PluginManagerForm_Shown);
 			this.tableLayoutPanel4.ResumeLayout(false);

@@ -83,7 +83,7 @@ namespace TrayDir
 				proc.Start();
 			}
 			catch (Exception e) {
-				MessageBox.Show(String.Format(Properties.Strings_en.ErrorStartingProcess, fileName, e.Message), Properties.Strings_en.Form_Error);
+				MessageBox.Show(String.Format(Properties.Strings.ErrorStartingProcess, fileName, e.Message), Properties.Strings.Form_Error);
 			}
 		}
 		public static void OpenPath(string path, bool runAsAdmin)
@@ -144,7 +144,7 @@ namespace TrayDir
 			if (sfd.ShowDialog() == DialogResult.OK)
 			{
 				XMLUtils.SaveToFile(copy_instance, sfd.FileName);
-				MessageBox.Show(string.Format(Properties.Strings_en.ExportedTo, sfd.FileName), Properties.Strings_en.Form_ExportDone);
+				MessageBox.Show(string.Format(Properties.Strings.ExportedTo, sfd.FileName), Properties.Strings.Form_ExportDone);
 			}
 		}
 		internal static void Run(IMenuItem menuItem) {
@@ -233,7 +233,7 @@ namespace TrayDir
 			if (sfd.ShowDialog() == DialogResult.OK)
 			{
 				XMLUtils.SaveToFile(plugin, sfd.FileName);
-				MessageBox.Show(string.Format(Properties.Strings_en.ExportedTo, sfd.FileName), Properties.Strings_en.Form_ExportDone);
+				MessageBox.Show(string.Format(Properties.Strings.ExportedTo, sfd.FileName), Properties.Strings.Form_ExportDone);
 			}
 		}
 
@@ -255,7 +255,7 @@ namespace TrayDir
 		public static void RunPlugin(TrayInstancePlugin p, bool runasadmin)
 		{
 			if (!p.isValid()) {
-				MessageBox.Show(Properties.Strings_en.Form_PluginInvalid, Properties.Strings_en.Form_Error);
+				MessageBox.Show(Properties.Strings.Form_PluginInvalid, Properties.Strings.Form_Error);
 				return;
 			}
 			bool runExternally = (p.plugin != null ? p.plugin.OpenIndirect && !p.plugin.isScript : false);

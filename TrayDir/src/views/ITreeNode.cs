@@ -117,7 +117,7 @@ namespace TrayDir
 							node.Text = string.Empty;
 						} else {
 							node.ImageIndex = IconUtils.QUESTION;
-							node.Text = Properties.Strings_en.Node_Error;
+							node.Text = Properties.Strings.Node_Error;
 						}
 						hidden = !tip.visible;
 						node.Text += hasAlias ? alias : string.Empty;
@@ -175,7 +175,7 @@ namespace TrayDir
 					break;
 				case TrayInstanceNode.NodeType.Separator:
 					node.ImageIndex = IconUtils.SEPARATOR;
-					node.Text = Properties.Strings_en.Form_Separator;
+					node.Text = Properties.Strings.Form_Separator;
 					break;
 				default:
 					break;

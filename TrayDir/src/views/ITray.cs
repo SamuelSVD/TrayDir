@@ -246,8 +246,8 @@ namespace TrayDir
 
 			//            notifyIcon.ContextMenuStrip.AutoClose = true;
 
-			showMenuItem = MakeAndAddMenuItem(showMenuItem, Properties.Strings_en.MenuItem_Show, false, showForm);
-			hideMenuItem = MakeAndAddMenuItem(hideMenuItem, Properties.Strings_en.MenuItem_Hide, true, hideForm);
+			showMenuItem = MakeAndAddMenuItem(showMenuItem, Properties.Strings.MenuItem_Show, false, showForm);
+			hideMenuItem = MakeAndAddMenuItem(hideMenuItem, Properties.Strings.MenuItem_Hide, true, hideForm);
 
 			notifyIcon.ContextMenuStrip.Items.Add("-");
 
@@ -258,7 +258,7 @@ namespace TrayDir
 			AddTrayTree(instance.nodes.children, notifyIcon.ContextMenuStrip.Items, null);
 
 			notifyIcon.ContextMenuStrip.Items.Add("-");
-			exitMenuItem = MakeAndAddMenuItem(exitMenuItem, Properties.Strings_en.MenuItem_Exit, true, exitForm);
+			exitMenuItem = MakeAndAddMenuItem(exitMenuItem, Properties.Strings.MenuItem_Exit, true, exitForm);
 
 			UpdateTrayIcon();
 
@@ -375,7 +375,7 @@ namespace TrayDir
 			}
 			catch (Exception e)
 			{
-				MessageBox.Show(String.Format(Properties.Strings_en.Form_ErrorLoadingIcon, e.Message));
+				MessageBox.Show(String.Format(Properties.Strings.Form_ErrorLoadingIcon, e.Message));
 				i = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
 			}
 			return i;

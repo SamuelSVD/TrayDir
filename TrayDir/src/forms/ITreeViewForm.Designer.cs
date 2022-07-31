@@ -30,6 +30,7 @@ namespace TrayDir
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ITreeViewForm));
 			this.formTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.leftButtonsTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.downButton = new System.Windows.Forms.Button();
@@ -58,253 +59,148 @@ namespace TrayDir
 			// 
 			// formTableLayoutPanel
 			// 
-			this.formTableLayoutPanel.AutoSize = true;
-			this.formTableLayoutPanel.ColumnCount = 2;
-			this.formTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.formTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			resources.ApplyResources(this.formTableLayoutPanel, "formTableLayoutPanel");
 			this.formTableLayoutPanel.Controls.Add(this.leftButtonsTableLayoutPanel, 0, 1);
 			this.formTableLayoutPanel.Controls.Add(this.topButtonsTableLayoutPanel, 1, 0);
 			this.formTableLayoutPanel.Controls.Add(this.ContentTableLayoutPanel, 1, 1);
-			this.formTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.formTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
 			this.formTableLayoutPanel.Name = "formTableLayoutPanel";
-			this.formTableLayoutPanel.RowCount = 2;
-			this.formTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.formTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.formTableLayoutPanel.Size = new System.Drawing.Size(358, 229);
-			this.formTableLayoutPanel.TabIndex = 13;
 			// 
 			// leftButtonsTableLayoutPanel
 			// 
-			this.leftButtonsTableLayoutPanel.AutoSize = true;
-			this.leftButtonsTableLayoutPanel.ColumnCount = 1;
-			this.leftButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.leftButtonsTableLayoutPanel, "leftButtonsTableLayoutPanel");
 			this.leftButtonsTableLayoutPanel.Controls.Add(this.downButton, 0, 4);
 			this.leftButtonsTableLayoutPanel.Controls.Add(this.outdentButton, 0, 3);
 			this.leftButtonsTableLayoutPanel.Controls.Add(this.upButton, 0, 0);
 			this.leftButtonsTableLayoutPanel.Controls.Add(this.indentButton, 0, 2);
-			this.leftButtonsTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.leftButtonsTableLayoutPanel.Location = new System.Drawing.Point(0, 29);
-			this.leftButtonsTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.leftButtonsTableLayoutPanel.Name = "leftButtonsTableLayoutPanel";
-			this.leftButtonsTableLayoutPanel.RowCount = 5;
-			this.leftButtonsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.leftButtonsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.leftButtonsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.leftButtonsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.leftButtonsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.leftButtonsTableLayoutPanel.Size = new System.Drawing.Size(26, 200);
-			this.leftButtonsTableLayoutPanel.TabIndex = 0;
 			// 
 			// downButton
 			// 
-			this.downButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.downButton.ImageIndex = 5;
-			this.downButton.Location = new System.Drawing.Point(3, 90);
+			resources.ApplyResources(this.downButton, "downButton");
 			this.downButton.Name = "downButton";
-			this.downButton.Size = new System.Drawing.Size(20, 23);
-			this.downButton.TabIndex = 14;
-			this.toolTip.SetToolTip(this.downButton, "Move item down (CTRL+DOWN)");
+			this.toolTip.SetToolTip(this.downButton, resources.GetString("downButton.ToolTip"));
 			this.downButton.UseVisualStyleBackColor = true;
 			this.downButton.Click += new System.EventHandler(this.downButton_Click);
 			// 
 			// outdentButton
 			// 
-			this.outdentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.outdentButton.ImageIndex = 5;
-			this.outdentButton.Location = new System.Drawing.Point(3, 61);
+			resources.ApplyResources(this.outdentButton, "outdentButton");
 			this.outdentButton.Name = "outdentButton";
-			this.outdentButton.Size = new System.Drawing.Size(20, 23);
-			this.outdentButton.TabIndex = 14;
-			this.toolTip.SetToolTip(this.outdentButton, "Move item out (CTRL+LEFT)");
+			this.toolTip.SetToolTip(this.outdentButton, resources.GetString("outdentButton.ToolTip"));
 			this.outdentButton.UseVisualStyleBackColor = true;
 			this.outdentButton.Click += new System.EventHandler(this.outdentButton_Click);
 			// 
 			// upButton
 			// 
-			this.upButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.upButton.ImageIndex = 5;
-			this.upButton.Location = new System.Drawing.Point(3, 3);
+			resources.ApplyResources(this.upButton, "upButton");
 			this.upButton.Name = "upButton";
-			this.upButton.Size = new System.Drawing.Size(20, 23);
-			this.upButton.TabIndex = 0;
-			this.toolTip.SetToolTip(this.upButton, "Move item up (CTRL+UP)");
+			this.toolTip.SetToolTip(this.upButton, resources.GetString("upButton.ToolTip"));
 			this.upButton.UseVisualStyleBackColor = true;
 			this.upButton.Click += new System.EventHandler(this.upButton_Click);
 			// 
 			// indentButton
 			// 
-			this.indentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.indentButton.Location = new System.Drawing.Point(3, 32);
+			resources.ApplyResources(this.indentButton, "indentButton");
 			this.indentButton.Name = "indentButton";
-			this.indentButton.Size = new System.Drawing.Size(20, 23);
-			this.indentButton.TabIndex = 2;
-			this.toolTip.SetToolTip(this.indentButton, "Move item into Virtual Folder (CTRL+RIGHT)");
+			this.toolTip.SetToolTip(this.indentButton, resources.GetString("indentButton.ToolTip"));
 			this.indentButton.UseVisualStyleBackColor = true;
 			this.indentButton.Click += new System.EventHandler(this.indentButton_Click);
 			// 
 			// topButtonsTableLayoutPanel
 			// 
-			this.topButtonsTableLayoutPanel.AutoSize = true;
-			this.topButtonsTableLayoutPanel.ColumnCount = 6;
-			this.topButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.topButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.topButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.topButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.topButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.topButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.topButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.topButtonsTableLayoutPanel, "topButtonsTableLayoutPanel");
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newDocButton, 0, 0);
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newFolderButton, 1, 0);
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newPluginButton, 2, 0);
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newVirtualFolderButton, 3, 0);
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newSeparatorButton, 4, 0);
-			this.topButtonsTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.topButtonsTableLayoutPanel.Location = new System.Drawing.Point(26, 0);
-			this.topButtonsTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.topButtonsTableLayoutPanel.Name = "topButtonsTableLayoutPanel";
-			this.topButtonsTableLayoutPanel.RowCount = 1;
-			this.topButtonsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.topButtonsTableLayoutPanel.Size = new System.Drawing.Size(332, 29);
-			this.topButtonsTableLayoutPanel.TabIndex = 1;
 			// 
 			// newDocButton
 			// 
-			this.newDocButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.newDocButton.Location = new System.Drawing.Point(3, 3);
+			resources.ApplyResources(this.newDocButton, "newDocButton");
 			this.newDocButton.Name = "newDocButton";
-			this.newDocButton.Size = new System.Drawing.Size(26, 23);
-			this.newDocButton.TabIndex = 0;
-			this.toolTip.SetToolTip(this.newDocButton, "Insert New File Item");
+			this.toolTip.SetToolTip(this.newDocButton, resources.GetString("newDocButton.ToolTip"));
 			this.newDocButton.UseVisualStyleBackColor = true;
 			this.newDocButton.Click += new System.EventHandler(this.newDocButton_Click);
 			// 
 			// newFolderButton
 			// 
-			this.newFolderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.newFolderButton.Location = new System.Drawing.Point(35, 3);
+			resources.ApplyResources(this.newFolderButton, "newFolderButton");
 			this.newFolderButton.Name = "newFolderButton";
-			this.newFolderButton.Size = new System.Drawing.Size(23, 23);
-			this.newFolderButton.TabIndex = 1;
-			this.toolTip.SetToolTip(this.newFolderButton, "Insert New Folder Item");
+			this.toolTip.SetToolTip(this.newFolderButton, resources.GetString("newFolderButton.ToolTip"));
 			this.newFolderButton.UseVisualStyleBackColor = true;
 			this.newFolderButton.Click += new System.EventHandler(this.newFolderButton_Click);
 			// 
 			// newPluginButton
 			// 
-			this.newPluginButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.newPluginButton.Location = new System.Drawing.Point(64, 3);
+			resources.ApplyResources(this.newPluginButton, "newPluginButton");
 			this.newPluginButton.Name = "newPluginButton";
-			this.newPluginButton.Size = new System.Drawing.Size(23, 23);
-			this.newPluginButton.TabIndex = 2;
-			this.toolTip.SetToolTip(this.newPluginButton, "Insert New Plugin Item");
+			this.toolTip.SetToolTip(this.newPluginButton, resources.GetString("newPluginButton.ToolTip"));
 			this.newPluginButton.UseVisualStyleBackColor = true;
 			this.newPluginButton.Click += new System.EventHandler(this.newPluginButton_Click);
 			// 
 			// newVirtualFolderButton
 			// 
-			this.newVirtualFolderButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.newVirtualFolderButton.Location = new System.Drawing.Point(93, 3);
+			resources.ApplyResources(this.newVirtualFolderButton, "newVirtualFolderButton");
 			this.newVirtualFolderButton.Name = "newVirtualFolderButton";
-			this.newVirtualFolderButton.Size = new System.Drawing.Size(20, 23);
-			this.newVirtualFolderButton.TabIndex = 3;
-			this.toolTip.SetToolTip(this.newVirtualFolderButton, "Insert New Virtual Folder Item");
+			this.toolTip.SetToolTip(this.newVirtualFolderButton, resources.GetString("newVirtualFolderButton.ToolTip"));
 			this.newVirtualFolderButton.UseVisualStyleBackColor = true;
 			this.newVirtualFolderButton.Click += new System.EventHandler(this.newVirtualFolderButton_Click);
 			// 
 			// newSeparatorButton
 			// 
-			this.newSeparatorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.newSeparatorButton.Location = new System.Drawing.Point(119, 3);
+			resources.ApplyResources(this.newSeparatorButton, "newSeparatorButton");
 			this.newSeparatorButton.Name = "newSeparatorButton";
-			this.newSeparatorButton.Size = new System.Drawing.Size(23, 23);
-			this.newSeparatorButton.TabIndex = 4;
-			this.toolTip.SetToolTip(this.newSeparatorButton, "Insert New Separator Item");
+			this.toolTip.SetToolTip(this.newSeparatorButton, resources.GetString("newSeparatorButton.ToolTip"));
 			this.newSeparatorButton.UseVisualStyleBackColor = true;
 			this.newSeparatorButton.Click += new System.EventHandler(this.newSeparatorButton_Click);
 			// 
 			// ContentTableLayoutPanel
 			// 
-			this.ContentTableLayoutPanel.AutoSize = true;
-			this.ContentTableLayoutPanel.ColumnCount = 2;
-			this.ContentTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.ContentTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.ContentTableLayoutPanel, "ContentTableLayoutPanel");
 			this.ContentTableLayoutPanel.Controls.Add(this.tableLayoutPanel5, 1, 0);
 			this.ContentTableLayoutPanel.Controls.Add(this.treeView2, 0, 0);
-			this.ContentTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ContentTableLayoutPanel.Location = new System.Drawing.Point(26, 29);
-			this.ContentTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.ContentTableLayoutPanel.Name = "ContentTableLayoutPanel";
-			this.ContentTableLayoutPanel.RowCount = 1;
-			this.ContentTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.ContentTableLayoutPanel.Size = new System.Drawing.Size(332, 200);
-			this.ContentTableLayoutPanel.TabIndex = 2;
 			// 
 			// tableLayoutPanel5
 			// 
-			this.tableLayoutPanel5.AutoSize = true;
-			this.tableLayoutPanel5.ColumnCount = 1;
-			this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
 			this.tableLayoutPanel5.Controls.Add(this.editButton, 0, 0);
 			this.tableLayoutPanel5.Controls.Add(this.deleteButton, 0, 1);
 			this.tableLayoutPanel5.Controls.Add(this.button1, 0, 4);
-			this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel5.Location = new System.Drawing.Point(248, 3);
 			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-			this.tableLayoutPanel5.RowCount = 5;
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel5.Size = new System.Drawing.Size(81, 194);
-			this.tableLayoutPanel5.TabIndex = 0;
 			// 
 			// editButton
 			// 
-			this.editButton.AutoSize = true;
-			this.editButton.Location = new System.Drawing.Point(3, 3);
+			resources.ApplyResources(this.editButton, "editButton");
 			this.editButton.Name = "editButton";
-			this.editButton.Size = new System.Drawing.Size(75, 23);
-			this.editButton.TabIndex = 0;
-			this.editButton.Text = "Edit";
-			this.toolTip.SetToolTip(this.editButton, "Edit selected item");
+			this.toolTip.SetToolTip(this.editButton, resources.GetString("editButton.ToolTip"));
 			this.editButton.UseVisualStyleBackColor = true;
 			this.editButton.Click += new System.EventHandler(this.editButton_Click);
 			// 
 			// deleteButton
 			// 
-			this.deleteButton.AutoSize = true;
-			this.deleteButton.Location = new System.Drawing.Point(3, 32);
+			resources.ApplyResources(this.deleteButton, "deleteButton");
 			this.deleteButton.Name = "deleteButton";
-			this.deleteButton.Size = new System.Drawing.Size(75, 23);
-			this.deleteButton.TabIndex = 1;
-			this.deleteButton.Text = "Delete";
-			this.toolTip.SetToolTip(this.deleteButton, "Delete selected item");
+			this.toolTip.SetToolTip(this.deleteButton, resources.GetString("deleteButton.ToolTip"));
 			this.deleteButton.UseVisualStyleBackColor = true;
 			this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
 			// 
 			// button1
 			// 
-			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.button1.Location = new System.Drawing.Point(3, 168);
+			resources.ApplyResources(this.button1, "button1");
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 4;
-			this.button1.Text = "Options";
-			this.toolTip.SetToolTip(this.button1, "Open instance options");
+			this.toolTip.SetToolTip(this.button1, resources.GetString("button1.ToolTip"));
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// treeView2
 			// 
 			this.treeView2.AllowDrop = true;
-			this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
+			resources.ApplyResources(this.treeView2, "treeView2");
 			this.treeView2.HideSelection = false;
-			this.treeView2.Location = new System.Drawing.Point(3, 3);
 			this.treeView2.Name = "treeView2";
-			this.treeView2.Size = new System.Drawing.Size(239, 194);
-			this.treeView2.TabIndex = 1;
 			this.treeView2.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView2_BeforeCollapse);
 			this.treeView2.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView2_ItemDrag);
 			this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
@@ -317,15 +213,10 @@ namespace TrayDir
 			// 
 			// ITreeViewForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoSize = true;
-			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ClientSize = new System.Drawing.Size(358, 229);
 			this.Controls.Add(this.formTableLayoutPanel);
-			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "ITreeViewForm";
-			this.Text = "ScrapForm";
 			this.formTableLayoutPanel.ResumeLayout(false);
 			this.formTableLayoutPanel.PerformLayout();
 			this.leftButtonsTableLayoutPanel.ResumeLayout(false);

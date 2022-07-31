@@ -26,8 +26,8 @@ namespace TrayDir.forms
 
 		private void reportButton_Click(object sender, EventArgs e) {
 			string address = "contact@samver.ca";
-			string subject = String.Format(Properties.Strings_en.Email_Subject_Unexpected, Program.RunningVersion);
-			string body = Properties.Strings_en.Email_Body;
+			string subject = String.Format(Properties.Strings.Email_Subject_Unexpected, Program.RunningVersion);
+			string body = Properties.Strings.Email_Body;
 			foreach (char c in richEdit.Text.Replace("\r\n", "\r").Replace("\n", "\r")) {
 				int v = Convert.ToInt32(c);
 				body += String.Format($"%{v:X2}");

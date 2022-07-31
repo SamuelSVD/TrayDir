@@ -94,10 +94,10 @@
     <Compile Include="lib\VerticalSeparator\VerticalSeparator.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Properties\Strings_en.Designer.cs">
+    <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Strings_en.resx</DependentUpon>
+      <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resource_Help.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -221,9 +221,9 @@
     <Compile Include="src\views\ITreeNode.cs" />
     <Compile Include="src\views\IView.cs" />
     <Compile Include="src\views\OptionView.cs" />
-    <EmbeddedResource Include="Properties\Strings_en.resx">
+    <EmbeddedResource Include="Properties\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings_en.Designer.cs</LastGenOutput>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resource_Help.resx">

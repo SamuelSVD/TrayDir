@@ -37,60 +37,32 @@ namespace TrayDir
 			// 
 			// label1
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			resources.ApplyResources(this.label1, "label1");
 			this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-			this.label1.Location = new System.Drawing.Point(25, 26);
-			this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label1.Name = "label1";
-			this.label1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-			this.label1.Size = new System.Drawing.Size(122, 47);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "TrayDir";
 			// 
 			// label2
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.label2.Location = new System.Drawing.Point(25, 73);
-			this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			resources.ApplyResources(this.label2, "label2");
 			this.label2.Name = "label2";
-			this.label2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-			this.label2.Size = new System.Drawing.Size(172, 49);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "A program by Sam Vergara\r\nvisit samver.ca for more information\r\n© samver 2022";
 			this.label2.Click += new System.EventHandler(this.label2_Click);
 			// 
 			// versionLabel
 			// 
-			this.versionLabel.AutoSize = true;
-			this.versionLabel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.versionLabel.Location = new System.Drawing.Point(25, 122);
-			this.versionLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			resources.ApplyResources(this.versionLabel, "versionLabel");
 			this.versionLabel.Name = "versionLabel";
-			this.versionLabel.Size = new System.Drawing.Size(100, 13);
-			this.versionLabel.TabIndex = 2;
-			this.versionLabel.Text = "V2.1.0 | 2021-03-21";
 			// 
 			// About
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.AutoSize = true;
-			this.ClientSize = new System.Drawing.Size(227, 171);
 			this.Controls.Add(this.versionLabel);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Margin = new System.Windows.Forms.Padding(2);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "About";
-			this.Padding = new System.Windows.Forms.Padding(25, 26, 25, 26);
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "About";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

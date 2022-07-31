@@ -96,7 +96,7 @@ namespace TrayDir
 				int paramCount = controls.Count;
 				int row = controls.Count + labels.Count;
 				Label l = new Label();
-				l.Text = String.Format(Properties.Strings_en.Plugin_ParameterN, paramCount + 1);
+				l.Text = String.Format(Properties.Strings.Plugin_ParameterN, paramCount + 1);
 				pluginTableLayoutPanel.Controls.Add(l, 0, startingCount + row);
 				pluginTableLayoutPanel.SetColumnSpan(l, 2);
 				row++;
@@ -129,7 +129,7 @@ namespace TrayDir
 				cb.Text = tpp.name;
 			}
 			else {
-				cb.Text = String.Format(Properties.Strings_en.Plugin_ParameterN, paramCount + 1);
+				cb.Text = String.Format(Properties.Strings.Plugin_ParameterN, paramCount + 1);
 			}
 			pluginTableLayoutPanel.Controls.Add(cb, 0, startingCount + row);
 			row++;
@@ -154,7 +154,7 @@ namespace TrayDir
 				l.Text = tpp.name;
 			}
 			else {
-				l.Text = String.Format(Properties.Strings_en.Plugin_ParameterN, paramCount + 1);
+				l.Text = String.Format(Properties.Strings.Plugin_ParameterN, paramCount + 1);
 			}
 			pluginTableLayoutPanel.Controls.Add(l, 0, startingCount + row);
 			pluginTableLayoutPanel.SetColumnSpan(l, 2);
