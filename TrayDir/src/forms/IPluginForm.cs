@@ -28,8 +28,7 @@ namespace TrayDir
 			{
 				string t = tp.getSignature();
 				pluginIndex[t] = ProgramData.pd.plugins.IndexOf(tp);
-				int i = pluginComboBox.Items.Add(t);
-
+				pluginComboBox.Items.Add(t);
 			}
 			for (int i = 0; i < pluginComboBox.Items.Count; i++)
 			{
