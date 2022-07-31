@@ -92,9 +92,10 @@ namespace TrayDir
 				{
 					child.EnqueueImgLoad();
 					child.menuItem.Visible = child.tiPath != null && child.tiPath.visible;
-					foreach (IMenuItem subchild in child.folderChildren)
-					{
-						subchild.EnqueueImgLoad();
+					if (child.tiPath != null) {
+						foreach (IMenuItem subchild in child.folderChildren) {
+							subchild.EnqueueImgLoad();
+						}
 					}
 				}
 			}

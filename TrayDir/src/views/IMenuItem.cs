@@ -363,9 +363,11 @@ namespace TrayDir {
 		}
 		public void LoadChildrenIconEvent(Object obj, EventArgs args)
 		{
-			foreach (IMenuItem child in folderChildren)
-			{
-				child.EnqueueImgLoad();
+			if (tiPath != null) {
+				foreach (IMenuItem child in folderChildren)
+				{
+					child.EnqueueImgLoad();
+				}
 			}
 		}
 		public void AddToCollection(ToolStripItemCollection collection)
