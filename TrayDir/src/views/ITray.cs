@@ -47,7 +47,11 @@ namespace TrayDir
 			virtualFolderMenuItems = new List<IMenuItem>();
 			pluginMenuItems = new List<IMenuItem>();
 		}
-
+		private void Reset(Object o, EventArgs e) {
+			foreach(IMenuItem m in menuItems) {
+				m.ResetClicks();
+			}
+		}
 		private ToolStripMenuItem MakeAndAddMenuItem(ToolStripMenuItem menuItem, string text, bool visible, EventHandler eh)
 		{
 			if (!(eh is null) && (menuItem == null))
@@ -119,6 +123,7 @@ namespace TrayDir
 		public void MenuClosed(Object obj, EventArgs args)
 		{
 			MainForm.form.iconLoadTimer.Stop();
+			Reset(obj, args);
 		}
 		public void RefreshPluginMenuItemList()
 		{
@@ -238,8 +243,7 @@ namespace TrayDir
 				notifyIcon.ContextMenuStrip = new ContextMenuStrip();
 				notifyIcon.ContextMenuStrip.Opened += MenuOpened;
 				notifyIcon.ContextMenuStrip.Closed += MenuClosed;
-			}
-			else
+			} else
 			{
 				notifyIcon.ContextMenuStrip.Items.Clear();
 			}

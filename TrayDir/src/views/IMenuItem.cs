@@ -197,8 +197,28 @@ namespace TrayDir {
 				_clicks = 0;
 			}
 		}
-		public void MenuItemDropDownClosed(object obj, EventArgs args) {
+		public void ResetClicks() {
 			_clicks = 0;
+			if (folderChildren != null) {
+				foreach (IMenuItem m in folderChildren) {
+					m.ResetClicks();
+				}
+			}
+			if (nodeChildren != null) {
+				foreach (IMenuItem m in nodeChildren) {
+					m.ResetClicks();
+				}
+			}
+			if (dirMenuItems != null) {
+				foreach (IMenuItem m in dirMenuItems) {
+					m.ResetClicks();
+				}
+			}
+			if (fileMenuItems != null) {
+				foreach (IMenuItem m in fileMenuItems) {
+					m.ResetClicks();
+				}
+			}
 		}
 		// Grabbed from https://stackoverflow.com/questions/26587843/prevent-toolstripmenuitems-from-jumping-to-second-screen
 		private void showContextMenu() {
@@ -368,7 +388,6 @@ namespace TrayDir {
 				menuItem.MouseDown += MenuItemClick;
 				menuItem.Click += MenuItemDoubleClick;
 				menuItem.DropDownOpened += LoadChildrenIconEvent;
-				menuItem.DropDownClosed += MenuItemDropDownClosed;
 				assignedClickEvent = true;
 			}
 		}
