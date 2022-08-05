@@ -35,6 +35,7 @@ SolidCompression=yes
 WizardStyle=modern
 UsePreviousAppDir=no
 DirExistsWarning=no
+CloseApplications=force
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
