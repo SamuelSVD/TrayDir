@@ -63,6 +63,7 @@ namespace TrayDir
 									System.Diagnostics.Process.Start(latestRelease.html_url);
 								} else {
 									ProgramData.pd.LatestVersion = latestRelease.tag_name;
+									ProgramData.pd.Save();
 								}
 							}
 						}
