@@ -54,7 +54,7 @@ namespace TrayDir
 			if (p != null) {
 				for(int i = 0; i < p.parameters.Count; i++) {
 					TrayPluginParameter tpp = p.parameters[i];
-					valid &= !(tpp.required || tpp.isBoolean) || ((parameters.Count > i) && parameters[i].value != "");
+					valid &= tpp.isBoolean || !(tpp.required && (parameters.Count > i) && parameters[i].value == "");
 				}
 			} else {
 				valid = false;
