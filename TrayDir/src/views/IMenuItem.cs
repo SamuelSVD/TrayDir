@@ -191,10 +191,9 @@ namespace TrayDir {
 		private int _clicks = 0;
 		public void MenuItemDoubleClick(object obj, EventArgs args) {
 			_clicks += 1;
-			if (_clicks >= 2) {
+			if (_clicks == 2) {
 				Run(obj, args);
 				RunAll(obj, args);
-				_clicks = 0;
 			}
 		}
 		public void ResetClicks() {
