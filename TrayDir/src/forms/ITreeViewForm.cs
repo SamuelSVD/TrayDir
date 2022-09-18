@@ -73,6 +73,7 @@ namespace TrayDir
 			rightClickMenu.MenuItems.Add(openInCmdAdminMenuItem);
 			this.instance = instance;
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			nodes = new List<ITreeNode>();
 			foreach (TrayInstanceNode tin in instance.nodes.children)
 			{

@@ -14,6 +14,7 @@ namespace TrayDir
 		public IVirtualFolderForm(TrayInstanceVirtualFolder tivf)
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			this.tivf = tivf;
 			aliasEdit.Text = tivf.alias;
 			hideItemCheckBox.Checked = !tivf.visible;

@@ -13,6 +13,7 @@ namespace TrayDir
 		public SettingsForm()
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			InitializeOptions();
 			SettingsTabControl.Appearance = TabAppearance.FlatButtons;
 			SettingsTabControl.ItemSize = new Size(0, 1);

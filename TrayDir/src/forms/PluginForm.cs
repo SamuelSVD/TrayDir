@@ -11,6 +11,7 @@ namespace TrayDir {
 		{
 			this.plugin = plugin;
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			nameEdit.Text = plugin.tp.name;
 			pathEdit.Text = plugin.tp.path;
 			paramNumericUpDown.Value = plugin.tp.parameterCount;

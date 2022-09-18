@@ -16,6 +16,7 @@ namespace TrayDir
 		public PluginParameterForm(TrayPlugin tp)
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			this.tp = tp;
 			LoadParameters();
 			parameterComboBox.SelectedIndex = 0;

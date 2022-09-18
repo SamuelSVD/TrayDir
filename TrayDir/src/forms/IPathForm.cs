@@ -14,6 +14,7 @@ namespace TrayDir
 		public IPathForm(TrayInstancePath tip)
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			this.tip = tip;
 			pathTextBox.Text = tip.path;
 			aliasEdit.Text = tip.alias;

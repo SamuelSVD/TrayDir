@@ -16,6 +16,7 @@ namespace TrayDir
 		public IPluginForm(TrayInstancePlugin tip)
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			this.tip = tip;
 			hideItemCheckBox.Checked = !tip.visible;
 			selectedPlugin = tip.plugin;

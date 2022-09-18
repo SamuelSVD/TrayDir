@@ -12,6 +12,7 @@ namespace TrayDir
 		public IOptionsForm(TrayInstance instance)
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			this.instance = instance;
 			Icon = instance.view.tray.icon;
 			iconBox.Image = Icon.ToBitmap();

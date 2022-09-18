@@ -22,6 +22,7 @@ namespace TrayDir.forms
 		public UnhandledExceptionForm()
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 		}
 
 		private void reportButton_Click(object sender, EventArgs e) {
