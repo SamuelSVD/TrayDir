@@ -3,12 +3,12 @@ using System.Windows.Forms;
 
 namespace TrayDir
 {
-	class OptionView
+	class CheckBoxOptionView
 	{
 		public Label label;
 		public CheckBox checkbox;
 		public ToolTip tp;
-		public OptionView(string text, bool boxChecked)
+		public CheckBoxOptionView(string text, bool boxChecked)
 		{
 			label = new Label();
 

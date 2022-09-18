@@ -220,7 +220,7 @@
     <Compile Include="src\views\IMenuItem.cs" />
     <Compile Include="src\views\ITreeNode.cs" />
     <Compile Include="src\views\IView.cs" />
-    <Compile Include="src\views\OptionView.cs" />
+    <Compile Include="src\views\CheckBoxOptionView.cs" />
     <EmbeddedResource Include="Properties\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>

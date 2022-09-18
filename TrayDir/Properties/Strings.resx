@@ -153,6 +153,9 @@
   <data name="Form_Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="Form_CreateFoldersAsShortcuts" xml:space="preserve">
+    <value>Create folder items as shortcuts</value>
+  </data>
   <data name="Form_Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -352,6 +355,9 @@ Do you want to start a new one?</value>
   </data>
   <data name="Tooltip_CheckForUpdatesOnStartup" xml:space="preserve">
     <value>When enabled, TrayDir will check for update on startup</value>
+  </data>
+  <data name="Tooltip_CreateFoldersAsShortcuts" xml:space="preserve">
+    <value>New folder items created will be shortcuts by default</value>
   </data>
   <data name="Tooltip_ExpandFirstPath" xml:space="preserve">
     <value>When this instance has a folder as the only item, the

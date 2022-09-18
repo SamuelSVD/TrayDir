@@ -19,7 +19,7 @@ namespace TrayDir.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Strings {
@@ -159,6 +159,15 @@ namespace TrayDir.Properties {
         internal static string Form_Close {
             get {
                 return ResourceManager.GetString("Form_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create folder items as shortcuts.
+        /// </summary>
+        internal static string Form_CreateFoldersAsShortcuts {
+            get {
+                return ResourceManager.GetString("Form_CreateFoldersAsShortcuts", resourceCulture);
             }
         }
         
@@ -743,6 +752,15 @@ namespace TrayDir.Properties {
         internal static string Tooltip_CheckForUpdatesOnStartup {
             get {
                 return ResourceManager.GetString("Tooltip_CheckForUpdatesOnStartup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New folder items created will be shortcuts by default.
+        /// </summary>
+        internal static string Tooltip_CreateFoldersAsShortcuts {
+            get {
+                return ResourceManager.GetString("Tooltip_CreateFoldersAsShortcuts", resourceCulture);
             }
         }
         

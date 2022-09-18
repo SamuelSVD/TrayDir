@@ -221,6 +221,7 @@ namespace TrayDir
 		private void newPathButton_Click(object sender, EventArgs e)
 		{
 			TrayInstancePath tip = new TrayInstancePath();
+			tip.shortcut = ProgramData.pd.settings.app.CreateFoldersAsShortcuts;
 			instance.paths.Add(tip);
 			int index = instance.paths.IndexOf(tip);
 			TrayInstanceNode tin = new TrayInstanceNode();

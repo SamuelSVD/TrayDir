@@ -178,5 +178,5 @@ namespace TrayDir
         private System.Windows.Forms.TabPage WinSettingsTabPage;
         public System.Windows.Forms.GroupBox WinGroupBox;
         public System.Windows.Forms.TableLayoutPanel WinGroupLayout;
-    }
+	}
 }

@@ -31,17 +31,22 @@ namespace TrayDir
 
 		public void InitializeOptions()
 		{
-			OptionView ov;
+			CheckBoxOptionView ov;
 
 			// Application Options
-			ov = new OptionView(Properties.Strings.Form_ShowIconsInTrayMenu, ProgramData.pd.settings.app.ShowIconsInMenus);
+			ov = new CheckBoxOptionView(Properties.Strings.Form_ShowIconsInTrayMenu, ProgramData.pd.settings.app.ShowIconsInMenus);
 			ov.AddTo(AppGroupLayout, 0);
 			ov.SetTooltip(Properties.Strings.Tooltip_ShowIconsInTrayMenu);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.app, "ShowIconsInMenus");
 
+			ov = new CheckBoxOptionView(Properties.Strings.Form_CreateFoldersAsShortcuts, ProgramData.pd.settings.app.CreateFoldersAsShortcuts);
+			ov.AddTo(AppGroupLayout, 1);
+			ov.SetTooltip(Properties.Strings.Tooltip_CreateFoldersAsShortcuts);
+			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.app, "CreateFoldersAsShortcuts");
+
 			string[] s = new[] { "Folders Top", "Folders Bottom", "None" };
 			ComboBoxView cbv = new ComboBoxView(Properties.Strings.Form_MenuSorting, s);
-			cbv.AddTo(AppGroupLayout, 1);
+			cbv.AddTo(AppGroupLayout, 2);
 			ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "MenuSorting");
 			cbv.SetTooltip(Properties.Strings.Tooltip_MenuSorting);
 			cbv.combobox.Text = ProgramData.pd.settings.app.MenuSorting;
@@ -49,7 +54,7 @@ namespace TrayDir
 			string[] s2 = new[] { "Yellow Folder", "Blue Folder"};
 			cbv = new ComboBoxView(Properties.Strings.Form_VirtualFolderMenuIcon, s2);
 			cbv.combobox.Text = ProgramData.pd.settings.app.VFolderIcon;
-			cbv.AddTo(AppGroupLayout, 2);
+			cbv.AddTo(AppGroupLayout, 3);
 			ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "VFolderIcon");
 			cbv.combobox.SelectedIndexChanged += new EventHandler(delegate (object obj, EventArgs args) {
 				foreach(TrayInstance ti in ProgramData.pd.trayInstances) {
@@ -58,28 +63,35 @@ namespace TrayDir
 			});
 			cbv.SetTooltip(Properties.Strings.Tooltip_VirtualFolderMenuIcon);
 
+			for(int i = 0; i < AppGroupLayout.Controls.Count; i++) {
+				if (AppGroupLayout.RowStyles.Count < i + 1) {
+					AppGroupLayout.RowStyles.Add(new RowStyle());
+				}
+				RowStyle rs = AppGroupLayout.RowStyles[i];
+				rs.SizeType = SizeType.AutoSize;
+			}
 			// Windows Options
-			ov = new OptionView(Properties.Strings.Form_MinimizeOnClose, ProgramData.pd.settings.win.MinimizeOnClose);
+			ov = new CheckBoxOptionView(Properties.Strings.Form_MinimizeOnClose, ProgramData.pd.settings.win.MinimizeOnClose);
 			ov.AddTo(WinGroupLayout, 0);
 			ov.SetTooltip(Properties.Strings.Tooltip_MinimizeOnClose);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "MinimizeOnClose");
 
-			ov = new OptionView(Properties.Strings.Form_HideOnMinimize, ProgramData.pd.settings.win.HideOnMinimize);
+			ov = new CheckBoxOptionView(Properties.Strings.Form_HideOnMinimize, ProgramData.pd.settings.win.HideOnMinimize);
 			ov.AddTo(WinGroupLayout, 1);
 			ov.SetTooltip(Properties.Strings.Tooltip_HideOnMinimize);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "HideOnMinimize");
 
-			ov = new OptionView(Properties.Strings.Form_StartMinimized, ProgramData.pd.settings.win.StartMinimized);
+			ov = new CheckBoxOptionView(Properties.Strings.Form_StartMinimized, ProgramData.pd.settings.win.StartMinimized);
 			ov.AddTo(WinGroupLayout, 2);
 			ov.SetTooltip(Properties.Strings.Tooltip_StartMinimized);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "StartMinimized");
 
-			ov = new OptionView(Properties.Strings.Form_StartWithWindows, ProgramData.pd.settings.win.StartWithWindows);
+			ov = new CheckBoxOptionView(Properties.Strings.Form_StartWithWindows, ProgramData.pd.settings.win.StartWithWindows);
 			ov.AddTo(WinGroupLayout, 3);
 			ov.SetTooltip(Properties.Strings.Tooltip_StartWithWindows);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "StartWithWindows");
 
-			ov = new OptionView(Properties.Strings.Form_CheckForUpdatesOnStartup, ProgramData.pd.settings.win.CheckForUpdates);
+			ov = new CheckBoxOptionView(Properties.Strings.Form_CheckForUpdatesOnStartup, ProgramData.pd.settings.win.CheckForUpdates);
 			ov.AddTo(WinGroupLayout, 4);
 			ov.SetTooltip(Properties.Strings.Tooltip_CheckForUpdatesOnStartup);
 			ControlUtils.SetCheckboxCheckedEvent(ov.checkbox, ProgramData.pd.settings.win, "CheckForUpdates");
