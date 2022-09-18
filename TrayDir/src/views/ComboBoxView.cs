@@ -42,7 +42,9 @@ namespace TrayDir
 			tlp.Controls.Add(label, 0, row);
 			tlp.Controls.Add(combobox, 1, row);
 			tlp.RowCount = row + 1;
-			tlp.RowStyles.Add(new RowStyle());
+			RowStyle rs = new RowStyle();
+			rs.SizeType = SizeType.AutoSize;
+			tlp.RowStyles.Add(rs);
 
 			for (int i = 0; i < 3; i++)
 			{

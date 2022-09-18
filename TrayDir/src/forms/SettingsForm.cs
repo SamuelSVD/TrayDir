@@ -51,25 +51,24 @@ namespace TrayDir
 			cbv.SetTooltip(Properties.Strings.Tooltip_MenuSorting);
 			cbv.combobox.Text = ProgramData.pd.settings.app.MenuSorting;
 
-			string[] s2 = new[] { "Yellow Folder", "Blue Folder"};
+			string[] s2 = new[] { "Yellow Folder", "Blue Folder" };
 			cbv = new ComboBoxView(Properties.Strings.Form_VirtualFolderMenuIcon, s2);
 			cbv.combobox.Text = ProgramData.pd.settings.app.VFolderIcon;
 			cbv.AddTo(AppGroupLayout, 3);
 			ControlUtils.SetComboBoxChangedEvent(cbv.combobox, ProgramData.pd.settings.app, "VFolderIcon");
 			cbv.combobox.SelectedIndexChanged += new EventHandler(delegate (object obj, EventArgs args) {
-				foreach(TrayInstance ti in ProgramData.pd.trayInstances) {
+				foreach (TrayInstance ti in ProgramData.pd.trayInstances) {
 					ti.view?.Rebuild();
 				}
 			});
 			cbv.SetTooltip(Properties.Strings.Tooltip_VirtualFolderMenuIcon);
 
-			for(int i = 0; i < AppGroupLayout.Controls.Count; i++) {
-				if (AppGroupLayout.RowStyles.Count < i + 1) {
-					AppGroupLayout.RowStyles.Add(new RowStyle());
-				}
-				RowStyle rs = AppGroupLayout.RowStyles[i];
-				rs.SizeType = SizeType.AutoSize;
+			//This manual sizing was required due to AutoSize not working correctly when a combo box item was added to the table view
+			AppGroupBox.AutoSize = false;
+			foreach (int rh in AppGroupLayout.GetRowHeights()) {
+				AppGroupBox.Height += rh;
 			}
+
 			// Windows Options
 			ov = new CheckBoxOptionView(Properties.Strings.Form_MinimizeOnClose, ProgramData.pd.settings.win.MinimizeOnClose);
 			ov.AddTo(WinGroupLayout, 0);
