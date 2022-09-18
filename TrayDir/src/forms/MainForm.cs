@@ -295,7 +295,7 @@ namespace TrayDir
 				}
 				e.Cancel = true;
 			} else {
-				if (!block && Visible) {
+				if (!block && Visible && !Program.IGNORECLOSE) {
 					switch (MessageBox.Show(Properties.Strings.Form_MinimizeToTray, Properties.Strings.Form_Exit, MessageBoxButtons.YesNo)) {
 						case DialogResult.Yes:
 							HideApp(this, null);

@@ -11,12 +11,14 @@ namespace TrayDir
 	{
 		public static bool DEBUG = false;
 		public static bool IGNORESTARTUP = false;
+		public static bool IGNORECLOSE = false;
 		public static string RunningVersion {  get { return Assembly.GetEntryAssembly().GetName().Version.ToString(); } }
 		[STAThread]
 		static void Main(string[] args)
 		{
 			if (args.Length > 0) {
 				IGNORESTARTUP = args[0] == "--ignorestartup";
+				IGNORECLOSE = args[1] == "--ignoreclose";
 			}
 			bool running = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Length > 1;
 			if (IGNORESTARTUP || !running || MessageBox.Show(Properties.Strings.ProcessRunning,"TrayDir",MessageBoxButtons.OKCancel) == DialogResult.OK)
