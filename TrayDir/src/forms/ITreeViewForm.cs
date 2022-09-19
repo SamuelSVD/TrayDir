@@ -289,28 +289,38 @@ namespace TrayDir
 		private void pathPropertiesButton_Click(object sender, EventArgs e)
 		{
 			ITreeNode itn = selectedNode;
-			IPathForm iff = new IPathForm(instance.paths[itn.tin.id]);
+			TrayInstancePath tip = instance.paths[itn.tin.id];
+			IPathForm iff = new IPathForm(tip);
 			if (selectedNodeNew) {
 				iff.ShowDialogNewFile();
 			}
 			else {
 				iff.ShowDialog();
 			}
-			itn.Refresh();
-			Save();
+			if (selectedNodeNew || iff.DialogResult == DialogResult.OK) {
+				if (selectedNodeNew || !tip.Equals(iff.model)) {
+					itn.Refresh();
+					Save();
+				}
+			}
 		}
 		private void folderPropertiesButton_Click(object sender, EventArgs e)
 		{
 			ITreeNode itn = selectedNode;
-			IPathForm iff = new IPathForm(instance.paths[itn.tin.id]);
+			TrayInstancePath tip = instance.paths[itn.tin.id];
+			IPathForm iff = new IPathForm(tip);
 			if (selectedNodeNew) {
 				iff.ShowDialogNewFolder();
 			}
 			else {
 				iff.ShowDialog();
 			}
-			itn.Refresh();
-			Save();
+			if (selectedNodeNew || iff.DialogResult == DialogResult.OK) {
+				if (selectedNodeNew || !tip.Equals(iff.model)) {
+					itn.Refresh();
+					Save();
+				}
+			}
 		}
 		private void UpdateButtonEnables()
 		{

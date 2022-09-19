@@ -8,14 +8,14 @@ namespace TrayDir
 {
 	public partial class IPathForm : Form
 	{
-		TrayInstancePath tip;
+		public TrayInstancePath model;
 		private bool editFileOnShow = false;
 		private bool editFolderOnShow = false;
 		public IPathForm(TrayInstancePath tip)
 		{
 			InitializeComponent();
 			this.Icon = Properties.Resources.file_exe;
-			this.tip = tip;
+			this.model = tip;
 			pathTextBox.Text = tip.path;
 			aliasEdit.Text = tip.alias;
 			shortcutCheckBox.Checked = tip.shortcut;
@@ -32,7 +32,7 @@ namespace TrayDir
 		private void folderBrowseButton_Click(object sender, EventArgs e)
 		{
 			FolderSelectDialog fs = new FolderSelectDialog();
-			string path = tip.path;
+			string path = model.path;
 			if (path == null || path == string.Empty) {
 				fs.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 			} else {
@@ -44,12 +44,12 @@ namespace TrayDir
 		}
 		private void pathTextBox_TextChanged(object sender, EventArgs e)
 		{
-			tip.path = pathTextBox.Text;
+			model.path = pathTextBox.Text;
 		}
 		private void fileBrowseButton_Click(object sender, EventArgs e)
 		{
 			MainForm.form.fd.DereferenceLinks = false;
-			string path = tip.path;
+			string path = model.path;
 			if (path == null || path == string.Empty) {
 				MainForm.form.fd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 			} else {
@@ -63,7 +63,7 @@ namespace TrayDir
 		}
 		private void shortcutCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
-			tip.shortcut = shortcutCheckBox.Checked;
+			model.shortcut = shortcutCheckBox.Checked;
 		}
 
 		private void IPathForm_Shown(object sender, EventArgs e) {
@@ -75,15 +75,19 @@ namespace TrayDir
 		}
 		private void aliasEdit_TextChanged(object sender, EventArgs e)
 		{
-			tip.alias = aliasEdit.Text;
+			model.alias = aliasEdit.Text;
 		}
 
 		private void hideItemCheckBox_CheckedChanged(object sender, EventArgs e) {
-			tip.visible = !hideItemCheckBox.Checked;
+			model.visible = !hideItemCheckBox.Checked;
 		}
 
 		private void IPathForm_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e) {
 			HelpUtils.ShowHelp(this, "src/files.htm");
 		}
-	}
+
+        private void OkButton_Click(object sender, EventArgs e) {
+			DialogResult = DialogResult.OK;
+        }
+    }
 }
