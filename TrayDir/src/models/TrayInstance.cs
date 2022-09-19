@@ -280,7 +280,7 @@ namespace TrayDir
 			ti.iconData = iconData;
 			foreach (TrayInstancePath tip in paths)
 			{
-				ti.paths.Add(tip.Copy());
+				ti.paths.Add((TrayInstancePath)tip.Copy());
 			}
 			foreach(TrayInstanceVirtualFolder tivf in vfolders)
 			{

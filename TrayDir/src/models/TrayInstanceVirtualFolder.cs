@@ -2,7 +2,7 @@
 
 namespace TrayDir
 {
-	public class TrayInstanceVirtualFolder
+	public class TrayInstanceVirtualFolder : Model<TrayInstanceVirtualFolder>
 	{
 		[XmlAttribute]
 		public string alias;
@@ -13,11 +13,19 @@ namespace TrayDir
 		{
 			this.alias = alias;
 		}
-		public TrayInstanceVirtualFolder Copy()
+		public override TrayInstanceVirtualFolder Copy()
 		{
 			TrayInstanceVirtualFolder tivf = new TrayInstanceVirtualFolder();
 			tivf.alias = alias;
 			return tivf;
+		}
+
+		public override bool Equals(TrayInstanceVirtualFolder b) {
+			TrayInstanceVirtualFolder a = this;
+			bool equals = true;
+			equals &= (a.alias == b.alias);
+			equals &= (a.visible == b.visible);
+			return equals;
 		}
 	}
 }

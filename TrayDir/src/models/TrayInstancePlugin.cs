@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace TrayDir
 {
-	public class TrayInstancePlugin
+	public class TrayInstancePlugin : Model<TrayInstancePlugin>
 	{
 		[XmlAttribute]
 		public int id = -1;
@@ -36,7 +36,7 @@ namespace TrayDir
 			}
 		}
 
-		public TrayInstancePlugin Copy()
+		public override TrayInstancePlugin Copy()
 		{
 			TrayInstancePlugin tip = new TrayInstancePlugin();
 			tip.id = id;
@@ -46,6 +46,23 @@ namespace TrayDir
 				tip.parameters.Add(tipp.Copy());
 			}
 			return tip;
+		}
+
+		public override bool Equals(TrayInstancePlugin b) {
+			//id alias visible parameters
+			TrayInstancePlugin a = this;
+			bool equals = true;
+			equals &= (a.id == b.id);
+			equals &= (a.alias == b.alias);
+			equals &= (a.visible == b.visible);
+			equals &= (a.parameters.Count == b.parameters.Count);
+			if (equals) {
+				int count = a.parameters.Count;
+				for(int i = 0; i < count; i++) {
+					equals &= (a.parameters[i].Equals(b.parameters[i]));
+				}
+			}
+			return equals;
 		}
 
 		internal bool isValid() {

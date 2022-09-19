@@ -1,8 +1,9 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace TrayDir
 {
-	public class TrayInstancePath
+	public class TrayInstancePath : Model<TrayInstancePath>
 	{
 		[XmlAttribute]
 		public string path;
@@ -19,13 +20,22 @@ namespace TrayDir
 		{
 			this.path = path;
 		}
-		public TrayInstancePath Copy()
+		public override TrayInstancePath Copy()
 		{
 			TrayInstancePath tip = new TrayInstancePath();
 			tip.path = path;
 			tip.shortcut = shortcut;
 			tip.alias = alias;
 			return tip;
+		}
+		public override bool Equals(TrayInstancePath b) {
+			TrayInstancePath a = this;
+			bool equals = true;
+			equals &= (a.path == b.path);
+			equals &= (a.shortcut == b.shortcut);
+			equals &= (a.alias == b.alias);
+			equals &= (a.visible == b.visible);
+			return equals;
 		}
 	}
 }
