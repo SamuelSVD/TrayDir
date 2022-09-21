@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -39,7 +40,22 @@ namespace TrayDir
 			ProgramData pd = XMLUtils.LoadFromFile<ProgramData>(config);
 			if (pd is null)
 			{
-				pd = new ProgramData();
+				//Check Virtual Folder or previous path location for executable.
+				if (!Debugger.IsAttached) {
+					string oldPath = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\VirtualStore\\Program Files (x86)\\samver\\TrayDir\\config.xml";
+					if (File.Exists(oldPath)) {
+						pd = XMLUtils.LoadFromFile<ProgramData>(oldPath);
+					}
+					if (pd is null) {
+						oldPath = "C:\\Program Files\\samver\\TrayDir\\TrayDir.exe";
+						if (File.Exists(oldPath)) {
+							pd = XMLUtils.LoadFromFile<ProgramData>(oldPath);
+						}
+					}
+				}
+				if (pd is null) {
+					pd = new ProgramData();
+				}
 			}
 			pd.PerformUpdate();
 			return pd;
