@@ -2,10 +2,13 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "TrayDir"
-#define MyAppVersion "3.3.1"
 #define MyAppPublisher "samver"
 #define MyAppURL "https://samver.ca/TrayDir"
 #define MyAppExeName "TrayDir.exe"
+#define MyAppSource "C:\Programming\samverApps\TrayDir\TrayDir\bin\Release\TrayDir.exe"
+#define MyAppVersion() \
+   ParseVersion(MyAppSource, Local[0], Local[1], Local[2], Local[3]), \
+   Str(Local[0]) + "." + Str(Local[1]) + "." + Str(Local[2])
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -44,7 +47,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Programming\samverApps\TrayDir\TrayDir\bin\Release\TrayDir.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: {#MyAppSource}; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
