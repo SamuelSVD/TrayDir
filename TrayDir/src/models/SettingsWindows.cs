@@ -14,7 +14,7 @@ namespace TrayDir
 		[XmlAttribute]
 		public bool StartMinimized = false;
 		[XmlAttribute]
-		public bool StartWithWindows = true;
+		public bool StartWithWindows = false;
 		[XmlAttribute]
 		public bool CheckForUpdates = true;
 	}
