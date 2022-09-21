@@ -47,7 +47,7 @@ namespace TrayDir
 						pd = XMLUtils.LoadFromFile<ProgramData>(oldPath);
 					}
 					if (pd is null) {
-						oldPath = "C:\\Program Files\\samver\\TrayDir\\TrayDir.exe";
+						oldPath = "C:\\Program Files (x86)\\samver\\TrayDir\\TrayDir.exe";
 						if (File.Exists(oldPath)) {
 							pd = XMLUtils.LoadFromFile<ProgramData>(oldPath);
 						}
