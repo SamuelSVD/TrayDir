@@ -6,6 +6,7 @@
 #define MyAppURL "https://samver.ca/TrayDir"
 #define MyAppExeName "TrayDir.exe"
 #define MyAppSource "C:\Programming\samverApps\TrayDir\TrayDir\bin\Release\TrayDir.exe"
+#define MyAppSource_x64 "C:\Programming\samverApps\TrayDir\TrayDir\bin\Release(x64)\TrayDir.exe"
 #define MyAppVersion() \
    ParseVersion(MyAppSource, Local[0], Local[1], Local[2], Local[3]), \
    Str(Local[0]) + "." + Str(Local[1]) + "." + Str(Local[2])
@@ -40,6 +41,8 @@ UsePreviousAppDir=no
 DirExistsWarning=no
 CloseApplications=force
 
+ArchitecturesInstallIn64BitMode=x64
+
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
@@ -47,7 +50,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: {#MyAppSource}; DestDir: "{app}"; Flags: ignoreversion
+Source: {#MyAppSource}; DestDir: "{app}"; Flags: ignoreversion; Check: Is64BitInstallMode
+Source: {#MyAppSource_x64}; DestDir: "{app}"; Flags: ignoreversion; Check: not Is64BitInstallMode
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
