@@ -221,34 +221,36 @@ namespace TrayDir {
 		}
 		// Grabbed from https://stackoverflow.com/questions/26587843/prevent-toolstripmenuitems-from-jumping-to-second-screen
 		private void showContextMenu() {
-			MenuSave();
-			Point pt = System.Windows.Forms.Cursor.Position;
-			ContextMenuStrip cmnu = new ContextMenuStrip();
-			ToolStripItem tsi;
+			if (isFile || isDir || isVFolder ||  isPlugin) {
+				MenuSave();
+				Point pt = System.Windows.Forms.Cursor.Position;
+				ContextMenuStrip cmnu = new ContextMenuStrip();
+				ToolStripItem tsi;
 
-			if (isFile || isPlugin) {
-				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_Run);
-				tsi.Click += Run;
-				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_RunAdmin);
-				tsi.Click += RunAs;
+				if (isFile || isPlugin) {
+					tsi = cmnu.Items.Add(Properties.Strings.MenuItem_Run);
+					tsi.Click += Run;
+					tsi = cmnu.Items.Add(Properties.Strings.MenuItem_RunAdmin);
+					tsi.Click += RunAs;
+				}
+				if (isDir || isFile || isPlugin) {
+					tsi = cmnu.Items.Add(Properties.Strings.MenuItem_OpenFileExplorer);
+					tsi.Click += Explore;
+				}
+				if (isDir || isFile) {
+					tsi = cmnu.Items.Add(Properties.Strings.MenuItem_OpenCmd);
+					tsi.Click += OpenCmd;
+					tsi = cmnu.Items.Add(Properties.Strings.MenuItem_OpenCmdAdmin);
+					tsi.Click += OpenAdminCmd;
+				}
+				if (isVFolder) {
+					tsi = cmnu.Items.Add(Properties.Strings.MenuItem_RunAll);
+					tsi.Click += RunAll;
+				}
+				cmnu.Show();
+				cmnu.Location = pt;
+				cmnu.Closing += MenuDestroy;
 			}
-			if (isDir || isFile || isPlugin) {
-				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_OpenFileExplorer);
-				tsi.Click += Explore;
-			}
-			if (isDir || isFile) {
-				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_OpenCmd);
-				tsi.Click += OpenCmd;
-				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_OpenCmdAdmin);
-				tsi.Click += OpenAdminCmd;
-			}
-			if (isVFolder) {
-				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_RunAll);
-				tsi.Click += RunAll;
-			}
-			cmnu.Show();
-			cmnu.Location = pt;
-			cmnu.Closing += MenuDestroy;
 		}
 		private void submenu_DropDownOpening(object sender, EventArgs e)
 		{
