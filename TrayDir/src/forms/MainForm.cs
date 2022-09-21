@@ -21,6 +21,7 @@ namespace TrayDir
 
 		private bool loaded = false;
 		private bool initializedMinSize = false;
+		private bool exitNoPrompt = false;
 
 		public MainForm()
 		{
@@ -295,7 +296,7 @@ namespace TrayDir
 				}
 				e.Cancel = true;
 			} else {
-				if (!block && Visible && !Program.IGNORECLOSE) {
+				if (!block && !exitNoPrompt && Visible && !Program.IGNORECLOSE) {
 					switch (MessageBox.Show(Properties.Strings.Form_MinimizeToTray, Properties.Strings.Form_Exit, MessageBoxButtons.YesNo)) {
 						case DialogResult.Yes:
 							HideApp(this, null);
@@ -343,6 +344,7 @@ namespace TrayDir
 		public void ExitApp(object sender, EventArgs e)
 		{
 			allowClose = true;
+			exitNoPrompt = true;
 			foreach (TrayInstance instance in pd.trayInstances)
 			{
 				instance.view.tray.Hide();
