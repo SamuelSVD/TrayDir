@@ -10,9 +10,8 @@ namespace TrayDir {
 			return Copy();
 		}
 		public abstract T Copy();
-		public override bool Equals(object b) {
-			return Equals((T)b);
-		}
+
+		// Do not override base Equals(object b);
 		public abstract bool Equals(T b);
 	}
 }
