@@ -130,32 +130,6 @@
   <data name="ButtonTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CloseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Left, Right</value>
-  </data>
-  <data name="CloseButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="CloseButton.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="CloseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>316, 2</value>
-  </data>
-  <data name="CloseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="CloseButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 23</value>
-  </data>
-  <data name="CloseButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="CloseButton.Text" xml:space="preserve">
-    <value>Close</value>
-  </data>
   <data name="&gt;&gt;CloseButton.Name" xml:space="preserve">
     <value>CloseButton</value>
   </data>
@@ -168,9 +142,11 @@
   <data name="&gt;&gt;CloseButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ButtonTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ButtonTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 164</value>
   </data>
@@ -207,234 +183,6 @@
   <data name="CategoryViewTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="AppGroupBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="AppGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="AppGroupLayout.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="AppGroupLayout.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="AppGroupLayout.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="AppGroupLayout.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="AppGroupLayout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 15</value>
-  </data>
-  <data name="AppGroupLayout.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="AppGroupLayout.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="AppGroupLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 0</value>
-  </data>
-  <data name="AppGroupLayout.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;AppGroupLayout.Name" xml:space="preserve">
-    <value>AppGroupLayout</value>
-  </data>
-  <data name="&gt;&gt;AppGroupLayout.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AppGroupLayout.Parent" xml:space="preserve">
-    <value>AppGroupBox</value>
-  </data>
-  <data name="&gt;&gt;AppGroupLayout.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="AppGroupLayout.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="AppGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="AppGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="AppGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 5, 10, 5</value>
-  </data>
-  <data name="AppGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="AppGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 17</value>
-  </data>
-  <data name="AppGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="AppGroupBox.Text" xml:space="preserve">
-    <value>Application</value>
-  </data>
-  <data name="&gt;&gt;AppGroupBox.Name" xml:space="preserve">
-    <value>AppGroupBox</value>
-  </data>
-  <data name="&gt;&gt;AppGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AppGroupBox.Parent" xml:space="preserve">
-    <value>AppSettingsTabPage</value>
-  </data>
-  <data name="&gt;&gt;AppGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="AppSettingsTabPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 20</value>
-  </data>
-  <data name="AppSettingsTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="AppSettingsTabPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 123</value>
-  </data>
-  <data name="AppSettingsTabPage.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="AppSettingsTabPage.Text" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;AppSettingsTabPage.Name" xml:space="preserve">
-    <value>AppSettingsTabPage</value>
-  </data>
-  <data name="&gt;&gt;AppSettingsTabPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AppSettingsTabPage.Parent" xml:space="preserve">
-    <value>SettingsTabControl</value>
-  </data>
-  <data name="&gt;&gt;AppSettingsTabPage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="WinGroupBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="WinGroupLayout.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="WinGroupLayout.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="WinGroupLayout.ColumnCount" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="WinGroupLayout.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="WinGroupLayout.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 15</value>
-  </data>
-  <data name="WinGroupLayout.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="WinGroupLayout.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="WinGroupLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 0</value>
-  </data>
-  <data name="WinGroupLayout.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;WinGroupLayout.Name" xml:space="preserve">
-    <value>WinGroupLayout</value>
-  </data>
-  <data name="&gt;&gt;WinGroupLayout.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;WinGroupLayout.Parent" xml:space="preserve">
-    <value>WinGroupBox</value>
-  </data>
-  <data name="&gt;&gt;WinGroupLayout.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="WinGroupLayout.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="WinGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="WinGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="WinGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 5, 10, 5</value>
-  </data>
-  <data name="WinGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="WinGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 17</value>
-  </data>
-  <data name="WinGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="WinGroupBox.Text" xml:space="preserve">
-    <value>Windows</value>
-  </data>
-  <data name="&gt;&gt;WinGroupBox.Name" xml:space="preserve">
-    <value>WinGroupBox</value>
-  </data>
-  <data name="&gt;&gt;WinGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;WinGroupBox.Parent" xml:space="preserve">
-    <value>WinSettingsTabPage</value>
-  </data>
-  <data name="&gt;&gt;WinGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="WinSettingsTabPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 20</value>
-  </data>
-  <data name="WinSettingsTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="WinSettingsTabPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 123</value>
-  </data>
-  <data name="WinSettingsTabPage.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="WinSettingsTabPage.Text" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;WinSettingsTabPage.Name" xml:space="preserve">
-    <value>WinSettingsTabPage</value>
-  </data>
-  <data name="&gt;&gt;WinSettingsTabPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;WinSettingsTabPage.Parent" xml:space="preserve">
-    <value>SettingsTabControl</value>
-  </data>
-  <data name="&gt;&gt;WinSettingsTabPage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="SettingsTabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="SettingsTabControl.ItemSize" type="System.Drawing.Size, System.Drawing">
-    <value>1, 16</value>
-  </data>
-  <data name="SettingsTabControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 3</value>
-  </data>
-  <data name="SettingsTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 147</value>
-  </data>
-  <data name="SettingsTabControl.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;SettingsTabControl.Name" xml:space="preserve">
     <value>SettingsTabControl</value>
   </data>
@@ -446,18 +194,6 @@
   </data>
   <data name="&gt;&gt;SettingsTabControl.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="CategoryTreeView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
-  </data>
-  <data name="CategoryTreeView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="CategoryTreeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 147</value>
-  </data>
-  <data name="CategoryTreeView.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
   </data>
   <data name="&gt;&gt;CategoryTreeView.Name" xml:space="preserve">
     <value>CategoryTreeView</value>
@@ -530,6 +266,384 @@
   </data>
   <data name="FormTableLayoutPanel.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="ButtonTableLayoutPanel" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="CategoryViewTableLayoutPanel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Absolute,10,Absolute,10" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="CloseButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="CloseButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CloseButton.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="CloseButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>316, 2</value>
+  </data>
+  <data name="CloseButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="CloseButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 23</value>
+  </data>
+  <data name="CloseButton.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="CloseButton.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="&gt;&gt;CloseButton.Name" xml:space="preserve">
+    <value>CloseButton</value>
+  </data>
+  <data name="&gt;&gt;CloseButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CloseButton.Parent" xml:space="preserve">
+    <value>ButtonTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;CloseButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;AppSettingsTabPage.Name" xml:space="preserve">
+    <value>AppSettingsTabPage</value>
+  </data>
+  <data name="&gt;&gt;AppSettingsTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AppSettingsTabPage.Parent" xml:space="preserve">
+    <value>SettingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;AppSettingsTabPage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;WinSettingsTabPage.Name" xml:space="preserve">
+    <value>WinSettingsTabPage</value>
+  </data>
+  <data name="&gt;&gt;WinSettingsTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WinSettingsTabPage.Parent" xml:space="preserve">
+    <value>SettingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;WinSettingsTabPage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="SettingsTabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="SettingsTabControl.ItemSize" type="System.Drawing.Size, System.Drawing">
+    <value>1, 16</value>
+  </data>
+  <data name="SettingsTabControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>136, 3</value>
+  </data>
+  <data name="SettingsTabControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 147</value>
+  </data>
+  <data name="SettingsTabControl.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;SettingsTabControl.Name" xml:space="preserve">
+    <value>SettingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;SettingsTabControl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SettingsTabControl.Parent" xml:space="preserve">
+    <value>CategoryViewTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;SettingsTabControl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;AppGroupBox.Name" xml:space="preserve">
+    <value>AppGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AppGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AppGroupBox.Parent" xml:space="preserve">
+    <value>AppSettingsTabPage</value>
+  </data>
+  <data name="&gt;&gt;AppGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="AppSettingsTabPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 20</value>
+  </data>
+  <data name="AppSettingsTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="AppSettingsTabPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 123</value>
+  </data>
+  <data name="AppSettingsTabPage.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="AppSettingsTabPage.Text" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;AppSettingsTabPage.Name" xml:space="preserve">
+    <value>AppSettingsTabPage</value>
+  </data>
+  <data name="&gt;&gt;AppSettingsTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AppSettingsTabPage.Parent" xml:space="preserve">
+    <value>SettingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;AppSettingsTabPage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="AppGroupBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="AppGroupBox.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="&gt;&gt;AppGroupLayout.Name" xml:space="preserve">
+    <value>AppGroupLayout</value>
+  </data>
+  <data name="&gt;&gt;AppGroupLayout.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AppGroupLayout.Parent" xml:space="preserve">
+    <value>AppGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AppGroupLayout.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="AppGroupLayout.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="AppGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="AppGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="AppGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 5, 10, 5</value>
+  </data>
+  <data name="AppGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="AppGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 17</value>
+  </data>
+  <data name="AppGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="AppGroupBox.Text" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="&gt;&gt;AppGroupBox.Name" xml:space="preserve">
+    <value>AppGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AppGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AppGroupBox.Parent" xml:space="preserve">
+    <value>AppSettingsTabPage</value>
+  </data>
+  <data name="&gt;&gt;AppGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="AppGroupLayout.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="AppGroupLayout.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="AppGroupLayout.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="AppGroupLayout.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="AppGroupLayout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 15</value>
+  </data>
+  <data name="AppGroupLayout.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="AppGroupLayout.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="AppGroupLayout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 0</value>
+  </data>
+  <data name="AppGroupLayout.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;AppGroupLayout.Name" xml:space="preserve">
+    <value>AppGroupLayout</value>
+  </data>
+  <data name="&gt;&gt;AppGroupLayout.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AppGroupLayout.Parent" xml:space="preserve">
+    <value>AppGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AppGroupLayout.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="AppGroupLayout.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="&gt;&gt;WinGroupBox.Name" xml:space="preserve">
+    <value>WinGroupBox</value>
+  </data>
+  <data name="&gt;&gt;WinGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WinGroupBox.Parent" xml:space="preserve">
+    <value>WinSettingsTabPage</value>
+  </data>
+  <data name="&gt;&gt;WinGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="WinSettingsTabPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 20</value>
+  </data>
+  <data name="WinSettingsTabPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="WinSettingsTabPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 123</value>
+  </data>
+  <data name="WinSettingsTabPage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="WinSettingsTabPage.Text" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;WinSettingsTabPage.Name" xml:space="preserve">
+    <value>WinSettingsTabPage</value>
+  </data>
+  <data name="&gt;&gt;WinSettingsTabPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WinSettingsTabPage.Parent" xml:space="preserve">
+    <value>SettingsTabControl</value>
+  </data>
+  <data name="&gt;&gt;WinSettingsTabPage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="WinGroupBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;WinGroupLayout.Name" xml:space="preserve">
+    <value>WinGroupLayout</value>
+  </data>
+  <data name="&gt;&gt;WinGroupLayout.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WinGroupLayout.Parent" xml:space="preserve">
+    <value>WinGroupBox</value>
+  </data>
+  <data name="&gt;&gt;WinGroupLayout.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="WinGroupLayout.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="WinGroupBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="WinGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="WinGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 5, 10, 5</value>
+  </data>
+  <data name="WinGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="WinGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 17</value>
+  </data>
+  <data name="WinGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="WinGroupBox.Text" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="&gt;&gt;WinGroupBox.Name" xml:space="preserve">
+    <value>WinGroupBox</value>
+  </data>
+  <data name="&gt;&gt;WinGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WinGroupBox.Parent" xml:space="preserve">
+    <value>WinSettingsTabPage</value>
+  </data>
+  <data name="&gt;&gt;WinGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="WinGroupLayout.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="WinGroupLayout.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="WinGroupLayout.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="WinGroupLayout.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="WinGroupLayout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 15</value>
+  </data>
+  <data name="WinGroupLayout.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="WinGroupLayout.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="WinGroupLayout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 0</value>
+  </data>
+  <data name="WinGroupLayout.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;WinGroupLayout.Name" xml:space="preserve">
+    <value>WinGroupLayout</value>
+  </data>
+  <data name="&gt;&gt;WinGroupLayout.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WinGroupLayout.Parent" xml:space="preserve">
+    <value>WinGroupBox</value>
+  </data>
+  <data name="&gt;&gt;WinGroupLayout.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="WinGroupLayout.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls /&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="CategoryTreeView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="CategoryTreeView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="CategoryTreeView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 147</value>
+  </data>
+  <data name="CategoryTreeView.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;CategoryTreeView.Name" xml:space="preserve">
+    <value>CategoryTreeView</value>
+  </data>
+  <data name="&gt;&gt;CategoryTreeView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TreeView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CategoryTreeView.Parent" xml:space="preserve">
+    <value>CategoryViewTableLayoutPanel</value>
+  </data>
+  <data name="&gt;&gt;CategoryTreeView.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

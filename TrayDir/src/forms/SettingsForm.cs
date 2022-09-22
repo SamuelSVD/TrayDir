@@ -23,6 +23,17 @@ namespace TrayDir
 			CategoryTreeView.Nodes.Add(AppNode);
 			CategoryTreeView.Nodes.Add(WinNode);
 
+			Size a = AppGroupBox.Size;
+			Size b = WinGroupBox.Size;
+			Size c = SettingsTabControl.Size;
+			int w = a.Width + AppGroupBox.Margin.Left * 2 + 20;
+			w = w < (b.Width + AppGroupBox.Margin.Left * 2 + 20) ? (b.Width + AppGroupBox.Margin.Left * 2 + 20) : w;
+			w = w < c.Width ? c.Width : w;
+			int h = a.Height + AppGroupBox.Margin.Top * 2;
+			h = h < (b.Height + AppGroupBox.Margin.Top * 2 + 20) ? (b.Height + AppGroupBox.Margin.Top * 2 + 20) : h;
+			h = h < c.Height ? c.Height : h;
+			SettingsTabControl.Size = new Size(w, h);
+
 			this.ClientSize = FormTableLayoutPanel.Size;
 		}
 		private void CloseButtonClick(object sender, EventArgs e)
@@ -69,6 +80,7 @@ namespace TrayDir
 			foreach (int rh in AppGroupLayout.GetRowHeights()) {
 				AppGroupBox.Height += rh;
 			}
+			AppGroupBox.Height += AppGroupLayout.Margin.Top * 2;
 
 			// Windows Options
 			ov = new CheckBoxOptionView(Properties.Strings.Form_MinimizeOnClose, ProgramData.pd.settings.win.MinimizeOnClose);
