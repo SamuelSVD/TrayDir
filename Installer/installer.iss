@@ -50,8 +50,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: {#MyAppSource}; DestDir: "{app}"; Flags: ignoreversion; Check: Is64BitInstallMode
-Source: {#MyAppSource_x64}; DestDir: "{app}"; Flags: ignoreversion; Check: not Is64BitInstallMode
+Source: {#MyAppSource}; DestDir: "{app}"; Flags: ignoreversion; Check: not Is64BitInstallMode
+Source: {#MyAppSource_x64}; DestDir: "{app}"; Flags: ignoreversion; Check: Is64BitInstallMode
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
