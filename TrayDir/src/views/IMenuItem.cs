@@ -31,9 +31,9 @@ namespace TrayDir {
 		public bool isVFolder { get { return tiVirtualFolder != null; } }
 		public bool isPlugin { get { return tiPlugin != null; } }
 		public bool loadedIcon = false;
-		public bool enqueued;
+		public bool enqueued = false;
 		private bool assignedClickEvent = false;
-		private bool painted;
+		private bool painted = false;
 
 		private string alias
 		{
@@ -82,6 +82,18 @@ namespace TrayDir {
 					folderChildren = new List<IMenuItem>();
 					dirMenuItems = new List<IMenuItem>();
 					fileMenuItems = new List<IMenuItem>();
+			}
+		}
+		private void Clear() {
+			RemoveChildren();
+			menuIcon = null;
+			painted = false;
+			enqueued = false;
+			loadedIcon = false;
+			if (menuItem != null) {
+				menuItem.DropDownItems.Clear();
+				menuItem.Image = null;
+				menuItem.Text = "";
 			}
 		}
 		private void LoadFolderChildren(object sender, PaintEventArgs e)
@@ -439,6 +451,7 @@ namespace TrayDir {
 				}
 			}
 		}
+
 		public void AddToCollectionExpanded(ToolStripItemCollection collection)
 		{
 			if (folderChildren.Count == 0) {
@@ -514,13 +527,17 @@ namespace TrayDir {
 			parent = null;
 		}
 		internal void RemoveChildren(List<IMenuItem> list) {
-			int c = list.Count;
-			for(int i = 0; i < c; i++) {
+			while(list.Count > 0) {
 				IMenuItem child = list[0];
-				list.RemoveAt(0);
 				child.RemoveChildren();
+				list.RemoveAt(0);
 			}
 			list.Clear();
+		}
+		public void Refresh() {
+			Clear();
+			LoadFolderChildren(null, null);
+			Load();
 		}
 	}
 }

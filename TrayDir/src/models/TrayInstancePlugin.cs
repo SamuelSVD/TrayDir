@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace TrayDir
-{
-	public class TrayInstancePlugin : Model<TrayInstancePlugin>
-	{
+namespace TrayDir {
+	public class TrayInstancePlugin : Model<TrayInstancePlugin> {
 		[XmlAttribute]
 		public int id = -1;
 		[XmlAttribute]
@@ -14,12 +12,9 @@ namespace TrayDir
 		public bool visible = true;
 		public List<TrayInstancePluginParameter> parameters = new List<TrayInstancePluginParameter>();
 		[XmlIgnore]
-		public TrayPlugin plugin
-		{
-			get
-			{
-				if (id >= 0 && id < ProgramData.pd.plugins.Count)
-				{
+		public TrayPlugin plugin {
+			get {
+				if (id >= 0 && id < ProgramData.pd.plugins.Count) {
 					return ProgramData.pd.plugins[id];
 				}
 				return null;
@@ -36,18 +31,31 @@ namespace TrayDir
 			}
 		}
 
-		public override TrayInstancePlugin Copy()
-		{
+		public override TrayInstancePlugin Copy() {
 			TrayInstancePlugin tip = new TrayInstancePlugin();
 			tip.id = id;
 			tip.alias = alias;
-			foreach(TrayInstancePluginParameter tipp in parameters)
-			{
+			foreach (TrayInstancePluginParameter tipp in parameters) {
 				tip.parameters.Add(tipp.Copy());
 			}
 			return tip;
 		}
-
+		public override void Apply(TrayInstancePlugin model) {
+			this.id = model.id;
+			this.alias = model.alias;
+			for (int i = 0; i < model.parameters.Count; i++) {
+				if (this.parameters.Count > i) {
+					this.parameters[i].Apply(model.parameters[i]);
+				} else {
+					TrayInstancePluginParameter tipp = new TrayInstancePluginParameter();
+					tipp.Apply(model.parameters[i]);
+					this.parameters.Add(tipp);
+				}
+			}
+			while (this.parameters.Count > model.parameters.Count) {
+				this.parameters.RemoveAt(parameters.Count - 1);
+			}
+		}
 		public override bool Equals(TrayInstancePlugin b) {
 			//id alias visible parameters
 			TrayInstancePlugin a = this;
@@ -58,7 +66,7 @@ namespace TrayDir
 			equals &= (a.parameters.Count == b.parameters.Count);
 			if (equals) {
 				int count = a.parameters.Count;
-				for(int i = 0; i < count; i++) {
+				for (int i = 0; i < count; i++) {
 					equals &= (a.parameters[i].Equals(b.parameters[i]));
 				}
 			}
@@ -69,7 +77,7 @@ namespace TrayDir
 			TrayPlugin p = plugin;
 			bool valid = true;
 			if (p != null) {
-				for(int i = 0; i < p.parameters.Count; i++) {
+				for (int i = 0; i < p.parameters.Count; i++) {
 					TrayPluginParameter tpp = p.parameters[i];
 					valid &= tpp.isBoolean || !(tpp.required && (parameters.Count > i) && parameters[i].value == "");
 				}

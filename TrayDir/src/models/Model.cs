@@ -10,6 +10,8 @@ namespace TrayDir {
 			return Copy();
 		}
 		public abstract T Copy();
+		/*** Apply should be used to assign all values from the input model to this instance of the model ***/
+		public abstract void Apply(T model);
 
 		// Do not override base Equals(object b);
 		public abstract bool Equals(T b);

@@ -16,7 +16,10 @@ namespace TrayDir
 			tipp.value = value;
 			return tipp;
 		}
-
+		public override void Apply(TrayInstancePluginParameter model) {
+			this.name = model.name;
+			this.value = model.value;
+		}
 		public override bool Equals(TrayInstancePluginParameter b) {
 			TrayInstancePluginParameter a = this;
 			bool equals = true;

@@ -16,10 +16,10 @@ namespace TrayDir
 			InitializeComponent();
 			this.Icon = Properties.Resources.file_exe;
 			this.model = tip;
-			pathTextBox.Text = tip.path;
-			aliasEdit.Text = tip.alias;
-			shortcutCheckBox.Checked = tip.shortcut;
-			hideItemCheckBox.Checked = !tip.visible;
+			pathTextBox.Text = model.path;
+			aliasEdit.Text = model.alias;
+			shortcutCheckBox.Checked = model.shortcut;
+			hideItemCheckBox.Checked = !model.visible;
 		}
 		public void ShowDialogNewFile() {
 			editFileOnShow = true;

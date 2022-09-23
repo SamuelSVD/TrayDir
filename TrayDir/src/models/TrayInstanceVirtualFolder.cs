@@ -19,7 +19,9 @@ namespace TrayDir
 			tivf.alias = alias;
 			return tivf;
 		}
-
+		public override void Apply(TrayInstanceVirtualFolder model) {
+			this.alias = model.alias;
+		}
 		public override bool Equals(TrayInstanceVirtualFolder b) {
 			TrayInstanceVirtualFolder a = this;
 			bool equals = true;

@@ -168,7 +168,6 @@ namespace TrayDir
 		private void Save()
 		{
 			instance.Repair();
-			instance.view?.Rebuild();
 			MainForm.form.BuildExploreDropdown();
 			ProgramData.pd.Save();
 		}
@@ -181,22 +180,26 @@ namespace TrayDir
 		private void upButton_Click(object sender, EventArgs e)
 		{
 			selectedNode.MoveUp();
+			instance.view?.Rebuild();
 			Save();
 		}
 		private void downButton_Click(object sender, EventArgs e)
 		{
 			selectedNode.MoveDown();
+			instance.view?.Rebuild();
 			Save();
 		}
 		private void indentButton_Click(object sender, EventArgs e)
 		{
 			selectedNode.MoveIn();
+			instance.view?.Rebuild();
 			Save();
 		}
 
 		private void outdentButton_Click(object sender, EventArgs e)
 		{
 			selectedNode.MoveOut();
+			instance.view?.Rebuild();
 			Save();
 		}
 
@@ -206,6 +209,7 @@ namespace TrayDir
 			newPathButton_Click(sender, e);
 			pathPropertiesButton_Click(null, null);
 			selectedNode.Refresh();
+			instance.view?.Rebuild();
 			Save();
 			selectedNodeNew = false;
 		}
@@ -216,6 +220,7 @@ namespace TrayDir
 			newPathButton_Click(sender, e);
 			folderPropertiesButton_Click(null, null);
 			selectedNode.Refresh();
+			instance.view?.Rebuild();
 			Save();
 			selectedNodeNew = false;
 		}
@@ -290,7 +295,7 @@ namespace TrayDir
 		{
 			ITreeNode itn = selectedNode;
 			TrayInstancePath tip = instance.paths[itn.tin.id];
-			IPathForm iff = new IPathForm(tip);
+			IPathForm iff = new IPathForm(tip.Copy());
 			if (selectedNodeNew) {
 				iff.ShowDialogNewFile();
 			}
@@ -299,9 +304,10 @@ namespace TrayDir
 			}
 			if (selectedNodeNew || iff.DialogResult == DialogResult.OK) {
 				if (selectedNodeNew || !tip.Equals(iff.model)) {
-					itn.Refresh();
+					tip.Apply(iff.model);
 					Save();
 				}
+				RefreshSelected();
 			}
 		}
 		private void folderPropertiesButton_Click(object sender, EventArgs e)
@@ -317,9 +323,10 @@ namespace TrayDir
 			}
 			if (selectedNodeNew || iff.DialogResult == DialogResult.OK) {
 				if (selectedNodeNew || !tip.Equals(iff.model)) {
-					itn.Refresh();
+					tip.Apply(iff.model);
 					Save();
 				}
+				RefreshSelected();
 			}
 		}
 		private void UpdateButtonEnables()
@@ -373,6 +380,7 @@ namespace TrayDir
 				{
 					nodes.Remove(selectedNode);
 					selectedNode.Delete();
+					instance.view?.Rebuild();
 					Save();
 				}
 				if (treeView2.Nodes.Count == 0)
@@ -381,11 +389,6 @@ namespace TrayDir
 				}
 			}
 		}
-		private void treeView2_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
-		{
-//            e.Cancel = true;
-		}
-
 		private void button1_Click(object sender, EventArgs e)
 		{
 			IOptionsForm optionsForm = new IOptionsForm(instance);
@@ -491,7 +494,7 @@ namespace TrayDir
 				selectedNode = itn;
 				outdentButton_Click(this, null);
 			}
-			itn.Refresh();
+			RefreshSelected();
 		}
 		private void PasteFromClipboard()
 		{
@@ -502,13 +505,13 @@ namespace TrayDir
 				{
 					RecursiveLoadFromInstance(copyInstance, tin, null);
 				}
+				instance.view?.Rebuild();
 				Save();
 			}
 			catch
 			{
 
 			}
-
 		}
 		public void treeView2_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -624,14 +627,12 @@ namespace TrayDir
 		private void folderShortcutMenuItem_click(object sender, EventArgs e)
 		{
 			instance.paths[selectedNode.tin.id].shortcut = true;
-			selectedNode.Refresh();
-			instance.view?.Rebuild();
+			RefreshSelected();
 		}
 		private void folderExpandMenuItem_click(object sender, EventArgs e)
 		{
 			instance.paths[selectedNode.tin.id].shortcut = false;
-			selectedNode.Refresh();
-			instance.view?.Rebuild();
+			RefreshSelected();
 		}
 		private void openInExplorerMenuItem_click(object sender, EventArgs e) {
 			AppUtils.ExplorePath(instance.paths[selectedNode.tin.id].path);
@@ -731,20 +732,21 @@ namespace TrayDir
 			selectedNode = itn;
 			nodes.Add(itn);
 			itn.Refresh();
+			instance.view?.Rebuild();
 			Save();
 		}
 		private void pluginPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
 			IPluginForm ipf = new IPluginForm(instance.plugins[itn.tin.id]);
 			ipf.ShowDialog();
-			itn.Refresh();
+			RefreshSelected();
 			Save();
 		}
 		private void vFolderPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
 			IVirtualFolderForm ivff = new IVirtualFolderForm(instance.vfolders[itn.tin.id]);
 			ivff.ShowDialog();
-			itn.Refresh();
+			RefreshSelected();
 			Save();
 		}
 		private void treeView2_ItemDrag(object sender, ItemDragEventArgs e)
@@ -832,6 +834,7 @@ namespace TrayDir
 				TrayInstanceNode tB = TreeNodeToInstanceNode(B);
 				if (tA != null && tB != null) {
 					tA.MoveOverB(tB);
+					instance.view?.Rebuild();
 					Save();
 				}
 			}
@@ -850,6 +853,22 @@ namespace TrayDir
 				}
 			}
 			return null;
+		}
+		public void RefreshSelected() {
+			if (selectedNode != null) {
+				selectedNode.Refresh();
+				TrayInstanceNode tin = selectedNode.tin;
+				bool found = false;
+				foreach(IMenuItem imi in instance.view.tray.menuItems) {
+					if (tin == imi.tiNode) {
+						imi.Refresh();
+						found = true;
+					}
+				}
+				if (!found) {
+					instance.view?.Rebuild();
+				}
+			}
 		}
 	}
 }

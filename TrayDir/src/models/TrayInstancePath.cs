@@ -28,6 +28,11 @@ namespace TrayDir
 			tip.alias = alias;
 			return tip;
 		}
+		public override void Apply(TrayInstancePath model) {
+			this.path = model.path;
+			this.shortcut = model.shortcut;
+			this.alias = model.alias;
+		}
 		public override bool Equals(TrayInstancePath b) {
 			TrayInstancePath a = this;
 			bool equals = true;
