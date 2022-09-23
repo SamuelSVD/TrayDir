@@ -35,7 +35,8 @@ namespace TrayDir
 			this.hideItemCheckBox = new System.Windows.Forms.CheckBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.aliasEdit = new System.Windows.Forms.TextBox();
-			this.closeButton = new System.Windows.Forms.Button();
+			this.OkButton = new System.Windows.Forms.Button();
+			this.CancelButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.pluginTableLayoutPanel.SuspendLayout();
@@ -45,7 +46,8 @@ namespace TrayDir
 			// 
 			resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
 			this.tableLayoutPanel4.Controls.Add(this.groupBox1, 0, 0);
-			this.tableLayoutPanel4.Controls.Add(this.closeButton, 1, 1);
+			this.tableLayoutPanel4.Controls.Add(this.OkButton, 0, 1);
+			this.tableLayoutPanel4.Controls.Add(this.CancelButton, 1, 1);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
 			// 
 			// groupBox1
@@ -83,19 +85,27 @@ namespace TrayDir
 			resources.ApplyResources(this.aliasEdit, "aliasEdit");
 			this.aliasEdit.Name = "aliasEdit";
 			// 
-			// closeButton
+			// OkButton
 			// 
-			resources.ApplyResources(this.closeButton, "closeButton");
-			this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.closeButton.Name = "closeButton";
-			this.closeButton.UseVisualStyleBackColor = true;
+			resources.ApplyResources(this.OkButton, "OkButton");
+			this.OkButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.OkButton.Name = "OkButton";
+			this.OkButton.UseVisualStyleBackColor = true;
+			this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
+			// 
+			// CancelButton
+			// 
+			resources.ApplyResources(this.CancelButton, "CancelButton");
+			this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.CancelButton.Name = "CancelButton";
+			this.CancelButton.UseVisualStyleBackColor = true;
 			// 
 			// IVirtualFolderForm
 			// 
-			this.AcceptButton = this.closeButton;
+			this.AcceptButton = this.OkButton;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.CancelButton = this.closeButton;
+			this.CancelButton = this.CancelButton;
 			this.Controls.Add(this.tableLayoutPanel4);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.HelpButton = true;
@@ -120,9 +130,10 @@ namespace TrayDir
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel pluginTableLayoutPanel;
-        private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox aliasEdit;
 		private System.Windows.Forms.CheckBox hideItemCheckBox;
-	}
+        private System.Windows.Forms.Button CancelButton;
+    }
 }

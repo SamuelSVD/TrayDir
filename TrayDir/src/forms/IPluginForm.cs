@@ -11,15 +11,15 @@ namespace TrayDir
 		List<Control> labels = new List<Control>();
 		List<Control> controls = new List<Control>();
 		TrayPlugin selectedPlugin;
-		TrayInstancePlugin tip;
+		TrayInstancePlugin model;
 		private int startingCount;
 		public IPluginForm(TrayInstancePlugin tip)
 		{
 			InitializeComponent();
 			this.Icon = Properties.Resources.file_exe;
-			this.tip = tip;
-			hideItemCheckBox.Checked = !tip.visible;
-			selectedPlugin = tip.plugin;
+			this.model = tip;
+			hideItemCheckBox.Checked = !model.visible;
+			selectedPlugin = model.plugin;
 			startingCount = pluginTableLayoutPanel.RowCount;
 			LoadPlugins();
 		}
@@ -40,13 +40,13 @@ namespace TrayDir
 					break;
 				}
 			}
-			aliasEdit.Text = tip.alias;
+			aliasEdit.Text = model.alias;
 		}
 		private void pluginComboBox_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			string selected = pluginComboBox.SelectedItem.ToString();
-			tip.id = pluginIndex[selected];
-			TrayPlugin tp = tip.plugin;
+			model.id = pluginIndex[selected];
+			TrayPlugin tp = model.plugin;
 			selectedPlugin = tp;
 			foreach (Control c in controls)
 			{
@@ -67,12 +67,12 @@ namespace TrayDir
 						tpp = tp.parameters[i];
 					}
 					TrayInstancePluginParameter tipp;
-					if (tip.parameters.Count < i + 1) {
+					if (model.parameters.Count < i + 1) {
 						tipp = new TrayInstancePluginParameter();
-						tip.parameters.Add(tipp);
+						model.parameters.Add(tipp);
 					}
 					else {
-						tipp = tip.parameters[i];
+						tipp = model.parameters[i];
 					}
 					AddParameterRow(tpp, tipp);
 				}
@@ -179,23 +179,26 @@ namespace TrayDir
 			if (selectedPlugin != null)
 			{
 				List<TrayInstancePluginParameter> par = new List<TrayInstancePluginParameter>();
-				for (int i = selectedPlugin.parameterCount; i < tip.parameters.Count; i++)
+				for (int i = selectedPlugin.parameterCount; i < model.parameters.Count; i++)
 				{
-					par.Add(tip.parameters[i]);
+					par.Add(model.parameters[i]);
 				}
 				foreach (TrayInstancePluginParameter p in par)
 				{
-					tip.parameters.Remove(p);
+					model.parameters.Remove(p);
 				}
 			}
-			tip.alias = aliasEdit.Text;
+			model.alias = aliasEdit.Text;
 		}
 		private void hideItemCheckBox_CheckedChanged(object sender, EventArgs e) {
-			tip.visible = !hideItemCheckBox.Checked;
+			model.visible = !hideItemCheckBox.Checked;
 		}
 
 		private void IPluginForm_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e) {
 			HelpUtils.ShowHelp(this, "src/plugins.htm");
+		}
+		private void OkButton_Click(object sender, EventArgs e) {
+			DialogResult = DialogResult.OK;
 		}
 	}
 }
