@@ -10,7 +10,7 @@ namespace TrayDir
 		Dictionary<string, int> pluginIndex = new Dictionary<string, int>();
 		List<Control> labels = new List<Control>();
 		List<Control> controls = new List<Control>();
-		TrayInstanceVirtualFolder model;
+		public TrayInstanceVirtualFolder model;
 		public IVirtualFolderForm(TrayInstanceVirtualFolder tivf)
 		{
 			InitializeComponent();

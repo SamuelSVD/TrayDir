@@ -11,7 +11,7 @@ namespace TrayDir
 		List<Control> labels = new List<Control>();
 		List<Control> controls = new List<Control>();
 		TrayPlugin selectedPlugin;
-		TrayInstancePlugin model;
+		public TrayInstancePlugin model;
 		private int startingCount;
 		public IPluginForm(TrayInstancePlugin tip)
 		{

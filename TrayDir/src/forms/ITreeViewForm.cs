@@ -357,6 +357,8 @@ namespace TrayDir
 			selectedNode = itn;
 			nodes.Add(itn);
 			vFolderPropertiesButton_Click(sender, e);
+			instance.view?.tray.Rebuild();
+			Save();
 		}
 		private void renameButton_Click(object sender, EventArgs e)
 		{
@@ -720,6 +722,8 @@ namespace TrayDir
 			selectedNode = itn;
 			nodes.Add(itn);
 			pluginPropertiesButton_Click(sender, e);
+			instance.view?.tray.Rebuild();
+			Save();
 		}
 		private void newSeparatorButton_Click(object sender, EventArgs e)
 		{
@@ -737,17 +741,29 @@ namespace TrayDir
 		}
 		private void pluginPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
-			IPluginForm ipf = new IPluginForm(instance.plugins[itn.tin.id]);
+			TrayInstancePlugin tip = instance.plugins[itn.tin.id];
+			IPluginForm ipf = new IPluginForm(tip.Copy());
 			ipf.ShowDialog();
-			RefreshSelected();
-			Save();
+			if (ipf.DialogResult == DialogResult.OK) {
+				if (!tip.Equals(ipf.model)) {
+					tip.Apply(ipf.model);
+					Save();
+				}
+				RefreshSelected();
+			}
 		}
 		private void vFolderPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
-			IVirtualFolderForm ivff = new IVirtualFolderForm(instance.vfolders[itn.tin.id]);
+			TrayInstanceVirtualFolder tivf = instance.vfolders[itn.tin.id];
+			IVirtualFolderForm ivff = new IVirtualFolderForm(tivf.Copy());
 			ivff.ShowDialog();
-			RefreshSelected();
-			Save();
+			if (ivff.DialogResult == DialogResult.OK) {
+				if (!tivf.Equals(ivff.model)) {
+					tivf.Apply(ivff.model);
+					Save();
+				}
+				RefreshSelected();
+			}
 		}
 		private void treeView2_ItemDrag(object sender, ItemDragEventArgs e)
 		{
