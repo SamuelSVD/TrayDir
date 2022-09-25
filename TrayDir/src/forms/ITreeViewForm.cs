@@ -359,6 +359,7 @@ namespace TrayDir
 			vFolderPropertiesButton_Click(sender, e);
 			instance.view?.tray.Rebuild();
 			Save();
+			selectedNode.Refresh();
 		}
 		private void renameButton_Click(object sender, EventArgs e)
 		{
@@ -724,6 +725,7 @@ namespace TrayDir
 			pluginPropertiesButton_Click(sender, e);
 			instance.view?.tray.Rebuild();
 			Save();
+			selectedNode.Refresh();
 		}
 		private void newSeparatorButton_Click(object sender, EventArgs e)
 		{
