@@ -837,7 +837,7 @@ namespace TrayDir
 		}
 		private void MoveAOverB(TreeNode A, TreeNode B)
 		{
-			if ((!A.Equals(B)) && (!ContainsNode(A, B))) {
+			if ((!object.ReferenceEquals(A, B)) && (!ContainsNode(A, B))) {
 				int targetNodeIndex;
 				if (B.Parent != null) {
 					targetNodeIndex = B.Parent.Nodes.IndexOf(B);
@@ -860,13 +860,13 @@ namespace TrayDir
 		private bool ContainsNode(TreeNode node1, TreeNode node2)
 		{
 			if (node2.Parent == null) return false;
-			if (node2.Parent.Equals(node1)) return true;
+			if (object.ReferenceEquals(node2.Parent, node1)) return true;
 			return ContainsNode(node1, node2.Parent);
 		}
 		private TrayInstanceNode TreeNodeToInstanceNode(TreeNode node)
 		{
 			foreach(ITreeNode n in nodes) {
-				if (node.Equals(n.node)) {
+				if (object.ReferenceEquals(node,n.node)) {
 					return n.tin;
 				}
 			}
