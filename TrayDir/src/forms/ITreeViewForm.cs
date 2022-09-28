@@ -631,11 +631,13 @@ namespace TrayDir
 		{
 			instance.paths[selectedNode.tin.id].shortcut = true;
 			RefreshSelected();
+			Save();
 		}
 		private void folderExpandMenuItem_click(object sender, EventArgs e)
 		{
 			instance.paths[selectedNode.tin.id].shortcut = false;
 			RefreshSelected();
+			Save();
 		}
 		private void openInExplorerMenuItem_click(object sender, EventArgs e) {
 			AppUtils.ExplorePath(instance.paths[selectedNode.tin.id].path);
