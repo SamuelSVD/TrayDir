@@ -38,6 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\TrayDir.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -220,6 +221,7 @@
     <Compile Include="src\utils\TrayUtils.cs" />
     <Compile Include="src\utils\UpdateUtils.cs" />
     <Compile Include="src\utils\XMLUtils.cs" />
+    <Compile Include="src\views\IMenuItem.Events.cs" />
     <Compile Include="src\views\ComboBoxView.cs" />
     <Compile Include="src\views\InstanceNode.cs" />
     <Compile Include="src\views\PluginNode.cs" />

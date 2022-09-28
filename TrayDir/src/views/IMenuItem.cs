@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using TrayDir.utils;
 
 namespace TrayDir {
-	public class IMenuItem {
+	public partial class IMenuItem {
 		internal TrayInstance instance;
 		internal TrayInstanceNode tiNode;
 		internal TrayInstancePath tiPath;
@@ -132,20 +132,6 @@ namespace TrayDir {
 				catch { }
 			}
 		}
-		public void MenuDestroy(object obj, EventArgs args)
-		{
-			IMenuItem mi = parent;
-			while (mi != null)
-			{
-				mi.menuItem.DropDown.AutoClose = true;
-				mi.menuItem.DropDown.Close();
-				mi.menuItem.Enabled = true;
-				mi = mi.parent;
-			}
-			instance.view.tray.notifyIcon.ContextMenuStrip.AutoClose = true;
-			instance.view.tray.notifyIcon.ContextMenuStrip.Enabled = true;
-			instance.view.tray.notifyIcon.ContextMenuStrip.Close();
-		}
 		private void MenuSave()
 		{
 			IMenuItem mi = parent;
@@ -160,54 +146,7 @@ namespace TrayDir {
 			instance.view.tray.notifyIcon.ContextMenuStrip.AutoClose = false;
 			instance.view.tray.notifyIcon.ContextMenuStrip.Enabled = false;
 		}
-		private void Run(object obj, EventArgs args)
-		{
-			AppUtils.Run(this);
-		}
-		private void RunAll(object obj, EventArgs args)
-		{
-			foreach(IMenuItem imi in nodeChildren) {
-				if (imi.isDir || imi.isFile || imi.isPlugin) {
-					AppUtils.Run(imi);
-				} else if (imi.isVFolder) {
-					imi.RunAll(obj, args);
-				}
-			}
-		}
-		private void Explore(object obj, EventArgs args)
-		{
-			AppUtils.Explore(this);
-		}
-		private void RunAs(object obj, EventArgs args)
-		{
-			AppUtils.RunAs(this);
-		}
-		private void OpenCmd(object obj, EventArgs args)
-		{
-			AppUtils.OpenCmd(this);
-		}
-		private void OpenAdminCmd(object obj, EventArgs args)
-		{
-			AppUtils.OpenAdminCmd(this);
-		}
-		public void MenuItemClick(object obj, MouseEventArgs args)
-		{
-			if (((MouseEventArgs)args).Button == MouseButtons.Right) {
-				showContextMenu();
-			}
-			else
-			{
-				AppUtils.Open(this);
-			}
-		}
 		private int _clicks = 0;
-		public void MenuItemDoubleClick(object obj, EventArgs args) {
-			_clicks += 1;
-			if (_clicks == 2) {
-				Run(obj, args);
-				RunAll(obj, args);
-			}
-		}
 		public void ResetClicks() {
 			_clicks = 0;
 			if (folderChildren != null) {
@@ -264,36 +203,6 @@ namespace TrayDir {
 				cmnu.Closing += MenuDestroy;
 			}
 		}
-		private void submenu_DropDownOpening(object sender, EventArgs e)
-		{
-			if (menuItem.HasDropDownItems == false)
-			{
-				return; // not a drop down item
-			}
-			// Current bounds of the current monitor
-			Rectangle Bounds = menuItem.GetCurrentParent().Bounds;
-			Screen CurrentScreen = Screen.FromPoint(Bounds.Location);
-
-			// Look how big our children are:
-			int MaxWidth = 0;
-			foreach (ToolStripItem subitem in menuItem.DropDownItems)
-			{
-				MaxWidth = Math.Max(subitem.Width, MaxWidth);
-			}
-			MaxWidth += 10; // Add a little wiggle room
-
-			int FarRight = Bounds.Right + MaxWidth;
-			int CurrentMonitorRight = CurrentScreen.Bounds.Right;
-
-			if (FarRight > CurrentMonitorRight)
-			{
-				menuItem.DropDownDirection = ToolStripDropDownDirection.Left;
-			}
-			else
-			{
-				menuItem.DropDownDirection = ToolStripDropDownDirection.Right;
-			}
-		}
 		internal void UpdateVisibility() {
 			if ((isFile || isDir) && (tiPath != null)) {
 				menuItem.Visible = tiPath.visible;
@@ -308,7 +217,8 @@ namespace TrayDir {
 			if (menuItem == null)
 			{
 				menuItem = new ToolStripMenuItem();
-				menuItem.DropDownOpening += submenu_DropDownOpening;
+				menuItem.DropDownOpening += MenuItemDropDownOpening;
+				menuItem.DropDownOpening += LoadChildrenIconEvent;
 				menuItem.Paint += LoadFolderChildren;
 			}
 			bool useAlias = (alias != null && alias != string.Empty);
@@ -399,23 +309,13 @@ namespace TrayDir {
 			if (!assignedClickEvent)
 			{
 				menuItem.MouseDown += MenuItemClick;
-				menuItem.Click += MenuItemDoubleClick;
-				menuItem.DropDownOpened += LoadChildrenIconEvent;
+				menuItem.Click += MenuItemClick;
 				assignedClickEvent = true;
 			}
 		}
 		public void EnqueueImgLoad()
 		{
 			IMenuItemIconUtils.EnqueueIconLoad(this);
-		}
-		public void LoadChildrenIconEvent(Object obj, EventArgs args)
-		{
-			if (tiPath != null) {
-				foreach (IMenuItem child in folderChildren)
-				{
-					child.EnqueueImgLoad();
-				}
-			}
 		}
 		public void AddToCollection(ToolStripItemCollection collection)
 		{
