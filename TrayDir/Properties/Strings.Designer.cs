@@ -445,6 +445,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show TrayMenu on Left Click.
+        /// </summary>
+        internal static string Form_ShowMenuOnLeftClick {
+            get {
+                return ResourceManager.GetString("Form_ShowMenuOnLeftClick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Minimized.
         /// </summary>
         internal static string Form_StartMinimized {
@@ -853,6 +862,15 @@ namespace TrayDir.Properties {
         internal static string Tooltip_ShowIconsInTrayMenu {
             get {
                 return ResourceManager.GetString("Tooltip_ShowIconsInTrayMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When enabled, left clicking on the tray menu item will display the context menu.
+        /// </summary>
+        internal static string Tooltip_ShowMenuOnLeftClick {
+            get {
+                return ResourceManager.GetString("Tooltip_ShowMenuOnLeftClick", resourceCulture);
             }
         }
         

@@ -249,6 +249,9 @@ Verify all required parameters are provided.</value>
   <data name="Form_ShowIconsInTrayMenu" xml:space="preserve">
     <value>Show Icons In Tray Menu</value>
   </data>
+  <data name="Form_ShowMenuOnLeftClick" xml:space="preserve">
+    <value>Show TrayMenu on Left Click</value>
+  </data>
   <data name="Form_StartMinimized" xml:space="preserve">
     <value>Start Minimized</value>
   </data>
@@ -390,6 +393,9 @@ them from the System Tray menu</value>
   </data>
   <data name="Tooltip_ShowIconsInTrayMenu" xml:space="preserve">
     <value>When enabled, each menu item will show the icon associated with the file linked</value>
+  </data>
+  <data name="Tooltip_ShowMenuOnLeftClick" xml:space="preserve">
+    <value>When enabled, left clicking on the tray menu item will display the context menu</value>
   </data>
   <data name="Tooltip_StartMinimized" xml:space="preserve">
     <value>When enabled, the application will always start hidden, only visible in system tray</value>

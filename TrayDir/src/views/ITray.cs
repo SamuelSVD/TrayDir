@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 using TrayDir.utils;
 
@@ -42,10 +43,17 @@ namespace TrayDir
 			this.instance = instance;
 			notifyIcon = new NotifyIcon();
 			notifyIcon.Visible = !instance.settings.HideFromTray;
+			notifyIcon.MouseClick += notifyIcon_Click;
 			UpdateTrayIcon();
 			pathMenuItems = new List<IMenuItem>();
 			virtualFolderMenuItems = new List<IMenuItem>();
 			pluginMenuItems = new List<IMenuItem>();
+		}
+		public void notifyIcon_Click(object sender, MouseEventArgs e) {
+			if (e.Button == MouseButtons.Left && ProgramData.pd.settings.app.ShowMenuOnLeftClick) {
+				MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
+				mi.Invoke(notifyIcon, null);
+			}
 		}
 		private void Reset(Object o, EventArgs e) {
 			foreach(IMenuItem m in menuItems) {

@@ -15,5 +15,7 @@ namespace TrayDir
 		public string VFolderIcon = "Blue Folder";
 		[XmlAttribute]
 		public bool CreateFoldersAsShortcuts = false;
+		[XmlAttribute]
+		public bool ShowMenuOnLeftClick = false;
 	}
 }

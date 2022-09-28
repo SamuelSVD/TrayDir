@@ -7,6 +7,29 @@ namespace TrayDir
 {
 	class ControlUtils
 	{
+		public static CheckBoxOptionView AddCheckbox(TableLayoutPanel panel, string settingName, StringIndexable settingGroup, string controlText, bool initialValue, string tooltipText) {
+			CheckBoxOptionView ov = new CheckBoxOptionView(controlText, initialValue);
+			if (panel.Controls.Count == 0) {
+				ov.AddTo(panel, 0);
+			} else {
+				ov.AddTo(panel, panel.RowCount);
+			}
+			ov.SetTooltip(tooltipText);
+			SetCheckboxCheckedEvent(ov.checkbox, settingGroup, settingName);
+			return ov;
+		}
+		public static ComboBoxView AddSimpleComboBox(TableLayoutPanel panel, string settingName, StringIndexable settingGroup, string controlText, string initalValue, string tooltipText, string[] comboboxOptions) {
+			ComboBoxView cbv = new ComboBoxView(controlText, comboboxOptions);
+			if (panel.Controls.Count == 0) {
+				cbv.AddTo(panel, 0);
+			} else {
+				cbv.AddTo(panel, panel.RowCount);
+			}
+			SetComboBoxChangedEvent(cbv.combobox, settingGroup, settingName);
+			cbv.SetTooltip(tooltipText);
+			cbv.combobox.Text = initalValue;
+			return cbv;
+		}
 		public static void AddEmptyOption(TableLayoutPanel tlp, int row)
 		{
 			tlp.RowStyles.Add(new RowStyle());
