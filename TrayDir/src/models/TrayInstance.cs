@@ -69,15 +69,15 @@ namespace TrayDir
 			// Link nodes to their corresponding data
 			foreach (TrayInstanceNode node in pathNodes)
 			{
-				node.__path = paths[node.id];
+				node.__item = paths[node.id];
 			}
 			foreach (TrayInstanceNode node in vfolderNodes)
 			{
-				node.__vfolder = vfolders[node.id];
+				node.__item = vfolders[node.id];
 			}
 			foreach (TrayInstanceNode node in pluginNodes)
 			{
-				node.__plugin = plugins[node.id];
+				node.__item = plugins[node.id];
 			}
 
 			// Detect and remove paths that are not used
@@ -87,7 +87,7 @@ namespace TrayDir
 				bool found = false;
 				foreach (TrayInstanceNode node in pathNodes)
 				{
-					if (node.__path == path)
+					if (node.__item == path)
 					{
 						found = true;
 						break;
@@ -110,7 +110,7 @@ namespace TrayDir
 				bool found = false;
 				foreach (TrayInstanceNode node in pluginNodes)
 				{
-					if (node.__plugin == plugin)
+					if (node.__item == plugin)
 					{
 						found = true;
 						break;
@@ -133,7 +133,7 @@ namespace TrayDir
 				bool found = false;
 				foreach (TrayInstanceNode node in vfolderNodes)
 				{
-					if (node.__vfolder == vfolder)
+					if (node.__item == vfolder)
 					{
 						found = true;
 						break;
@@ -152,15 +152,15 @@ namespace TrayDir
 			// Fix all IDs
 			foreach (TrayInstanceNode node in pathNodes)
 			{
-				node.id = paths.IndexOf(node.__path);
+				node.id = paths.IndexOf((TrayInstancePath)node.__item);
 			}
 			foreach (TrayInstanceNode node in pluginNodes)
 			{
-				node.id = plugins.IndexOf(node.__plugin);
+				node.id = plugins.IndexOf((TrayInstancePlugin)node.__item);
 			}
 			foreach (TrayInstanceNode node in vfolderNodes)
 			{
-				node.id = vfolders.IndexOf(node.__vfolder);
+				node.id = vfolders.IndexOf((TrayInstanceVirtualFolder)node.__item);
 			}
 		}
 		public TrayPlugin getGlobalPluginBySignature(string signature)
@@ -284,11 +284,11 @@ namespace TrayDir
 			}
 			foreach(TrayInstanceVirtualFolder tivf in vfolders)
 			{
-				ti.vfolders.Add(tivf.Copy());
+				ti.vfolders.Add((TrayInstanceVirtualFolder)tivf.Copy());
 			}
 			foreach(TrayInstancePlugin tip in plugins)
 			{
-				ti.plugins.Add(tip.Copy());
+				ti.plugins.Add((TrayInstancePlugin)tip.Copy());
 			}
 			ti.nodes = nodes.Copy();
 			return ti;

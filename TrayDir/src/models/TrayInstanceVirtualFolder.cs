@@ -2,32 +2,33 @@
 
 namespace TrayDir
 {
-	public class TrayInstanceVirtualFolder : Model<TrayInstanceVirtualFolder>
+	public class TrayInstanceVirtualFolder : TrayInstanceItem
 	{
-		[XmlAttribute]
-		public string alias;
-		[XmlAttribute]
-		public bool visible = true;
 		public TrayInstanceVirtualFolder() : this(string.Empty) { }
 		public TrayInstanceVirtualFolder(string alias)
 		{
 			this.alias = alias;
 		}
-		public override TrayInstanceVirtualFolder Copy()
+		public override object Copy()
 		{
 			TrayInstanceVirtualFolder tivf = new TrayInstanceVirtualFolder();
 			tivf.alias = alias;
 			return tivf;
 		}
-		public override void Apply(TrayInstanceVirtualFolder model) {
-			this.alias = model.alias;
+		public override void Apply(object model) {
+			if (model.GetType() == typeof(TrayInstanceVirtualFolder)) {
+				this.alias = ((TrayInstanceVirtualFolder)model).alias;
+			}
 		}
-		public override bool Equals(TrayInstanceVirtualFolder b) {
-			TrayInstanceVirtualFolder a = this;
-			bool equals = true;
-			equals &= (a.alias == b.alias);
-			equals &= (a.visible == b.visible);
-			return equals;
+		public override bool Equals(object b) {
+			if (b.GetType() == typeof(TrayInstanceVirtualFolder)) {
+				TrayInstanceVirtualFolder a = this;
+				bool equals = true;
+				equals &= (a.alias == ((TrayInstanceVirtualFolder)b).alias);
+				equals &= (a.visible == ((TrayInstanceVirtualFolder)b).visible);
+				return equals;
+			}
+			return false;
 		}
 	}
 }

@@ -3,16 +3,12 @@ using System.Xml.Serialization;
 
 namespace TrayDir
 {
-	public class TrayInstancePath : Model<TrayInstancePath>
+	public class TrayInstancePath : TrayInstanceItem
 	{
 		[XmlAttribute]
 		public string path;
 		[XmlAttribute]
 		public bool shortcut = false;
-		[XmlAttribute]
-		public string alias;
-		[XmlAttribute]
-		public bool visible = true;
 		public TrayInstancePath() : this(string.Empty) { }
 		public bool isDir { get { return AppUtils.PathIsDirectory(path); } }
 		public bool isFile { get { return AppUtils.PathIsFile(path); } }
@@ -20,7 +16,7 @@ namespace TrayDir
 		{
 			this.path = path;
 		}
-		public override TrayInstancePath Copy()
+		public override object Copy()
 		{
 			TrayInstancePath tip = new TrayInstancePath();
 			tip.path = path;
@@ -28,19 +24,24 @@ namespace TrayDir
 			tip.alias = alias;
 			return tip;
 		}
-		public override void Apply(TrayInstancePath model) {
-			this.path = model.path;
-			this.shortcut = model.shortcut;
-			this.alias = model.alias;
+		public override void Apply(object model) {
+			if (model.GetType() == typeof(TrayInstancePath)) {
+				this.path = ((TrayInstancePath)model).path;
+				this.shortcut = ((TrayInstancePath)model).shortcut;
+				this.alias = ((TrayInstancePath)model).alias;
+			}
 		}
-		public override bool Equals(TrayInstancePath b) {
-			TrayInstancePath a = this;
-			bool equals = true;
-			equals &= (a.path == b.path);
-			equals &= (a.shortcut == b.shortcut);
-			equals &= (a.alias == b.alias);
-			equals &= (a.visible == b.visible);
-			return equals;
+		public override bool Equals(object b) {
+			if (b.GetType() == typeof(TrayInstancePath)) {
+				TrayInstancePath a = this;
+				bool equals = true;
+				equals &= (a.path == ((TrayInstancePath)b).path);
+				equals &= (a.shortcut == ((TrayInstancePath)b).shortcut);
+				equals &= (a.alias == ((TrayInstancePath)b).alias);
+				equals &= (a.visible == ((TrayInstancePath)b).visible);
+				return equals;
+			}
+			return false;
 		}
 	}
 }

@@ -295,7 +295,7 @@ namespace TrayDir
 		{
 			ITreeNode itn = selectedNode;
 			TrayInstancePath tip = instance.paths[itn.tin.id];
-			IPathForm iff = new IPathForm(tip.Copy());
+			IPathForm iff = new IPathForm((TrayInstancePath)tip.Copy());
 			if (selectedNodeNew) {
 				iff.ShowDialogNewFile();
 			}
@@ -420,7 +420,7 @@ namespace TrayDir
 					recursive_instance.internalPlugins = new List<TrayPlugin>();
 				}
 				newTin.id = recursive_instance.plugins.Count;
-				TrayInstancePlugin ip = instance.plugins[tin.id].Copy();
+				TrayInstancePlugin ip = (TrayInstancePlugin)instance.plugins[tin.id].Copy();
 				if (ip.plugin != null)
 				{
 					TrayPlugin tp = recursive_instance.getInternalPluginBySignature(ip.plugin.getSignature());
@@ -746,7 +746,7 @@ namespace TrayDir
 		private void pluginPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
 			TrayInstancePlugin tip = instance.plugins[itn.tin.id];
-			IPluginForm ipf = new IPluginForm(tip.Copy());
+			IPluginForm ipf = new IPluginForm((TrayInstancePlugin)tip.Copy());
 			ipf.ShowDialog();
 			if (ipf.DialogResult == DialogResult.OK) {
 				if (!tip.Equals(ipf.model)) {
@@ -759,7 +759,7 @@ namespace TrayDir
 		private void vFolderPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
 			TrayInstanceVirtualFolder tivf = instance.vfolders[itn.tin.id];
-			IVirtualFolderForm ivff = new IVirtualFolderForm(tivf.Copy());
+			IVirtualFolderForm ivff = new IVirtualFolderForm((TrayInstanceVirtualFolder)tivf.Copy());
 			ivff.ShowDialog();
 			if (ivff.DialogResult == DialogResult.OK) {
 				if (!tivf.Equals(ivff.model)) {

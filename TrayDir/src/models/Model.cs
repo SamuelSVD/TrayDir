@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TrayDir {
-	public abstract class Model<T> {
+	public abstract class Model {
 		public object ObjectCopy() {
 			return Copy();
 		}
-		public abstract T Copy();
+		public abstract object Copy();
 		/*** Apply should be used to assign all values from the input model to this instance of the model ***/
-		public abstract void Apply(T model);
+		public abstract void Apply(object model);
 
 		// Do not override base Equals(object b);
-		public abstract bool Equals(T b);
+		public abstract bool Equals(object b);
 	}
 }

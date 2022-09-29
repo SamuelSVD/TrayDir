@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace TrayDir {
-	public class TrayInstancePlugin : Model<TrayInstancePlugin> {
+	public class TrayInstancePlugin : TrayInstanceItem {
 		[XmlAttribute]
 		public int id = -1;
-		[XmlAttribute]
-		public string alias;
-		[XmlAttribute]
-		public bool visible = true;
 		public List<TrayInstancePluginParameter> parameters = new List<TrayInstancePluginParameter>();
 		[XmlIgnore]
 		public TrayPlugin plugin {
@@ -31,46 +27,50 @@ namespace TrayDir {
 			}
 		}
 
-		public override TrayInstancePlugin Copy() {
+		public override object Copy() {
 			TrayInstancePlugin tip = new TrayInstancePlugin();
 			tip.id = id;
 			tip.alias = alias;
 			foreach (TrayInstancePluginParameter tipp in parameters) {
-				tip.parameters.Add(tipp.Copy());
+				tip.parameters.Add((TrayInstancePluginParameter)tipp.Copy());
 			}
 			return tip;
 		}
-		public override void Apply(TrayInstancePlugin model) {
-			this.id = model.id;
-			this.alias = model.alias;
-			for (int i = 0; i < model.parameters.Count; i++) {
-				if (this.parameters.Count > i) {
-					this.parameters[i].Apply(model.parameters[i]);
-				} else {
-					TrayInstancePluginParameter tipp = new TrayInstancePluginParameter();
-					tipp.Apply(model.parameters[i]);
-					this.parameters.Add(tipp);
+		public override void Apply(object model) {
+			if (model.GetType() == typeof(TrayInstancePlugin)) {
+				this.id = ((TrayInstancePlugin)model).id;
+				this.alias = ((TrayInstancePlugin)model).alias;
+				for (int i = 0; i < ((TrayInstancePlugin)model).parameters.Count; i++) {
+					if (this.parameters.Count > i) {
+						this.parameters[i].Apply(((TrayInstancePlugin)model).parameters[i]);
+					} else {
+						TrayInstancePluginParameter tipp = new TrayInstancePluginParameter();
+						tipp.Apply(((TrayInstancePlugin)model).parameters[i]);
+						this.parameters.Add(tipp);
+					}
 				}
-			}
-			while (this.parameters.Count > model.parameters.Count) {
-				this.parameters.RemoveAt(parameters.Count - 1);
+				while (this.parameters.Count > ((TrayInstancePlugin)model).parameters.Count) {
+					this.parameters.RemoveAt(parameters.Count - 1);
+				}
 			}
 		}
-		public override bool Equals(TrayInstancePlugin b) {
-			//id alias visible parameters
-			TrayInstancePlugin a = this;
-			bool equals = true;
-			equals &= (a.id == b.id);
-			equals &= (a.alias == b.alias);
-			equals &= (a.visible == b.visible);
-			equals &= (a.parameters.Count == b.parameters.Count);
-			if (equals) {
-				int count = a.parameters.Count;
-				for (int i = 0; i < count; i++) {
-					equals &= (a.parameters[i].Equals(b.parameters[i]));
+		public override bool Equals(object b) {
+			if (b.GetType() == typeof(TrayInstancePlugin)) {
+				TrayInstancePlugin a = this;
+				bool equals = true;
+				equals &= (a.id == ((TrayInstancePlugin)b).id);
+				equals &= (a.alias == ((TrayInstancePlugin)b).alias);
+				equals &= (a.visible == ((TrayInstancePlugin)b).visible);
+				equals &= (a.parameters.Count == ((TrayInstancePlugin)b).parameters.Count);
+				if (equals) {
+					int count = a.parameters.Count;
+					for (int i = 0; i < count; i++) {
+						equals &= (a.parameters[i].Equals(((TrayInstancePlugin)b).parameters[i]));
+					}
 				}
+				return equals;
 			}
-			return equals;
+			return false;
 		}
 
 		internal bool isValid() {

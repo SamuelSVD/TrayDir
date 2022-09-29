@@ -181,6 +181,7 @@
     <Compile Include="src\forms\UnhandledExceptionForm.Designer.cs">
       <DependentUpon>UnhandledExceptionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\models\TrayInstanceItem.cs" />
     <Compile Include="src\models\Model.cs" />
     <Compile Include="src\models\SettingsWindows.cs" />
     <Compile Include="src\models\StringIndexable.cs" />
