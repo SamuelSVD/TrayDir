@@ -1,10 +1,7 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
-namespace TrayDir
-{
-	public class TrayInstancePath : TrayInstanceItem
-	{
+namespace TrayDir {
+	public class TrayInstancePath : TrayInstanceItem {
 		[XmlAttribute]
 		public string path;
 		[XmlAttribute]
@@ -12,12 +9,10 @@ namespace TrayDir
 		public TrayInstancePath() : this(string.Empty) { }
 		public bool isDir { get { return AppUtils.PathIsDirectory(path); } }
 		public bool isFile { get { return AppUtils.PathIsFile(path); } }
-		public TrayInstancePath(string path)
-		{
+		public TrayInstancePath(string path) {
 			this.path = path;
 		}
-		public override object Copy()
-		{
+		public override object Copy() {
 			TrayInstancePath tip = new TrayInstancePath();
 			tip.path = path;
 			tip.shortcut = shortcut;

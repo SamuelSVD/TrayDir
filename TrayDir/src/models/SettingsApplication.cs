@@ -1,12 +1,8 @@
-﻿using System;
-using System.Reflection;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
-namespace TrayDir
-{
+namespace TrayDir {
 	[XmlRoot(ElementName = "Application")]
-	public class SettingsApplication : StringIndexable
-	{
+	public class SettingsApplication : StringIndexable {
 		[XmlAttribute]
 		public bool ShowIconsInMenus = true;
 		[XmlAttribute]

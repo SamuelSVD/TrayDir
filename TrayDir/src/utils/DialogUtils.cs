@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace TrayDir
-{
-	class InputDialog
-	{
-		public static DialogResult ShowStringInputDialog(string text, ref string input)
-		{
+namespace TrayDir {
+	class InputDialog {
+		public static DialogResult ShowStringInputDialog(string text, ref string input) {
 			Size size = new Size(500, 50);
 			Form inputBox = new Form();
 			inputBox.Icon = MainForm.form.Icon;
@@ -49,11 +41,9 @@ namespace TrayDir
 			cancelButton.Dock = DockStyle.Top;
 			tlp.Controls.Add(cancelButton, 2, 1);
 
-			for (int i = 0; i < 3; i++)
-			{
+			for (int i = 0; i < 3; i++) {
 				ColumnStyle cs = new ColumnStyle();
-				switch (i)
-				{
+				switch (i) {
 					case 0:
 						cs.SizeType = SizeType.Percent;
 						cs.Width = 60;
@@ -75,8 +65,7 @@ namespace TrayDir
 			input = textBox.Text;
 			return result;
 		}
-		public static DialogResult ShowMultilineStringInputDialog(string text, ref string input)
-		{
+		public static DialogResult ShowMultilineStringInputDialog(string text, ref string input) {
 			Size size = new Size(500, 50);
 			Form inputBox = new Form();
 
@@ -121,11 +110,9 @@ namespace TrayDir
 			tlp.Controls.Add(cancelButton, 2, 1);
 
 			tlp.ColumnStyles.Clear();
-			for (int i = 0; i < 3; i++)
-			{
+			for (int i = 0; i < 3; i++) {
 				ColumnStyle cs = new ColumnStyle();
-				switch (i)
-				{
+				switch (i) {
 					case 0:
 						cs.SizeType = SizeType.Percent;
 						cs.Width = 60;
@@ -139,11 +126,9 @@ namespace TrayDir
 			}
 
 			tlp.RowStyles.Clear();
-			for (int i = 0; i < 2; i++)
-			{
+			for (int i = 0; i < 2; i++) {
 				RowStyle rs = new RowStyle();
-				switch (i)
-				{
+				switch (i) {
 					case 0:
 						rs.SizeType = SizeType.Percent;
 						rs.Height = 75;

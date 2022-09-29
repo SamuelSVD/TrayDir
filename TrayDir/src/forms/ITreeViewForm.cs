@@ -1,15 +1,11 @@
-﻿using FolderSelect;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using TrayDir.utils;
 
-namespace TrayDir
-{
-	public partial class ITreeViewForm : Form
-	{
+namespace TrayDir {
+	public partial class ITreeViewForm : Form {
 		private List<ITreeNode> nodes;
 		private bool selectedNodeNew = false;
 		private ITreeNode selectedNode { get { return __selectedNode; } set { __selectedNode = value; UpdateButtonEnables(); } }
@@ -37,8 +33,7 @@ namespace TrayDir
 		private MenuItem openInCmdAdminMenuItem;
 
 
-		public ITreeViewForm(TrayInstance instance)
-		{
+		public ITreeViewForm(TrayInstance instance) {
 			rightClickMenu = new ContextMenu();
 			renameMenuItem = new MenuItem(Properties.Strings.Item_RenameItem, renameButton_Click);
 
@@ -75,8 +70,7 @@ namespace TrayDir
 			InitializeComponent();
 			this.Icon = Properties.Resources.file_exe;
 			nodes = new List<ITreeNode>();
-			foreach (TrayInstanceNode tin in instance.nodes.children)
-			{
+			foreach (TrayInstanceNode tin in instance.nodes.children) {
 				InitNodes(treeView2, tin, null);
 			}
 			treeView2.ExpandAll();
@@ -101,8 +95,7 @@ namespace TrayDir
 			deleteButton.TextImageRelation = TextImageRelation.ImageBeforeText;
 			deleteButton.TextAlign = ContentAlignment.MiddleLeft;
 			UpdateButtonEnables();
-			foreach(ITreeNode n in nodes)
-			{
+			foreach (ITreeNode n in nodes) {
 				n.Refresh();
 			}
 		}
@@ -122,25 +115,19 @@ namespace TrayDir
 		private void copyButton_Click(object sender, EventArgs e) {
 			CopyToClipboard();
 		}
-		public void setTabPage(TabPage tp)
-		{
+		public void setTabPage(TabPage tp) {
 			this.tp = tp;
 		}
-		public Control GetControl()
-		{
+		public Control GetControl() {
 			return this.formTableLayoutPanel;
 		}
-		private ITreeNode InitNodes(TreeView tv, TrayInstanceNode tin, ITreeNode parent)
-		{
+		private ITreeNode InitNodes(TreeView tv, TrayInstanceNode tin, ITreeNode parent) {
 			ITreeNode tn = new ITreeNode(tin);
-			if (parent == null)
-			{
+			if (parent == null) {
 				treeView2.Nodes.Add(tn.node);
 			}
-			if (tin.children.Count > 0)
-			{
-				foreach (TrayInstanceNode tinc in tin.children)
-				{
+			if (tin.children.Count > 0) {
+				foreach (TrayInstanceNode tinc in tin.children) {
 					ITreeNode tnc = InitNodes(tv, tinc, tn);
 					tn.node.Nodes.Add(tnc.node);
 				}
@@ -148,63 +135,52 @@ namespace TrayDir
 			nodes.Add(tn);
 			return tn;
 		}
-		private void updateImage(Button b, int index)
-		{
+		private void updateImage(Button b, int index) {
 			b.Image = IconUtils.imageList.Images[index];
 			b.Width = b.Height;
 		}
-		private void treeView2_AfterSelect(object sender, TreeViewEventArgs e)
-		{
+		private void treeView2_AfterSelect(object sender, TreeViewEventArgs e) {
 			Text = e.Node.Text;
-			foreach (ITreeNode itn in nodes)
-			{
-				if (e.Node == itn.node)
-				{
+			foreach (ITreeNode itn in nodes) {
+				if (e.Node == itn.node) {
 					selectedNode = itn;
 					break;
 				}
 			}
 		}
-		private void Save()
-		{
+		private void Save() {
 			instance.Repair();
 			MainForm.form.BuildExploreDropdown();
 			ProgramData.pd.Save();
 		}
-		public void Rebuild()
-		{
-			foreach(ITreeNode itn in nodes) {
+		public void Rebuild() {
+			foreach (ITreeNode itn in nodes) {
 				itn.Refresh();
 			}
 		}
-		private void upButton_Click(object sender, EventArgs e)
-		{
+		private void upButton_Click(object sender, EventArgs e) {
 			selectedNode.MoveUp();
 			instance.view?.Rebuild();
 			Save();
 		}
-		private void downButton_Click(object sender, EventArgs e)
-		{
+		private void downButton_Click(object sender, EventArgs e) {
 			selectedNode.MoveDown();
 			instance.view?.Rebuild();
 			Save();
 		}
-		private void indentButton_Click(object sender, EventArgs e)
-		{
+		private void indentButton_Click(object sender, EventArgs e) {
 			selectedNode.MoveIn();
 			instance.view?.Rebuild();
 			Save();
 		}
 
-		private void outdentButton_Click(object sender, EventArgs e)
-		{
+		private void outdentButton_Click(object sender, EventArgs e) {
 			selectedNode.MoveOut();
 			instance.view?.Rebuild();
 			Save();
 		}
 
-		private void newDocButton_Click(object sender, EventArgs e)
-		{
+		private void newDocButton_Click(object sender, EventArgs e) {
 			selectedNodeNew = true;
 			newPathButton_Click(sender, e);
 			pathPropertiesButton_Click(null, null);
@@ -214,8 +190,7 @@ namespace TrayDir
 			selectedNodeNew = false;
 		}
 
-		private void newFolderButton_Click(object sender, EventArgs e)
-		{
+		private void newFolderButton_Click(object sender, EventArgs e) {
 			selectedNodeNew = true;
 			newPathButton_Click(sender, e);
 			folderPropertiesButton_Click(null, null);
@@ -224,8 +199,7 @@ namespace TrayDir
 			Save();
 			selectedNodeNew = false;
 		}
-		private void newPathButton_Click(object sender, EventArgs e)
-		{
+		private void newPathButton_Click(object sender, EventArgs e) {
 			TrayInstancePath tip = new TrayInstancePath();
 			tip.shortcut = ProgramData.pd.settings.app.CreateFoldersAsShortcuts;
 			instance.paths.Add(tip);
@@ -240,35 +214,25 @@ namespace TrayDir
 			selectedNode = itn;
 			nodes.Add(itn);
 		}
-		private void insertNode(ITreeNode itn)
-		{
+		private void insertNode(ITreeNode itn) {
 			TrayInstanceNode tin = itn.tin;
-			if (selectedNode != null)
-			{
-				if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder)
-				{
+			if (selectedNode != null) {
+				if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder) {
 					selectedNode.tin.children.Add(tin);
 					tin.parent = selectedNode.tin;
 					selectedNode.node.Nodes.Add(itn.node);
-				}
-				else
-				{
+				} else {
 					TrayInstanceNode tinp = selectedNode.tin.parent;
 					tinp.children.Insert(tinp.children.IndexOf(selectedNode.tin) + 1, tin);
 					tin.parent = tinp;
-					if (selectedNode.node.Parent != null)
-					{
+					if (selectedNode.node.Parent != null) {
 						TreeNode tnp = selectedNode.node.Parent;
 						tnp.Nodes.Insert(tnp.Nodes.IndexOf(selectedNode.node) + 1, itn.node);
-					}
-					else
-					{
+					} else {
 						selectedNode.node.TreeView.Nodes.Insert(selectedNode.node.TreeView.Nodes.IndexOf(selectedNode.node) + 1, itn.node);
 					}
 				}
-			}
-			else
-			{
+			} else {
 				TrayInstanceNode tinp = instance.nodes;
 				tinp.children.Add(tin);
 				tin.parent = tinp;
@@ -291,15 +255,13 @@ namespace TrayDir
 				}
 			}
 		}
-		private void pathPropertiesButton_Click(object sender, EventArgs e)
-		{
+		private void pathPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
 			TrayInstancePath tip = instance.paths[itn.tin.id];
 			IPathForm iff = new IPathForm((TrayInstancePath)tip.Copy());
 			if (selectedNodeNew) {
 				iff.ShowDialogNewFile();
-			}
-			else {
+			} else {
 				iff.ShowDialog();
 			}
 			if (selectedNodeNew || iff.DialogResult == DialogResult.OK) {
@@ -310,15 +272,13 @@ namespace TrayDir
 				RefreshSelected();
 			}
 		}
-		private void folderPropertiesButton_Click(object sender, EventArgs e)
-		{
+		private void folderPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
 			TrayInstancePath tip = instance.paths[itn.tin.id];
 			IPathForm iff = new IPathForm(tip);
 			if (selectedNodeNew) {
 				iff.ShowDialogNewFolder();
-			}
-			else {
+			} else {
 				iff.ShowDialog();
 			}
 			if (selectedNodeNew || iff.DialogResult == DialogResult.OK) {
@@ -329,8 +289,7 @@ namespace TrayDir
 				RefreshSelected();
 			}
 		}
-		private void UpdateButtonEnables()
-		{
+		private void UpdateButtonEnables() {
 			upButton.Enabled = selectedUpable;
 			downButton.Enabled = selectedDownable;
 			indentButton.Enabled = selectedIndentable;
@@ -342,8 +301,7 @@ namespace TrayDir
 			deleteButton.Enabled = selectedNode != null;
 			editButton.Enabled = selectedNode != null && selectedNode.tin.type != TrayInstanceNode.NodeType.Separator;
 		}
-		private void newVirtualFolderButton_Click(object sender, EventArgs e)
-		{
+		private void newVirtualFolderButton_Click(object sender, EventArgs e) {
 			TrayInstanceVirtualFolder tip = new TrayInstanceVirtualFolder(Properties.Strings.VirtualFolder_New);
 			instance.vfolders.Add(tip);
 			int index = instance.vfolders.IndexOf(tip);
@@ -361,71 +319,56 @@ namespace TrayDir
 			Save();
 			selectedNode.Refresh();
 		}
-		private void renameButton_Click(object sender, EventArgs e)
-		{
+		private void renameButton_Click(object sender, EventArgs e) {
 			string input = selectedNode.alias;
-			if (InputDialog.ShowStringInputDialog(Properties.Strings.Form_EditDisplayName, ref input) == DialogResult.OK)
-			{
+			if (InputDialog.ShowStringInputDialog(Properties.Strings.Form_EditDisplayName, ref input) == DialogResult.OK) {
 				selectedNode.alias = input;
 				Save();
 			}
 		}
-		private void deleteButton_Click(object sender, EventArgs e)
-		{
-			if (selectedNode != null)
-			{
+		private void deleteButton_Click(object sender, EventArgs e) {
+			if (selectedNode != null) {
 				bool deleteNode = true;
-				if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder && selectedNode.node.Nodes.Count > 0)
-				{
+				if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder && selectedNode.node.Nodes.Count > 0) {
 					deleteNode = (MessageBox.Show(Properties.Strings.VirtualFolder_DeleteContents, string.Empty, MessageBoxButtons.OKCancel) == DialogResult.OK);
 				}
-				if (deleteNode)
-				{
+				if (deleteNode) {
 					nodes.Remove(selectedNode);
 					selectedNode.Delete();
 					instance.view?.Rebuild();
 					Save();
 				}
-				if (treeView2.Nodes.Count == 0)
-				{
+				if (treeView2.Nodes.Count == 0) {
 					selectedNode = null;
 				}
 			}
 		}
-		private void button1_Click(object sender, EventArgs e)
-		{
+		private void button1_Click(object sender, EventArgs e) {
 			IOptionsForm optionsForm = new IOptionsForm(instance);
 			optionsForm.ShowDialog();
 			tp.Text = instance.instanceName;
 			instance.view.tray.SetText(instance.instanceName);
 		}
-		private void RecursiveAddToInstance(TrayInstance recursive_instance, TrayInstanceNode tin, TrayInstanceNode parent)
-		{
+		private void RecursiveAddToInstance(TrayInstance recursive_instance, TrayInstanceNode tin, TrayInstanceNode parent) {
 			TrayInstanceNode newTin = new TrayInstanceNode();
 			newTin.type = tin.type;
-			if (tin.type == TrayInstanceNode.NodeType.Path)
-			{
+			if (tin.type == TrayInstanceNode.NodeType.Path) {
 				newTin.id = recursive_instance.paths.Count;
 				recursive_instance.paths.Add(instance.paths[tin.id]);
 			}
-			if (tin.type == TrayInstanceNode.NodeType.VirtualFolder)
-			{
+			if (tin.type == TrayInstanceNode.NodeType.VirtualFolder) {
 				newTin.id = recursive_instance.vfolders.Count;
 				recursive_instance.vfolders.Add(instance.vfolders[tin.id]);
 			}
-			if (tin.type == TrayInstanceNode.NodeType.Plugin)
-			{
-				if (recursive_instance.internalPlugins == null)
-				{
+			if (tin.type == TrayInstanceNode.NodeType.Plugin) {
+				if (recursive_instance.internalPlugins == null) {
 					recursive_instance.internalPlugins = new List<TrayPlugin>();
 				}
 				newTin.id = recursive_instance.plugins.Count;
 				TrayInstancePlugin ip = (TrayInstancePlugin)instance.plugins[tin.id].Copy();
-				if (ip.plugin != null)
-				{
+				if (ip.plugin != null) {
 					TrayPlugin tp = recursive_instance.getInternalPluginBySignature(ip.plugin.getSignature());
-					if (tp == null)
-					{
+					if (tp == null) {
 						recursive_instance.internalPlugins.Add(ip.plugin);
 						tp = ip.plugin;
 					}
@@ -433,52 +376,39 @@ namespace TrayDir
 				}
 				recursive_instance.plugins.Add(ip);
 			}
-			if (parent == null)
-			{
+			if (parent == null) {
 				recursive_instance.nodes.children.Add(newTin);
-			} else
-			{
+			} else {
 				parent.children.Add(newTin);
 			}
-			foreach(TrayInstanceNode tinChild in tin.children)
-			{
+			foreach (TrayInstanceNode tinChild in tin.children) {
 				RecursiveAddToInstance(recursive_instance, tinChild, newTin);
 			}
 		}
-		private void CopyToClipboard()
-		{
+		private void CopyToClipboard() {
 			TrayInstance copyInstance = new TrayInstance();
 			RecursiveAddToInstance(copyInstance, selectedNode.tin, null);
 			Clipboard.SetText(XMLUtils.XmlSerializeToString(copyInstance));
 		}
-		private void RecursiveLoadFromInstance(TrayInstance recursive_instance, TrayInstanceNode tin, ITreeNode parentNode)
-		{
+		private void RecursiveLoadFromInstance(TrayInstance recursive_instance, TrayInstanceNode tin, ITreeNode parentNode) {
 			TrayInstanceNode newTin = new TrayInstanceNode();
 			newTin.type = tin.type;
-			if (tin.type == TrayInstanceNode.NodeType.Path)
-			{
+			if (tin.type == TrayInstanceNode.NodeType.Path) {
 				newTin.id = instance.paths.Count;
 				instance.paths.Add(recursive_instance.paths[tin.id]);
-			}
-			else if (tin.type == TrayInstanceNode.NodeType.Plugin)
-			{
+			} else if (tin.type == TrayInstanceNode.NodeType.Plugin) {
 				newTin.id = instance.plugins.Count;
 				TrayInstancePlugin tip = recursive_instance.plugins[tin.id];
 				TrayPlugin tp = recursive_instance.internalPlugins[tip.id];
 				TrayPlugin gtp = instance.getGlobalPluginBySignature(tp.getSignature());
-				if (gtp == null)
-				{
+				if (gtp == null) {
 					tip.id = ProgramData.pd.plugins.Count;
 					ProgramData.pd.plugins.Add(tp);
-				}
-				else
-				{
+				} else {
 					tip.id = ProgramData.pd.plugins.IndexOf(gtp);
 				}
 				instance.plugins.Add(tip);
-			}
-			else if (tin.type == TrayInstanceNode.NodeType.VirtualFolder)
-			{
+			} else if (tin.type == TrayInstanceNode.NodeType.VirtualFolder) {
 				newTin.id = instance.vfolders.Count;
 				instance.vfolders.Add(recursive_instance.vfolders[tin.id]);
 			}
@@ -489,8 +419,7 @@ namespace TrayDir
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
 			nodes.Add(itn);
-			foreach(TrayInstanceNode nodeChild in tin.children)
-			{
+			foreach (TrayInstanceNode nodeChild in tin.children) {
 				RecursiveLoadFromInstance(recursive_instance, nodeChild, itn);
 			}
 			if (parentNode == null) {
@@ -499,25 +428,20 @@ namespace TrayDir
 			}
 			RefreshSelected();
 		}
-		private void PasteFromClipboard()
-		{
-			try
-			{
+		private void PasteFromClipboard() {
+			try {
 				TrayInstance copyInstance = (TrayInstance)XMLUtils.XmlDeserializeFromString(Clipboard.GetText(), typeof(TrayInstance));
-				foreach(TrayInstanceNode tin in copyInstance.nodes.children)
-				{
+				foreach (TrayInstanceNode tin in copyInstance.nodes.children) {
 					RecursiveLoadFromInstance(copyInstance, tin, null);
 				}
 				instance.view?.Rebuild();
 				Save();
 			}
-			catch
-			{
+			catch {
 
 			}
 		}
-		public void treeView2_KeyDown(object sender, KeyEventArgs e)
-		{
+		public void treeView2_KeyDown(object sender, KeyEventArgs e) {
 			if (selectedNode != null) {
 				if (e.KeyCode == Keys.Enter) {
 					e.Handled = true;
@@ -610,31 +534,23 @@ namespace TrayDir
 				e.SuppressKeyPress = true;
 			}
 		}
-		private void treeView2_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-		{
-			if (selectedNode != null)
-			{
-				if (selectedNode.tin.type == TrayInstanceNode.NodeType.Plugin)
-				{
+		private void treeView2_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e) {
+			if (selectedNode != null) {
+				if (selectedNode.tin.type == TrayInstanceNode.NodeType.Plugin) {
 					pluginPropertiesButton_Click(sender, e);
-				}
-				else if (selectedNode.tin.type == TrayInstanceNode.NodeType.Path) {
+				} else if (selectedNode.tin.type == TrayInstanceNode.NodeType.Path) {
 					pathPropertiesButton_Click(sender, e);
-				}
-				else if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder)
-				{
+				} else if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder) {
 					vFolderPropertiesButton_Click(sender, e);
 				}
 			}
 		}
-		private void folderShortcutMenuItem_click(object sender, EventArgs e)
-		{
+		private void folderShortcutMenuItem_click(object sender, EventArgs e) {
 			instance.paths[selectedNode.tin.id].shortcut = true;
 			RefreshSelected();
 			Save();
 		}
-		private void folderExpandMenuItem_click(object sender, EventArgs e)
-		{
+		private void folderExpandMenuItem_click(object sender, EventArgs e) {
 			instance.paths[selectedNode.tin.id].shortcut = false;
 			RefreshSelected();
 			Save();
@@ -648,10 +564,8 @@ namespace TrayDir
 		private void openInCmdAdminMenuItem_click(object sender, EventArgs e) {
 			AppUtils.OpenAdminCmdPath(instance.paths[selectedNode.tin.id].path);
 		}
-		private void treeView2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-		{
-			if (e.Button == MouseButtons.Right && selectedNode != null)
-			{
+		private void treeView2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e) {
+			if (e.Button == MouseButtons.Right && selectedNode != null) {
 				pasteMenuItem.Enabled = (Clipboard.ContainsText(TextDataFormat.Text) && Clipboard.GetText().StartsWith("<?xml"));
 				folderShortcutMenuItem.Enabled = false;
 				folderExpandMenuItem.Enabled = false;
@@ -663,19 +577,15 @@ namespace TrayDir
 				openInCmdMenuItem.Enabled = false;
 				openInCmdAdminMenuItem.Enabled = false;
 
-				if (e.Node != null)
-				{
-					foreach (ITreeNode itn in nodes)
-					{
-						if (e.Node == itn.node)
-						{
+				if (e.Node != null) {
+					foreach (ITreeNode itn in nodes) {
+						if (e.Node == itn.node) {
 							selectedNode = itn;
 							break;
 						}
 					}
 				}
-				if (selectedNode.tin.type == TrayInstanceNode.NodeType.Path)
-				{
+				if (selectedNode.tin.type == TrayInstanceNode.NodeType.Path) {
 					TrayInstancePath path = selectedNode.tin.GetPath();
 					if (path != null) {
 						if (path.isDir) {
@@ -701,8 +611,7 @@ namespace TrayDir
 				rightClickMenu.Show(treeView2, e.Location);
 			}
 		}
-		private void newPluginButton_Click(object sender, EventArgs e)
-		{
+		private void newPluginButton_Click(object sender, EventArgs e) {
 			if (ProgramData.pd.plugins.Count == 0) {
 				switch (MessageBox.Show(Properties.Strings.Form_NoPluginsDefined, Properties.Strings.Form_Attention, MessageBoxButtons.YesNo)) {
 					case DialogResult.No:
@@ -729,8 +638,7 @@ namespace TrayDir
 			Save();
 			selectedNode.Refresh();
 		}
-		private void newSeparatorButton_Click(object sender, EventArgs e)
-		{
+		private void newSeparatorButton_Click(object sender, EventArgs e) {
 			TrayInstanceNode tin = new TrayInstanceNode();
 			tin.type = TrayInstanceNode.NodeType.Separator;
 			tin.SetInstance(instance);
@@ -769,21 +677,17 @@ namespace TrayDir
 				RefreshSelected();
 			}
 		}
-		private void treeView2_ItemDrag(object sender, ItemDragEventArgs e)
-		{
+		private void treeView2_ItemDrag(object sender, ItemDragEventArgs e) {
 			DoDragDrop(e.Item, DragDropEffects.Move);
 		}
-		private void treeView2_DragEnter(object sender, DragEventArgs e)
-		{
+		private void treeView2_DragEnter(object sender, DragEventArgs e) {
 			e.Effect = e.AllowedEffect;
 		}
-		private void treeView2_DragOver(object sender, DragEventArgs e)
-		{
+		private void treeView2_DragOver(object sender, DragEventArgs e) {
 			Point targetPoint = treeView2.PointToClient(new Point(e.X, e.Y));
 			treeView2.SelectedNode = treeView2.GetNodeAt(targetPoint);
 		}
-		private void treeView2_DragDrop(object sender, DragEventArgs e)
-		{
+		private void treeView2_DragDrop(object sender, DragEventArgs e) {
 			Point targetPoint = treeView2.PointToClient(new Point(e.X, e.Y));
 			TreeNode targetNode = treeView2.GetNodeAt(targetPoint);
 			if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
@@ -803,12 +707,10 @@ namespace TrayDir
 				}
 			}
 		}
-		private ITreeNode CreatePathNode()
-		{
+		private ITreeNode CreatePathNode() {
 			return CreatePathNode(string.Empty);
 		}
-		private ITreeNode CreatePathNode(string path)
-		{
+		private ITreeNode CreatePathNode(string path) {
 			TrayInstancePath tip = new TrayInstancePath();
 			tip.path = path;
 			instance.paths.Add(tip);
@@ -819,16 +721,14 @@ namespace TrayDir
 			tin.SetInstance(instance);
 			return new ITreeNode(tin);
 		}
-		private void AddNewPathOverB(string path, TreeNode B)
-		{
+		private void AddNewPathOverB(string path, TreeNode B) {
 			ITreeNode itn = CreatePathNode(path);
 			itn.Refresh();
 			nodes.Add(itn);
 			MoveAOverB(itn.node, B);
 			Save();
 		}
-		private void AddNewPath(string path)
-		{
+		private void AddNewPath(string path) {
 			ITreeNode itn = CreatePathNode(path);
 			itn.Refresh();
 			insertNode(itn);
@@ -837,8 +737,7 @@ namespace TrayDir
 			nodes.Add(itn);
 			Save();
 		}
-		private void MoveAOverB(TreeNode A, TreeNode B)
-		{
+		private void MoveAOverB(TreeNode A, TreeNode B) {
 			if ((!object.ReferenceEquals(A, B)) && (!ContainsNode(A, B))) {
 				int targetNodeIndex;
 				if (B.Parent != null) {
@@ -859,16 +758,14 @@ namespace TrayDir
 				}
 			}
 		}
-		private bool ContainsNode(TreeNode node1, TreeNode node2)
-		{
+		private bool ContainsNode(TreeNode node1, TreeNode node2) {
 			if (node2.Parent == null) return false;
 			if (object.ReferenceEquals(node2.Parent, node1)) return true;
 			return ContainsNode(node1, node2.Parent);
 		}
-		private TrayInstanceNode TreeNodeToInstanceNode(TreeNode node)
-		{
-			foreach(ITreeNode n in nodes) {
-				if (object.ReferenceEquals(node,n.node)) {
+		private TrayInstanceNode TreeNodeToInstanceNode(TreeNode node) {
+			foreach (ITreeNode n in nodes) {
+				if (object.ReferenceEquals(node, n.node)) {
 					return n.tin;
 				}
 			}
@@ -879,7 +776,7 @@ namespace TrayDir
 				selectedNode.Refresh();
 				TrayInstanceNode tin = selectedNode.tin;
 				bool found = false;
-				foreach(IMenuItem imi in instance.view.tray.menuItems) {
+				foreach (IMenuItem imi in instance.view.tray.menuItems) {
 					if (tin == imi.tiNode) {
 						imi.Refresh();
 						found = true;

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TrayDir.utils
-{
-	class IconUtils
-	{
+namespace TrayDir.utils {
+	class IconUtils {
 		private static Dictionary<string, Bitmap> imgKnownIcons = new Dictionary<string, Bitmap>();
 		private static Semaphore imgLoadSemaphore = new Semaphore(1, 1);
 		public static ImageList imageList;
@@ -53,8 +47,7 @@ namespace TrayDir.utils
 		public static Image SeparatorImage { get { return imageList.Images[SEPARATOR]; } }
 		public static Image RunnableError { get { return imageList.Images[RUNNABLE_ERROR]; } }
 		public static Image Empty { get { return imageList.Images[EMPTY]; } }
-		public static void Init(int sizeWH)
-		{
+		public static void Init(int sizeWH) {
 			imageList = new ImageList();
 			imageList.ImageSize = new Size(sizeWH, sizeWH);
 			imageList.Images.Add(TrayDir.Properties.Resources.document);       //0
@@ -97,23 +90,18 @@ namespace TrayDir.utils
 			IconUtils.EMPTY = 18;
 			initialized = true;
 		}
-		public static Bitmap lookupIcon(string key)
-		{
+		public static Bitmap lookupIcon(string key) {
 			imgLoadSemaphore.WaitOne();
 			Bitmap icon;
-			if (imgKnownIcons.ContainsKey(key))
-			{
+			if (imgKnownIcons.ContainsKey(key)) {
 				icon = imgKnownIcons[key];
-			}
-			else
-			{
+			} else {
 				icon = null;
 			}
 			imgLoadSemaphore.Release();
 			return icon;
 		}
-		public static void addIcon(string key, Bitmap icon)
-		{
+		public static void addIcon(string key, Bitmap icon) {
 			imgLoadSemaphore.WaitOne();
 			imgKnownIcons[key] = icon;
 			imgLoadSemaphore.Release();

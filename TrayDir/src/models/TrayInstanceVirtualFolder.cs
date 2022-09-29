@@ -1,16 +1,10 @@
-﻿using System.Xml.Serialization;
-
-namespace TrayDir
-{
-	public class TrayInstanceVirtualFolder : TrayInstanceItem
-	{
+﻿namespace TrayDir {
+	public class TrayInstanceVirtualFolder : TrayInstanceItem {
 		public TrayInstanceVirtualFolder() : this(string.Empty) { }
-		public TrayInstanceVirtualFolder(string alias)
-		{
+		public TrayInstanceVirtualFolder(string alias) {
 			this.alias = alias;
 		}
-		public override object Copy()
-		{
+		public override object Copy() {
 			TrayInstanceVirtualFolder tivf = new TrayInstanceVirtualFolder();
 			tivf.alias = alias;
 			return tivf;

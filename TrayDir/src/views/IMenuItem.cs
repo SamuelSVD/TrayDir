@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
-using System.Threading;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using TrayDir.utils;
 
 namespace TrayDir {
@@ -25,9 +22,9 @@ namespace TrayDir {
 		private List<IMenuItem> dirMenuItems;
 		private List<IMenuItem> fileMenuItems;
 
-		public bool isErr { get { return tiPath != null ? !(Directory.Exists(tiPath.path)||File.Exists(tiPath.path)) : false; } }
+		public bool isErr { get { return tiPath != null ? !(Directory.Exists(tiPath.path) || File.Exists(tiPath.path)) : false; } }
 		public bool isDir { get { return tiPath != null ? AppUtils.PathIsDirectory(tiPath.path) : false; } }
-		public bool isFile { get { return tiPath != null ? AppUtils.PathIsFile(tiPath.path) : false; } } 
+		public bool isFile { get { return tiPath != null ? AppUtils.PathIsFile(tiPath.path) : false; } }
 		public bool isVFolder { get { return tiVirtualFolder != null; } }
 		public bool isPlugin { get { return tiPlugin != null; } }
 		public bool loadedIcon = false;
@@ -35,32 +32,24 @@ namespace TrayDir {
 		private bool assignedClickEvent = false;
 		private bool painted = false;
 
-		private string alias
-		{
-			get
-			{
-				if (tiPath != null)
-				{
+		private string alias {
+			get {
+				if (tiPath != null) {
 					return tiPath.alias;
 				}
-				if (tiVirtualFolder != null)
-				{
+				if (tiVirtualFolder != null) {
 					return tiVirtualFolder.alias;
 				}
-				if (tiPlugin != null)
-				{
+				if (tiPlugin != null) {
 					return tiPlugin.alias;
 				}
 				return null;
 			}
 		}
-		protected int depth
-		{
-			get
-			{
+		protected int depth {
+			get {
 				int d = 1;
-				if (parent != null)
-				{
+				if (parent != null) {
 					d += parent.depth;
 				}
 				return d;
@@ -70,8 +59,7 @@ namespace TrayDir {
 		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstancePath path) : this(instance, tiNode, path, null, null, null) { }
 		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstancePlugin plugin) : this(instance, tiNode, null, null, plugin, null) { }
 		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceVirtualFolder virtualFolder) : this(instance, tiNode, null, virtualFolder, null, null) { }
-		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstancePath tiPath, TrayInstanceVirtualFolder tiVirtualFolder, TrayInstancePlugin tiPlugin, IMenuItem parent)
-		{
+		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstancePath tiPath, TrayInstanceVirtualFolder tiVirtualFolder, TrayInstancePlugin tiPlugin, IMenuItem parent) {
 			this.instance = instance;
 			this.tiNode = tiNode;
 			this.tiPath = tiPath;
@@ -79,9 +67,9 @@ namespace TrayDir {
 			this.tiPlugin = tiPlugin;
 			this.parent = parent;
 			if (tiPath != null) {
-					folderChildren = new List<IMenuItem>();
-					dirMenuItems = new List<IMenuItem>();
-					fileMenuItems = new List<IMenuItem>();
+				folderChildren = new List<IMenuItem>();
+				dirMenuItems = new List<IMenuItem>();
+				fileMenuItems = new List<IMenuItem>();
 			}
 		}
 		private void Clear() {
@@ -96,8 +84,7 @@ namespace TrayDir {
 				menuItem.Text = "";
 			}
 		}
-		private void LoadFolderChildren(object sender, PaintEventArgs e)
-		{
+		private void LoadFolderChildren(object sender, PaintEventArgs e) {
 			if (!painted && isDir && !tiPath.shortcut) {
 				MakeChildren();
 				Load();
@@ -105,26 +92,19 @@ namespace TrayDir {
 			}
 			painted = true;
 		}
-		private void MakeChildren()
-		{
-			if (isDir)
-			{
-				try
-				{
+		private void MakeChildren() {
+			if (isDir) {
+				try {
 					string[] dirpaths = Directory.GetFileSystemEntries(tiPath.path);
-					foreach (string fp in dirpaths)
-					{
+					foreach (string fp in dirpaths) {
 						bool match = false;
-						foreach(string regx in instance.regexList)
-						{
-							if (regx != string.Empty)
-							{
+						foreach (string regx in instance.regexList) {
+							if (regx != string.Empty) {
 								match = match || (Regex.Matches(fp, regx).Count > 0);
 							}
 							if (match) break;
 						}
-						if (!match)
-						{
+						if (!match) {
 							folderChildren.Add(new IMenuItem(instance, null, new TrayInstancePath(fp), null, null, this));
 						}
 					}
@@ -132,12 +112,10 @@ namespace TrayDir {
 				catch { }
 			}
 		}
-		private void MenuSave()
-		{
+		private void MenuSave() {
 			IMenuItem mi = parent;
 			instance.view.tray.notifyIcon.ContextMenuStrip.Show();
-			while (mi != null)
-			{
+			while (mi != null) {
 				mi.menuItem.DropDown.AutoClose = false;
 				mi.menuItem.DropDown.Show();
 				mi.menuItem.Enabled = false;
@@ -172,7 +150,7 @@ namespace TrayDir {
 		}
 		// Grabbed from https://stackoverflow.com/questions/26587843/prevent-toolstripmenuitems-from-jumping-to-second-screen
 		private void showContextMenu() {
-			if (isFile || isDir || isVFolder ||  isPlugin) {
+			if (isFile || isDir || isVFolder || isPlugin) {
 				MenuSave();
 				Point pt = System.Windows.Forms.Cursor.Position;
 				ContextMenuStrip cmnu = new ContextMenuStrip();
@@ -212,53 +190,34 @@ namespace TrayDir {
 				menuItem.Visible = tiVirtualFolder.visible;
 			}
 		}
-		public void Load()
-		{
-			if (menuItem == null)
-			{
+		public void Load() {
+			if (menuItem == null) {
 				menuItem = new ToolStripMenuItem();
 				menuItem.DropDownOpening += MenuItemDropDownOpening;
 				menuItem.DropDownOpening += LoadChildrenIconEvent;
 				menuItem.Paint += LoadFolderChildren;
 			}
 			bool useAlias = (alias != null && alias != string.Empty);
-			if (useAlias)
-			{
+			if (useAlias) {
 				menuItem.Text = alias;
-			}
-			else
-			{
-				if (isDir)
-				{
+			} else {
+				if (isDir) {
 					menuItem.Text = new DirectoryInfo(tiPath.path).Name;
-				}
-				else if (isFile)
-				{
-					if (instance.settings.ShowFileExtensions)
-					{
+				} else if (isFile) {
+					if (instance.settings.ShowFileExtensions) {
 						menuItem.Text = Path.GetFileName(tiPath.path);
-					}
-					else
-					{
+					} else {
 						menuItem.Text = Path.GetFileNameWithoutExtension(tiPath.path);
 					}
-				}
-				else if (tiPlugin != null)
-				{
+				} else if (tiPlugin != null) {
 					TrayPlugin plugin = tiPlugin.plugin;
-					if (plugin != null)
-					{
-						if (plugin.name == null || plugin.name == string.Empty)
-						{
+					if (plugin != null) {
+						if (plugin.name == null || plugin.name == string.Empty) {
 							menuItem.Text = "(plugin item)";
-						}
-						else
-						{
+						} else {
 							menuItem.Text = string.Format("({0})", plugin.name);
 						}
-					}
-					else
-					{
+					} else {
 						menuItem.Text = "(plugin item)";
 					}
 				}
@@ -306,19 +265,16 @@ namespace TrayDir {
 					}
 				}
 			}
-			if (!assignedClickEvent)
-			{
+			if (!assignedClickEvent) {
 				menuItem.MouseDown += MenuItemClick;
 				menuItem.Click += MenuItemClick;
 				assignedClickEvent = true;
 			}
 		}
-		public void EnqueueImgLoad()
-		{
+		public void EnqueueImgLoad() {
 			IMenuItemIconUtils.EnqueueIconLoad(this);
 		}
-		public void AddToCollection(ToolStripItemCollection collection)
-		{
+		public void AddToCollection(ToolStripItemCollection collection) {
 			collection.Add(menuItem);
 
 			if (tiPath != null) {
@@ -352,68 +308,48 @@ namespace TrayDir {
 			}
 		}
 
-		public void AddToCollectionExpanded(ToolStripItemCollection collection)
-		{
+		public void AddToCollectionExpanded(ToolStripItemCollection collection) {
 			if (folderChildren.Count == 0) {
 				MakeChildren();
 				Load();
 				LoadChildrenIconEvent(this, null);
 			}
-			if (folderChildren.Count > 0)
-			{
-				if (folderChildren.Count != menuItem.DropDownItems.Count)
-				{
+			if (folderChildren.Count > 0) {
+				if (folderChildren.Count != menuItem.DropDownItems.Count) {
 					menuItem.DropDownItems.Clear();
 				}
 				dirMenuItems.Clear();
 				fileMenuItems.Clear();
 
-				foreach (IMenuItem child in folderChildren)
-				{
-					if (child.isDir)
-					{
+				foreach (IMenuItem child in folderChildren) {
+					if (child.isDir) {
 						dirMenuItems.Add(child);
-					}
-					else if (child.isFile)
-					{
+					} else if (child.isFile) {
 						fileMenuItems.Add(child);
 					}
 				}
-				if (ProgramData.pd.settings.app.MenuSorting != "None")
-				{
-					if (ProgramData.pd.settings.app.MenuSorting == "Folders Top")
-					{
-						foreach (IMenuItem child in dirMenuItems)
-						{
+				if (ProgramData.pd.settings.app.MenuSorting != "None") {
+					if (ProgramData.pd.settings.app.MenuSorting == "Folders Top") {
+						foreach (IMenuItem child in dirMenuItems) {
 							collection.Add(child.menuItem);
 						}
-						foreach (IMenuItem child in fileMenuItems)
-						{
+						foreach (IMenuItem child in fileMenuItems) {
 							collection.Add(child.menuItem);
 						}
-					}
-					else
-					{
-						foreach (IMenuItem child in fileMenuItems)
-						{
+					} else {
+						foreach (IMenuItem child in fileMenuItems) {
 							collection.Add(child.menuItem);
 						}
-						foreach (IMenuItem child in dirMenuItems)
-						{
+						foreach (IMenuItem child in dirMenuItems) {
 							collection.Add(child.menuItem);
 						}
 					}
-				}
-				else
-				{
-					foreach (IMenuItem child in folderChildren)
-					{
+				} else {
+					foreach (IMenuItem child in folderChildren) {
 						collection.Add(child.menuItem);
 					}
 				}
-			}
-			else
-			{
+			} else {
 				collection.Add(menuItem);
 			}
 		}
@@ -427,7 +363,7 @@ namespace TrayDir {
 			parent = null;
 		}
 		internal void RemoveChildren(List<IMenuItem> list) {
-			while(list.Count > 0) {
+			while (list.Count > 0) {
 				IMenuItem child = list[0];
 				child.RemoveChildren();
 				list.RemoveAt(0);

@@ -7,10 +7,8 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 
-namespace TrayDir
-{
-	public class ProgramData
-	{
+namespace TrayDir {
+	public class ProgramData {
 		[XmlElement(ElementName = "Settings")]
 		public Settings settings;
 		public List<TrayInstance> trayInstances;
@@ -25,8 +23,7 @@ namespace TrayDir
 		public string LatestVersion;
 		[XmlIgnore]
 		public bool initialized;
-		public ProgramData()
-		{
+		public ProgramData() {
 			initialized = false;
 			settings = new Settings();
 			trayInstances = new List<TrayInstance>();
@@ -34,12 +31,10 @@ namespace TrayDir
 			plugins = new List<TrayPlugin>();
 			ProgramData.pd = this;
 		}
-		public static ProgramData Load()
-		{
+		public static ProgramData Load() {
 			config = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml";
 			ProgramData pd = XMLUtils.LoadFromFile<ProgramData>(config);
-			if (pd is null)
-			{
+			if (pd is null) {
 				//Check Virtual Folder or previous path location for config file.
 				if (!Debugger.IsAttached) {
 					string oldPath = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\VirtualStore\\Program Files (x86)\\samver\\TrayDir\\config.xml";
@@ -60,19 +55,16 @@ namespace TrayDir
 			pd.PerformUpdate();
 			return pd;
 		}
-		public void CreateDefaultInstance()
-		{
+		public void CreateDefaultInstance() {
 			TrayInstance ti = new TrayInstance();
 			trayInstances.Add(ti);
 		}
-		public void Save()
-		{
+		public void Save() {
 			if (initialized) {
 				XMLUtils.SaveToFile(this, config);
 			}
 		}
-		public void SaveAs()
-		{
+		public void SaveAs() {
 			if (initialized) {
 				SaveFileDialog sfd = new SaveFileDialog();
 				sfd.Filter = "TrayDir XML Export | *.xml";
@@ -83,8 +75,7 @@ namespace TrayDir
 				}
 			}
 		}
-		public void Update()
-		{
+		public void Update() {
 			if (initialized) {
 				if (trayInstances != null) {
 					foreach (TrayInstance instance in trayInstances) {
@@ -94,84 +85,66 @@ namespace TrayDir
 			}
 			if (!Program.IGNORESTARTUP) CheckStartup();
 		}
-		public void FormHidden()
-		{
-			if (trayInstances != null)
-			{
-				foreach (TrayInstance instance in trayInstances)
-				{
+		public void FormHidden() {
+			if (trayInstances != null) {
+				foreach (TrayInstance instance in trayInstances) {
 					instance.view.tray.SetFormHiddenMenu();
 				}
 			}
 		}
-		public void FormShowed()
-		{
-			if (trayInstances != null)
-			{
-				foreach (TrayInstance instance in trayInstances)
-				{
-					if (instance.view != null)
-					{
+		public void FormShowed() {
+			if (trayInstances != null) {
+				foreach (TrayInstance instance in trayInstances) {
+					if (instance.view != null) {
 						instance.view.tray.SetFormShownMenu();
 					}
 				}
 			}
 		}
-		public void FixInstances()
-		{
-			foreach (TrayInstance instance in trayInstances)
-			{
+		public void FixInstances() {
+			foreach (TrayInstance instance in trayInstances) {
 				instance.FixNodes();
 			}
 		}
-		public void CheckStartup()
-		{
+		public void CheckStartup() {
 			//HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
 			RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-			if (settings.win.StartWithWindows)
-			{
+			if (settings.win.StartWithWindows) {
 				key.SetValue("TrayDir", System.Reflection.Assembly.GetEntryAssembly().Location);
-			}
-			else
-			{
-				if (Array.Find(key.GetValueNames(), v => v == "TrayDir") != null)
-				{
+			} else {
+				if (Array.Find(key.GetValueNames(), v => v == "TrayDir") != null) {
 					key.DeleteValue("TrayDir");
 				}
 			}
 			key.Close();
 		}
-		public void RebuildAll()
-		{
-			foreach (TrayInstance ti in pd.trayInstances)
-			{
+		public void RebuildAll() {
+			foreach (TrayInstance ti in pd.trayInstances) {
 				ti.view?.Rebuild();
 			}
 		}
-		private void PerformUpdate()
-		{
-			foreach(TrayInstance ti in trayInstances)
-			{
+		private void PerformUpdate() {
+			foreach (TrayInstance ti in trayInstances) {
 				ti.FixPaths();
 				ti.Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 			}
-			foreach(TrayInstance ti in archivedInstances) {
+			foreach (TrayInstance ti in archivedInstances) {
 				ti.FixPaths();
 				ti.Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 			}
-			foreach(TrayPlugin tp in plugins) {
+			foreach (TrayPlugin tp in plugins) {
 				tp.Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 			}
 			Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 		}
 		public void RemovedPlugin(int i) {
-			foreach(TrayInstance ti in trayInstances) {
-				foreach(TrayInstancePlugin tip in ti.plugins) {
+			foreach (TrayInstance ti in trayInstances) {
+				foreach (TrayInstancePlugin tip in ti.plugins) {
 					if (tip.id > i) tip.id--;
 				}
 			}
-			foreach(TrayInstance ti in archivedInstances) {
-				foreach(TrayInstancePlugin tip in ti.plugins) {
+			foreach (TrayInstance ti in archivedInstances) {
+				foreach (TrayInstancePlugin tip in ti.plugins) {
 					if (tip.id > i) tip.id--;
 				}
 			}

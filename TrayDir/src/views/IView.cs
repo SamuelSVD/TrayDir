@@ -1,11 +1,8 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace TrayDir
-{
-	public class IView
-	{
+namespace TrayDir {
+	public class IView {
 		private TrayInstance instance;
 
 		public TabPage InstanceTabPage;
@@ -14,9 +11,8 @@ namespace TrayDir
 
 		public ITreeViewForm treeviewForm;
 		public ITray tray;
-		
-		public IView(TrayInstance instance)
-		{
+
+		public IView(TrayInstance instance) {
 			this.instance = instance;
 			instance.view = this;
 			tray = new ITray(instance);
@@ -31,8 +27,7 @@ namespace TrayDir
 			if (Program.DEBUG) p.BackColor = Color.Violet;
 			p.Controls.Add(c);
 		}
-		public Control GetControl()
-		{
+		public Control GetControl() {
 			return p;
 		}
 

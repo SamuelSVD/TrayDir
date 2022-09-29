@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace TrayDir.utils
-{
-	class IMenuItemIconUtils
-	{
+namespace TrayDir.utils {
+	class IMenuItemIconUtils {
 		private static Thread imgLoadThread;
 		private static Thread mainThread;
 		private static Semaphore imgLoadSemaphore;
@@ -20,8 +14,7 @@ namespace TrayDir.utils
 		public static Queue<IMenuItem> urlLoadQueue;
 		public static Queue<IMenuItem> imgLoadQueue;
 		public static Queue<IMenuItem> imgLoadedQueue;
-		public static void Init()
-		{
+		public static void Init() {
 			if (imgLoadSemaphore is null) {
 				imgLoadSemaphore = new Semaphore(1, 1);
 			}
@@ -46,8 +39,7 @@ namespace TrayDir.utils
 				imgLoadThread.Start();
 			}
 		}
-		private static void LoadIconThread()
-		{
+		private static void LoadIconThread() {
 			Stopwatch s = new Stopwatch();
 			s.Start();
 			while (true && mainThread.IsAlive) {
@@ -62,16 +54,14 @@ namespace TrayDir.utils
 				Thread.Sleep(1);
 			}
 		}
-		public static bool PerformIconLoading()
-		{
+		public static bool PerformIconLoading() {
 			if (urlLoadQueue != null && urlLoadQueue.Count > 0) {
 				tryLoadIconThread(urlLoadSemaphore, urlLoadQueue);
 				return true;
 			}
 			return false;
 		}
-		public static bool tryLoadIconThread(Semaphore sem, Queue<IMenuItem> queue)
-		{
+		public static bool tryLoadIconThread(Semaphore sem, Queue<IMenuItem> queue) {
 			sem.WaitOne();
 			bool result = false;
 			if (MainForm.form != null && queue.Count > 0) {
@@ -143,8 +133,7 @@ namespace TrayDir.utils
 			sem.Release();
 			return result;
 		}
-		public static void EnqueueIconLoad(IMenuItem mi)
-		{
+		public static void EnqueueIconLoad(IMenuItem mi) {
 			if (!mi.enqueued) {
 				imgLoadSemaphore.WaitOne();
 				imgLoadQueue.Enqueue(mi);
@@ -156,8 +145,7 @@ namespace TrayDir.utils
 				imgLoadThread.Start();
 			}
 		}
-		public static void AssignIcons()
-		{
+		public static void AssignIcons() {
 			imgLoadedSemaphore.WaitOne();
 			while (imgLoadedQueue.Count > 0) {
 				IMenuItem mi = imgLoadedQueue.Dequeue();

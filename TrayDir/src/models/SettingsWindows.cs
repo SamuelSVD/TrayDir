@@ -1,12 +1,9 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
-namespace TrayDir
-{
+namespace TrayDir {
 	[XmlRoot(ElementName = "Windows")]
 
-	public class SettingsWindows : StringIndexable
-	{
+	public class SettingsWindows : StringIndexable {
 		[XmlAttribute]
 		public bool MinimizeOnClose = true;
 		[XmlAttribute]

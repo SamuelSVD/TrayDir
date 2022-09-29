@@ -1,16 +1,13 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace TrayDir
-{
-	class ComboBoxView
-	{
+namespace TrayDir {
+	class ComboBoxView {
 		public Label label;
 		public ComboBox combobox;
 		public ToolTip tp;
 
-		public ComboBoxView(string text, string[] options)
-		{
+		public ComboBoxView(string text, string[] options) {
 			label = new Label();
 
 			label.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
@@ -31,14 +28,12 @@ namespace TrayDir
 			combobox.TabIndex = 1;
 			combobox.DropDownStyle = ComboBoxStyle.DropDownList;
 
-			foreach( string s in options)
-			{
+			foreach (string s in options) {
 				combobox.Items.Add(s);
 			}
 			if (Program.DEBUG) combobox.BackColor = Color.Red;
 		}
-		public void AddTo(TableLayoutPanel tlp, int row)
-		{
+		public void AddTo(TableLayoutPanel tlp, int row) {
 			tlp.Controls.Add(label, 0, row);
 			tlp.Controls.Add(combobox, 1, row);
 			tlp.RowCount = row + 1;
@@ -46,16 +41,13 @@ namespace TrayDir
 			rs.SizeType = SizeType.AutoSize;
 			tlp.RowStyles.Add(rs);
 
-			for (int i = 0; i < 3; i++)
-			{
-				if (tlp.ColumnStyles.Count < (i + 1))
-				{
+			for (int i = 0; i < 3; i++) {
+				if (tlp.ColumnStyles.Count < (i + 1)) {
 					tlp.ColumnStyles.Add(new ColumnStyle());
 				}
 				ColumnStyle style = tlp.ColumnStyles[i];
 				style.SizeType = SizeType.Percent;
-				switch (i)
-				{
+				switch (i) {
 					case 0:
 						style.Width = 60;
 						break;
@@ -68,8 +60,7 @@ namespace TrayDir
 				}
 			}
 		}
-		public void SetTooltip(string message)
-		{
+		public void SetTooltip(string message) {
 			tp = new ToolTip();
 			tp.AutoPopDelay = 5000;
 			tp.InitialDelay = 500;

@@ -3,63 +3,46 @@ using System.Drawing;
 using System.Windows.Forms;
 using TrayDir.utils;
 
-namespace TrayDir
-{
-	public class ITreeNode
-	{
+namespace TrayDir {
+	public class ITreeNode {
 		private static Font strikethroughFont;
 		public TreeNode node;
 		public TrayInstanceNode tin;
 		public static Dictionary<string, int> pluginIndex = new Dictionary<string, int>();
-		public int index
-		{
-			get
-			{
+		public int index {
+			get {
 				return node.Parent != null ? node.Parent.Nodes.IndexOf(node) : node.TreeView.Nodes.IndexOf(node);
 			}
 		}
-		public bool isFirstChild
-		{
-			get
-			{
+		public bool isFirstChild {
+			get {
 				return index == 0;
 			}
 		}
-		public bool isLastChild
-		{
-			get
-			{
+		public bool isLastChild {
+			get {
 				return node.Parent != null ? node.Parent.Nodes.Count == index + 1 : node.TreeView.Nodes.Count == index + 1;
 			}
 		}
-		public ITreeNode previousRelative
-		{
-			get
-			{
-				if (!isFirstChild)
-				{
+		public ITreeNode previousRelative {
+			get {
+				if (!isFirstChild) {
 					return tin.parent.children[index - 1].itn;
 				}
 				return null;
 			}
 		}
-		public ITreeNode nextRelative
-		{
-			get
-			{
-				if (!isLastChild)
-				{
+		public ITreeNode nextRelative {
+			get {
+				if (!isLastChild) {
 					return tin.parent.children[index + 1].itn;
 				}
 				return null;
 			}
 		}
-		public string alias
-		{
-			get
-			{
-				switch (tin.type)
-				{
+		public string alias {
+			get {
+				switch (tin.type) {
 					case TrayInstanceNode.NodeType.Path:
 						return tin.instance.paths[tin.id].alias;
 					case TrayInstanceNode.NodeType.Plugin:
@@ -70,10 +53,8 @@ namespace TrayDir
 						return null;
 				}
 			}
-			set
-			{
-				switch (tin.type)
-				{
+			set {
+				switch (tin.type) {
 					case TrayInstanceNode.NodeType.Path:
 						tin.instance.paths[tin.id].alias = value;
 						break;
@@ -89,18 +70,15 @@ namespace TrayDir
 				Refresh();
 			}
 		}
-		public ITreeNode(TrayInstanceNode tin)
-		{
+		public ITreeNode(TrayInstanceNode tin) {
 			this.tin = tin;
 			tin.itn = this;
 			node = new TreeNode();
 		}
-		public void Refresh()
-		{
+		public void Refresh() {
 			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
-			switch (tin.type)
-			{
+			switch (tin.type) {
 				case TrayInstanceNode.NodeType.Path:
 					TrayInstancePath tip = tin.GetPath();
 					if (tip != null) {
@@ -128,7 +106,7 @@ namespace TrayDir
 					TrayInstanceVirtualFolder tivf = tin.GetVirtualFolder();
 					if (tivf != null) {
 						node.ImageIndex = IconUtils.FOLDER_BLUE;
-						node.Text =  tivf.alias;
+						node.Text = tivf.alias;
 						hidden = !tivf.visible;
 					}
 					break;
@@ -136,24 +114,20 @@ namespace TrayDir
 					string pluginName = "";
 					TrayInstancePlugin iPlugin = tin.GetPlugin();
 					TrayPlugin plugin = null;
-					if (iPlugin != null)
-					{
+					if (iPlugin != null) {
 						plugin = iPlugin.plugin;
 						hidden = !iPlugin.visible;
 					}
-					if (plugin != null)
-					{
+					if (plugin != null) {
 						pluginName = plugin.name;
-						if (node.TreeView != null)
-						{
+						if (node.TreeView != null) {
 							if (plugin.isScript) {
 								if (iPlugin.isValid()) {
 									node.ImageIndex = IconUtils.RUNNABLE;
 								} else {
 									node.ImageIndex = IconUtils.RUNNABLE_ERROR;
 								}
-							}
-							else {
+							} else {
 								if (AppUtils.PathIsFile(plugin.path)) {
 
 									if (ITreeNode.pluginIndex.ContainsKey(plugin.getSignature())) {
@@ -188,89 +162,66 @@ namespace TrayDir
 				node.NodeFont = node.TreeView?.Font;
 			}
 		}
-		public void MoveUp()
-		{
+		public void MoveUp() {
 			tin.MoveUp();
 
-			if (node.Parent != null)
-			{
+			if (node.Parent != null) {
 				TreeNode parent = node.Parent;
 				int index = parent.Nodes.IndexOf(node);
-				if (index > 0)
-				{
+				if (index > 0) {
 					parent.Nodes.RemoveAt(index);
 					parent.Nodes.Insert(index - 1, node);
 					node.TreeView.SelectedNode = node;
-				}
-				else if (index == 0)
-				{
+				} else if (index == 0) {
 					//TODO
 				}
-			} else
-			{
+			} else {
 				TreeView tv = node.TreeView;
 				int index = tv.Nodes.IndexOf(node);
-				if (index > 0)
-				{
+				if (index > 0) {
 					tv.Nodes.RemoveAt(index);
 					tv.Nodes.Insert(index - 1, node);
 					tv.SelectedNode = node;
 				}
 			}
 		}
-		public void MoveDown()
-		{
+		public void MoveDown() {
 			tin.MoveDown();
 			TreeNode parent = node.Parent;
-			if (parent != null)
-			{
+			if (parent != null) {
 				int index = parent.Nodes.IndexOf(node);
-				if (index < parent.Nodes.Count - 1)
-				{
+				if (index < parent.Nodes.Count - 1) {
 					parent.Nodes.RemoveAt(index);
 					parent.Nodes.Insert(index + 1, node);
 					node.TreeView.SelectedNode = node;
-				}
-				else if (index == parent.Nodes.Count - 1)
-				{
+				} else if (index == parent.Nodes.Count - 1) {
 					MoveOut();
 				}
-			}
-			else
-			{
+			} else {
 				TreeView tv = node.TreeView;
 				int index = tv.Nodes.IndexOf(node);
-				if (index < tv.Nodes.Count - 1)
-				{
+				if (index < tv.Nodes.Count - 1) {
 					tv.Nodes.RemoveAt(index);
 					tv.Nodes.Insert(index + 1, node);
 					tv.SelectedNode = node;
 				}
 			}
 		}
-		public void MoveIn()
-		{
+		public void MoveIn() {
 			tin.MoveIn();
 
 			TreeNode parent = node.Parent;
-			if (parent != null)
-			{
+			if (parent != null) {
 				int index = parent.Nodes.IndexOf(node);
-				if (index > 0)
-				{
+				if (index > 0) {
 					parent.Nodes.RemoveAt(index);
 					parent.Nodes[index - 1].Nodes.Add(node);
+				} else if (index == 0) {
 				}
-				else if (index == 0)
-				{
-				}
-			} 
-			else
-			{
+			} else {
 				TreeView tv = node.TreeView;
 				int index = tv.Nodes.IndexOf(node);
-				if (index > 0)
-				{
+				if (index > 0) {
 					parent = tv.Nodes[index - 1];
 					tv.Nodes.RemoveAt(index);
 					parent.Nodes.Add(node);
@@ -278,35 +229,27 @@ namespace TrayDir
 			}
 			node.TreeView.SelectedNode = node;
 		}
-		public void MoveOut()
-		{
+		public void MoveOut() {
 			tin.MoveOut();
 
 			TreeNode parent = node.Parent;
-			if (parent != null)
-			{
+			if (parent != null) {
 				int index = parent.Nodes.IndexOf(node);
-				if (index >= 0)
-				{
+				if (index >= 0) {
 					TreeNode grandParent = parent.Parent;
 					int parentindex;
-					if (grandParent != null)
-					{
+					if (grandParent != null) {
 						parentindex = grandParent.Nodes.IndexOf(parent);
-						if (parentindex >= 0)
-						{
+						if (parentindex >= 0) {
 							parent.Nodes.RemoveAt(index);
-							grandParent.Nodes.Insert(parentindex+1, node);
+							grandParent.Nodes.Insert(parentindex + 1, node);
 						}
-					}
-					else
-					{
+					} else {
 						TreeView tv = node.TreeView;
 						parentindex = tv.Nodes.IndexOf(parent);
-						if (parentindex >= 0)
-						{
+						if (parentindex >= 0) {
 							parent.Nodes.RemoveAt(index);
-							tv.Nodes.Insert(parentindex+1, node);
+							tv.Nodes.Insert(parentindex + 1, node);
 						}
 					}
 				}
@@ -314,37 +257,29 @@ namespace TrayDir
 			node.TreeView.SelectedNode = node;
 		}
 
-		public void Delete()
-		{
+		public void Delete() {
 			tin.Delete();
-			if (this.node.Parent != null)
-			{
+			if (this.node.Parent != null) {
 				node.Parent.Nodes.Remove(node);
-			}
-			else
-			{
+			} else {
 				node.TreeView?.Nodes.Remove(node);
 			}
-			switch(tin.type)
-			{
+			switch (tin.type) {
 				case TrayInstanceNode.NodeType.Path:
 					tin.instance.paths.RemoveAt(tin.id);
-					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes())
-					{
+					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes()) {
 						if (n.type == tin.type && n.id > tin.id) n.id--;
 					}
 					break;
 				case TrayInstanceNode.NodeType.Plugin:
 					tin.instance.plugins.RemoveAt(tin.id);
-					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes())
-					{
+					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes()) {
 						if (n.type == tin.type && n.id > tin.id) n.id--;
 					}
 					break;
 				case TrayInstanceNode.NodeType.VirtualFolder:
 					tin.instance.vfolders.RemoveAt(tin.id);
-					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes())
-					{
+					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes()) {
 						if (n.type == tin.type && n.id > tin.id) n.id--;
 					}
 					break;

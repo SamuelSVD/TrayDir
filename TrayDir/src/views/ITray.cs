@@ -5,17 +5,15 @@ using System.Reflection;
 using System.Windows.Forms;
 using TrayDir.utils;
 
-namespace TrayDir
-{
-	public class ITray
-	{
+namespace TrayDir {
+	public class ITray {
 		public NotifyIcon notifyIcon;
 
 		private TrayInstance instance;
 		private List<IMenuItem> pathMenuItems;
 		private List<IMenuItem> virtualFolderMenuItems;
 		private List<IMenuItem> pluginMenuItems;
-		
+
 		private ToolStripMenuItem showMenuItem;
 		private ToolStripMenuItem hideMenuItem;
 		private ToolStripMenuItem exitMenuItem;
@@ -38,8 +36,7 @@ namespace TrayDir
 			set { notifyIcon.Icon = value; }
 		}
 
-		public ITray(TrayInstance instance)
-		{
+		public ITray(TrayInstance instance) {
 			this.instance = instance;
 			notifyIcon = new NotifyIcon();
 			notifyIcon.Visible = !instance.settings.HideFromTray;
@@ -56,31 +53,26 @@ namespace TrayDir
 			}
 		}
 		private void Reset(Object o, EventArgs e) {
-			foreach(IMenuItem m in menuItems) {
+			foreach (IMenuItem m in menuItems) {
 				m.ResetClicks();
 			}
 		}
-		private ToolStripMenuItem MakeAndAddMenuItem(ToolStripMenuItem menuItem, string text, bool visible, EventHandler eh)
-		{
-			if (!(eh is null) && (menuItem == null))
-			{
+		private ToolStripMenuItem MakeAndAddMenuItem(ToolStripMenuItem menuItem, string text, bool visible, EventHandler eh) {
+			if (!(eh is null) && (menuItem == null)) {
 				menuItem = new ToolStripMenuItem(text, null, eh);
 				menuItem.Visible = visible;
 			}
-			if (menuItem != null)
-			{
+			if (menuItem != null) {
 				notifyIcon.ContextMenuStrip.Items.Add(menuItem);
 			}
 			return menuItem;
 		}
-		public void setEventHandlers(EventHandler showForm, EventHandler hideForm, EventHandler exitForm)
-		{
+		public void setEventHandlers(EventHandler showForm, EventHandler hideForm, EventHandler exitForm) {
 			this.showForm = showForm;
 			this.hideForm = hideForm;
 			this.exitForm = exitForm;
 		}
-		public void Rebuild()
-		{
+		public void Rebuild() {
 			if (MainForm.form != null) {
 				ClearList(pathMenuItems);
 				ClearList(pluginMenuItems);
@@ -95,13 +87,10 @@ namespace TrayDir
 			}
 			list.Clear();
 		}
-		public void MenuOpened(Object obj, EventArgs args)
-		{
+		public void MenuOpened(Object obj, EventArgs args) {
 			IMenuItemIconUtils.AssignIcons();
-			if (instance.settings.ExpandFirstPath && instance.PathCount == 1)
-			{
-				foreach (IMenuItem child in pathMenuItems)
-				{
+			if (instance.settings.ExpandFirstPath && instance.PathCount == 1) {
+				foreach (IMenuItem child in pathMenuItems) {
 					child.EnqueueImgLoad();
 					child.menuItem.Visible = child.tiPath != null && child.tiPath.visible;
 					if (child.tiPath != null) {
@@ -110,149 +99,110 @@ namespace TrayDir
 						}
 					}
 				}
-			}
-			else
-			{
-				foreach (IMenuItem child in pathMenuItems)
-				{
+			} else {
+				foreach (IMenuItem child in pathMenuItems) {
 					child.EnqueueImgLoad();
 				}
 			}
-			foreach(IMenuItem child in pluginMenuItems)
-			{
+			foreach (IMenuItem child in pluginMenuItems) {
 				child.EnqueueImgLoad();
 			}
-			foreach (IMenuItem child in virtualFolderMenuItems)
-			{
+			foreach (IMenuItem child in virtualFolderMenuItems) {
 				child.EnqueueImgLoad();
 			}
 			MainForm.form.iconLoadTimer.Start();
 		}
-		public void MenuClosed(Object obj, EventArgs args)
-		{
+		public void MenuClosed(Object obj, EventArgs args) {
 			MainForm.form.iconLoadTimer.Stop();
 			Reset(obj, args);
 		}
-		public void RefreshPluginMenuItemList()
-		{
-			foreach (TrayInstancePlugin tiPlugin in instance.plugins)
-			{
+		public void RefreshPluginMenuItemList() {
+			foreach (TrayInstancePlugin tiPlugin in instance.plugins) {
 				bool miFound = false;
-				foreach (IMenuItem mi in pluginMenuItems)
-				{
+				foreach (IMenuItem mi in pluginMenuItems) {
 					if (mi.tiPlugin == tiPlugin) miFound = true;
 				}
-				if (!miFound)
-				{
+				if (!miFound) {
 					IMenuItem mi = new IMenuItem(instance, null, tiPlugin);
 					pluginMenuItems.Add(mi);
 				}
 			}
 			List<IMenuItem> deletable = new List<IMenuItem>();
-			foreach (IMenuItem mi in pluginMenuItems)
-			{
+			foreach (IMenuItem mi in pluginMenuItems) {
 				bool miFound = false;
-				foreach (TrayInstancePlugin tiPlugin in instance.plugins)
-				{
+				foreach (TrayInstancePlugin tiPlugin in instance.plugins) {
 					if (mi.tiPlugin == tiPlugin) miFound = true;
 				}
-				if (miFound)
-				{
+				if (miFound) {
 					mi.Load();
-				}
-				else
-				{
+				} else {
 					deletable.Add(mi);
 				}
 			}
-			foreach (IMenuItem mi in deletable)
-			{
+			foreach (IMenuItem mi in deletable) {
 				pluginMenuItems.Remove(mi);
 			}
 		}
-		public void RefreshVirtualFolderMenuItemList()
-		{
-			foreach (TrayInstanceVirtualFolder tiVirtualFolder in instance.vfolders)
-			{
+		public void RefreshVirtualFolderMenuItemList() {
+			foreach (TrayInstanceVirtualFolder tiVirtualFolder in instance.vfolders) {
 				bool miFound = false;
-				foreach (IMenuItem mi in virtualFolderMenuItems)
-				{
+				foreach (IMenuItem mi in virtualFolderMenuItems) {
 					if (mi.tiVirtualFolder == tiVirtualFolder) miFound = true;
 				}
-				if (!miFound)
-				{
+				if (!miFound) {
 					IMenuItem mi = new IMenuItem(instance, null, tiVirtualFolder);
 					virtualFolderMenuItems.Add(mi);
 				}
 			}
 			List<IMenuItem> deletable = new List<IMenuItem>();
-			foreach (IMenuItem mi in virtualFolderMenuItems)
-			{
+			foreach (IMenuItem mi in virtualFolderMenuItems) {
 				bool miFound = false;
-				foreach (TrayInstanceVirtualFolder tiVirtualFolder in instance.vfolders)
-				{
+				foreach (TrayInstanceVirtualFolder tiVirtualFolder in instance.vfolders) {
 					if (mi.tiVirtualFolder == tiVirtualFolder) miFound = true;
 				}
-				if (miFound)
-				{
+				if (miFound) {
 					mi.Load();
-				}
-				else
-				{
+				} else {
 					deletable.Add(mi);
 				}
 			}
-			foreach (IMenuItem mi in deletable)
-			{
+			foreach (IMenuItem mi in deletable) {
 				virtualFolderMenuItems.Remove(mi);
 			}
 		}
-		public void RefreshPathMenuItemList()
-		{
-			foreach (TrayInstancePath tiPath in instance.paths)
-			{
+		public void RefreshPathMenuItemList() {
+			foreach (TrayInstancePath tiPath in instance.paths) {
 				bool miFound = false;
-				foreach (IMenuItem mi in pathMenuItems)
-				{
+				foreach (IMenuItem mi in pathMenuItems) {
 					if (mi.tiPath == tiPath) miFound = true;
 				}
-				if (!miFound)
-				{
+				if (!miFound) {
 					IMenuItem mi = new IMenuItem(instance, null, tiPath);
 					pathMenuItems.Add(mi);
 				}
 			}
 			List<IMenuItem> deletable = new List<IMenuItem>();
-			foreach (IMenuItem mi in pathMenuItems)
-			{
+			foreach (IMenuItem mi in pathMenuItems) {
 				bool miFound = false;
-				foreach (TrayInstancePath tiPath in instance.paths)
-				{
+				foreach (TrayInstancePath tiPath in instance.paths) {
 					if (mi.tiPath == tiPath) miFound = true;
 				}
-				if (miFound)
-				{
+				if (miFound) {
 					mi.Load();
-				}
-				else
-				{
+				} else {
 					deletable.Add(mi);
 				}
 			}
-			foreach (IMenuItem mi in deletable)
-			{
+			foreach (IMenuItem mi in deletable) {
 				pathMenuItems.Remove(mi);
 			}
 		}
-		public void BuildTrayMenu()
-		{
-			if (notifyIcon.ContextMenuStrip is null)
-			{
+		public void BuildTrayMenu() {
+			if (notifyIcon.ContextMenuStrip is null) {
 				notifyIcon.ContextMenuStrip = new ContextMenuStrip();
 				notifyIcon.ContextMenuStrip.Opened += MenuOpened;
 				notifyIcon.ContextMenuStrip.Closed += MenuClosed;
-			} else
-			{
+			} else {
 				notifyIcon.ContextMenuStrip.Items.Clear();
 			}
 
@@ -279,25 +229,18 @@ namespace TrayDir
 				mi.UpdateVisibility();
 			}
 		}
-		private void AddTrayTree(List<TrayInstanceNode> nodes, ToolStripItemCollection collection, IMenuItem parent)
-		{
-			foreach(TrayInstanceNode node in nodes)
-			{
-				switch(node.type) {
+		private void AddTrayTree(List<TrayInstanceNode> nodes, ToolStripItemCollection collection, IMenuItem parent) {
+			foreach (TrayInstanceNode node in nodes) {
+				switch (node.type) {
 					case TrayInstanceNode.NodeType.Path:
 						if (node.id < instance.paths.Count) {
-							foreach(IMenuItem mi in pathMenuItems)
-							{
-								if (mi.tiPath == instance.paths[node.id])
-								{
+							foreach (IMenuItem mi in pathMenuItems) {
+								if (mi.tiPath == instance.paths[node.id]) {
 									mi.tiNode = node;
 									if (parent != null) parent.nodeChildren.Add(mi);
-									if (!mi.tiPath.shortcut && (instance.settings.ExpandFirstPath && nodes.Count == 1 && collection == notifyIcon.ContextMenuStrip.Items))
-									{
+									if (!mi.tiPath.shortcut && (instance.settings.ExpandFirstPath && nodes.Count == 1 && collection == notifyIcon.ContextMenuStrip.Items)) {
 										mi.AddToCollectionExpanded(collection);
-									}
-									else
-									{
+									} else {
 										mi.AddToCollection(collection);
 									}
 									break;
@@ -337,11 +280,9 @@ namespace TrayDir
 				}
 			}
 		}
-		public void UpdateTrayIcon()
-		{
+		public void UpdateTrayIcon() {
 			Icon i = this.GetInstanceIcon();
-			if (i != null && ((instance.iconPath != null && instance.iconPath != string.Empty) || (instance.iconData == null)))
-			{
+			if (i != null && ((instance.iconPath != null && instance.iconPath != string.Empty) || (instance.iconData == null))) {
 				notifyIcon.Icon = i;
 				instance.iconData = TrayUtils.IconToBytes(i);
 			}
@@ -349,44 +290,32 @@ namespace TrayDir
 			notifyIcon.Text = instance.instanceName;
 			notifyIcon.Icon = i;
 		}
-		public void Hide()
-		{
+		public void Hide() {
 			notifyIcon.Visible = false;
 		}
-		public void Show()
-		{
+		public void Show() {
 			notifyIcon.Visible = true;
 		}
-		public void SetFormHiddenMenu()
-		{
+		public void SetFormHiddenMenu() {
 			notifyIcon.ContextMenuStrip.Items[0].Visible = true;
 			notifyIcon.ContextMenuStrip.Items[1].Visible = false;
 		}
-		public void SetFormShownMenu()
-		{
+		public void SetFormShownMenu() {
 			showMenuItem.Visible = false;
 			hideMenuItem.Visible = true;
 		}
-		public Icon GetInstanceIcon()
-		{
+		public Icon GetInstanceIcon() {
 			Icon i;
-			try
-			{
-				if (instance.iconData != null)
-				{
+			try {
+				if (instance.iconData != null) {
 					i = TrayUtils.BytesToIcon(instance.iconData);
-				}
-				else if (AppUtils.PathIsFile(instance.iconPath))
-				{
+				} else if (AppUtils.PathIsFile(instance.iconPath)) {
 					i = Icon.ExtractAssociatedIcon(instance.iconPath);
-				}
-				else
-				{
+				} else {
 					i = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
 				}
 			}
-			catch (Exception e)
-			{
+			catch (Exception e) {
 				MessageBox.Show(String.Format(Properties.Strings.Form_ErrorLoadingIcon, e.Message));
 				i = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
 			}

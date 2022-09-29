@@ -3,15 +3,12 @@ using System.Drawing;
 using System.Windows.Forms;
 using Utils;
 
-namespace TrayDir
-{
-	public partial class SettingsForm : Form
-	{
+namespace TrayDir {
+	public partial class SettingsForm : Form {
 		private TreeNode AppNode;
 		private TreeNode WinNode;
 
-		public SettingsForm()
-		{
+		public SettingsForm() {
 			InitializeComponent();
 			this.Icon = Properties.Resources.file_exe;
 			InitializeOptions();
@@ -36,8 +33,7 @@ namespace TrayDir
 
 			this.ClientSize = FormTableLayoutPanel.Size;
 		}
-		private void CloseButtonClick(object sender, EventArgs e)
-		{
+		private void CloseButtonClick(object sender, EventArgs e) {
 			Close();
 		}
 		public void InitializeOptions() {
@@ -123,7 +119,7 @@ namespace TrayDir
 				WinGroupLayout,
 				"HideOnMinimize",
 				ProgramData.pd.settings.win,
-				Properties.Strings.Form_HideOnMinimize, 
+				Properties.Strings.Form_HideOnMinimize,
 				ProgramData.pd.settings.win.HideOnMinimize,
 				Properties.Strings.Tooltip_HideOnMinimize
 			);
@@ -132,7 +128,7 @@ namespace TrayDir
 				WinGroupLayout,
 				"StartMinimized",
 				ProgramData.pd.settings.win,
-				Properties.Strings.Form_StartMinimized, 
+				Properties.Strings.Form_StartMinimized,
 				ProgramData.pd.settings.win.StartMinimized,
 				Properties.Strings.Tooltip_StartMinimized
 			);
@@ -141,7 +137,7 @@ namespace TrayDir
 				WinGroupLayout,
 				"StartWithWindows",
 				ProgramData.pd.settings.win,
-				Properties.Strings.Form_StartWithWindows, 
+				Properties.Strings.Form_StartWithWindows,
 				ProgramData.pd.settings.win.StartWithWindows,
 				Properties.Strings.Tooltip_StartWithWindows
 			);
@@ -156,14 +152,10 @@ namespace TrayDir
 			);
 		}
 
-		private void CategoryTreeView_AfterSelect(object sender, TreeViewEventArgs e)
-		{
-			if (CategoryTreeView.SelectedNode == AppNode)
-			{
+		private void CategoryTreeView_AfterSelect(object sender, TreeViewEventArgs e) {
+			if (CategoryTreeView.SelectedNode == AppNode) {
 				this.SettingsTabControl.SelectedTab = this.AppSettingsTabPage;
-			}
-			else if (CategoryTreeView.SelectedNode == WinNode)
-			{
+			} else if (CategoryTreeView.SelectedNode == WinNode) {
 				this.SettingsTabControl.SelectedTab = this.WinSettingsTabPage;
 			}
 		}

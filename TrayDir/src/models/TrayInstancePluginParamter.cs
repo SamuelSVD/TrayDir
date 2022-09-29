@@ -1,16 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
-namespace TrayDir
-{
-	public class TrayInstancePluginParameter : Model
-	{
+namespace TrayDir {
+	public class TrayInstancePluginParameter : Model {
 		[XmlAttribute]
 		public string name = string.Empty;
 		[XmlAttribute]
 		public string value = string.Empty;
-		public override object Copy()
-		{
+		public override object Copy() {
 			TrayInstancePluginParameter tipp = new TrayInstancePluginParameter();
 			tipp.name = name;
 			tipp.value = value;

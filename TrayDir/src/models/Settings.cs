@@ -1,20 +1,14 @@
-﻿using System;
-using System.Reflection;
-using System.Windows.Forms;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.Serialization;
 
-namespace TrayDir
-{
-	public class Settings
-	{
+namespace TrayDir {
+	public class Settings {
 		[XmlElement(ElementName = "Application")]
 		public SettingsApplication app;
 		public SettingsWindows win;
 		public static string config = "config.xml";
-        
-		public Settings()
-		{
+
+		public Settings() {
 			app = new SettingsApplication();
 			win = new SettingsWindows();
 		}
