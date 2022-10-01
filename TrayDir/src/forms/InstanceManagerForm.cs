@@ -64,6 +64,7 @@ namespace TrayDir
 					ProgramData.pd.archivedInstances.Remove(ti);
 					treeView1.Nodes.Remove(selectedNode.node);
 					treeView1.Sort();
+					MainForm.form.BuildRebuildDropdown();
 				}
 			}
 		}

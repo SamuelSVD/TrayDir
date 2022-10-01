@@ -23,6 +23,7 @@ namespace TrayDir {
 					Application.SetCompatibleTextRenderingDefault(false);
 					IMenuItemIconUtils.Init();
 					MainForm.Init();
+					MainForm.form.LoadProgram();
 					ProgramData.pd.initialized = true;
 					Application.Run(MainForm.form);
 				}

@@ -13,7 +13,7 @@ namespace TrayDir
 		private bool allowVisible;     // ContextMenu's Show command used
 		private bool allowClose;       // ContextMenu's Exit command used
 		public TrayInstance trayInstance { get { return pd.trayInstances[instanceTabs.SelectedIndex]; } }
-		private TrayInstance onShowInstance;
+		internal TrayInstance onShowInstance;
 		public ProgramData pd;
 		public FileDialog fd;
 		public SmartTabControl instanceTabs;
@@ -40,21 +40,19 @@ namespace TrayDir
 
 			pd.FixInstances();
 			if (!Program.IGNORESTARTUP) pd.CheckStartup();
+		}
+		public void LoadProgram() {
 			InitializeContent();
 			BuildExploreDropdown();
 			BuildRebuildDropdown();
 
-			if (pd.settings.win.StartMinimized)
-			{
+			if (pd.settings.win.StartMinimized) {
 				allowVisible = false;
 				HideApp(this, null);
-			}
-			else
-			{
+			} else {
 				allowVisible = true;
 			}
-			if (pd.settings.win.CheckForUpdates)
-			{
+			if (pd.settings.win.CheckForUpdates) {
 				UpdateUtils.CheckForUpdates();
 			}
 			if (pd.settings.app.ShowIconsInMenus) {
@@ -130,6 +128,9 @@ namespace TrayDir
 				TrayInstance instance = pd.trayInstances[i];
 				AddInstanceTabPage(instance);
 			}
+			foreach(TrayInstance instance in ProgramData.pd.trayInstances) {
+				instance.view.Rebuild();
+			}
 			instanceTabs.SelectedIndex = 0;
 		}
 		public void AddInstanceTabPage(TrayInstance instance)
@@ -140,16 +141,7 @@ namespace TrayDir
 			instanceTabs.TabPages.Remove(newTabTabPage);
 			instanceTabs.TabPages.Add(tp);
 			instanceTabs.TabPages.Add(newTabTabPage);
-			IView iv = CreateViewFromInstance(instance, tp);
-			iv.tray.notifyIcon.DoubleClick += new EventHandler(delegate (object obj, EventArgs args)
-			{
-				if (((MouseEventArgs)args).Button == MouseButtons.Left)
-				{
-					onShowInstance = instance;
-					ShowApp(obj, args);
-				}
-			});
-			BuildRebuildDropdown();
+			IView iv = new IView(instance, tp);
 			instanceTabs.SelectedIndex = i;
 			instanceTabs.MinimumSize = new Size((instance.view.p.MinimumSize.Width), (instance.view.p.MinimumSize.Height + instanceTabs.ItemSize.Height));
 			if (!initializedMinSize) {
@@ -355,23 +347,6 @@ namespace TrayDir
 		{
 			new SettingsForm().ShowDialog();
 		}
-		private void MainForm_Load(object sender, EventArgs e) { }
-		private IView CreateViewFromInstance(TrayInstance instance, TabPage tp)
-		{
-			IView iv = new IView(instance);
-			iv.InstanceTabPage = tp;
-			tp.Text = instance.instanceName;
-			tp.Controls.Add(iv.GetControl());
-			iv.treeviewForm.setTabPage(tp);
-
-			iv.tray.setEventHandlers(new EventHandler(delegate (Object obj, EventArgs args)
-			{
-				onShowInstance = instance;
-				ShowApp(obj, args);
-			}), HideApp, ExitApp);
-			iv.tray.BuildTrayMenu();
-			return iv;
-		}
 		private void timer1_Tick(object sender, EventArgs e)
 		{
 			if (loaded)
@@ -405,6 +380,7 @@ namespace TrayDir
 			archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
 			pd.Save();
 			Edit(this, e);
+			BuildRebuildDropdown();
 		}
 		private void Edit(object sender, EventArgs e)
 		{
@@ -454,6 +430,7 @@ namespace TrayDir
 					AddInstanceTabPage(i);
 					deleteSelectedToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
 					archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
+					BuildRebuildDropdown();
 					pd.Save();
 				}
 				else

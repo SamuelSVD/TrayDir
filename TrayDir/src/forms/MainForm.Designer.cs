@@ -315,7 +315,6 @@ namespace TrayDir
 			this.MinimumSize = this.Size;
 			this.Name = "MainForm";
 			this.toolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
-			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
 			this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainForm_DragDrop);
 			this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
