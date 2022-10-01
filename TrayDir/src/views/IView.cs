@@ -40,13 +40,6 @@ namespace TrayDir {
 				MainForm.form.ShowApp(obj, args);
 			}), MainForm.form.HideApp,
 				MainForm.form.ExitApp);
-			tray.notifyIcon.DoubleClick += new EventHandler(delegate (object obj, EventArgs args) {
-				if (((MouseEventArgs)args).Button == MouseButtons.Left) {
-					MainForm.form.onShowInstance = instance;
-					MainForm.form.ShowApp(obj, args);
-				}
-			});
-
 		}
 		public Control GetControl() {
 			return p;

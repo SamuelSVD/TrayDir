@@ -45,6 +45,14 @@ namespace TrayDir {
 			pathMenuItems = new List<IMenuItem>();
 			virtualFolderMenuItems = new List<IMenuItem>();
 			pluginMenuItems = new List<IMenuItem>();
+			notifyIcon.DoubleClick += notifyIcon_DoubleClick;
+		}
+		public void notifyIcon_DoubleClick(object obj, EventArgs args) {
+			if (((MouseEventArgs)args).Button == MouseButtons.Left) {
+				MainForm.form.onShowInstance = instance;
+				MainForm.form.ShowApp(obj, args);
+				notifyIcon.ContextMenuStrip.Hide();
+			}
 		}
 		public void notifyIcon_Click(object sender, MouseEventArgs e) {
 			if (e.Button == MouseButtons.Left && ProgramData.pd.settings.app.ShowMenuOnLeftClick) {
