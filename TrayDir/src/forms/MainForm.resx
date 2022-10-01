@@ -122,7 +122,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="exploreToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 36</value>
+    <value>112, 44</value>
   </data>
   <data name="exploreToolStripMenuItem.Text" xml:space="preserve">
     <value>Explore</value>
@@ -139,6 +139,71 @@
   <metadata name="mainMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>147, 17</value>
   </metadata>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 36</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="instanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 36</value>
+  </data>
+  <data name="instanceToolStripMenuItem.Text" xml:space="preserve">
+    <value>Instance</value>
+  </data>
+  <data name="rebuildToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 36</value>
+  </data>
+  <data name="rebuildToolStripMenuItem.Text" xml:space="preserve">
+    <value>Rebuild</value>
+  </data>
+  <data name="pluginToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 36</value>
+  </data>
+  <data name="pluginToolStripMenuItem.Text" xml:space="preserve">
+    <value>Plugins</value>
+  </data>
+  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 36</value>
+  </data>
+  <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 36</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="mainMenu.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="mainMenu.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 2, 0, 2</value>
+  </data>
+  <data name="mainMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>898, 48</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="mainMenu.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="mainMenu.Text" xml:space="preserve">
+    <value>mainMenu</value>
+  </data>
+  <data name="&gt;&gt;mainMenu.Name" xml:space="preserve">
+    <value>mainMenu</value>
+  </data>
+  <data name="&gt;&gt;mainMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mainMenu.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;mainMenu.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="saveToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>244, 44</value>
   </data>
@@ -156,12 +221,6 @@
   </data>
   <data name="exitToolStripMenuItem1.Text" xml:space="preserve">
     <value>Exit</value>
-  </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 36</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
   </data>
   <data name="newInstanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>391, 44</value>
@@ -225,12 +284,6 @@
 Regex patterns follow c# formatting.
 Patterns are separated by new lines.</value>
   </data>
-  <data name="instanceToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 36</value>
-  </data>
-  <data name="instanceToolStripMenuItem.Text" xml:space="preserve">
-    <value>Instance</value>
-  </data>
   <data name="rebuildCurrentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>314, 44</value>
   </data>
@@ -242,24 +295,6 @@ Patterns are separated by new lines.</value>
   </data>
   <data name="rebuildAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Rebuild All</value>
-  </data>
-  <data name="rebuildToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 36</value>
-  </data>
-  <data name="rebuildToolStripMenuItem.Text" xml:space="preserve">
-    <value>Rebuild</value>
-  </data>
-  <data name="pluginToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 36</value>
-  </data>
-  <data name="pluginToolStripMenuItem.Text" xml:space="preserve">
-    <value>Plugins</value>
-  </data>
-  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 36</value>
-  </data>
-  <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Settings</value>
   </data>
   <data name="helpToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>266, 44</value>
@@ -279,41 +314,9 @@ Patterns are separated by new lines.</value>
   <data name="bugReportToolStripMenuItem.Text" xml:space="preserve">
     <value>Bug Report</value>
   </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 36</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Help</value>
-  </data>
-  <data name="mainMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="mainMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>898, 40</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="mainMenu.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="mainMenu.Text" xml:space="preserve">
-    <value>mainMenu</value>
-  </data>
-  <data name="&gt;&gt;mainMenu.Name" xml:space="preserve">
-    <value>mainMenu</value>
-  </data>
-  <data name="&gt;&gt;mainMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mainMenu.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;mainMenu.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 20</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
@@ -339,7 +342,7 @@ Patterns are separated by new lines.</value>
     <value>Top</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 40</value>
+    <value>0, 48</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 6, 6, 6</value>
