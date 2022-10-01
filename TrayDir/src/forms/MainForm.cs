@@ -347,20 +347,6 @@ namespace TrayDir
 		{
 			new SettingsForm().ShowDialog();
 		}
-		private void timer1_Tick(object sender, EventArgs e)
-		{
-			if (loaded)
-			{
-				if (Visible)
-				{
-					timer1.Interval = 1000;
-				}
-				else
-				{
-					timer1.Interval = 100;
-				}
-			}
-		}
 		private void instanceTabs_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			int index = ((TabControl)sender).SelectedIndex;
