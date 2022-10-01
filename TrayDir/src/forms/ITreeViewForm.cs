@@ -390,7 +390,7 @@ namespace TrayDir {
 			RecursiveAddToInstance(copyInstance, selectedNode.tin, null);
 			Clipboard.SetText(XMLUtils.XmlSerializeToString(copyInstance));
 		}
-		private void RecursiveLoadFromInstance(TrayInstance recursive_instance, TrayInstanceNode tin, ITreeNode parentNode) {
+		private ITreeNode RecursiveLoadFromInstance(TrayInstance recursive_instance, TrayInstanceNode tin, ITreeNode parentNode) {
 			TrayInstanceNode newTin = new TrayInstanceNode();
 			newTin.type = tin.type;
 			if (tin.type == TrayInstanceNode.NodeType.Path) {
@@ -426,13 +426,15 @@ namespace TrayDir {
 				selectedNode = itn;
 				outdentButton_Click(this, null);
 			}
-			RefreshSelected();
+			return itn;
 		}
 		private void PasteFromClipboard() {
 			try {
 				TrayInstance copyInstance = (TrayInstance)XMLUtils.XmlDeserializeFromString(Clipboard.GetText(), typeof(TrayInstance));
+				ITreeNode parentNode = null;
+				if (selectedNode != null) parentNode = selectedNode;
 				foreach (TrayInstanceNode tin in copyInstance.nodes.children) {
-					RecursiveLoadFromInstance(copyInstance, tin, null);
+					RecursiveLoadFromInstance(copyInstance, tin, parentNode);
 				}
 				instance.view?.Rebuild();
 				Save();
