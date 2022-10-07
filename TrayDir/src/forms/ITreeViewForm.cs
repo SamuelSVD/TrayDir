@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using TrayDir.src.views;
 using TrayDir.utils;
 
 namespace TrayDir {
@@ -122,7 +123,24 @@ namespace TrayDir {
 			return this.formTableLayoutPanel;
 		}
 		private ITreeNode InitNodes(TreeView tv, TrayInstanceNode tin, ITreeNode parent) {
-			ITreeNode tn = new ITreeNode(tin);
+			ITreeNode tn;
+			switch (tin.type) {
+				case TrayInstanceNode.NodeType.Path:
+					tn = new ITreePathNode(tin);
+					break;
+				case TrayInstanceNode.NodeType.VirtualFolder:
+					tn = new ITreeVirtualFolderNode(tin);
+					break;
+				case TrayInstanceNode.NodeType.Plugin:
+					tn = new ITreePluginNode(tin);
+					break;
+				case TrayInstanceNode.NodeType.Separator:
+					tn = new ITreeSeparatorNode(tin);
+					break;
+				default:
+					tn = new ITreeUnknownNode(tin);
+					break;
+			}
 			if (parent == null) {
 				treeView2.Nodes.Add(tn.node);
 			}
@@ -208,7 +226,7 @@ namespace TrayDir {
 			tin.id = index;
 			tin.type = TrayInstanceNode.NodeType.Path;
 			tin.SetInstance(instance);
-			ITreeNode itn = new ITreeNode(tin);
+			ITreeNode itn = new ITreePathNode(tin);
 			insertNode(itn);
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
@@ -309,7 +327,7 @@ namespace TrayDir {
 			tin.id = index;
 			tin.type = TrayInstanceNode.NodeType.VirtualFolder;
 			tin.SetInstance(instance);
-			ITreeNode itn = new ITreeNode(tin);
+			ITreeNode itn = new ITreeVirtualFolderNode(tin);
 			insertNode(itn);
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
@@ -413,7 +431,25 @@ namespace TrayDir {
 				instance.vfolders.Add(recursive_instance.vfolders[tin.id]);
 			}
 			newTin.SetInstance(instance);
-			ITreeNode itn = new ITreeNode(newTin);
+
+			ITreeNode itn;
+			switch(newTin.type) {
+				case TrayInstanceNode.NodeType.Path:
+					itn = new ITreePathNode(newTin);
+					break;
+				case TrayInstanceNode.NodeType.VirtualFolder:
+					itn = new ITreeVirtualFolderNode(newTin);
+					break;
+				case TrayInstanceNode.NodeType.Plugin:
+					itn = new ITreePluginNode(newTin);
+					break;
+				case TrayInstanceNode.NodeType.Separator:
+					itn = new ITreeSeparatorNode(newTin);
+					break;
+				default:
+					itn = new ITreeUnknownNode(newTin);
+					break;
+			}
 			if (parentNode != null) treeView2.SelectedNode = parentNode.node;
 			insertNode(itn);
 			treeView2.SelectedNode = itn.node;
@@ -630,7 +666,7 @@ namespace TrayDir {
 			tin.id = index;
 			tin.type = TrayInstanceNode.NodeType.Plugin;
 			tin.SetInstance(instance);
-			ITreeNode itn = new ITreeNode(tin);
+			ITreeNode itn = new ITreePluginNode(tin);
 			insertNode(itn);
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
@@ -644,7 +680,7 @@ namespace TrayDir {
 			TrayInstanceNode tin = new TrayInstanceNode();
 			tin.type = TrayInstanceNode.NodeType.Separator;
 			tin.SetInstance(instance);
-			ITreeNode itn = new ITreeNode(tin);
+			ITreeNode itn = new ITreeSeparatorNode(tin);
 			insertNode(itn);
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
@@ -721,7 +757,7 @@ namespace TrayDir {
 			tin.id = index;
 			tin.type = TrayInstanceNode.NodeType.Path;
 			tin.SetInstance(instance);
-			return new ITreeNode(tin);
+			return new ITreePathNode(tin);
 		}
 		private void AddNewPathOverB(string path, TreeNode B) {
 			ITreeNode itn = CreatePathNode(path);

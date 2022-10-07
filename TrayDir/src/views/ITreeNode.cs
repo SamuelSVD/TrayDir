@@ -4,8 +4,8 @@ using System.Windows.Forms;
 using TrayDir.utils;
 
 namespace TrayDir {
-	public class ITreeNode {
-		private static Font strikethroughFont;
+	public abstract class ITreeNode {
+		protected static Font strikethroughFont;
 		public TreeNode node;
 		public TrayInstanceNode tin;
 		public static Dictionary<string, int> pluginIndex = new Dictionary<string, int>();
@@ -75,93 +75,7 @@ namespace TrayDir {
 			tin.itn = this;
 			node = new TreeNode();
 		}
-		public void Refresh() {
-			bool hidden = false;
-			node.ImageIndex = IconUtils.QUESTION;
-			switch (tin.type) {
-				case TrayInstanceNode.NodeType.Path:
-					TrayInstancePath tip = tin.GetPath();
-					if (tip != null) {
-						bool hasAlias = alias != null && alias != string.Empty;
-						if (tip.isDir) {
-							if (tip.shortcut) {
-								node.ImageIndex = IconUtils.FOLDER_SHORTCUT;
-							} else {
-								node.ImageIndex = IconUtils.FOLDER;
-							}
-							node.Text = string.Empty;
-						} else if (tip.isFile) {
-							node.ImageIndex = IconUtils.DOCUMENT;
-							node.Text = string.Empty;
-						} else {
-							node.ImageIndex = IconUtils.QUESTION;
-							node.Text = Properties.Strings.Node_Error;
-						}
-						hidden = !tip.visible;
-						node.Text += hasAlias ? alias : string.Empty;
-						node.Text += hasAlias ? " (" + tin.instance.paths[tin.id].path + ")" : tin.instance.paths[tin.id].path;
-					}
-					break;
-				case TrayInstanceNode.NodeType.VirtualFolder:
-					TrayInstanceVirtualFolder tivf = tin.GetVirtualFolder();
-					if (tivf != null) {
-						node.ImageIndex = IconUtils.FOLDER_BLUE;
-						node.Text = tivf.alias;
-						hidden = !tivf.visible;
-					}
-					break;
-				case TrayInstanceNode.NodeType.Plugin:
-					string pluginName = "";
-					TrayInstancePlugin iPlugin = tin.GetPlugin();
-					TrayPlugin plugin = null;
-					if (iPlugin != null) {
-						plugin = iPlugin.plugin;
-						hidden = !iPlugin.visible;
-					}
-					if (plugin != null) {
-						pluginName = plugin.name;
-						if (node.TreeView != null) {
-							if (plugin.isScript) {
-								if (iPlugin.isValid()) {
-									node.ImageIndex = IconUtils.RUNNABLE;
-								} else {
-									node.ImageIndex = IconUtils.RUNNABLE_ERROR;
-								}
-							} else {
-								if (AppUtils.PathIsFile(plugin.path)) {
-
-									if (ITreeNode.pluginIndex.ContainsKey(plugin.getSignature())) {
-										node.ImageIndex = ITreeNode.pluginIndex[plugin.getSignature()];
-									} else {
-										Bitmap i = IconUtils.lookupIcon(plugin.getSignature());
-										if (i == null) {
-											i = Icon.ExtractAssociatedIcon(plugin.path).ToBitmap();
-											IconUtils.addIcon(plugin.getSignature(), i);
-										}
-										node.TreeView.ImageList.Images.Add(i);
-										node.ImageIndex = node.TreeView.ImageList.Images.Count - 1;
-									}
-								}
-							}
-						}
-					}
-					node.Text = string.Format("{0} ({1})", tin.instance.plugins[tin.id].alias, pluginName);
-					break;
-				case TrayInstanceNode.NodeType.Separator:
-					node.ImageIndex = IconUtils.SEPARATOR;
-					node.Text = Properties.Strings.Form_Separator;
-					break;
-				default:
-					break;
-			}
-			node.SelectedImageIndex = node.ImageIndex;
-			if (hidden) {
-				ITreeNode.strikethroughFont = new Font(node.TreeView.Font.FontFamily, node.TreeView.Font.Size, FontStyle.Strikeout);
-				node.NodeFont = strikethroughFont;
-			} else {
-				node.NodeFont = node.TreeView?.Font;
-			}
-		}
+		public abstract void Refresh();
 		public void MoveUp() {
 			tin.MoveUp();
 

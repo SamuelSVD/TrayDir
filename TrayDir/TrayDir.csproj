@@ -225,6 +225,11 @@
     <Compile Include="src\views\IMenuItem.Events.cs" />
     <Compile Include="src\views\ComboBoxView.cs" />
     <Compile Include="src\views\InstanceNode.cs" />
+    <Compile Include="src\views\ITreePathNode.cs" />
+    <Compile Include="src\views\ITreePluginNode.cs" />
+    <Compile Include="src\views\ITreeSeparatorNode.cs" />
+    <Compile Include="src\views\ITreeUnknownNode.cs" />
+    <Compile Include="src\views\ITreeVirtualFolderNode.cs" />
     <Compile Include="src\views\PluginNode.cs" />
     <Compile Include="src\views\ITray.cs" />
     <Compile Include="src\views\IMenuItem.cs" />
