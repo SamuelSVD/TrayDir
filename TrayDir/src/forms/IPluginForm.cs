@@ -5,16 +5,14 @@ using Utils;
 
 namespace TrayDir
 {
-	public partial class IPluginForm : Form
-	{
+	public partial class IPluginForm : Form {
 		Dictionary<string, int> pluginIndex = new Dictionary<string, int>();
 		List<Control> labels = new List<Control>();
 		List<Control> controls = new List<Control>();
 		TrayPlugin selectedPlugin;
 		public TrayInstancePlugin model;
 		private int startingCount;
-		public IPluginForm(TrayInstancePlugin tip)
-		{
+		public IPluginForm(TrayInstancePlugin tip) {
 			InitializeComponent();
 			this.Icon = Properties.Resources.file_exe;
 			this.model = tip;
@@ -23,45 +21,36 @@ namespace TrayDir
 			startingCount = pluginTableLayoutPanel.RowCount;
 			LoadPlugins();
 		}
-		public void LoadPlugins()
-		{
-			foreach (TrayPlugin tp in ProgramData.pd.plugins)
-			{
+		public void LoadPlugins() {
+			foreach (TrayPlugin tp in ProgramData.pd.plugins) {
 				string t = tp.getSignature();
 				pluginIndex[t] = ProgramData.pd.plugins.IndexOf(tp);
 				pluginComboBox.Items.Add(t);
 			}
-			for (int i = 0; i < pluginComboBox.Items.Count; i++)
-			{
+			for (int i = 0; i < pluginComboBox.Items.Count; i++) {
 				TrayPlugin tp = ProgramData.pd.plugins[pluginIndex[pluginComboBox.Items[i].ToString()]];
-				if (tp == selectedPlugin)
-				{
+				if (tp == selectedPlugin) {
 					pluginComboBox.SelectedIndex = i;
 					break;
 				}
 			}
 			aliasEdit.Text = model.alias;
 		}
-		private void pluginComboBox_SelectedIndexChanged(object sender, EventArgs e)
-		{
+		private void pluginComboBox_SelectedIndexChanged(object sender, EventArgs e) {
 			string selected = pluginComboBox.SelectedItem.ToString();
 			model.id = pluginIndex[selected];
 			TrayPlugin tp = model.plugin;
 			selectedPlugin = tp;
-			foreach (Control c in controls)
-			{
+			foreach (Control c in controls) {
 				pluginTableLayoutPanel.Controls.Remove(c);
 			}
 			controls.Clear();
-			foreach (Control c in labels)
-			{
+			foreach (Control c in labels) {
 				pluginTableLayoutPanel.Controls.Remove(c);
 			}
 			labels.Clear();
-			if (tp.parameterCount > 0)
-			{
-				for (int i = 0; i < tp.parameterCount; i++)
-				{
+			if (tp.parameterCount > 0) {
+				for (int i = 0; i < tp.parameterCount; i++) {
 					TrayPluginParameter tpp = null;
 					if (i < tp.parameters.Count) {
 						tpp = tp.parameters[i];
@@ -70,26 +59,32 @@ namespace TrayDir
 					if (model.parameters.Count < i + 1) {
 						tipp = new TrayInstancePluginParameter();
 						model.parameters.Add(tipp);
-					}
-					else {
+					} else {
 						tipp = model.parameters[i];
 					}
 					AddParameterRow(tpp, tipp);
 				}
 			}
-			for (int i = 0; i < pluginTableLayoutPanel.RowCount; i++)
-			{
+			for (int i = 0; i < pluginTableLayoutPanel.RowCount; i++) {
 				RowStyle rs;
-				if (pluginTableLayoutPanel.RowStyles.Count > i + 1)
-				{
+				if (pluginTableLayoutPanel.RowStyles.Count > i + 1) {
 					rs = pluginTableLayoutPanel.RowStyles[i];
-				}
-				else
-				{
+				} else {
 					rs = new RowStyle();
 					pluginTableLayoutPanel.RowStyles.Add(rs);
 				}
 				rs.SizeType = SizeType.AutoSize;
+			}
+			FixTabOrder();
+		}
+		private void FixTabOrder() {
+			int TabIndex = 0;
+			for(int i = 0; i < pluginTableLayoutPanel.RowCount; i++) {
+				Control c = pluginTableLayoutPanel.GetControlFromPosition(0, i);
+				if (c != null) {
+					c.TabIndex = TabIndex;
+					TabIndex++;
+				}
 			}
 		}
 		private void AddParameterRow(TrayPluginParameter tpp, TrayInstancePluginParameter tipp) {
