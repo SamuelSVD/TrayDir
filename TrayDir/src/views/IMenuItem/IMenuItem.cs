@@ -16,8 +16,6 @@ namespace TrayDir {
 		public IMenuItem parent;
 		public Bitmap menuIcon;
 
-		public bool isVFolder { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstanceVirtualFolder)); } }
-		public bool isPlugin { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstancePlugin)); } }
 		public bool loadedIcon = false;
 		public bool enqueued = false;
 		protected bool assignedClickEvent = false;

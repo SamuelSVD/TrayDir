@@ -191,7 +191,7 @@ namespace TrayDir {
 					ExplorePath(Path.GetFullPath(((TrayInstancePath)menuItem.tiItem).path));
 				}
 			} else if (menuItem.GetType() == typeof(IPluginMenuItem)) {
-				if (menuItem.isPlugin) {
+				if (((IPluginMenuItem)menuItem).isPlugin) {
 					if (((TrayInstancePlugin)menuItem.tiItem).plugin != null) {
 						ExplorePath(((TrayInstancePlugin)menuItem.tiItem).plugin.path);
 					}
@@ -227,7 +227,7 @@ namespace TrayDir {
 					OpenPath(Path.GetFullPath(((TrayInstancePath)menuItem.tiItem).path), menuItem.instance.settings.RunAsAdmin);
 				}
 			} else if (menuItem.GetType() == typeof(IPluginMenuItem)) {
-				if (menuItem.isPlugin) {
+				if (((IPluginMenuItem)menuItem).isPlugin) {
 					RunPlugin(((TrayInstancePlugin)menuItem.tiItem), menuItem.instance.settings.RunAsAdmin);
 				}
 			}

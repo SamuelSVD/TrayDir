@@ -11,7 +11,7 @@ namespace TrayDir {
 			foreach (IMenuItem imi in nodeChildren) {
 				if (imi.GetType() == typeof(IPathMenuItem) || (imi.GetType() == typeof(IPluginMenuItem))) {
 					AppUtils.Run(imi);
-				} else if (imi.isVFolder) {
+				} else if (imi.GetType() == typeof(IVirtualFolderMenuItem) && ((IVirtualFolderMenuItem)imi).isVFolder) {
 					imi.RunAll(obj, args);
 				}
 			}
