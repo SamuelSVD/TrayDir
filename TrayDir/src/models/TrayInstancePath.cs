@@ -17,6 +17,7 @@ namespace TrayDir {
 			tip.path = path;
 			tip.shortcut = shortcut;
 			tip.alias = alias;
+			tip.visible = visible;
 			return tip;
 		}
 		public override void Apply(object model) {
@@ -24,6 +25,7 @@ namespace TrayDir {
 				this.path = ((TrayInstancePath)model).path;
 				this.shortcut = ((TrayInstancePath)model).shortcut;
 				this.alias = ((TrayInstancePath)model).alias;
+				this.visible = ((TrayInstancePath)model).visible;
 			}
 		}
 		public override bool Equals(object b) {

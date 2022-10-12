@@ -139,6 +139,12 @@
     <Compile Include="src\forms\IVirtualFolderForm.Designer.cs">
       <DependentUpon>IVirtualFolderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\forms\IWebLinkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\forms\IWebLinkForm.Designer.cs">
+      <DependentUpon>IWebLinkForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\forms\PluginParameterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,17 +235,17 @@
     <Compile Include="src\views\InstanceNode.cs" />
     <Compile Include="src\views\IMenuItem\IPathMenuItem.cs" />
     <Compile Include="src\views\IMenuItem\IPluginMenuItem.cs" />
-    <Compile Include="src\views\ITreePathNode.cs" />
-    <Compile Include="src\views\ITreePluginNode.cs" />
-    <Compile Include="src\views\ITreeSeparatorNode.cs" />
-    <Compile Include="src\views\ITreeUnknownNode.cs" />
-    <Compile Include="src\views\ITreeVirtualFolderNode.cs" />
-    <Compile Include="src\views\ITreeWebLinkNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreePathNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreePluginNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreeSeparatorNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreeUnknownNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreeVirtualFolderNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreeWebLinkNode.cs" />
     <Compile Include="src\views\IMenuItem\IVirtualFolderMenuItem.cs" />
     <Compile Include="src\views\PluginNode.cs" />
     <Compile Include="src\views\ITray.cs" />
     <Compile Include="src\views\IMenuItem\IMenuItem.cs" />
-    <Compile Include="src\views\ITreeNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreeNode.cs" />
     <Compile Include="src\views\IView.cs" />
     <Compile Include="src\views\CheckBoxOptionView.cs" />
     <EmbeddedResource Include="Properties\Strings.resx">
@@ -270,6 +276,9 @@
     <EmbeddedResource Include="src\forms\IVirtualFolderForm.resx">
       <DependentUpon>IVirtualFolderForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\IWebLinkForm.resx">
+      <DependentUpon>IWebLinkForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\PluginParameterForm.resx">
       <DependentUpon>PluginParameterForm.cs</DependentUpon>
@@ -338,6 +347,7 @@
     <Content Include="Resources\document.png" />
     <Content Include="Resources\document_new.png" />
     <Content Include="Resources\down.png" />
+    <None Include="Resources\weblink.png" />
     <None Include="Resources\edit.png" />
     <None Include="Resources\empty.png" />
     <Content Include="Resources\file-exe.ico" />

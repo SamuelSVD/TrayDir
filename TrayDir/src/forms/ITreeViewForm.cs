@@ -89,6 +89,7 @@ namespace TrayDir {
 			updateImage(newPluginButton, IconUtils.RUNNABLE_NEW);
 			updateImage(newVirtualFolderButton, IconUtils.FOLDER_BLUE_NEW);
 			updateImage(newSeparatorButton, IconUtils.SEPARATOR);
+			updateImage(newWebLinkButton, IconUtils.WEBLINK);
 			editButton.Image = IconUtils.EditImage;
 			editButton.TextImageRelation = TextImageRelation.ImageBeforeText;
 			editButton.TextAlign = ContentAlignment.MiddleLeft;
@@ -272,6 +273,9 @@ namespace TrayDir {
 						break;
 					case TrayInstanceNode.NodeType.VirtualFolder:
 						vFolderPropertiesButton_Click(sender, e);
+						break;
+					case TrayInstanceNode.NodeType.WebLink:
+						webLinkPropertiesButton_Click(sender, e);
 						break;
 				}
 			}
@@ -577,12 +581,19 @@ namespace TrayDir {
 		}
 		private void treeView2_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e) {
 			if (selectedNode != null) {
-				if (selectedNode.tin.type == TrayInstanceNode.NodeType.Plugin) {
-					pluginPropertiesButton_Click(sender, e);
-				} else if (selectedNode.tin.type == TrayInstanceNode.NodeType.Path) {
-					pathPropertiesButton_Click(sender, e);
-				} else if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder) {
-					vFolderPropertiesButton_Click(sender, e);
+				switch(selectedNode.tin.type) {
+					case TrayInstanceNode.NodeType.Plugin:
+						pluginPropertiesButton_Click(sender, e);
+						break;
+					case TrayInstanceNode.NodeType.Path:
+						pathPropertiesButton_Click(sender, e);
+						break;
+					case TrayInstanceNode.NodeType.VirtualFolder:
+						vFolderPropertiesButton_Click(sender, e);
+						break;
+					case TrayInstanceNode.NodeType.WebLink:
+						webLinkPropertiesButton_Click(sender, e);
+						break;
 				}
 			}
 		}
@@ -718,6 +729,19 @@ namespace TrayDir {
 				RefreshSelected();
 			}
 		}
+		private void webLinkPropertiesButton_Click(object sender, EventArgs e) {
+			ITreeNode itn = selectedNode;
+			TrayInstanceWebLink tivf = instance.weblinks[itn.tin.id];
+			IWebLinkForm iwlf = new IWebLinkForm((TrayInstanceWebLink)tivf.Copy());
+			iwlf.ShowDialog();
+			if (iwlf.DialogResult == DialogResult.OK) {
+				if (!tivf.Equals(iwlf.model)) {
+					tivf.Apply(iwlf.model);
+					Save();
+				}
+				RefreshSelected();
+			}
+		}
 		private void treeView2_ItemDrag(object sender, ItemDragEventArgs e) {
 			DoDragDrop(e.Item, DragDropEffects.Move);
 		}
@@ -827,6 +851,24 @@ namespace TrayDir {
 					instance.view?.Rebuild();
 				}
 			}
+		}
+		private void newWebLinkButton_Click(object sender, EventArgs e) {
+			TrayInstanceWebLink tiwl = new TrayInstanceWebLink();
+			instance.weblinks.Add(tiwl);
+			int index = instance.weblinks.IndexOf(tiwl);
+			TrayInstanceNode tin = new TrayInstanceNode();
+			tin.id = index;
+			tin.type = TrayInstanceNode.NodeType.WebLink;
+			tin.SetInstance(instance);
+			ITreeNode itn = new ITreeWebLinkNode(tin);
+			insertNode(itn);
+			treeView2.SelectedNode = itn.node;
+			selectedNode = itn;
+			nodes.Add(itn);
+			webLinkPropertiesButton_Click(sender, e);
+			instance.view?.tray.Rebuild();
+			Save();
+			selectedNode.Refresh();
 		}
 	}
 }

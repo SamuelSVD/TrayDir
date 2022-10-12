@@ -7,11 +7,13 @@
 		public override object Copy() {
 			TrayInstanceVirtualFolder tivf = new TrayInstanceVirtualFolder();
 			tivf.alias = alias;
+			tivf.visible = visible;
 			return tivf;
 		}
 		public override void Apply(object model) {
 			if (model.GetType() == typeof(TrayInstanceVirtualFolder)) {
 				this.alias = ((TrayInstanceVirtualFolder)model).alias;
+				this.visible = ((TrayInstanceVirtualFolder)model).visible;
 			}
 		}
 		public override bool Equals(object b) {

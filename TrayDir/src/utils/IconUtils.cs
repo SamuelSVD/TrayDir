@@ -27,6 +27,7 @@ namespace TrayDir.utils {
 		public static int SEPARATOR;
 		public static int RUNNABLE_ERROR;
 		public static int EMPTY;
+		public static int WEBLINK;
 		public static bool initialized = false;
 		public static Image DocumentImage { get { return imageList.Images[DOCUMENT]; } }
 		public static Image FolderImage { get { return imageList.Images[FOLDER]; } }
@@ -47,6 +48,7 @@ namespace TrayDir.utils {
 		public static Image SeparatorImage { get { return imageList.Images[SEPARATOR]; } }
 		public static Image RunnableError { get { return imageList.Images[RUNNABLE_ERROR]; } }
 		public static Image Empty { get { return imageList.Images[EMPTY]; } }
+		public static Image WebLink { get { return imageList.Images[WEBLINK]; } }
 		public static void Init(int sizeWH) {
 			imageList = new ImageList();
 			imageList.ImageSize = new Size(sizeWH, sizeWH);
@@ -88,6 +90,8 @@ namespace TrayDir.utils {
 			IconUtils.RUNNABLE_ERROR = 17;
 			imageList.Images.Add(TrayDir.Properties.Resources.empty);
 			IconUtils.EMPTY = 18;
+			imageList.Images.Add(TrayDir.Properties.Resources.weblink);
+			IconUtils.WEBLINK = 19;
 			initialized = true;
 		}
 		public static Bitmap lookupIcon(string key) {

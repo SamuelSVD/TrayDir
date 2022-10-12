@@ -112,6 +112,12 @@ namespace TrayDir {
 			}
 			return null;
 		}
+		public TrayInstanceWebLink GetWebLink() {
+			if (instance.weblinks.Count > id && id >= 0) {
+				return instance.weblinks[id];
+			}
+			return null;
+		}
 		public TrayInstancePlugin GetPlugin() {
 			if (instance.plugins.Count > id && id >= 0) {
 				return instance.plugins[id];

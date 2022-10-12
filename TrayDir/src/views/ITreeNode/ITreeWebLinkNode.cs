@@ -14,11 +14,11 @@ namespace TrayDir.src.views {
 		public override void Refresh() {
 			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
-			TrayInstanceVirtualFolder tivf = tin.GetVirtualFolder();
-			if (tivf != null) {
-				node.ImageIndex = IconUtils.FOLDER_BLUE;
-				node.Text = tivf.alias;
-				hidden = !tivf.visible;
+			TrayInstanceWebLink tiwl = tin.GetWebLink();
+			if (tiwl != null) {
+				node.ImageIndex = IconUtils.WEBLINK;
+				node.Text = tiwl.alias;
+				hidden = !tiwl.visible;
 			}
 			node.SelectedImageIndex = node.ImageIndex;
 			if (hidden) {

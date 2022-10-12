@@ -37,8 +37,8 @@ namespace TrayDir {
 				ContextMenuStrip cmnu = new ContextMenuStrip();
 				ToolStripItem tsi;
 
-				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_RunAll);
-				tsi.Click += RunAll;
+				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_Open);
+				tsi.Click += Run;
 
 				cmnu.Show();
 				cmnu.Location = pt;

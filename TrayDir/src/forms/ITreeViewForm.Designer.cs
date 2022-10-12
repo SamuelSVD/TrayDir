@@ -50,6 +50,7 @@ namespace TrayDir
 			this.button1 = new System.Windows.Forms.Button();
 			this.treeView2 = new System.Windows.Forms.TreeView();
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+			this.newWebLinkButton = new System.Windows.Forms.Button();
 			this.formTableLayoutPanel.SuspendLayout();
 			this.leftButtonsTableLayoutPanel.SuspendLayout();
 			this.topButtonsTableLayoutPanel.SuspendLayout();
@@ -113,7 +114,8 @@ namespace TrayDir
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newFolderButton, 1, 0);
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newPluginButton, 2, 0);
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newVirtualFolderButton, 3, 0);
-			this.topButtonsTableLayoutPanel.Controls.Add(this.newSeparatorButton, 4, 0);
+			this.topButtonsTableLayoutPanel.Controls.Add(this.newSeparatorButton, 5, 0);
+			this.topButtonsTableLayoutPanel.Controls.Add(this.newWebLinkButton, 4, 0);
 			this.topButtonsTableLayoutPanel.Name = "topButtonsTableLayoutPanel";
 			// 
 			// newDocButton
@@ -210,6 +212,14 @@ namespace TrayDir
 			this.treeView2.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView2_DragOver);
 			this.treeView2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView2_KeyDown);
 			// 
+			// newWebLinkButton
+			// 
+			resources.ApplyResources(this.newWebLinkButton, "newWebLinkButton");
+			this.newWebLinkButton.Name = "newWebLinkButton";
+			this.toolTip.SetToolTip(this.newWebLinkButton, resources.GetString("newWebLinkButton.ToolTip"));
+			this.newWebLinkButton.UseVisualStyleBackColor = true;
+			this.newWebLinkButton.Click += new System.EventHandler(this.newWebLinkButton_Click);
+			// 
 			// ITreeViewForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -249,5 +259,6 @@ namespace TrayDir
         private System.Windows.Forms.Button outdentButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolTip toolTip;
-    }
+		private System.Windows.Forms.Button newWebLinkButton;
+	}
 }
