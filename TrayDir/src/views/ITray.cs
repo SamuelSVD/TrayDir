@@ -167,6 +167,33 @@ namespace TrayDir {
 				virtualFolderMenuItems.Remove(mi);
 			}
 		}
+		public void RefreshWebLinkMenuItemList() {
+			foreach (TrayInstanceWebLink tiWebLink in instance.weblinks) {
+				bool miFound = false;
+				foreach (IMenuItem mi in webLinkMenuItems) {
+					if (mi.tiItem == tiWebLink) miFound = true;
+				}
+				if (!miFound) {
+					IWebLinkMenuItem mi = new IWebLinkMenuItem(instance, null, tiWebLink, null);
+					webLinkMenuItems.Add(mi);
+				}
+			}
+			List<IWebLinkMenuItem> deletable = new List<IWebLinkMenuItem>();
+			foreach (IWebLinkMenuItem mi in webLinkMenuItems) {
+				bool miFound = false;
+				foreach (TrayInstanceWebLink tiVirtualFolder in instance.weblinks) {
+					if (mi.tiItem == tiVirtualFolder) miFound = true;
+				}
+				if (miFound) {
+					mi.Load();
+				} else {
+					deletable.Add(mi);
+				}
+			}
+			foreach (IWebLinkMenuItem mi in deletable) {
+				webLinkMenuItems.Remove(mi);
+			}
+		}
 		public void RefreshPathMenuItemList() {
 			foreach (TrayInstancePath tiPath in instance.paths) {
 				bool miFound = false;
@@ -212,6 +239,7 @@ namespace TrayDir {
 
 			RefreshPathMenuItemList();
 			RefreshVirtualFolderMenuItemList();
+			RefreshWebLinkMenuItemList();
 			RefreshPluginMenuItemList();
 
 			AddTrayTree(instance.nodes.children, notifyIcon.ContextMenuStrip.Items, null);

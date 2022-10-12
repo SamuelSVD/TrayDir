@@ -129,6 +129,10 @@ namespace TrayDir {
 				if (((IPluginMenuItem)menuItem).isPlugin) {
 					RunPlugin(((TrayInstancePlugin)menuItem.tiItem), false);
 				}
+			} else if (menuItem.GetType() == typeof(IWebLinkMenuItem)) {
+				if (((IWebLinkMenuItem)menuItem).isWebLink) {
+					Run((TrayInstanceWebLink)menuItem.tiItem);
+				}
 			}
 		}
 		internal static void OpenCmd(IMenuItem menuItem) {
@@ -304,6 +308,12 @@ namespace TrayDir {
 				OpenPath(new DirectoryInfo(tip.path).FullName, false);
 			} else if (tip.isFile) {
 				OpenPath(Path.GetFullPath(tip.path), false);
+			}
+		}
+		public static void Run(TrayInstanceWebLink tiwl) {
+			Uri uriResult;
+			if (Uri.TryCreate(tiwl.URL, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps)) {
+				OpenPath(tiwl.URL, false);
 			}
 		}
 		public static void RunAs(TrayInstancePlugin tip) {
