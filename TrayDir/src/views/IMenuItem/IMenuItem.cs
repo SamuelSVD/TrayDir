@@ -18,7 +18,6 @@ namespace TrayDir {
 
 		public bool loadedIcon = false;
 		public bool enqueued = false;
-		protected bool assignedClickEvent = false;
 
 		protected string alias {
 			get {

@@ -126,6 +126,8 @@ namespace TrayDir {
 				menuItem.DropDownOpening += MenuItemDropDownOpening;
 				menuItem.DropDownOpening += LoadChildrenIconEvent;
 				menuItem.Paint += LoadFolderChildren;
+				menuItem.MouseDown += MenuItemClick;
+				menuItem.Click += MenuItemClick;
 			}
 			bool useAlias = (alias != null && alias != string.Empty);
 			if (useAlias) {
@@ -180,11 +182,6 @@ namespace TrayDir {
 				foreach (IMenuItem child in folderChildren) {
 					menuItem.DropDownItems.Add(child.menuItem);
 				}
-			}
-			if (!assignedClickEvent) {
-				menuItem.MouseDown += MenuItemClick;
-				menuItem.Click += MenuItemClick;
-				assignedClickEvent = true;
 			}
 			LoadFolderChildren(null, null);
 		}

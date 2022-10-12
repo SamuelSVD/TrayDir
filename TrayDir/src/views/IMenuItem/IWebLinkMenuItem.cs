@@ -1,37 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace TrayDir {
 	internal class IWebLinkMenuItem : IMenuItem {
+		public bool isWebLink { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstanceWebLink)); } }
 		public IWebLinkMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceItem tiItem, IMenuItem parent) : base(instance, tiNode, tiItem, parent) {
 		}
-
 		public override void AddToCollection(ToolStripItemCollection collection) {
-			throw new NotImplementedException();
+			collection.Add(menuItem);
 		}
-
 		public override void ChildClear() {
-			throw new NotImplementedException();
 		}
-
 		public override void ChildResetClicks() {
-			throw new NotImplementedException();
 		}
-
 		public override void Load() {
-			throw new NotImplementedException();
+			if (menuItem == null) {
+				menuItem = new ToolStripMenuItem();
+				menuItem.DropDownOpening += MenuItemDropDownOpening;
+				menuItem.MouseDown += MenuItemClick;
+				menuItem.Click += MenuItemClick;
+			}
+			bool useAlias = (alias != null && alias != string.Empty);
+			if (useAlias) {
+				menuItem.Text = alias;
+			}
+			menuItem.DropDownItems.Clear();
 		}
-
 		public override void MenuOpened() {
-			throw new NotImplementedException();
+			EnqueueImgLoad();
+			UpdateVisibility();
 		}
-
 		protected override void showContextMenu() {
-			throw new NotImplementedException();
+			if (isWebLink) {
+				MenuSave();
+				Point pt = System.Windows.Forms.Cursor.Position;
+				ContextMenuStrip cmnu = new ContextMenuStrip();
+				ToolStripItem tsi;
+
+				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_RunAll);
+				tsi.Click += RunAll;
+
+				cmnu.Show();
+				cmnu.Location = pt;
+				cmnu.Closing += MenuDestroy;
+			}
 		}
 	}
 }

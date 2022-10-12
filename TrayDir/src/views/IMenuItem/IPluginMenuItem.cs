@@ -17,6 +17,8 @@ namespace TrayDir {
 			if (menuItem == null) {
 				menuItem = new ToolStripMenuItem();
 				menuItem.DropDownOpening += MenuItemDropDownOpening;
+				menuItem.MouseDown += MenuItemClick;
+				menuItem.Click += MenuItemClick;
 			}
 			bool useAlias = (alias != null && alias != string.Empty);
 			if (useAlias) {
@@ -35,13 +37,7 @@ namespace TrayDir {
 					}
 				}
 			}
-
 			menuItem.DropDownItems.Clear();
-			if (!assignedClickEvent) {
-				menuItem.MouseDown += MenuItemClick;
-				menuItem.Click += MenuItemClick;
-				assignedClickEvent = true;
-			}
 		}
 		public override void MenuOpened() {
 			EnqueueImgLoad();
