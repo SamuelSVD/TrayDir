@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace TrayDir.utils {
 	class IMenuItemIconUtils {
@@ -67,58 +69,12 @@ namespace TrayDir.utils {
 			if (MainForm.form != null && queue.Count > 0) {
 				IMenuItem mi = queue.Dequeue();
 				try {
-					if (mi.menuIcon is null && mi.isErr) {
-						mi.menuIcon = (Bitmap)IconUtils.QuestionImage;
-					} else if (mi.menuIcon is null && mi.isFile) {
-						string ext = Path.GetExtension(mi.tiPath.path);
-						if (ext.Length == 0 || ext == ".ico" || ext == ".lnk" || ext == ".exe" || (queue != imgLoadQueue && ext == ".url")) {
-							mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
-						} else if (queue == imgLoadQueue && ext == ".url") {
-							urlLoadSemaphore.WaitOne();
-							MainForm.form.imgLoadTimer.Enabled = true;
-							urlLoadQueue.Enqueue(mi);
-							urlLoadSemaphore.Release();
-						} else {
-							mi.menuIcon = IconUtils.lookupIcon(ext);
-							if (mi.menuIcon == null) {
-								mi.menuIcon = Icon.ExtractAssociatedIcon(mi.tiPath.path).ToBitmap();
-								IconUtils.addIcon(ext, mi.menuIcon);
-							}
-						}
-					} else if (mi.menuIcon is null && mi.isDir) {
-						if (mi.tiPath != null && mi.tiPath.shortcut) {
-							mi.menuIcon = Properties.Resources.folder_shortcut;
-						} else {
-							mi.menuIcon = Properties.Resources.folder;
-						}
-					} else if (mi.menuIcon is null && mi.tiVirtualFolder != null) {
-						if (ProgramData.pd.settings.app.VFolderIcon != "Yellow Folder") {
-							mi.menuIcon = Properties.Resources.folder_blue;
-						} else {
-							mi.menuIcon = Properties.Resources.folder;
-						}
-					} else if (mi.tiPlugin != null) {
-						TrayPlugin tp = mi.tiPlugin.plugin;
-						if (tp != null) {
-							if (tp.isScript) {
-								if (mi.tiPlugin.isValid()) {
-									mi.menuIcon = Properties.Resources.runnable;
-								} else {
-									mi.menuIcon = Properties.Resources.runnable_error;
-								}
-							} else {
-								if (AppUtils.PathIsFile(tp.path)) {
-									Bitmap i = IconUtils.lookupIcon(tp.getSignature());
-									if (i == null) {
-										i = Icon.ExtractAssociatedIcon(tp.path).ToBitmap();
-										IconUtils.addIcon(tp.getSignature(), i);
-									}
-									mi.menuIcon = i;
-								}
-							}
-						} else {
-							mi.menuIcon = (Bitmap)IconUtils.QuestionImage;
-						}
+					if (mi.GetType() == typeof(IPathMenuItem)) {
+						LoadIcon(queue, (IPathMenuItem)mi);
+					} else if (mi.GetType() == typeof(IVirtualFolderMenuItem)) {
+						LoadIcon((IVirtualFolderMenuItem)mi);
+					} else if (mi.GetType() == typeof(IPluginMenuItem)) {
+						LoadIcon((IPluginMenuItem)mi);
 					}
 					if (mi.menuIcon != null) {
 						imgLoadedSemaphore.WaitOne();
@@ -132,6 +88,67 @@ namespace TrayDir.utils {
 			}
 			sem.Release();
 			return result;
+		}
+		public static void LoadIcon(IPluginMenuItem mi) {
+			if (mi.isPlugin) {
+				TrayPlugin tp = ((TrayInstancePlugin)mi.tiItem).plugin;
+				if (tp != null) {
+					if (tp.isScript) {
+						if (((TrayInstancePlugin)mi.tiItem).isValid()) {
+							mi.menuIcon = Properties.Resources.runnable;
+						} else {
+							mi.menuIcon = Properties.Resources.runnable_error;
+						}
+					} else {
+						if (AppUtils.PathIsFile(tp.path)) {
+							Bitmap i = IconUtils.lookupIcon(tp.getSignature());
+							if (i == null) {
+								i = Icon.ExtractAssociatedIcon(tp.path).ToBitmap();
+								IconUtils.addIcon(tp.getSignature(), i);
+							}
+							mi.menuIcon = i;
+						}
+					}
+				} else {
+					mi.menuIcon = (Bitmap)IconUtils.QuestionImage;
+				}
+			}
+		}
+		public static void LoadIcon(IVirtualFolderMenuItem mi) {
+			if (mi.menuIcon is null && mi.isVFolder) {
+				if (ProgramData.pd.settings.app.VFolderIcon != "Yellow Folder") {
+					mi.menuIcon = Properties.Resources.folder_blue;
+				} else {
+					mi.menuIcon = Properties.Resources.folder;
+				}
+			}
+		}
+		public static void LoadIcon(Queue<IMenuItem> queue, IPathMenuItem mi) {
+				if (mi.menuIcon is null && mi.isErr) {
+				mi.menuIcon = (Bitmap)IconUtils.QuestionImage;
+			} else if (mi.menuIcon is null && mi.isFile) {
+				string ext = Path.GetExtension(((TrayInstancePath)mi.tiItem).path);
+				if (ext.Length == 0 || ext == ".ico" || ext == ".lnk" || ext == ".exe" || (queue != imgLoadQueue && ext == ".url")) {
+					mi.menuIcon = Icon.ExtractAssociatedIcon(((TrayInstancePath)mi.tiItem).path).ToBitmap();
+				} else if (queue == imgLoadQueue && ext == ".url") {
+					urlLoadSemaphore.WaitOne();
+					MainForm.form.imgLoadTimer.Enabled = true;
+					urlLoadQueue.Enqueue(mi);
+					urlLoadSemaphore.Release();
+				} else {
+					mi.menuIcon = IconUtils.lookupIcon(ext);
+					if (mi.menuIcon == null) {
+						mi.menuIcon = Icon.ExtractAssociatedIcon(((TrayInstancePath)mi.tiItem).path).ToBitmap();
+						IconUtils.addIcon(ext, mi.menuIcon);
+					}
+				}
+			} else if (mi.menuIcon is null && mi.isDir) {
+				if (mi.tiItem != null && mi.tiItem.GetType() == typeof(TrayInstancePath) && ((TrayInstancePath)mi.tiItem).shortcut) {
+					mi.menuIcon = Properties.Resources.folder_shortcut;
+				} else {
+					mi.menuIcon = Properties.Resources.folder;
+				}
+			}
 		}
 		public static void EnqueueIconLoad(IMenuItem mi) {
 			if (!mi.enqueued) {

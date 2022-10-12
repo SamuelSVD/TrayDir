@@ -49,6 +49,8 @@ namespace TrayDir {
 						return tin.instance.plugins[tin.id].alias;
 					case TrayInstanceNode.NodeType.VirtualFolder:
 						return tin.instance.vfolders[tin.id].alias;
+					case TrayInstanceNode.NodeType.WebLink:
+						return tin.instance.weblinks[tin.id].alias;
 					default:
 						return null;
 				}
@@ -63,6 +65,9 @@ namespace TrayDir {
 						break;
 					case TrayInstanceNode.NodeType.VirtualFolder:
 						tin.instance.vfolders[tin.id].alias = value;
+						break;
+					case TrayInstanceNode.NodeType.WebLink:
+						tin.instance.weblinks[tin.id].alias = value;
 						break;
 					default:
 						break;
@@ -193,6 +198,12 @@ namespace TrayDir {
 					break;
 				case TrayInstanceNode.NodeType.VirtualFolder:
 					tin.instance.vfolders.RemoveAt(tin.id);
+					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes()) {
+						if (n.type == tin.type && n.id > tin.id) n.id--;
+					}
+					break;
+				case TrayInstanceNode.NodeType.WebLink:
+					tin.instance.weblinks.RemoveAt(tin.id);
 					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes()) {
 						if (n.type == tin.type && n.id > tin.id) n.id--;
 					}

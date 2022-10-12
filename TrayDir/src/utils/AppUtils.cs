@@ -118,19 +118,26 @@ namespace TrayDir {
 			}
 		}
 		internal static void Run(IMenuItem menuItem) {
-			if (menuItem.isDir) {
-				OpenPath(new DirectoryInfo(menuItem.tiPath.path).FullName, false);
-			} else if (menuItem.isFile) {
-				OpenPath(Path.GetFullPath(menuItem.tiPath.path), false);
-			} else if (menuItem.isPlugin) {
-				RunPlugin(menuItem.tiPlugin, false);
+			if (menuItem.GetType() == typeof(IPathMenuItem)) {
+
+				if (((IPathMenuItem)menuItem).isDir) {
+					OpenPath(new DirectoryInfo(((TrayInstancePath)menuItem.tiItem).path).FullName, false);
+				} else if (((IPathMenuItem)menuItem).isFile) {
+					OpenPath(Path.GetFullPath(((TrayInstancePath)menuItem.tiItem).path), false);
+				}
+			} else if (menuItem.GetType() == typeof(IPluginMenuItem)) {
+				if (((IPluginMenuItem)menuItem).isPlugin) {
+					RunPlugin(((TrayInstancePlugin)menuItem.tiItem), false);
+				}
 			}
 		}
 		internal static void OpenCmd(IMenuItem menuItem) {
-			if (menuItem.isDir) {
-				OpenCmdPath(new DirectoryInfo(menuItem.tiPath.path).FullName);
-			} else if (menuItem.isFile) {
-				OpenCmdPath(Path.GetFullPath(menuItem.tiPath.path));
+			if (menuItem.GetType() == typeof(IPathMenuItem)) {
+				if (((IPathMenuItem)menuItem).isDir) {
+					OpenCmdPath(new DirectoryInfo(((TrayInstancePath)menuItem.tiItem).path).FullName);
+				} else if (((IPathMenuItem)menuItem).isFile) {
+					OpenCmdPath(Path.GetFullPath(((TrayInstancePath)menuItem.tiItem).path));
+				}
 			}
 		}
 		internal static void RunAs(TrayInstanceNode node) {
@@ -154,31 +161,39 @@ namespace TrayDir {
 			}
 		}
 		internal static void OpenAdminCmd(IMenuItem menuItem) {
-			if (menuItem.isDir) {
-				OpenAdminCmdPath(new DirectoryInfo(menuItem.tiPath.path).FullName);
-			} else if (menuItem.isFile) {
-				OpenAdminCmdPath(Path.GetFullPath(menuItem.tiPath.path));
+			if (menuItem.GetType() == typeof(IPathMenuItem)) {
+				if (((IPathMenuItem)menuItem).isDir) {
+					OpenAdminCmdPath(new DirectoryInfo(((TrayInstancePath)menuItem.tiItem).path).FullName);
+				} else if (((IPathMenuItem)menuItem).isFile) {
+					OpenAdminCmdPath(Path.GetFullPath(((TrayInstancePath)menuItem.tiItem).path));
+				}
 			}
 		}
 		internal static void RunAs(IMenuItem menuItem) {
-			if (menuItem.isDir) {
-				OpenPath(new DirectoryInfo(menuItem.tiPath.path).FullName, true);
-			} else if (menuItem.isFile) {
-				OpenPath(Path.GetFullPath(menuItem.tiPath.path), true);
-			} else if (menuItem.isPlugin) {
-				RunPlugin(menuItem.tiPlugin, true);
+			if (menuItem.GetType() == typeof(IPathMenuItem)) {
+				if (((IPathMenuItem)menuItem).isDir) {
+					OpenPath(new DirectoryInfo(((TrayInstancePath)menuItem.tiItem).path).FullName, true);
+				} else if (((IPathMenuItem)menuItem).isFile) {
+					OpenPath(Path.GetFullPath(((TrayInstancePath)menuItem.tiItem).path), true);
+				}
+			} else if (menuItem.GetType() == typeof(IPluginMenuItem)) {
+				if (((IPluginMenuItem)menuItem).isPlugin) {
+					RunPlugin(((TrayInstancePlugin)menuItem.tiItem), true);
+				}
 			}
 		}
 
 		internal static void Explore(IMenuItem menuItem) {
-			if (menuItem.isDir) {
-				ExplorePath(new DirectoryInfo(menuItem.tiPath.path).FullName);
-			} else if (menuItem.isFile) {
-				ExplorePath(Path.GetFullPath(menuItem.tiPath.path));
-			} else if (menuItem.isPlugin) {
-				if (menuItem.tiPlugin != null) {
-					if (menuItem.tiPlugin.plugin != null) {
-						ExplorePath(menuItem.tiPlugin.plugin.path);
+			if (menuItem.GetType() == typeof(IPathMenuItem)) {
+				if (((IPathMenuItem)menuItem).isDir) {
+					ExplorePath(new DirectoryInfo(((TrayInstancePath)menuItem.tiItem).path).FullName);
+				} else if (((IPathMenuItem)menuItem).isFile) {
+					ExplorePath(Path.GetFullPath(((TrayInstancePath)menuItem.tiItem).path));
+				}
+			} else if (menuItem.GetType() == typeof(IPluginMenuItem)) {
+				if (menuItem.isPlugin) {
+					if (((TrayInstancePlugin)menuItem.tiItem).plugin != null) {
+						ExplorePath(((TrayInstancePlugin)menuItem.tiItem).plugin.path);
 					}
 				}
 			}
@@ -205,12 +220,16 @@ namespace TrayDir {
 		}
 
 		internal static void Open(IMenuItem menuItem) {
-			if (menuItem.isDir && (menuItem.instance.settings.ExploreFoldersInTrayMenu || menuItem.tiPath.shortcut)) {
-				OpenPath(new DirectoryInfo(menuItem.tiPath.path).FullName, menuItem.instance.settings.RunAsAdmin);
-			} else if (menuItem.isFile) {
-				OpenPath(Path.GetFullPath(menuItem.tiPath.path), menuItem.instance.settings.RunAsAdmin);
-			} else if (menuItem.tiPlugin != null) {
-				RunPlugin(menuItem.tiPlugin, menuItem.instance.settings.RunAsAdmin);
+			if (menuItem.GetType() == typeof(IPathMenuItem)) {
+				if (((IPathMenuItem)menuItem).isDir && (menuItem.instance.settings.ExploreFoldersInTrayMenu || ((TrayInstancePath)menuItem.tiItem).shortcut)) {
+					OpenPath(new DirectoryInfo(((TrayInstancePath)menuItem.tiItem).path).FullName, menuItem.instance.settings.RunAsAdmin);
+				} else if (((IPathMenuItem)menuItem).isFile) {
+					OpenPath(Path.GetFullPath(((TrayInstancePath)menuItem.tiItem).path), menuItem.instance.settings.RunAsAdmin);
+				}
+			} else if (menuItem.GetType() == typeof(IPluginMenuItem)) {
+				if (menuItem.isPlugin) {
+					RunPlugin(((TrayInstancePlugin)menuItem.tiItem), menuItem.instance.settings.RunAsAdmin);
+				}
 			}
 		}
 		public static TrayPlugin ImportPlugin(string path) {

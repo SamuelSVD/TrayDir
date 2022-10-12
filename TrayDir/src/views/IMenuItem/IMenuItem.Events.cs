@@ -3,39 +3,39 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace TrayDir {
-	public partial class IMenuItem {
-		private void Run(object obj, EventArgs args) {
+	public abstract partial class IMenuItem {
+		protected void Run(object obj, EventArgs args) {
 			AppUtils.Run(this);
 		}
-		private void RunAll(object obj, EventArgs args) {
+		protected void RunAll(object obj, EventArgs args) {
 			foreach (IMenuItem imi in nodeChildren) {
-				if (imi.isDir || imi.isFile || imi.isPlugin) {
+				if (imi.GetType() == typeof(IPathMenuItem) || (imi.GetType() == typeof(IPluginMenuItem))) {
 					AppUtils.Run(imi);
 				} else if (imi.isVFolder) {
 					imi.RunAll(obj, args);
 				}
 			}
 		}
-		private void Explore(object obj, EventArgs args) {
+		protected void Explore(object obj, EventArgs args) {
 			AppUtils.Explore(this);
 		}
-		private void RunAs(object obj, EventArgs args) {
+		protected void RunAs(object obj, EventArgs args) {
 			AppUtils.RunAs(this);
 		}
-		private void OpenCmd(object obj, EventArgs args) {
+		protected void OpenCmd(object obj, EventArgs args) {
 			AppUtils.OpenCmd(this);
 		}
-		private void OpenAdminCmd(object obj, EventArgs args) {
+		protected void OpenAdminCmd(object obj, EventArgs args) {
 			AppUtils.OpenAdminCmd(this);
 		}
-		public void MenuItemClick(object obj, MouseEventArgs args) {
+		protected void MenuItemClick(object obj, MouseEventArgs args) {
 			if (((MouseEventArgs)args).Button == MouseButtons.Right) {
 				showContextMenu();
 			} else {
 				AppUtils.Open(this);
 			}
 		}
-		public void MenuDestroy(object obj, EventArgs args) {
+		protected void MenuDestroy(object obj, EventArgs args) {
 			IMenuItem mi = parent;
 			while (mi != null) {
 				mi.menuItem.DropDown.AutoClose = true;
@@ -47,14 +47,14 @@ namespace TrayDir {
 			instance.view.tray.notifyIcon.ContextMenuStrip.Enabled = true;
 			instance.view.tray.notifyIcon.ContextMenuStrip.Close();
 		}
-		public void MenuItemClick(object obj, EventArgs args) {
+		protected void MenuItemClick(object obj, EventArgs args) {
 			_clicks += 1;
 			if (_clicks == 2) {
 				Run(obj, args);
 				RunAll(obj, args);
 			}
 		}
-		private void MenuItemDropDownOpening(object sender, EventArgs e) {
+		protected void MenuItemDropDownOpening(object sender, EventArgs e) {
 			if (menuItem.HasDropDownItems == false) {
 				return; // not a drop down item
 			}
@@ -76,13 +76,6 @@ namespace TrayDir {
 				menuItem.DropDownDirection = ToolStripDropDownDirection.Left;
 			} else {
 				menuItem.DropDownDirection = ToolStripDropDownDirection.Right;
-			}
-		}
-		public void LoadChildrenIconEvent(Object obj, EventArgs args) {
-			if (tiPath != null) {
-				foreach (IMenuItem child in folderChildren) {
-					child.EnqueueImgLoad();
-				}
 			}
 		}
 	}

@@ -23,6 +23,7 @@ namespace TrayDir {
 		public List<TrayInstanceVirtualFolder> vfolders;
 		public List<TrayInstancePlugin> plugins;
 		public List<TrayPlugin> internalPlugins;
+		public List<TrayInstanceWebLink> weblinks;
 		public TrayInstanceNode nodes;
 
 		public byte[] iconData;

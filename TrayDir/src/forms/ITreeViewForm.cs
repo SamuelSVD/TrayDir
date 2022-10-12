@@ -137,6 +137,9 @@ namespace TrayDir {
 				case TrayInstanceNode.NodeType.Separator:
 					tn = new ITreeSeparatorNode(tin);
 					break;
+				case TrayInstanceNode.NodeType.WebLink:
+					tn = new ITreeWebLinkNode(tin);
+					break;
 				default:
 					tn = new ITreeUnknownNode(tin);
 					break;
