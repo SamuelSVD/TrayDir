@@ -43,6 +43,7 @@ namespace TrayDir
 			this.newPluginButton = new System.Windows.Forms.Button();
 			this.newVirtualFolderButton = new System.Windows.Forms.Button();
 			this.newSeparatorButton = new System.Windows.Forms.Button();
+			this.newWebLinkButton = new System.Windows.Forms.Button();
 			this.ContentTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
 			this.editButton = new System.Windows.Forms.Button();
@@ -50,7 +51,6 @@ namespace TrayDir
 			this.button1 = new System.Windows.Forms.Button();
 			this.treeView2 = new System.Windows.Forms.TreeView();
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-			this.newWebLinkButton = new System.Windows.Forms.Button();
 			this.formTableLayoutPanel.SuspendLayout();
 			this.leftButtonsTableLayoutPanel.SuspendLayout();
 			this.topButtonsTableLayoutPanel.SuspendLayout();
@@ -158,6 +158,14 @@ namespace TrayDir
 			this.newSeparatorButton.UseVisualStyleBackColor = true;
 			this.newSeparatorButton.Click += new System.EventHandler(this.newSeparatorButton_Click);
 			// 
+			// newWebLinkButton
+			// 
+			resources.ApplyResources(this.newWebLinkButton, "newWebLinkButton");
+			this.newWebLinkButton.Name = "newWebLinkButton";
+			this.toolTip.SetToolTip(this.newWebLinkButton, resources.GetString("newWebLinkButton.ToolTip"));
+			this.newWebLinkButton.UseVisualStyleBackColor = true;
+			this.newWebLinkButton.Click += new System.EventHandler(this.newWebLinkButton_Click);
+			// 
 			// ContentTableLayoutPanel
 			// 
 			resources.ApplyResources(this.ContentTableLayoutPanel, "ContentTableLayoutPanel");
@@ -211,14 +219,6 @@ namespace TrayDir
 			this.treeView2.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView2_DragEnter);
 			this.treeView2.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView2_DragOver);
 			this.treeView2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView2_KeyDown);
-			// 
-			// newWebLinkButton
-			// 
-			resources.ApplyResources(this.newWebLinkButton, "newWebLinkButton");
-			this.newWebLinkButton.Name = "newWebLinkButton";
-			this.toolTip.SetToolTip(this.newWebLinkButton, resources.GetString("newWebLinkButton.ToolTip"));
-			this.newWebLinkButton.UseVisualStyleBackColor = true;
-			this.newWebLinkButton.Click += new System.EventHandler(this.newWebLinkButton_Click);
 			// 
 			// ITreeViewForm
 			// 

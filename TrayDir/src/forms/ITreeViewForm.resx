@@ -442,7 +442,7 @@
     <value>4</value>
   </data>
   <data name="newWebLinkButton.ToolTip" xml:space="preserve">
-    <value>Insert New Separator Item</value>
+    <value>Insert New Web Link Item</value>
   </data>
   <data name="&gt;&gt;newWebLinkButton.Name" xml:space="preserve">
     <value>newWebLinkButton</value>
