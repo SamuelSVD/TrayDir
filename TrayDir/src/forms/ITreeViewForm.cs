@@ -89,7 +89,7 @@ namespace TrayDir {
 			updateImage(newPluginButton, IconUtils.RUNNABLE_NEW);
 			updateImage(newVirtualFolderButton, IconUtils.FOLDER_BLUE_NEW);
 			updateImage(newSeparatorButton, IconUtils.SEPARATOR);
-			updateImage(newWebLinkButton, IconUtils.WEBLINK);
+			updateImage(newWebLinkButton, IconUtils.WEBLINK_NEW);
 			editButton.Image = IconUtils.EditImage;
 			editButton.TextImageRelation = TextImageRelation.ImageBeforeText;
 			editButton.TextAlign = ContentAlignment.MiddleLeft;

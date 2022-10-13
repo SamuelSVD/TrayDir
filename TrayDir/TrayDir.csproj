@@ -358,6 +358,9 @@
     <None Include="Resources\indent_in.png" />
     <None Include="Resources\indent_out.png" />
     <Content Include="Resources\folder_shortcut.png" />
+    <None Include="Resources\overlay_error.png" />
+    <None Include="Resources\overlay_new.png" />
+    <None Include="Resources\overlay_shortcut.png" />
     <Content Include="Resources\question.png" />
     <Content Include="Resources\runnable.png" />
     <None Include="Resources\runnable_error.png" />
