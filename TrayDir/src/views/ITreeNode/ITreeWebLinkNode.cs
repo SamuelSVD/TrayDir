@@ -18,6 +18,7 @@ namespace TrayDir.src.views {
 			if (tiwl != null) {
 				node.ImageIndex = IconUtils.WEBLINK;
 				node.Text = tiwl.alias;
+				if (node.Text == "") node.Text = "(WebLink)";
 				hidden = !tiwl.visible;
 			}
 			node.SelectedImageIndex = node.ImageIndex;

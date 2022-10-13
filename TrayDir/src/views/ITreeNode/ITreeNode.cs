@@ -79,6 +79,7 @@ namespace TrayDir {
 			this.tin = tin;
 			tin.itn = this;
 			node = new TreeNode();
+			Refresh();
 		}
 		public abstract void Refresh();
 		public void MoveUp() {
