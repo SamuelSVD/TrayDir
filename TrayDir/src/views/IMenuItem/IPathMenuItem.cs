@@ -103,7 +103,6 @@ namespace TrayDir {
 
 		}
 		public override void ChildResetClicks() {
-
 			if (folderChildren != null) {
 				foreach (IMenuItem m in folderChildren) {
 					m.ResetClicks();

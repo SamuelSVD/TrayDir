@@ -234,6 +234,10 @@ namespace TrayDir {
 				if (((IPluginMenuItem)menuItem).isPlugin) {
 					RunPlugin(((TrayInstancePlugin)menuItem.tiItem), menuItem.instance.settings.RunAsAdmin);
 				}
+			} else if (menuItem.GetType() == typeof(IWebLinkMenuItem)) {
+				if(((IWebLinkMenuItem)menuItem).isWebLink) {
+					Run((TrayInstanceWebLink)((IWebLinkMenuItem)menuItem).tiItem);
+				}
 			}
 		}
 		public static TrayPlugin ImportPlugin(string path) {
