@@ -75,6 +75,8 @@ namespace TrayDir.utils {
 						LoadIcon((IVirtualFolderMenuItem)mi);
 					} else if (mi.GetType() == typeof(IPluginMenuItem)) {
 						LoadIcon((IPluginMenuItem)mi);
+					} else if (mi.GetType() == typeof(IWebLinkMenuItem)) {
+						LoadIcon((IWebLinkMenuItem)mi);
 					}
 					if (mi.menuIcon != null) {
 						imgLoadedSemaphore.WaitOne();
@@ -95,9 +97,9 @@ namespace TrayDir.utils {
 				if (tp != null) {
 					if (tp.isScript) {
 						if (((TrayInstancePlugin)mi.tiItem).isValid()) {
-							mi.menuIcon = Properties.Resources.runnable;
+							mi.menuIcon = (Bitmap)IconUtils.RunnableImage;
 						} else {
-							mi.menuIcon = Properties.Resources.runnable_error;
+							mi.menuIcon = (Bitmap)IconUtils.RunnableErrorImage;
 						}
 					} else {
 						if (AppUtils.PathIsFile(tp.path)) {
@@ -117,10 +119,15 @@ namespace TrayDir.utils {
 		public static void LoadIcon(IVirtualFolderMenuItem mi) {
 			if (mi.menuIcon is null && mi.isVFolder) {
 				if (ProgramData.pd.settings.app.VFolderIcon != "Yellow Folder") {
-					mi.menuIcon = Properties.Resources.folder_blue;
+					mi.menuIcon = (Bitmap)IconUtils.FolderBlueImage;
 				} else {
-					mi.menuIcon = Properties.Resources.folder;
+					mi.menuIcon = (Bitmap)IconUtils.FolderImage;
 				}
+			}
+		}
+		public static void LoadIcon(IWebLinkMenuItem mi) {
+			if (mi.menuIcon is null && mi.isWebLink) {
+				mi.menuIcon = (Bitmap)IconUtils.WebLinkImage;
 			}
 		}
 		public static void LoadIcon(Queue<IMenuItem> queue, IPathMenuItem mi) {
@@ -144,9 +151,9 @@ namespace TrayDir.utils {
 				}
 			} else if (mi.menuIcon is null && mi.isDir) {
 				if (mi.tiItem != null && mi.tiItem.GetType() == typeof(TrayInstancePath) && ((TrayInstancePath)mi.tiItem).shortcut) {
-					mi.menuIcon = Properties.Resources.folder_shortcut;
+					mi.menuIcon = (Bitmap)IconUtils.FolderShortcutImage;
 				} else {
-					mi.menuIcon = Properties.Resources.folder;
+					mi.menuIcon = (Bitmap)IconUtils.FolderImage;
 				}
 			}
 		}

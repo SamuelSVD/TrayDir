@@ -182,7 +182,6 @@ namespace TrayDir {
 					menuItem.DropDownItems.Add(child.menuItem);
 				}
 			}
-			LoadFolderChildren(null, null);
 		}
 		private void LoadFolderChildren(object sender, PaintEventArgs e) {
 			if (!painted && isDir && !((TrayInstancePath)tiItem).shortcut) {

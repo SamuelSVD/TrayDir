@@ -29,6 +29,7 @@ namespace TrayDir {
 				iml.AddRange(pathMenuItems);
 				iml.AddRange(virtualFolderMenuItems);
 				iml.AddRange(pluginMenuItems);
+				iml.AddRange(webLinkMenuItems);
 				return iml;
 			}
 		}

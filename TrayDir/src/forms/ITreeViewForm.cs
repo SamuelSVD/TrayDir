@@ -77,7 +77,7 @@ namespace TrayDir {
 			treeView2.ExpandAll();
 			TreeNode folder = new TreeNode();
 			if (!IconUtils.initialized) {
-				IconUtils.Init(upButton.Font.Height);
+				IconUtils.Init(upButton.Font.Height + 2);
 			}
 			this.treeView2.ImageList = IconUtils.imageList;
 			updateImage(upButton, IconUtils.UP);
@@ -88,7 +88,7 @@ namespace TrayDir {
 			updateImage(newFolderButton, IconUtils.FOLDER_NEW);
 			updateImage(newPluginButton, IconUtils.RUNNABLE_NEW);
 			updateImage(newVirtualFolderButton, IconUtils.FOLDER_BLUE_NEW);
-			updateImage(newSeparatorButton, IconUtils.SEPARATOR);
+			updateImage(newSeparatorButton, IconUtils.SEPARATOR_NEW);
 			updateImage(newWebLinkButton, IconUtils.WEBLINK_NEW);
 			editButton.Image = IconUtils.EditImage;
 			editButton.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -158,7 +158,8 @@ namespace TrayDir {
 			return tn;
 		}
 		private void updateImage(Button b, int index) {
-			b.Image = IconUtils.imageList.Images[index];
+			b.BackgroundImageLayout = ImageLayout.Zoom;
+			b.BackgroundImage = IconUtils.imageList.Images[index];
 			b.Width = b.Height;
 		}
 		private void treeView2_AfterSelect(object sender, TreeViewEventArgs e) {
@@ -440,7 +441,7 @@ namespace TrayDir {
 			newTin.SetInstance(instance);
 
 			ITreeNode itn;
-			switch(newTin.type) {
+			switch (newTin.type) {
 				case TrayInstanceNode.NodeType.Path:
 					itn = new ITreePathNode(newTin);
 					break;
@@ -581,7 +582,7 @@ namespace TrayDir {
 		}
 		private void treeView2_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e) {
 			if (selectedNode != null) {
-				switch(selectedNode.tin.type) {
+				switch (selectedNode.tin.type) {
 					case TrayInstanceNode.NodeType.Plugin:
 						pluginPropertiesButton_Click(sender, e);
 						break;
