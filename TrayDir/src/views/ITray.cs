@@ -23,6 +23,8 @@ namespace TrayDir {
 		private EventHandler hideForm;
 		private EventHandler exitForm;
 
+		private Timer ClosedTimer = new Timer();
+		private bool menuVisible = false;
 		public List<IMenuItem> menuItems {
 			get {
 				List<IMenuItem> iml = new List<IMenuItem>();
@@ -45,7 +47,13 @@ namespace TrayDir {
 			notifyIcon.MouseClick += notifyIcon_Click;
 			UpdateTrayIcon();
 			notifyIcon.DoubleClick += notifyIcon_DoubleClick;
+			ClosedTimer.Tick += ClosedTimer_Tick;
 		}
+
+		private void ClosedTimer_Tick(object sender, EventArgs e) {
+			menuVisible = false;
+		}
+
 		public void notifyIcon_DoubleClick(object obj, EventArgs args) {
 			if (((MouseEventArgs)args).Button == MouseButtons.Left) {
 				MainForm.form.onShowInstance = instance;
@@ -55,8 +63,12 @@ namespace TrayDir {
 		}
 		public void notifyIcon_Click(object sender, MouseEventArgs e) {
 			if (e.Button == MouseButtons.Left && ProgramData.pd.settings.app.ShowMenuOnLeftClick) {
-				MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
-				mi.Invoke(notifyIcon, null);
+				if (menuVisible) {
+					notifyIcon.ContextMenuStrip.Hide();
+				} else {
+					MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
+					mi.Invoke(notifyIcon, null);
+				}
 			}
 		}
 		private void Reset(Object o, EventArgs e) {
@@ -98,6 +110,8 @@ namespace TrayDir {
 			list.Clear();
 		}
 		public void MenuOpened(Object obj, EventArgs args) {
+			ClosedTimer.Stop();
+			menuVisible = true;
 			IMenuItemIconUtils.AssignIcons();
 			foreach (IMenuItem child in pathMenuItems) {
 				child.MenuOpened();
@@ -113,6 +127,7 @@ namespace TrayDir {
 		public void MenuClosed(Object obj, EventArgs args) {
 			MainForm.form.iconLoadTimer.Stop();
 			Reset(obj, args);
+			ClosedTimer.Start();
 		}
 		public void RefreshPluginMenuItemList() {
 			foreach (TrayInstancePlugin tiPlugin in instance.plugins) {
