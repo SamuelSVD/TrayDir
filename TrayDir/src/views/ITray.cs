@@ -52,6 +52,7 @@ namespace TrayDir {
 
 		private void ClosedTimer_Tick(object sender, EventArgs e) {
 			menuVisible = false;
+			ClosedTimer.Stop();
 		}
 
 		public void notifyIcon_DoubleClick(object obj, EventArgs args) {
