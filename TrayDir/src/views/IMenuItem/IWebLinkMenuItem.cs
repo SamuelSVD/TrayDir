@@ -23,6 +23,8 @@ namespace TrayDir {
 			bool useAlias = (alias != null && alias != string.Empty);
 			if (useAlias) {
 				menuItem.Text = alias;
+			} else {
+				menuItem.Text = "(Web Link)";
 			}
 			menuItem.DropDownItems.Clear();
 		}
