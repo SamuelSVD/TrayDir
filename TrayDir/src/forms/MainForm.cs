@@ -64,7 +64,6 @@ namespace TrayDir {
 			instanceTabs = new SmartTabControl();
 			instanceTabs.AllowDrop = true;
 			instanceTabs.DragEnter += MainForm_DragEnter;
-			instanceTabs.DragDrop += MainForm_DragDrop;
 			instanceTabs.Dock = DockStyle.Fill;
 			//instanceTabs.Anchor = (AnchorStyles)5;
 			instanceTabs.Name = "instanceTabs";
@@ -444,13 +443,6 @@ namespace TrayDir {
 
 		private void MainForm_DragEnter(object sender, DragEventArgs e) {
 			if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.All;
-		}
-
-		private void MainForm_DragDrop(object sender, DragEventArgs e) {
-			if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
-				string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-				foreach (string file in files) Console.WriteLine(file);
-			}
 		}
 
 		private void MainForm_KeyDown(object sender, KeyEventArgs e) {
