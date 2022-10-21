@@ -845,6 +845,7 @@ namespace TrayDir {
 				foreach (IMenuItem imi in instance.view.tray.menuItems) {
 					if (tin == imi.tiNode) {
 						imi.Refresh();
+						imi.EnqueueImgLoad();
 						found = true;
 					}
 				}

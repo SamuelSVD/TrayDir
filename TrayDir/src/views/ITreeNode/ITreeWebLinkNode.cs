@@ -16,7 +16,11 @@ namespace TrayDir.src.views {
 			node.ImageIndex = IconUtils.QUESTION;
 			TrayInstanceWebLink tiwl = tin.GetWebLink();
 			if (tiwl != null) {
-				node.ImageIndex = IconUtils.WEBLINK;
+				if (tiwl.isValidURL) {
+					node.ImageIndex = IconUtils.WEBLINK;
+				} else {
+					node.ImageIndex = IconUtils.WEBLINK_ERROR;
+				}
 				node.Text = tiwl.alias;
 				if (node.Text == "") node.Text = "(WebLink)";
 				hidden = !tiwl.visible;

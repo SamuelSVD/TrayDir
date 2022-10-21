@@ -1,6 +1,19 @@
-﻿namespace TrayDir {
+﻿using System;
+using System.Xml.Serialization;
+
+namespace TrayDir {
 	public class TrayInstanceWebLink : TrayInstanceItem {
 		public string URL = "";
+		[XmlIgnore]
+		public bool isValidURL {
+			get {
+				Uri uriResult;
+				if (Uri.TryCreate(URL, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps)) {
+					return true;
+				}
+				return false;
+			}
+		}
 		public override void Apply(object model) {
 			if (model.GetType() == typeof(TrayInstanceWebLink)) {
 				this.URL = ((TrayInstanceWebLink)model).URL;

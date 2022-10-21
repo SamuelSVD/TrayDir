@@ -127,7 +127,11 @@ namespace TrayDir.utils {
 		}
 		public static void LoadIcon(IWebLinkMenuItem mi) {
 			if (mi.menuIcon is null && mi.isWebLink) {
-				mi.menuIcon = (Bitmap)IconUtils.WebLinkImage;
+				if (((TrayInstanceWebLink)mi.tiItem).isValidURL) {
+					mi.menuIcon = (Bitmap)IconUtils.WebLinkImage;
+				} else {
+					mi.menuIcon = (Bitmap)IconUtils.WebLinkErrorImage;
+				}
 			}
 		}
 		public static void LoadIcon(Queue<IMenuItem> queue, IPathMenuItem mi) {

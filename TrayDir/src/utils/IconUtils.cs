@@ -31,6 +31,7 @@ namespace TrayDir.utils {
 		public static int EMPTY;
 		public static int WEBLINK;
 		public static int WEBLINK_NEW;
+		public static int WEBLINK_ERROR;
 		public static bool initialized = false;
 		public static Image DocumentImage { get { return imageList.Images[DOCUMENT]; } }
 		public static Image FolderImage { get { return imageList.Images[FOLDER]; } }
@@ -53,7 +54,8 @@ namespace TrayDir.utils {
 		public static Image RunnableErrorImage { get { return imageList.Images[RUNNABLE_ERROR]; } }
 		public static Image Empty { get { return imageList.Images[EMPTY]; } }
 		public static Image WebLinkImage { get { return imageList.Images[WEBLINK]; } }
-		public static Image WebLinkNew { get { return imageList.Images[WEBLINK_NEW]; } }
+		public static Image WebLinkNewImage { get { return imageList.Images[WEBLINK_NEW]; } }
+		public static Image WebLinkErrorImage { get { return imageList.Images[WEBLINK_ERROR]; } }
 		public static void Init(int sizeWH) {
 			imageList = new ImageList();
 			imageList.ImageSize = new Size(sizeWH, sizeWH);
@@ -102,6 +104,8 @@ namespace TrayDir.utils {
 			IconUtils.WEBLINK_NEW = 20;
 			imageList.Images.Add(Overlay(TrayDir.Properties.Resources.separator, TrayDir.Properties.Resources.overlay_new));
 			IconUtils.SEPARATOR_NEW = 21;
+			imageList.Images.Add(Overlay(TrayDir.Properties.Resources.weblink, TrayDir.Properties.Resources.overlay_error));
+			IconUtils.WEBLINK_ERROR = 22;
 			initialized = true;
 		}
 		private static Bitmap Overlay(Bitmap source, Bitmap overlay) {
