@@ -375,6 +375,9 @@ folder's contents will be used as the main menu structure</value>
   <data name="Tooltip_InsertInstance" xml:space="preserve">
     <value>Insert new instance</value>
   </data>
+  <data name="Tooltip_InvalidUrl" xml:space="preserve">
+    <value>Invalid URL. Verify it begins with http:// or https:// and contains valid characters</value>
+  </data>
   <data name="Tooltip_MenuSorting" xml:space="preserve">
     <value>Set tray menu folder / file sorting</value>
   </data>

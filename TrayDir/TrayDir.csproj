@@ -350,6 +350,7 @@
     <None Include="Resources\weblink.png" />
     <None Include="Resources\edit.png" />
     <None Include="Resources\empty.png" />
+    <None Include="Resources\error.png" />
     <Content Include="Resources\file-exe.ico" />
     <Content Include="Resources\folder.png" />
     <Content Include="Resources\folder_blue.png" />

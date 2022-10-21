@@ -1,6 +1,4 @@
-﻿using FolderSelect;
-using System;
-using System.IO;
+﻿using System;
 using System.Windows.Forms;
 using Utils;
 
@@ -14,13 +12,14 @@ namespace TrayDir
 			InitializeComponent();
 			this.Icon = Properties.Resources.file_exe;
 			this.model = tip;
-			pathTextBox.Text = model.URL;
+			urlTextBox.Text = model.URL;
 			aliasEdit.Text = model.alias;
 			hideItemCheckBox.Checked = !model.visible;
 		}
-		private void pathTextBox_TextChanged(object sender, EventArgs e)
+		private void urlTextBox_TextChanged(object sender, EventArgs e)
 		{
-			model.URL = pathTextBox.Text;
+			model.URL = urlTextBox.Text;
+			ValidateURL();
 		}
 		private void aliasEdit_TextChanged(object sender, EventArgs e)
 		{
@@ -35,5 +34,20 @@ namespace TrayDir
         private void OkButton_Click(object sender, EventArgs e) {
 			DialogResult = DialogResult.OK;
         }
-    }
+
+        private void IWebLinkForm_Shown(object sender, EventArgs e) {
+			ValidateURL();
+        }
+		private void ValidateURL() {
+			urlErrorPictureBox.Visible = !model.isValidURL;
+		}
+
+		private void urlErrorPictureBox_MouseLeave(object sender, EventArgs e) {
+			urlToolTip.Hide(urlTextBox);
+		}
+
+		private void urlErrorPictureBox_MouseEnter(object sender, EventArgs e) {
+			urlToolTip.Show(Properties.Strings.Tooltip_InvalidUrl, urlTextBox, urlTextBox.PointToClient(MousePosition).X+2, urlTextBox.PointToClient(MousePosition).Y+2);
+		}
+	}
 }

@@ -811,6 +811,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid URL. Verify it begins with http:// or https:// and contains valid characters.
+        /// </summary>
+        internal static string Tooltip_InvalidUrl {
+            get {
+                return ResourceManager.GetString("Tooltip_InvalidUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set tray menu folder / file sorting.
         /// </summary>
         internal static string Tooltip_MenuSorting {
