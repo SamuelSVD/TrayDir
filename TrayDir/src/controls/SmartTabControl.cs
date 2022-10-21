@@ -67,7 +67,7 @@ namespace TrayDir
             var draggedTab = (TabPage)drgevent.Data.GetData(typeof(TabPage));
             var pointedTab = getPointedTab();
 
-            if (ReferenceEquals(draggedTab, predraggedTab) && pointedTab != null)
+            if (draggedTab != null && ReferenceEquals(draggedTab, predraggedTab) && pointedTab != null)
             {
                 drgevent.Effect = DragDropEffects.Move;
 
