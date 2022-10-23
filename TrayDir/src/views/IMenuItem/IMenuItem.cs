@@ -102,6 +102,7 @@ namespace TrayDir {
 		public void Refresh() {
 			Clear();
 			Load();
+			UpdateVisibility();
 		}
 		public abstract void MenuOpened();
 	}

@@ -16,7 +16,7 @@ namespace TrayDir.src.views {
 			node.ImageIndex = IconUtils.QUESTION;
 			node.Text = Properties.Strings.Form_Error;
 			node.SelectedImageIndex = node.ImageIndex;
-			if (hidden) {
+			if (hidden && node.TreeView != null) {
 				ITreeNode.strikethroughFont = new Font(node.TreeView.Font.FontFamily, node.TreeView.Font.Size, FontStyle.Strikeout);
 				node.NodeFont = strikethroughFont;
 			} else {

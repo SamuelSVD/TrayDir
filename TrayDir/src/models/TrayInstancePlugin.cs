@@ -30,6 +30,7 @@ namespace TrayDir {
 			TrayInstancePlugin tip = new TrayInstancePlugin();
 			tip.id = id;
 			tip.alias = alias;
+			tip.visible = visible;
 			foreach (TrayInstancePluginParameter tipp in parameters) {
 				tip.parameters.Add((TrayInstancePluginParameter)tipp.Copy());
 			}
@@ -39,6 +40,7 @@ namespace TrayDir {
 			if (model.GetType() == typeof(TrayInstancePlugin)) {
 				this.id = ((TrayInstancePlugin)model).id;
 				this.alias = ((TrayInstancePlugin)model).alias;
+				this.visible = ((TrayInstancePlugin)model).visible;
 				for (int i = 0; i < ((TrayInstancePlugin)model).parameters.Count; i++) {
 					if (this.parameters.Count > i) {
 						this.parameters[i].Apply(((TrayInstancePlugin)model).parameters[i]);
