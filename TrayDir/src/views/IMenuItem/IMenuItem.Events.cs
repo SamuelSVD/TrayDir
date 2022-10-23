@@ -8,13 +8,7 @@ namespace TrayDir {
 			AppUtils.Run(this);
 		}
 		protected void RunAll(object obj, EventArgs args) {
-			foreach (IMenuItem imi in nodeChildren) {
-				if (imi.GetType() == typeof(IPathMenuItem) || (imi.GetType() == typeof(IPluginMenuItem))) {
-					AppUtils.Run(imi);
-				} else if (imi.GetType() == typeof(IVirtualFolderMenuItem) && ((IVirtualFolderMenuItem)imi).isVFolder) {
-					imi.RunAll(obj, args);
-				}
-			}
+			AppUtils.Run(this);
 		}
 		protected void Explore(object obj, EventArgs args) {
 			AppUtils.Explore(this);

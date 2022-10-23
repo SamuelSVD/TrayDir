@@ -119,7 +119,6 @@ namespace TrayDir {
 		}
 		internal static void Run(IMenuItem menuItem) {
 			if (menuItem.GetType() == typeof(IPathMenuItem)) {
-
 				if (((IPathMenuItem)menuItem).isDir) {
 					OpenPath(new DirectoryInfo(((TrayInstancePath)menuItem.tiItem).path).FullName, false);
 				} else if (((IPathMenuItem)menuItem).isFile) {
@@ -132,6 +131,10 @@ namespace TrayDir {
 			} else if (menuItem.GetType() == typeof(IWebLinkMenuItem)) {
 				if (((IWebLinkMenuItem)menuItem).isWebLink) {
 					Run((TrayInstanceWebLink)menuItem.tiItem);
+				}
+			} else if (menuItem.GetType() == typeof(IVirtualFolderMenuItem)) {
+				foreach (IMenuItem imi in menuItem.nodeChildren) {
+					Run(imi);
 				}
 			}
 		}
@@ -152,6 +155,9 @@ namespace TrayDir {
 				case TrayInstanceNode.NodeType.Plugin:
 					RunAs(node.GetPlugin());
 					break;
+				case TrayInstanceNode.NodeType.WebLink:
+					RunAs(node.GetWebLink());
+					break;
 			}
 		}
 		internal static void Run(TrayInstanceNode node) {
@@ -161,6 +167,14 @@ namespace TrayDir {
 					break;
 				case TrayInstanceNode.NodeType.Plugin:
 					Run(node.GetPlugin());
+					break;
+				case TrayInstanceNode.NodeType.VirtualFolder:
+					foreach(TrayInstanceNode childNode in node.children) {
+						Run(childNode);
+					}
+					break;
+				case TrayInstanceNode.NodeType.WebLink:
+					Run(node.GetWebLink());
 					break;
 			}
 		}
@@ -235,7 +249,7 @@ namespace TrayDir {
 					RunPlugin(((TrayInstancePlugin)menuItem.tiItem), menuItem.instance.settings.RunAsAdmin);
 				}
 			} else if (menuItem.GetType() == typeof(IWebLinkMenuItem)) {
-				if(((IWebLinkMenuItem)menuItem).isWebLink) {
+				if (((IWebLinkMenuItem)menuItem).isWebLink) {
 					Run((TrayInstanceWebLink)((IWebLinkMenuItem)menuItem).tiItem);
 				}
 			}
@@ -346,6 +360,9 @@ namespace TrayDir {
 			} else if (tip.isFile) {
 				OpenPath(Path.GetFullPath(tip.path), true);
 			}
+		}
+		public static void RunAs(TrayInstanceWebLink tiwl) {
+			Run(tiwl);
 		}
 		public static string BuildPluginCliParams(TrayInstancePlugin tip) {
 			string parameters = string.Empty;
