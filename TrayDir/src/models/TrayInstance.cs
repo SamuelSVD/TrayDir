@@ -20,11 +20,11 @@ namespace TrayDir {
 		[XmlIgnore]
 		public IView view;
 		public List<TrayInstancePath> paths;
-		public List<TrayInstanceVirtualFolder> vfolders;
-		public List<TrayInstancePlugin> plugins;
-		public List<TrayPlugin> internalPlugins;
-		public List<TrayInstanceWebLink> weblinks;
-		public TrayInstanceNode nodes;
+		public List<TrayInstanceVirtualFolder> vfolders = new List<TrayInstanceVirtualFolder>();
+		public List<TrayInstancePlugin> plugins = new List<TrayInstancePlugin>();
+		public List<TrayPlugin> internalPlugins = new List<TrayPlugin>();
+		public List<TrayInstanceWebLink> weblinks = new List<TrayInstanceWebLink>();
+		public TrayInstanceNode nodes = new TrayInstanceNode();
 
 		public byte[] iconData;
 		public static string defaultPath = string.Empty;
@@ -37,16 +37,13 @@ namespace TrayDir {
 		public TrayInstance(String instanceName, TrayInstanceSettings settings) {
 			this.settings = settings;
 			this.instanceName = instanceName;
-			paths = new List<TrayInstancePath>();
-			vfolders = new List<TrayInstanceVirtualFolder>();
-			plugins = new List<TrayInstancePlugin>();
-			nodes = new TrayInstanceNode();
 		}
 		public void Repair() {
 			// Separate nodes into their types
 			List<TrayInstanceNode> pathNodes = new List<TrayInstanceNode>();
 			List<TrayInstanceNode> vfolderNodes = new List<TrayInstanceNode>();
 			List<TrayInstanceNode> pluginNodes = new List<TrayInstanceNode>();
+			List<TrayInstanceNode> weblinkNodes = new List<TrayInstanceNode>();
 			foreach (TrayInstanceNode node in nodes.GetAllChildNodes()) {
 				switch (node.type) {
 					case TrayInstanceNode.NodeType.Path:
@@ -57,6 +54,9 @@ namespace TrayDir {
 						break;
 					case TrayInstanceNode.NodeType.VirtualFolder:
 						vfolderNodes.Add(node);
+						break;
+					case TrayInstanceNode.NodeType.WebLink:
+						weblinkNodes.Add(node);
 						break;
 				}
 			}
@@ -70,60 +70,25 @@ namespace TrayDir {
 			foreach (TrayInstanceNode node in pluginNodes) {
 				node.__item = plugins[node.id];
 			}
-
-			// Detect and remove paths that are not used
-			List<TrayInstancePath> deletablePaths = new List<TrayInstancePath>();
-			foreach (TrayInstancePath path in paths) {
-				bool found = false;
-				foreach (TrayInstanceNode node in pathNodes) {
-					if (node.__item == path) {
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					deletablePaths.Add(path);
-				}
-			}
-			foreach (TrayInstancePath path in deletablePaths) {
-				paths.Remove(path);
+			foreach (TrayInstanceNode node in weblinkNodes) {
+				node.__item = weblinks[node.id];
 			}
 
 			// Detect and remove paths that are not used
-			List<TrayInstancePlugin> deletablePlugins = new List<TrayInstancePlugin>();
-			foreach (TrayInstancePlugin plugin in plugins) {
-				bool found = false;
-				foreach (TrayInstanceNode node in pluginNodes) {
-					if (node.__item == plugin) {
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					deletablePlugins.Add(plugin);
-				}
-			}
-			foreach (TrayInstancePlugin plugin in deletablePlugins) {
-				plugins.Remove(plugin);
-			}
+			List<TrayInstancePath> deletablePaths = paths.FindAll(path => !pathNodes.Exists(pathNode => pathNode.__item == path));
+			paths.RemoveAll(path => deletablePaths.Contains(path));
 
 			// Detect and remove paths that are not used
-			List<TrayInstanceVirtualFolder> deletableVfoldersPaths = new List<TrayInstanceVirtualFolder>();
-			foreach (TrayInstanceVirtualFolder vfolder in vfolders) {
-				bool found = false;
-				foreach (TrayInstanceNode node in vfolderNodes) {
-					if (node.__item == vfolder) {
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					deletableVfoldersPaths.Add(vfolder);
-				}
-			}
-			foreach (TrayInstanceVirtualFolder path in deletableVfoldersPaths) {
-				vfolders.Remove(path);
-			}
+			List<TrayInstancePlugin> deletablePlugins = plugins.FindAll(plugin => !pluginNodes.Exists(pluginNode => pluginNode.__item == plugin));
+			plugins.RemoveAll(plugin => deletablePlugins.Contains(plugin));
+
+			// Detect and remove paths that are not used
+			List<TrayInstanceVirtualFolder> deletableVFolders = vfolders.FindAll(vfolder => !vfolderNodes.Exists(vfolderNode => vfolderNode.__item == vfolder));
+			vfolders.RemoveAll(vfolder => deletableVFolders.Contains(vfolder));
+
+			// Detect and remove paths that are not used
+			List<TrayInstanceWebLink> deletableWebLinks = weblinks.FindAll(weblink => !weblinkNodes.Exists(weblinkNode => weblinkNode.__item == weblink));
+			weblinks.RemoveAll(weblink => deletableWebLinks.Contains(weblink));
 
 			// Fix all IDs
 			foreach (TrayInstanceNode node in pathNodes) {
@@ -134,6 +99,9 @@ namespace TrayDir {
 			}
 			foreach (TrayInstanceNode node in vfolderNodes) {
 				node.id = vfolders.IndexOf((TrayInstanceVirtualFolder)node.__item);
+			}
+			foreach (TrayInstanceNode node in weblinkNodes) {
+				node.id = weblinks.IndexOf((TrayInstanceWebLink)node.__item);
 			}
 		}
 		public TrayPlugin getGlobalPluginBySignature(string signature) {
