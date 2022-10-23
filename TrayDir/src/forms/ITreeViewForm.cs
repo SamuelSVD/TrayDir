@@ -378,29 +378,37 @@ namespace TrayDir {
 		private void RecursiveAddToInstance(TrayInstance recursive_instance, TrayInstanceNode tin, TrayInstanceNode parent) {
 			TrayInstanceNode newTin = new TrayInstanceNode();
 			newTin.type = tin.type;
-			if (tin.type == TrayInstanceNode.NodeType.Path) {
-				newTin.id = recursive_instance.paths.Count;
-				recursive_instance.paths.Add(instance.paths[tin.id]);
-			}
-			if (tin.type == TrayInstanceNode.NodeType.VirtualFolder) {
-				newTin.id = recursive_instance.vfolders.Count;
-				recursive_instance.vfolders.Add(instance.vfolders[tin.id]);
-			}
-			if (tin.type == TrayInstanceNode.NodeType.Plugin) {
-				if (recursive_instance.internalPlugins == null) {
-					recursive_instance.internalPlugins = new List<TrayPlugin>();
-				}
-				newTin.id = recursive_instance.plugins.Count;
-				TrayInstancePlugin ip = (TrayInstancePlugin)instance.plugins[tin.id].Copy();
-				if (ip.plugin != null) {
-					TrayPlugin tp = recursive_instance.getInternalPluginBySignature(ip.plugin.getSignature());
-					if (tp == null) {
-						recursive_instance.internalPlugins.Add(ip.plugin);
-						tp = ip.plugin;
+			switch (tin.type) {
+				case TrayInstanceNode.NodeType.Path:
+					newTin.id = recursive_instance.paths.Count;
+					recursive_instance.paths.Add(instance.paths[tin.id]);
+					break;
+				case TrayInstanceNode.NodeType.VirtualFolder:
+					newTin.id = recursive_instance.vfolders.Count;
+					recursive_instance.vfolders.Add(instance.vfolders[tin.id]);
+					break;
+				case TrayInstanceNode.NodeType.Plugin:
+					if (recursive_instance.internalPlugins == null) {
+						recursive_instance.internalPlugins = new List<TrayPlugin>();
 					}
-					ip.id = recursive_instance.internalPlugins.IndexOf(tp);
-				}
-				recursive_instance.plugins.Add(ip);
+					newTin.id = recursive_instance.plugins.Count;
+					TrayInstancePlugin ip = (TrayInstancePlugin)instance.plugins[tin.id].Copy();
+					if (ip.plugin != null) {
+						TrayPlugin tp = recursive_instance.getInternalPluginBySignature(ip.plugin.getSignature());
+						if (tp == null) {
+							recursive_instance.internalPlugins.Add(ip.plugin);
+							tp = ip.plugin;
+						}
+						ip.id = recursive_instance.internalPlugins.IndexOf(tp);
+					}
+					recursive_instance.plugins.Add(ip);
+					break;
+				case TrayInstanceNode.NodeType.Separator:
+					break;
+				case TrayInstanceNode.NodeType.WebLink:
+					newTin.id = recursive_instance.weblinks.Count;
+					recursive_instance.weblinks.Add(instance.weblinks[tin.id]);
+					break;
 			}
 			if (parent == null) {
 				recursive_instance.nodes.children.Add(newTin);
@@ -419,24 +427,34 @@ namespace TrayDir {
 		private ITreeNode RecursiveLoadFromInstance(TrayInstance recursive_instance, TrayInstanceNode tin, ITreeNode parentNode) {
 			TrayInstanceNode newTin = new TrayInstanceNode();
 			newTin.type = tin.type;
-			if (tin.type == TrayInstanceNode.NodeType.Path) {
-				newTin.id = instance.paths.Count;
-				instance.paths.Add(recursive_instance.paths[tin.id]);
-			} else if (tin.type == TrayInstanceNode.NodeType.Plugin) {
-				newTin.id = instance.plugins.Count;
-				TrayInstancePlugin tip = recursive_instance.plugins[tin.id];
-				TrayPlugin tp = recursive_instance.internalPlugins[tip.id];
-				TrayPlugin gtp = instance.getGlobalPluginBySignature(tp.getSignature());
-				if (gtp == null) {
-					tip.id = ProgramData.pd.plugins.Count;
-					ProgramData.pd.plugins.Add(tp);
-				} else {
-					tip.id = ProgramData.pd.plugins.IndexOf(gtp);
-				}
-				instance.plugins.Add(tip);
-			} else if (tin.type == TrayInstanceNode.NodeType.VirtualFolder) {
-				newTin.id = instance.vfolders.Count;
-				instance.vfolders.Add(recursive_instance.vfolders[tin.id]);
+			switch (tin.type) {
+				case TrayInstanceNode.NodeType.Path:
+					newTin.id = instance.paths.Count;
+					instance.paths.Add(recursive_instance.paths[tin.id]);
+					break;
+				case TrayInstanceNode.NodeType.Plugin:
+					newTin.id = instance.plugins.Count;
+					TrayInstancePlugin tip = recursive_instance.plugins[tin.id];
+					TrayPlugin tp = recursive_instance.internalPlugins[tip.id];
+					TrayPlugin gtp = instance.getGlobalPluginBySignature(tp.getSignature());
+					if (gtp == null) {
+						tip.id = ProgramData.pd.plugins.Count;
+						ProgramData.pd.plugins.Add(tp);
+					} else {
+						tip.id = ProgramData.pd.plugins.IndexOf(gtp);
+					}
+					instance.plugins.Add(tip);
+					break;
+				case TrayInstanceNode.NodeType.VirtualFolder:
+					newTin.id = instance.vfolders.Count;
+					instance.vfolders.Add(recursive_instance.vfolders[tin.id]);
+					break;
+				case TrayInstanceNode.NodeType.Separator:
+					break;
+				case TrayInstanceNode.NodeType.WebLink:
+					newTin.id = instance.weblinks.Count;
+					instance.weblinks.Add(recursive_instance.weblinks[tin.id]);
+					break;
 			}
 			newTin.SetInstance(instance);
 
@@ -453,6 +471,9 @@ namespace TrayDir {
 					break;
 				case TrayInstanceNode.NodeType.Separator:
 					itn = new ITreeSeparatorNode(newTin);
+					break;
+				case TrayInstanceNode.NodeType.WebLink:
+					itn = new ITreeWebLinkNode(newTin);
 					break;
 				default:
 					itn = new ITreeUnknownNode(newTin);
@@ -638,28 +659,38 @@ namespace TrayDir {
 						}
 					}
 				}
-				if (selectedNode.tin.type == TrayInstanceNode.NodeType.Path) {
-					TrayInstancePath path = selectedNode.tin.GetPath();
-					if (path != null) {
-						if (path.isDir) {
-							folderShortcutMenuItem.Enabled = true;
-							folderExpandMenuItem.Enabled = true;
-							folderShortcutMenuItem.Visible = !path.shortcut;
-							folderExpandMenuItem.Visible = path.shortcut;
+				switch (selectedNode.tin.type) {
+					case TrayInstanceNode.NodeType.Path:
+						TrayInstancePath path = selectedNode.tin.GetPath();
+						if (path != null) {
+							if (path.isDir) {
+								folderShortcutMenuItem.Enabled = true;
+								folderExpandMenuItem.Enabled = true;
+								folderShortcutMenuItem.Visible = !path.shortcut;
+								folderExpandMenuItem.Visible = path.shortcut;
+							}
+							runMenuItem.Enabled = path.isFile;
+							runasMenuItem.Enabled = path.isFile;
+							openInExplorerMenuItem.Enabled = true;
+							openInCmdMenuItem.Enabled = true;
+							openInCmdAdminMenuItem.Enabled = true;
 						}
-						runMenuItem.Enabled = path.isFile;
-						runasMenuItem.Enabled = path.isFile;
+						break;
+					case TrayInstanceNode.NodeType.VirtualFolder:
+						runMenuItem.Enabled = true;
+						break;
+					case TrayInstanceNode.NodeType.Plugin:
+						runMenuItem.Enabled = true;
+						runasMenuItem.Enabled = true;
 						openInExplorerMenuItem.Enabled = true;
 						openInCmdMenuItem.Enabled = true;
 						openInCmdAdminMenuItem.Enabled = true;
-					}
-				}
-				if (selectedNode.tin.type == TrayInstanceNode.NodeType.Plugin) {
-					runMenuItem.Enabled = true;
-					runasMenuItem.Enabled = true;
-					openInExplorerMenuItem.Enabled = true;
-					openInCmdMenuItem.Enabled = true;
-					openInCmdAdminMenuItem.Enabled = true;
+						break;
+					case TrayInstanceNode.NodeType.Separator:
+						break;
+					case TrayInstanceNode.NodeType.WebLink:
+						runMenuItem.Enabled = true;
+						break;
 				}
 				rightClickMenu.Show(treeView2, e.Location);
 			}
