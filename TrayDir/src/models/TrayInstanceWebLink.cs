@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 
 namespace TrayDir {
 	public class TrayInstanceWebLink : TrayInstanceItem {
+		[XmlAttribute]
 		public string URL = "";
 		[XmlIgnore]
 		public bool isValidURL {
