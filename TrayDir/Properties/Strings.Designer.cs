@@ -902,6 +902,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Value required.
+        /// </summary>
+        internal static string Tooltip_ValueRequired {
+            get {
+                return ResourceManager.GetString("Tooltip_ValueRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When virtual folders choose between a yellow folder or blue folder icon.
         /// </summary>
         internal static string Tooltip_VirtualFolderMenuIcon {

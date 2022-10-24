@@ -36,7 +36,7 @@ namespace TrayDir
 			}
 			for (int i = 0; i < tp.parameterCount; i++) {
 				if (tp.parameters[i].name != string.Empty) {
-					parameterComboBox.Items[i]=tp.parameters[i].name;
+					parameterComboBox.Items[i]= String.Format(Properties.Strings.Plugin_ParameterN, i+1) + ": " + tp.parameters[i].name;
 				}
 			}
 		}
@@ -54,7 +54,7 @@ namespace TrayDir
 		private void nameTextBox_TextChanged(object sender, EventArgs e) {
 			tpp.name = nameTextBox.Text;
 			if (tpp.name != string.Empty) {
-				parameterComboBox.Items[parameterComboBox.SelectedIndex] = tpp.name;
+				parameterComboBox.Items[parameterComboBox.SelectedIndex] = String.Format(Properties.Strings.Plugin_ParameterN, parameterComboBox.SelectedIndex + 1) + ": " + tpp.name;
 			}
 			else {
 				parameterComboBox.Items[parameterComboBox.SelectedIndex] = String.Format(Properties.Strings.Plugin_ParameterN, parameterComboBox.SelectedIndex + 1);

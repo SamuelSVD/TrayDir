@@ -33,23 +33,17 @@ namespace TrayDir
 			this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.pluginTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.urlTextBox = new System.Windows.Forms.TextBox();
-			this.urlErrorPictureBox = new System.Windows.Forms.PictureBox();
 			this.hideItemCheckBox = new System.Windows.Forms.CheckBox();
 			this.pathLabel = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.aliasEdit = new System.Windows.Forms.TextBox();
+			this.urlTextBox = new TrayDir.ValidateTextBox();
 			this.OkButton = new System.Windows.Forms.Button();
 			this.FormCancelButton = new System.Windows.Forms.Button();
 			this.urlToolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.tableLayoutPanel4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.pluginTableLayoutPanel.SuspendLayout();
-			this.panel1.SuspendLayout();
-			this.tableLayoutPanel1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.urlErrorPictureBox)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel4
@@ -71,44 +65,12 @@ namespace TrayDir
 			// pluginTableLayoutPanel
 			// 
 			resources.ApplyResources(this.pluginTableLayoutPanel, "pluginTableLayoutPanel");
-			this.pluginTableLayoutPanel.Controls.Add(this.panel1, 0, 3);
 			this.pluginTableLayoutPanel.Controls.Add(this.hideItemCheckBox, 0, 4);
 			this.pluginTableLayoutPanel.Controls.Add(this.pathLabel, 0, 2);
 			this.pluginTableLayoutPanel.Controls.Add(this.label1, 0, 0);
 			this.pluginTableLayoutPanel.Controls.Add(this.aliasEdit, 0, 1);
+			this.pluginTableLayoutPanel.Controls.Add(this.urlTextBox, 0, 3);
 			this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
-			// 
-			// panel1
-			// 
-			resources.ApplyResources(this.panel1, "panel1");
-			this.panel1.BackColor = System.Drawing.SystemColors.Window;
-			this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.panel1.Controls.Add(this.tableLayoutPanel1);
-			this.panel1.Name = "panel1";
-			// 
-			// tableLayoutPanel1
-			// 
-			resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-			this.tableLayoutPanel1.Controls.Add(this.urlTextBox, 0, 0);
-			this.tableLayoutPanel1.Controls.Add(this.urlErrorPictureBox, 1, 0);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			// 
-			// urlTextBox
-			// 
-			this.urlTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			resources.ApplyResources(this.urlTextBox, "urlTextBox");
-			this.urlTextBox.Name = "urlTextBox";
-			this.urlTextBox.TextChanged += new System.EventHandler(this.urlTextBox_TextChanged);
-			// 
-			// urlErrorPictureBox
-			// 
-			this.urlErrorPictureBox.BackColor = System.Drawing.Color.Transparent;
-			this.urlErrorPictureBox.BackgroundImage = global::TrayDir.Properties.Resources.error;
-			resources.ApplyResources(this.urlErrorPictureBox, "urlErrorPictureBox");
-			this.urlErrorPictureBox.Name = "urlErrorPictureBox";
-			this.urlErrorPictureBox.TabStop = false;
-			this.urlErrorPictureBox.MouseEnter += new System.EventHandler(this.urlErrorPictureBox_MouseEnter);
-			this.urlErrorPictureBox.MouseLeave += new System.EventHandler(this.urlErrorPictureBox_MouseLeave);
 			// 
 			// hideItemCheckBox
 			// 
@@ -132,6 +94,13 @@ namespace TrayDir
 			resources.ApplyResources(this.aliasEdit, "aliasEdit");
 			this.aliasEdit.Name = "aliasEdit";
 			this.aliasEdit.TextChanged += new System.EventHandler(this.aliasEdit_TextChanged);
+			// 
+			// urlTextBox
+			// 
+			resources.ApplyResources(this.urlTextBox, "urlTextBox");
+			this.urlTextBox.Name = "urlTextBox";
+			this.urlTextBox.TooltipText = null;
+			this.urlTextBox.Valid = true;
 			// 
 			// OkButton
 			// 
@@ -168,10 +137,6 @@ namespace TrayDir
 			this.groupBox1.PerformLayout();
 			this.pluginTableLayoutPanel.ResumeLayout(false);
 			this.pluginTableLayoutPanel.PerformLayout();
-			this.panel1.ResumeLayout(false);
-			this.tableLayoutPanel1.ResumeLayout(false);
-			this.tableLayoutPanel1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.urlErrorPictureBox)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -189,9 +154,6 @@ namespace TrayDir
 		private System.Windows.Forms.CheckBox hideItemCheckBox;
         private System.Windows.Forms.Button FormCancelButton;
 		private System.Windows.Forms.ToolTip urlToolTip;
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.PictureBox urlErrorPictureBox;
-		private System.Windows.Forms.TextBox urlTextBox;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private ValidateTextBox urlTextBox;
 	}
 }

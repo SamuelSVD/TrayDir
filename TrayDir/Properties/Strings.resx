@@ -406,6 +406,9 @@ them from the System Tray menu</value>
   <data name="Tooltip_StartWithWindows" xml:space="preserve">
     <value>When enabled, the application will start when you log in to your account on Windows</value>
   </data>
+  <data name="Tooltip_ValueRequired" xml:space="preserve">
+    <value>Value required</value>
+  </data>
   <data name="Tooltip_VirtualFolderMenuIcon" xml:space="preserve">
     <value>When virtual folders choose between a yellow folder or blue folder icon</value>
   </data>

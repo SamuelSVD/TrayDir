@@ -98,17 +98,19 @@ namespace TrayDir
 				row++;
 				l.AutoSize = true;
 				labels.Add(l);
-				TextBox tb = new TextBox();
+				ValidateTextBox tb = new ValidateTextBox();
 				tb.Dock = DockStyle.Top;
 				tb.AutoSize = true;
 				controls.Add(tb);
 				pluginTableLayoutPanel.SetColumnSpan(tb, 2);
 				pluginTableLayoutPanel.Controls.Add(tb, 0, startingCount + row);
-				tb.Text = tipp.value;
+				tb.TooltipText = Properties.Strings.Tooltip_ValueRequired;
 				tb.TextChanged += new EventHandler(delegate (object obj, EventArgs args)
 				{
 					tipp.value = tb.Text;
+					tb.Valid = (!tpp.required || !(tb.Text == String.Empty || tb.Text == null));
 				});
+				tb.Text = tipp.value;
 			} else {
 				if (tpp.isBoolean) {
 					AddCheckboxParameterRow(tpp, tipp);
@@ -157,17 +159,19 @@ namespace TrayDir
 			row++;
 			l.AutoSize = true;
 			labels.Add(l);
-			TextBox tb = new TextBox();
+			ValidateTextBox tb = new ValidateTextBox();
 			tb.Dock = DockStyle.Top;
-			tb.AutoSize = true;
+			//tb.AutoSize = true;
 			controls.Add(tb);
 			pluginTableLayoutPanel.SetColumnSpan(tb, 2);
 			pluginTableLayoutPanel.Controls.Add(tb, 0, startingCount + row);
-			tb.Text = tipp.value;
+			tb.TooltipText = Properties.Strings.Tooltip_ValueRequired;
 			tb.TextChanged += new EventHandler(delegate (object obj, EventArgs args)
 			{
 				tipp.value = tb.Text;
+				tb.Valid = (!tpp.required || !(tb.Text == String.Empty || tb.Text == null));
 			});
+			tb.Text = tipp.value;
 		}
 		private void IPluginForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
