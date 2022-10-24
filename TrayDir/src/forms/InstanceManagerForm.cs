@@ -61,6 +61,7 @@ namespace TrayDir
 					ti.FixNodes();
 					ProgramData.pd.trayInstances.Add(ti);
 					MainForm.form.AddInstanceTabPage(ti);
+					ti.view.Rebuild();
 					ProgramData.pd.archivedInstances.Remove(ti);
 					treeView1.Nodes.Remove(selectedNode.node);
 					treeView1.Sort();
