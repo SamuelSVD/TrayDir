@@ -82,16 +82,16 @@ namespace TrayDir
 			// 
 			// SettingsTabControl
 			// 
+			resources.ApplyResources(this.SettingsTabControl, "SettingsTabControl");
 			this.SettingsTabControl.Controls.Add(this.AppSettingsTabPage);
 			this.SettingsTabControl.Controls.Add(this.WinSettingsTabPage);
-			resources.ApplyResources(this.SettingsTabControl, "SettingsTabControl");
 			this.SettingsTabControl.Name = "SettingsTabControl";
 			this.SettingsTabControl.SelectedIndex = 0;
 			// 
 			// AppSettingsTabPage
 			// 
-			this.AppSettingsTabPage.Controls.Add(this.AppGroupBox);
 			resources.ApplyResources(this.AppSettingsTabPage, "AppSettingsTabPage");
+			this.AppSettingsTabPage.Controls.Add(this.AppGroupBox);
 			this.AppSettingsTabPage.Name = "AppSettingsTabPage";
 			this.AppSettingsTabPage.UseVisualStyleBackColor = true;
 			// 
@@ -109,8 +109,8 @@ namespace TrayDir
 			// 
 			// WinSettingsTabPage
 			// 
-			this.WinSettingsTabPage.Controls.Add(this.WinGroupBox);
 			resources.ApplyResources(this.WinSettingsTabPage, "WinSettingsTabPage");
+			this.WinSettingsTabPage.Controls.Add(this.WinGroupBox);
 			this.WinSettingsTabPage.Name = "WinSettingsTabPage";
 			this.WinSettingsTabPage.UseVisualStyleBackColor = true;
 			// 

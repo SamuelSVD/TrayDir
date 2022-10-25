@@ -43,15 +43,15 @@ namespace TrayDir.forms
 			// 
 			// button1
 			// 
-			this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			resources.ApplyResources(this.button1, "button1");
+			this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.button1.Name = "button1";
 			this.button1.UseVisualStyleBackColor = true;
 			// 
 			// reportButton
 			// 
-			this.reportButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
 			resources.ApplyResources(this.reportButton, "reportButton");
+			this.reportButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
 			this.reportButton.Name = "reportButton";
 			this.reportButton.UseVisualStyleBackColor = true;
 			this.reportButton.Click += new System.EventHandler(this.reportButton_Click);

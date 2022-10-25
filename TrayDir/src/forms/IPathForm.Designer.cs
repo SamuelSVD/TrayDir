@@ -103,15 +103,15 @@ namespace TrayDir
 			// 
 			// aliasEdit
 			// 
-			this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 3);
 			resources.ApplyResources(this.aliasEdit, "aliasEdit");
+			this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 3);
 			this.aliasEdit.Name = "aliasEdit";
 			this.aliasEdit.TextChanged += new System.EventHandler(this.aliasEdit_TextChanged);
 			// 
 			// pathTextBox
 			// 
-			this.pluginTableLayoutPanel.SetColumnSpan(this.pathTextBox, 3);
 			resources.ApplyResources(this.pathTextBox, "pathTextBox");
+			this.pluginTableLayoutPanel.SetColumnSpan(this.pathTextBox, 3);
 			this.pathTextBox.Name = "pathTextBox";
 			this.pathTextBox.TextChanged += new System.EventHandler(this.pathTextBox_TextChanged);
 			// 

@@ -86,8 +86,8 @@ namespace TrayDir
 			// 
 			// pluginComboBox
 			// 
-			this.pluginTableLayoutPanel.SetColumnSpan(this.pluginComboBox, 2);
 			resources.ApplyResources(this.pluginComboBox, "pluginComboBox");
+			this.pluginTableLayoutPanel.SetColumnSpan(this.pluginComboBox, 2);
 			this.pluginComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.pluginComboBox.FormattingEnabled = true;
 			this.pluginComboBox.Name = "pluginComboBox";
@@ -101,8 +101,8 @@ namespace TrayDir
 			// 
 			// aliasEdit
 			// 
-			this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 2);
 			resources.ApplyResources(this.aliasEdit, "aliasEdit");
+			this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 2);
 			this.aliasEdit.Name = "aliasEdit";
 			// 
 			// OkButton

@@ -81,8 +81,8 @@ namespace TrayDir
 			// 
 			// aliasEdit
 			// 
-			this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 2);
 			resources.ApplyResources(this.aliasEdit, "aliasEdit");
+			this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 2);
 			this.aliasEdit.Name = "aliasEdit";
 			// 
 			// OkButton

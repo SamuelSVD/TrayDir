@@ -65,6 +65,7 @@ namespace TrayDir
 			this.formTableLayoutPanel.Controls.Add(this.topButtonsTableLayoutPanel, 1, 0);
 			this.formTableLayoutPanel.Controls.Add(this.ContentTableLayoutPanel, 1, 1);
 			this.formTableLayoutPanel.Name = "formTableLayoutPanel";
+			this.toolTip.SetToolTip(this.formTableLayoutPanel, resources.GetString("formTableLayoutPanel.ToolTip"));
 			// 
 			// leftButtonsTableLayoutPanel
 			// 
@@ -74,6 +75,7 @@ namespace TrayDir
 			this.leftButtonsTableLayoutPanel.Controls.Add(this.upButton, 0, 0);
 			this.leftButtonsTableLayoutPanel.Controls.Add(this.indentButton, 0, 2);
 			this.leftButtonsTableLayoutPanel.Name = "leftButtonsTableLayoutPanel";
+			this.toolTip.SetToolTip(this.leftButtonsTableLayoutPanel, resources.GetString("leftButtonsTableLayoutPanel.ToolTip"));
 			// 
 			// downButton
 			// 
@@ -117,6 +119,7 @@ namespace TrayDir
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newSeparatorButton, 5, 0);
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newWebLinkButton, 4, 0);
 			this.topButtonsTableLayoutPanel.Name = "topButtonsTableLayoutPanel";
+			this.toolTip.SetToolTip(this.topButtonsTableLayoutPanel, resources.GetString("topButtonsTableLayoutPanel.ToolTip"));
 			// 
 			// newDocButton
 			// 
@@ -172,6 +175,7 @@ namespace TrayDir
 			this.ContentTableLayoutPanel.Controls.Add(this.tableLayoutPanel5, 1, 0);
 			this.ContentTableLayoutPanel.Controls.Add(this.treeView2, 0, 0);
 			this.ContentTableLayoutPanel.Name = "ContentTableLayoutPanel";
+			this.toolTip.SetToolTip(this.ContentTableLayoutPanel, resources.GetString("ContentTableLayoutPanel.ToolTip"));
 			// 
 			// tableLayoutPanel5
 			// 
@@ -180,6 +184,7 @@ namespace TrayDir
 			this.tableLayoutPanel5.Controls.Add(this.deleteButton, 0, 1);
 			this.tableLayoutPanel5.Controls.Add(this.button1, 0, 4);
 			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+			this.toolTip.SetToolTip(this.tableLayoutPanel5, resources.GetString("tableLayoutPanel5.ToolTip"));
 			// 
 			// editButton
 			// 
@@ -207,10 +212,11 @@ namespace TrayDir
 			// 
 			// treeView2
 			// 
-			this.treeView2.AllowDrop = true;
 			resources.ApplyResources(this.treeView2, "treeView2");
+			this.treeView2.AllowDrop = true;
 			this.treeView2.HideSelection = false;
 			this.treeView2.Name = "treeView2";
+			this.toolTip.SetToolTip(this.treeView2, resources.GetString("treeView2.ToolTip"));
 			this.treeView2.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView2_ItemDrag);
 			this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
 			this.treeView2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseClick);
@@ -226,6 +232,7 @@ namespace TrayDir
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.formTableLayoutPanel);
 			this.Name = "ITreeViewForm";
+			this.toolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
 			this.formTableLayoutPanel.ResumeLayout(false);
 			this.formTableLayoutPanel.PerformLayout();
 			this.leftButtonsTableLayoutPanel.ResumeLayout(false);
