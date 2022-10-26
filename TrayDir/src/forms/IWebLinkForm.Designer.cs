@@ -53,7 +53,6 @@ namespace TrayDir
 			this.tableLayoutPanel4.Controls.Add(this.OkButton, 0, 1);
 			this.tableLayoutPanel4.Controls.Add(this.FormCancelButton, 1, 1);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-			this.urlToolTip.SetToolTip(this.tableLayoutPanel4, resources.GetString("tableLayoutPanel4.ToolTip"));
 			// 
 			// groupBox1
 			// 
@@ -62,7 +61,6 @@ namespace TrayDir
 			this.groupBox1.Controls.Add(this.pluginTableLayoutPanel);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.TabStop = false;
-			this.urlToolTip.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
 			// 
 			// pluginTableLayoutPanel
 			// 
@@ -73,13 +71,11 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.Controls.Add(this.aliasEdit, 0, 1);
 			this.pluginTableLayoutPanel.Controls.Add(this.urlTextBox, 0, 3);
 			this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
-			this.urlToolTip.SetToolTip(this.pluginTableLayoutPanel, resources.GetString("pluginTableLayoutPanel.ToolTip"));
 			// 
 			// hideItemCheckBox
 			// 
 			resources.ApplyResources(this.hideItemCheckBox, "hideItemCheckBox");
 			this.hideItemCheckBox.Name = "hideItemCheckBox";
-			this.urlToolTip.SetToolTip(this.hideItemCheckBox, resources.GetString("hideItemCheckBox.ToolTip"));
 			this.hideItemCheckBox.UseVisualStyleBackColor = true;
 			this.hideItemCheckBox.CheckedChanged += new System.EventHandler(this.hideItemCheckBox_CheckedChanged);
 			// 
@@ -87,26 +83,22 @@ namespace TrayDir
 			// 
 			resources.ApplyResources(this.pathLabel, "pathLabel");
 			this.pathLabel.Name = "pathLabel";
-			this.urlToolTip.SetToolTip(this.pathLabel, resources.GetString("pathLabel.ToolTip"));
 			// 
 			// label1
 			// 
 			resources.ApplyResources(this.label1, "label1");
 			this.label1.Name = "label1";
-			this.urlToolTip.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
 			// 
 			// aliasEdit
 			// 
 			resources.ApplyResources(this.aliasEdit, "aliasEdit");
 			this.aliasEdit.Name = "aliasEdit";
-			this.urlToolTip.SetToolTip(this.aliasEdit, resources.GetString("aliasEdit.ToolTip"));
 			this.aliasEdit.TextChanged += new System.EventHandler(this.aliasEdit_TextChanged);
 			// 
 			// urlTextBox
 			// 
 			resources.ApplyResources(this.urlTextBox, "urlTextBox");
 			this.urlTextBox.Name = "urlTextBox";
-			this.urlToolTip.SetToolTip(this.urlTextBox, resources.GetString("urlTextBox.ToolTip"));
 			this.urlTextBox.TooltipText = null;
 			this.urlTextBox.Valid = true;
 			// 
@@ -115,7 +107,6 @@ namespace TrayDir
 			resources.ApplyResources(this.OkButton, "OkButton");
 			this.OkButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.OkButton.Name = "OkButton";
-			this.urlToolTip.SetToolTip(this.OkButton, resources.GetString("OkButton.ToolTip"));
 			this.OkButton.UseVisualStyleBackColor = true;
 			this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
 			// 
@@ -124,7 +115,6 @@ namespace TrayDir
 			resources.ApplyResources(this.FormCancelButton, "FormCancelButton");
 			this.FormCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.FormCancelButton.Name = "FormCancelButton";
-			this.urlToolTip.SetToolTip(this.FormCancelButton, resources.GetString("FormCancelButton.ToolTip"));
 			this.FormCancelButton.UseVisualStyleBackColor = true;
 			// 
 			// IWebLinkForm
@@ -139,7 +129,6 @@ namespace TrayDir
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "IWebLinkForm";
-			this.urlToolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
 			this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.IPathForm_HelpButtonClicked);
 			this.Shown += new System.EventHandler(this.IWebLinkForm_Shown);
 			this.tableLayoutPanel4.ResumeLayout(false);
