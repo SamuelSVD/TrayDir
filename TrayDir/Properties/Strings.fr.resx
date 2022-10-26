@@ -124,10 +124,10 @@
     <value>Traydir {0}: rapport de bogue</value>
   </data>
   <data name="Email_Subject_Unexpected" xml:space="preserve">
-    <value>Traydir {0}: Rapport de bogue - Exception non perdue</value>
+    <value>Traydir {0}: Rapport de bogue -  Exception non gérée</value>
   </data>
   <data name="ErrorStartingProcess" xml:space="preserve">
-    <value>Démarrage d'erreur.
+    <value>Erreur de démarrage.
 {0}
 {1}</value>
   </data>
@@ -148,7 +148,7 @@
     <value>Parcourir</value>
   </data>
   <data name="Form_CheckForUpdatesOnStartup" xml:space="preserve">
-    <value>Vérifiez les mises à jour sur le démarrage</value>
+    <value>Vérifiez les mises à jour au démarrage</value>
   </data>
   <data name="Form_Close" xml:space="preserve">
     <value>Fermer</value>
@@ -160,10 +160,10 @@
     <value>Supprimer</value>
   </data>
   <data name="Form_EditDisplayName" xml:space="preserve">
-    <value>Modifier le nom de l'affichage</value>
+    <value>Modifier le nom d'affichage</value>
   </data>
   <data name="Form_EditIgnoreRegex" xml:space="preserve">
-    <value>Modifier Ignore Regex</value>
+    <value>Modifier Ignorer RegEx</value>
   </data>
   <data name="Form_EditName" xml:space="preserve">
     <value>Modifier le nom</value>
@@ -176,7 +176,7 @@
 {0}</value>
   </data>
   <data name="Form_Exit" xml:space="preserve">
-    <value>Sortir</value>
+    <value>Quitter</value>
   </data>
   <data name="Form_ExpandFirstPath" xml:space="preserve">
     <value>Développer le premier chemin</value>
@@ -185,10 +185,10 @@
     <value>Exportation effectuée</value>
   </data>
   <data name="Form_HideFromTray" xml:space="preserve">
-    <value>Se cacher du Tray</value>
+    <value>Masquer dans barre d'état</value>
   </data>
   <data name="Form_HideOnMinimize" xml:space="preserve">
-    <value>Se cacher sur minimiser</value>
+    <value>Masquer sur réduire</value>
   </data>
   <data name="Form_ImportConflict" xml:space="preserve">
     <value>Conflit d'importation</value>
@@ -206,7 +206,7 @@
     <value>Minimiser la fermeture</value>
   </data>
   <data name="Form_MinimizeToTray" xml:space="preserve">
-    <value>Minimiser Traydir dans le plateau système?</value>
+    <value>Minimiser TrayDir dans la barre d'état?</value>
   </data>
   <data name="Form_Name" xml:space="preserve">
     <value>Nom</value>
@@ -225,7 +225,7 @@
 Souhaitez-vous en configurer un maintenant?</value>
   </data>
   <data name="Form_OpenFoldersInFileExplorerOnClick" xml:space="preserve">
-    <value>Ouvrez les dossiers dans File Explorer lorsque vous cliquez sur</value>
+    <value>Ouvrir les dossiers dans l'explorateur de fichiers lorsqu'on clique dessus</value>
   </data>
   <data name="Form_PluginInvalid" xml:space="preserve">
     <value>Les paramètres du plugin ne sont pas valides.
@@ -247,13 +247,13 @@ Vérifiez que tous les paramètres requis sont fournis.</value>
     <value>Afficher les extensions de fichiers</value>
   </data>
   <data name="Form_ShowIconsInTrayMenu" xml:space="preserve">
-    <value>Afficher les icônes dans le menu des plateaux</value>
+    <value>Afficher les icônes dans le menu de la barre d'état</value>
   </data>
   <data name="Form_ShowMenuOnLeftClick" xml:space="preserve">
-    <value>Afficher TrayMenu sur le clic gauche</value>
+    <value>Afficher le TrayMenu lors d'un clic gauche</value>
   </data>
   <data name="Form_StartMinimized" xml:space="preserve">
-    <value>Afficher TrayMenu sur le clic gauche</value>
+    <value>Démarrer en mode minimisé</value>
   </data>
   <data name="Form_StartWithWindows" xml:space="preserve">
     <value>Commence avec windows</value>
@@ -262,7 +262,7 @@ Vérifiez que tous les paramètres requis sont fournis.</value>
     <value>Options de plateau</value>
   </data>
   <data name="Form_VirtualFolderMenuIcon" xml:space="preserve">
-    <value>Icône de menu de dossier virtuel</value>
+    <value>Icône du menu du dossier virtuel</value>
   </data>
   <data name="Instance_Archive" xml:space="preserve">
     <value>Voulez-vous archiver l'instance:
@@ -280,7 +280,7 @@ Vérifiez que tous les paramètres requis sont fournis.</value>
 {0}</value>
   </data>
   <data name="Item_CopyItem" xml:space="preserve">
-    <value>Copie</value>
+    <value>Copier</value>
   </data>
   <data name="Item_DeleteItem" xml:space="preserve">
     <value>Effacer</value>
@@ -289,10 +289,10 @@ Vérifiez que tous les paramètres requis sont fournis.</value>
     <value>Dupliquer</value>
   </data>
   <data name="Item_Expand" xml:space="preserve">
-    <value>Développer le dossier dans le menu des plateaux</value>
+    <value>Développer le dossier dans le menu de la barre d'état</value>
   </data>
   <data name="Item_PasteItem" xml:space="preserve">
-    <value>Pâte</value>
+    <value>Coller</value>
   </data>
   <data name="Item_RenameItem" xml:space="preserve">
     <value>Renommer</value>
@@ -301,34 +301,34 @@ Vérifiez que tous les paramètres requis sont fournis.</value>
     <value>Utilisez le lien de dossier comme raccourci</value>
   </data>
   <data name="MenuItem_Exit" xml:space="preserve">
-    <value>Sortir</value>
+    <value>Quitter</value>
   </data>
   <data name="MenuItem_Hide" xml:space="preserve">
     <value>Cacher</value>
   </data>
   <data name="MenuItem_Open" xml:space="preserve">
-    <value>Ouvert</value>
+    <value>Ouvrir</value>
   </data>
   <data name="MenuItem_OpenCmd" xml:space="preserve">
-    <value>Emplacement ouvert dans la ligne de commande</value>
+    <value>Ouvrir l'emplacement en ligne de commande</value>
   </data>
   <data name="MenuItem_OpenCmdAdmin" xml:space="preserve">
-    <value>Emplacement ouvert dans la ligne de commande (administrateur)</value>
+    <value>Ouvrir l'emplacement en ligne de commande (administrateur)</value>
   </data>
   <data name="MenuItem_OpenFileExplorer" xml:space="preserve">
     <value>Open Emplacement dans Fichier Explorer</value>
   </data>
   <data name="MenuItem_Run" xml:space="preserve">
-    <value>Courir</value>
+    <value>Exécuter</value>
   </data>
   <data name="MenuItem_RunAdmin" xml:space="preserve">
-    <value>Exécuter (administrateur)</value>
+    <value>Exécuter en (administrateur)</value>
   </data>
   <data name="MenuItem_RunAll" xml:space="preserve">
-    <value>Courir tous</value>
+    <value>Tout exécuter</value>
   </data>
   <data name="MenuItem_Show" xml:space="preserve">
-    <value>Spectacle</value>
+    <value>Afficher</value>
   </data>
   <data name="Node_Error" xml:space="preserve">
     <value>ERREUR:</value>
@@ -350,7 +350,7 @@ Vérifiez que tous les paramètres requis sont fournis.</value>
     <value>Il existe un autre plugin avec le même nom. Souhaitez-vous écraser sa configuration?</value>
   </data>
   <data name="Plugin_UnableToDelete" xml:space="preserve">
-    <value>Impossible de supprimer. Plugin actuellement utilisé.</value>
+    <value>Impossible à supprimer. Le plugin est actuellement utilisé.</value>
   </data>
   <data name="ProcessRunning" xml:space="preserve">
     <value>Un autre processus de Traydir est déjà en cours d'exécution.
@@ -367,7 +367,7 @@ Voulez-vous en démarrer un nouveau?</value>
 Le contenu du dossier sera utilisé comme structure du menu principal</value>
   </data>
   <data name="Tooltip_HideFromTray" xml:space="preserve">
-    <value>Cachez cette instance au plateau sytem</value>
+    <value>Masquer cette instance dans la barre d'état système</value>
   </data>
   <data name="Tooltip_HideOnMinimize" xml:space="preserve">
     <value>Lorsqu'il est activé, la minimisation de la fenêtre masquera l'application</value>
@@ -379,38 +379,37 @@ Le contenu du dossier sera utilisé comme structure du menu principal</value>
     <value>URL invalide. Vérifiez qu'il commence par http: // ou https: // et contient des caractères valides</value>
   </data>
   <data name="Tooltip_MenuSorting" xml:space="preserve">
-    <value>Définir le dossier du menu de plateau / tri de fichiers</value>
+    <value>Définir le dossier du menu de la barre d'état / tri de fichiers</value>
   </data>
   <data name="Tooltip_MinimizeOnClose" xml:space="preserve">
-    <value>Lorsqu'il est activé, la fermeture de la fenêtre ne quittera pas l'application</value>
+    <value>Lorsqu'elle est activée, la fermeture de la fenêtre n'entraîne pas la fermeture de l'application.</value>
   </data>
   <data name="Tooltip_OpenFoldersInFileExplorerOnClick" xml:space="preserve">
-    <value>Ouvrez l'emplacement du dossier dans File Explorer lorsque vous cliquez sur
-eux du menu du plateau système</value>
+    <value>Ouvrir l'emplacement des dossiers dans l'Explorateur de fichiers lorsque l'on clique dessus à partir du menu de la barre d'état système</value>
   </data>
   <data name="Tooltip_RunAsAdministrator" xml:space="preserve">
-    <value>Exécutez toujours des éléments à partir de cette instance en tant qu'administrateur</value>
+    <value>Toujours exécuter les éléments de cette instance en tant qu'administrateur</value>
   </data>
   <data name="Tooltip_ShowFileExtensions" xml:space="preserve">
-    <value>Afficher les extensions de fichiers. Par exemple. File.txt</value>
+    <value>Afficher les extensions de fichiers. Par exemple, Fichier.txt</value>
   </data>
   <data name="Tooltip_ShowIconsInTrayMenu" xml:space="preserve">
     <value>Lorsqu'il est activé, chaque élément de menu affichera l'icône associée au fichier lié</value>
   </data>
   <data name="Tooltip_ShowMenuOnLeftClick" xml:space="preserve">
-    <value>Lorsqu'il est activé, cliquer à gauche sur l'élément du menu du plateau affiche le menu contextuel</value>
+    <value>Lorsqu'il est activé, un clic gauche sur l'élément du menu de la barre d'état système affichera le menu contextuel</value>
   </data>
   <data name="Tooltip_StartMinimized" xml:space="preserve">
-    <value>Lorsqu'il est activé, l'application commencera toujours à cacher, visible uniquement dans le plateau système</value>
+    <value>Lorsqu'elle est activée, l'application démarre toujours de manière cachée et n'est visible que dans la barre d'état système.</value>
   </data>
   <data name="Tooltip_StartWithWindows" xml:space="preserve">
-    <value>Lorsqu'il est activé, l'application commencera lorsque vous vous connectez à votre compte sur Windows</value>
+    <value>Lorsqu'elle est activée, l'application démarre lorsque vous vous connectez à votre compte sous Windows.</value>
   </data>
   <data name="Tooltip_ValueRequired" xml:space="preserve">
     <value>Valeur requise</value>
   </data>
   <data name="Tooltip_VirtualFolderMenuIcon" xml:space="preserve">
-    <value>Lorsque les dossiers virtuels choisissent entre un dossier jaune ou une icône de dossier bleu</value>
+    <value>Pour les dossiers virtuels, choisissez entre une icône de dossier jaune ou de dossier bleu.</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>Version: {0}</value>
