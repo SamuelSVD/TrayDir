@@ -349,6 +349,7 @@ namespace TrayDir {
 			string input = selectedNode.alias;
 			if (InputDialog.ShowStringInputDialog(Properties.Strings.Form_EditDisplayName, ref input) == DialogResult.OK) {
 				selectedNode.alias = input;
+				RefreshSelected();
 				Save();
 			}
 		}
