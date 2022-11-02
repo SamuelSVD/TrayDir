@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TrayDir {
@@ -6,8 +8,12 @@ namespace TrayDir {
 		public Label label;
 		public ComboBox combobox;
 		public ToolTip tp;
+		StringIndexable settingGroup;
+		string settingName;
+		private Dictionary<string, string> comboBoxOptions;
+		private Dictionary<string, string> inverseComboBoxOptions = new Dictionary<string, string>();
 
-		public ComboBoxView(string text, string[] options) {
+		public ComboBoxView(string text, Dictionary<string, string> options, StringIndexable settingGroup, string settingName) {
 			label = new Label();
 
 			label.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
@@ -27,12 +33,25 @@ namespace TrayDir {
 			combobox.Size = new Size(116, 27);
 			combobox.TabIndex = 1;
 			combobox.DropDownStyle = ComboBoxStyle.DropDownList;
+			combobox.SelectedIndexChanged += Combobox_SelectedIndexChanged;
 
-			foreach (string s in options) {
-				combobox.Items.Add(s);
+			comboBoxOptions = options;
+			this.settingGroup = settingGroup;
+			this.settingName = settingName;
+
+			foreach (string s in options.Keys) {
+				combobox.Items.Add(options[s]);
+				inverseComboBoxOptions.Add(options[s], s);
 			}
 			if (Program.DEBUG) combobox.BackColor = Color.Red;
 		}
+
+		private void Combobox_SelectedIndexChanged(object sender, EventArgs e) {
+			settingGroup[settingName] = inverseComboBoxOptions[combobox.SelectedItem.ToString()];
+			MainForm.form.pd.Update();
+			MainForm.form.pd.Save();
+		}
+
 		public void AddTo(TableLayoutPanel tlp, int row) {
 			tlp.Controls.Add(label, 0, row);
 			tlp.Controls.Add(combobox, 1, row);

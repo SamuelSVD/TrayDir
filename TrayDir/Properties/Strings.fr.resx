@@ -356,6 +356,21 @@ Vérifiez que tous les paramètres requis sont fournis.</value>
     <value>Un autre processus de Traydir est déjà en cours d'exécution.
 Voulez-vous en démarrer un nouveau?</value>
   </data>
+  <data name="Setting_Sorting_FoldersBottom" xml:space="preserve">
+    <value>Dossiers en bas</value>
+  </data>
+  <data name="Setting_Sorting_FoldersTop" xml:space="preserve">
+    <value>Dossiers en haut</value>
+  </data>
+  <data name="Setting_Sorting_None" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="Setting_VFolderColour_Blue" xml:space="preserve">
+    <value>Dossier Bleu</value>
+  </data>
+  <data name="Setting_VFolderColour_Yellow" xml:space="preserve">
+    <value>Dossier Jaune</value>
+  </data>
   <data name="Tooltip_CheckForUpdatesOnStartup" xml:space="preserve">
     <value>Lorsqu'il est activé, Traydir vérifiera la mise à jour au démarrage</value>
   </data>

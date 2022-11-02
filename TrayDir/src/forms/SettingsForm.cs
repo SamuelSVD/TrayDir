@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Utils;
@@ -7,6 +8,8 @@ namespace TrayDir {
 	public partial class SettingsForm : Form {
 		private TreeNode AppNode;
 		private TreeNode WinNode;
+		private Dictionary<string, string> FolderSortingDict = new Dictionary<string, string>();
+		private Dictionary<string, string> VFolderColourDict = new Dictionary<string, string>();
 
 		public SettingsForm() {
 			InitializeComponent();
@@ -69,27 +72,39 @@ namespace TrayDir {
 				Properties.Strings.Tooltip_ShowMenuOnLeftClick
 			);
 
-			string[] s = new[] { "Folders Top", "Folders Bottom", "None" };
+			FolderSortingDict.Add("Folders Top", Properties.Strings.Setting_Sorting_FoldersTop);
+			FolderSortingDict.Add("Folders Bottom", Properties.Strings.Setting_Sorting_FoldersBottom);
+			FolderSortingDict.Add("None", Properties.Strings.Setting_Sorting_None);
 
+			string MenuSorting_InitialValue;
+			if (!FolderSortingDict.TryGetValue(ProgramData.pd.settings.app.MenuSorting, out MenuSorting_InitialValue)) {
+				MenuSorting_InitialValue = FolderSortingDict["Folders Top"];
+			}
 			ControlUtils.AddSimpleComboBox(
 				AppGroupLayout,
 				"MenuSorting",
 				ProgramData.pd.settings.app,
 				Properties.Strings.Form_MenuSorting,
-				ProgramData.pd.settings.app.MenuSorting,
+				MenuSorting_InitialValue,
 				Properties.Strings.Tooltip_MenuSorting,
-				s
+				FolderSortingDict
 			);
 
-			string[] s2 = new[] { "Yellow Folder", "Blue Folder" };
+			VFolderColourDict.Add("Yellow Folder", Properties.Strings.Setting_VFolderColour_Yellow);
+			VFolderColourDict.Add("Blue Folder", Properties.Strings.Setting_VFolderColour_Blue);
+
+			string VFolderIcon_InitialValue;
+			if (!VFolderColourDict.TryGetValue(ProgramData.pd.settings.app.VFolderIcon, out VFolderIcon_InitialValue)) {
+				VFolderIcon_InitialValue = VFolderColourDict["Yellow Folder"];
+			}
 			ControlUtils.AddSimpleComboBox(
 				AppGroupLayout,
 				"VFolderIcon",
 				ProgramData.pd.settings.app,
 				Properties.Strings.Form_VirtualFolderMenuIcon,
-				ProgramData.pd.settings.app.VFolderIcon,
+				VFolderIcon_InitialValue,
 				Properties.Strings.Tooltip_VirtualFolderMenuIcon,
-				s2
+				VFolderColourDict
 			).combobox.SelectedIndexChanged += new EventHandler(delegate (object obj, EventArgs args) {
 				foreach (TrayInstance ti in ProgramData.pd.trayInstances) {
 					ti.view?.Rebuild();

@@ -356,6 +356,21 @@ Verify all required parameters are provided.</value>
     <value>Another process of TrayDir is already running.
 Do you want to start a new one?</value>
   </data>
+  <data name="Setting_Sorting_FoldersBottom" xml:space="preserve">
+    <value>Folders Bottom</value>
+  </data>
+  <data name="Setting_Sorting_FoldersTop" xml:space="preserve">
+    <value>Folders Top</value>
+  </data>
+  <data name="Setting_Sorting_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Setting_VFolderColour_Blue" xml:space="preserve">
+    <value>Blue Folder</value>
+  </data>
+  <data name="Setting_VFolderColour_Yellow" xml:space="preserve">
+    <value>Yellow Folder</value>
+  </data>
   <data name="Tooltip_CheckForUpdatesOnStartup" xml:space="preserve">
     <value>When enabled, TrayDir will check for update on startup</value>
   </data>

@@ -756,6 +756,51 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Folders Bottom.
+        /// </summary>
+        internal static string Setting_Sorting_FoldersBottom {
+            get {
+                return ResourceManager.GetString("Setting_Sorting_FoldersBottom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folders Top.
+        /// </summary>
+        internal static string Setting_Sorting_FoldersTop {
+            get {
+                return ResourceManager.GetString("Setting_Sorting_FoldersTop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string Setting_Sorting_None {
+            get {
+                return ResourceManager.GetString("Setting_Sorting_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blue Folder.
+        /// </summary>
+        internal static string Setting_VFolderColour_Blue {
+            get {
+                return ResourceManager.GetString("Setting_VFolderColour_Blue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yellow Folder.
+        /// </summary>
+        internal static string Setting_VFolderColour_Yellow {
+            get {
+                return ResourceManager.GetString("Setting_VFolderColour_Yellow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When enabled, TrayDir will check for update on startup.
         /// </summary>
         internal static string Tooltip_CheckForUpdatesOnStartup {

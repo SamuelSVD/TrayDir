@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace TrayDir {
@@ -14,14 +15,13 @@ namespace TrayDir {
 			SetCheckboxCheckedEvent(ov.checkbox, settingGroup, settingName);
 			return ov;
 		}
-		public static ComboBoxView AddSimpleComboBox(TableLayoutPanel panel, string settingName, StringIndexable settingGroup, string controlText, string initalValue, string tooltipText, string[] comboboxOptions) {
-			ComboBoxView cbv = new ComboBoxView(controlText, comboboxOptions);
+		public static ComboBoxView AddSimpleComboBox(TableLayoutPanel panel, string settingName, StringIndexable settingGroup, string controlText, string initalValue, string tooltipText, Dictionary<string, string> comboboxOptions) {
+			ComboBoxView cbv = new ComboBoxView(controlText, comboboxOptions, settingGroup, settingName);
 			if (panel.Controls.Count == 0) {
 				cbv.AddTo(panel, 0);
 			} else {
 				cbv.AddTo(panel, panel.RowCount);
 			}
-			SetComboBoxChangedEvent(cbv.combobox, settingGroup, settingName);
 			cbv.SetTooltip(tooltipText);
 			cbv.combobox.Text = initalValue;
 			return cbv;
@@ -31,7 +31,6 @@ namespace TrayDir {
 			tlp.RowStyles[row].Height = 0;
 			tlp.RowCount = row + 1;
 		}
-
 
 		public static void ConfigureGroupBox(GroupBox gb) {
 			gb.Dock = DockStyle.Top;
@@ -62,15 +61,6 @@ namespace TrayDir {
 				}
 			});
 			cb.Click += cbClick;
-		}
-		public static void SetComboBoxChangedEvent(ComboBox cb, StringIndexable settings, string settingName) {
-			EventHandler cbClick = new EventHandler(delegate (object obj, EventArgs args) {
-				settings[settingName] = cb.SelectedItem;
-
-				MainForm.form.pd.Update();
-				MainForm.form.pd.Save();
-			});
-			cb.SelectedIndexChanged += cbClick;
 		}
 	}
 }
