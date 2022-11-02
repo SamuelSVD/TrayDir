@@ -37,11 +37,11 @@ namespace TrayDir
 			this.pathLabel = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.aliasEdit = new System.Windows.Forms.TextBox();
-			this.pathTextBox = new System.Windows.Forms.TextBox();
 			this.folderBrowseButton = new System.Windows.Forms.Button();
 			this.shortcutCheckBox = new System.Windows.Forms.CheckBox();
 			this.OkButton = new System.Windows.Forms.Button();
 			this.FormCancelButton = new System.Windows.Forms.Button();
+			this.pathTextBox = new TrayDir.ValidateTextBox();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.pluginTableLayoutPanel.SuspendLayout();
@@ -71,9 +71,9 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.Controls.Add(this.pathLabel, 0, 2);
 			this.pluginTableLayoutPanel.Controls.Add(this.label1, 0, 0);
 			this.pluginTableLayoutPanel.Controls.Add(this.aliasEdit, 0, 1);
-			this.pluginTableLayoutPanel.Controls.Add(this.pathTextBox, 0, 3);
 			this.pluginTableLayoutPanel.Controls.Add(this.folderBrowseButton, 2, 4);
 			this.pluginTableLayoutPanel.Controls.Add(this.shortcutCheckBox, 0, 5);
+			this.pluginTableLayoutPanel.Controls.Add(this.pathTextBox, 0, 3);
 			this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
 			// 
 			// hideItemCheckBox
@@ -103,17 +103,10 @@ namespace TrayDir
 			// 
 			// aliasEdit
 			// 
-			resources.ApplyResources(this.aliasEdit, "aliasEdit");
 			this.pluginTableLayoutPanel.SetColumnSpan(this.aliasEdit, 3);
+			resources.ApplyResources(this.aliasEdit, "aliasEdit");
 			this.aliasEdit.Name = "aliasEdit";
 			this.aliasEdit.TextChanged += new System.EventHandler(this.aliasEdit_TextChanged);
-			// 
-			// pathTextBox
-			// 
-			resources.ApplyResources(this.pathTextBox, "pathTextBox");
-			this.pluginTableLayoutPanel.SetColumnSpan(this.pathTextBox, 3);
-			this.pathTextBox.Name = "pathTextBox";
-			this.pathTextBox.TextChanged += new System.EventHandler(this.pathTextBox_TextChanged);
 			// 
 			// folderBrowseButton
 			// 
@@ -144,6 +137,14 @@ namespace TrayDir
 			this.FormCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.FormCancelButton.Name = "FormCancelButton";
 			this.FormCancelButton.UseVisualStyleBackColor = true;
+			// 
+			// pathTextBox
+			// 
+			this.pluginTableLayoutPanel.SetColumnSpan(this.pathTextBox, 3);
+			resources.ApplyResources(this.pathTextBox, "pathTextBox");
+			this.pathTextBox.Name = "pathTextBox";
+			this.pathTextBox.TooltipText = null;
+			this.pathTextBox.Valid = false;
 			// 
 			// IPathForm
 			// 
@@ -179,11 +180,11 @@ namespace TrayDir
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox aliasEdit;
         private System.Windows.Forms.Button OkButton;
-        private System.Windows.Forms.TextBox pathTextBox;
         private System.Windows.Forms.Button folderBrowseButton;
         private System.Windows.Forms.Button fileBrowseButton;
         private System.Windows.Forms.CheckBox shortcutCheckBox;
 		private System.Windows.Forms.CheckBox hideItemCheckBox;
         private System.Windows.Forms.Button FormCancelButton;
-    }
+		private ValidateTextBox pathTextBox;
+	}
 }

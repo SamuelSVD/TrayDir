@@ -375,6 +375,9 @@ Le contenu du dossier sera utilisé comme structure du menu principal</value>
   <data name="Tooltip_InsertInstance" xml:space="preserve">
     <value>Insérer une nouvelle instance</value>
   </data>
+  <data name="Tooltip_InvalidPath" xml:space="preserve">
+    <value>Chemin invalide. </value>
+  </data>
   <data name="Tooltip_InvalidUrl" xml:space="preserve">
     <value>URL invalide. Vérifiez qu'il commence par http: // ou https: // et contient des caractères valides</value>
   </data>

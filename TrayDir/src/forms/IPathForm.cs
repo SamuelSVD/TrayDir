@@ -14,6 +14,8 @@ namespace TrayDir
 		public IPathForm(TrayInstancePath tip)
 		{
 			InitializeComponent();
+			pathTextBox.TextChanged += pathTextBox_TextChanged;
+			pathTextBox.TooltipText = Properties.Strings.Tooltip_InvalidPath;
 			this.Icon = Properties.Resources.file_exe;
 			this.model = tip;
 			pathTextBox.Text = model.path;
@@ -45,6 +47,7 @@ namespace TrayDir
 		private void pathTextBox_TextChanged(object sender, EventArgs e)
 		{
 			model.path = pathTextBox.Text;
+			pathTextBox.Valid = model.isFile || model.isDir;
 		}
 		private void fileBrowseButton_Click(object sender, EventArgs e)
 		{

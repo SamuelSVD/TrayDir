@@ -811,6 +811,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid path. File or folder not found..
+        /// </summary>
+        internal static string Tooltip_InvalidPath {
+            get {
+                return ResourceManager.GetString("Tooltip_InvalidPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid URL. Verify it begins with http:// or https:// and contains valid characters.
         /// </summary>
         internal static string Tooltip_InvalidUrl {
