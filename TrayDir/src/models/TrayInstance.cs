@@ -19,7 +19,7 @@ namespace TrayDir {
 		public string Version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 		[XmlIgnore]
 		public IView view;
-		public List<TrayInstancePath> paths;
+		public List<TrayInstancePath> paths = new List<TrayInstancePath>();
 		public List<TrayInstanceVirtualFolder> vfolders = new List<TrayInstanceVirtualFolder>();
 		public List<TrayInstancePlugin> plugins = new List<TrayInstancePlugin>();
 		public List<TrayPlugin> internalPlugins = new List<TrayPlugin>();
