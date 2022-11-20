@@ -27,6 +27,7 @@ namespace TrayDir
 					resetButton.Enabled = true;
 					instance.view.tray.UpdateTrayIcon();
 					iconBox.Image = instance.view.tray.icon.ToBitmap();
+					MainForm.form.UpdateInstanceIcons();
 					MainForm.form.pd.Save();
 				}
 			});
@@ -38,6 +39,7 @@ namespace TrayDir
 				instance.iconData = null;
 				instance.view.tray.UpdateTrayIcon();
 				iconBox.Image = instance.view.tray.icon.ToBitmap();
+				MainForm.form.UpdateInstanceIcons();
 				MainForm.form.pd.Save();
 				resetButton.Enabled = false;
 			});

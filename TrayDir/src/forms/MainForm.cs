@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using TrayDir.utils;
+using static TrayDir.SmartTabControl;
 
 namespace TrayDir {
 	public partial class MainForm : Form {
@@ -14,7 +15,7 @@ namespace TrayDir {
 		public ProgramData pd;
 		public FileDialog fd;
 		public SmartTabControl instanceTabs;
-		public TabPage newTabTabPage;
+		public CustomTabPage newTabTabPage;
 
 		private bool loaded = false;
 		private bool initializedMinSize = false;
@@ -75,7 +76,7 @@ namespace TrayDir {
 			// 
 			// newTabTabPage
 			// 
-			newTabTabPage = new TabPage();
+			newTabTabPage = new CustomTabPage("+");
 			newTabTabPage.BackColor = Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
 			newTabTabPage.Name = "newTabTabPage";
 			newTabTabPage.Text = "+";
@@ -119,8 +120,7 @@ namespace TrayDir {
 			instanceTabs.SelectedIndex = 0;
 		}
 		public void AddInstanceTabPage(TrayInstance instance) {
-			TabPage tp;
-			tp = new TabPage(instance.instanceName);
+			CustomTabPage tp = new CustomTabPage(instance.instanceName);
 			int i = instanceTabs.TabPages.IndexOf(newTabTabPage);
 			instanceTabs.TabPages.Remove(newTabTabPage);
 			instanceTabs.TabPages.Add(tp);
@@ -141,6 +141,7 @@ namespace TrayDir {
 				this.MinimumSize = temp;
 				initializedMinSize = true;
 			}
+			tp.Image = iv.tray.notifyIcon.Icon.ToBitmap();
 		}
 		public static void Init() {
 			form = new MainForm();
@@ -447,6 +448,13 @@ namespace TrayDir {
 
 		private void MainForm_KeyDown(object sender, KeyEventArgs e) {
 			trayInstance.view.treeviewForm.treeView2_KeyDown(sender, e);
+		}
+		internal void UpdateInstanceIcons() {
+			for(int i = 0; i < ProgramData.pd.trayInstances.Count; i++) {
+				TrayInstance ti = ProgramData.pd.trayInstances[i];
+				CustomTabPage ctp = (CustomTabPage)instanceTabs.TabPages[i];
+				ctp.Image = ti.view.tray.notifyIcon.Icon.ToBitmap();
+			}
 		}
 	}
 }

@@ -41,18 +41,18 @@ namespace TrayDir
             IgnoreDragTabPages = new List<TabPage>();
             SetStyle(
                 ControlStyles.AllPaintingInWmPaint 
-                //ControlStyles.UserPaint
+                | ControlStyles.UserPaint
                 | ControlStyles.ResizeRedraw
                 | ControlStyles.OptimizedDoubleBuffer
                 ,true);
             DoubleBuffered = true;
             AllowDrop = true;
-        }
+		}
 
         /// <summary>
         ///     A random page will be used to store a tab that will be deplaced in the run-time
         /// </summary>
-        private TabPage predraggedTab;
+        private CustomTabPage predraggedTab;
 
         public event EventHandler<TabClickedArgs> OnTabClick;
         public event EventHandler<TabSwappedArgs> OnTabsSwapped;
@@ -64,7 +64,7 @@ namespace TrayDir
         /// <param name="drgevent"></param>
         protected override void OnDragOver(DragEventArgs drgevent)
         {
-            var draggedTab = (TabPage)drgevent.Data.GetData(typeof(TabPage));
+            var draggedTab = (CustomTabPage)drgevent.Data.GetData(typeof(CustomTabPage));
             var pointedTab = getPointedTab();
 
             if (draggedTab != null && ReferenceEquals(draggedTab, predraggedTab) && pointedTab != null)
@@ -86,7 +86,7 @@ namespace TrayDir
         /// <param name="e"></param>
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            predraggedTab = getPointedTab();
+            predraggedTab = (CustomTabPage)getPointedTab();
             if (IgnoreDragTabPages.IndexOf(predraggedTab) > -1)
             {
                 predraggedTab = null;
@@ -134,9 +134,11 @@ namespace TrayDir
         /// <returns></returns>
         private TabPage getPointedTab()
         {
+			var p = PointToClient(Cursor.Position);
             for (var i = 0; i <= TabPages.Count - 1; i++)
             {
-                if (GetTabRect(i).Contains(PointToClient(Cursor.Position)))
+				var r = GetTabRect(i);
+                if (r.Contains(p))
                 {
                     return TabPages[i];
                 }
@@ -173,7 +175,58 @@ namespace TrayDir
 
             Refresh();
         }
+		protected override void OnPaint(PaintEventArgs e) {
+			base.OnPaint(e);
+			int selectedIndex = -2;
+			Color c = Color.FromArgb(255, 217, 217, 217);
+			Pen borderPen = new Pen(c, 1);
+			Rectangle d1 = new Rectangle(DisplayRectangle.X - 3, DisplayRectangle.Y - 3, DisplayRectangle.Width + 6, DisplayRectangle.Height + 6);
+			Rectangle d2 = new Rectangle(DisplayRectangle.X - 2, DisplayRectangle.Y - 2, DisplayRectangle.Width + 4, DisplayRectangle.Height + 4);
+			e.Graphics.FillRectangle(new SolidBrush(c), d1);
+			e.Graphics.FillRectangle(new SolidBrush(SystemColors.ControlLightLight), d2);
+			for (int i = 0; i < this.TabPages.Count; i++) {
+				var tabPage = this.TabPages[i] as CustomTabPage;
+				var tabSize = GetTabRect(i);
+				var contentSize = new Rectangle(Point.Empty, tabSize.Size);
+				var textSize = contentSize;
+				textSize.Width = textSize.Width - FontHeight;
+				textSize.Y = tabPage == SelectedTab ? -1 : 2;
+				if (tabPage == SelectedTab) selectedIndex = i;
+				Color selectedColor = tabPage == this.SelectedTab ? SystemColors.ControlLightLight : SystemColors.Control;
+				Brush selectedBrush = new SolidBrush(selectedColor);
+				using (var bm = new Bitmap(contentSize.Width, contentSize.Height)) {
+					Rectangle tabRect = new Rectangle(
+						(i == selectedIndex + 1) ? -1 : 0,
+						(tabPage == SelectedTab) ? 0 : 2,
+						(tabPage == SelectedTab || i == TabPages.Count - 1) ? bm.Size.Width - 1 : (i == selectedIndex + 1) ? bm.Size.Width + 1: bm.Size.Width,
+						(tabPage == SelectedTab) ? bm.Size.Height : bm.Size.Height - 3
+					);
+					using (var bmGraphics = Graphics.FromImage(bm)) {
+						if (tabPage.Image != null) {
+							bmGraphics.FillRectangle(selectedBrush, tabRect);
+							bmGraphics.DrawRectangle(borderPen, tabRect);
+							var imageSize = new Rectangle(2, (bm.Height - Font.Height) / 2 + tabRect.Y, Font.Height+1, Font.Height+1);
+							textSize.X = imageSize.X + imageSize.Width;
+							TextRenderer.DrawText(bmGraphics, tabPage.Text, this.Font, textSize, Color.Black, selectedColor);
+							bmGraphics.DrawImage(tabPage.Image, imageSize);
+						} else {
+							bmGraphics.FillRectangle(selectedBrush, tabRect);
+							bmGraphics.DrawRectangle(borderPen, tabRect);
+							TextRenderer.DrawText(bmGraphics, tabPage.Text, this.Font, textSize, Color.Black, selectedColor);
+						}
+						e.Graphics.DrawImage(bm, tabSize);
+					}
+				}
+			}
+		}
+		public class CustomTabPage : TabPage {
+			public Image Image { get; set; }
+			public CustomTabPage(string text) : this(null, text) { }
+			public CustomTabPage(Image image, string text)
+				: base(text) {
+				Image = image;
+			}
+		}
 
-
-    }
+	}
 }
