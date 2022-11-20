@@ -5,11 +5,11 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace TrayDir {
-	class AppUtils {
-		private static string RUNAS = "runas";
-		private static string CMD = "cmd";
-		private static string EXPLORER = "explorer.exe";
-		public static bool PathIsDirectory(string path) {
+	internal class AppUtils {
+		internal static string RUNAS = "runas";
+		internal static string CMD = "cmd";
+		internal static string EXPLORER = "explorer.exe";
+		internal static bool PathIsDirectory(string path) {
 			if (path != string.Empty && path != null) {
 				try {
 					FileAttributes attr = File.GetAttributes(path);
@@ -22,7 +22,7 @@ namespace TrayDir {
 			}
 			return false;
 		}
-		public static bool PathIsFile(string path) {
+		internal static bool PathIsFile(string path) {
 			if (path != string.Empty && path != null) {
 				try {
 					FileAttributes attr = File.GetAttributes(path);
@@ -35,19 +35,19 @@ namespace TrayDir {
 			}
 			return false;
 		}
-		public static string SplitCamelCase(string input) {
+		internal static string SplitCamelCase(string input) {
 			return Regex.Replace(input, "([A-Z])", " $1", RegexOptions.Compiled).Trim();
 		}
-		public static void ProcessStart(string fileName) {
+		internal static void ProcessStart(string fileName) {
 			ProcessStart(fileName, false);
 		}
-		public static void ProcessStart(string fileName, bool runasadmin) {
+		internal static void ProcessStart(string fileName, bool runasadmin) {
 			ProcessStart(fileName, string.Empty, runasadmin);
 		}
-		public static void ProcessStart(string fileName, string parameters, bool runasadmin) {
+		internal static void ProcessStart(string fileName, string parameters, bool runasadmin) {
 			ProcessStart(string.Empty, fileName, parameters, runasadmin);
 		}
-		public static void ProcessStart(string startingPath, string fileName, string parameters, bool runasadmin) {
+		internal static void ProcessStart(string startingPath, string fileName, string parameters, bool runasadmin) {
 			Process proc = new Process();
 			if ((startingPath == null || startingPath == string.Empty)) {
 				if (PathIsFile(fileName)) {
@@ -75,38 +75,38 @@ namespace TrayDir {
 				MessageBox.Show(String.Format(Properties.Strings.ErrorStartingProcess, fileName, e.Message), Properties.Strings.Form_Error);
 			}
 		}
-		public static void OpenPath(string path, bool runAsAdmin) {
+		internal static void OpenPath(string path, bool runAsAdmin) {
 			if (runAsAdmin) {
 				ProcessStart(path, true);
 			} else {
 				ProcessStart(path);
 			}
 		}
-		public static void OpenCmdPath(string path) {
+		internal static void OpenCmdPath(string path) {
 			if (PathIsFile(path)) {
 				ProcessStart(new FileInfo(path).Directory.FullName, CMD, string.Empty, false);
 			} else {
 				ProcessStart(path, CMD, string.Empty, false);
 			}
 		}
-		public static void OpenAdminCmdPath(string path) {
+		internal static void OpenAdminCmdPath(string path) {
 			if (PathIsFile(path)) {
 				ProcessStart(CMD, String.Format("/k cd \"{0}\"", new FileInfo(path).Directory.FullName), true);
 			} else {
 				ProcessStart(CMD, String.Format("/k cd \"{0}\"", path), true);
 			}
 		}
-		public static void ExplorePath(string path) {
+		internal static void ExplorePath(string path) {
 			if (PathIsFile(path)) {
 				ProcessStart(EXPLORER, new FileInfo(path).Directory.FullName, false);
 			} else {
 				ProcessStart(EXPLORER, path, false);
 			}
 		}
-		public static bool StrToBool(string value) {
+		internal static bool StrToBool(string value) {
 			return value == "1" ? true : false;
 		}
-		public static void ExportInstance(TrayInstance instance) {
+		internal static void ExportInstance(TrayInstance instance) {
 			SaveFileDialog sfd = new SaveFileDialog();
 			TrayInstance copy_instance = instance.Copy();
 			copy_instance.buildAndReferenceInternalPlugin();
@@ -217,7 +217,7 @@ namespace TrayDir {
 			}
 		}
 
-		public static TrayInstance ImportInstance(string path) {
+		internal static TrayInstance ImportInstance(string path) {
 			TrayInstance i = null;
 			i = XMLUtils.LoadFromFile<TrayInstance>(path);
 			i.FixPaths();
@@ -227,7 +227,7 @@ namespace TrayDir {
 			return i;
 		}
 
-		public static void ExportPlugin(TrayPlugin plugin) {
+		internal static void ExportPlugin(TrayPlugin plugin) {
 			SaveFileDialog sfd = new SaveFileDialog();
 			sfd.Filter = "Tray Plugin Export | *.tpe";
 			sfd.FileName = Regex.Replace(plugin.name, @"[^0-9a-zA-Z()_ ]+", "_");
@@ -254,12 +254,12 @@ namespace TrayDir {
 				}
 			}
 		}
-		public static TrayPlugin ImportPlugin(string path) {
+		internal static TrayPlugin ImportPlugin(string path) {
 			TrayPlugin i = null;
 			i = XMLUtils.LoadFromFile<TrayPlugin>(path);
 			return i;
 		}
-		public static void RunPlugin(TrayInstancePlugin p, bool runasadmin) {
+		internal static void RunPlugin(TrayInstancePlugin p, bool runasadmin) {
 			if (!p.isValid()) {
 				MessageBox.Show(Properties.Strings.Form_PluginInvalid, Properties.Strings.Form_Error);
 				return;
@@ -273,7 +273,7 @@ namespace TrayDir {
 				Run(p);
 			}
 		}
-		public static void Run(TrayInstancePlugin tip) {
+		internal static void Run(TrayInstancePlugin tip) {
 			TrayPlugin plugin = tip.plugin;
 			if (plugin != null && tip.isValid()) {
 				if (plugin.isScript) {
@@ -295,7 +295,7 @@ namespace TrayDir {
 				}
 			}
 		}
-		public static void RunPluginExternally(TrayInstancePlugin tip) {
+		internal static void RunPluginExternally(TrayInstancePlugin tip) {
 			TrayPlugin plugin = tip.plugin;
 			if (plugin != null && tip.isValid()) {
 				if (plugin.isScript) {
@@ -321,20 +321,20 @@ namespace TrayDir {
 				}
 			}
 		}
-		public static void Run(TrayInstancePath tip) {
+		internal static void Run(TrayInstancePath tip) {
 			if (tip.isDir) {
 				OpenPath(new DirectoryInfo(tip.path).FullName, false);
 			} else if (tip.isFile) {
 				OpenPath(Path.GetFullPath(tip.path), false);
 			}
 		}
-		public static void Run(TrayInstanceWebLink tiwl) {
+		internal static void Run(TrayInstanceWebLink tiwl) {
 			Uri uriResult;
 			if (Uri.TryCreate(tiwl.URL, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps)) {
 				OpenPath(tiwl.URL, false);
 			}
 		}
-		public static void RunAs(TrayInstancePlugin tip) {
+		internal static void RunAs(TrayInstancePlugin tip) {
 			TrayPlugin plugin = tip.plugin;
 			if (plugin != null && tip.isValid()) {
 				if (plugin.isScript) {
@@ -354,17 +354,17 @@ namespace TrayDir {
 				}
 			}
 		}
-		public static void RunAs(TrayInstancePath tip) {
+		internal static void RunAs(TrayInstancePath tip) {
 			if (tip.isDir) {
 				OpenPath(new DirectoryInfo(tip.path).FullName, false);
 			} else if (tip.isFile) {
 				OpenPath(Path.GetFullPath(tip.path), true);
 			}
 		}
-		public static void RunAs(TrayInstanceWebLink tiwl) {
+		internal static void RunAs(TrayInstanceWebLink tiwl) {
 			Run(tiwl);
 		}
-		public static string BuildPluginCliParams(TrayInstancePlugin tip) {
+		internal static string BuildPluginCliParams(TrayInstancePlugin tip) {
 			string parameters = string.Empty;
 			TrayPlugin tp = tip.plugin;
 			for (int i = 0; i < tip.parameters.Count; i++) {
@@ -381,7 +381,7 @@ namespace TrayDir {
 			}
 			return parameters;
 		}
-		public static string BuildPluginParameter(TrayInstancePluginParameter tipp, TrayPluginParameter tpp) {
+		internal static string BuildPluginParameter(TrayInstancePluginParameter tipp, TrayPluginParameter tpp) {
 			if (tpp == null) {
 				return tipp.value;
 			} else {

@@ -3,10 +3,10 @@ using System.Windows.Forms;
 
 namespace TrayDir {
 	class CheckBoxOptionView {
-		public Label label;
-		public CheckBox checkbox;
-		public ToolTip tp;
-		public CheckBoxOptionView(string text, bool boxChecked) {
+		internal Label label;
+		internal CheckBox checkbox;
+		internal ToolTip tp;
+		internal CheckBoxOptionView(string text, bool boxChecked) {
 			label = new Label();
 
 			label.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
@@ -31,13 +31,13 @@ namespace TrayDir {
 
 			if (Program.DEBUG) checkbox.BackColor = Color.Red;
 		}
-		public void AddTo(TableLayoutPanel tlp, int row) {
+		internal void AddTo(TableLayoutPanel tlp, int row) {
 			tlp.Controls.Add(label, 0, row);
 			tlp.Controls.Add(checkbox, 1, row);
 			tlp.RowCount = row + 1;
 			tlp.RowStyles.Add(new RowStyle());
 		}
-		public void SetTooltip(string message) {
+		internal void SetTooltip(string message) {
 			tp = new ToolTip();
 			tp.AutoPopDelay = 5000;
 			tp.InitialDelay = 500;

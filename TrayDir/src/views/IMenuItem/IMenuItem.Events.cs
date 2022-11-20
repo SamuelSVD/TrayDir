@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace TrayDir {
-	public abstract partial class IMenuItem {
+	internal abstract partial class IMenuItem {
 		protected void Run(object obj, EventArgs args) {
 			AppUtils.Run(this);
 		}

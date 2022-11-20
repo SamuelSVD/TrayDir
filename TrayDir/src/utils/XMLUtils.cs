@@ -7,11 +7,11 @@ using System.Xml.Serialization;
 
 namespace TrayDir
 {
-	public static class XMLUtils
+	internal static class XMLUtils
 	{
 		// Grabbed from stack overflow
 		// https://stackoverflow.com/questions/2347642/deserialize-from-string-instead-textreader
-		public static string XmlSerializeToString(this object objectInstance)
+		internal static string XmlSerializeToString(this object objectInstance)
 		{
 			var serializer = new XmlSerializer(objectInstance.GetType());
 			var sb = new StringBuilder();
@@ -23,18 +23,18 @@ namespace TrayDir
 
 			return sb.ToString();
 		}
-		public static void XmlSerializeToWriter(this object objectInstance, XmlWriter writer)
+		internal static void XmlSerializeToWriter(this object objectInstance, XmlWriter writer)
 		{
 			XmlSerializerNamespaces xns = new XmlSerializerNamespaces();
 			xns.Add(string.Empty, string.Empty);
 			XmlSerializer serializer = new XmlSerializer(objectInstance.GetType());
 			serializer.Serialize(writer, objectInstance, xns);
 		}
-		public static T XmlDeserializeFromString<T>(this string objectData)
+		internal static T XmlDeserializeFromString<T>(this string objectData)
 		{
 			return (T)XmlDeserializeFromString(objectData, typeof(T));
 		}
-		public static object XmlDeserializeFromString(this string objectData, Type t)
+		internal static object XmlDeserializeFromString(this string objectData, Type t)
 		{
 			var serializer = new XmlSerializer(t);
 			object result;
@@ -45,7 +45,7 @@ namespace TrayDir
 			}
 			return result;
 		}
-		public static T LoadFromFile<T>(string filepath)
+		internal static T LoadFromFile<T>(string filepath)
 		{
 			XmlDocument doc = new XmlDocument();
 			doc.PreserveWhitespace = true;
@@ -60,7 +60,7 @@ namespace TrayDir
 				return default(T);
 			}
 		}
-		public static void SaveToFile(this object obj, string filepath)
+		internal static void SaveToFile(this object obj, string filepath)
 		{
 			try
 			{

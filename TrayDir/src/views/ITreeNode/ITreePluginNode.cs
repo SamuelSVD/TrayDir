@@ -8,8 +8,8 @@ using TrayDir.utils;
 
 namespace TrayDir.src.views {
 	internal class ITreePluginNode : ITreeNode {
-		public ITreePluginNode(TrayInstanceNode tin) : base(tin) { }
-		public override void Refresh() {
+		internal ITreePluginNode(TrayInstanceNode tin) : base(tin) { }
+		internal override void Refresh() {
 			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
 			string pluginName = "";

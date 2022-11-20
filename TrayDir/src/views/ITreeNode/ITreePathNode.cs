@@ -3,8 +3,8 @@ using TrayDir.utils;
 
 namespace TrayDir {
 	internal class ITreePathNode : ITreeNode {
-		public ITreePathNode(TrayInstanceNode tin) : base(tin) { }
-		public override void Refresh() {
+		internal ITreePathNode(TrayInstanceNode tin) : base(tin) { }
+		internal override void Refresh() {
 			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
 			TrayInstancePath tip = tin.GetPath();

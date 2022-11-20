@@ -3,17 +3,17 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace TrayDir {
-	public class IView {
+	internal class IView {
 		private TrayInstance instance;
 
-		public TabPage InstanceTabPage;
+		internal TabPage InstanceTabPage;
 
-		public Panel p;
+		internal Panel p;
 
-		public ITreeViewForm treeviewForm;
-		public ITray tray;
+		internal ITreeViewForm treeviewForm;
+		internal ITray tray;
 
-		public IView(TrayInstance instance, TabPage tabPage) {
+		internal IView(TrayInstance instance, TabPage tabPage) {
 			this.instance = instance;
 			this.InstanceTabPage = tabPage;
 
@@ -41,7 +41,7 @@ namespace TrayDir {
 			}), MainForm.form.HideApp,
 				MainForm.form.ExitApp);
 		}
-		public Control GetControl() {
+		internal Control GetControl() {
 			return p;
 		}
 

@@ -2,8 +2,8 @@
 using System.Windows.Forms;
 
 namespace TrayDir {
-	class InputDialog {
-		public static DialogResult ShowStringInputDialog(string text, ref string input) {
+	internal class InputDialog {
+		internal static DialogResult ShowStringInputDialog(string text, ref string input) {
 			Size size = new Size(500, 50);
 			Form inputBox = new Form();
 			inputBox.Icon = MainForm.form.Icon;
@@ -65,7 +65,7 @@ namespace TrayDir {
 			input = textBox.Text;
 			return result;
 		}
-		public static DialogResult ShowMultilineStringInputDialog(string text, ref string input) {
+		internal static DialogResult ShowMultilineStringInputDialog(string text, ref string input) {
 			Size size = new Size(500, 50);
 			Form inputBox = new Form();
 

@@ -2,14 +2,14 @@
 using System.Windows.Forms;
 
 namespace TrayDir {
-	public class InstanceNode {
-		public TreeNode node;
-		public TrayInstance instance;
-		public Icon icon;
-		public InstanceNode() {
+	internal class InstanceNode {
+		internal TreeNode node;
+		internal TrayInstance instance;
+		internal Icon icon;
+		internal InstanceNode() {
 			node = new TreeNode();
 		}
-		public void UpdateNode() {
+		internal void UpdateNode() {
 			string s = string.Empty;
 			if (instance.instanceName == null || instance.instanceName == string.Empty) {
 				s += Properties.Strings.Node_NoName;

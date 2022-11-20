@@ -6,8 +6,8 @@ using System.Windows.Forms;
 using TrayDir.utils;
 
 namespace TrayDir {
-	public class ITray {
-		public NotifyIcon notifyIcon;
+	internal class ITray {
+		internal NotifyIcon notifyIcon;
 
 		private TrayInstance instance;
 		private List<IPathMenuItem> pathMenuItems = new List<IPathMenuItem>();
@@ -25,7 +25,7 @@ namespace TrayDir {
 
 		private Timer ClosedTimer = new Timer();
 		private bool menuVisible = false;
-		public List<IMenuItem> menuItems {
+		internal List<IMenuItem> menuItems {
 			get {
 				List<IMenuItem> iml = new List<IMenuItem>();
 				iml.AddRange(pathMenuItems);
@@ -35,12 +35,12 @@ namespace TrayDir {
 				return iml;
 			}
 		}
-		public Icon icon {
+		internal Icon icon {
 			get { return notifyIcon.Icon; }
 			set { notifyIcon.Icon = value; }
 		}
 
-		public ITray(TrayInstance instance) {
+		internal ITray(TrayInstance instance) {
 			this.instance = instance;
 			notifyIcon = new NotifyIcon();
 			notifyIcon.Visible = !instance.settings.HideFromTray;
@@ -55,14 +55,14 @@ namespace TrayDir {
 			ClosedTimer.Stop();
 		}
 
-		public void notifyIcon_DoubleClick(object obj, EventArgs args) {
+		internal void notifyIcon_DoubleClick(object obj, EventArgs args) {
 			if (((MouseEventArgs)args).Button == MouseButtons.Left) {
 				MainForm.form.onShowInstance = instance;
 				MainForm.form.ShowApp(obj, args);
 				notifyIcon.ContextMenuStrip.Hide();
 			}
 		}
-		public void notifyIcon_Click(object sender, MouseEventArgs e) {
+		internal void notifyIcon_Click(object sender, MouseEventArgs e) {
 			if (e.Button == MouseButtons.Left && ProgramData.pd.settings.app.ShowMenuOnLeftClick) {
 				if (menuVisible) {
 					notifyIcon.ContextMenuStrip.Hide();
@@ -87,12 +87,12 @@ namespace TrayDir {
 			}
 			return menuItem;
 		}
-		public void setEventHandlers(EventHandler showForm, EventHandler hideForm, EventHandler exitForm) {
+		internal void setEventHandlers(EventHandler showForm, EventHandler hideForm, EventHandler exitForm) {
 			this.showForm = showForm;
 			this.hideForm = hideForm;
 			this.exitForm = exitForm;
 		}
-		public void Rebuild() {
+		internal void Rebuild() {
 			if (MainForm.form != null) {
 				ClearList(pathMenuItems.ConvertAll<IMenuItem>(m => (IMenuItem)m));
 				pathMenuItems.Clear();
@@ -110,7 +110,7 @@ namespace TrayDir {
 			}
 			list.Clear();
 		}
-		public void MenuOpened(Object obj, EventArgs args) {
+		internal void MenuOpened(Object obj, EventArgs args) {
 			ClosedTimer.Stop();
 			menuVisible = true;
 			IMenuItemIconUtils.AssignIcons();
@@ -125,12 +125,12 @@ namespace TrayDir {
 			}
 			MainForm.form.iconLoadTimer.Start();
 		}
-		public void MenuClosed(Object obj, EventArgs args) {
+		internal void MenuClosed(Object obj, EventArgs args) {
 			MainForm.form.iconLoadTimer.Stop();
 			Reset(obj, args);
 			ClosedTimer.Start();
 		}
-		public void RefreshPluginMenuItemList() {
+		internal void RefreshPluginMenuItemList() {
 			foreach (TrayInstancePlugin tiPlugin in instance.plugins) {
 				bool miFound = false;
 				foreach (IMenuItem mi in pluginMenuItems) {
@@ -157,7 +157,7 @@ namespace TrayDir {
 				pluginMenuItems.Remove(mi);
 			}
 		}
-		public void RefreshVirtualFolderMenuItemList() {
+		internal void RefreshVirtualFolderMenuItemList() {
 			foreach (TrayInstanceVirtualFolder tiVirtualFolder in instance.vfolders) {
 				bool miFound = false;
 				foreach (IMenuItem mi in virtualFolderMenuItems) {
@@ -184,7 +184,7 @@ namespace TrayDir {
 				virtualFolderMenuItems.Remove(mi);
 			}
 		}
-		public void RefreshWebLinkMenuItemList() {
+		internal void RefreshWebLinkMenuItemList() {
 			foreach (TrayInstanceWebLink tiWebLink in instance.weblinks) {
 				bool miFound = false;
 				foreach (IMenuItem mi in webLinkMenuItems) {
@@ -211,7 +211,7 @@ namespace TrayDir {
 				webLinkMenuItems.Remove(mi);
 			}
 		}
-		public void RefreshPathMenuItemList() {
+		internal void RefreshPathMenuItemList() {
 			foreach (TrayInstancePath tiPath in instance.paths) {
 				bool miFound = false;
 				foreach (IPathMenuItem mi in pathMenuItems) {
@@ -238,7 +238,7 @@ namespace TrayDir {
 				pathMenuItems.Remove(mi);
 			}
 		}
-		public void BuildTrayMenu() {
+		internal void BuildTrayMenu() {
 			if (notifyIcon.ContextMenuStrip is null) {
 				notifyIcon.ContextMenuStrip = new ContextMenuStrip();
 				notifyIcon.ContextMenuStrip.Opened += MenuOpened;
@@ -335,7 +335,7 @@ namespace TrayDir {
 				}
 			}
 		}
-		public void UpdateTrayIcon() {
+		internal void UpdateTrayIcon() {
 			Icon i = this.GetInstanceIcon();
 			if (i != null && ((instance.iconPath != null && instance.iconPath != string.Empty) || (instance.iconData == null))) {
 				notifyIcon.Icon = i;
@@ -345,21 +345,21 @@ namespace TrayDir {
 			notifyIcon.Text = instance.instanceName;
 			notifyIcon.Icon = i;
 		}
-		public void Hide() {
+		internal void Hide() {
 			notifyIcon.Visible = false;
 		}
-		public void Show() {
+		internal void Show() {
 			notifyIcon.Visible = true;
 		}
-		public void SetFormHiddenMenu() {
+		internal void SetFormHiddenMenu() {
 			notifyIcon.ContextMenuStrip.Items[0].Visible = true;
 			notifyIcon.ContextMenuStrip.Items[1].Visible = false;
 		}
-		public void SetFormShownMenu() {
+		internal void SetFormShownMenu() {
 			showMenuItem.Visible = false;
 			hideMenuItem.Visible = true;
 		}
-		public Icon GetInstanceIcon() {
+		internal Icon GetInstanceIcon() {
 			Icon i;
 			try {
 				if (instance.iconData != null) {

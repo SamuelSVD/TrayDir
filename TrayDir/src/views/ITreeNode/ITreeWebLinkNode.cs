@@ -8,10 +8,10 @@ using TrayDir.utils;
 
 namespace TrayDir.src.views {
 	internal class ITreeWebLinkNode : ITreeNode {
-		public ITreeWebLinkNode(TrayInstanceNode tin) : base(tin) {
+		internal ITreeWebLinkNode(TrayInstanceNode tin) : base(tin) {
 		}
 
-		public override void Refresh() {
+		internal override void Refresh() {
 			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
 			TrayInstanceWebLink tiwl = tin.GetWebLink();

@@ -4,13 +4,13 @@ using TrayDir.utils;
 
 namespace TrayDir {
 	public class PluginNode {
-		public TreeNode node;
-		public TrayPlugin tp;
-		public Icon icon;
+		internal TreeNode node;
+		internal TrayPlugin tp;
+		internal Icon icon;
 		public PluginNode() {
 			node = new TreeNode();
 		}
-		public void UpdateNode() {
+		internal void UpdateNode() {
 			string s = string.Empty;
 			if (tp.name != null && tp.name != string.Empty) {
 				s += tp.name;

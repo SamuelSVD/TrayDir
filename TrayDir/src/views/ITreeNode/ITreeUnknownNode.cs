@@ -8,10 +8,10 @@ using TrayDir.utils;
 
 namespace TrayDir.src.views {
 	internal class ITreeUnknownNode : ITreeNode {
-		public ITreeUnknownNode(TrayInstanceNode tin) : base(tin) {
+		internal ITreeUnknownNode(TrayInstanceNode tin) : base(tin) {
 		}
 
-		public override void Refresh() {
+		internal override void Refresh() {
 			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
 			node.Text = Properties.Strings.Form_Error;

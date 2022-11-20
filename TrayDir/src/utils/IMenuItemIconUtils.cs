@@ -11,12 +11,12 @@ namespace TrayDir.utils {
 		private static Thread imgLoadThread;
 		private static Thread mainThread;
 		private static Semaphore imgLoadSemaphore;
-		public static Semaphore urlLoadSemaphore;
+		internal static Semaphore urlLoadSemaphore;
 		private static Semaphore imgLoadedSemaphore;
-		public static Queue<IMenuItem> urlLoadQueue;
-		public static Queue<IMenuItem> imgLoadQueue;
-		public static Queue<IMenuItem> imgLoadedQueue;
-		public static void Init() {
+		internal static Queue<IMenuItem> urlLoadQueue;
+		internal static Queue<IMenuItem> imgLoadQueue;
+		internal static Queue<IMenuItem> imgLoadedQueue;
+		internal static void Init() {
 			if (imgLoadSemaphore is null) {
 				imgLoadSemaphore = new Semaphore(1, 1);
 			}
@@ -56,14 +56,14 @@ namespace TrayDir.utils {
 				Thread.Sleep(1);
 			}
 		}
-		public static bool PerformIconLoading() {
+		internal static bool PerformIconLoading() {
 			if (urlLoadQueue != null && urlLoadQueue.Count > 0) {
 				tryLoadIconThread(urlLoadSemaphore, urlLoadQueue);
 				return true;
 			}
 			return false;
 		}
-		public static bool tryLoadIconThread(Semaphore sem, Queue<IMenuItem> queue) {
+		internal static bool tryLoadIconThread(Semaphore sem, Queue<IMenuItem> queue) {
 			sem.WaitOne();
 			bool result = false;
 			if (MainForm.form != null && queue.Count > 0) {
@@ -91,7 +91,7 @@ namespace TrayDir.utils {
 			sem.Release();
 			return result;
 		}
-		public static void LoadIcon(IPluginMenuItem mi) {
+		internal static void LoadIcon(IPluginMenuItem mi) {
 			if (mi.isPlugin) {
 				TrayPlugin tp = ((TrayInstancePlugin)mi.tiItem).plugin;
 				if (tp != null) {
@@ -116,7 +116,7 @@ namespace TrayDir.utils {
 				}
 			}
 		}
-		public static void LoadIcon(IVirtualFolderMenuItem mi) {
+		internal static void LoadIcon(IVirtualFolderMenuItem mi) {
 			if (mi.menuIcon is null && mi.isVFolder) {
 				if (ProgramData.pd.settings.app.VFolderIcon != "Yellow Folder") {
 					mi.menuIcon = (Bitmap)IconUtils.FolderBlueImage;
@@ -125,7 +125,7 @@ namespace TrayDir.utils {
 				}
 			}
 		}
-		public static void LoadIcon(IWebLinkMenuItem mi) {
+		internal static void LoadIcon(IWebLinkMenuItem mi) {
 			if (mi.menuIcon is null && mi.isWebLink) {
 				if (((TrayInstanceWebLink)mi.tiItem).isValidURL) {
 					mi.menuIcon = (Bitmap)IconUtils.WebLinkImage;
@@ -134,7 +134,7 @@ namespace TrayDir.utils {
 				}
 			}
 		}
-		public static void LoadIcon(Queue<IMenuItem> queue, IPathMenuItem mi) {
+		internal static void LoadIcon(Queue<IMenuItem> queue, IPathMenuItem mi) {
 				if (mi.menuIcon is null && mi.isErr) {
 				mi.menuIcon = (Bitmap)IconUtils.QuestionImage;
 			} else if (mi.menuIcon is null && mi.isFile) {
@@ -161,7 +161,7 @@ namespace TrayDir.utils {
 				}
 			}
 		}
-		public static void EnqueueIconLoad(IMenuItem mi) {
+		internal static void EnqueueIconLoad(IMenuItem mi) {
 			if (!mi.enqueued) {
 				imgLoadSemaphore.WaitOne();
 				imgLoadQueue.Enqueue(mi);
@@ -173,7 +173,7 @@ namespace TrayDir.utils {
 				imgLoadThread.Start();
 			}
 		}
-		public static void AssignIcons() {
+		internal static void AssignIcons() {
 			imgLoadedSemaphore.WaitOne();
 			while (imgLoadedQueue.Count > 0) {
 				IMenuItem mi = imgLoadedQueue.Dequeue();

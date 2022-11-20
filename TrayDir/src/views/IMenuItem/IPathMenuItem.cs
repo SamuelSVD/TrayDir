@@ -11,15 +11,15 @@ namespace TrayDir {
 		private List<IMenuItem> fileMenuItems = new List<IMenuItem>();
 		private List<IMenuItem> folderChildren = new List<IMenuItem>();
 		private bool painted = false;
-		public bool isErr { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) ? !(Directory.Exists(((TrayInstancePath)tiItem).path) || File.Exists(((TrayInstancePath)tiItem).path)) : false; } }
-		public bool isDir { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) ? AppUtils.PathIsDirectory(((TrayInstancePath)tiItem).path) : false; } }
-		public bool isFile { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) ? AppUtils.PathIsFile(((TrayInstancePath)tiItem).path) : false; } }
+		internal bool isErr { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) ? !(Directory.Exists(((TrayInstancePath)tiItem).path) || File.Exists(((TrayInstancePath)tiItem).path)) : false; } }
+		internal bool isDir { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) ? AppUtils.PathIsDirectory(((TrayInstancePath)tiItem).path) : false; } }
+		internal bool isFile { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) ? AppUtils.PathIsFile(((TrayInstancePath)tiItem).path) : false; } }
 
 
-		public IPathMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceItem tiItem, IMenuItem parent) : base(instance, tiNode, tiItem, parent) {
+		internal IPathMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceItem tiItem, IMenuItem parent) : base(instance, tiNode, tiItem, parent) {
 		}
 
-		public override void AddToCollection(ToolStripItemCollection collection) {
+		internal override void AddToCollection(ToolStripItemCollection collection) {
 			collection.Add(menuItem);
 
 			if (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) {
@@ -52,7 +52,7 @@ namespace TrayDir {
 				}
 			}
 		}
-		public void AddToCollectionExpanded(ToolStripItemCollection collection) {
+		internal void AddToCollectionExpanded(ToolStripItemCollection collection) {
 			if (folderChildren.Count == 0) {
 				MakeChildren();
 				Load();
@@ -97,12 +97,12 @@ namespace TrayDir {
 				collection.Add(menuItem);
 			}
 		}
-		public override void ChildClear() {
+		internal override void ChildClear() {
 			RemoveChildren();
 			painted = false;
 
 		}
-		public override void ChildResetClicks() {
+		internal override void ChildResetClicks() {
 			if (folderChildren != null) {
 				foreach (IMenuItem m in folderChildren) {
 					m.ResetClicks();
@@ -119,7 +119,7 @@ namespace TrayDir {
 				}
 			}
 		}
-		public override void Load() {
+		internal override void Load() {
 			if (menuItem == null) {
 				menuItem = new ToolStripMenuItem();
 				menuItem.DropDownOpening += MenuItemDropDownOpening;
@@ -219,7 +219,7 @@ namespace TrayDir {
 				catch { }
 			}
 		}
-		public override void MenuOpened() {
+		internal override void MenuOpened() {
 			EnqueueImgLoad();
 			UpdateVisibility();
 			foreach (IMenuItem subchild in folderChildren) {

@@ -4,11 +4,11 @@ using System.IO;
 using System.Windows.Forms;
 
 namespace TrayDir {
-	class TrayUtils {
-		public static string BrowseForIconPath() {
+	internal class TrayUtils {
+		internal static string BrowseForIconPath() {
 			return BrowseForIconPath(string.Empty);
 		}
-		public static string BrowseForIconPath(string startingPath) {
+		internal static string BrowseForIconPath(string startingPath) {
 			OpenFileDialog iconFileDialog = new OpenFileDialog();
 			iconFileDialog.DereferenceLinks = false;
 			iconFileDialog.InitialDirectory = System.IO.Path.GetDirectoryName(startingPath);
@@ -20,13 +20,13 @@ namespace TrayDir {
 				return null;
 			}
 		}
-		public static byte[] IconToBytes(System.Drawing.Icon icon) {
+		internal static byte[] IconToBytes(System.Drawing.Icon icon) {
 			using (MemoryStream ms = new MemoryStream()) {
 				icon.ToBitmap().Save(ms, System.Drawing.Imaging.ImageFormat.Tiff);
 				return ms.ToArray();
 			}
 		}
-		public static System.Drawing.Icon BytesToIcon(byte[] bytes) {
+		internal static System.Drawing.Icon BytesToIcon(byte[] bytes) {
 			using (MemoryStream ms = new MemoryStream(bytes)) {
 				Bitmap bmp = new Bitmap(ms);
 				IntPtr Hicon = bmp.GetHicon();

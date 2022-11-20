@@ -8,10 +8,10 @@ using TrayDir.utils;
 
 namespace TrayDir.src.views {
 	internal class ITreeSeparatorNode : ITreeNode {
-		public ITreeSeparatorNode(TrayInstanceNode tin) : base(tin) {
+		internal ITreeSeparatorNode(TrayInstanceNode tin) : base(tin) {
 		}
 
-		public override void Refresh() {
+		internal override void Refresh() {
 			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
 			node.ImageIndex = IconUtils.SEPARATOR;

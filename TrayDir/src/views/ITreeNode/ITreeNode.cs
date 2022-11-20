@@ -6,25 +6,25 @@ using TrayDir.utils;
 namespace TrayDir {
 	public abstract class ITreeNode {
 		protected static Font strikethroughFont;
-		public TreeNode node;
-		public TrayInstanceNode tin;
-		public static Dictionary<string, int> pluginIndex = new Dictionary<string, int>();
-		public int index {
+		internal TreeNode node;
+		internal TrayInstanceNode tin;
+		internal static Dictionary<string, int> pluginIndex = new Dictionary<string, int>();
+		internal int index {
 			get {
 				return node.Parent != null ? node.Parent.Nodes.IndexOf(node) : node.TreeView.Nodes.IndexOf(node);
 			}
 		}
-		public bool isFirstChild {
+		internal bool isFirstChild {
 			get {
 				return index == 0;
 			}
 		}
-		public bool isLastChild {
+		internal bool isLastChild {
 			get {
 				return node.Parent != null ? node.Parent.Nodes.Count == index + 1 : node.TreeView.Nodes.Count == index + 1;
 			}
 		}
-		public ITreeNode previousRelative {
+		internal ITreeNode previousRelative {
 			get {
 				if (!isFirstChild) {
 					return tin.parent.children[index - 1].itn;
@@ -32,7 +32,7 @@ namespace TrayDir {
 				return null;
 			}
 		}
-		public ITreeNode nextRelative {
+		internal ITreeNode nextRelative {
 			get {
 				if (!isLastChild) {
 					return tin.parent.children[index + 1].itn;
@@ -40,7 +40,7 @@ namespace TrayDir {
 				return null;
 			}
 		}
-		public string alias {
+		internal string alias {
 			get {
 				switch (tin.type) {
 					case TrayInstanceNode.NodeType.Path:
@@ -81,8 +81,8 @@ namespace TrayDir {
 			node = new TreeNode();
 			Refresh();
 		}
-		public abstract void Refresh();
-		public void MoveUp() {
+		internal abstract void Refresh();
+		internal void MoveUp() {
 			tin.MoveUp();
 
 			if (node.Parent != null) {
@@ -105,7 +105,7 @@ namespace TrayDir {
 				}
 			}
 		}
-		public void MoveDown() {
+		internal void MoveDown() {
 			tin.MoveDown();
 			TreeNode parent = node.Parent;
 			if (parent != null) {
@@ -127,7 +127,7 @@ namespace TrayDir {
 				}
 			}
 		}
-		public void MoveIn() {
+		internal void MoveIn() {
 			tin.MoveIn();
 
 			TreeNode parent = node.Parent;
@@ -149,7 +149,7 @@ namespace TrayDir {
 			}
 			node.TreeView.SelectedNode = node;
 		}
-		public void MoveOut() {
+		internal void MoveOut() {
 			tin.MoveOut();
 
 			TreeNode parent = node.Parent;
@@ -177,7 +177,7 @@ namespace TrayDir {
 			node.TreeView.SelectedNode = node;
 		}
 
-		public void Delete() {
+		internal void Delete() {
 			tin.Delete();
 			if (this.node.Parent != null) {
 				node.Parent.Nodes.Remove(node);

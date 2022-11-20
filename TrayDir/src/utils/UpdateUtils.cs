@@ -8,7 +8,7 @@ using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace TrayDir {
-	class UpdateUtils {
+	internal class UpdateUtils {
 		private static string SOURCE = "https://api.github.com/repos/SamuelSVD/TrayDir/releases/latest";
 		private static Thread mainThread;
 		private static Thread updatesThread;
@@ -32,7 +32,7 @@ namespace TrayDir {
 				patch = int.Parse(versionString.Substring(i + 1, versionString.Length - i - 1));
 			}
 		}
-		public static void CheckForUpdates() {
+		internal static void CheckForUpdates() {
 			if (updatesThread == null || !updatesThread.IsAlive) {
 				mainThread = Thread.CurrentThread;
 				updatesThread = new Thread(UpdatesThread);
@@ -67,7 +67,7 @@ namespace TrayDir {
 				Thread.Sleep(1000);
 			}
 		}
-		public async static Task<string> GetVersion() {
+		internal async static Task<string> GetVersion() {
 			string JSON;
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(SOURCE);
 			request.UserAgent = "TrayDir";
@@ -80,7 +80,7 @@ namespace TrayDir {
 			}
 			return JSON;
 		}
-		public static bool SemverCompare(string oldVersion, string newVersion) {
+		internal static bool SemverCompare(string oldVersion, string newVersion) {
 			try {
 				string pattern = "[0-9]+.[0-9]+.[0-9]+";
 				Regex rgx = new Regex(pattern);

@@ -8,8 +8,8 @@ using TrayDir.utils;
 
 namespace TrayDir.src.views {
 	internal class ITreeVirtualFolderNode : ITreeNode {
-		public ITreeVirtualFolderNode(TrayInstanceNode tin) : base(tin) { }
-		public override void Refresh() {
+		internal ITreeVirtualFolderNode(TrayInstanceNode tin) : base(tin) { }
+		internal override void Refresh() {
 			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
 			TrayInstanceVirtualFolder tivf = tin.GetVirtualFolder();

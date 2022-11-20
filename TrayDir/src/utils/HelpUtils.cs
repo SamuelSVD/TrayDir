@@ -13,11 +13,11 @@ namespace Utils {
 			}
 			catch { }
 		}
-		public static void ShowHelp(Control control) {
+		internal static void ShowHelp(Control control) {
 			MakeHelp();
 			Help.ShowHelp(control, _helpPath);
 		}
-		public static void ShowHelp(Control control, string topic) {
+		internal static void ShowHelp(Control control, string topic) {
 			MakeHelp();
 			Help.ShowHelp(control, _helpPath, HelpNavigator.Topic, topic);
 		}

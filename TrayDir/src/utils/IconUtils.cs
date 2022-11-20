@@ -5,58 +5,58 @@ using System.Threading;
 using System.Windows.Forms;
 
 namespace TrayDir.utils {
-	class IconUtils {
+	internal class IconUtils {
 		private static Dictionary<string, Bitmap> imgKnownIcons = new Dictionary<string, Bitmap>();
 		private static Semaphore imgLoadSemaphore = new Semaphore(1, 1);
-		public static ImageList imageList;
-		public static int DOCUMENT;
-		public static int FOLDER;
-		public static int FOLDER_BLUE;
-		public static int RUNNABLE;
-		public static int FOLDER_BLUE_NEW;
-		public static int UP;
-		public static int DOWN;
-		public static int RUNNABLE_NEW;
-		public static int DOCUMENT_NEW;
-		public static int FOLDER_NEW;
-		public static int EDIT;
-		public static int DELETE;
-		public static int QUESTION;
-		public static int INDENT_IN;
-		public static int INDENT_OUT;
-		public static int FOLDER_SHORTCUT;
-		public static int SEPARATOR;
-		public static int SEPARATOR_NEW;
-		public static int RUNNABLE_ERROR;
-		public static int EMPTY;
-		public static int WEBLINK;
-		public static int WEBLINK_NEW;
-		public static int WEBLINK_ERROR;
-		public static bool initialized = false;
-		public static Image DocumentImage { get { return imageList.Images[DOCUMENT]; } }
-		public static Image FolderImage { get { return imageList.Images[FOLDER]; } }
-		public static Image FolderBlueImage { get { return imageList.Images[FOLDER_BLUE]; } }
-		public static Image RunnableImage { get { return imageList.Images[RUNNABLE]; } }
-		public static Image FolderBlueNewImage { get { return imageList.Images[FOLDER_BLUE_NEW]; } }
-		public static Image UpImage { get { return imageList.Images[UP]; } }
-		public static Image DownImage { get { return imageList.Images[DOWN]; } }
-		public static Image RunnableNewImage { get { return imageList.Images[RUNNABLE_NEW]; } }
-		public static Image DocumentNewImage { get { return imageList.Images[DOCUMENT_NEW]; } }
-		public static Image FolderNewImage { get { return imageList.Images[FOLDER_NEW]; } }
-		public static Image DeleteImage { get { return imageList.Images[DELETE]; } }
-		public static Image QuestionImage { get { return imageList.Images[QUESTION]; } }
-		public static Image IndentInImage { get { return imageList.Images[INDENT_IN]; } }
-		public static Image IndentOutImage { get { return imageList.Images[INDENT_OUT]; } }
-		public static Image FolderShortcutImage { get { return imageList.Images[FOLDER_SHORTCUT]; } }
-		public static Image EditImage { get { return imageList.Images[EDIT]; } }
-		public static Image SeparatorImage { get { return imageList.Images[SEPARATOR]; } }
-		public static Image SeparatorNewImage { get { return imageList.Images[SEPARATOR_NEW]; } }
-		public static Image RunnableErrorImage { get { return imageList.Images[RUNNABLE_ERROR]; } }
-		public static Image Empty { get { return imageList.Images[EMPTY]; } }
-		public static Image WebLinkImage { get { return imageList.Images[WEBLINK]; } }
-		public static Image WebLinkNewImage { get { return imageList.Images[WEBLINK_NEW]; } }
-		public static Image WebLinkErrorImage { get { return imageList.Images[WEBLINK_ERROR]; } }
-		public static void Init(int sizeWH) {
+		internal static ImageList imageList;
+		internal static int DOCUMENT;
+		internal static int FOLDER;
+		internal static int FOLDER_BLUE;
+		internal static int RUNNABLE;
+		internal static int FOLDER_BLUE_NEW;
+		internal static int UP;
+		internal static int DOWN;
+		internal static int RUNNABLE_NEW;
+		internal static int DOCUMENT_NEW;
+		internal static int FOLDER_NEW;
+		internal static int EDIT;
+		internal static int DELETE;
+		internal static int QUESTION;
+		internal static int INDENT_IN;
+		internal static int INDENT_OUT;
+		internal static int FOLDER_SHORTCUT;
+		internal static int SEPARATOR;
+		internal static int SEPARATOR_NEW;
+		internal static int RUNNABLE_ERROR;
+		internal static int EMPTY;
+		internal static int WEBLINK;
+		internal static int WEBLINK_NEW;
+		internal static int WEBLINK_ERROR;
+		internal static bool initialized = false;
+		internal static Image DocumentImage { get { return imageList.Images[DOCUMENT]; } }
+		internal static Image FolderImage { get { return imageList.Images[FOLDER]; } }
+		internal static Image FolderBlueImage { get { return imageList.Images[FOLDER_BLUE]; } }
+		internal static Image RunnableImage { get { return imageList.Images[RUNNABLE]; } }
+		internal static Image FolderBlueNewImage { get { return imageList.Images[FOLDER_BLUE_NEW]; } }
+		internal static Image UpImage { get { return imageList.Images[UP]; } }
+		internal static Image DownImage { get { return imageList.Images[DOWN]; } }
+		internal static Image RunnableNewImage { get { return imageList.Images[RUNNABLE_NEW]; } }
+		internal static Image DocumentNewImage { get { return imageList.Images[DOCUMENT_NEW]; } }
+		internal static Image FolderNewImage { get { return imageList.Images[FOLDER_NEW]; } }
+		internal static Image DeleteImage { get { return imageList.Images[DELETE]; } }
+		internal static Image QuestionImage { get { return imageList.Images[QUESTION]; } }
+		internal static Image IndentInImage { get { return imageList.Images[INDENT_IN]; } }
+		internal static Image IndentOutImage { get { return imageList.Images[INDENT_OUT]; } }
+		internal static Image FolderShortcutImage { get { return imageList.Images[FOLDER_SHORTCUT]; } }
+		internal static Image EditImage { get { return imageList.Images[EDIT]; } }
+		internal static Image SeparatorImage { get { return imageList.Images[SEPARATOR]; } }
+		internal static Image SeparatorNewImage { get { return imageList.Images[SEPARATOR_NEW]; } }
+		internal static Image RunnableErrorImage { get { return imageList.Images[RUNNABLE_ERROR]; } }
+		internal static Image Empty { get { return imageList.Images[EMPTY]; } }
+		internal static Image WebLinkImage { get { return imageList.Images[WEBLINK]; } }
+		internal static Image WebLinkNewImage { get { return imageList.Images[WEBLINK_NEW]; } }
+		internal static Image WebLinkErrorImage { get { return imageList.Images[WEBLINK_ERROR]; } }
+		internal static void Init(int sizeWH) {
 			imageList = new ImageList();
 			imageList.ImageSize = new Size(sizeWH, sizeWH);
 			imageList.ColorDepth = ColorDepth.Depth16Bit;
@@ -118,7 +118,7 @@ namespace TrayDir.utils {
 			}
 			return img;
 		}
-		public static Bitmap lookupIcon(string key) {
+		internal static Bitmap lookupIcon(string key) {
 			imgLoadSemaphore.WaitOne();
 			Bitmap icon;
 			if (imgKnownIcons.ContainsKey(key)) {
@@ -129,7 +129,7 @@ namespace TrayDir.utils {
 			imgLoadSemaphore.Release();
 			return icon;
 		}
-		public static void addIcon(string key, Bitmap icon) {
+		internal static void addIcon(string key, Bitmap icon) {
 			imgLoadSemaphore.WaitOne();
 			imgKnownIcons[key] = icon;
 			imgLoadSemaphore.Release();

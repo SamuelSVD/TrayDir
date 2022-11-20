@@ -3,17 +3,17 @@ using System.Windows.Forms;
 
 namespace TrayDir {
 	internal class IVirtualFolderMenuItem : IMenuItem {
-		public bool isVFolder { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstanceVirtualFolder)); } }
-		public IVirtualFolderMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceItem tiItem, IMenuItem parent) : base(instance, tiNode, tiItem, parent) {
+		internal bool isVFolder { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstanceVirtualFolder)); } }
+		internal IVirtualFolderMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceItem tiItem, IMenuItem parent) : base(instance, tiNode, tiItem, parent) {
 		}
-		public override void AddToCollection(ToolStripItemCollection collection) {
+		internal override void AddToCollection(ToolStripItemCollection collection) {
 			collection.Add(menuItem);
 		}
-		public override void ChildClear() {
+		internal override void ChildClear() {
 		}
-		public override void ChildResetClicks() {
+		internal override void ChildResetClicks() {
 		}
-		public override void Load() {
+		internal override void Load() {
 			if (menuItem == null) {
 				menuItem = new ToolStripMenuItem();
 				menuItem.DropDownOpening += MenuItemDropDownOpening;
@@ -26,7 +26,7 @@ namespace TrayDir {
 			}
 			menuItem.DropDownItems.Clear();
 		}
-		public override void MenuOpened() {
+		internal override void MenuOpened() {
 			EnqueueImgLoad();
 			UpdateVisibility();
 		}

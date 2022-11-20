@@ -5,15 +5,15 @@ using System.Windows.Forms;
 
 namespace TrayDir {
 	class ComboBoxView {
-		public Label label;
-		public ComboBox combobox;
-		public ToolTip tp;
+		internal Label label;
+		internal ComboBox combobox;
+		internal ToolTip tp;
 		StringIndexable settingGroup;
 		string settingName;
 		private Dictionary<string, string> comboBoxOptions;
 		private Dictionary<string, string> inverseComboBoxOptions = new Dictionary<string, string>();
 
-		public ComboBoxView(string text, Dictionary<string, string> options, StringIndexable settingGroup, string settingName) {
+		internal ComboBoxView(string text, Dictionary<string, string> options, StringIndexable settingGroup, string settingName) {
 			label = new Label();
 
 			label.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
@@ -52,7 +52,7 @@ namespace TrayDir {
 			MainForm.form.pd.Save();
 		}
 
-		public void AddTo(TableLayoutPanel tlp, int row) {
+		internal void AddTo(TableLayoutPanel tlp, int row) {
 			tlp.Controls.Add(label, 0, row);
 			tlp.Controls.Add(combobox, 1, row);
 			tlp.RowCount = row + 1;
@@ -79,7 +79,7 @@ namespace TrayDir {
 				}
 			}
 		}
-		public void SetTooltip(string message) {
+		internal void SetTooltip(string message) {
 			tp = new ToolTip();
 			tp.AutoPopDelay = 5000;
 			tp.InitialDelay = 500;

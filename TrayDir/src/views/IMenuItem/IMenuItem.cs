@@ -6,18 +6,18 @@ using System.Windows.Forms;
 using TrayDir.utils;
 
 namespace TrayDir {
-	public abstract partial class IMenuItem {
+	internal abstract partial class IMenuItem {
 		internal TrayInstance instance;
 		internal TrayInstanceNode tiNode;
 		internal TrayInstanceItem tiItem;
 
-		public ToolStripMenuItem menuItem;
-		public List<IMenuItem> nodeChildren = new List<IMenuItem>();
-		public IMenuItem parent;
-		public Bitmap menuIcon;
+		internal ToolStripMenuItem menuItem;
+		internal List<IMenuItem> nodeChildren = new List<IMenuItem>();
+		internal IMenuItem parent;
+		internal Bitmap menuIcon;
 
-		public bool loadedIcon = false;
-		public bool enqueued = false;
+		internal bool loadedIcon = false;
+		internal bool enqueued = false;
 
 		protected string alias {
 			get {
@@ -37,14 +37,14 @@ namespace TrayDir {
 			}
 		}
 
-		public IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceItem tiItem, IMenuItem parent) {
+		internal IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceItem tiItem, IMenuItem parent) {
 			this.instance = instance;
 			this.tiNode = tiNode;
 			this.tiItem = tiItem;
 			this.parent = parent;
 		}
-		public abstract void ChildClear();
-		public void Clear() {
+		internal abstract void ChildClear();
+		internal void Clear() {
 			ChildClear();
 			menuIcon = null;
 			enqueued = false;
@@ -68,7 +68,7 @@ namespace TrayDir {
 			instance.view.tray.notifyIcon.ContextMenuStrip.Enabled = false;
 		}
 		private int _clicks = 0;
-		public void ResetClicks() {
+		internal void ResetClicks() {
 			_clicks = 0;
 			if (nodeChildren != null) {
 				foreach (IMenuItem m in nodeChildren) {
@@ -76,7 +76,7 @@ namespace TrayDir {
 				}
 			}
 		}
-		public abstract void ChildResetClicks();
+		internal abstract void ChildResetClicks();
 		protected abstract void showContextMenu(); /*{
 		} */
 		internal void UpdateVisibility() {
@@ -84,13 +84,13 @@ namespace TrayDir {
 				menuItem.Visible = tiItem.visible;
 			}
 		}
-		public abstract void Load();/* {
+		internal abstract void Load();/* {
 			
 		}*/
-		public void EnqueueImgLoad() {
+		internal void EnqueueImgLoad() {
 			IMenuItemIconUtils.EnqueueIconLoad(this);
 		}
-		public abstract void AddToCollection(ToolStripItemCollection collection);
+		internal abstract void AddToCollection(ToolStripItemCollection collection);
 		internal void RemoveChildren(List<IMenuItem> list) {
 			while (list.Count > 0) {
 				IMenuItem child = list[0];
@@ -99,11 +99,11 @@ namespace TrayDir {
 			}
 			list.Clear();
 		}
-		public void Refresh() {
+		internal void Refresh() {
 			Clear();
 			Load();
 			UpdateVisibility();
 		}
-		public abstract void MenuOpened();
+		internal abstract void MenuOpened();
 	}
 }
