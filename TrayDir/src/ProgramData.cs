@@ -35,22 +35,7 @@ namespace TrayDir {
 			config = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\config.xml";
 			ProgramData pd = XMLUtils.LoadFromFile<ProgramData>(config);
 			if (pd is null) {
-				//Check Virtual Folder or previous path location for config file.
-				if (!Debugger.IsAttached) {
-					string oldPath = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\VirtualStore\\Program Files (x86)\\samver\\TrayDir\\config.xml";
-					if (File.Exists(oldPath)) {
-						pd = XMLUtils.LoadFromFile<ProgramData>(oldPath);
-					}
-					if (pd is null) {
-						oldPath = "C:\\Program Files (x86)\\samver\\TrayDir\\config.xml";
-						if (File.Exists(oldPath)) {
-							pd = XMLUtils.LoadFromFile<ProgramData>(oldPath);
-						}
-					}
-				}
-				if (pd is null) {
-					pd = new ProgramData();
-				}
+				pd = new ProgramData();
 			}
 			pd.PerformUpdate();
 			return pd;
