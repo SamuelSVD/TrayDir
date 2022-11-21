@@ -68,6 +68,7 @@ namespace TrayDir
 			this.imgLoadTimer = new System.Windows.Forms.Timer(this.components);
 			this.iconLoadTimer = new System.Windows.Forms.Timer(this.components);
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -102,6 +103,7 @@ namespace TrayDir
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
             this.saveToolStripMenuItem1,
             this.saveAsToolStripMenuItem,
             this.exitToolStripMenuItem1});
@@ -293,6 +295,12 @@ namespace TrayDir
 			// 
 			this.iconLoadTimer.Tick += new System.EventHandler(this.iconLoadTimer_Tick);
 			// 
+			// openToolStripMenuItem
+			// 
+			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+			resources.ApplyResources(this.openToolStripMenuItem, "openToolStripMenuItem");
+			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this.AllowDrop = true;
@@ -350,6 +358,7 @@ namespace TrayDir
         private ToolStripMenuItem donateToolStripMenuItem;
         private ToolTip toolTip;
 		private ToolStripMenuItem bugReportToolStripMenuItem;
+		private ToolStripMenuItem openToolStripMenuItem;
 	}
 }
 

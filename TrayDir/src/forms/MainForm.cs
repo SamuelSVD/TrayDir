@@ -456,5 +456,22 @@ namespace TrayDir {
 				ctp.Image = ti.view.tray.notifyIcon.Icon.ToBitmap();
 			}
 		}
+		private void openToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (MessageBox.Show(Properties.Strings.Form_OpenConfigurationConfirmation, Properties.Strings.Form_OpenConfiguration, MessageBoxButtons.OKCancel) == DialogResult.OK) {
+				OpenFileDialog ofd = new OpenFileDialog();
+				ofd.Filter = "TrayDir XML Export | *.xml";
+				if (ofd.ShowDialog() == DialogResult.OK) {
+					ProgramData pd = XMLUtils.LoadFromFile<ProgramData>(ofd.FileName);
+					if (pd != null) {
+						pd.initialized = true;
+						pd.Save();
+						Application.Restart();
+						Environment.Exit(0);
+					} else {
+						MessageBox.Show(Properties.Strings.Error_ImportFailed, Properties.Strings.Form_ImportFailed);
+					}
+				}
+			}
+		}
 	}
 }

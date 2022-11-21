@@ -372,6 +372,24 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Configuration.
+        /// </summary>
+        internal static string Form_OpenConfiguration {
+            get {
+                return ResourceManager.GetString("Form_OpenConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to load a configuration from a file? All current data will be lost and TrayDir will restart..
+        /// </summary>
+        internal static string Form_OpenConfigurationConfirmation {
+            get {
+                return ResourceManager.GetString("Form_OpenConfigurationConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Folders in File Explorer When Clicked.
         /// </summary>
         internal static string Form_OpenFoldersInFileExplorerOnClick {
