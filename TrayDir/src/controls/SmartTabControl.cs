@@ -41,7 +41,7 @@ namespace TrayDir
             IgnoreDragTabPages = new List<TabPage>();
             SetStyle(
                 ControlStyles.AllPaintingInWmPaint 
-                | ControlStyles.UserPaint
+                //| ControlStyles.UserPaint
                 | ControlStyles.ResizeRedraw
                 | ControlStyles.OptimizedDoubleBuffer
                 ,true);
