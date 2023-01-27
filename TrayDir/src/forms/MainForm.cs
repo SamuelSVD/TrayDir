@@ -311,6 +311,7 @@ namespace TrayDir {
 			archiveToolStripMenuItem.Enabled = (pd.trayInstances.Count > 1);
 			pd.Save();
 			Edit(this, e);
+			ti.view.tray.BuildTrayMenu();
 			BuildRebuildDropdown();
 		}
 		private void Edit(object sender, EventArgs e) {
