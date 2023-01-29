@@ -246,6 +246,9 @@ Vérifiez que tous les paramètres requis sont fournis.</value>
   <data name="Form_ShowFileExtensions" xml:space="preserve">
     <value>Afficher les extensions de fichiers</value>
   </data>
+  <data name="Form_ShowHiddenFiles" xml:space="preserve">
+    <value>Montrer les fichiers cachés</value>
+  </data>
   <data name="Form_ShowIconsInTrayMenu" xml:space="preserve">
     <value>Afficher les icônes dans le menu de la barre d'état</value>
   </data>
@@ -410,6 +413,9 @@ Le contenu du dossier sera utilisé comme structure du menu principal</value>
   </data>
   <data name="Tooltip_ShowFileExtensions" xml:space="preserve">
     <value>Afficher les extensions de fichiers. Par exemple, Fichier.txt</value>
+  </data>
+  <data name="Tooltip_ShowHiddenFiles" xml:space="preserve">
+    <value>Lorsqu'il est activé, les fichiers cachés seront affichés à l'intérieur des éléments de menu du dossier</value>
   </data>
   <data name="Tooltip_ShowIconsInTrayMenu" xml:space="preserve">
     <value>Lorsqu'il est activé, chaque élément de menu affichera l'icône associée au fichier lié</value>

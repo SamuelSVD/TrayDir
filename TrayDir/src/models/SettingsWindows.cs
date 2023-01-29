@@ -14,5 +14,7 @@ namespace TrayDir {
 		public bool StartWithWindows = false;
 		[XmlAttribute]
 		public bool CheckForUpdates = true;
+		[XmlAttribute]
+		public bool ShowHiddenFiles = false;
 	}
 }

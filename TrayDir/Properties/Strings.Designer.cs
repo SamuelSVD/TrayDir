@@ -454,6 +454,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Hidden Files.
+        /// </summary>
+        internal static string Form_ShowHiddenFiles {
+            get {
+                return ResourceManager.GetString("Form_ShowHiddenFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Icons In Tray Menu.
         /// </summary>
         internal static string Form_ShowIconsInTrayMenu {
@@ -934,6 +943,15 @@ namespace TrayDir.Properties {
         internal static string Tooltip_ShowFileExtensions {
             get {
                 return ResourceManager.GetString("Tooltip_ShowFileExtensions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When enabled, hidden files will be shown inside of folder menu items.
+        /// </summary>
+        internal static string Tooltip_ShowHiddenFiles {
+            get {
+                return ResourceManager.GetString("Tooltip_ShowHiddenFiles", resourceCulture);
             }
         }
         

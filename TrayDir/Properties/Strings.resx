@@ -252,6 +252,9 @@ Verify all required parameters are provided.</value>
   <data name="Form_ShowFileExtensions" xml:space="preserve">
     <value>Show File Extensions</value>
   </data>
+  <data name="Form_ShowHiddenFiles" xml:space="preserve">
+    <value>Show Hidden Files</value>
+  </data>
   <data name="Form_ShowIconsInTrayMenu" xml:space="preserve">
     <value>Show Icons In Tray Menu</value>
   </data>
@@ -417,6 +420,9 @@ them from the System Tray menu</value>
   </data>
   <data name="Tooltip_ShowFileExtensions" xml:space="preserve">
     <value>Show file extensions. E.g. File.txt</value>
+  </data>
+  <data name="Tooltip_ShowHiddenFiles" xml:space="preserve">
+    <value>When enabled, hidden files will be shown inside of folder menu items</value>
   </data>
   <data name="Tooltip_ShowIconsInTrayMenu" xml:space="preserve">
     <value>When enabled, each menu item will show the icon associated with the file linked</value>

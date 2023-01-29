@@ -203,21 +203,36 @@ namespace TrayDir {
 			if (isDir) {
 				try {
 					string[] dirpaths = Directory.GetFileSystemEntries(((TrayInstancePath)tiItem).path);
-					foreach (string fp in dirpaths) {
-						bool match = false;
-						foreach (string regx in instance.regexList) {
-							if (regx != string.Empty) {
-								match = match || (Regex.Matches(fp, regx).Count > 0);
-							}
-							if (match) break;
-						}
-						if (!match) {
-							folderChildren.Add(new IPathMenuItem(instance, null, new TrayInstancePath(fp), this));
-						}
+					DirectoryInfo di = new DirectoryInfo(((TrayInstancePath)tiItem).path);
+					foreach (FileInfo fp in di.GetFiles()) {
+						MakeFileChild(fp);
+					}
+					foreach (DirectoryInfo fp in di.GetDirectories()) {
+						MakeDirChild(fp);
 					}
 				}
 				catch { }
 			}
+		}
+		private void MakeDirChild(DirectoryInfo fp) {
+			if (isRegexMatch(fp.FullName)) return;
+			if (!(ProgramData.pd.settings.win.ShowHiddenFiles) && fp.Attributes.HasFlag(FileAttributes.Hidden)) return;
+			folderChildren.Add(new IPathMenuItem(instance, null, new TrayInstancePath(fp.FullName), this));
+		}
+		private void MakeFileChild(FileInfo fp) {
+			if (isRegexMatch(fp.FullName)) return;
+			if (!(ProgramData.pd.settings.win.ShowHiddenFiles) && fp.Attributes.HasFlag(FileAttributes.Hidden)) return;
+			folderChildren.Add(new IPathMenuItem(instance, null, new TrayInstancePath(fp.FullName), this));
+		}
+		private bool isRegexMatch(string val) {
+			bool match = false;
+			foreach (string regx in instance.regexList) {
+				if (regx != string.Empty) {
+					match = match || (Regex.Matches(val, regx).Count > 0);
+				}
+				if (match) return true;
+			}
+			return false;
 		}
 		internal override void MenuOpened() {
 			EnqueueImgLoad();

@@ -165,6 +165,19 @@ namespace TrayDir {
 				ProgramData.pd.settings.win.CheckForUpdates,
 				Properties.Strings.Tooltip_CheckForUpdatesOnStartup
 			);
+			CheckBoxOptionView cbov = ControlUtils.AddCheckbox(
+				WinGroupLayout,
+				"ShowHiddenFiles",
+				ProgramData.pd.settings.win,
+				Properties.Strings.Form_ShowHiddenFiles,
+				ProgramData.pd.settings.win.ShowHiddenFiles,
+				Properties.Strings.Tooltip_ShowHiddenFiles
+			);
+			cbov.checkbox.CheckedChanged += new EventHandler(delegate (object obj, EventArgs args) {
+				foreach (TrayInstance ti in ProgramData.pd.trayInstances) {
+					ti.view?.Rebuild();
+				}
+			});
 		}
 
 		private void CategoryTreeView_AfterSelect(object sender, TreeViewEventArgs e) {
