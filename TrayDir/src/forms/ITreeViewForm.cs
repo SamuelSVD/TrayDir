@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using TrayDir.Properties;
 using TrayDir.src.views;
 using TrayDir.utils;
 
@@ -35,6 +36,28 @@ namespace TrayDir {
 
 
 		public ITreeViewForm(TrayInstance instance) {
+			this.instance = instance;
+			InitializeComponent();
+			InitializeContextMenu();
+
+			this.Icon = Properties.Resources.file_exe;
+			nodes = new List<ITreeNode>();
+			foreach (TrayInstanceNode tin in instance.nodes.children) {
+				InitNodes(treeView2, tin, null);
+			}
+			treeView2.ExpandAll();
+			if (!IconUtils.initialized) {
+				IconUtils.Init(upButton.Font.Height + 2);
+			}
+			this.treeView2.ImageList = IconUtils.imageList;
+
+			InitializeButtons();
+			UpdateButtonEnables();
+			foreach (ITreeNode n in nodes) {
+				n.Refresh();
+			}
+		}
+		private void InitializeContextMenu() {
 			rightClickMenu = new ContextMenu();
 			renameMenuItem = new MenuItem(Properties.Strings.Item_RenameItem, renameButton_Click);
 
@@ -67,39 +90,24 @@ namespace TrayDir {
 			rightClickMenu.MenuItems.Add(openInExplorerMenuItem);
 			rightClickMenu.MenuItems.Add(openInCmdMenuItem);
 			rightClickMenu.MenuItems.Add(openInCmdAdminMenuItem);
-			this.instance = instance;
-			InitializeComponent();
-			this.Icon = Properties.Resources.file_exe;
-			nodes = new List<ITreeNode>();
-			foreach (TrayInstanceNode tin in instance.nodes.children) {
-				InitNodes(treeView2, tin, null);
-			}
-			treeView2.ExpandAll();
-			TreeNode folder = new TreeNode();
-			if (!IconUtils.initialized) {
-				IconUtils.Init(upButton.Font.Height + 2);
-			}
-			this.treeView2.ImageList = IconUtils.imageList;
-			updateImage(upButton, IconUtils.UP);
-			updateImage(downButton, IconUtils.DOWN);
-			updateImage(indentButton, IconUtils.INDENT_IN);
-			updateImage(outdentButton, IconUtils.INDENT_OUT);
-			updateImage(newDocButton, IconUtils.DOCUMENT_NEW);
-			updateImage(newFolderButton, IconUtils.FOLDER_NEW);
-			updateImage(newPluginButton, IconUtils.RUNNABLE_NEW);
-			updateImage(newVirtualFolderButton, IconUtils.FOLDER_BLUE_NEW);
-			updateImage(newSeparatorButton, IconUtils.SEPARATOR_NEW);
-			updateImage(newWebLinkButton, IconUtils.WEBLINK_NEW);
+		}
+		private void InitializeButtons() {
+			updateImage(upButton, Resources.up, Resources.up_disabled);
+			updateImage(downButton, Resources.down, Resources.down_disabled);
+			updateImage(indentButton, Resources.indent_in, Resources.indent_in_disabled);
+			updateImage(outdentButton, Resources.indent_out, Resources.indent_out_disabled);
+			updateImage(newDocButton, Resources.document_new, Resources.document_new);
+			updateImage(newFolderButton, Resources.folder_new, Resources.folder_new);
+			updateImage(newPluginButton, Resources.runnable_new, Resources.runnable_new);
+			updateImage(newVirtualFolderButton, Resources.folder_blue_new, Resources.folder_blue_new);
+			updateImage(newSeparatorButton, (Bitmap)IconUtils.SeparatorNewImage, (Bitmap)IconUtils.SeparatorNewImage);
+			updateImage(newWebLinkButton, (Bitmap)IconUtils.WebLinkNewImage, (Bitmap)IconUtils.WebLinkNewImage);
 			editButton.Image = IconUtils.EditImage;
 			editButton.TextImageRelation = TextImageRelation.ImageBeforeText;
 			editButton.TextAlign = ContentAlignment.MiddleLeft;
 			deleteButton.Image = IconUtils.DeleteImage;
 			deleteButton.TextImageRelation = TextImageRelation.ImageBeforeText;
 			deleteButton.TextAlign = ContentAlignment.MiddleLeft;
-			UpdateButtonEnables();
-			foreach (ITreeNode n in nodes) {
-				n.Refresh();
-			}
 		}
 		private void runasMenuItem_click(object sender, EventArgs e) {
 			AppUtils.RunAs(selectedNode.tin);
@@ -157,10 +165,13 @@ namespace TrayDir {
 			nodes.Add(tn);
 			return tn;
 		}
-		private void updateImage(Button b, int index) {
+		private void updateImage(Button b, Bitmap enabledImage, Bitmap disabledImage) {
+			b.BackgroundImage = enabledImage;
 			b.BackgroundImageLayout = ImageLayout.Zoom;
-			b.BackgroundImage = IconUtils.imageList.Images[index];
 			b.Width = b.Height;
+			b.EnabledChanged += new EventHandler(delegate (object s, EventArgs e) {
+				IconUtils.ChangeButtonEnableDisable(b, enabledImage, disabledImage);
+			});
 		}
 		private void treeView2_AfterSelect(object sender, TreeViewEventArgs e) {
 			Text = e.Node.Text;

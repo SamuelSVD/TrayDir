@@ -134,5 +134,12 @@ namespace TrayDir.utils {
 			imgKnownIcons[key] = icon;
 			imgLoadSemaphore.Release();
 		}
+		public static void ChangeButtonEnableDisable(Button button, Bitmap enabledImage, Bitmap disabledImage) {
+			if (button.Enabled) {
+				button.BackgroundImage = enabledImage;
+			} else {
+				button.BackgroundImage = disabledImage;
+			}
+		}
 	}
 }

@@ -407,13 +407,17 @@
   <ItemGroup>
     <Content Include="Resources\add.png" />
     <Content Include="Resources\delete.png" />
+    <None Include="Resources\delete_disabled.png" />
     <Content Include="Resources\document.png" />
     <Content Include="Resources\document_new.png" />
     <Content Include="Resources\down.png" />
+    <None Include="Resources\up_disabled.png" />
     <None Include="Resources\weblink.png" />
     <None Include="Resources\edit.png" />
     <None Include="Resources\empty.png" />
     <None Include="Resources\error.png" />
+    <None Include="Resources\down_disabled.png" />
+    <None Include="Resources\edit_disabled.png" />
     <Content Include="Resources\file-exe.ico" />
     <Content Include="Resources\folder.png" />
     <Content Include="Resources\folder_blue.png" />
@@ -425,6 +429,8 @@
     <None Include="Resources\overlay_error.png" />
     <None Include="Resources\overlay_new.png" />
     <None Include="Resources\overlay_shortcut.png" />
+    <None Include="Resources\indent_in_disabled.png" />
+    <None Include="Resources\indent_out_disabled.png" />
     <Content Include="Resources\question.png" />
     <Content Include="Resources\runnable.png" />
     <None Include="Resources\runnable_error.png" />
