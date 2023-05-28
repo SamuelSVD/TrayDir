@@ -12,7 +12,6 @@ namespace TrayDir.src.views {
 		}
 
 		internal override void Refresh() {
-			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
 			TrayInstanceWebLink tiwl = tin.GetWebLink();
 			if (tiwl != null) {
@@ -23,14 +22,16 @@ namespace TrayDir.src.views {
 				}
 				node.Text = tiwl.alias;
 				if (node.Text == "") node.Text = "(WebLink)";
-				hidden = !tiwl.visible;
 			}
 			node.SelectedImageIndex = node.ImageIndex;
-			if (hidden && node.TreeView != null) {
-				ITreeNode.strikethroughFont = new Font(node.TreeView.Font.FontFamily, node.TreeView.Font.Size, FontStyle.Strikeout);
-				node.NodeFont = strikethroughFont;
-			} else {
-				node.NodeFont = node.TreeView?.Font;
+		}
+		internal override bool Hidden {
+			get {
+				TrayInstanceItem model = tin.GetWebLink();
+				if (model != null) {
+					return !model.visible;
+				}
+				return false;
 			}
 		}
 	}

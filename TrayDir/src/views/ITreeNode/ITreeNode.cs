@@ -75,6 +75,7 @@ namespace TrayDir {
 				Refresh();
 			}
 		}
+		internal abstract bool Hidden { get; }
 		public ITreeNode(TrayInstanceNode tin) {
 			this.tin = tin;
 			tin.itn = this;
@@ -176,7 +177,6 @@ namespace TrayDir {
 			}
 			node.TreeView.SelectedNode = node;
 		}
-
 		internal void Delete() {
 			tin.Delete();
 			if (this.node.Parent != null) {
@@ -209,6 +209,19 @@ namespace TrayDir {
 						if (n.type == tin.type && n.id > tin.id) n.id--;
 					}
 					break;
+			}
+		}
+		public void UpdateFont() {
+			if (Hidden && node.TreeView != null) {
+				if (strikethroughFont == null) {
+					strikethroughFont = new Font(node.TreeView.Font.FontFamily, node.TreeView.Font.Size, FontStyle.Strikeout);
+				}
+				node.NodeFont = strikethroughFont;
+			} else {
+				if (node.TreeView != null) {
+					node.NodeFont = node.TreeView?.Font;
+					node.NodeFont = System.Windows.Forms.Control.DefaultFont;
+				}
 			}
 		}
 	}

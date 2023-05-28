@@ -191,6 +191,12 @@ namespace TrayDir {
 			foreach (ITreeNode itn in nodes) {
 				itn.Refresh();
 			}
+			// Updating font needs to be done separately and only for the items that are hidden to avoid an OutOfMemoryException
+			foreach (ITreeNode itn in nodes) {
+				if (itn.Hidden) {
+					itn.UpdateFont();
+				}
+			}
 		}
 		private void upButton_Click(object sender, EventArgs e) {
 			selectedNode.MoveUp();
@@ -890,6 +896,9 @@ namespace TrayDir {
 						imi.Refresh();
 						imi.EnqueueImgLoad();
 						found = true;
+						if (tin.itn != null) {
+							tin.itn.UpdateFont();
+						}
 					}
 				}
 				if (!found) {

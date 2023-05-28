@@ -10,14 +10,12 @@ namespace TrayDir.src.views {
 	internal class ITreePluginNode : ITreeNode {
 		internal ITreePluginNode(TrayInstanceNode tin) : base(tin) { }
 		internal override void Refresh() {
-			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
 			string pluginName = "";
 			TrayInstancePlugin iPlugin = tin.GetPlugin();
 			TrayPlugin plugin = null;
 			if (iPlugin != null) {
 				plugin = iPlugin.plugin;
-				hidden = !iPlugin.visible;
 			}
 			if (plugin != null) {
 				pluginName = plugin.name;
@@ -48,11 +46,14 @@ namespace TrayDir.src.views {
 			}
 			node.Text = string.Format("{0} ({1})", tin.instance.plugins[tin.id].alias, pluginName);
 			node.SelectedImageIndex = node.ImageIndex;
-			if (hidden && node.TreeView != null) {
-				ITreeNode.strikethroughFont = new Font(node.TreeView.Font.FontFamily, node.TreeView.Font.Size, FontStyle.Strikeout);
-				node.NodeFont = strikethroughFont;
-			} else {
-				node.NodeFont = node.TreeView?.Font;
+		}
+		internal override bool Hidden {
+			get {
+				TrayInstanceItem model = tin.GetPlugin();
+				if (model != null) {
+					return !model.visible;
+				}
+				return false;
 			}
 		}
 	}

@@ -12,15 +12,13 @@ namespace TrayDir.src.views {
 		}
 
 		internal override void Refresh() {
-			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
 			node.Text = Properties.Strings.Form_Error;
 			node.SelectedImageIndex = node.ImageIndex;
-			if (hidden && node.TreeView != null) {
-				ITreeNode.strikethroughFont = new Font(node.TreeView.Font.FontFamily, node.TreeView.Font.Size, FontStyle.Strikeout);
-				node.NodeFont = strikethroughFont;
-			} else {
-				node.NodeFont = node.TreeView?.Font;
+		}
+		internal override bool Hidden {
+			get {
+				return false;
 			}
 		}
 	}

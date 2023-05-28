@@ -5,7 +5,6 @@ namespace TrayDir {
 	internal class ITreePathNode : ITreeNode {
 		internal ITreePathNode(TrayInstanceNode tin) : base(tin) { }
 		internal override void Refresh() {
-			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
 			TrayInstancePath tip = tin.GetPath();
 			if (tip != null) {
@@ -24,16 +23,18 @@ namespace TrayDir {
 					node.ImageIndex = IconUtils.QUESTION;
 					node.Text = Properties.Strings.Node_Error;
 				}
-				hidden = !tip.visible;
 				node.Text += hasAlias ? alias : string.Empty;
 				node.Text += hasAlias ? " (" + tin.instance.paths[tin.id].path + ")" : tin.instance.paths[tin.id].path;
 			}
 			node.SelectedImageIndex = node.ImageIndex;
-			if (hidden && node.TreeView != null) {
-				ITreeNode.strikethroughFont = new Font(node.TreeView.Font.FontFamily, node.TreeView.Font.Size, FontStyle.Strikeout);
-				node.NodeFont = strikethroughFont;
-			} else {
-				node.NodeFont = node.TreeView?.Font;
+		}
+		internal override bool Hidden {
+			get {
+				TrayInstanceItem model = tin.GetPath();
+				if (model != null) {
+					return !model.visible;
+				}
+				return false;
 			}
 		}
 	}
