@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using TrayDir.src.views;
 using TrayDir.utils;
 
 namespace TrayDir {
 	public abstract class ITreeNode {
 		protected static Font strikethroughFont;
 		internal TreeNode node;
-		internal TrayInstanceNode tin;
+		internal IItem Item;
 		internal static Dictionary<string, int> pluginIndex = new Dictionary<string, int>();
 		internal int index {
 			get {
@@ -27,7 +28,7 @@ namespace TrayDir {
 		internal ITreeNode previousRelative {
 			get {
 				if (!isFirstChild) {
-					return tin.parent.children[index - 1].itn;
+					return Item.TrayInstanceNode.parent.children[index - 1].itn;
 				}
 				return null;
 			}
@@ -35,39 +36,39 @@ namespace TrayDir {
 		internal ITreeNode nextRelative {
 			get {
 				if (!isLastChild) {
-					return tin.parent.children[index + 1].itn;
+					return Item.TrayInstanceNode.parent.children[index + 1].itn;
 				}
 				return null;
 			}
 		}
 		internal string alias {
 			get {
-				switch (tin.type) {
+				switch (Item.TrayInstanceNode.type) {
 					case TrayInstanceNode.NodeType.Path:
-						return tin.instance.paths[tin.id].alias;
+						return Item.TrayInstanceNode.instance.paths[Item.TrayInstanceNode.id].alias;
 					case TrayInstanceNode.NodeType.Plugin:
-						return tin.instance.plugins[tin.id].alias;
+						return Item.TrayInstanceNode.instance.plugins[Item.TrayInstanceNode.id].alias;
 					case TrayInstanceNode.NodeType.VirtualFolder:
-						return tin.instance.vfolders[tin.id].alias;
+						return Item.TrayInstanceNode.instance.vfolders[Item.TrayInstanceNode.id].alias;
 					case TrayInstanceNode.NodeType.WebLink:
-						return tin.instance.weblinks[tin.id].alias;
+						return Item.TrayInstanceNode.instance.weblinks[Item.TrayInstanceNode.id].alias;
 					default:
 						return null;
 				}
 			}
 			set {
-				switch (tin.type) {
+				switch (Item.TrayInstanceNode.type) {
 					case TrayInstanceNode.NodeType.Path:
-						tin.instance.paths[tin.id].alias = value;
+						Item.TrayInstanceNode.instance.paths[Item.TrayInstanceNode.id].alias = value;
 						break;
 					case TrayInstanceNode.NodeType.Plugin:
-						tin.instance.plugins[tin.id].alias = value;
+						Item.TrayInstanceNode.instance.plugins[Item.TrayInstanceNode.id].alias = value;
 						break;
 					case TrayInstanceNode.NodeType.VirtualFolder:
-						tin.instance.vfolders[tin.id].alias = value;
+						Item.TrayInstanceNode.instance.vfolders[Item.TrayInstanceNode.id].alias = value;
 						break;
 					case TrayInstanceNode.NodeType.WebLink:
-						tin.instance.weblinks[tin.id].alias = value;
+						Item.TrayInstanceNode.instance.weblinks[Item.TrayInstanceNode.id].alias = value;
 						break;
 					default:
 						break;
@@ -76,15 +77,16 @@ namespace TrayDir {
 			}
 		}
 		internal abstract bool Hidden { get; }
-		public ITreeNode(TrayInstanceNode tin) {
-			this.tin = tin;
-			tin.itn = this;
+		internal ITreeNode(IItem item) {
+			Item = item;
+			Item.TreeNode = this;
+			Item.TrayInstanceNode.itn = this;
 			node = new TreeNode();
 			Refresh();
 		}
 		internal abstract void Refresh();
 		internal void MoveUp() {
-			tin.MoveUp();
+			Item.TrayInstanceNode.MoveUp();
 
 			if (node.Parent != null) {
 				TreeNode parent = node.Parent;
@@ -107,7 +109,7 @@ namespace TrayDir {
 			}
 		}
 		internal void MoveDown() {
-			tin.MoveDown();
+			Item.TrayInstanceNode.MoveDown();
 			TreeNode parent = node.Parent;
 			if (parent != null) {
 				int index = parent.Nodes.IndexOf(node);
@@ -129,7 +131,7 @@ namespace TrayDir {
 			}
 		}
 		internal void MoveIn() {
-			tin.MoveIn();
+			Item.TrayInstanceNode.MoveIn();
 
 			TreeNode parent = node.Parent;
 			if (parent != null) {
@@ -151,7 +153,7 @@ namespace TrayDir {
 			node.TreeView.SelectedNode = node;
 		}
 		internal void MoveOut() {
-			tin.MoveOut();
+			Item.TrayInstanceNode.MoveOut();
 
 			TreeNode parent = node.Parent;
 			if (parent != null) {
@@ -178,35 +180,35 @@ namespace TrayDir {
 			node.TreeView.SelectedNode = node;
 		}
 		internal void Delete() {
-			tin.Delete();
+			Item.TrayInstanceNode.Delete();
 			if (this.node.Parent != null) {
 				node.Parent.Nodes.Remove(node);
 			} else {
 				node.TreeView?.Nodes.Remove(node);
 			}
-			switch (tin.type) {
+			switch (Item.TrayInstanceNode.type) {
 				case TrayInstanceNode.NodeType.Path:
-					tin.instance.paths.RemoveAt(tin.id);
-					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes()) {
-						if (n.type == tin.type && n.id > tin.id) n.id--;
+					Item.TrayInstanceNode.instance.paths.RemoveAt(Item.TrayInstanceNode.id);
+					foreach (TrayInstanceNode n in Item.TrayInstanceNode.instance.nodes.GetAllChildNodes()) {
+						if (n.type == Item.TrayInstanceNode.type && n.id > Item.TrayInstanceNode.id) n.id--;
 					}
 					break;
 				case TrayInstanceNode.NodeType.Plugin:
-					tin.instance.plugins.RemoveAt(tin.id);
-					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes()) {
-						if (n.type == tin.type && n.id > tin.id) n.id--;
+					Item.TrayInstanceNode.instance.plugins.RemoveAt(Item.TrayInstanceNode.id);
+					foreach (TrayInstanceNode n in Item.TrayInstanceNode.instance.nodes.GetAllChildNodes()) {
+						if (n.type == Item.TrayInstanceNode.type && n.id > Item.TrayInstanceNode.id) n.id--;
 					}
 					break;
 				case TrayInstanceNode.NodeType.VirtualFolder:
-					tin.instance.vfolders.RemoveAt(tin.id);
-					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes()) {
-						if (n.type == tin.type && n.id > tin.id) n.id--;
+					Item.TrayInstanceNode.instance.vfolders.RemoveAt(Item.TrayInstanceNode.id);
+					foreach (TrayInstanceNode n in Item.TrayInstanceNode.instance.nodes.GetAllChildNodes()) {
+						if (n.type == Item.TrayInstanceNode.type && n.id > Item.TrayInstanceNode.id) n.id--;
 					}
 					break;
 				case TrayInstanceNode.NodeType.WebLink:
-					tin.instance.weblinks.RemoveAt(tin.id);
-					foreach (TrayInstanceNode n in tin.instance.nodes.GetAllChildNodes()) {
-						if (n.type == tin.type && n.id > tin.id) n.id--;
+					Item.TrayInstanceNode.instance.weblinks.RemoveAt(Item.TrayInstanceNode.id);
+					foreach (TrayInstanceNode n in Item.TrayInstanceNode.instance.nodes.GetAllChildNodes()) {
+						if (n.type == Item.TrayInstanceNode.type && n.id > Item.TrayInstanceNode.id) n.id--;
 					}
 					break;
 			}

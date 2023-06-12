@@ -8,10 +8,10 @@ using TrayDir.utils;
 
 namespace TrayDir {
 	public partial class ITreeViewForm : Form {
-		private List<ITreeNode> nodes;
+		private List<IItem> items;
 		private bool selectedNodeNew = false;
 		private ITreeNode selectedNode { get { return __selectedNode; } set { __selectedNode = value; UpdateButtonEnables(); } }
-		private bool selectedIndentable { get { return selectedNode != null ? !selectedNode.isFirstChild && selectedNode.previousRelative.tin.type == TrayInstanceNode.NodeType.VirtualFolder : false; } }
+		private bool selectedIndentable { get { return selectedNode != null ? !selectedNode.isFirstChild && selectedNode.previousRelative.Item.TrayInstanceNode.type == TrayInstanceNode.NodeType.VirtualFolder : false; } }
 		private bool selectedOutdentable { get { return selectedNode != null ? selectedNode.node.Parent != null : false; } }
 		private bool selectedUpable { get { return selectedNode != null ? !selectedNode.isFirstChild : false; } }
 		private bool selectedDownable { get { return selectedNode != null ? !selectedNode.isLastChild : false; } }
@@ -35,13 +35,14 @@ namespace TrayDir {
 		private MenuItem openInCmdAdminMenuItem;
 
 
-		public ITreeViewForm(TrayInstance instance) {
+		internal ITreeViewForm(TrayInstance instance, List<IItem> items) {
 			this.instance = instance;
+			this.items = items;
 			InitializeComponent();
 			InitializeContextMenu();
 
 			this.Icon = Properties.Resources.file_exe;
-			nodes = new List<ITreeNode>();
+			items = new List<IItem>();
 			foreach (TrayInstanceNode tin in instance.nodes.children) {
 				InitNodes(treeView2, tin, null);
 			}
@@ -53,8 +54,8 @@ namespace TrayDir {
 
 			InitializeButtons();
 			UpdateButtonEnables();
-			foreach (ITreeNode n in nodes) {
-				n.Refresh();
+			foreach (IItem item in items) {
+				item.TreeNode.Refresh();
 			}
 		}
 		private void InitializeContextMenu() {
@@ -110,10 +111,10 @@ namespace TrayDir {
 			deleteButton.TextAlign = ContentAlignment.MiddleLeft;
 		}
 		private void runasMenuItem_click(object sender, EventArgs e) {
-			AppUtils.RunAs(selectedNode.tin);
+			AppUtils.RunAs(selectedNode.Item.TrayInstanceNode);
 		}
 		private void runMenuItem_click(object sender, EventArgs e) {
-			AppUtils.Run(selectedNode.tin);
+			AppUtils.Run(selectedNode.Item.TrayInstanceNode);
 		}
 		private void duplicateButton_Click(object sender, EventArgs e) {
 			CopyToClipboard();
@@ -132,25 +133,31 @@ namespace TrayDir {
 			return this.formTableLayoutPanel;
 		}
 		private ITreeNode InitNodes(TreeView tv, TrayInstanceNode tin, ITreeNode parent) {
+			IItem item = new IItem();
+			item.TrayInstanceNode = tin;
 			ITreeNode tn;
 			switch (tin.type) {
 				case TrayInstanceNode.NodeType.Path:
-					tn = new ITreePathNode(tin);
+					tn = new ITreePathNode(item);
+					item.TrayInstanceItem = tin.GetPath();
 					break;
 				case TrayInstanceNode.NodeType.VirtualFolder:
-					tn = new ITreeVirtualFolderNode(tin);
+					tn = new ITreeVirtualFolderNode(item);
+					item.TrayInstanceItem = tin.GetVirtualFolder();
 					break;
 				case TrayInstanceNode.NodeType.Plugin:
-					tn = new ITreePluginNode(tin);
+					tn = new ITreePluginNode(item);
+					item.TrayInstanceItem = tin.GetPlugin();
 					break;
 				case TrayInstanceNode.NodeType.Separator:
-					tn = new ITreeSeparatorNode(tin);
+					tn = new ITreeSeparatorNode(item);
 					break;
 				case TrayInstanceNode.NodeType.WebLink:
-					tn = new ITreeWebLinkNode(tin);
+					tn = new ITreeWebLinkNode(item);
+					item.TrayInstanceItem = tin.GetWebLink();
 					break;
 				default:
-					tn = new ITreeUnknownNode(tin);
+					tn = new ITreeUnknownNode(item);
 					break;
 			}
 			if (parent == null) {
@@ -162,7 +169,7 @@ namespace TrayDir {
 					tn.node.Nodes.Add(tnc.node);
 				}
 			}
-			nodes.Add(tn);
+			items.Add(item);
 			return tn;
 		}
 		private void updateImage(Button b, Bitmap enabledImage, Bitmap disabledImage) {
@@ -175,9 +182,9 @@ namespace TrayDir {
 		}
 		private void treeView2_AfterSelect(object sender, TreeViewEventArgs e) {
 			Text = e.Node.Text;
-			foreach (ITreeNode itn in nodes) {
-				if (e.Node == itn.node) {
-					selectedNode = itn;
+			foreach (IItem itn in items) {
+				if (e.Node == itn.TreeNode.node) {
+					selectedNode = itn.TreeNode;
 					break;
 				}
 			}
@@ -188,13 +195,13 @@ namespace TrayDir {
 			ProgramData.pd.Save();
 		}
 		public void Rebuild() {
-			foreach (ITreeNode itn in nodes) {
-				itn.Refresh();
+			foreach (IItem itn in items) {
+				itn.TreeNode.Refresh();
 			}
 			// Updating font needs to be done separately and only for the items that are hidden to avoid an OutOfMemoryException
-			foreach (ITreeNode itn in nodes) {
-				if (itn.Hidden) {
-					itn.UpdateFont();
+			foreach (IItem itn in items) {
+				if (itn.TreeNode.Hidden) {
+					itn.TreeNode.UpdateFont();
 				}
 			}
 		}
@@ -248,41 +255,44 @@ namespace TrayDir {
 			tin.id = index;
 			tin.type = TrayInstanceNode.NodeType.Path;
 			tin.SetInstance(instance);
-			ITreeNode itn = new ITreePathNode(tin);
-			insertNode(itn);
+			IItem item = new IItem();
+			item.TrayInstanceItem = tip;
+			item.TrayInstanceNode = tin;
+			ITreeNode itn = new ITreePathNode(item);
+			insertNode(item);
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
-			nodes.Add(itn);
+			items.Add(item);
 		}
-		private void insertNode(ITreeNode itn) {
-			TrayInstanceNode tin = itn.tin;
+		private void insertNode(IItem item) {
+			TrayInstanceNode tin = item.TrayInstanceNode;
 			if (selectedNode != null) {
-				if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder) {
-					selectedNode.tin.children.Add(tin);
-					tin.parent = selectedNode.tin;
-					selectedNode.node.Nodes.Add(itn.node);
+				if (selectedNode.Item.TrayInstanceNode.type == TrayInstanceNode.NodeType.VirtualFolder) {
+					selectedNode.Item.TrayInstanceNode.children.Add(tin);
+					tin.parent = selectedNode.Item.TrayInstanceNode;
+					selectedNode.node.Nodes.Add(item.TreeNode.node);
 				} else {
-					TrayInstanceNode tinp = selectedNode.tin.parent;
-					tinp.children.Insert(tinp.children.IndexOf(selectedNode.tin) + 1, tin);
+					TrayInstanceNode tinp = selectedNode.Item.TrayInstanceNode.parent;
+					tinp.children.Insert(tinp.children.IndexOf(selectedNode.Item.TrayInstanceNode) + 1, tin);
 					tin.parent = tinp;
 					if (selectedNode.node.Parent != null) {
 						TreeNode tnp = selectedNode.node.Parent;
-						tnp.Nodes.Insert(tnp.Nodes.IndexOf(selectedNode.node) + 1, itn.node);
+						tnp.Nodes.Insert(tnp.Nodes.IndexOf(selectedNode.node) + 1, item.TreeNode.node);
 					} else {
-						selectedNode.node.TreeView.Nodes.Insert(selectedNode.node.TreeView.Nodes.IndexOf(selectedNode.node) + 1, itn.node);
+						selectedNode.node.TreeView.Nodes.Insert(selectedNode.node.TreeView.Nodes.IndexOf(selectedNode.node) + 1, item.TreeNode.node);
 					}
 				}
 			} else {
 				TrayInstanceNode tinp = instance.nodes;
 				tinp.children.Add(tin);
 				tin.parent = tinp;
-				treeView2.Nodes.Add(itn.node);
+				treeView2.Nodes.Add(item.TreeNode.node);
 			}
 		}
 		private void editButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
-			if (itn != null && itn.tin != null && itn.tin.type != TrayInstanceNode.NodeType.Separator) {
-				switch (itn.tin.type) {
+			if (itn != null && itn.Item.TrayInstanceNode != null && itn.Item.TrayInstanceNode.type != TrayInstanceNode.NodeType.Separator) {
+				switch (itn.Item.TrayInstanceNode.type) {
 					case TrayInstanceNode.NodeType.Path:
 						pathPropertiesButton_Click(sender, e);
 						break;
@@ -300,7 +310,7 @@ namespace TrayDir {
 		}
 		private void pathPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
-			TrayInstancePath tip = instance.paths[itn.tin.id];
+			TrayInstancePath tip = instance.paths[itn.Item.TrayInstanceNode.id];
 			IPathForm iff = new IPathForm((TrayInstancePath)tip.Copy());
 			if (selectedNodeNew) {
 				iff.ShowDialogNewFile();
@@ -317,7 +327,7 @@ namespace TrayDir {
 		}
 		private void folderPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
-			TrayInstancePath tip = instance.paths[itn.tin.id];
+			TrayInstancePath tip = instance.paths[itn.Item.TrayInstanceNode.id];
 			IPathForm iff = new IPathForm(tip);
 			if (selectedNodeNew) {
 				iff.ShowDialogNewFolder();
@@ -342,7 +352,7 @@ namespace TrayDir {
 			newPluginButton.Enabled = true;
 			newVirtualFolderButton.Enabled = true;
 			deleteButton.Enabled = selectedNode != null;
-			editButton.Enabled = selectedNode != null && selectedNode.tin.type != TrayInstanceNode.NodeType.Separator;
+			editButton.Enabled = selectedNode != null && selectedNode.Item.TrayInstanceNode.type != TrayInstanceNode.NodeType.Separator;
 		}
 		private void newVirtualFolderButton_Click(object sender, EventArgs e) {
 			TrayInstanceVirtualFolder tip = new TrayInstanceVirtualFolder(Properties.Strings.VirtualFolder_New);
@@ -352,11 +362,14 @@ namespace TrayDir {
 			tin.id = index;
 			tin.type = TrayInstanceNode.NodeType.VirtualFolder;
 			tin.SetInstance(instance);
-			ITreeNode itn = new ITreeVirtualFolderNode(tin);
-			insertNode(itn);
+			IItem item = new IItem();
+			item.TrayInstanceItem = tip;
+			item.TrayInstanceNode = tin;
+			ITreeNode itn = new ITreeVirtualFolderNode(item);
+			insertNode(item);
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
-			nodes.Add(itn);
+			items.Add(item);
 			vFolderPropertiesButton_Click(sender, e);
 			instance.view?.tray.Rebuild();
 			Save();
@@ -373,13 +386,13 @@ namespace TrayDir {
 		private void deleteButton_Click(object sender, EventArgs e) {
 			if (selectedNode != null) {
 				bool deleteNode = true;
-				if (selectedNode.tin.type == TrayInstanceNode.NodeType.VirtualFolder && selectedNode.node.Nodes.Count > 0) {
+				if (selectedNode.Item.TrayInstanceNode.type == TrayInstanceNode.NodeType.VirtualFolder && selectedNode.node.Nodes.Count > 0) {
 					deleteNode = (MessageBox.Show(Properties.Strings.VirtualFolder_DeleteContents, string.Empty, MessageBoxButtons.OKCancel) == DialogResult.OK);
 				}
 				if (deleteNode) {
-					nodes.Remove(selectedNode);
-					selectedNode.Delete();
-					instance.view?.Rebuild();
+					IItem item = selectedNode.Item;
+					items.Remove(item);
+					item.Delete();
 					Save();
 				}
 				if (treeView2.Nodes.Count == 0) {
@@ -439,16 +452,19 @@ namespace TrayDir {
 		}
 		private void CopyToClipboard() {
 			TrayInstance copyInstance = new TrayInstance();
-			RecursiveAddToInstance(copyInstance, selectedNode.tin, null);
+			RecursiveAddToInstance(copyInstance, selectedNode.Item.TrayInstanceNode, null);
 			Clipboard.SetText(XMLUtils.XmlSerializeToString(copyInstance));
 		}
 		private ITreeNode RecursiveLoadFromInstance(TrayInstance recursive_instance, TrayInstanceNode tin, ITreeNode parentNode) {
 			TrayInstanceNode newTin = new TrayInstanceNode();
+			IItem item = new IItem();
+			item.TrayInstanceNode = newTin;
 			newTin.type = tin.type;
 			switch (tin.type) {
 				case TrayInstanceNode.NodeType.Path:
 					newTin.id = instance.paths.Count;
 					instance.paths.Add(recursive_instance.paths[tin.id]);
+					item.TrayInstanceItem = recursive_instance.paths[tin.id];
 					break;
 				case TrayInstanceNode.NodeType.Plugin:
 					newTin.id = instance.plugins.Count;
@@ -462,16 +478,19 @@ namespace TrayDir {
 						tip.id = ProgramData.pd.plugins.IndexOf(gtp);
 					}
 					instance.plugins.Add(tip);
+					item.TrayInstanceItem = tip;
 					break;
 				case TrayInstanceNode.NodeType.VirtualFolder:
 					newTin.id = instance.vfolders.Count;
 					instance.vfolders.Add(recursive_instance.vfolders[tin.id]);
+					item.TrayInstanceItem = recursive_instance.vfolders[tin.id];
 					break;
 				case TrayInstanceNode.NodeType.Separator:
 					break;
 				case TrayInstanceNode.NodeType.WebLink:
 					newTin.id = instance.weblinks.Count;
 					instance.weblinks.Add(recursive_instance.weblinks[tin.id]);
+					item.TrayInstanceItem = recursive_instance.weblinks[tin.id];
 					break;
 			}
 			newTin.SetInstance(instance);
@@ -479,29 +498,29 @@ namespace TrayDir {
 			ITreeNode itn;
 			switch (newTin.type) {
 				case TrayInstanceNode.NodeType.Path:
-					itn = new ITreePathNode(newTin);
+					itn = new ITreePathNode(item);
 					break;
 				case TrayInstanceNode.NodeType.VirtualFolder:
-					itn = new ITreeVirtualFolderNode(newTin);
+					itn = new ITreeVirtualFolderNode(item);
 					break;
 				case TrayInstanceNode.NodeType.Plugin:
-					itn = new ITreePluginNode(newTin);
+					itn = new ITreePluginNode(item);
 					break;
 				case TrayInstanceNode.NodeType.Separator:
-					itn = new ITreeSeparatorNode(newTin);
+					itn = new ITreeSeparatorNode(item);
 					break;
 				case TrayInstanceNode.NodeType.WebLink:
-					itn = new ITreeWebLinkNode(newTin);
+					itn = new ITreeWebLinkNode(item);
 					break;
 				default:
-					itn = new ITreeUnknownNode(newTin);
+					itn = new ITreeUnknownNode(item);
 					break;
 			}
 			if (parentNode != null) treeView2.SelectedNode = parentNode.node;
-			insertNode(itn);
+			insertNode(item);
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
-			nodes.Add(itn);
+			items.Add(item);
 			foreach (TrayInstanceNode nodeChild in tin.children) {
 				RecursiveLoadFromInstance(recursive_instance, nodeChild, itn);
 			}
@@ -621,7 +640,7 @@ namespace TrayDir {
 		}
 		private void treeView2_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e) {
 			if (selectedNode != null) {
-				switch (selectedNode.tin.type) {
+				switch (selectedNode.Item.TrayInstanceNode.type) {
 					case TrayInstanceNode.NodeType.Plugin:
 						pluginPropertiesButton_Click(sender, e);
 						break;
@@ -638,23 +657,23 @@ namespace TrayDir {
 			}
 		}
 		private void folderShortcutMenuItem_click(object sender, EventArgs e) {
-			instance.paths[selectedNode.tin.id].shortcut = true;
+			instance.paths[selectedNode.Item.TrayInstanceNode.id].shortcut = true;
 			RefreshSelected();
 			Save();
 		}
 		private void folderExpandMenuItem_click(object sender, EventArgs e) {
-			instance.paths[selectedNode.tin.id].shortcut = false;
+			instance.paths[selectedNode.Item.TrayInstanceNode.id].shortcut = false;
 			RefreshSelected();
 			Save();
 		}
 		private void openInExplorerMenuItem_click(object sender, EventArgs e) {
-			AppUtils.ExplorePath(instance.paths[selectedNode.tin.id].path);
+			AppUtils.ExplorePath(instance.paths[selectedNode.Item.TrayInstanceNode.id].path);
 		}
 		private void openInCmdMenuItem_click(object sender, EventArgs e) {
-			AppUtils.OpenCmdPath(instance.paths[selectedNode.tin.id].path);
+			AppUtils.OpenCmdPath(instance.paths[selectedNode.Item.TrayInstanceNode.id].path);
 		}
 		private void openInCmdAdminMenuItem_click(object sender, EventArgs e) {
-			AppUtils.OpenAdminCmdPath(instance.paths[selectedNode.tin.id].path);
+			AppUtils.OpenAdminCmdPath(instance.paths[selectedNode.Item.TrayInstanceNode.id].path);
 		}
 		private void treeView2_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e) {
 			if (e.Button == MouseButtons.Right && selectedNode != null) {
@@ -670,16 +689,16 @@ namespace TrayDir {
 				openInCmdAdminMenuItem.Enabled = false;
 
 				if (e.Node != null) {
-					foreach (ITreeNode itn in nodes) {
-						if (e.Node == itn.node) {
-							selectedNode = itn;
+					foreach (IItem item in items) {
+						if (e.Node == item.TreeNode.node) {
+							selectedNode = item.TreeNode;
 							break;
 						}
 					}
 				}
-				switch (selectedNode.tin.type) {
+				switch (selectedNode.Item.TrayInstanceNode.type) {
 					case TrayInstanceNode.NodeType.Path:
-						TrayInstancePath path = selectedNode.tin.GetPath();
+						TrayInstancePath path = selectedNode.Item.TrayInstanceNode.GetPath();
 						if (path != null) {
 							if (path.isDir) {
 								folderShortcutMenuItem.Enabled = true;
@@ -730,11 +749,14 @@ namespace TrayDir {
 			tin.id = index;
 			tin.type = TrayInstanceNode.NodeType.Plugin;
 			tin.SetInstance(instance);
-			ITreeNode itn = new ITreePluginNode(tin);
-			insertNode(itn);
+			IItem item = new IItem();
+			item.TrayInstanceNode = tin;
+			item.TrayInstanceItem = tip;
+			ITreeNode itn = new ITreePluginNode(item);
+			insertNode(item);
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
-			nodes.Add(itn);
+			items.Add(item);
 			pluginPropertiesButton_Click(sender, e);
 			instance.view?.tray.Rebuild();
 			Save();
@@ -744,18 +766,20 @@ namespace TrayDir {
 			TrayInstanceNode tin = new TrayInstanceNode();
 			tin.type = TrayInstanceNode.NodeType.Separator;
 			tin.SetInstance(instance);
-			ITreeNode itn = new ITreeSeparatorNode(tin);
-			insertNode(itn);
+			IItem item = new IItem();
+			item.TrayInstanceNode = tin;
+			ITreeNode itn = new ITreeSeparatorNode(item);
+			insertNode(item);
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
-			nodes.Add(itn);
+			items.Add(item);
 			itn.Refresh();
 			instance.view?.Rebuild();
 			Save();
 		}
 		private void pluginPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
-			TrayInstancePlugin tip = instance.plugins[itn.tin.id];
+			TrayInstancePlugin tip = instance.plugins[itn.Item.TrayInstanceNode.id];
 			IPluginForm ipf = new IPluginForm((TrayInstancePlugin)tip.Copy());
 			ipf.ShowDialog();
 			if (ipf.DialogResult == DialogResult.OK) {
@@ -768,7 +792,7 @@ namespace TrayDir {
 		}
 		private void vFolderPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
-			TrayInstanceVirtualFolder tivf = instance.vfolders[itn.tin.id];
+			TrayInstanceVirtualFolder tivf = instance.vfolders[itn.Item.TrayInstanceNode.id];
 			IVirtualFolderForm ivff = new IVirtualFolderForm((TrayInstanceVirtualFolder)tivf.Copy());
 			ivff.ShowDialog();
 			if (ivff.DialogResult == DialogResult.OK) {
@@ -781,7 +805,7 @@ namespace TrayDir {
 		}
 		private void webLinkPropertiesButton_Click(object sender, EventArgs e) {
 			ITreeNode itn = selectedNode;
-			TrayInstanceWebLink tivf = instance.weblinks[itn.tin.id];
+			TrayInstanceWebLink tivf = instance.weblinks[itn.Item.TrayInstanceNode.id];
 			IWebLinkForm iwlf = new IWebLinkForm((TrayInstanceWebLink)tivf.Copy());
 			iwlf.ShowDialog();
 			if (iwlf.DialogResult == DialogResult.OK) {
@@ -822,10 +846,7 @@ namespace TrayDir {
 				}
 			}
 		}
-		private ITreeNode CreatePathNode() {
-			return CreatePathNode(string.Empty);
-		}
-		private ITreeNode CreatePathNode(string path) {
+		private ITreeNode CreatePathNode(string path, IItem item) {
 			TrayInstancePath tip = new TrayInstancePath();
 			tip.path = path;
 			instance.paths.Add(tip);
@@ -834,23 +855,29 @@ namespace TrayDir {
 			tin.id = index;
 			tin.type = TrayInstanceNode.NodeType.Path;
 			tin.SetInstance(instance);
-			return new ITreePathNode(tin);
+			item.TrayInstanceNode = tin;
+			item.TrayInstanceItem = tip;
+			return new ITreePathNode(item);
 		}
-		private void AddNewPathOverB(string path, TreeNode B) {
-			ITreeNode itn = CreatePathNode(path);
+		private IItem AddNewPathOverB(string path, TreeNode B) {
+			IItem item = new IItem();
+			ITreeNode itn = CreatePathNode(path, item);
 			itn.Refresh();
-			nodes.Add(itn);
+			items.Add(item);
 			MoveAOverB(itn.node, B);
 			Save();
+			return item;
 		}
-		private void AddNewPath(string path) {
-			ITreeNode itn = CreatePathNode(path);
+		private IItem AddNewPath(string path) {
+			IItem item = new IItem();
+			ITreeNode itn = CreatePathNode(path, item);
 			itn.Refresh();
-			insertNode(itn);
+			insertNode(item);
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
-			nodes.Add(itn);
+			items.Add(item);
 			Save();
+			return item;
 		}
 		private void MoveAOverB(TreeNode A, TreeNode B) {
 			if ((!object.ReferenceEquals(A, B)) && (!ContainsNode(A, B))) {
@@ -879,9 +906,9 @@ namespace TrayDir {
 			return ContainsNode(node1, node2.Parent);
 		}
 		private TrayInstanceNode TreeNodeToInstanceNode(TreeNode node) {
-			foreach (ITreeNode n in nodes) {
-				if (object.ReferenceEquals(node, n.node)) {
-					return n.tin;
+			foreach (IItem item in items) {
+				if (object.ReferenceEquals(node, item.TreeNode.node)) {
+					return item.TrayInstanceNode;
 				}
 			}
 			return null;
@@ -889,10 +916,10 @@ namespace TrayDir {
 		public void RefreshSelected() {
 			if (selectedNode != null) {
 				selectedNode.Refresh();
-				TrayInstanceNode tin = selectedNode.tin;
+				TrayInstanceNode tin = selectedNode.Item.TrayInstanceNode;
 				bool found = false;
 				foreach (IMenuItem imi in instance.view.tray.menuItems) {
-					if (tin == imi.tiNode) {
+					if (tin == imi.Item.TrayInstanceNode) {
 						imi.Refresh();
 						imi.EnqueueImgLoad();
 						found = true;
@@ -914,11 +941,14 @@ namespace TrayDir {
 			tin.id = index;
 			tin.type = TrayInstanceNode.NodeType.WebLink;
 			tin.SetInstance(instance);
-			ITreeNode itn = new ITreeWebLinkNode(tin);
-			insertNode(itn);
+			IItem item = new IItem();
+			item.TrayInstanceItem = tiwl;
+			item.TrayInstanceNode = tin;
+			ITreeNode itn = new ITreeWebLinkNode(item);
+			insertNode(item);
 			treeView2.SelectedNode = itn.node;
 			selectedNode = itn;
-			nodes.Add(itn);
+			items.Add(item);
 			webLinkPropertiesButton_Click(sender, e);
 			instance.view?.tray.Rebuild();
 			Save();

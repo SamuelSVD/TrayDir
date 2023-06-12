@@ -8,11 +8,11 @@ using TrayDir.utils;
 
 namespace TrayDir.src.views {
 	internal class ITreeVirtualFolderNode : ITreeNode {
-		internal ITreeVirtualFolderNode(TrayInstanceNode tin) : base(tin) { }
+		internal ITreeVirtualFolderNode(IItem item) : base(item) { }
 		internal override void Refresh() {
 			bool hidden = false;
 			node.ImageIndex = IconUtils.QUESTION;
-			TrayInstanceVirtualFolder tivf = tin.GetVirtualFolder();
+			TrayInstanceVirtualFolder tivf = Item.TrayInstanceNode.GetVirtualFolder();
 			if (tivf != null) {
 				node.ImageIndex = IconUtils.FOLDER_BLUE;
 				node.Text = tivf.alias;
@@ -22,7 +22,7 @@ namespace TrayDir.src.views {
 		}
 		internal override bool Hidden {
 			get {
-				TrayInstanceItem model = tin.GetVirtualFolder();
+				TrayInstanceItem model = Item.TrayInstanceNode.GetVirtualFolder();
 				if (model != null) {
 					return !model.visible;
 				}

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using TrayDir.src.views;
 
 namespace TrayDir {
 	internal class IView {
@@ -12,14 +14,15 @@ namespace TrayDir {
 
 		internal ITreeViewForm treeviewForm;
 		internal ITray tray;
+		internal List<IItem> items = new List<IItem>();
 
 		internal IView(TrayInstance instance, TabPage tabPage) {
 			this.instance = instance;
 			this.InstanceTabPage = tabPage;
 
 			instance.view = this;
-			tray = new ITray(instance);
-			treeviewForm = new ITreeViewForm(instance);
+			treeviewForm = new ITreeViewForm(instance, items);
+			tray = new ITray(instance, items);
 
 			p = new Panel();
 			p.Dock = DockStyle.Fill;

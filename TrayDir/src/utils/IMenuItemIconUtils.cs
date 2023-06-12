@@ -93,10 +93,10 @@ namespace TrayDir.utils {
 		}
 		internal static void LoadIcon(IPluginMenuItem mi) {
 			if (mi.isPlugin) {
-				TrayPlugin tp = ((TrayInstancePlugin)mi.tiItem).plugin;
+				TrayPlugin tp = ((TrayInstancePlugin)mi.Item.TrayInstanceItem).plugin;
 				if (tp != null) {
 					if (tp.isScript) {
-						if (((TrayInstancePlugin)mi.tiItem).isValid()) {
+						if (((TrayInstancePlugin)mi.Item.TrayInstanceItem).isValid()) {
 							mi.menuIcon = (Bitmap)IconUtils.RunnableImage;
 						} else {
 							mi.menuIcon = (Bitmap)IconUtils.RunnableErrorImage;
@@ -127,7 +127,7 @@ namespace TrayDir.utils {
 		}
 		internal static void LoadIcon(IWebLinkMenuItem mi) {
 			if (mi.menuIcon is null && mi.isWebLink) {
-				if (((TrayInstanceWebLink)mi.tiItem).isValidURL) {
+				if (((TrayInstanceWebLink)mi.Item.TrayInstanceItem).isValidURL) {
 					mi.menuIcon = (Bitmap)IconUtils.WebLinkImage;
 				} else {
 					mi.menuIcon = (Bitmap)IconUtils.WebLinkErrorImage;
@@ -138,9 +138,9 @@ namespace TrayDir.utils {
 				if (mi.menuIcon is null && mi.isErr) {
 				mi.menuIcon = (Bitmap)IconUtils.QuestionImage;
 			} else if (mi.menuIcon is null && mi.isFile) {
-				string ext = Path.GetExtension(((TrayInstancePath)mi.tiItem).path);
+				string ext = Path.GetExtension(((TrayInstancePath)mi.Item.TrayInstanceItem).path);
 				if (ext.Length == 0 || ext == ".ico" || ext == ".lnk" || ext == ".exe" || (queue != imgLoadQueue && ext == ".url")) {
-					mi.menuIcon = Icon.ExtractAssociatedIcon(((TrayInstancePath)mi.tiItem).path).ToBitmap();
+					mi.menuIcon = Icon.ExtractAssociatedIcon(((TrayInstancePath)mi.Item.TrayInstanceItem).path).ToBitmap();
 				} else if (queue == imgLoadQueue && ext == ".url") {
 					urlLoadSemaphore.WaitOne();
 					MainForm.form.imgLoadTimer.Enabled = true;
@@ -149,12 +149,12 @@ namespace TrayDir.utils {
 				} else {
 					mi.menuIcon = IconUtils.lookupIcon(ext);
 					if (mi.menuIcon == null) {
-						mi.menuIcon = Icon.ExtractAssociatedIcon(((TrayInstancePath)mi.tiItem).path).ToBitmap();
+						mi.menuIcon = Icon.ExtractAssociatedIcon(((TrayInstancePath)mi.Item.TrayInstanceItem).path).ToBitmap();
 						IconUtils.addIcon(ext, mi.menuIcon);
 					}
 				}
 			} else if (mi.menuIcon is null && mi.isDir) {
-				if (mi.tiItem != null && mi.tiItem.GetType() == typeof(TrayInstancePath) && ((TrayInstancePath)mi.tiItem).shortcut) {
+				if (mi.Item.TrayInstanceItem != null && mi.Item.TrayInstanceItem.GetType() == typeof(TrayInstancePath) && ((TrayInstancePath)mi.Item.TrayInstanceItem).shortcut) {
 					mi.menuIcon = (Bitmap)IconUtils.FolderShortcutImage;
 				} else {
 					mi.menuIcon = (Bitmap)IconUtils.FolderImage;

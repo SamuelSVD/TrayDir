@@ -8,7 +8,7 @@ using TrayDir.utils;
 
 namespace TrayDir.src.views {
 	internal class ITreeUnknownNode : ITreeNode {
-		internal ITreeUnknownNode(TrayInstanceNode tin) : base(tin) {
+		internal ITreeUnknownNode(IItem item) : base(item) {
 		}
 
 		internal override void Refresh() {

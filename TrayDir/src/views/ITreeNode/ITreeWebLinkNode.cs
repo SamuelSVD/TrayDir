@@ -8,12 +8,12 @@ using TrayDir.utils;
 
 namespace TrayDir.src.views {
 	internal class ITreeWebLinkNode : ITreeNode {
-		internal ITreeWebLinkNode(TrayInstanceNode tin) : base(tin) {
+		internal ITreeWebLinkNode(IItem item) : base(item) {
 		}
 
 		internal override void Refresh() {
 			node.ImageIndex = IconUtils.QUESTION;
-			TrayInstanceWebLink tiwl = tin.GetWebLink();
+			TrayInstanceWebLink tiwl = Item.TrayInstanceNode.GetWebLink();
 			if (tiwl != null) {
 				if (tiwl.isValidURL) {
 					node.ImageIndex = IconUtils.WEBLINK;
@@ -27,7 +27,7 @@ namespace TrayDir.src.views {
 		}
 		internal override bool Hidden {
 			get {
-				TrayInstanceItem model = tin.GetWebLink();
+				TrayInstanceItem model = Item.TrayInstanceNode.GetWebLink();
 				if (model != null) {
 					return !model.visible;
 				}

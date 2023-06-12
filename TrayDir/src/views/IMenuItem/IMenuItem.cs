@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using TrayDir.src.views;
 using TrayDir.utils;
 
 namespace TrayDir {
 	internal abstract partial class IMenuItem {
 		internal TrayInstance instance;
-		internal TrayInstanceNode tiNode;
-		internal TrayInstanceItem tiItem;
+		internal IItem Item;
 
 		internal ToolStripMenuItem menuItem;
 		internal List<IMenuItem> nodeChildren = new List<IMenuItem>();
@@ -21,8 +22,8 @@ namespace TrayDir {
 
 		protected string alias {
 			get {
-				if (tiItem != null) {
-					return tiItem.alias;
+				if (Item.TrayInstanceItem != null) {
+					return Item.TrayInstanceItem.alias;
 				}
 				return null;
 			}
@@ -37,11 +38,11 @@ namespace TrayDir {
 			}
 		}
 
-		internal IMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceItem tiItem, IMenuItem parent) {
+		internal IMenuItem(TrayInstance instance, IItem item, IMenuItem parent) {
 			this.instance = instance;
-			this.tiNode = tiNode;
-			this.tiItem = tiItem;
+			this.Item = item;
 			this.parent = parent;
+			item.MenuItem = this;
 		}
 		internal abstract void ChildClear();
 		internal void Clear() {
@@ -80,8 +81,8 @@ namespace TrayDir {
 		protected abstract void showContextMenu(); /*{
 		} */
 		internal void UpdateVisibility() {
-			if (tiItem != null) {
-				menuItem.Visible = tiItem.visible;
+			if (Item.TrayInstanceItem != null) {
+				menuItem.Visible = Item.TrayInstanceItem.visible;
 			}
 		}
 		internal abstract void Load();/* {
@@ -105,5 +106,14 @@ namespace TrayDir {
 			UpdateVisibility();
 		}
 		internal abstract void MenuOpened();
+
+		internal void Delete() {
+			menuItem.GetCurrentParent().Items.Remove(menuItem);
+			if (parent != null) {
+				if (parent.nodeChildren.Contains(this)) {
+					parent.nodeChildren.Remove(this);
+				}
+			}
+		}
 	}
 }

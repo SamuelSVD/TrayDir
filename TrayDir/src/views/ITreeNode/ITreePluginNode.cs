@@ -8,11 +8,11 @@ using TrayDir.utils;
 
 namespace TrayDir.src.views {
 	internal class ITreePluginNode : ITreeNode {
-		internal ITreePluginNode(TrayInstanceNode tin) : base(tin) { }
+		internal ITreePluginNode(IItem item) : base(item) { }
 		internal override void Refresh() {
 			node.ImageIndex = IconUtils.QUESTION;
 			string pluginName = "";
-			TrayInstancePlugin iPlugin = tin.GetPlugin();
+			TrayInstancePlugin iPlugin = Item.TrayInstanceNode.GetPlugin();
 			TrayPlugin plugin = null;
 			if (iPlugin != null) {
 				plugin = iPlugin.plugin;
@@ -44,12 +44,12 @@ namespace TrayDir.src.views {
 					}
 				}
 			}
-			node.Text = string.Format("{0} ({1})", tin.instance.plugins[tin.id].alias, pluginName);
+			node.Text = string.Format("{0} ({1})", Item.TrayInstanceNode.instance.plugins[Item.TrayInstanceNode.id].alias, pluginName);
 			node.SelectedImageIndex = node.ImageIndex;
 		}
 		internal override bool Hidden {
 			get {
-				TrayInstanceItem model = tin.GetPlugin();
+				TrayInstanceItem model = Item.TrayInstanceNode.GetPlugin();
 				if (model != null) {
 					return !model.visible;
 				}

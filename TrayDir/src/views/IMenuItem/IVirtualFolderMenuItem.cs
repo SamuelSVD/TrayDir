@@ -1,10 +1,11 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using TrayDir.src.views;
 
 namespace TrayDir {
 	internal class IVirtualFolderMenuItem : IMenuItem {
-		internal bool isVFolder { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstanceVirtualFolder)); } }
-		internal IVirtualFolderMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceItem tiItem, IMenuItem parent) : base(instance, tiNode, tiItem, parent) {
+		internal bool isVFolder { get { return (Item.TrayInstanceItem != null && Item.TrayInstanceItem.GetType() == typeof(TrayInstanceVirtualFolder)); } }
+		internal IVirtualFolderMenuItem(TrayInstance instance, IItem item, IMenuItem parent) : base(instance, item, parent) {
 		}
 		internal override void AddToCollection(ToolStripItemCollection collection) {
 			collection.Add(menuItem);

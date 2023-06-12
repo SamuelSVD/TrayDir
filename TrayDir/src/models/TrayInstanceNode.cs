@@ -17,13 +17,13 @@ namespace TrayDir {
 		public List<TrayInstanceNode> children;
 
 		[XmlIgnore]
-		public TrayInstanceNode parent;
+		public TrayInstanceNode parent { get; set; }
 		[XmlIgnore]
-		public TrayInstance instance;
+		public TrayInstance instance { get; set; }
 		[XmlIgnore]
-		public ITreeNode itn;
+		public ITreeNode itn { get; set; }
 		[XmlIgnore]
-		public TrayInstanceItem __item;
+		public TrayInstanceItem __item { get; set; }
 
 		public int NodeCount { get { int i = 0; if (type == NodeType.Path || type == NodeType.Plugin) i++; foreach (TrayInstanceNode tin in children) i += tin.NodeCount; return i; } }
 		public int ParentIndex { get { if (parent == null) { return -1; } return parent.children.IndexOf(this); } }

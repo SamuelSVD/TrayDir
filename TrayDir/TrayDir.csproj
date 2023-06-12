@@ -242,6 +242,7 @@
     <Compile Include="src\utils\TrayUtils.cs" />
     <Compile Include="src\utils\UpdateUtils.cs" />
     <Compile Include="src\utils\XMLUtils.cs" />
+    <Compile Include="src\views\IItem.cs" />
     <Compile Include="src\views\IMenuItem\IMenuItem.Events.cs" />
     <Compile Include="src\views\ComboBoxView.cs" />
     <Compile Include="src\views\IMenuItem\IWebLinkMenuItem.cs" />

@@ -1,12 +1,13 @@
 ﻿using System.Drawing;
+using TrayDir.src.views;
 using TrayDir.utils;
 
 namespace TrayDir {
 	internal class ITreePathNode : ITreeNode {
-		internal ITreePathNode(TrayInstanceNode tin) : base(tin) { }
+		internal ITreePathNode(IItem item) : base(item) { }
 		internal override void Refresh() {
 			node.ImageIndex = IconUtils.QUESTION;
-			TrayInstancePath tip = tin.GetPath();
+			TrayInstancePath tip = Item.TrayInstanceNode.GetPath();
 			if (tip != null) {
 				bool hasAlias = alias != null && alias != string.Empty;
 				if (tip.isDir) {
@@ -24,13 +25,13 @@ namespace TrayDir {
 					node.Text = Properties.Strings.Node_Error;
 				}
 				node.Text += hasAlias ? alias : string.Empty;
-				node.Text += hasAlias ? " (" + tin.instance.paths[tin.id].path + ")" : tin.instance.paths[tin.id].path;
+				node.Text += hasAlias ? " (" + Item.TrayInstanceNode.instance.paths[Item.TrayInstanceNode.id].path + ")" : Item.TrayInstanceNode.instance.paths[Item.TrayInstanceNode.id].path;
 			}
 			node.SelectedImageIndex = node.ImageIndex;
 		}
 		internal override bool Hidden {
 			get {
-				TrayInstanceItem model = tin.GetPath();
+				TrayInstanceItem model = Item.TrayInstanceNode.GetPath();
 				if (model != null) {
 					return !model.visible;
 				}

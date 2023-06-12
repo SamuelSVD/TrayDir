@@ -1,10 +1,11 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using TrayDir.src.views;
 
 namespace TrayDir {
 	internal class IPluginMenuItem : IMenuItem {
-		internal bool isPlugin { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstancePlugin)); } }
-		internal IPluginMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceItem tiItem, IMenuItem parent) : base(instance, tiNode, tiItem, parent) {
+		internal bool isPlugin { get { return (Item.TrayInstanceItem != null && Item.TrayInstanceItem.GetType() == typeof(TrayInstancePlugin)); } }
+		internal IPluginMenuItem(TrayInstance instance, IItem item, IMenuItem parent) : base(instance, item, parent) {
 		}
 		internal override void AddToCollection(ToolStripItemCollection collection) {
 			collection.Add(menuItem);
@@ -25,7 +26,7 @@ namespace TrayDir {
 				menuItem.Text = alias;
 			} else {
 				if (isPlugin) {
-					TrayPlugin plugin = ((TrayInstancePlugin)tiItem).plugin;
+					TrayPlugin plugin = ((TrayInstancePlugin)Item.TrayInstanceItem).plugin;
 					if (plugin != null) {
 						if (plugin.name == null || plugin.name == string.Empty) {
 							menuItem.Text = "(plugin item)";

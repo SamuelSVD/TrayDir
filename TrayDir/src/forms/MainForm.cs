@@ -38,6 +38,7 @@ namespace TrayDir {
 			if (!Program.IGNORESTARTUP) pd.CheckStartup();
 		}
 		public void LoadProgram() {
+			pd.FixInstances();
 			InitializeContent();
 			BuildExploreDropdown();
 			BuildRebuildDropdown();

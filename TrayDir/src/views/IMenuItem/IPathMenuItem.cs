@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using TrayDir.src.views;
 
 namespace TrayDir {
 	internal class IPathMenuItem : IMenuItem {
@@ -11,18 +12,18 @@ namespace TrayDir {
 		private List<IMenuItem> fileMenuItems = new List<IMenuItem>();
 		private List<IMenuItem> folderChildren = new List<IMenuItem>();
 		private bool painted = false;
-		internal bool isErr { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) ? !(Directory.Exists(((TrayInstancePath)tiItem).path) || File.Exists(((TrayInstancePath)tiItem).path)) : false; } }
-		internal bool isDir { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) ? AppUtils.PathIsDirectory(((TrayInstancePath)tiItem).path) : false; } }
-		internal bool isFile { get { return (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) ? AppUtils.PathIsFile(((TrayInstancePath)tiItem).path) : false; } }
+		internal bool isErr { get { return (Item.TrayInstanceItem != null && Item.TrayInstanceItem.GetType() == typeof(TrayInstancePath)) ? !(Directory.Exists(((TrayInstancePath)Item.TrayInstanceItem).path) || File.Exists(((TrayInstancePath)Item.TrayInstanceItem).path)) : false; } }
+		internal bool isDir { get { return (Item.TrayInstanceItem != null && Item.TrayInstanceItem.GetType() == typeof(TrayInstancePath)) ? AppUtils.PathIsDirectory(((TrayInstancePath)Item.TrayInstanceItem).path) : false; } }
+		internal bool isFile { get { return (Item.TrayInstanceItem != null && Item.TrayInstanceItem.GetType() == typeof(TrayInstancePath)) ? AppUtils.PathIsFile(((TrayInstancePath)Item.TrayInstanceItem).path) : false; } }
 
 
-		internal IPathMenuItem(TrayInstance instance, TrayInstanceNode tiNode, TrayInstanceItem tiItem, IMenuItem parent) : base(instance, tiNode, tiItem, parent) {
+		internal IPathMenuItem(TrayInstance instance, IItem item, IMenuItem parent) : base(instance, item, parent) {
 		}
 
 		internal override void AddToCollection(ToolStripItemCollection collection) {
 			collection.Add(menuItem);
 
-			if (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) {
+			if (Item.TrayInstanceItem != null && Item.TrayInstanceItem.GetType() == typeof(TrayInstancePath)) {
 				if (folderChildren.Count != menuItem.DropDownItems.Count) {
 					menuItem.DropDownItems.Clear();
 					dirMenuItems.Clear();
@@ -133,12 +134,12 @@ namespace TrayDir {
 				menuItem.Text = alias;
 			} else {
 				if (isDir) {
-					menuItem.Text = new DirectoryInfo(((TrayInstancePath)tiItem).path).Name;
+					menuItem.Text = new DirectoryInfo(((TrayInstancePath)Item.TrayInstanceItem).path).Name;
 				} else if (isFile) {
 					if (instance.settings.ShowFileExtensions) {
-						menuItem.Text = Path.GetFileName(((TrayInstancePath)tiItem).path);
+						menuItem.Text = Path.GetFileName(((TrayInstancePath)Item.TrayInstanceItem).path);
 					} else {
-						menuItem.Text = Path.GetFileNameWithoutExtension(((TrayInstancePath)tiItem).path);
+						menuItem.Text = Path.GetFileNameWithoutExtension(((TrayInstancePath)Item.TrayInstanceItem).path);
 					}
 				}
 			}
@@ -154,11 +155,11 @@ namespace TrayDir {
 					fileMenuItems.Add(child);
 				}
 			}
-			if (isDir && ((TrayInstancePath)tiItem).shortcut) {
+			if (isDir && ((TrayInstancePath)Item.TrayInstanceItem).shortcut) {
 				folderChildren.Clear();
 				menuItem.DropDownItems.Clear();
 			}
-			if (folderChildren.Count == 0 && isDir && !((TrayInstancePath)tiItem).shortcut) {
+			if (folderChildren.Count == 0 && isDir && !((TrayInstancePath)Item.TrayInstanceItem).shortcut) {
 				menuItem.DropDownItems.Add("(Empty)");
 			}
 			if (ProgramData.pd.settings.app.MenuSorting != "None") {
@@ -184,7 +185,7 @@ namespace TrayDir {
 			}
 		}
 		private void LoadFolderChildren(object sender, PaintEventArgs e) {
-			if (!painted && isDir && !((TrayInstancePath)tiItem).shortcut) {
+			if (!painted && isDir && !((TrayInstancePath)Item.TrayInstanceItem).shortcut) {
 				painted = true;
 				MakeChildren();
 				Load();
@@ -193,7 +194,7 @@ namespace TrayDir {
 			painted = true;
 		}
 		protected void LoadChildrenIconEvent(Object obj, EventArgs args) {
-			if (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) {
+			if (Item.TrayInstanceItem != null && Item.TrayInstanceItem.GetType() == typeof(TrayInstancePath)) {
 				foreach (IMenuItem child in folderChildren) {
 					child.EnqueueImgLoad();
 				}
@@ -202,8 +203,8 @@ namespace TrayDir {
 		private void MakeChildren() {
 			if (isDir) {
 				try {
-					string[] dirpaths = Directory.GetFileSystemEntries(((TrayInstancePath)tiItem).path);
-					DirectoryInfo di = new DirectoryInfo(((TrayInstancePath)tiItem).path);
+					string[] dirpaths = Directory.GetFileSystemEntries(((TrayInstancePath)Item.TrayInstanceItem).path);
+					DirectoryInfo di = new DirectoryInfo(((TrayInstancePath)Item.TrayInstanceItem).path);
 					foreach (FileInfo fp in di.GetFiles()) {
 						MakeFileChild(fp);
 					}
@@ -217,12 +218,12 @@ namespace TrayDir {
 		private void MakeDirChild(DirectoryInfo fp) {
 			if (isRegexMatch(fp.FullName)) return;
 			if (!(ProgramData.pd.settings.win.ShowHiddenFiles) && fp.Attributes.HasFlag(FileAttributes.Hidden)) return;
-			folderChildren.Add(new IPathMenuItem(instance, null, new TrayInstancePath(fp.FullName), this));
+			folderChildren.Add(new IPathMenuItem(instance, new IItem() { TrayInstanceItem = new TrayInstancePath(fp.FullName) }, this));
 		}
 		private void MakeFileChild(FileInfo fp) {
 			if (isRegexMatch(fp.FullName)) return;
 			if (!(ProgramData.pd.settings.win.ShowHiddenFiles) && fp.Attributes.HasFlag(FileAttributes.Hidden)) return;
-			folderChildren.Add(new IPathMenuItem(instance, null, new TrayInstancePath(fp.FullName), this));
+			folderChildren.Add(new IPathMenuItem(instance, new IItem() { TrayInstanceItem = new TrayInstancePath(fp.FullName) }, this));
 		}
 		private bool isRegexMatch(string val) {
 			bool match = false;
@@ -243,7 +244,7 @@ namespace TrayDir {
 		}
 		internal void RemoveChildren() {
 			RemoveChildren(nodeChildren);
-			if (tiItem != null && tiItem.GetType() == typeof(TrayInstancePath)) {
+			if (Item.TrayInstanceItem != null && Item.TrayInstanceItem.GetType() == typeof(TrayInstancePath)) {
 				RemoveChildren(folderChildren);
 				RemoveChildren(dirMenuItems);
 				RemoveChildren(fileMenuItems);

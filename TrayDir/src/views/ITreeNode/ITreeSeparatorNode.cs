@@ -8,7 +8,7 @@ using TrayDir.utils;
 
 namespace TrayDir.src.views {
 	internal class ITreeSeparatorNode : ITreeNode {
-		internal ITreeSeparatorNode(TrayInstanceNode tin) : base(tin) {
+		internal ITreeSeparatorNode(IItem item) : base(item) {
 		}
 
 		internal override void Refresh() {
