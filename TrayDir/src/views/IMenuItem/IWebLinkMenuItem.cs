@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using TrayDir.src.views;
 
@@ -42,11 +43,16 @@ namespace TrayDir {
 
 				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_Open);
 				tsi.Click += Run;
+				tsi = cmnu.Items.Add(Properties.Strings.MenuItem_CopyLink);
+				tsi.Click += CopyHyperlink;
 
 				cmnu.Show();
 				cmnu.Location = pt;
 				cmnu.Closing += MenuDestroy;
 			}
+		}
+		protected void CopyHyperlink(object obj, EventArgs args) {
+			Clipboard.SetText(Item.TrayInstanceNode.GetWebLink().URL);
 		}
 	}
 }

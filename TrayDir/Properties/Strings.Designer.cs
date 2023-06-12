@@ -619,6 +619,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy Link to Clipboard.
+        /// </summary>
+        internal static string MenuItem_CopyLink {
+            get {
+                return ResourceManager.GetString("MenuItem_CopyLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         internal static string MenuItem_Exit {

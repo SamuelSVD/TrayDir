@@ -309,6 +309,9 @@ Verify all required parameters are provided.</value>
   <data name="Item_UseAsShortcut" xml:space="preserve">
     <value>Use folder link as shortcut</value>
   </data>
+  <data name="MenuItem_CopyLink" xml:space="preserve">
+    <value>Copy Link to Clipboard</value>
+  </data>
   <data name="MenuItem_Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
