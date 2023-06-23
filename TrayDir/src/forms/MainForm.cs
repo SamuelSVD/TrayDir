@@ -452,7 +452,7 @@ namespace TrayDir {
 			trayInstance.view.treeviewForm.treeView2_KeyDown(sender, e);
 		}
 		internal void UpdateInstanceIcons() {
-			for(int i = 0; i < ProgramData.pd.trayInstances.Count; i++) {
+			for (int i = 0; i < ProgramData.pd.trayInstances.Count; i++) {
 				TrayInstance ti = ProgramData.pd.trayInstances[i];
 				CustomTabPage ctp = (CustomTabPage)instanceTabs.TabPages[i];
 				ctp.Image = ti.view.tray.notifyIcon.Icon.ToBitmap();
@@ -474,6 +474,18 @@ namespace TrayDir {
 					}
 				}
 			}
+		}
+
+		internal void TryHideAll() {
+			try {
+				foreach (TrayInstance trayInstance in ProgramData.pd.trayInstances) {
+					try {
+						trayInstance.view.tray.Hide();
+					}
+					catch { }
+				}
+			}
+			catch { }
 		}
 	}
 }

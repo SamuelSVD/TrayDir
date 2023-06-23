@@ -31,6 +31,7 @@ namespace TrayDir {
 					UnhandledExceptionForm f = new UnhandledExceptionForm();
 					f.richEdit.Text = "Unhandled exception." + Environment.NewLine + e.Message + Environment.NewLine + e.StackTrace;
 					f.ShowDialog();
+					MainForm.form.TryHideAll();
 				}
 			}
 		}
