@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using TrayDir.src.views;
 using TrayDir.utils;
+using Utils;
 
 namespace TrayDir {
 	internal class ITray {
@@ -367,7 +369,21 @@ namespace TrayDir {
 				if (instance.iconData != null) {
 					i = TrayUtils.BytesToIcon(instance.iconData);
 				} else if (AppUtils.PathIsFile(instance.iconPath)) {
-					i = Icon.ExtractAssociatedIcon(instance.iconPath);
+					if (new FileInfo(instance.iconPath).Length < 5*10*10*10*10*10*10) {
+						byte[] fileBytes = File.ReadAllBytes(instance.iconPath);
+						switch (FileImageUtils.GetImageFormat(fileBytes)) {
+							case FileImageUtils.ImageFormat.unknown:
+								i = Icon.ExtractAssociatedIcon(instance.iconPath);
+								break;
+							default:
+								Bitmap bmp = (Bitmap)Bitmap.FromFile(instance.iconPath);
+								IntPtr Hicon = bmp.GetHicon();
+								i = Icon.FromHandle(Hicon);
+								break;
+						}
+					} else {
+						i = Icon.ExtractAssociatedIcon(instance.iconPath);
+					}
 				} else {
 					i = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
 				}
