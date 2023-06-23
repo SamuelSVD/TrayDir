@@ -163,7 +163,7 @@
     <value>399, 17</value>
   </data>
   <data name="hideItemCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>5</value>
   </data>
   <data name="hideItemCheckBox.Text" xml:space="preserve">
     <value>Hide item from System Tray menu</value>
@@ -193,7 +193,7 @@
     <value>75, 23</value>
   </data>
   <data name="fileBrowseButton.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>2</value>
   </data>
   <data name="fileBrowseButton.Text" xml:space="preserve">
     <value>File</value>
@@ -274,7 +274,7 @@
     <value>397, 20</value>
   </data>
   <data name="aliasEdit.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;aliasEdit.Name" xml:space="preserve">
     <value>aliasEdit</value>
@@ -298,7 +298,7 @@
     <value>75, 23</value>
   </data>
   <data name="folderBrowseButton.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>3</value>
   </data>
   <data name="folderBrowseButton.Text" xml:space="preserve">
     <value>Folder</value>
@@ -334,7 +334,7 @@
     <value>399, 17</value>
   </data>
   <data name="shortcutCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>4</value>
   </data>
   <data name="shortcutCheckBox.Text" xml:space="preserve">
     <value>Use folder as shortcut</value>
@@ -358,13 +358,13 @@
     <value>397, 22</value>
   </data>
   <data name="pathTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;pathTextBox.Name" xml:space="preserve">
     <value>pathTextBox</value>
   </data>
   <data name="&gt;&gt;pathTextBox.Type" xml:space="preserve">
-    <value>TrayDir.ValidateTextBox, TrayDir, Version=3.3.2.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>TrayDir.ValidateTextBox, TrayDir, Version=3.3.2.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;pathTextBox.Parent" xml:space="preserve">
     <value>pluginTableLayoutPanel</value>
@@ -385,7 +385,7 @@
     <value>403, 151</value>
   </data>
   <data name="pluginTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;pluginTableLayoutPanel.Name" xml:space="preserve">
     <value>pluginTableLayoutPanel</value>
@@ -442,7 +442,7 @@
     <value>75, 23</value>
   </data>
   <data name="OkButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="OkButton.Text" xml:space="preserve">
     <value>OK</value>
@@ -469,7 +469,7 @@
     <value>75, 23</value>
   </data>
   <data name="FormCancelButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="FormCancelButton.Text" xml:space="preserve">
     <value>Cancel</value>

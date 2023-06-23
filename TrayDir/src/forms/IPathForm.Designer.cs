@@ -39,9 +39,9 @@ namespace TrayDir
 			this.aliasEdit = new System.Windows.Forms.TextBox();
 			this.folderBrowseButton = new System.Windows.Forms.Button();
 			this.shortcutCheckBox = new System.Windows.Forms.CheckBox();
+			this.pathTextBox = new TrayDir.ValidateTextBox();
 			this.OkButton = new System.Windows.Forms.Button();
 			this.FormCancelButton = new System.Windows.Forms.Button();
-			this.pathTextBox = new TrayDir.ValidateTextBox();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.pluginTableLayoutPanel.SuspendLayout();
@@ -123,6 +123,14 @@ namespace TrayDir
 			this.shortcutCheckBox.UseVisualStyleBackColor = true;
 			this.shortcutCheckBox.CheckedChanged += new System.EventHandler(this.shortcutCheckBox_CheckedChanged);
 			// 
+			// pathTextBox
+			// 
+			this.pluginTableLayoutPanel.SetColumnSpan(this.pathTextBox, 3);
+			resources.ApplyResources(this.pathTextBox, "pathTextBox");
+			this.pathTextBox.Name = "pathTextBox";
+			this.pathTextBox.TooltipText = null;
+			this.pathTextBox.Valid = false;
+			// 
 			// OkButton
 			// 
 			resources.ApplyResources(this.OkButton, "OkButton");
@@ -137,14 +145,6 @@ namespace TrayDir
 			this.FormCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.FormCancelButton.Name = "FormCancelButton";
 			this.FormCancelButton.UseVisualStyleBackColor = true;
-			// 
-			// pathTextBox
-			// 
-			this.pluginTableLayoutPanel.SetColumnSpan(this.pathTextBox, 3);
-			resources.ApplyResources(this.pathTextBox, "pathTextBox");
-			this.pathTextBox.Name = "pathTextBox";
-			this.pathTextBox.TooltipText = null;
-			this.pathTextBox.Valid = false;
 			// 
 			// IPathForm
 			// 
