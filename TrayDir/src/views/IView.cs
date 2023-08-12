@@ -1,26 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using TrayDir.src.views;
 
-namespace TrayDir
-{
-	public class IView
-	{
+namespace TrayDir {
+	internal class IView {
 		private TrayInstance instance;
 
-		public TabPage InstanceTabPage;
+		internal TabPage InstanceTabPage;
 
-		public Panel p;
+		internal Panel p;
 
-		public ITreeViewForm treeviewForm;
-		public ITray tray;
-		
-		public IView(TrayInstance instance)
-		{
+		internal ITreeViewForm treeviewForm;
+		internal ITray tray;
+		internal List<IItem> items = new List<IItem>();
+
+		internal IView(TrayInstance instance, TabPage tabPage) {
 			this.instance = instance;
+			this.InstanceTabPage = tabPage;
+
 			instance.view = this;
-			tray = new ITray(instance);
-			treeviewForm = new ITreeViewForm(instance);
+			treeviewForm = new ITreeViewForm(instance, items);
+			tray = new ITray(instance, items);
 
 			p = new Panel();
 			p.Dock = DockStyle.Fill;
@@ -30,9 +32,19 @@ namespace TrayDir
 			p.MinimumSize = c.Size;
 			if (Program.DEBUG) p.BackColor = Color.Violet;
 			p.Controls.Add(c);
+
+			//Initialize tab page 
+			tabPage.Text = instance.instanceName;
+			tabPage.Controls.Add(GetControl());
+			treeviewForm.setTabPage(tabPage);
+			//Add event handlers
+			tray.setEventHandlers(new EventHandler(delegate (Object obj, EventArgs args) {
+				MainForm.form.onShowInstance = instance;
+				MainForm.form.ShowApp(obj, args);
+			}), MainForm.form.HideApp,
+				MainForm.form.ExitApp);
 		}
-		public Control GetControl()
-		{
+		internal Control GetControl() {
 			return p;
 		}
 

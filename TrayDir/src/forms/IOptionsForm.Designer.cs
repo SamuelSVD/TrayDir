@@ -63,6 +63,7 @@ namespace TrayDir
 			this.groupBox1.Controls.Add(this.tableLayoutPanel1);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.TabStop = false;
+			this.toolTip.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
 			// 
 			// tableLayoutPanel1
 			// 
@@ -71,12 +72,14 @@ namespace TrayDir
 			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 0);
 			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			this.toolTip.SetToolTip(this.tableLayoutPanel1, resources.GetString("tableLayoutPanel1.ToolTip"));
 			// 
 			// verticalSeparator1
 			// 
 			resources.ApplyResources(this.verticalSeparator1, "verticalSeparator1");
 			this.verticalSeparator1.LineColor = System.Drawing.Color.LightGray;
 			this.verticalSeparator1.Name = "verticalSeparator1";
+			this.toolTip.SetToolTip(this.verticalSeparator1, resources.GetString("verticalSeparator1.ToolTip"));
 			// 
 			// tableLayoutPanel2
 			// 
@@ -85,24 +88,28 @@ namespace TrayDir
 			this.tableLayoutPanel2.Controls.Add(this.iconBox, 0, 0);
 			this.tableLayoutPanel2.Controls.Add(this.browseButton, 0, 1);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+			this.toolTip.SetToolTip(this.tableLayoutPanel2, resources.GetString("tableLayoutPanel2.ToolTip"));
 			// 
 			// resetButton
 			// 
 			resources.ApplyResources(this.resetButton, "resetButton");
 			this.resetButton.Name = "resetButton";
+			this.toolTip.SetToolTip(this.resetButton, resources.GetString("resetButton.ToolTip"));
 			this.resetButton.UseVisualStyleBackColor = true;
 			// 
 			// iconBox
 			// 
-			this.iconBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			resources.ApplyResources(this.iconBox, "iconBox");
+			this.iconBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.iconBox.Name = "iconBox";
 			this.iconBox.TabStop = false;
+			this.toolTip.SetToolTip(this.iconBox, resources.GetString("iconBox.ToolTip"));
 			// 
 			// browseButton
 			// 
 			resources.ApplyResources(this.browseButton, "browseButton");
 			this.browseButton.Name = "browseButton";
+			this.toolTip.SetToolTip(this.browseButton, resources.GetString("browseButton.ToolTip"));
 			this.browseButton.UseVisualStyleBackColor = true;
 			// 
 			// tableLayoutPanel3
@@ -116,6 +123,7 @@ namespace TrayDir
 			this.tableLayoutPanel3.Controls.Add(this.nameLabel, 0, 0);
 			this.tableLayoutPanel3.Controls.Add(this.nameTextBox, 0, 1);
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+			this.toolTip.SetToolTip(this.tableLayoutPanel3, resources.GetString("tableLayoutPanel3.ToolTip"));
 			// 
 			// hideFromTrayCheckBox
 			// 
@@ -161,11 +169,13 @@ namespace TrayDir
 			// 
 			resources.ApplyResources(this.nameLabel, "nameLabel");
 			this.nameLabel.Name = "nameLabel";
+			this.toolTip.SetToolTip(this.nameLabel, resources.GetString("nameLabel.ToolTip"));
 			// 
 			// nameTextBox
 			// 
 			resources.ApplyResources(this.nameTextBox, "nameTextBox");
 			this.nameTextBox.Name = "nameTextBox";
+			this.toolTip.SetToolTip(this.nameTextBox, resources.GetString("nameTextBox.ToolTip"));
 			this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
 			// 
 			// closeButton
@@ -173,6 +183,7 @@ namespace TrayDir
 			resources.ApplyResources(this.closeButton, "closeButton");
 			this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.closeButton.Name = "closeButton";
+			this.toolTip.SetToolTip(this.closeButton, resources.GetString("closeButton.ToolTip"));
 			this.closeButton.UseVisualStyleBackColor = true;
 			// 
 			// tableLayoutPanel4
@@ -181,6 +192,7 @@ namespace TrayDir
 			this.tableLayoutPanel4.Controls.Add(this.closeButton, 0, 1);
 			this.tableLayoutPanel4.Controls.Add(this.groupBox1, 0, 0);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+			this.toolTip.SetToolTip(this.tableLayoutPanel4, resources.GetString("tableLayoutPanel4.ToolTip"));
 			// 
 			// IOptionsForm
 			// 
@@ -193,6 +205,7 @@ namespace TrayDir
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "IOptionsForm";
+			this.toolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
 			this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.IOptionsForm_HelpButtonClicked);
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IOptionsForm_FormClosed);
 			this.groupBox1.ResumeLayout(false);

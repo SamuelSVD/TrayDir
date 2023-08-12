@@ -12,6 +12,7 @@ namespace TrayDir
 		public IOptionsForm(TrayInstance instance)
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			this.instance = instance;
 			Icon = instance.view.tray.icon;
 			iconBox.Image = Icon.ToBitmap();
@@ -26,6 +27,7 @@ namespace TrayDir
 					resetButton.Enabled = true;
 					instance.view.tray.UpdateTrayIcon();
 					iconBox.Image = instance.view.tray.icon.ToBitmap();
+					MainForm.form.UpdateInstanceIcons();
 					MainForm.form.pd.Save();
 				}
 			});
@@ -37,6 +39,7 @@ namespace TrayDir
 				instance.iconData = null;
 				instance.view.tray.UpdateTrayIcon();
 				iconBox.Image = instance.view.tray.icon.ToBitmap();
+				MainForm.form.UpdateInstanceIcons();
 				MainForm.form.pd.Save();
 				resetButton.Enabled = false;
 			});

@@ -4,6 +4,7 @@ Win32/
 *.local
 TrayDir/obj
 TrayDir/bin
+Installer/bin
 .vs
 *.suo
 Installer/binaries

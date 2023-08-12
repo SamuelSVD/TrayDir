@@ -8,6 +8,7 @@ namespace TrayDir
 		public About()
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			versionLabel.Text = string.Format(Properties.Strings.Version, Assembly.GetEntryAssembly().GetName().Version.ToString());
 		}
 

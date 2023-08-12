@@ -153,6 +153,9 @@
   <data name="Form_Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="Form_CreateFoldersAsShortcuts" xml:space="preserve">
+    <value>Create folder items as shortcuts</value>
+  </data>
   <data name="Form_Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -221,6 +224,12 @@
     <value>There are no plugins configured.
 Would you like to configure one now?</value>
   </data>
+  <data name="Form_OpenConfiguration" xml:space="preserve">
+    <value>Open Configuration</value>
+  </data>
+  <data name="Form_OpenConfigurationConfirmation" xml:space="preserve">
+    <value>Would you like to load a configuration from a file? All current data will be lost and TrayDir will restart.</value>
+  </data>
   <data name="Form_OpenFoldersInFileExplorerOnClick" xml:space="preserve">
     <value>Open Folders in File Explorer When Clicked</value>
   </data>
@@ -243,8 +252,14 @@ Verify all required parameters are provided.</value>
   <data name="Form_ShowFileExtensions" xml:space="preserve">
     <value>Show File Extensions</value>
   </data>
+  <data name="Form_ShowHiddenFiles" xml:space="preserve">
+    <value>Show Hidden Files</value>
+  </data>
   <data name="Form_ShowIconsInTrayMenu" xml:space="preserve">
     <value>Show Icons In Tray Menu</value>
+  </data>
+  <data name="Form_ShowMenuOnLeftClick" xml:space="preserve">
+    <value>Show TrayMenu on Left Click</value>
   </data>
   <data name="Form_StartMinimized" xml:space="preserve">
     <value>Start Minimized</value>
@@ -293,6 +308,9 @@ Verify all required parameters are provided.</value>
   </data>
   <data name="Item_UseAsShortcut" xml:space="preserve">
     <value>Use folder link as shortcut</value>
+  </data>
+  <data name="MenuItem_CopyLink" xml:space="preserve">
+    <value>Copy Link to Clipboard</value>
   </data>
   <data name="MenuItem_Exit" xml:space="preserve">
     <value>Exit</value>
@@ -350,8 +368,26 @@ Verify all required parameters are provided.</value>
     <value>Another process of TrayDir is already running.
 Do you want to start a new one?</value>
   </data>
+  <data name="Setting_Sorting_FoldersBottom" xml:space="preserve">
+    <value>Folders Bottom</value>
+  </data>
+  <data name="Setting_Sorting_FoldersTop" xml:space="preserve">
+    <value>Folders Top</value>
+  </data>
+  <data name="Setting_Sorting_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Setting_VFolderColour_Blue" xml:space="preserve">
+    <value>Blue Folder</value>
+  </data>
+  <data name="Setting_VFolderColour_Yellow" xml:space="preserve">
+    <value>Yellow Folder</value>
+  </data>
   <data name="Tooltip_CheckForUpdatesOnStartup" xml:space="preserve">
     <value>When enabled, TrayDir will check for update on startup</value>
+  </data>
+  <data name="Tooltip_CreateFoldersAsShortcuts" xml:space="preserve">
+    <value>New folder items created will be shortcuts by default</value>
   </data>
   <data name="Tooltip_ExpandFirstPath" xml:space="preserve">
     <value>When this instance has a folder as the only item, the
@@ -365,6 +401,12 @@ folder's contents will be used as the main menu structure</value>
   </data>
   <data name="Tooltip_InsertInstance" xml:space="preserve">
     <value>Insert new instance</value>
+  </data>
+  <data name="Tooltip_InvalidPath" xml:space="preserve">
+    <value>Invalid path. File or folder not found.</value>
+  </data>
+  <data name="Tooltip_InvalidUrl" xml:space="preserve">
+    <value>Invalid URL. Verify it begins with http:// or https:// and contains valid characters</value>
   </data>
   <data name="Tooltip_MenuSorting" xml:space="preserve">
     <value>Set tray menu folder / file sorting</value>
@@ -382,14 +424,23 @@ them from the System Tray menu</value>
   <data name="Tooltip_ShowFileExtensions" xml:space="preserve">
     <value>Show file extensions. E.g. File.txt</value>
   </data>
+  <data name="Tooltip_ShowHiddenFiles" xml:space="preserve">
+    <value>When enabled, hidden files will be shown inside of folder menu items</value>
+  </data>
   <data name="Tooltip_ShowIconsInTrayMenu" xml:space="preserve">
     <value>When enabled, each menu item will show the icon associated with the file linked</value>
+  </data>
+  <data name="Tooltip_ShowMenuOnLeftClick" xml:space="preserve">
+    <value>When enabled, left clicking on the tray menu item will display the context menu</value>
   </data>
   <data name="Tooltip_StartMinimized" xml:space="preserve">
     <value>When enabled, the application will always start hidden, only visible in system tray</value>
   </data>
   <data name="Tooltip_StartWithWindows" xml:space="preserve">
     <value>When enabled, the application will start when you log in to your account on Windows</value>
+  </data>
+  <data name="Tooltip_ValueRequired" xml:space="preserve">
+    <value>Value required</value>
   </data>
   <data name="Tooltip_VirtualFolderMenuIcon" xml:space="preserve">
     <value>When virtual folders choose between a yellow folder or blue folder icon</value>

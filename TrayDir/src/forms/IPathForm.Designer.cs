@@ -37,10 +37,11 @@ namespace TrayDir
 			this.pathLabel = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.aliasEdit = new System.Windows.Forms.TextBox();
-			this.pathTextBox = new System.Windows.Forms.TextBox();
 			this.folderBrowseButton = new System.Windows.Forms.Button();
 			this.shortcutCheckBox = new System.Windows.Forms.CheckBox();
-			this.closeButton = new System.Windows.Forms.Button();
+			this.pathTextBox = new TrayDir.ValidateTextBox();
+			this.OkButton = new System.Windows.Forms.Button();
+			this.FormCancelButton = new System.Windows.Forms.Button();
 			this.tableLayoutPanel4.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.pluginTableLayoutPanel.SuspendLayout();
@@ -50,7 +51,8 @@ namespace TrayDir
 			// 
 			resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
 			this.tableLayoutPanel4.Controls.Add(this.groupBox1, 0, 0);
-			this.tableLayoutPanel4.Controls.Add(this.closeButton, 1, 1);
+			this.tableLayoutPanel4.Controls.Add(this.OkButton, 0, 1);
+			this.tableLayoutPanel4.Controls.Add(this.FormCancelButton, 1, 1);
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
 			// 
 			// groupBox1
@@ -69,9 +71,9 @@ namespace TrayDir
 			this.pluginTableLayoutPanel.Controls.Add(this.pathLabel, 0, 2);
 			this.pluginTableLayoutPanel.Controls.Add(this.label1, 0, 0);
 			this.pluginTableLayoutPanel.Controls.Add(this.aliasEdit, 0, 1);
-			this.pluginTableLayoutPanel.Controls.Add(this.pathTextBox, 0, 3);
 			this.pluginTableLayoutPanel.Controls.Add(this.folderBrowseButton, 2, 4);
 			this.pluginTableLayoutPanel.Controls.Add(this.shortcutCheckBox, 0, 5);
+			this.pluginTableLayoutPanel.Controls.Add(this.pathTextBox, 0, 3);
 			this.pluginTableLayoutPanel.Name = "pluginTableLayoutPanel";
 			// 
 			// hideItemCheckBox
@@ -106,13 +108,6 @@ namespace TrayDir
 			this.aliasEdit.Name = "aliasEdit";
 			this.aliasEdit.TextChanged += new System.EventHandler(this.aliasEdit_TextChanged);
 			// 
-			// pathTextBox
-			// 
-			this.pluginTableLayoutPanel.SetColumnSpan(this.pathTextBox, 3);
-			resources.ApplyResources(this.pathTextBox, "pathTextBox");
-			this.pathTextBox.Name = "pathTextBox";
-			this.pathTextBox.TextChanged += new System.EventHandler(this.pathTextBox_TextChanged);
-			// 
 			// folderBrowseButton
 			// 
 			resources.ApplyResources(this.folderBrowseButton, "folderBrowseButton");
@@ -128,19 +123,35 @@ namespace TrayDir
 			this.shortcutCheckBox.UseVisualStyleBackColor = true;
 			this.shortcutCheckBox.CheckedChanged += new System.EventHandler(this.shortcutCheckBox_CheckedChanged);
 			// 
-			// closeButton
+			// pathTextBox
 			// 
-			resources.ApplyResources(this.closeButton, "closeButton");
-			this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.closeButton.Name = "closeButton";
-			this.closeButton.UseVisualStyleBackColor = true;
+			this.pluginTableLayoutPanel.SetColumnSpan(this.pathTextBox, 3);
+			resources.ApplyResources(this.pathTextBox, "pathTextBox");
+			this.pathTextBox.Name = "pathTextBox";
+			this.pathTextBox.TooltipText = null;
+			this.pathTextBox.Valid = false;
+			// 
+			// OkButton
+			// 
+			resources.ApplyResources(this.OkButton, "OkButton");
+			this.OkButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.OkButton.Name = "OkButton";
+			this.OkButton.UseVisualStyleBackColor = true;
+			this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
+			// 
+			// FormCancelButton
+			// 
+			resources.ApplyResources(this.FormCancelButton, "FormCancelButton");
+			this.FormCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.FormCancelButton.Name = "FormCancelButton";
+			this.FormCancelButton.UseVisualStyleBackColor = true;
 			// 
 			// IPathForm
 			// 
-			this.AcceptButton = this.closeButton;
+			this.AcceptButton = this.OkButton;
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.CancelButton = this.closeButton;
+			this.CancelButton = this.FormCancelButton;
 			this.Controls.Add(this.tableLayoutPanel4);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.HelpButton = true;
@@ -168,11 +179,12 @@ namespace TrayDir
         private System.Windows.Forms.Label pathLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox aliasEdit;
-        private System.Windows.Forms.Button closeButton;
-        private System.Windows.Forms.TextBox pathTextBox;
+        private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.Button folderBrowseButton;
         private System.Windows.Forms.Button fileBrowseButton;
         private System.Windows.Forms.CheckBox shortcutCheckBox;
 		private System.Windows.Forms.CheckBox hideItemCheckBox;
+        private System.Windows.Forms.Button FormCancelButton;
+		private ValidateTextBox pathTextBox;
 	}
 }

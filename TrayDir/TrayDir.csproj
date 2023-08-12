@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>TrayDir</RootNamespace>
     <AssemblyName>TrayDir</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>false</Deterministic>
@@ -28,6 +28,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,6 +39,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -75,6 +78,12 @@
   <PropertyGroup>
     <ManifestTimestampUrl>http://timestamp.sectigo.com</ManifestTimestampUrl>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release(x64)|AnyCPU'">
+    <OutputPath>bin\Release(x64)\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -94,6 +103,11 @@
     <Compile Include="lib\VerticalSeparator\VerticalSeparator.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Properties\Strings.fr.Designer.cs">
+      <DependentUpon>Strings.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Properties\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,6 +121,12 @@
     <Compile Include="src\controls\NativeContextMenuStrip.cs" />
     <Compile Include="src\controls\SmartTabControl.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="src\controls\ValidateTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\controls\ValidateTextBox.Designer.cs">
+      <DependentUpon>ValidateTextBox.cs</DependentUpon>
     </Compile>
     <Compile Include="src\forms\AboutForm.cs">
       <SubType>Form</SubType>
@@ -131,6 +151,12 @@
     </Compile>
     <Compile Include="src\forms\IVirtualFolderForm.Designer.cs">
       <DependentUpon>IVirtualFolderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\forms\IWebLinkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\forms\IWebLinkForm.Designer.cs">
+      <DependentUpon>IWebLinkForm.cs</DependentUpon>
     </Compile>
     <Compile Include="src\forms\PluginParameterForm.cs">
       <SubType>Form</SubType>
@@ -174,10 +200,13 @@
     <Compile Include="src\forms\UnhandledExceptionForm.Designer.cs">
       <DependentUpon>UnhandledExceptionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\models\TrayInstanceItem.cs" />
+    <Compile Include="src\models\Model.cs" />
     <Compile Include="src\models\SettingsWindows.cs" />
     <Compile Include="src\models\StringIndexable.cs" />
     <Compile Include="src\models\TrayInstanceNode.cs" />
     <Compile Include="src\models\TrayInstancePluginParamter.cs" />
+    <Compile Include="src\models\TrayInstanceWebLink.cs" />
     <Compile Include="src\models\TrayInstanceVirtualFolder.cs" />
     <Compile Include="src\models\TrayInstancePath.cs" />
     <Compile Include="src\models\TrayInstancePlugin.cs" />
@@ -207,20 +236,38 @@
     <Compile Include="src\models\TrayInstance.cs" />
     <Compile Include="src\models\TrayInstanceSettings.cs" />
     <Compile Include="src\utils\DialogUtils.cs" />
+    <Compile Include="src\utils\FileImageUtils.cs" />
     <Compile Include="src\utils\HelpUtils.cs" />
     <Compile Include="src\utils\IconUtils.cs" />
     <Compile Include="src\utils\IMenuItemIconUtils.cs" />
     <Compile Include="src\utils\TrayUtils.cs" />
     <Compile Include="src\utils\UpdateUtils.cs" />
     <Compile Include="src\utils\XMLUtils.cs" />
+    <Compile Include="src\views\IItem.cs" />
+    <Compile Include="src\views\IMenuItem\IMenuItem.Events.cs" />
     <Compile Include="src\views\ComboBoxView.cs" />
+    <Compile Include="src\views\IMenuItem\IWebLinkMenuItem.cs" />
     <Compile Include="src\views\InstanceNode.cs" />
+    <Compile Include="src\views\IMenuItem\IPathMenuItem.cs" />
+    <Compile Include="src\views\IMenuItem\IPluginMenuItem.cs" />
+    <Compile Include="src\views\ITreeNode\ITreePathNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreePluginNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreeSeparatorNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreeUnknownNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreeVirtualFolderNode.cs" />
+    <Compile Include="src\views\ITreeNode\ITreeWebLinkNode.cs" />
+    <Compile Include="src\views\IMenuItem\IVirtualFolderMenuItem.cs" />
     <Compile Include="src\views\PluginNode.cs" />
     <Compile Include="src\views\ITray.cs" />
-    <Compile Include="src\views\IMenuItem.cs" />
-    <Compile Include="src\views\ITreeNode.cs" />
+    <Compile Include="src\views\IMenuItem\IMenuItem.cs" />
+    <Compile Include="src\views\ITreeNode\ITreeNode.cs" />
     <Compile Include="src\views\IView.cs" />
-    <Compile Include="src\views\OptionView.cs" />
+    <Compile Include="src\views\CheckBoxOptionView.cs" />
+    <EmbeddedResource Include="Properties\Strings.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
@@ -231,12 +278,24 @@
       <LastGenOutput>Resource_Help.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="src\controls\ValidateTextBox.resx">
+      <DependentUpon>ValidateTextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\forms\AboutForm.fr.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\InstanceManagerForm.fr.resx">
+      <DependentUpon>InstanceManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\IOptionsForm.fr.resx">
+      <DependentUpon>IOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\IPathForm.fr.resx">
+      <DependentUpon>IPathForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\IPathForm.resx">
       <DependentUpon>IPathForm.cs</DependentUpon>
@@ -246,9 +305,39 @@
       <DependentUpon>IOptionsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\IPluginForm.fr.resx">
+      <DependentUpon>IPluginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\ITreeViewForm.fr.resx">
+      <DependentUpon>ITreeViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\IVirtualFolderForm.fr.resx">
+      <DependentUpon>IVirtualFolderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\forms\IVirtualFolderForm.resx">
       <DependentUpon>IVirtualFolderForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\IWebLinkForm.fr.resx">
+      <DependentUpon>IWebLinkForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\IWebLinkForm.resx">
+      <DependentUpon>IWebLinkForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\MainForm.fr.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\PluginForm.fr.resx">
+      <DependentUpon>PluginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\PluginManagerForm.aa.resx">
+      <DependentUpon>PluginManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\PluginManagerForm.fr.resx">
+      <DependentUpon>PluginManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\PluginParameterForm.fr.resx">
+      <DependentUpon>PluginParameterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\PluginParameterForm.resx">
       <DependentUpon>PluginParameterForm.cs</DependentUpon>
@@ -288,9 +377,15 @@
       <DependentUpon>PluginManagerForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\SettingsForm.fr.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\forms\UnhandledExceptionForm.fr.resx">
+      <DependentUpon>UnhandledExceptionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\forms\UnhandledExceptionForm.resx">
       <DependentUpon>UnhandledExceptionForm.cs</DependentUpon>
@@ -314,11 +409,17 @@
   <ItemGroup>
     <Content Include="Resources\add.png" />
     <Content Include="Resources\delete.png" />
+    <None Include="Resources\delete_disabled.png" />
     <Content Include="Resources\document.png" />
     <Content Include="Resources\document_new.png" />
     <Content Include="Resources\down.png" />
+    <None Include="Resources\up_disabled.png" />
+    <None Include="Resources\weblink.png" />
     <None Include="Resources\edit.png" />
     <None Include="Resources\empty.png" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\down_disabled.png" />
+    <None Include="Resources\edit_disabled.png" />
     <Content Include="Resources\file-exe.ico" />
     <Content Include="Resources\folder.png" />
     <Content Include="Resources\folder_blue.png" />
@@ -327,6 +428,11 @@
     <None Include="Resources\indent_in.png" />
     <None Include="Resources\indent_out.png" />
     <Content Include="Resources\folder_shortcut.png" />
+    <None Include="Resources\overlay_error.png" />
+    <None Include="Resources\overlay_new.png" />
+    <None Include="Resources\overlay_shortcut.png" />
+    <None Include="Resources\indent_in_disabled.png" />
+    <None Include="Resources\indent_out_disabled.png" />
     <Content Include="Resources\question.png" />
     <Content Include="Resources\runnable.png" />
     <None Include="Resources\runnable_error.png" />

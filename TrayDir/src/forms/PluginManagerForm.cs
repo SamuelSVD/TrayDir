@@ -25,6 +25,7 @@ namespace TrayDir
 		public PluginManagerForm()
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			initializeTree();
 		}
 		public void initializeTree()

@@ -103,8 +103,8 @@ namespace TrayDir
 			// 
 			// prefixTextBox
 			// 
-			this.pluginTableLayoutPanel.SetColumnSpan(this.prefixTextBox, 2);
 			resources.ApplyResources(this.prefixTextBox, "prefixTextBox");
+			this.pluginTableLayoutPanel.SetColumnSpan(this.prefixTextBox, 2);
 			this.prefixTextBox.Name = "prefixTextBox";
 			this.prefixTextBox.TextChanged += new System.EventHandler(this.prefixTextBox_TextChanged);
 			// 
@@ -120,8 +120,8 @@ namespace TrayDir
 			// 
 			// parameterComboBox
 			// 
-			this.pluginTableLayoutPanel.SetColumnSpan(this.parameterComboBox, 2);
 			resources.ApplyResources(this.parameterComboBox, "parameterComboBox");
+			this.pluginTableLayoutPanel.SetColumnSpan(this.parameterComboBox, 2);
 			this.parameterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.parameterComboBox.FormattingEnabled = true;
 			this.parameterComboBox.Name = "parameterComboBox";
@@ -135,8 +135,8 @@ namespace TrayDir
 			// 
 			// nameTextBox
 			// 
-			this.pluginTableLayoutPanel.SetColumnSpan(this.nameTextBox, 2);
 			resources.ApplyResources(this.nameTextBox, "nameTextBox");
+			this.pluginTableLayoutPanel.SetColumnSpan(this.nameTextBox, 2);
 			this.nameTextBox.Name = "nameTextBox";
 			this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
 			// 

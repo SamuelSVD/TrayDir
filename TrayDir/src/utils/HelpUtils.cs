@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows.Forms;
 
 namespace Utils {
@@ -18,11 +13,11 @@ namespace Utils {
 			}
 			catch { }
 		}
-		public static void ShowHelp(Control control) {
+		internal static void ShowHelp(Control control) {
 			MakeHelp();
 			Help.ShowHelp(control, _helpPath);
 		}
-		public static void ShowHelp(Control control, string topic) {
+		internal static void ShowHelp(Control control, string topic) {
 			MakeHelp();
 			Help.ShowHelp(control, _helpPath, HelpNavigator.Topic, topic);
 		}

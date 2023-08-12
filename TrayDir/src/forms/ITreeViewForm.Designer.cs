@@ -43,6 +43,7 @@ namespace TrayDir
 			this.newPluginButton = new System.Windows.Forms.Button();
 			this.newVirtualFolderButton = new System.Windows.Forms.Button();
 			this.newSeparatorButton = new System.Windows.Forms.Button();
+			this.newWebLinkButton = new System.Windows.Forms.Button();
 			this.ContentTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
 			this.editButton = new System.Windows.Forms.Button();
@@ -64,6 +65,7 @@ namespace TrayDir
 			this.formTableLayoutPanel.Controls.Add(this.topButtonsTableLayoutPanel, 1, 0);
 			this.formTableLayoutPanel.Controls.Add(this.ContentTableLayoutPanel, 1, 1);
 			this.formTableLayoutPanel.Name = "formTableLayoutPanel";
+			this.toolTip.SetToolTip(this.formTableLayoutPanel, resources.GetString("formTableLayoutPanel.ToolTip"));
 			// 
 			// leftButtonsTableLayoutPanel
 			// 
@@ -73,6 +75,7 @@ namespace TrayDir
 			this.leftButtonsTableLayoutPanel.Controls.Add(this.upButton, 0, 0);
 			this.leftButtonsTableLayoutPanel.Controls.Add(this.indentButton, 0, 2);
 			this.leftButtonsTableLayoutPanel.Name = "leftButtonsTableLayoutPanel";
+			this.toolTip.SetToolTip(this.leftButtonsTableLayoutPanel, resources.GetString("leftButtonsTableLayoutPanel.ToolTip"));
 			// 
 			// downButton
 			// 
@@ -113,8 +116,10 @@ namespace TrayDir
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newFolderButton, 1, 0);
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newPluginButton, 2, 0);
 			this.topButtonsTableLayoutPanel.Controls.Add(this.newVirtualFolderButton, 3, 0);
-			this.topButtonsTableLayoutPanel.Controls.Add(this.newSeparatorButton, 4, 0);
+			this.topButtonsTableLayoutPanel.Controls.Add(this.newSeparatorButton, 5, 0);
+			this.topButtonsTableLayoutPanel.Controls.Add(this.newWebLinkButton, 4, 0);
 			this.topButtonsTableLayoutPanel.Name = "topButtonsTableLayoutPanel";
+			this.toolTip.SetToolTip(this.topButtonsTableLayoutPanel, resources.GetString("topButtonsTableLayoutPanel.ToolTip"));
 			// 
 			// newDocButton
 			// 
@@ -156,12 +161,21 @@ namespace TrayDir
 			this.newSeparatorButton.UseVisualStyleBackColor = true;
 			this.newSeparatorButton.Click += new System.EventHandler(this.newSeparatorButton_Click);
 			// 
+			// newWebLinkButton
+			// 
+			resources.ApplyResources(this.newWebLinkButton, "newWebLinkButton");
+			this.newWebLinkButton.Name = "newWebLinkButton";
+			this.toolTip.SetToolTip(this.newWebLinkButton, resources.GetString("newWebLinkButton.ToolTip"));
+			this.newWebLinkButton.UseVisualStyleBackColor = true;
+			this.newWebLinkButton.Click += new System.EventHandler(this.newWebLinkButton_Click);
+			// 
 			// ContentTableLayoutPanel
 			// 
 			resources.ApplyResources(this.ContentTableLayoutPanel, "ContentTableLayoutPanel");
 			this.ContentTableLayoutPanel.Controls.Add(this.tableLayoutPanel5, 1, 0);
 			this.ContentTableLayoutPanel.Controls.Add(this.treeView2, 0, 0);
 			this.ContentTableLayoutPanel.Name = "ContentTableLayoutPanel";
+			this.toolTip.SetToolTip(this.ContentTableLayoutPanel, resources.GetString("ContentTableLayoutPanel.ToolTip"));
 			// 
 			// tableLayoutPanel5
 			// 
@@ -170,6 +184,7 @@ namespace TrayDir
 			this.tableLayoutPanel5.Controls.Add(this.deleteButton, 0, 1);
 			this.tableLayoutPanel5.Controls.Add(this.button1, 0, 4);
 			this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+			this.toolTip.SetToolTip(this.tableLayoutPanel5, resources.GetString("tableLayoutPanel5.ToolTip"));
 			// 
 			// editButton
 			// 
@@ -197,11 +212,11 @@ namespace TrayDir
 			// 
 			// treeView2
 			// 
-			this.treeView2.AllowDrop = true;
 			resources.ApplyResources(this.treeView2, "treeView2");
+			this.treeView2.AllowDrop = true;
 			this.treeView2.HideSelection = false;
 			this.treeView2.Name = "treeView2";
-			this.treeView2.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView2_BeforeCollapse);
+			this.toolTip.SetToolTip(this.treeView2, resources.GetString("treeView2.ToolTip"));
 			this.treeView2.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView2_ItemDrag);
 			this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
 			this.treeView2.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView2_NodeMouseClick);
@@ -217,6 +232,7 @@ namespace TrayDir
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.formTableLayoutPanel);
 			this.Name = "ITreeViewForm";
+			this.toolTip.SetToolTip(this, resources.GetString("$this.ToolTip"));
 			this.formTableLayoutPanel.ResumeLayout(false);
 			this.formTableLayoutPanel.PerformLayout();
 			this.leftButtonsTableLayoutPanel.ResumeLayout(false);
@@ -250,5 +266,6 @@ namespace TrayDir
         private System.Windows.Forms.Button outdentButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolTip toolTip;
-    }
+		private System.Windows.Forms.Button newWebLinkButton;
+	}
 }

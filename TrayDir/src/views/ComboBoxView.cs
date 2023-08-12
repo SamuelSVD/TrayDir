@@ -1,16 +1,19 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
-namespace TrayDir
-{
-	class ComboBoxView
-	{
-		public Label label;
-		public ComboBox combobox;
-		public ToolTip tp;
+namespace TrayDir {
+	class ComboBoxView {
+		internal Label label;
+		internal ComboBox combobox;
+		internal ToolTip tp;
+		StringIndexable settingGroup;
+		string settingName;
+		private Dictionary<string, string> comboBoxOptions;
+		private Dictionary<string, string> inverseComboBoxOptions = new Dictionary<string, string>();
 
-		public ComboBoxView(string text, string[] options)
-		{
+		internal ComboBoxView(string text, Dictionary<string, string> options, StringIndexable settingGroup, string settingName) {
 			label = new Label();
 
 			label.Anchor = ((AnchorStyles)((AnchorStyles.Left | AnchorStyles.Right)));
@@ -30,30 +33,40 @@ namespace TrayDir
 			combobox.Size = new Size(116, 27);
 			combobox.TabIndex = 1;
 			combobox.DropDownStyle = ComboBoxStyle.DropDownList;
+			combobox.SelectedIndexChanged += Combobox_SelectedIndexChanged;
 
-			foreach( string s in options)
-			{
-				combobox.Items.Add(s);
+			comboBoxOptions = options;
+			this.settingGroup = settingGroup;
+			this.settingName = settingName;
+
+			foreach (string s in options.Keys) {
+				combobox.Items.Add(options[s]);
+				inverseComboBoxOptions.Add(options[s], s);
 			}
 			if (Program.DEBUG) combobox.BackColor = Color.Red;
 		}
-		public void AddTo(TableLayoutPanel tlp, int row)
-		{
+
+		private void Combobox_SelectedIndexChanged(object sender, EventArgs e) {
+			settingGroup[settingName] = inverseComboBoxOptions[combobox.SelectedItem.ToString()];
+			MainForm.form.pd.Update();
+			MainForm.form.pd.Save();
+		}
+
+		internal void AddTo(TableLayoutPanel tlp, int row) {
 			tlp.Controls.Add(label, 0, row);
 			tlp.Controls.Add(combobox, 1, row);
 			tlp.RowCount = row + 1;
-			tlp.RowStyles.Add(new RowStyle());
+			RowStyle rs = new RowStyle();
+			rs.SizeType = SizeType.AutoSize;
+			tlp.RowStyles.Add(rs);
 
-			for (int i = 0; i < 3; i++)
-			{
-				if (tlp.ColumnStyles.Count < (i + 1))
-				{
+			for (int i = 0; i < 3; i++) {
+				if (tlp.ColumnStyles.Count < (i + 1)) {
 					tlp.ColumnStyles.Add(new ColumnStyle());
 				}
 				ColumnStyle style = tlp.ColumnStyles[i];
 				style.SizeType = SizeType.Percent;
-				switch (i)
-				{
+				switch (i) {
 					case 0:
 						style.Width = 60;
 						break;
@@ -66,8 +79,7 @@ namespace TrayDir
 				}
 			}
 		}
-		public void SetTooltip(string message)
-		{
+		internal void SetTooltip(string message) {
 			tp = new ToolTip();
 			tp.AutoPopDelay = 5000;
 			tp.InitialDelay = 500;

@@ -2,10 +2,16 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "TrayDir"
-#define MyAppVersion "3.3.0"
 #define MyAppPublisher "samver"
 #define MyAppURL "https://samver.ca/TrayDir"
 #define MyAppExeName "TrayDir.exe"
+#define MyAppSource "C:\Programming\samverApps\TrayDir\TrayDir\bin\Release\TrayDir.exe"
+#define MyAppSourceDir "C:\Programming\samverApps\TrayDir\TrayDir\bin\Release\"
+#define MyAppSource_x64 "C:\Programming\samverApps\TrayDir\TrayDir\bin\Release(x64)\TrayDir.exe"
+#define MyAppSourceDir_x64 "C:\Programming\samverApps\TrayDir\TrayDir\bin\Release(x64)\"
+#define MyAppVersion() \
+   ParseVersion(MyAppSource, Local[0], Local[1], Local[2], Local[3]), \
+   Str(Local[0]) + "." + Str(Local[1]) + "." + Str(Local[2])
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -35,6 +41,9 @@ SolidCompression=yes
 WizardStyle=modern
 UsePreviousAppDir=no
 DirExistsWarning=no
+CloseApplications=force
+
+ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -43,7 +52,10 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Programming\samverApps\TrayDir\TrayDir\bin\Release\TrayDir.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: {#MyAppSource}; DestDir: "{app}"; Flags: ignoreversion; Check: not Is64BitInstallMode
+Source: "{#MyAppSourceDir}fr\*"; DestDir: "{app}\fr"; Flags: ignoreversion; Check: not Is64BitInstallMode
+Source: "{#MyAppSourceDir_x64}fr\*"; DestDir: "{app}\fr"; Flags: ignoreversion; Check: Is64BitInstallMode
+Source: {#MyAppSource_x64}; DestDir: "{app}"; Flags: ignoreversion; Check: Is64BitInstallMode
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

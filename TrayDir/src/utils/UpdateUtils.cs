@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -8,47 +7,39 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
-namespace TrayDir
-{
-	class UpdateUtils
-	{
+namespace TrayDir {
+	internal class UpdateUtils {
 		private static string SOURCE = "https://api.github.com/repos/SamuelSVD/TrayDir/releases/latest";
 		private static Thread mainThread;
 		private static Thread updatesThread;
 		private class GitHubRelease {
 			public string html_url;
 			public string tag_name;
-			public GitHubRelease()
-			{
+			public GitHubRelease() {
 				html_url = null;
 				tag_name = null;
 			}
 		}
-		private class Version
-		{
+		private class Version {
 			public int major, minor, patch;
-			public Version(string versionString)
-			{
+			public Version(string versionString) {
 				int i = 0;
 				int j = 0;
 				j = versionString.IndexOf(".");
 				major = int.Parse(versionString.Substring(i, j));
-				i = versionString.IndexOf(".",j+1);
-				minor = int.Parse(versionString.Substring(j+1,i-j-1));
+				i = versionString.IndexOf(".", j + 1);
+				minor = int.Parse(versionString.Substring(j + 1, i - j - 1));
 				patch = int.Parse(versionString.Substring(i + 1, versionString.Length - i - 1));
 			}
 		}
-		public static void CheckForUpdates()
-		{
-			if (updatesThread == null || !updatesThread.IsAlive)
-			{
+		internal static void CheckForUpdates() {
+			if (updatesThread == null || !updatesThread.IsAlive) {
 				mainThread = Thread.CurrentThread;
 				updatesThread = new Thread(UpdatesThread);
 				updatesThread.Start();
 			}
 		}
-		private static async void UpdatesThread()
-		{
+		private static async void UpdatesThread() {
 			bool run = true;
 			int count = 0;
 			while (run && mainThread.IsAlive) {
@@ -63,6 +54,7 @@ namespace TrayDir
 									System.Diagnostics.Process.Start(latestRelease.html_url);
 								} else {
 									ProgramData.pd.LatestVersion = latestRelease.tag_name;
+									ProgramData.pd.Save();
 								}
 							}
 						}
@@ -75,8 +67,7 @@ namespace TrayDir
 				Thread.Sleep(1000);
 			}
 		}
-		public async static Task<string> GetVersion()
-		{
+		internal async static Task<string> GetVersion() {
 			string JSON;
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(SOURCE);
 			request.UserAgent = "TrayDir";
@@ -84,28 +75,24 @@ namespace TrayDir
 
 			using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
 			using (Stream stream = response.GetResponseStream())
-			using (StreamReader reader = new StreamReader(stream))
-			{
+			using (StreamReader reader = new StreamReader(stream)) {
 				JSON = await reader.ReadToEndAsync();
 			}
 			return JSON;
 		}
-		public static bool SemverCompare(string oldVersion, string newVersion)
-		{
-			try
-			{
+		internal static bool SemverCompare(string oldVersion, string newVersion) {
+			try {
 				string pattern = "[0-9]+.[0-9]+.[0-9]+";
 				Regex rgx = new Regex(pattern);
 				MatchCollection matches = rgx.Matches(oldVersion);
 				Version oldV = new Version(matches[0].ToString());
 				matches = rgx.Matches(newVersion);
 				Version newV = new Version(matches[0].ToString());
-				return (newV.major > oldV.major || (newV.major == oldV.major && 
-						(newV.minor > oldV.minor || (newV.minor == oldV.minor && 
+				return (newV.major > oldV.major || (newV.major == oldV.major &&
+						(newV.minor > oldV.minor || (newV.minor == oldV.minor &&
 						(newV.patch > oldV.patch)))));
 			}
-			catch
-			{
+			catch {
 				return false;
 			}
 		}

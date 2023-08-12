@@ -14,6 +14,16 @@ Download installer from GitHub in the latest release
 
 [http://github.com/samuelSVD/TrayDir/releases/latest](http://github.com/samuelSVD/TrayDir/releases/latest)
 
+## Usage
+
+It is very easy to get started with TrayDir. Make use of Files, Folders, and Virtual Folders easily by dragging in files from the Windows File Explorer.
+
+| Description | GIF|
+| --- | --- |
+| File use in TrayDir | <img src="https://github.com/SamuelSVD/TrayDir/blob/main/Misc/Media/TrayDir_DragDrop_File.gif?raw=true" width="500"/> |
+| Folder use in TrayDir | <img src="https://github.com/SamuelSVD/TrayDir/blob/main/Misc/Media/TrayDir_DragDrop_Folder.gif?raw=true" width="500"/> |
+| Virtual Folder use in TrayDir | <img src="https://github.com/SamuelSVD/TrayDir/blob/main/Misc/Media/TrayDir_VirtualFolder.gif?raw=true" width="500"/> |
+
 ## Supported Platforms
 
 Currently TrayDir is only tested on Windows 10, but also works on Windows 11.

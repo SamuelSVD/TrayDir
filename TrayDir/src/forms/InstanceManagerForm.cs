@@ -24,6 +24,7 @@ namespace TrayDir
 		public InstanceManagerForm()
 		{
 			InitializeComponent();
+			this.Icon = Properties.Resources.file_exe;
 			initializeTree();
 		}
 		public void initializeTree()
@@ -60,9 +61,11 @@ namespace TrayDir
 					ti.FixNodes();
 					ProgramData.pd.trayInstances.Add(ti);
 					MainForm.form.AddInstanceTabPage(ti);
+					ti.view.Rebuild();
 					ProgramData.pd.archivedInstances.Remove(ti);
 					treeView1.Nodes.Remove(selectedNode.node);
 					treeView1.Sort();
+					MainForm.form.BuildRebuildDropdown();
 				}
 			}
 		}

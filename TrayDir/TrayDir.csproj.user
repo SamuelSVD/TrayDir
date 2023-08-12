@@ -14,6 +14,6 @@
     <EnableSecurityDebugging>false</EnableSecurityDebugging>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>--ignorestartup</StartArguments>
+    <StartArguments>--ignorestartup --ignoreclose</StartArguments>
   </PropertyGroup>
 </Project>

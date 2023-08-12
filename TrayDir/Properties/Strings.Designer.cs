@@ -163,6 +163,15 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create folder items as shortcuts.
+        /// </summary>
+        internal static string Form_CreateFoldersAsShortcuts {
+            get {
+                return ResourceManager.GetString("Form_CreateFoldersAsShortcuts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string Form_Delete {
@@ -363,6 +372,24 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open Configuration.
+        /// </summary>
+        internal static string Form_OpenConfiguration {
+            get {
+                return ResourceManager.GetString("Form_OpenConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to load a configuration from a file? All current data will be lost and TrayDir will restart..
+        /// </summary>
+        internal static string Form_OpenConfigurationConfirmation {
+            get {
+                return ResourceManager.GetString("Form_OpenConfigurationConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Folders in File Explorer When Clicked.
         /// </summary>
         internal static string Form_OpenFoldersInFileExplorerOnClick {
@@ -427,11 +454,29 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Hidden Files.
+        /// </summary>
+        internal static string Form_ShowHiddenFiles {
+            get {
+                return ResourceManager.GetString("Form_ShowHiddenFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Icons In Tray Menu.
         /// </summary>
         internal static string Form_ShowIconsInTrayMenu {
             get {
                 return ResourceManager.GetString("Form_ShowIconsInTrayMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show TrayMenu on Left Click.
+        /// </summary>
+        internal static string Form_ShowMenuOnLeftClick {
+            get {
+                return ResourceManager.GetString("Form_ShowMenuOnLeftClick", resourceCulture);
             }
         }
         
@@ -570,6 +615,15 @@ namespace TrayDir.Properties {
         internal static string Item_UseAsShortcut {
             get {
                 return ResourceManager.GetString("Item_UseAsShortcut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy Link to Clipboard.
+        /// </summary>
+        internal static string MenuItem_CopyLink {
+            get {
+                return ResourceManager.GetString("MenuItem_CopyLink", resourceCulture);
             }
         }
         
@@ -738,11 +792,65 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Folders Bottom.
+        /// </summary>
+        internal static string Setting_Sorting_FoldersBottom {
+            get {
+                return ResourceManager.GetString("Setting_Sorting_FoldersBottom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folders Top.
+        /// </summary>
+        internal static string Setting_Sorting_FoldersTop {
+            get {
+                return ResourceManager.GetString("Setting_Sorting_FoldersTop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string Setting_Sorting_None {
+            get {
+                return ResourceManager.GetString("Setting_Sorting_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blue Folder.
+        /// </summary>
+        internal static string Setting_VFolderColour_Blue {
+            get {
+                return ResourceManager.GetString("Setting_VFolderColour_Blue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yellow Folder.
+        /// </summary>
+        internal static string Setting_VFolderColour_Yellow {
+            get {
+                return ResourceManager.GetString("Setting_VFolderColour_Yellow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When enabled, TrayDir will check for update on startup.
         /// </summary>
         internal static string Tooltip_CheckForUpdatesOnStartup {
             get {
                 return ResourceManager.GetString("Tooltip_CheckForUpdatesOnStartup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New folder items created will be shortcuts by default.
+        /// </summary>
+        internal static string Tooltip_CreateFoldersAsShortcuts {
+            get {
+                return ResourceManager.GetString("Tooltip_CreateFoldersAsShortcuts", resourceCulture);
             }
         }
         
@@ -780,6 +888,24 @@ namespace TrayDir.Properties {
         internal static string Tooltip_InsertInstance {
             get {
                 return ResourceManager.GetString("Tooltip_InsertInstance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid path. File or folder not found..
+        /// </summary>
+        internal static string Tooltip_InvalidPath {
+            get {
+                return ResourceManager.GetString("Tooltip_InvalidPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid URL. Verify it begins with http:// or https:// and contains valid characters.
+        /// </summary>
+        internal static string Tooltip_InvalidUrl {
+            get {
+                return ResourceManager.GetString("Tooltip_InvalidUrl", resourceCulture);
             }
         }
         
@@ -830,11 +956,29 @@ namespace TrayDir.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When enabled, hidden files will be shown inside of folder menu items.
+        /// </summary>
+        internal static string Tooltip_ShowHiddenFiles {
+            get {
+                return ResourceManager.GetString("Tooltip_ShowHiddenFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When enabled, each menu item will show the icon associated with the file linked.
         /// </summary>
         internal static string Tooltip_ShowIconsInTrayMenu {
             get {
                 return ResourceManager.GetString("Tooltip_ShowIconsInTrayMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When enabled, left clicking on the tray menu item will display the context menu.
+        /// </summary>
+        internal static string Tooltip_ShowMenuOnLeftClick {
+            get {
+                return ResourceManager.GetString("Tooltip_ShowMenuOnLeftClick", resourceCulture);
             }
         }
         
@@ -853,6 +997,15 @@ namespace TrayDir.Properties {
         internal static string Tooltip_StartWithWindows {
             get {
                 return ResourceManager.GetString("Tooltip_StartWithWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value required.
+        /// </summary>
+        internal static string Tooltip_ValueRequired {
+            get {
+                return ResourceManager.GetString("Tooltip_ValueRequired", resourceCulture);
             }
         }
         

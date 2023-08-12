@@ -110,8 +110,8 @@ namespace TrayDir
 			// 
 			// paramNumericUpDown
 			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.paramNumericUpDown, 2);
 			resources.ApplyResources(this.paramNumericUpDown, "paramNumericUpDown");
+			this.tableLayoutPanel3.SetColumnSpan(this.paramNumericUpDown, 2);
 			this.paramNumericUpDown.Name = "paramNumericUpDown";
 			this.paramNumericUpDown.ValueChanged += new System.EventHandler(this.paramNumericUpDown_ValueChanged);
 			// 
@@ -145,8 +145,8 @@ namespace TrayDir
 			// 
 			// nameEdit
 			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.nameEdit, 2);
 			resources.ApplyResources(this.nameEdit, "nameEdit");
+			this.tableLayoutPanel3.SetColumnSpan(this.nameEdit, 2);
 			this.nameEdit.Name = "nameEdit";
 			// 
 			// alwaysRunAsAdminCheckBox
@@ -160,8 +160,8 @@ namespace TrayDir
 			// scriptText
 			// 
 			this.scriptText.AcceptsReturn = true;
-			this.tableLayoutPanel3.SetColumnSpan(this.scriptText, 2);
 			resources.ApplyResources(this.scriptText, "scriptText");
+			this.tableLayoutPanel3.SetColumnSpan(this.scriptText, 2);
 			this.scriptText.Name = "scriptText";
 			this.scriptText.TextChanged += new System.EventHandler(this.scriptText_TextChanged);
 			// 

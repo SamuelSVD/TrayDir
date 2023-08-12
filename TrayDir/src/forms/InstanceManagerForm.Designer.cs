@@ -88,8 +88,8 @@ namespace TrayDir
 			// 
 			// treeView1
 			// 
-			this.tableLayoutPanel1.SetColumnSpan(this.treeView1, 3);
 			resources.ApplyResources(this.treeView1, "treeView1");
+			this.tableLayoutPanel1.SetColumnSpan(this.treeView1, 3);
 			this.treeView1.ImageList = this.imageList;
 			this.treeView1.Name = "treeView1";
 			// 
