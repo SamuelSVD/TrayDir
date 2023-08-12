@@ -170,7 +170,7 @@ namespace TrayDir {
 			settings.paths = null;
 		}
 		public void FixNodes() {
-			if (PathCount + plugins.Count != NodeCount) {
+			if (PathCount + plugins.Count + weblinks.Count != NodeCount) {
 				nodes.children.Clear();
 				foreach (TrayInstancePath tip in paths) {
 					TrayInstanceNode tin = new TrayInstanceNode();
@@ -183,6 +183,13 @@ namespace TrayDir {
 					TrayInstanceNode tin = new TrayInstanceNode();
 					tin.id = plugins.IndexOf(tip);
 					tin.type = TrayInstanceNode.NodeType.Plugin;
+					nodes.children.Add(tin);
+					tin.parent = nodes;
+				}
+				foreach(TrayInstanceWebLink tiwl in weblinks) {
+					TrayInstanceNode tin = new TrayInstanceNode();
+					tin.id = weblinks.IndexOf(tiwl);
+					tin.type = TrayInstanceNode.NodeType.WebLink;
 					nodes.children.Add(tin);
 					tin.parent = nodes;
 				}
